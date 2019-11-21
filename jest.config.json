@@ -1,0 +1,19 @@
+{
+  "verbose": true,
+  "bail": true,
+  "setupFiles": [
+    "core-js/stable",
+    "regenerator-runtime/runtime",
+    "enzyme-react-16-adapter-setup",
+    "<rootDir>/test/jest-pretest.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+  },
+  "moduleFileExtensions": ["js", "json", "jsx"],
+  "testPathIgnorePatterns": ["/node_modules/", "/puppeteer/"],
+  "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+  "collectCoverage": true,
+  "testEnvironment": "jest-environment-jsdom",
+  "testURL": "http://localhost/"
+}
