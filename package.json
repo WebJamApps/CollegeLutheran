@@ -1,10 +1,10 @@
 {
-  "name": "JaMmusic",
-  "version": "0.0.6",
-  "description": "joshandmariamusic.com",
+  "name": "CollegeLutheran",
+  "version": "0.0.1",
+  "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
-    "url": "git+ssh://git@github.com/WebJamApps/JaMmusic.git",
+    "url": "git+ssh://git@github.com/WebJamApps/CollegeLutheran.git",
     "type": "git"
   },
   "author": "https://github.com/orgs/WebJamApps/teams/handlersandkickers",
@@ -81,7 +81,7 @@
     "react-html-parser": "latest",
     "react-player": "latest",
     "react-redux": "latest",
-    "react-resize-detector": "^4.2.0",
+    "react-resize-detector": "latest",
     "react-router-dom": "latest",
     "react-slick": "latest",
     "redux": "latest",
