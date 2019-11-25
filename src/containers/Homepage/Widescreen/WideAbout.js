@@ -6,25 +6,21 @@ const WideAboutUs = () => (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-6" style={{ top: '0', paddingRight: '6px' }}>
-          <p style={{ marginTop: '45px', marginBottom: '40px', fontSize: '18px' }}>
-          Web Jam LLC helps businesses bring their web technologies into the 21st century! Let us
-          help make your website mobile-friendly and grow your business by utilizing the power of online services.
-          More information is available in our&nbsp;
-            <a
-              href="https://www.dropbox.com/s/bzdqp3hr682y9sw/WebJamLLC_FactSheet.pdf?dl=0"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            Fact Sheet
-            </a>
-          .
+          <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
+          College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
+          The church is situated on College Avenue, within easy walking distance of Roanoke College.
+          College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
           <Faqs />
         </div>
 
         <div className="col-md-6" style={{ padding: '1px', paddingRight: '0' }}>
-          <div id="slideshow1">
-            <img alt="Web Jam Banner Large" src="../static/imgs/banner1.jpg" />
+          <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
+            <img
+              style={{ borderRadius: '50%', width: '80%' }}
+              alt="churchBuilding"
+              src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+            />
           </div>
         </div>
       </div>

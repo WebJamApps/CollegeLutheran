@@ -12,23 +12,24 @@ import AppFourOhFour from './404';
 import AppMain from './app-main';
 import DefaultOriginals from '../containers/Originals';
 import HomePage from '../containers/Homepage';
-import connectToSC from './connectToSC';
+// import connectToSC from './connectToSC';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import getSongs from './songsActions';
-import getImages from './imageActions';
+// import getSongs from './songsActions';
+// import getImages from './imageActions';
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.connectToSC = connectToSC;
+    // this.connectToSC = connectToSC;
+    this.state = {};
   }
 
   componentDidMount() {
-    const { dispatch, songs, images } = this.props;
-    this.connectToSC.setupSocketCluster(dispatch);
+    // const { dispatch, songs, images } = this.props;
+    // this.connectToSC.setupSocketCluster(dispatch);
     // fetch songs and images
-    if (songs.length === 0)dispatch(getSongs());
-    if (images.length === 0)dispatch(getImages());
+    // if (songs.length === 0)dispatch(getSongs());
+    // if (images.length === 0)dispatch(getImages());
   }
 
   render() {
@@ -56,14 +57,14 @@ export class App extends Component {
   }
 }
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape({})),
-  images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
+  // dispatch: PropTypes.func.isRequired,
+  // songs: PropTypes.arrayOf(PropTypes.shape({})),
+  // images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool,
     user: PropTypes.shape({ userType: PropTypes.string }),
   }),
 };
-App.defaultProps = { songs: [], images: [], auth: { isAuthenticated: false, user: { userType: '' } } };
+App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 
 export default connect(mapStoreToProps, null)(App);

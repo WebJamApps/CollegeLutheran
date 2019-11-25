@@ -5,7 +5,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
 import mapStoreToProps from '../redux/mapStoreToAllProps';
-import appMainUtils from './appMainUtils';
+// import appMainUtils from './appMainUtils';
 import Footer from './Footer';
 import menuUtils from './menuUtils';
 
@@ -24,7 +24,7 @@ export class AppTemplate extends Component {
     this.responseGoogleLogout = this.responseGoogleLogout.bind(this);
     this.googleButtons = this.googleButtons.bind(this);
     this.authUtils = authUtils;
-    this.appMainUtils = appMainUtils;
+    // this.appMainUtils = appMainUtils;
   }
 
   get currentStyles() {
@@ -134,7 +134,6 @@ export class AppTemplate extends Component {
   }
 
   navLinks() {
-    const { userCount, heartBeat } = this.props;
     return (
       <div className="nav-list">
         <div
@@ -146,8 +145,6 @@ export class AppTemplate extends Component {
           Music
         </div>
         {this.menus.map((menu, index) => (this.menuUtils.menuItem(menu, index, this)))}
-        <p style={{ margin: 0, padding: 0, fontSize: '6pt' }}>&nbsp;</p>
-        {this.appMainUtils.activeUsers(heartBeat, userCount)}
       </div>
     );
   }
@@ -198,13 +195,11 @@ export class AppTemplate extends Component {
 }
 /* istanbul ignore next */
 AppTemplate.defaultProps = {
-  dispatch: () => {}, auth: { isAuthenticated: false, user: { userType: '' } }, userCount: 0, heartBeat: 'white',
+  dispatch: () => {}, auth: { isAuthenticated: false, user: { userType: '' } },
 };
 
 AppTemplate.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-  heartBeat: PropTypes.string,
-  userCount: PropTypes.number,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool,
     user: PropTypes.shape({ userType: PropTypes.string }),
