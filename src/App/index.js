@@ -10,7 +10,7 @@ import BuyMusic from '../containers/BuyMusic';
 import ShopMain from '../containers/Shop/ShopMain';
 import AppFourOhFour from './404';
 import AppMain from './app-main';
-import DefaultOriginals from '../containers/Originals';
+// import DefaultOriginals from '../containers/Originals';
 import HomePage from '../containers/Homepage';
 // import connectToSC from './connectToSC';
 import mapStoreToProps from '../redux/mapStoreToProps';
@@ -43,7 +43,6 @@ export class App extends Component {
               <Route exact path="/" component={HomePage} />
               <Route exact path="/music" component={DefaultMusic} />
               <Route path="/music/buymusic" component={BuyMusic} />
-              <Route path="/music/originals" component={DefaultOriginals} />
               {auth.isAuthenticated && auth.user.userType === 'Developer'
                 ? <Route path="/music/dashboard" component={DefaultMusicDashboard} /> : null}
               <Route path="/shop" component={ShopMain} />
