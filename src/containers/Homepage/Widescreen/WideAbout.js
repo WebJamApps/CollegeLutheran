@@ -1,7 +1,6 @@
 import React from 'react';
-import Faqs from '../HomepageData';
 
-const WideAboutUs = () => (
+const WideAboutUs = (homeContent) => (
   <div className="widescreenHomepage">
     <div className="container-fluid">
       <div className="row">
@@ -11,9 +10,34 @@ const WideAboutUs = () => (
           The church is situated on College Avenue, within easy walking distance of Roanoke College.
           College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          <Faqs />
+          <h5>Join Us for Holy Communion</h5>
+          <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
+            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Service of Holy Communion, Sunday at 10:00 am</li>
+            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Sunday school for all ages begins at 9:00 am</li>
+            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Choir rehearses at 9:15 on Sunday mornings</li>
+            <li style={{ marginLeft: '-10px' }}>Wednesday Bible study at 11:15 am followed by Holy Communion at 12:15 pm</li>
+          </ul>
+          <p><i>Please join us as we celebrate God’s grace and share His love in Christ</i></p>
+          <div id="custom-content">
+            <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{homeContent.title}</h5>
+            <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{homeContent.comments}</section>
+          </div>
+          <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
+            <span style={{ fontSize: '18px' }}>
+              {' '}
+              <strong>What Else is Happening at CLC?</strong>
+            </span>
+          </p>
+          <p>
+Click
+            {' '}
+            <a href="/news">News & Forum</a>
+            {' '}
+to view a copy of our monthly forum or subscribe to our weekly email announcements.
+Scroll below to view our CLC Events Calendar, and follow us on social media.
+            <br />
+          </p>
         </div>
-
         <div className="col-md-6" style={{ padding: '1px', paddingRight: '0' }}>
           <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
             <img
@@ -27,5 +51,4 @@ const WideAboutUs = () => (
     </div>
   </div>
 );
-
 export default WideAboutUs;

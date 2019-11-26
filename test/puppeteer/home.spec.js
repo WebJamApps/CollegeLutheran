@@ -2,11 +2,11 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 describe('Home', () => {
-  it('should be titled "Web Jam LLC"', async () => {
+  it('should be titled "College Lutheran Church"', async () => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:7878/', {
+    await page.goto('http://localhost:7777/', {
       waitUntil: 'load',
     });
-    await expect(page.title()).resolves.toMatch('Web Jam LLC');
+    await expect(page.title()).resolves.toMatch('College Lutheran Church');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import Faqs from '../HomepageData';
 
 const NarrowAboutUs = () => (
   <div className="notWidescreen" style={{ marginTop: '40px' }}>
@@ -9,7 +8,6 @@ College Lutheran Church is located in Southwest Virginia in the beautiful city o
 The church is situated on College Avenue, within easy walking distance of Roanoke College.
 College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
       </p>
-      <Faqs />
     </div>
   </div>
 );
