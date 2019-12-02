@@ -2,7 +2,7 @@ import React from 'react';
 
 const WideFacebookFeed = () => (
   <div className="row" style={{ marginLeft: '10px' }}>
-    <div className="col-md-6" style={{ maxWidth: '600px', margin: 'auto' }}>
+    <div className="col" style={{ maxWidth: '600px', margin: 'auto', paddingRight: '10px' }}>
       <p style={{ textAlign: 'center', fontSize: '10pt', marginTop: '0px' }}>
         <a style={{ fontSize: '10pt' }} href="/calendar">
           <i>View Full Calendar</i>
@@ -19,7 +19,12 @@ const WideFacebookFeed = () => (
       />
       <p>&nbsp;</p>
     </div>
-    <div className="col-md-6" style={{ maxWidth: '650px', margin: 'auto' }}>
+    <div
+      className="col"
+      style={{
+        width: '600px', margin: 'auto', paddingRight: '10px', paddingLeft: '10px', textAlign: 'center',
+      }}
+    >
       <p style={{
         textAlign: 'center', fontSize: '10pt', marginTop: '0px', marginBottom: '32px',
       }}

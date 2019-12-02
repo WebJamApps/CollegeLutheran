@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const WideAboutUs = (homeContent) => (
+const WideAboutUs = ({ homeContent, width }) => (
   <div className="widescreenHomepage">
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-6" style={{ top: '0', paddingRight: '6px' }}>
+        <div className="col" style={{ top: '0', paddingRight: '6px' }}>
           <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
           College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
           The church is situated on College Avenue, within easy walking distance of Roanoke College.
@@ -38,17 +39,27 @@ Scroll below to view our CLC Events Calendar, and follow us on social media.
             <br />
           </p>
         </div>
-        <div className="col-md-6" style={{ padding: '1px', paddingRight: '0' }}>
-          <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
-            <img
-              style={{ borderRadius: '50%', width: '80%' }}
-              alt="churchBuilding"
-              src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
-            />
+        {width >= 1004 ? (
+          <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
+            <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
+              <img
+                style={{ borderRadius: '50%', width: '80%' }}
+                alt="churchBuilding"
+                src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   </div>
 );
+WideAboutUs.defaultProps = { homeContent: {}, width: 1004 };
+WideAboutUs.propTypes = {
+  width: PropTypes.number,
+  homeContent: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    comments: PropTypes.string,
+  })),
+};
 export default WideAboutUs;
