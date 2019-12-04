@@ -17,7 +17,6 @@ const WideFacebookFeed = () => (
         scrolling="no"
         title="google-calendar"
       />
-      <p>&nbsp;</p>
     </div>
     <div
       className="col"
@@ -46,7 +45,6 @@ Like Us On
         allow="encrypted-media"
         title="facebook ticker"
       />
-      <p>&nbsp;</p>
     </div>
   </div>
 );

@@ -3,15 +3,15 @@ import ReactResizeDetector from 'react-resize-detector';
 import WideAboutUs from './Widescreen/WideAbout';
 import WideFacebookFeed from './Widescreen/WideFacebookFeed';
 // import NarrowAboutUs from './Narrowscreen/NarrowAbout';
-import FacebookFeed from './Narrowscreen/NarrowFacebookFeed';
-import Inquiry from '../../components/inquiry';
+import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
+// import Inquiry from '../../components/inquiry';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.parentRef = React.createRef();
     this.onResize = this.onResize.bind(this);
-    this.state = { width: 100, nodeEnv: process.env.NODE_ENV };
+    this.state = { width: 100 };
   }
 
   componentDidMount() { document.title = 'College Lutheran Church'; }
@@ -19,7 +19,7 @@ export default class Home extends Component {
   onResize(width) { this.setState({ width }); }
 
   render() {
-    const { width, nodeEnv } = this.state;
+    const { width } = this.state;
     return (
       <div>
         {width >= 1004
@@ -36,11 +36,24 @@ export default class Home extends Component {
               <WideAboutUs width={width} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <FacebookFeed />
+              <NarrowFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              {nodeEnv !== 'production' ? <Inquiry /> : null}
             </div>
           )}
+        <div style={{
+          textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
+        }}
+        >
+          <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
+            <img
+              id="elcaLogo"
+              alt="ELCA LOGO"
+              src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+              style={{ width: '90%', margin: 'auto' }}
+            />
+          </a>
+          <p>{' '}</p>
+        </div>
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} targetDomEl={this.parentRef.current} />
       </div>
     );

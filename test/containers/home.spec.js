@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Home from '../../src/containers/Homepage';
 import WideAboutUs from '../../src/containers/Homepage/Widescreen/WideAbout';
 // import WideFacebookFeed from '../../src/containers/Homepage/Widescreen/WideFacebookFeed';
-import Inquiry from '../../src/components/inquiry';
+// import Inquiry from '../../src/components/inquiry';
 
 const wrapper = shallow(<Home />);
 
@@ -20,12 +20,7 @@ describe('Home', () => {
   it('Resizes the page', () => {
     wrapper.instance().onResize(100);
     expect(wrapper.instance().state.width).toBe(100);
-    const i = wrapper.find(Inquiry).get(0);
-    expect(i).toBeDefined();
-  });
-  it('does not render the inquiry form', () => {
-    wrapper.instance().setState({ nodeEnv: 'production' });
-    const i = wrapper.find(Inquiry).get(0);
-    expect(i).toBe(undefined);
+    // const i = wrapper.find(Inquiry).get(0);
+    // expect(i).toBeDefined();
   });
 });
