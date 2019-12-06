@@ -770,11 +770,11 @@ div.fof {
 }
 
 .footer {
-  background-color: #2a222a !important;
+  background-color: rgb(36, 74, 139) !important;
 }
 
 .footer span {
-  color: #367aff;
+  color: #f4c00eff;;
   cursor: pointer;
 }
 
@@ -1192,4 +1192,12 @@ span.inquiryValidation {
   margin-left: 5px;
   padding: 0;
   width: 80%;
+}
+
+.nohover {
+  margin-left: 26px;
+  color: #fff !important;
+  font-size: 9pt;
+  margin-bottom: 0;
+  cursor: text !important;
 }
