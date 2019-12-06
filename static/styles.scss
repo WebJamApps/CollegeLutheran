@@ -845,17 +845,20 @@ div.fof {
   position: fixed;
   top: 91px;
   right: 0;
-  width: 180px;
+  width: 220px;
   height: 100%;
   z-index: 90000;
   background-color: rgb(192, 192, 192);
 }
 
 .navImage {
-  top: 0;
-  right: 0;
-  width: 13.5vw;
-  background-color: #244a8bff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    background-color: #244a8bff;
+    margin: auto;
+    text-align: center;
 }
 
 ::-webkit-scrollbar {
