@@ -41,9 +41,9 @@ Scroll below to view our CLC Events Calendar, and follow us on social media.
         </div>
         {width >= 1004 ? (
           <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
-            <div id="slideshow1" style={{ marginTop: '40px' }}>
+            <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
               <img
-                style={{ borderRadius: '50%' }}
+                style={{ borderRadius: '50%', width: '80%' }}
                 alt="churchBuilding"
                 src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
               />

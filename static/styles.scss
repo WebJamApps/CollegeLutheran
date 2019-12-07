@@ -845,7 +845,7 @@ div.fof {
   position: fixed;
   top: 91px;
   right: 0;
-  width: 220px;
+  width: 180px;
   height: 100%;
   z-index: 90000;
   background-color: rgb(192, 192, 192);
@@ -855,7 +855,7 @@ div.fof {
     position: fixed;
     top: 0;
     right: 0;
-    width: 220px;
+    width: 180px;
     background-color: #244a8bff;
     margin: auto;
     padding-top: 3px;
@@ -1041,7 +1041,17 @@ button.on {
   padding: 4px;
 }
 
+@media screen and (max-width: 500px) {
+  .header-text {
+    line-height: 1.2em;
+  }
+}
+
 @media screen and (max-width: 400px) {
+  .flex-header {
+    margin-top: -20px;
+  }
+
   #copyInput {
     width: 95%;
     margin-left: 8px;
