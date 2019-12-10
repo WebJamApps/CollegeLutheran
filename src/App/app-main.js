@@ -38,7 +38,7 @@ export class AppTemplate extends Component {
       sidebarClass: 'home-sidebar',
       menuToggleClass: 'home-menu-toggle',
     };
-    result.sidebarImagePath = '../static/imgs/webjamlogo1.png';
+    result.sidebarImagePath = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png';
     return result;
   }
 
@@ -152,11 +152,18 @@ export class AppTemplate extends Component {
   headerSection() {
     return (
       <div id="header" className={`material-header ${this.currentStyles.headerClass}`}>
-        <div id="ohaflogo" className="headercontent">
-          <img alt="ohaflogo" src={`${this.currentStyles.headerImagePath}`} className={`${this.currentStyles.headerImageClass}`} />
-        </div>
-        <div className="headercontent header-text-card">
-          <h3 className="header-text" style={{ marginTop: 0 }}>{this.currentStyles.headerText1}</h3>
+        <div className="headercontent" />
+        <div>
+          <div style={{ marginLeft: '5px', marginTop: '-18px' }}>
+            <div className="flex-header">
+              <h2 className="header-text" style={{ marginBottom: '0px', marginTop: '1px', fontSize: '34px' }}>
+                <a className="header-text" href="/" style={{ textAlign: 'left', textDecoration: 'none' }}>College Lutheran Church</a>
+              </h2>
+              <p className="subTitle" style={{ marginTop: '-6px', maxWidth: '100%' }}>
+                We celebrate God&apos;s grace and share His love in Christ!
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -171,7 +178,7 @@ export class AppTemplate extends Component {
         <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
           <div className="drawer" style={{ backgroundColor: '#c0c0c0' }}>
             <div className="navImage">
-              <img alt="wjsidelogo" id="webjamwidelogo" src={`${this.currentStyles.sidebarImagePath}`} style={{ width: '182px', marginRight: 0 }} />
+              <img alt="Luther Rose" id="webjamwidelogo" src={`${this.currentStyles.sidebarImagePath}`} style={{ marginRight: 0, width: '86px' }} />
             </div>
             { this.navLinks() }
           </div>

@@ -322,6 +322,9 @@ h6 {
 
 .headercontent {
   top: 2px;
+  box-shadow: 0 2px 2px 0
+  rgba(0, 0, 0, 0.14), 0 1px 5px 0
+  rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   display: inline-block;
   position: relative;
   box-sizing: border-box;
@@ -340,13 +343,24 @@ h6 {
 
 .header-text {
   color: white;
-  font-size: 24px;
+  font-size: 19pt;
+  font-weight: 500;
+  font-family: 'TrajanProRegular', Times, 'Times New Roman', serif;
 }
 
 .header-text-card {
   left: 10px;
   top: -32px;
   text-align: center;
+}
+
+.subTitle {
+  max-width: 80%;
+  margin-top: -5px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #999999;
+  font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
 }
 
 .home-slideshow {
@@ -420,7 +434,7 @@ h6 {
 
 .material-header {
   min-height: 88px;
-  background-color: #2a222a;
+  background-color: #244a8bff;
   z-index: 93;
   top: 0;
 }
@@ -480,12 +494,12 @@ h6 {
 #mobilemenutoggle {
   cursor: pointer;
   position: fixed;
-  right: 25px;
+  right: 16px;
   top: 32px;
   z-index: 95;
-  color: #ffffff;
-  background-color: #2a222a;
-  padding: 1px 5px;
+  color: #f4c00eff;
+  background-color: #244a8bff;
+  padding: 6px;
 }
 
 #mobilemenutoggle img {
@@ -637,14 +651,15 @@ h6 {
 }
 
 /* @media print { */
-/* .page-host { */
-/*left: 10px;*/
-/*right: 0;*/
-/*top: 50px;*/
-/*bottom: 0;*/
-/*overflow-y: inherit;*/
-/*overflow-x: inherit;*/
-/* } */
+  div.page-host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 /* } */
 @-webkit-keyframes fadeIn {
   0% {
@@ -756,11 +771,11 @@ div.fof {
 }
 
 .footer {
-  background-color: #2a222a !important;
+  background-color: rgb(36, 74, 139) !important;
 }
 
 .footer span {
-  color: #367aff;
+  color: #f4c00eff;
   cursor: pointer;
 }
 
@@ -838,10 +853,14 @@ div.fof {
 }
 
 .navImage {
-  top: 0;
-  right: 0;
-  width: 13.5vw;
-  background-color: #2a222a;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 180px;
+    background-color: #244a8bff;
+    margin: auto;
+    padding-top: 3px;
+    text-align: center;
 }
 
 ::-webkit-scrollbar {
@@ -1023,7 +1042,26 @@ button.on {
   padding: 4px;
 }
 
+@media screen and (max-width: 500px) {
+  .header-text {
+    line-height: 1.2em;
+  }
+}
+
 @media screen and (max-width: 400px) {
+  .flex-header {
+    margin-top: -20px;
+    width: 100% !important;
+  }
+
+  img#elcaLogo {
+    width: 290px !important;
+  }
+
+  .subTitle {
+    width: 80% !important;
+  }
+
   #copyInput {
     width: 95%;
     margin-left: 8px;
@@ -1097,7 +1135,6 @@ hr {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -15px;
   margin-left: -15px;
 }
 
@@ -1169,4 +1206,21 @@ span.inquiryValidation {
   margin-right: 38%;
   font-family: Habibi;
   font-style: italic;
+}
+
+.flex-header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: 5px;
+  padding: 0;
+  width: 80%;
+}
+
+.nohover {
+  margin-left: 26px;
+  color: #fff !important;
+  font-size: 9pt;
+  margin-bottom: 0;
+  cursor: text !important;
 }

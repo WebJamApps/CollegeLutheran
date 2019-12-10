@@ -49,7 +49,7 @@ export default class Home extends Component {
               id="elcaLogo"
               alt="ELCA LOGO"
               src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-              style={{ width: '90%', margin: 'auto' }}
+              style={{ width: '340px', margin: 'auto auto auto -2px', paddingTop: '30px' }}
             />
           </a>
           <p>{' '}</p>
