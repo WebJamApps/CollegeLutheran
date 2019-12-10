@@ -494,12 +494,12 @@ h6 {
 #mobilemenutoggle {
   cursor: pointer;
   position: fixed;
-  right: 25px;
+  right: 16px;
   top: 32px;
   z-index: 95;
-  color: #ffffff;
-  background-color: #2a222a;
-  padding: 1px 5px;
+  color: #f4c00eff;
+  background-color: #244a8bff;
+  padding: 6px;
 }
 
 #mobilemenutoggle img {
@@ -651,14 +651,15 @@ h6 {
 }
 
 /* @media print { */
-/* .page-host { */
-/*left: 10px;*/
-/*right: 0;*/
-/*top: 50px;*/
-/*bottom: 0;*/
-/*overflow-y: inherit;*/
-/*overflow-x: inherit;*/
-/* } */
+  div.page-host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 /* } */
 @-webkit-keyframes fadeIn {
   0% {
@@ -1050,6 +1051,15 @@ button.on {
 @media screen and (max-width: 400px) {
   .flex-header {
     margin-top: -20px;
+    width: 100% !important;
+  }
+
+  img#elcaLogo {
+    width: 290px !important;
+  }
+
+  .subTitle {
+    width: 80% !important;
   }
 
   #copyInput {
