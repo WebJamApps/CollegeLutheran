@@ -13,6 +13,10 @@ body {
   text-align: left;
 }
 
+p {
+  margin-top: 0;
+}
+
 div.checkboxes-div {
   outline: none;
   position: relative;
@@ -356,7 +360,6 @@ h6 {
 
 .subTitle {
   max-width: 80%;
-  margin-top: -5px;
   font-weight: bold;
   font-size: 16px;
   color: #999999;
@@ -467,14 +470,14 @@ h6 {
   padding-left: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  font-family: 'Roboto', 'Noto', sans-serif;
+  align-items: left;
+  font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   position: relative;
-  min-height: 48px;
+  min-height: 44px;
   padding-top: 0;
   padding-right: 16px;
   box-sizing: border-box;
@@ -805,7 +808,7 @@ div.fof {
     float: left;
     clear: both;
     height: 100vh;
-    width: calc(100% - 180px);
+    width: calc(100% - 220px);
     display: block;
     overflow: hidden;
   }
@@ -839,14 +842,14 @@ div.fof {
   position: fixed;
   float: right;
   z-index: 100;
-  width: 180px;
+  width: 220px;
 }
 
 .nav-list {
   position: fixed;
   top: 91px;
   right: 0;
-  width: 180px;
+  width: 220px;
   height: 100%;
   z-index: 90000;
   background-color: rgb(192, 192, 192);
@@ -856,7 +859,7 @@ div.fof {
     position: fixed;
     top: 0;
     right: 0;
-    width: 180px;
+    width: 220px;
     background-color: #244a8bff;
     margin: auto;
     padding-top: 3px;
@@ -894,6 +897,36 @@ div.fof {
     height: 100%;
   }
 
+  .menu-item {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    position: relative;
+    min-height: 40px;
+    padding-top: 0;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    margin: auto;
+    padding-top: 1px;
+  }
+
+  span {
+    text-align: left;
+  }
+
   .main-panel {
     position: relative;
     float: left;
@@ -915,19 +948,17 @@ div.fof {
     display: block !important;
     width: 100vw !important;
     z-index: 100 !important;
-    cursor: pointer;
     background-color: rgba(42, 34, 42, 0.67);
   }
 
   .content-block {
     width: 100vw !important;
     margin: 0 auto;
-    height: calc(100vh - 88px);
+    height: 100%;
   }
 
-  .navImage,
-  .nav-list {
-    width: 180px !important;
+  .navImage {
+    display: none;
   }
 
   .swipe-area {

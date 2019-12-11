@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 
-export default class ShopMain extends Component {
+export default class Youth extends Component {
   constructor(props) {
     super(props);
     this.children = props.children;// eslint-disable-line react/prop-types
