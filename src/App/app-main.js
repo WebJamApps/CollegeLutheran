@@ -143,10 +143,10 @@ export class AppTemplate extends Component {
     return (
       <div className="nav-list">
         <div>
-          <p style={{ fontSize: "1px", marginBottom: "2px" }} />
+          <p style={{ fontSize: '1px', marginBottom: '2px' }} />
         </div>
-        <div className="menu-item" style={{ backgroundColor: "#244a8bff" }}>
-          <p style={{ color: "#fff", marginBottom: "2px" }}>
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
             <a href="https://www.google.com/maps/dir/Salem,+Virginia+24153/College+Lutheran+Church,+210+S+College+Ave,+Salem,+VA+24153/@37.2925694,
             -80.056487,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x884d0a3455d08057:0x5a45aeb585040b01!2m2!1d-80.0547626!2d37.
             2934681!1m5!1m1!1s0x884d0a32d6f01edf:0x88dc0d7faccf632b!2m2!1d-80.053834!2d37.291714"
@@ -157,15 +157,15 @@ export class AppTemplate extends Component {
               Salem, VA 24153
           </p>
         </div>
-        <div className="menu-item" style={{ backgroundColor: "#244a8bff" }}>
-          <p style={{ color: "#fff", marginBottom: "2px" }}>
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
             <span>ph:</span>
             <a href="tel:5403894963"> (540) 389-4963</a>
             <br />
             <span>fax:</span>
             <a href="tel:5403894980"> (540) 389-4980</a>
             <br />
-            <a style={{ wordWrap: "break-word" }} href="mailto:office1@collegelutheran.org"> office1@collegelutheran.org</a>
+            <a style={{ wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org"> office1@collegelutheran.org</a>
           </p>
         </div>
         {this.menus.map((menu, index) => (this.menuUtils.menuItem(menu, index, this)))}
