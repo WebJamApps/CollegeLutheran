@@ -10,10 +10,10 @@ const menuItem = (menu, index, controller) => {
   || menu.link === '/music')) {
     return controller.makeMenuLink(menu, index);
   }
-  if (location.pathname.includes('') && (menu.link === '/giving' || menu.link === '/youth' || menu.link === '/family')) {
+  if (location.pathname.includes('/') && (menu.link === '/giving' || menu.link === '/youth' || menu.link === '/family')) {
     return controller.makeMenuLink(menu, index);
   }
-  if (location.pathname.includes('') && (menu.link === '/news' || menu.link === '/')) {
+  if (location.pathname.includes('/') && (menu.link === '/news' || menu.link === '/')) {
     return controller.makeMenuLink(menu, index);
   }
   return continueMenuItem(menu, index, location, auth, controller);
