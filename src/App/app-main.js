@@ -141,11 +141,9 @@ export class AppTemplate extends Component {
         </div>
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
           <p style={{ color: '#fff', marginBottom: '2px' }}>
-            <a
-              style={{ color: '#88c1ff' }}
-              href="http://bit.ly/CLCDirections" // CLC Map directions google maps
-            >
-              210 S. College Ave
+            {/* Google maps directions */}
+            <a href="http://bit.ly/CLCDirections">
+              <span style={{ color: '#88c1ff' }}>210 S. College Ave</span>
             </a>
             <br />
               Salem, VA 24153
