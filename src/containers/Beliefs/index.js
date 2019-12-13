@@ -7,13 +7,13 @@ export default class Beliefs extends Component {
   }
 
   componentDidMount() {
-    document.title = 'Shop | Web Jam LLC';
+    document.title = 'Our Lutheran Beliefs | College Lutheran Church';
   }
 
   render() {
     return (
       <div className="page-content">
-        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Web Jam Shop</h3>
+        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Beliefs</h3>
         <div
           className="main"
           style={{
@@ -24,13 +24,18 @@ export default class Beliefs extends Component {
             {' '}
           </p>
           <p style={{ fontSize: '14pt' }}>
-            Welcome to the landing page of the future Web Jam Shop.
-            This application is currently a work in progress, so please check back later for more updates.
-            In time, businesses will be able to sign up to the shop as a means of selling products.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <p style={{ fontSize: '14pt' }}>
-We are planning on having a custom inventory space for each business, all linked into a centralized area for customers to buy from.
-            The shop items themselves will update in real time, to prevent the purchase of items that are out of stock.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </div>
         <div style={{ minHeight: '4.7in' }}>&nbsp;</div>

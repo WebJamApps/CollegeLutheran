@@ -27,7 +27,7 @@ describe('authUtils', () => {
     const result = await authUtils.setUser(controllerStub);
     expect(result).toBe(true);
   });
-  it('cathes fetch user error when sets the user', async () => {
+  it('catches fetch user error when sets the user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
     request.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     await expect(authUtils.setUser(controllerStub)).rejects.toThrow('bad');

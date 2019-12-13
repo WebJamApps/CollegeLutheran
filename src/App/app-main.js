@@ -141,9 +141,11 @@ export class AppTemplate extends Component {
         </div>
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
           <p style={{ color: '#fff', marginBottom: '2px' }}>
-            <a href="https://www.google.com/maps/dir/Salem,+Virginia+24153/College+Lutheran+Church,+210+S+College+Ave,+Salem,+VA+24153/@37.2925694,
+            <a
+              style={{ color: '#88c1ff' }}
+              href="https://www.google.com/maps/dir/Salem,+Virginia+24153/College+Lutheran+Church,+210+S+College+Ave,+Salem,+VA+24153/@37.2925694,
             -80.056487,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x884d0a3455d08057:0x5a45aeb585040b01!2m2!1d-80.0547626!2d37.
-            2934681!1m5!1m1!1s0x884d0a32d6f01edf:0x88dc0d7faccf632b!2m2!1d-80.053834!2d37.291714" style={{ color: '#88c1ff' }}
+            2934681!1m5!1m1!1s0x884d0a32d6f01edf:0x88dc0d7faccf632b!2m2!1d-80.053834!2d37.291714"
             >
               210 S. College Ave
             </a>

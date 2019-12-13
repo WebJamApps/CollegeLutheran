@@ -7,8 +7,13 @@ const continueMenuItem = (menu, index, location, auth, controller) => {
 const menuItem = (menu, index, controller) => {
   const { location, auth } = controller.props;
   if (location.pathname.includes('/') && (menu.link === '/belief' || menu.link === '/staff'
-  || menu.link === '/music' || menu.link === '/giving' || menu.link === '/youth' || menu.link === '/family'
-  || menu.link === '/news' || menu.link === '/')) {
+  || menu.link === '/music')) {
+    return controller.makeMenuLink(menu, index);
+  }
+  if (location.pathname.includes('') && (menu.link === '/giving' || menu.link === '/youth' || menu.link === '/family')) {
+    return controller.makeMenuLink(menu, index);
+  }
+  if (location.pathname.includes('') && (menu.link === '/news' || menu.link === '/')) {
     return controller.makeMenuLink(menu, index);
   }
   return continueMenuItem(menu, index, location, auth, controller);
