@@ -45,28 +45,28 @@ export class AppTemplate extends Component {
   get menus() { // eslint-disable-line class-methods-use-this
     return [
       {
+        className: '', type: 'link', iconClass: 'fas fa-arrows-alt', link: '/belief', name: 'Our Lutheran Beliefs',
+      },
+      {
+        className: '', type: 'link', iconClass: 'fas fa-users', link: '/staff', name: 'Church Staff',
+      },
+      {
         className: '', type: 'link', iconClass: 'fas fa-music', link: '/music', name: 'Music',
       },
       {
-        className: '', type: 'link', iconClass: 'far fa-money-bill-alt', link: '/music/buymusic', name: 'Buy Music',
+        className: '', type: 'link', iconClass: 'fas fa-handshake', link: '/giving', name: 'Giving',
       },
       {
-        className: 'songs', type: 'link', iconClass: 'far fa-lightbulb', link: '/music/originals', name: 'Songs',
+        className: '', type: 'link', iconClass: 'fas fa-futbol', link: '/youth', name: 'Youth Ministry',
       },
       {
-        className: 'dashboard', type: 'link', iconClass: 'fas fa-user-secret', link: '/music/dashboard', name: 'Dashboard', auth: true,
+        className: '', type: 'link', iconClass: 'fas fa-child', link: '/family', name: 'Child & Families',
       },
       {
-        className: 'shop', type: 'link', iconClass: 'fas fa-shopping-cart', link: '/shop', name: 'Web Jam Shop',
+        className: '', type: 'link', iconClass: 'far fa-newspaper', link: '/news', name: 'News & Forum',
       },
       {
-        className: 'home', type: 'link', iconClass: 'fas fa-home', link: '/', name: 'Web Jam LLC',
-      },
-      {
-        className: 'login', type: 'googleLogin', iconClass: 'fas fa-login', link: '', name: 'Login',
-      },
-      {
-        className: 'logout', type: 'googleLogout', iconClass: 'fas fa-logout', link: '', name: 'Logout', auth: true,
+        className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
       },
     ];
   }
@@ -136,13 +136,29 @@ export class AppTemplate extends Component {
   navLinks() {
     return (
       <div className="nav-list">
-        <div
-          id="musTT"
-          style={{
-            display: 'none', position: 'absolute', top: '305px', right: '68px', backgroundColor: 'white', padding: '3px',
-          }}
-        >
-          Music
+        <div>
+          <p style={{ fontSize: '1px', marginBottom: '2px' }} />
+        </div>
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
+            {/* Google maps directions */}
+            <a href="http://bit.ly/CLCDirections">
+              <span style={{ color: '#88c1ff' }}>210 S. College Ave</span>
+            </a>
+            <br />
+              Salem, VA 24153
+          </p>
+        </div>
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
+            <span>ph:</span>
+            <a href="tel:5403894963" style={{ color: '#88c1ff' }}> (540) 389-4963</a>
+            <br />
+            <span>fax:</span>
+            <a href="tel:5403894980" style={{ color: '#88c1ff' }}> (540) 389-4980</a>
+            <br />
+            <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org"> office1@collegelutheran.org</a>
+          </p>
         </div>
         {this.menus.map((menu, index) => (this.menuUtils.menuItem(menu, index, this)))}
       </div>

@@ -5,8 +5,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DefaultMusic from '../containers/Music';
-import DefaultMusicDashboard from '../containers/MusicDashboard';
-import BuyMusic from '../containers/BuyMusic';
+import Beliefs from '../containers/Beliefs';
+import Family from '../containers/Family';
+import Giving from '../containers/Giving';
+import Staff from '../containers/Staff';
+import Youth from '../containers/Youth';
 import News from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
@@ -25,7 +28,7 @@ export class App extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    // const { auth } = this.props;
     // console.log(auth);//eslint-disable-line
     return (
       <div id="App" className="App">
@@ -33,10 +36,12 @@ export class App extends Component {
           <AppMain id="homepage">
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/music" component={DefaultMusic} />
-              <Route path="/music/buymusic" component={BuyMusic} />
-              {auth.isAuthenticated && auth.user.userType === 'Developer'
-                ? <Route path="/music/dashboard" component={DefaultMusicDashboard} /> : null}
+              <Route path="/music" component={DefaultMusic} />
+              <Route path="/belief" component={Beliefs} />
+              <Route path="/family" component={Family} />
+              <Route path="/giving" component={Giving} />
+              <Route path="/staff" component={Staff} />
+              <Route path="/youth" component={Youth} />
               <Route path="/news" component={News} />
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />

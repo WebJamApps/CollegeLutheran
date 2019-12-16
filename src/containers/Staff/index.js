@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 
-export default class Calendar extends Component {
+export default class Staff extends Component {
   constructor(props) {
     super(props);
     this.children = props.children;// eslint-disable-line react/prop-types
   }
 
   componentDidMount() {
-    document.title = 'Church Calendar | College Lutheran Church';
+    document.title = 'Church Staff | College Lutheran Church';
   }
 
   render() {
     return (
       <div className="page-content">
-        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Church Calendar</h3>
+        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Church Staff</h3>
         <div
           className="main"
           style={{

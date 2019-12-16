@@ -30,12 +30,12 @@ const WideAboutUs = ({ homeContent, width }) => (
             </span>
           </p>
           <p>
-Click
+            Click
             {' '}
             <a href="/news">News & Forum</a>
             {' '}
-to view a copy of our monthly forum or subscribe to our weekly email announcements.
-Scroll below to view our CLC Events Calendar, and follow us on social media.
+            to view a copy of our monthly forum or subscribe to our weekly email announcements.
+            Scroll below to view our CLC Events Calendar, and follow us on social media.
             <br />
           </p>
         </div>

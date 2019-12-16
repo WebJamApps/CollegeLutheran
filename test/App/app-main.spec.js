@@ -23,14 +23,14 @@ describe('app-main component test setup', () => {
   });
   it('handles response from google login', () => new Promise((done) => {
     authUtils.responseGoogleLogin = jest.fn(() => true);
-    const wrapper2 = shallow(<AppTemplate dispatch={dFunc} location={{ pathname: '/music' }}><div /></AppTemplate>);
+    const wrapper2 = shallow(<AppTemplate dispatch={dFunc} location={{ pathname: '/' }}><div /></AppTemplate>);
     const result = wrapper2.instance().responseGoogleLogin({});
     expect(result).toBe(true);
     done();
   }));
   it('handles response from google logout', () => new Promise((done) => {
     authUtils.responseGoogleLogout = jest.fn(() => true);
-    const wrapper2 = shallow(<AppTemplate dispatch={dFunc} location={{ pathname: '/music' }}><div /></AppTemplate>);
+    const wrapper2 = shallow(<AppTemplate dispatch={dFunc} location={{ pathname: '/' }}><div /></AppTemplate>);
     const result = wrapper2.instance().responseGoogleLogout({});
     expect(result).toBe(true);
     done();
