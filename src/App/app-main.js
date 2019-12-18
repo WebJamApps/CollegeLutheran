@@ -136,14 +136,11 @@ export class AppTemplate extends Component {
   navLinks() {
     return (
       <div className="nav-list">
-        <div>
-          <p style={{ fontSize: '1px', marginBottom: '2px' }} />
-        </div>
+        <p style={{ fontSize: '1px', marginBottom: '2px' }} />
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
           <p style={{ color: '#fff', marginBottom: '2px' }}>
-            {/* Google maps directions */}
-            <a href="http://bit.ly/CLCDirections">
-              <span style={{ color: '#88c1ff' }}>210 S. College Ave</span>
+            <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={{ color: '#88c1ff' }}>
+              <span>210 S. College Ave</span>
             </a>
             <br />
               Salem, VA 24153
@@ -151,13 +148,15 @@ export class AppTemplate extends Component {
         </div>
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
           <p style={{ color: '#fff', marginBottom: '2px' }}>
-            <span>ph:</span>
-            <a href="tel:5403894963" style={{ color: '#88c1ff' }}> (540) 389-4963</a>
+            <span>ph: </span>
+            <a href="tel:5403894963" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4963</a>
             <br />
-            <span>fax:</span>
-            <a href="tel:5403894980" style={{ color: '#88c1ff' }}> (540) 389-4980</a>
+            <span>fax: </span>
+            <a href="tel:5403894980" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4980</a>
             <br />
-            <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org"> office1@collegelutheran.org</a>
+            <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org">
+              <span className="menu-hover">office1@collegelutheran.org</span>
+            </a>
           </p>
         </div>
         {this.menus.map((menu, index) => (this.menuUtils.menuItem(menu, index, this)))}
