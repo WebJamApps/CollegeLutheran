@@ -54,12 +54,12 @@ const WideAboutUs = ({ homeContent, width }) => (
     </div>
   </div>
 );
-WideAboutUs.defaultProps = { homeContent: {}, width: 1004 };
-WideAboutUs.propTypes = {
-  width: PropTypes.number,
-  homeContent: PropTypes.shape({
-    title: PropTypes.string,
-    comments: PropTypes.string,
-  }),
-};
+  WideAboutUs.defaultProps = { homeContent: {}, width: 1004 };
+  WideAboutUs.propTypes = {
+    width: PropTypes.number,
+    homeContent: PropTypes.shape({
+      title: PropTypes.string,
+      comments: PropTypes.string,
+    }),
+  };
 export default WideAboutUs;
