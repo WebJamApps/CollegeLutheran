@@ -29,7 +29,7 @@ const Footer = () => (
     id="wjfooter"
     className="footer"
     style={{
-      paddingTop: '20px', paddingBottom: '20px', bottom: '0',
+      marginTop: '20px', paddingTop: '20px', paddingBottom: '20px', bottom: '0',
     }}
   >
     { footerLinks() }
