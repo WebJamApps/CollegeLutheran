@@ -40,7 +40,7 @@ module.exports = ({
     path: outDir,
     publicPath: baseUrl,
     filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
-    sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
+    // sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js',
   },
 
@@ -151,9 +151,9 @@ module.exports = ({
     }),
     new CopyWebpackPlugin([
       { from: 'static/favicon.ico', to: 'favicon.ico' },
-      { from: 'static/imgs', to: 'static/imgs' },
+      // { from: 'static/imgs', to: 'static/imgs' },
     ]),
-    new webpack.EnvironmentPlugin(['SOCKETCLUSTER_HOST', 'SOCKETCLUSTER_PORT', 'SOCKETCLUSTER_SECURE', 'NODE_ENV',
+    new webpack.EnvironmentPlugin(['NODE_ENV',
       'AuthProductionBaseURL', 'PORT', 'BackendUrl', 'GoogleClientId', 'userRoles', 'HashString']),
     ...when(analyze, new BundleAnalyzerPlugin()),
   ],

@@ -5,7 +5,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
 import mapStoreToProps from '../redux/mapStoreToAllProps';
-import appMainUtils from './appMainUtils';
+// import appMainUtils from './appMainUtils';
 import Footer from './Footer';
 import menuUtils from './menuUtils';
 
@@ -24,7 +24,7 @@ export class AppTemplate extends Component {
     this.responseGoogleLogout = this.responseGoogleLogout.bind(this);
     this.googleButtons = this.googleButtons.bind(this);
     this.authUtils = authUtils;
-    this.appMainUtils = appMainUtils;
+    // this.appMainUtils = appMainUtils;
   }
 
   get currentStyles() {
@@ -38,35 +38,35 @@ export class AppTemplate extends Component {
       sidebarClass: 'home-sidebar',
       menuToggleClass: 'home-menu-toggle',
     };
-    result.sidebarImagePath = '../static/imgs/webjamlogo1.png';
+    result.sidebarImagePath = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png';
     return result;
   }
 
   get menus() { // eslint-disable-line class-methods-use-this
     return [
       {
+        className: '', type: 'link', iconClass: 'fas fa-arrows-alt', link: '/belief', name: 'Our Lutheran Beliefs',
+      },
+      {
+        className: '', type: 'link', iconClass: 'fas fa-users', link: '/staff', name: 'Church Staff',
+      },
+      {
         className: '', type: 'link', iconClass: 'fas fa-music', link: '/music', name: 'Music',
       },
       {
-        className: '', type: 'link', iconClass: 'far fa-money-bill-alt', link: '/music/buymusic', name: 'Buy Music',
+        className: '', type: 'link', iconClass: 'fas fa-handshake', link: '/giving', name: 'Giving',
       },
       {
-        className: 'songs', type: 'link', iconClass: 'far fa-lightbulb', link: '/music/originals', name: 'Songs',
+        className: '', type: 'link', iconClass: 'fas fa-futbol', link: '/youth', name: 'Youth Ministry',
       },
       {
-        className: 'dashboard', type: 'link', iconClass: 'fas fa-user-secret', link: '/music/dashboard', name: 'Dashboard', auth: true,
+        className: '', type: 'link', iconClass: 'fas fa-child', link: '/family', name: 'Child & Families',
       },
       {
-        className: 'shop', type: 'link', iconClass: 'fas fa-shopping-cart', link: '/shop', name: 'Web Jam Shop',
+        className: '', type: 'link', iconClass: 'far fa-newspaper', link: '/news', name: 'News & Forum',
       },
       {
-        className: 'home', type: 'link', iconClass: 'fas fa-home', link: '/', name: 'Web Jam LLC',
-      },
-      {
-        className: 'login', type: 'googleLogin', iconClass: 'fas fa-login', link: '', name: 'Login',
-      },
-      {
-        className: 'logout', type: 'googleLogout', iconClass: 'fas fa-logout', link: '', name: 'Logout', auth: true,
+        className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
       },
     ];
   }
@@ -134,20 +134,32 @@ export class AppTemplate extends Component {
   }
 
   navLinks() {
-    const { userCount, heartBeat } = this.props;
     return (
       <div className="nav-list">
-        <div
-          id="musTT"
-          style={{
-            display: 'none', position: 'absolute', top: '305px', right: '68px', backgroundColor: 'white', padding: '3px',
-          }}
-        >
-          Music
+        <p style={{ fontSize: '1px', marginBottom: '2px' }} />
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
+            <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={{ color: '#88c1ff' }}>
+              <span>210 S. College Ave</span>
+            </a>
+            <br />
+              Salem, VA 24153
+          </p>
+        </div>
+        <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
+          <p style={{ color: '#fff', marginBottom: '2px' }}>
+            <span>ph: </span>
+            <a href="tel:5403894963" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4963</a>
+            <br />
+            <span>fax: </span>
+            <a href="tel:5403894980" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4980</a>
+            <br />
+            <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org">
+              <span className="menu-hover">office1@collegelutheran.org</span>
+            </a>
+          </p>
         </div>
         {this.menus.map((menu, index) => (this.menuUtils.menuItem(menu, index, this)))}
-        <p style={{ margin: 0, padding: 0, fontSize: '6pt' }}>&nbsp;</p>
-        {this.appMainUtils.activeUsers(heartBeat, userCount)}
       </div>
     );
   }
@@ -155,11 +167,18 @@ export class AppTemplate extends Component {
   headerSection() {
     return (
       <div id="header" className={`material-header ${this.currentStyles.headerClass}`}>
-        <div id="ohaflogo" className="headercontent">
-          <img alt="ohaflogo" src={`${this.currentStyles.headerImagePath}`} className={`${this.currentStyles.headerImageClass}`} />
-        </div>
-        <div className="headercontent header-text-card">
-          <h3 className="header-text" style={{ marginTop: 0 }}>{this.currentStyles.headerText1}</h3>
+        <div className="headercontent" />
+        <div>
+          <div style={{ marginLeft: '5px', marginTop: '-18px' }}>
+            <div className="flex-header">
+              <h2 className="header-text" style={{ marginBottom: '0px', marginTop: '1px', fontSize: '34px' }}>
+                <a className="header-text" href="/" style={{ textAlign: 'left', textDecoration: 'none' }}>College Lutheran Church</a>
+              </h2>
+              <p className="subTitle" style={{ marginTop: '-6px', maxWidth: '100%' }}>
+                We celebrate God&apos;s grace and share His love in Christ!
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -174,7 +193,7 @@ export class AppTemplate extends Component {
         <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
           <div className="drawer" style={{ backgroundColor: '#c0c0c0' }}>
             <div className="navImage">
-              <img alt="wjsidelogo" id="webjamwidelogo" src={`${this.currentStyles.sidebarImagePath}`} style={{ width: '182px', marginRight: 0 }} />
+              <img alt="Luther Rose" id="webjamwidelogo" src={`${this.currentStyles.sidebarImagePath}`} style={{ marginRight: 0, width: '86px' }} />
             </div>
             { this.navLinks() }
           </div>
@@ -198,13 +217,11 @@ export class AppTemplate extends Component {
 }
 /* istanbul ignore next */
 AppTemplate.defaultProps = {
-  dispatch: () => {}, auth: { isAuthenticated: false, user: { userType: '' } }, userCount: 0, heartBeat: 'white',
+  dispatch: () => {}, auth: { isAuthenticated: false, user: { userType: '' } },
 };
 
 AppTemplate.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-  heartBeat: PropTypes.string,
-  userCount: PropTypes.number,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool,
     user: PropTypes.shape({ userType: PropTypes.string }),

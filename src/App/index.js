@@ -5,34 +5,30 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DefaultMusic from '../containers/Music';
-import DefaultMusicDashboard from '../containers/MusicDashboard';
-import BuyMusic from '../containers/BuyMusic';
-import ShopMain from '../containers/Shop/ShopMain';
+import Beliefs from '../containers/Beliefs';
+import Family from '../containers/Family';
+import Giving from '../containers/Giving';
+import Staff from '../containers/Staff';
+import Youth from '../containers/Youth';
+import News from '../containers/News';
+import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
 import AppMain from './app-main';
-import DefaultOriginals from '../containers/Originals';
 import HomePage from '../containers/Homepage';
-import connectToSC from './connectToSC';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import getSongs from './songsActions';
-import getImages from './imageActions';
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.connectToSC = connectToSC;
+    this.state = {};
   }
 
-  componentDidMount() {
-    const { dispatch, songs, images } = this.props;
-    this.connectToSC.setupSocketCluster(dispatch);
-    // fetch songs and images
-    if (songs.length === 0)dispatch(getSongs());
-    if (images.length === 0)dispatch(getImages());
+  componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
+
   }
 
   render() {
-    const { auth } = this.props;
+    // const { auth } = this.props;
     // console.log(auth);//eslint-disable-line
     return (
       <div id="App" className="App">
@@ -40,12 +36,14 @@ export class App extends Component {
           <AppMain id="homepage">
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/music" component={DefaultMusic} />
-              <Route path="/music/buymusic" component={BuyMusic} />
-              <Route path="/music/originals" component={DefaultOriginals} />
-              {auth.isAuthenticated && auth.user.userType === 'Developer'
-                ? <Route path="/music/dashboard" component={DefaultMusicDashboard} /> : null}
-              <Route path="/shop" component={ShopMain} />
+              <Route path="/music" component={DefaultMusic} />
+              <Route path="/belief" component={Beliefs} />
+              <Route path="/family" component={Family} />
+              <Route path="/giving" component={Giving} />
+              <Route path="/staff" component={Staff} />
+              <Route path="/youth" component={Youth} />
+              <Route path="/news" component={News} />
+              <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />
             </Switch>
           </AppMain>
@@ -56,14 +54,14 @@ export class App extends Component {
   }
 }
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape({})),
-  images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
+  // dispatch: PropTypes.func.isRequired,
+  // songs: PropTypes.arrayOf(PropTypes.shape({})),
+  // images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool,
     user: PropTypes.shape({ userType: PropTypes.string }),
   }),
 };
-App.defaultProps = { songs: [], images: [], auth: { isAuthenticated: false, user: { userType: '' } } };
+App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 
 export default connect(mapStoreToProps, null)(App);
