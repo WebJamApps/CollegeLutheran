@@ -32,7 +32,7 @@ const WideAboutUs = ({ homeContent, width }) => (
           <p>
             Click
             {' '}
-            <a href="/news">News & Forum</a>
+            <a href="/news">News &amp; Forum</a>
             {' '}
             to view a copy of our monthly forum or subscribe to our weekly email announcements.
             Scroll below to view our CLC Events Calendar, and follow us on social media.

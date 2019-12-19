@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactResizeDetector from 'react-resize-detector';
 import WideAboutUs from './Widescreen/WideAbout';
+import WideFacebookFeed from './Widescreen/WideFacebookFeed';
+import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
 // import NarrowAboutUs from './Narrowscreen/NarrowAbout';
 // import Inquiry from '../../components/inquiry';
 
@@ -25,7 +27,7 @@ export default class Home extends Component {
             <div className="page-content">
               <WideAboutUs width={width} />
               <hr />
-              {/* <WideFacebookFeed /> */}
+              <WideFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )
@@ -34,7 +36,7 @@ export default class Home extends Component {
               <WideAboutUs width={width} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              {/* <NarrowFacebookFeed /> */}
+              <NarrowFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
