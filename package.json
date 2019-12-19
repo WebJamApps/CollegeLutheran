@@ -40,8 +40,7 @@
     "snyk-protect": "snyk protect",
     "eslint:fix": "./node_modules/eslint/bin/eslint.js --fix .",
     "postinstall": "yarn start build",
-    "test:stylelint": "stylelint \"static/**/*.scss\"",
-    "prepare": "yarn run snyk-protect"
+    "test:stylelint": "stylelint \"static/**/*.scss\""
   },
   "dependencies": {
     "@babel/core": "latest",
