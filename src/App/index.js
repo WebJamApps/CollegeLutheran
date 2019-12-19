@@ -33,12 +33,12 @@ export class App extends Component {
   async fetchHomepage() {
     let res;
     const { dispatch } = this.props;
-    try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json');}
-    catch(e) {
+    try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); } catch (e) {
       return console.log(e.message);
     }
     console.log(res.body);
-    dispatch({type: "GOT_HOMEPAGE", data: res.body})
+    dispatch({ type: 'GOT_HOMEPAGE', data: res.body });
+    return true;
   }
 
   render() {
