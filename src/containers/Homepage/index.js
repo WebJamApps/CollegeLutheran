@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
 import WideAboutUs from './Widescreen/WideAbout';
 import WideFacebookFeed from './Widescreen/WideFacebookFeed';
@@ -20,12 +21,13 @@ export default class Home extends Component {
 
   render() {
     const { width } = this.state;
+    const { homeContent } = this.props;
     return (
       <div>
         {width >= 1004
           ? (
             <div className="page-content">
-              <WideAboutUs width={width} />
+              <WideAboutUs homeContent={homeContent} width={width} />
               <hr />
               <WideFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -59,3 +61,11 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.defaultProps = { homeContent: {} };
+Home.propTypes = {
+  homeContent: PropTypes.shape({
+    title: PropTypes.string,
+    comments: PropTypes.string,
+  }),
+};

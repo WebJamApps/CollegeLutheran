@@ -1,15 +1,13 @@
 const initialState = {
-  songs: [],
-  error: '',
+  homeContent: {},
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'GOT_SONGS':
+    case 'GOT_HOMEPAGE':
       return {
         ...state,
-        songs: action.data,
-        error: '', 
+        homeContent: action.data,
       };
     default:
       return state;
