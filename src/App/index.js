@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import superagent from 'superagent';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,10 +22,23 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.superagent = superagent;
+    this.fetchHomepage = this.fetchHomepage.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
+    this.fetchHomepage();
+  }
 
+  async fetchHomepage() {
+    let res;
+    const { dispatch } = this.props;
+    try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); } catch (e) {
+      return console.log(e.message);
+    }
+    console.log(res.body);
+    dispatch({ type: 'GOT_HOMEPAGE', data: res.body });
+    return true;
   }
 
   render() {
@@ -54,7 +68,7 @@ export class App extends Component {
   }
 }
 App.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   // songs: PropTypes.arrayOf(PropTypes.shape({})),
   // images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
   auth: PropTypes.shape({

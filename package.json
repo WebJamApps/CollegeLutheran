@@ -7,7 +7,7 @@
     "url": "git+ssh://git@github.com/WebJamApps/CollegeLutheran.git",
     "type": "git"
   },
-  "author": "https://github.com/orgs/WebJamApps/teams/handlersandkickers",
+  "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
     "node": ">=13.4.0"
   },
