@@ -795,6 +795,12 @@ div.fof {
   display: none;
 }
 
+.giving-iframe {
+  width: 800px;
+  height: 460px;
+  border: 1px solid #d3d3d3;
+}
+
 @media screen and (min-width: 900px) {
   .drawer-container {
     float: right;
@@ -977,6 +983,12 @@ div.fof {
 
   ::-webkit-scrollbar:vertical {
     width: 0;
+  }
+
+  .giving-iframe {
+    width: 320px;
+    height: 700px;
+    border: 1px solid #d3d3d3;
   }
 }
 

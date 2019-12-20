@@ -13,32 +13,46 @@ export default class Giving extends Component {
   render() {
     return (
       <div className="page-content">
-        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Giving</h3>
-        <div
-          className="main"
-          style={{
-            paddingLeft: '20px', paddingRight: '20px', maxWidth: '9in', margin: 'auto',
+        <div className="container-fluid">
+          <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
+          <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
+            <h3 style={{ paddingTop: '22px', paddingBottom: '15px', fontWeight: '100' }}>Giving</h3>
+            <p>
+            College Lutheran Church now accepts online gifts through GivePlus and Vanco Payment Services.
+            Giving with your credit card is easy. Just complete the form below to support the ministries of CLC with your offering!
+            </p>
+          </div>
+          <p>&nbsp;</p>
+          <div style={{
+            margin: 'auto', textAlign: 'center', padding: '0', marginLeft: '-15px',
           }}
-        >
-          <p style={{ fontSize: '40pt' }}>
-            {' '}
-          </p>
-          <p style={{ fontSize: '14pt' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p style={{ fontSize: '14pt' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          >
+            <iframe
+              className="giving-iframe"
+              src="https://gp.vancopayments.com/gpo/#/195e5d99-170c-4f3a-b5eb-e61ff13"
+              title="Just Giving"
+            >
+              <p>Your browser does not support iframe.</p>
+            </iframe>
+          </div>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <div style={{
+            textAlign: 'center', margin: 'auto', paddingTop: '0', paddingBottom: '-40px',
+          }}
+          >
+            <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
+              <img
+                id="elcaLogo"
+                alt="ELCA LOGO"
+                src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+                style={{ width: '350px', margin: 'auto' }}
+              />
+            </a>
+          </div>
+          <p>&nbsp;</p>
         </div>
-        <div style={{ minHeight: '4.7in' }}>&nbsp;</div>
       </div>
     );
   }
