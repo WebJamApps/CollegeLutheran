@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
-import WideAboutUs from './Widescreen/WideAbout';
+import WideAbout from './Widescreen/WideAbout';
 import WideFacebookFeed from './Widescreen/WideFacebookFeed';
 import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
-// import NarrowAboutUs from './Narrowscreen/NarrowAbout';
-// import Inquiry from '../../components/inquiry';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
-export default class Home extends Component {
+export class Homepage extends Component {
   constructor(props) {
     super(props);
     this.parentRef = React.createRef();
@@ -19,6 +19,25 @@ export default class Home extends Component {
 
   onResize(width) { this.setState({ width }); }
 
+  elca() { // eslint-disable-line class-methods-use-this
+    return (
+      <div style={{
+        textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
+      }}
+      >
+        <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
+          <img
+            id="elcaLogo"
+            alt="ELCA LOGO"
+            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+            style={{ width: '340px', margin: 'auto auto auto -2px', paddingTop: '30px' }}
+          />
+        </a>
+        <p>{' '}</p>
+      </div>
+    );
+  }
+
   render() {
     const { width } = this.state;
     const { homeContent } = this.props;
@@ -27,7 +46,7 @@ export default class Home extends Component {
         {width >= 1004
           ? (
             <div className="page-content">
-              <WideAboutUs homeContent={homeContent} width={width} />
+              <WideAbout homeContent={homeContent} width={width} />
               <hr />
               <WideFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -35,37 +54,26 @@ export default class Home extends Component {
           )
           : (
             <div className="page-content">
-              <WideAboutUs width={width} />
+              <WideAbout homeContent={homeContent} width={width} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
               <NarrowFacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
-        <div style={{
-          textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
-        }}
-        >
-          <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
-            <img
-              id="elcaLogo"
-              alt="ELCA LOGO"
-              src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-              style={{ width: '340px', margin: 'auto auto auto -2px', paddingTop: '30px' }}
-            />
-          </a>
-          <p>{' '}</p>
-        </div>
+        {this.elca()}
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} targetDomEl={this.parentRef.current} />
       </div>
     );
   }
 }
 
-Home.defaultProps = { homeContent: {} };
-Home.propTypes = {
+Homepage.defaultProps = { homeContent: {} };
+Homepage.propTypes = {
   homeContent: PropTypes.shape({
     title: PropTypes.string,
     comments: PropTypes.string,
   }),
 };
+
+export default connect(mapStoreToProps, null)(Homepage);

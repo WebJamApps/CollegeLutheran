@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 
-const WideAboutUs = ({ homeContent, width }) => (
+const WideAbout = ({ homeContent, width }) => (
   <div className="widescreenHomepage">
     <div className="container-fluid">
       <div className="row">
@@ -19,10 +20,8 @@ const WideAboutUs = ({ homeContent, width }) => (
             <li style={{ marginLeft: '-10px' }}>Wednesday Bible study at 11:15 am followed by Holy Communion at 12:15 pm</li>
           </ul>
           <p><i>Please join us as we celebrate God’s grace and share His love in Christ</i></p>
-          <div id="custom-content">
-            <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{homeContent.title}</h5>
-            <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{homeContent.comments}</section>
-          </div>
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent.title)}</h5>
+          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{ReactHtmlParser(homeContent.comments)}</section>
           <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
             <span style={{ fontSize: '18px' }}>
               {' '}
@@ -54,12 +53,12 @@ const WideAboutUs = ({ homeContent, width }) => (
     </div>
   </div>
 );
-WideAboutUs.defaultProps = { homeContent: {}, width: 1004 };
-WideAboutUs.propTypes = {
+WideAbout.defaultProps = { homeContent: {}, width: 1004 };
+WideAbout.propTypes = {
   width: PropTypes.number,
   homeContent: PropTypes.shape({
     title: PropTypes.string,
     comments: PropTypes.string,
   }),
 };
-export default WideAboutUs;
+export default WideAbout;

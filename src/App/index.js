@@ -15,7 +15,7 @@ import News from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
 import AppMain from './app-main';
-import HomePage from '../containers/Homepage';
+import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
 
 export class App extends Component {
@@ -34,11 +34,11 @@ export class App extends Component {
     let res;
     const { dispatch } = this.props;
     try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); } catch (e) {
-      return console.log(e.message);
+      console.log(e.message);// eslint-disable-line no-console
+      return Promise.resolve(false);
     }
-    console.log(res.body);
     dispatch({ type: 'GOT_HOMEPAGE', data: res.body });
-    return true;
+    return Promise.resolve(true);
   }
 
   render() {
@@ -49,7 +49,7 @@ export class App extends Component {
         <Router>
           <AppMain id="homepage">
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route exact path="/" component={DefaultHome} />
               <Route path="/music" component={DefaultMusic} />
               <Route path="/belief" component={Beliefs} />
               <Route path="/family" component={Family} />
