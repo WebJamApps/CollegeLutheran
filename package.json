@@ -84,6 +84,7 @@
     "react-redux": "latest",
     "react-resize-detector": "latest",
     "react-router-dom": "latest",
+    "react-router-hash-link": "^1.2.2",
     "react-slick": "latest",
     "redux": "latest",
     "redux-logger": "latest",
