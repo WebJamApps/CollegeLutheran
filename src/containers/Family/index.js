@@ -17,7 +17,7 @@ export class Family extends Component {
   render() {
     const { familyPics } = this.props;
     return (
-      <DefaultFamilyContent familyPics={familyPics} />
+      <DefaultFamilyContent data={familyPics} />
     );
   }
 }
