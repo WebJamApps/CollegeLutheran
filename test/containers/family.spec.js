@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Family from '../../src/containers/Family/index';
+import DefaultFamily from '../../src/containers/Family/index';
 
 function setup() {
   const props = {};
-  const wrapper = shallow(<Family />);
+  const wrapper = shallow(<DefaultFamily />);
   return { props, wrapper };
 }
 
