@@ -1,16 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import PicSlider from '../../components/pic-slider';
+// import PicSlider from '../../components/pic-slider';
 
 const FamilyContent = ({ familyPics }) => (
   <div className="page-content">
-    <div id="familySlideshowWide">
-      {familyPics.length > 0 ? (<PicSlider familyPics={familyPics} />) : null}
+    <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* {familyPics.length > 0 ? (<PicSlider data={familyPics.comments} />) : null} */}
+      <img
+        src={familyPics[0].comments}
+        style={{
+          display: 'flex', alignSelf: 'center', paddingBottom: '5px', width: '20%', height: '40%',
+        }}
+        alt="Test"
+      />
+      <p style={{
+        display: 'flex', alignSelf: 'center', fontSize: '14px', textAlign: 'center',
+      }}
+      >
+        A test to make sure data is being rendered correctly. Still needs to be passed to pic-slider to render all.
+      </p>
     </div>
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
-      <div className="material-content elevation2" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
         <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>Children and Families</h3>
         <p>
           <span style={{ color: 'rgb(0, 51, 102)' }}>
