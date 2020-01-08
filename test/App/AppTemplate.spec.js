@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AppTemplate } from '../../src/App/app-main';
+import { AppTemplate } from '../../src/App/AppTemplate';
 import authUtils from '../../src/App/authUtils';
 
 const dFunc = () => {};
@@ -11,7 +11,7 @@ function setup() {
   return { wrapper, props };
 }
 
-describe('app-main component test setup', () => {
+describe('AppTemplate', () => {
   it('renders the component', () => {
     const { wrapper } = setup();
     expect(wrapper.find('div.page-host').exists()).toBe(true);
