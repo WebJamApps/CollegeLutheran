@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-// import PicSlider from '../../components/pic-slider';
+import PicSlider from '../../components/pic-slider';
 
 const FamilyContent = ({ familyPics }) => (
   <div className="page-content">
     <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* {familyPics.length > 0 ? (<PicSlider data={familyPics.comments} />) : null} */}
-      <img
-        src={familyPics[0].comments}
-        style={{
-          display: 'flex', alignSelf: 'center', paddingBottom: '5px', width: '20%', height: '40%',
-        }}
-        alt="Test"
-      />
+      {familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
       <p style={{
         display: 'flex', alignSelf: 'center', fontSize: '14px', textAlign: 'center',
       }}
