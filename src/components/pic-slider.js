@@ -30,7 +30,7 @@ class PicSlider extends Component {
             data.map((d) => (
               <div key={d._id}>
                 {' '}
-                <img width="100%" height="100%" src={d.url} alt={d.title} />
+                <img className="slide-show" src={d.url} alt={d.title} />
                 {' '}
                 <Caption caption={d.title} />
               </div>

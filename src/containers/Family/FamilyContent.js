@@ -7,12 +7,6 @@ const FamilyContent = ({ familyPics }) => (
   <div className="page-content">
     <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
       {familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
-      <p style={{
-        display: 'flex', alignSelf: 'center', fontSize: '14px', textAlign: 'center',
-      }}
-      >
-        A test to make sure data is being rendered correctly. Still needs to be passed to pic-slider to render all.
-      </p>
     </div>
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>

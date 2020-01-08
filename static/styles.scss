@@ -199,30 +199,38 @@ h6 {
 }
 
 /* Slideshow container */
-#libslideshow,
-#libslideshow1,
-#slideshowMusic,
-#slideshow1,
-#slideshow,
-#musicSlide1,
-#musicSlide2,
-#lSlide1,
-#lSlide2 {
-  max-width: 1000px;
+#youthSlideshow, #youthSlideshow1, #familySlideshow, #familySlideshow1, #slideshowMusic, #slideshow1, #slideshow, #musicSlide2, #lSlide1, #lSlide2 {
+  max-width: 600px;
   position: relative;
   margin: auto;
 }
 
-#libslideshow img,
-#libslideshow1 img,
-#slideshowMusic img,
-#slideshow1 img,
-#slideshow img,
-#musicSlide1 img,
-#musicSlide2 img,
-#lSlide1 img,
-#lSlide2 img {
+#musicSlide1 {
+  max-width: 998px !important;
+  margin: auto !important;
+}
+
+#familySlideshowWide, #youthSlideshowWide {
+  max-width: 600px;
+  margin: auto;
+}
+
+#slideshow1 img, #musicSlide1 img {
   width: 100%;
+}
+
+#familySlideshow img, #familySlideshow1 img, #youthSlideshow img, #youthSlideshow1 img, #slideshowMusic img, #slideshow img, #musicSlide2 img, #lSlide1 img, #lSlide2 img {
+  /* width: 100%; */
+  margin: auto;
+  max-height: 5in;
+  cursor: pointer;
+  /* max-height: 5in; */
+}
+
+#familySlideshowWide img, #familySlideshow1 img, #youthSlideshowWide img, #youthSlideshowWide1 img {
+  margin: auto;
+  max-height: 5in;
+  padding-top: 1px
 }
 
 #content {
@@ -1279,4 +1287,11 @@ span.inquiryValidation {
 
 .menu-hover:hover {
   color: rgb(204, 224, 255) !important;
+}
+
+.slide-show {
+  height: 400px;
+  width: 100%;
+  object-fit: contain;
+  background-color: rgb(192, 192, 192);
 }
