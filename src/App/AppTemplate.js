@@ -5,7 +5,6 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
 import mapStoreToProps from '../redux/mapStoreToProps';
-// import appMainUtils from './appMainUtils';
 import Footer from './Footer';
 import menuUtils from './menuUtils';
 
@@ -24,7 +23,6 @@ export class AppTemplate extends Component {
     this.responseGoogleLogout = this.responseGoogleLogout.bind(this);
     this.googleButtons = this.googleButtons.bind(this);
     this.authUtils = authUtils;
-    // this.appMainUtils = appMainUtils;
   }
 
   get currentStyles() {
@@ -68,6 +66,12 @@ export class AppTemplate extends Component {
       {
         className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
       },
+      {
+        className: 'login', type: 'googleLogin', iconClass: 'fas fa-login', link: '', name: 'Login',
+      },
+      {
+        className: 'logout', type: 'googleLogout', iconClass: 'fas fa-logout', link: '', name: 'Logout', auth: true,
+      },
     ];
   }
 
@@ -77,11 +81,9 @@ export class AppTemplate extends Component {
     this.setState({ menuOpen: mO });
   }
 
-  // eslint-disable-next-line react/destructuring-assignment
   responseGoogleLogin(response) { return this.authUtils.responseGoogleLogin(response, this); }
 
-  // eslint-disable-next-line react/destructuring-assignment
-  responseGoogleLogout(response) { return this.authUtils.responseGoogleLogout(response, this.props.dispatch); }
+  responseGoogleLogout(response) { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(response, dispatch); }
 
   close(e) {
     this.setState({ menuOpen: false });
@@ -187,7 +189,6 @@ export class AppTemplate extends Component {
   render() {
     const { menuOpen } = this.state;
     const style = `${this.currentStyles.sidebarClass} ${menuOpen ? 'open' : 'close'}`;
-
     return (
       <div className="page-host">
         <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
