@@ -13,7 +13,7 @@ export class AppTemplate extends Component {
     super(props);
     this.menuUtils = menuUtils;
     this.children = props.children;
-    this.state = { menuOpen: false };// eslint-disable-line
+    this.state = { menuOpen: false };
     this.close = this.close.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyMenu = this.handleKeyMenu.bind(this);
