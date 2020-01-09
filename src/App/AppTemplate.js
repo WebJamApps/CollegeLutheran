@@ -5,16 +5,17 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
 import mapStoreToProps from '../redux/mapStoreToProps';
-// import appMainUtils from './appMainUtils';
 import Footer from './Footer';
 import menuUtils from './menuUtils';
+import menuItems from './menuItems.json';
 
 export class AppTemplate extends Component {
   constructor(props) {
     super(props);
+    this.menus = menuItems.menus;
     this.menuUtils = menuUtils;
     this.children = props.children;
-    this.state = { menuOpen: false };// eslint-disable-line
+    this.state = { menuOpen: false };
     this.close = this.close.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyMenu = this.handleKeyMenu.bind(this);
@@ -24,7 +25,6 @@ export class AppTemplate extends Component {
     this.responseGoogleLogout = this.responseGoogleLogout.bind(this);
     this.googleButtons = this.googleButtons.bind(this);
     this.authUtils = authUtils;
-    // this.appMainUtils = appMainUtils;
   }
 
   get currentStyles() {
@@ -42,34 +42,40 @@ export class AppTemplate extends Component {
     return result;
   }
 
-  get menus() { // eslint-disable-line class-methods-use-this
-    return [
-      {
-        className: '', type: 'link', iconClass: 'fas fa-arrows-alt', link: '/belief', name: 'Our Lutheran Beliefs',
-      },
-      {
-        className: '', type: 'link', iconClass: 'fas fa-users', link: '/staff', name: 'Church Staff',
-      },
-      {
-        className: '', type: 'link', iconClass: 'fas fa-music', link: '/music', name: 'Music',
-      },
-      {
-        className: '', type: 'link', iconClass: 'fas fa-handshake', link: '/giving', name: 'Giving',
-      },
-      {
-        className: '', type: 'link', iconClass: 'fas fa-futbol', link: '/youth', name: 'Youth Ministry',
-      },
-      {
-        className: '', type: 'link', iconClass: 'fas fa-child', link: '/family', name: 'Child & Families',
-      },
-      {
-        className: '', type: 'link', iconClass: 'far fa-newspaper', link: '/news', name: 'News & Forum',
-      },
-      {
-        className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
-      },
-    ];
-  }
+  // get menus() { // eslint-disable-line class-methods-use-this
+  //   return [
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-arrows-alt', link: '/belief', name: 'Our Lutheran Beliefs',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-users', link: '/staff', name: 'Church Staff',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-music', link: '/music', name: 'Music',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-handshake', link: '/giving', name: 'Giving',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-futbol', link: '/youth', name: 'Youth Ministry',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'fas fa-child', link: '/family', name: 'Child & Families',
+  //     },
+  //     {
+  //       className: '', type: 'link', iconClass: 'far fa-newspaper', link: '/news', name: 'News & Forum',
+  //     },
+  //     {
+  //       className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
+  //     },
+  //     {
+  //       className: 'login', type: 'googleLogin', iconClass: 'fas fa-login', link: '', name: 'Login',
+  //     },
+  //     {
+  //       className: 'logout', type: 'googleLogout', iconClass: 'fas fa-logout', link: '', name: 'Logout', auth: true,
+  //     },
+  //   ];
+  // }
 
   toggleMobileMenu() {
     const { menuOpen } = this.state;
@@ -77,11 +83,9 @@ export class AppTemplate extends Component {
     this.setState({ menuOpen: mO });
   }
 
-  // eslint-disable-next-line react/destructuring-assignment
   responseGoogleLogin(response) { return this.authUtils.responseGoogleLogin(response, this); }
 
-  // eslint-disable-next-line react/destructuring-assignment
-  responseGoogleLogout(response) { return this.authUtils.responseGoogleLogout(response, this.props.dispatch); }
+  responseGoogleLogout(response) { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(response, dispatch); }
 
   close(e) {
     this.setState({ menuOpen: false });
@@ -187,7 +191,6 @@ export class AppTemplate extends Component {
   render() {
     const { menuOpen } = this.state;
     const style = `${this.currentStyles.sidebarClass} ${menuOpen ? 'open' : 'close'}`;
-
     return (
       <div className="page-host">
         <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>

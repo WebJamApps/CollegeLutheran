@@ -14,7 +14,7 @@ import Youth from '../containers/Youth';
 import News from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
-import AppMain from './app-main';
+import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
 
@@ -36,7 +36,6 @@ export class App extends Component {
     let res;
     const { dispatch } = this.props;
     try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); } catch (e) {
-      console.log(e.message);// eslint-disable-line no-console
       return Promise.resolve(false);
     }
     dispatch({ type: 'GOT_HOMEPAGE', data: res.body });
@@ -55,12 +54,10 @@ export class App extends Component {
   }
 
   render() {
-    // const { auth } = this.props;
-    // console.log(auth);//eslint-disable-line
     return (
       <div id="App" className="App">
         <Router>
-          <AppMain id="homepage">
+          <AppTemplateDefault id="homepage">
             <Switch>
               <Route exact path="/" component={DefaultHome} />
               <Route path="/music" component={DefaultMusic} />
@@ -73,7 +70,7 @@ export class App extends Component {
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />
             </Switch>
-          </AppMain>
+          </AppTemplateDefault>
         </Router>
       </div>
 
@@ -82,12 +79,7 @@ export class App extends Component {
 }
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  // songs: PropTypes.arrayOf(PropTypes.shape({})),
-  // images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-    user: PropTypes.shape({ userType: PropTypes.string }),
-  }),
+  auth: PropTypes.shape({ user: PropTypes.shape({ userType: PropTypes.string }), isAuthenticated: PropTypes.bool }),
 };
 App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 
