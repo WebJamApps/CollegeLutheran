@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
-import Family from '../containers/Family';
+import DefaultFamily from '../containers/Family';
 import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
 import Youth from '../containers/Youth';
@@ -24,10 +24,12 @@ export class App extends Component {
     this.state = {};
     this.superagent = superagent;
     this.fetchHomepage = this.fetchHomepage.bind(this);
+    this.fetchFamily = this.fetchFamily.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetchHomepage();
+    this.fetchFamily();
   }
 
   async fetchHomepage() {
@@ -40,6 +42,17 @@ export class App extends Component {
     return Promise.resolve(true);
   }
 
+  async fetchFamily() {
+    let fres;
+    const { dispatch } = this.props;
+    try { fres = await this.superagent.get(`${process.env.BackendUrl}/book?type=familyPics`).set('Accept', 'application/json'); } catch (e) {
+      console.log(e.message);// eslint-disable-line no-console
+      return Promise.resolve(false);
+    }
+    dispatch({ type: 'GOT_FAMILYPICS', data: fres.body });
+    return Promise.resolve(true);
+  }
+
   render() {
     return (
       <div id="App" className="App">
@@ -49,7 +62,7 @@ export class App extends Component {
               <Route exact path="/" component={DefaultHome} />
               <Route path="/music" component={DefaultMusic} />
               <Route path="/belief" component={Beliefs} />
-              <Route path="/family" component={Family} />
+              <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
               <Route path="/staff" component={Staff} />
               <Route path="/youth" component={Youth} />
