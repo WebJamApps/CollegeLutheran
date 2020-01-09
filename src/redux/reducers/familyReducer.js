@@ -3,7 +3,9 @@ const initialState = {
 };
 
 const fixUrl = (state, action) => {
-  const familyPics = action.data.map((i) => {
+  let picArr = [];
+  if (Array.isArray(action.data)) picArr = action.data;
+  const familyPics = picArr.map((i) => {
     const newPic = i;
     newPic.url = i.comments;
     return newPic;

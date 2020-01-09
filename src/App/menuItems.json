@@ -1,5 +1,13 @@
 {
   "menus": [{
+      "classname": "dashboard",
+      "type": "link",
+      "iconClass": "fas fa-user-secret",
+      "link": "/staff/dashboard",
+      "name": "Staff Dashboard",
+      "auth": true
+    },
+    {
       "classname": "",
       "type": "link",
       "iconClass": "fas fa-arrows-alt",
