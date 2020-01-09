@@ -10,6 +10,7 @@ import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
 import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
+import StaffDashboardDefault from '../containers/StaffDashboard';
 import Youth from '../containers/Youth';
 import News from '../containers/News';
 import Calendar from '../containers/Calendar';
@@ -54,6 +55,7 @@ export class App extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     return (
       <div id="App" className="App">
         <Router>
@@ -64,7 +66,9 @@ export class App extends Component {
               <Route path="/belief" component={Beliefs} />
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
-              <Route path="/staff" component={Staff} />
+              <Route exact path="/staff" component={Staff} />
+              {auth.isAuthenticated && auth.user.userType === 'Developer'
+                ? <Route path="/staff/dashboard" component={StaffDashboardDefault} /> : null}
               <Route path="/youth" component={Youth} />
               <Route path="/news" component={News} />
               <Route path="/calendar" component={Calendar} />

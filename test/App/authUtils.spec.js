@@ -22,7 +22,12 @@ describe('authUtils', () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
     jwt.encode = jest.fn(() => 'token');
     request.setMockResponse({ body: {} });
-    window.location.reload = jest.fn();
+    delete window.location;
+    window.location = {
+      href: '/',
+      assign: jest.fn(),
+      reload: jest.fn(),
+    };
     controllerStub.props.dispatch = (obj) => { expect(obj.type).toBeDefined(); };
     const result = await authUtils.setUser(controllerStub);
     expect(result).toBe(true);
@@ -34,12 +39,23 @@ describe('authUtils', () => {
   });
   it('sets the user to the already decoded user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
-    window.location.reload = jest.fn();
+    delete window.location;
+    window.location = {
+      href: '/',
+      assign: jest.fn(),
+      reload: jest.fn(),
+    };
     controllerStub.props.dispatch = (obj) => { expect(obj.type).toBe('SET_USER'); };
     const result = await authUtils.setUser(controllerStub);
     expect(result).toBe(true);
   });
   it('logs out when not /dashboard', async () => {
+    delete window.location;
+    window.location = {
+      href: '/',
+      assign: jest.fn(),
+      reload: jest.fn(),
+    };
     const result = await authUtils.responseGoogleLogout('howdy', () => {});
     expect(result).toBe('howdy');
   });
@@ -48,6 +64,7 @@ describe('authUtils', () => {
     window.location = {
       href: '/dashboard',
       assign: jest.fn(),
+      reload: jest.fn(),
     };
     const result = await authUtils.responseGoogleLogout('howdy', () => {});
     expect(result).toBe('howdy');
