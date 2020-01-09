@@ -79,10 +79,7 @@ export class App extends Component {
 }
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-    user: PropTypes.shape({ userType: PropTypes.string }),
-  }),
+  auth: PropTypes.shape({ user: PropTypes.shape({ userType: PropTypes.string }), isAuthenticated: PropTypes.bool }),
 };
 App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 
