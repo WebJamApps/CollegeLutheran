@@ -56,14 +56,9 @@ const StaffContent = () => (
             <img
               alt="pastor"
               src="https://dl.dropboxusercontent.com/s/p696kqa9ist7ffz/2018.04.02.8896%20David%20Drebes%20%28Color%29.jpg?dl=0"
-              style={{
-                width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
-              }}
+              className="staffPicture"
             />
-            <div style={{
-              textAlign: 'left', maxWidth: '8in', margin: 'auto', marginTop: '15px',
-            }}
-            >
+            <div className="staffDescription">
               <p>
                 The Rev. David C. Drebes came to College Lutheran Church in May of 2018 after serving for seven and half years in
                 Shenandoah County, Virginia. He was happy to return to Salem, having graduated from Roanoke College in 2005 with a
@@ -90,14 +85,9 @@ const StaffContent = () => (
             <img
               alt="susan"
               src="https://dl.dropboxusercontent.com/s/zo01a5oblb0lcw4/susan.jpg?dl=0"
-              style={{
-                width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
-              }}
+              className="staffPicture"
             />
-            <div style={{
-              textAlign: 'left', maxWidth: '8in', margin: 'auto', marginTop: '15px',
-            }}
-            >
+            <div className="staffDescription">
               <p>
                 Susan is a lifelong Lutheran. She was baptized as an infant at Trinity Lutheran Church in Hagerstown, Maryland and confirmed at
                 St. Mark’s Lutheran Church in Oakland, Maryland. Prior to moving to Salem and College Lutheran Church in
@@ -138,9 +128,9 @@ const StaffContent = () => (
           <section id="Sandi">
             <h4>Sandi Roop - Parish Administrator</h4>
             <img
-              className="staffPicture"
               alt="Sandi"
               src="https://dl.dropboxusercontent.com/s/i1n5ct7wnt2ju0d/Sandi_v01.jpg?dl=0"
+              className="staffPicture"
             />
             <div className="staffDescription">
               <p>
@@ -157,14 +147,9 @@ const StaffContent = () => (
             <img
               alt="Lawrence"
               src="https://dl.dropboxusercontent.com/s/ewvlw65y1zwp0bc/Lawrence_v01.jpg?dl=0"
-              style={{
-                width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
-              }}
+              className="staffPicture"
             />
-            <div style={{
-              textAlign: 'left', maxWidth: '8in', margin: 'auto', marginTop: '15px',
-            }}
-            >
+            <div className="staffDescription">
               <p>Lawrence Keffer has been our sexton for College Lutheran Church since 1997. He resides in Salem with his wife Laurie.</p>
 
               <p>Lawrence has been with the Salem Fire and EMS Department since 1989. He enjoys the outdoors, golfing, hiking and gardening.</p>
@@ -176,14 +161,9 @@ const StaffContent = () => (
             <img
               alt="Richard"
               src="https://dl.dropboxusercontent.com/s/c0xsjx22rklxxwo/Richard_Hoffman.jpg?dl=0"
-              style={{
-                width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
-              }}
+              className="staffPicture"
             />
-            <div style={{
-              textAlign: 'left', maxWidth: '8in', margin: 'auto', marginTop: '15px',
-            }}
-            >
+            <div className="staffDescription">
               <p>
                 Richard Hoffman was born and raised in the New York/ New Jersey metropolitan area which explains his life long loyalty for the
                 NY Yankees. After a brief stint with US Army as a sentry dog hander, Richard worked for Citibank for 3
