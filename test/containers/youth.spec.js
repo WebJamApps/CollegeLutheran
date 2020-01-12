@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Youth from '../../src/containers/Youth/index';
+import DefaultYouth from '../../src/containers/Youth/index';
 
 function setup() {
   const props = {};
-  const wrapper = shallow(<Youth />);
+  const wrapper = shallow(<DefaultYouth />);
   return { props, wrapper };
 }
 
