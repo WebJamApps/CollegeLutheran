@@ -138,16 +138,11 @@ const StaffContent = () => (
           <section id="Sandi">
             <h4>Sandi Roop - Parish Administrator</h4>
             <img
+              className="staffPicture"
               alt="Sandi"
               src="https://dl.dropboxusercontent.com/s/i1n5ct7wnt2ju0d/Sandi_v01.jpg?dl=0"
-              style={{
-                width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
-              }}
             />
-            <div style={{
-              textAlign: 'left', maxWidth: '8in', margin: 'auto', marginTop: '15px',
-            }}
-            >
+            <div className="staffDescription">
               <p>
                 Sandi Roop is our Parish Administrator for College Lutheran. Sandi joined the staff of CLC in 2012. She lives in Roanoke County
                 with her husband, Michael and her children, Ashley and Joshua.
@@ -179,7 +174,7 @@ const StaffContent = () => (
           <section id="Richard">
             <h4>Richard Hoffman - Financial Administrator</h4>
             <img
-              alt="Sandi"
+              alt="Richard"
               src="https://dl.dropboxusercontent.com/s/c0xsjx22rklxxwo/Richard_Hoffman.jpg?dl=0"
               style={{
                 width: '288px', display: 'block', margin: 'auto', textAlign: 'center',
@@ -203,10 +198,7 @@ const StaffContent = () => (
               </p>
             </div>
           </section>
-          <div style={{
-            textAlign: 'left', marginBottom: '-30px', marginTop: '20px', display: 'none',
-          }}
-          >
+          <div className="staffElca">
             <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
               <img
                 id="elcaLogo"
