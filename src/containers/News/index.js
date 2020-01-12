@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 
 export default class News extends Component {
-  constructor(props) {
-    super(props);
-    this.children = props.children;// eslint-disable-line react/prop-types
-  }
+  constructor(props) { super(props); }// eslint-disable-line no-useless-constructor
 
-  componentDidMount() {
-    document.title = 'News & Forum | College Lutheran Church';
-  }
+  componentDidMount() { document.title = 'News & Forum | College Lutheran Church'; }
 
   render() {
     return (

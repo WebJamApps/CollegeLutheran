@@ -3,6 +3,7 @@ const mapStoreToProps = (store) => ({
   auth: store.auth,
   // tour: store.tour.tour,
   homeContent: store.homeContent.homeContent,
+  familyPics: store.familyPics.familyPics,
   // tourUpdated: store.tour.tourUpdated,
 });
 export default mapStoreToProps;
