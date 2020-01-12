@@ -51,10 +51,7 @@ const YouthContent = ({ youthPics }) => (
         <section style={{ textAlign: 'left', marginTop: '0' }} />
       </div>
       {ReactHtmlParser(youthPics.comments)}
-      <div style={{
-        textAlign: 'center', margin: 'auto', paddingTop: '0', paddingBottom: '-40px',
-      }}
-      >
+      <div className="youthELCA">
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"

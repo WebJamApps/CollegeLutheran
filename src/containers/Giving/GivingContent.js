@@ -28,10 +28,7 @@ const GivingContent = () => (
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <div style={{
-        textAlign: 'center', margin: 'auto', paddingTop: '0', paddingBottom: '-40px',
-      }}
-      >
+      <div className="givingELCA">
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"
