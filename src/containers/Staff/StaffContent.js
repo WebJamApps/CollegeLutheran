@@ -128,9 +128,9 @@ const StaffContent = () => (
           <section id="Sandi">
             <h4>Sandi Roop - Parish Administrator</h4>
             <img
+              className="staffPicture"
               alt="Sandi"
               src="https://dl.dropboxusercontent.com/s/i1n5ct7wnt2ju0d/Sandi_v01.jpg?dl=0"
-              className="staffPicture"
             />
             <div className="staffDescription">
               <p>
@@ -145,8 +145,8 @@ const StaffContent = () => (
           <section id="Lawrence">
             <h4>Lawrence Keffer - Sexton</h4>
             <img
-              alt="Lawrence"
               src="https://dl.dropboxusercontent.com/s/ewvlw65y1zwp0bc/Lawrence_v01.jpg?dl=0"
+              alt="Lawrence"
               className="staffPicture"
             />
             <div className="staffDescription">
