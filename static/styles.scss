@@ -1300,4 +1300,24 @@ div.familyELCA, div.youthELCA, div.givingELCA {
   text-align: center;
   margin: auto;
   padding-top: 0;
+
+.staffElca {
+  text-align: left;
+  margin-bottom: -30px;
+  margin-top: 20px;
+  display: none;
+}
+
+.staffPicture {
+  width: 288px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.staffDescription {
+  text-align: left;
+  max-width: 8in;
+  margin: auto;
+  margin-top: 15px;
 }
