@@ -1295,3 +1295,24 @@ span.inquiryValidation {
   object-fit: contain;
   background-color: rgb(192, 192, 192);
 }
+
+.staffElca {
+  text-align: left;
+  margin-bottom: -30px;
+  margin-top: 20px;
+  display: none;
+}
+
+.staffPicture {
+  width: 288px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.staffDescription {
+  text-align: left;
+  max-width: 8in;
+  margin: auto;
+  margin-top: 15px;
+}
