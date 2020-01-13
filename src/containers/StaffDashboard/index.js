@@ -87,14 +87,149 @@ export class StaffDashboard extends Component {
     // } = this.state;
     return (
       <div className="page-content">
-        {redirect ? <Redirect to="/staff" /> : null}
-        <h3 style={{ textAlign: 'center', margin: '14px', fontWeight: 'bold' }}>Staff Dashboard</h3>
-        {/* <h5 style={{ textAlign: 'center', marginBottom: 0 }}>Create a New Tour</h5>
-        {this.newTourForm(date, time, buttonStyle)}
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p> */}
-      </div>
+        <h3>CLC Admin Dashboard</h3>
+          <div className="material-content elevation3">
+            <h4 class="material-header-h4">Add Monthly Forum</h4>
+            <form>
+              <label>Type
+              <select id="mediaType" className="form-control" value="">
+                <option></option>
+              </select>
+              </label>
+              <label>Dropbox URL to PDF
+              <input value=""/></label>
+              <div className="form-group">
+                <ul>
+                <li style={{color:red}}>
+                  </li>
+                </ul>
+              </div>
+              <button id="createMediaButton" class="button-lib">
+                Submit
+              </button>
+            </form>
+          </div>
+              <hr>
+          <div class="material-content elevation3" style="max-width:5in; margin:auto">
+            <h4 class="material-header-h4">Delete Monthly Forum</h4>
+            <form>
+              <label style="padding-top:0">Select</label>
+              <select id="selectBookTitle" className="form-control" value="">
+                <option value=""></option>
+                <option value="book._id"></option>
+              </select>
+              <button className="button-lib">
+                Delete
+              </button>
+            </form>
+          </div>
+                    <hr>
+          <div className="material-content elevation3">
+            <h4 class="material-header-h4">Change Homepage Section</h4>
+            <form>
+              <label>Title
+              <input value="homePageContent.title"/>
+              </label>
+              <label>Content
+              <textarea rows="15" cols="32" value="homePageContent.comments"/></label>
+              <button id="changeStuff" className="button-lib">
+                Submit
+              </button>
+            </form>
+          </div>
+          <hr>
+          <div class="material-content elevation3" style="max-width:5in; margin:auto">
+            <h4 class="material-header-h4">Change Youthpage Section</h4>
+            <form>
+              <label>Content
+              <textarea rows="15" cols="32" value="youthPageContent.comments"/></label>
+              <button id="changeYouth" class="button-lib">
+                Submit
+              </button>
+            </form>
+            <hr>
+            <h4 class="material-header-h4">Add Youthpage Picture from Dropbox</h4>
+            <form>
+              <label>Dropbox URL to Picture
+              <input value="newBook.url"/></label>
+              <button id="createYouthPic" className="button-lib">
+                Add Pic
+              </button>
+            </form>
+            <hr>
+            <h4 class="material-header-h4">Add Youthpage Pic from Image Address</h4>
+            <form>
+              <label>Title
+              <input value="newYouthPic.title"/></label>
+              <label>Image Address
+              <input value="newYouthPic.url"/></label>
+              <button id="addYouthPic" className="button-lib">
+                Add Pic
+              </button>
+            </form>
+            <p style={{color:'red'}}><strong>errorMessage</strong></p>
+            <hr>
+            <h4 className="material-header-h4">Delete Youthpage Picture</h4>
+            <form>
+              <label>Select
+              <select id="selectYouthPic" className="form-control" value="titleSelected">
+                <option value=""></option>
+                <option value="pic._id"></option>
+              </select>
+              </label>
+              <button id="deleteYouth" className="button-lib">
+                Delete
+              </button>
+            </form>
+          </div>
+          <p style="font-size:2pt">&nbsp;</p>
+          <div class="material-content elevation3" style="max-width:5in; margin:auto">
+            <h4 class="material-header-h4">Change Familypage Section</h4>
+            <form>
+              <label>Content</label>
+              <textarea rows="15" cols="32" value.two-way="familyPageContent.comments"></textarea>
+              <button id="changeFamily" class="button-lib" raised click.trigger="changeFamilyPage()">
+                Submit
+              </button>
+            </form>
+            <p>&nbsp;</p>
+            <hr>
+            <h4 class="material-header-h4">Add Familypage Pic from Dropbox</h4>
+            <form>
+              <label>Dropbox URL to Picture</label>
+              <input value.two-way="newBook.url & validate">
+              <button id="createFamilyPic" class="button-lib" style="width:70px" raised click.trigger="createFamilyPic()">
+                Add Pic
+              </button>
+            </form>
+            <p>&nbsp;</p>
+            <hr>
+            <h4 class="material-header-h4">Add Familypage Pic from Image Address</h4>
+            <form>
+              <label>Title</label>
+              <input value.two-way="newFamilyPic.title" style="min-width:0" required>
+              <label>Image Address</label>
+              <input value.two-way="newFamilyPic.url">
+              <button id="addFamilyPic" class="button-lib" style="width:70px" raised click.trigger="addFamilyPic()">
+                Add Pic
+              </button>
+            </form>
+            <p style="color:red;"><strong>${familyPicError}</strong></p>
+            <p>&nbsp;</p>
+            <hr>
+            <h4 class="material-header-h4">Delete Familypage Picture</h4>
+            <form>
+              <label>Select</label>
+              <select id="selectFamilyPic" class="form-control" change.delegate="showDelete()" value.bind="titleSelected" style="margin-top:0;max-width: 2.5in;overflow-wrap:break-word;word-break:break-all;">
+                <option value=""></option>
+                <option repeat.for="pic of familyPicsArr" value="${pic._id}" model.bind="familyPicsArr">${pic.title}</option>
+              </select>
+              <button if.bind="showDeleteButton" id="deleteFamily" class="button-lib" raised click.trigger="deleteFamilyPic()">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
     );
   }
 }
