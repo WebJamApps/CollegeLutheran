@@ -215,35 +215,34 @@ Dropbox URL to Picture
           <hr /> */}
           <h4 className="material-header-h4">Add Familypage Pic from Image Address</h4>
           <form>
-            <label>
+            <label htmlFor="family-pic-title">
 Title
-              <input value="newFamilyPic.title" style="min-width:0" />
+              <input id="family-pic-title" value="newFamilyPic.title" />
             </label>
-            <label>
+            <label htmlFor="family-pic-url">
 Image Address
-              <input value="newFamilyPic.url" />
+              <input id="family-pic-url" value="newFamilyPic.url" />
             </label>
-            <button id="addFamilyPic" className="button-lib" style="width:70px">
+            <button type="button" id="addFamilyPic" className="button-lib">
                 Add Pic
             </button>
           </form>
-          <p style="color:red;">
+          <p style={{ color: 'red' }}>
             <strong>
-$
-              {familyPicError}
+familyPicError
             </strong>
           </p>
           <hr />
           <h4 className="material-header-h4">Delete Familypage Picture</h4>
           <form>
-            <label>
+            <label htmlFor="delete-family-pic">
 Select
-              <select id="selectFamilyPic" className="form-control">
-                <option value="" />
-                <option value="pic._id">pic.title</option>
+              <select id="delete-family-pic" className="form-control">
+                {/* <option value="" />
+                <option value="pic._id">pic.title</option> */}
               </select>
             </label>
-            <button id="deleteFamily" className="button-lib">
+            <button type="button" id="deleteFamily" className="button-lib">
                 Delete
             </button>
           </form>
