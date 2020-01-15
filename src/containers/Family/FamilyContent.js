@@ -47,10 +47,7 @@ const FamilyContent = ({ familyPics }) => (
           {ReactHtmlParser(familyPics.comments)}
         </section>
       </div>
-      <div style={{
-        textAlign: 'center', margin: 'auto', paddingTop: '0', paddingBottom: '-40px',
-      }}
-      >
+      <div className="familyELCA">
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"
