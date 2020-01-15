@@ -1,6 +1,8 @@
 import React from 'react';
 
-const FamilyContent = () => (
+const pageName = 'beliefs';
+
+const BeliefsContent = () => (
   <div className="page-content">
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
@@ -72,7 +74,7 @@ const FamilyContent = () => (
         <p>&nbsp;</p>
         <p>&nbsp;</p>
       </div>
-      <div className="beliefsELCA">
+      <div className={`${pageName}ELCA`}>
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"
@@ -85,4 +87,4 @@ const FamilyContent = () => (
     </div>
   </div>
 );
-export default FamilyContent;
+export default BeliefsContent;
