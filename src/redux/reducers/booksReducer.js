@@ -1,13 +1,13 @@
 const initialState = {
-  newsContent: {},
+  books: {},
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'GOT_NEWS':
+    case 'GOT_BOOKS':
       return {
         ...state,
-        newsContent: action.data,
+        books: action.data,
       };
     default:
       return state;

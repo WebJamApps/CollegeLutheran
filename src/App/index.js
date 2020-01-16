@@ -26,11 +26,13 @@ export class App extends Component {
     this.superagent = superagent;
     this.fetchHomepage = this.fetchHomepage.bind(this);
     this.fetchFamily = this.fetchFamily.bind(this);
+    this.fetchBooks = this.fetchBooks.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetchHomepage();
     this.fetchFamily();
+    this.fetchBooks();
   }
 
   async fetchHomepage() {
@@ -54,14 +56,15 @@ export class App extends Component {
     return Promise.resolve(true);
   }
 
-  async fetchNews() {
-    let nres;
+  /* Fetches books for newsContent */
+  async fetchBooks() {
+    let bres;
     const { dispatch } = this.props;
-    try { nres = await this.superagent.get(`${process.env.BackendUrl}/book`).set('Accept', 'application/json'); } catch (e) {
+    try { bres = await this.superagent.get(`${process.env.BackendUrl}/book`).set('Accept', 'application/json'); } catch (e) {
       console.log(e.message);// eslint-disable-line no-console
       return Promise.resolve(false);
     }
-    dispatch({ type: 'GOT_NEWS', data: nres.body });
+    dispatch({ type: 'GOT_BOOKS', data: bres.body });
     return Promise.resolve(true);
   }
 
