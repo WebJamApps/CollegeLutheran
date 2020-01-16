@@ -1,5 +1,4 @@
 import React from 'react';
-import DefaultNewsTable from './NewsTable';
 
 const pageName = 'news';
 const NewsContent = () => (
@@ -39,7 +38,6 @@ const NewsContent = () => (
           >
             Monthly Forums
           </h3>
-          <DefaultNewsTable />
         </div>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
