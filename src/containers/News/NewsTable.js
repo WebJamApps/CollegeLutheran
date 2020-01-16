@@ -49,7 +49,7 @@ export class NewsTable extends Component {
 
   setColumns() {
     const columns = [];
-    const titles = ['Date', 'Time', 'Location', 'Venue', 'Tickets'];
+    const titles = ['Title', 'Date'];
     for (let i = 0; i < titles.length; i += 1) {
       columns.push({
         name: titles[i].toLowerCase(), // eslint-disable-line security/detect-object-injection
@@ -99,11 +99,9 @@ export class NewsTable extends Component {
                 print: false,
                 viewColumns: false,
                 selectableRows: 'none',
-                fixedHeader: false,
               }}
               columns={columns}
               data={news}
-              title="News"
             />
           </MuiThemeProvider>
         </div>
