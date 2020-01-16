@@ -849,6 +849,12 @@ div.fof {
   ::-webkit-scrollbar:vertical {
     width: 0;
   }
+
+  .newsIFrame {
+    width:350px;
+    height: 610px;
+    border: 1px solid #d3d3d3;
+  }
 }
 
 .drawer-container {
