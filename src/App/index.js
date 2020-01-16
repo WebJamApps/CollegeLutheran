@@ -54,6 +54,16 @@ export class App extends Component {
     return Promise.resolve(true);
   }
 
+  // async fetchNews() {
+  //   let res;
+  //   const { dispatch } = this.props;
+  //   try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); } catch (e) {
+  //     return Promise.resolve(false);
+  //   }
+  //   dispatch({ type: 'GOT_NEWS', data: res.body });
+  //   return Promise.resolve(true);
+  // }
+
   render() {
     const { auth } = this.props;
     return (
