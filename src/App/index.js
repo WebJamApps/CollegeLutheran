@@ -10,8 +10,8 @@ import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
 import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
-import StaffDashboardDefault from '../containers/StaffDashboard';
 import DefaultYouth from '../containers/Youth';
+import AdminDashboardDefault from '../containers/AdminDashboard';
 import News from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
@@ -81,8 +81,8 @@ export class App extends Component {
               <Route path="/giving" component={Giving} />
               <Route exact path="/staff" component={Staff} />
               {auth.isAuthenticated && auth.user.userType === 'Developer'
-                ? <Route path="/staff/dashboard" component={StaffDashboardDefault} /> : null}
-              <Route path="/youth" component={DefaultYouth} />
+                ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
+              <Route path="/youth" component={Youth} />
               <Route path="/news" component={News} />
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />

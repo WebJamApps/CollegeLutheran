@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/pic-slider';
+import ELCALogo from '../../components/elcaLogo';
+
+const pageName = 'family';
 
 const FamilyContent = ({ familyPics }) => (
   <div className="page-content">
@@ -47,7 +50,8 @@ const FamilyContent = ({ familyPics }) => (
           {ReactHtmlParser(familyPics.comments)}
         </section>
       </div>
-      <div className="familyELCA">
+      <ELCALogo pageName={pageName} />
+      {/* <div className={`${pageName}ELCA`}>
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"
@@ -56,7 +60,7 @@ const FamilyContent = ({ familyPics }) => (
             style={{ width: '350px', paddingTop: '30px', margin: 'auto' }}
           />
         </a>
-      </div>
+      </div> */}
     </div>
   </div>
 );

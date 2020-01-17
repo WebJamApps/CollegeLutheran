@@ -1,6 +1,19 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
+import staffItems from './staffItems.json';
 
+const makeStaff = () => {
+  let moreStaff = '';
+  for (let i = 0; i < staffItems.staff.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
+    moreStaff += `<hr /><section id="${staffItems.staff[i].sectionId}"><h4>${staffItems.staff[i].title}</h4>`;
+    // eslint-disable-next-line security/detect-object-injection
+    moreStaff += `<img style="width:288px" alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
+    // eslint-disable-next-line security/detect-object-injection
+    moreStaff += `<div style="text-align:left;max-width:8in;margin:auto">${staffItems.staff[i].desc}</div></section>`;
+  }
+  return ReactHtmlParser(moreStaff);
+};
 const StaffContent = () => (
   <div className="page-content">
     <div>
@@ -124,7 +137,8 @@ const StaffContent = () => (
               </p>
             </div>
           </section>
-          <hr />
+          {makeStaff()}
+          {/* <hr />
           <section id="Sandi">
             <h4>Sandi Roop - Parish Administrator</h4>
             <img
@@ -177,7 +191,7 @@ const StaffContent = () => (
                 have 2 grown children (Stephen and Kacie) who live in the Arlington, Virginia area.
               </p>
             </div>
-          </section>
+          </section> */}
           <div className="staffElca">
             <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
               <img
