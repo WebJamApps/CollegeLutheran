@@ -1,4 +1,5 @@
 import React from 'react';
+import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'beliefs';
 
@@ -74,7 +75,8 @@ const BeliefsContent = () => (
         <p>&nbsp;</p>
         <p>&nbsp;</p>
       </div>
-      <div className={`${pageName}ELCA`}>
+      <ELCALogo pageName={pageName} />
+      {/* <div className={`${pageName}ELCA`}>
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
             id="elcaLogo"
@@ -83,7 +85,7 @@ const BeliefsContent = () => (
             style={{ width: '350px', paddingTop: '30px', margin: 'auto' }}
           />
         </a>
-      </div>
+      </div> */}
     </div>
   </div>
 );
