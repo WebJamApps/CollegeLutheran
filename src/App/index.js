@@ -82,7 +82,7 @@ export class App extends Component {
               <Route exact path="/staff" component={Staff} />
               {auth.isAuthenticated && auth.user.userType === 'Developer'
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
-              <Route path="/youth" component={Youth} />
+              <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={News} />
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />
