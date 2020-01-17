@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 
-export class StaffDashboard extends Component {
+export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -174,7 +174,7 @@ Select
     );
   }
 }
-StaffDashboard.propTypes = {
+AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
 };
-export default withRouter(connect(mapStoreToProps)(StaffDashboard));
+export default withRouter(connect(mapStoreToProps)(AdminDashboard));

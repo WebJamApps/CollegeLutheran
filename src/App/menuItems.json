@@ -3,8 +3,8 @@
       "classname": "dashboard",
       "type": "link",
       "iconClass": "fas fa-user-secret",
-      "link": "/staff/dashboard",
-      "name": "Staff Dashboard",
+      "link": "admin",
+      "name": "Admin Dashboard",
       "auth": true
     },
     {
