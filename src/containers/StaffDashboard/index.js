@@ -40,31 +40,27 @@ export class StaffDashboard extends Component {
           <h5>Add Monthly Forum</h5>
           <form>
             <label htmlFor="dropbox-url">
-Dropbox URL to PDF
+Full URL to PDF
               <input id="dropbox-url" value="" />
             </label>
-            {/* <div className="form-group">
-              <ul>
-                <li style={{ color: 'red' }} />
-              </ul>
-            </div> */}
             <button type="button" id="createMediaButton" className="button-lib">
                 Submit
             </button>
           </form>
           <hr />
-          <h5>Delete Monthly Forum</h5>
+          {/* <h5>Delete Monthly Forum</h5>
           <form>
             <label htmlFor="selectBookTitle">
 Select
               <br />
-              {/* <select id="selectBookTitle" className="form-control" value="" /> */}
+              <select id="selectBookTitle" className="form-control" value="" />
             </label>
             <button type="button" className="button-lib">
                 Delete
             </button>
-          </form>
+          </form> */}
         </div>
+        {/*
         <p>{' '}</p>
         <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
           <h5>Change Homepage Section</h5>
@@ -122,15 +118,15 @@ Image Address
           <form>
             <label htmlFor="delete-youth-pic">
 Select
-              {/* <select id="delete-youth-pic" className="form-control" value="titleSelected" /> */}
+             <select id="delete-youth-pic" className="form-control" value="titleSelected" />
             </label>
             <button type="button" id="deleteYouth" className="button-lib">
                 Delete
             </button>
           </form>
         </div>
-        <p>{' '}
-        {/*
+        <p>{' '}</p>
+
         <div className="material-content elevation3">
           <h4 className="material-header-h4">Change Familypage Section</h4>
           <form>
