@@ -1343,39 +1343,22 @@ span.inquiryValidation {
     table-layout: fixed;
 }
 
-td {
+.newsTable td {
   width: 50% ;
   word-wrap: break-word
-}
-
-thead {
-  display: table-header-group;
-  vertical-align: middle;
-  border-color: inherit;
-}
-
-tr {
-  display: table-row;
-  vertical-align: inherit;
-  border-color: inherit;
 }
 
 .newsTable td, .newsTable th {
   padding: .75rem;
   vertical-align: top;
-  border-top: 1px solid #dee2e6;
 }
 
-th {
-  text-align: inherit;
-}
-
-tbody tr:nth-child(odd).newsUrl {
+.newsUrl tbody tr:nth-child(odd) {
   display: table-row;
   background-color: #d8ecf3;
 }
 
-tbody tr:nth-child(even).newsUrl {
+.newsUrl tbody tr:nth-child(even) {
   display: table-row;
   background-color: #fff;
 }
