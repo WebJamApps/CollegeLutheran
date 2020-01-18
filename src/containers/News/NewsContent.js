@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'news';
-const NewsContent = () => (
+
+const NewsContent = ({ books }) => (
   <div className="page-content">
     <div className="container-fluid">
-      <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
-      <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
+      <div className="noFix">
+        <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
         <div
           style={{
             margin: 'auto',
@@ -15,7 +18,11 @@ const NewsContent = () => (
           }}
         >
           <iframe
-            style={{ width: '800px', height: '540px', border: '1px solid #d3d3d3' }}
+            style={{
+              width: '100%',
+              height: '540px',
+              border: '1px solid #d3d3d3',
+            }}
             className="newsIFrame"
             src="https://visitor.r20.constantcontact.com/d.jsp?
             llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
@@ -25,35 +32,62 @@ const NewsContent = () => (
           </iframe>
         </div>
         <div>
-          <p>There are currently no pdfs links to display</p>
+          {books.length > 0 ? (
+            <div>
+              <h3
+                style={{
+                  paddingTop: '22px',
+                  marginBottom: '8px',
+                  fontWeight: '100',
+                  textAlign: 'center',
+                }}
+              >
+                Monthly Forums
+              </h3>
+              <div className="table-responsive">
+                <table className="newsTable">
+                  <thead>
+                    <tr>
+                      <th style={{ padding: '8px' }}>Title</th>
+                      <th style={{ padding: '8px', minWidth: '100px' }}>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+            books.map((d) => (
+              <tr key={d._id}>
+                <td className="newsUrl">
+                  <a href={d.url}>{d.title}</a>
+                </td>
+                <td>
+                  {d.created_at}
+                </td>
+              </tr>
+            ))
+          }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <p>There are currently no pdfs links to display</p>
+          )}
         </div>
-        <div>
-          <h3
-            style={{
-              paddingTop: '22px',
-              marginBottom: '8px',
-              fontWeight: '100',
-              textAlign: 'center',
-            }}
-          >
-            Monthly Forums
-          </h3>
-        </div>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
       </div>
-
-      <div className={`${pageName}ELCA`}>
-        <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
-          <img
-            id="elcaLogo"
-            alt="ELCA LOGO"
-            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-            style={{ width: '350px', paddingTop: '30px', margin: 'auto' }}
-          />
-        </a>
-      </div>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <ELCALogo pageName={pageName} />
     </div>
   </div>
 );
+
+NewsContent.defaultProps = { books: [] };
+NewsContent.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      comments: PropTypes.string,
+    }),
+  ),
+};
+
 export default NewsContent;
