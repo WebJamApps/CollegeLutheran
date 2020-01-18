@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DefaultNews from '../../src/containers/News/index';
+import { News } from '../../src/containers/News/index';
 import DefaultNewsContent from '../../src/containers/News/NewsContent';
 
 function setup() {
   const props = {};
-  const wrapper = shallow(<DefaultNews />);
+  const wrapper = shallow(<News />);
   return { props, wrapper };
 }
 
