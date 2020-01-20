@@ -849,6 +849,12 @@ div.fof {
   ::-webkit-scrollbar:vertical {
     width: 0;
   }
+
+  .newsIFrame {
+    width:350px;
+    height: 610px;
+    border: 1px solid #d3d3d3;
+  }
 }
 
 .drawer-container {
@@ -1317,8 +1323,42 @@ span.inquiryValidation {
   margin-top: 15px;
 }
 
-.beliefsELCA, .familyELCA {
+.beliefsELCA, .familyELCA, .newsELCA {
   text-align: center;
   margin: auto;
   padding-top: 0;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.newsTable {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    table-layout: fixed;
+}
+
+.newsTable td {
+  width: 50% ;
+  word-wrap: break-word
+}
+
+.newsTable td, .newsTable th {
+  padding: .75rem;
+  vertical-align: top;
+}
+
+.newsUrl tbody tr:nth-child(odd) {
+  display: table-row;
+  background-color: #d8ecf3;
+}
+
+.newsUrl tbody tr:nth-child(even) {
+  display: table-row;
+  background-color: #fff;
 }
