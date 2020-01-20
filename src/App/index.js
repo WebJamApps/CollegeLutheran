@@ -12,7 +12,8 @@ import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';
-import News from '../containers/News';
+import DefaultYouth from '../containers/Youth';
+import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
@@ -27,12 +28,14 @@ export class App extends Component {
     this.fetchHomepage = this.fetchHomepage.bind(this);
     this.fetchFamily = this.fetchFamily.bind(this);
     this.fetchYouth = this.fetchYouth.bind(this);
+    this.fetchBooks = this.fetchBooks.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetchHomepage();
     this.fetchFamily();
     this.fetchYouth();
+    this.fetchBooks();
   }
 
   async fetchHomepage() {
@@ -64,6 +67,16 @@ export class App extends Component {
       return Promise.resolve(false);
     }
     dispatch({ type: 'GOT_YOUTHPICS', data: fres.body });
+
+  /* Fetches books for newsContent */
+  async fetchBooks() {
+    let bres;
+    const { dispatch } = this.props;
+    try { bres = await this.superagent.get(`${process.env.BackendUrl}/book`).set('Accept', 'application/json'); } catch (e) {
+      console.log(e.message);// eslint-disable-line no-console
+      return Promise.resolve(false);
+    }
+    dispatch({ type: 'GOT_BOOKS', data: bres.body });
     return Promise.resolve(true);
   }
 
@@ -83,7 +96,7 @@ export class App extends Component {
               {auth.isAuthenticated && auth.user.userType === 'Developer'
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
               <Route path="/youth" component={DefaultYouth} />
-              <Route path="/news" component={News} />
+              <Route path="/news" component={DefaultNews} />
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />
             </Switch>
