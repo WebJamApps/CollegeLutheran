@@ -66,6 +66,8 @@ export class App extends Component {
       return Promise.resolve(false);
     }
     dispatch({ type: 'GOT_YOUTHPICS', data: fres.body });
+    return Promise.resolve(true);
+  }
 
   /* Fetches books for newsContent */
   async fetchBooks() {
