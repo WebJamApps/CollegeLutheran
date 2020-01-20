@@ -12,7 +12,6 @@ import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';
-import DefaultYouth from '../containers/Youth';
 import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
