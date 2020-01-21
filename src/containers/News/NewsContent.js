@@ -57,7 +57,7 @@ const NewsContent = ({ books }) => (
                       <td className="newsUrl">
                         <a href={d.url}>{d.title}</a>
                       </td>
-                      <td>{d.created_at}</td>
+                      <td>{d.created_at.split('T')[0]}</td>
                     </tr>
                   ))}
                 </tbody>

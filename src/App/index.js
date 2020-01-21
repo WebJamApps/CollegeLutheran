@@ -31,7 +31,7 @@ export class App extends Component {
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetch(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
     this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
-    this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
+    this.fetch(this, 'book?type=Forum', 'GOT_BOOKS');
     this.fetch(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
   }
 
