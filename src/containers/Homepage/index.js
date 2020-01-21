@@ -48,7 +48,7 @@ export class Homepage extends Component {
             <div className="page-content">
               <WideAbout homeContent={homeContent} width={width} />
               <hr />
-              <WideFacebookFeed />
+              <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )
