@@ -26,10 +26,6 @@ export class App extends Component {
     this.fetch = fetch;
     this.state = {};
     this.superagent = superagent;
-    // this.fetchHomepage = this.fetchHomepage.bind(this);
-    // this.fetchFamily = this.fetchFamily.bind(this);
-    // this.fetchYouth = this.fetchYouth.bind(this);
-    // this.fetchBooks = this.fetchBooks.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
@@ -38,51 +34,6 @@ export class App extends Component {
     this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
   }
-
-  // async fetchHomepage() {
-  //   let res;
-  //   const { dispatch } = this.props;
-  //   try { res = await this.superagent.get(`${process.env.BackendUrl}/book/one?type=homePageContent`).set('Accept', 'application/json'); }
-  // catch (e) {
-  //     return Promise.resolve(false);
-  //   }
-  //   dispatch({ type: 'GOT_HOMEPAGE', data: res.body });
-  //   return Promise.resolve(true);
-  // }
-
-  // async fetchFamily() {
-  //   let fres;
-  //   const { dispatch } = this.props;
-  //   try { fres = await this.superagent.get(`${process.env.BackendUrl}/book?type=familyPics`).set('Accept', 'application/json'); } catch (e) {
-  //     console.log(e.message);// eslint-disable-line no-console
-  //     return Promise.resolve(false);
-  //   }
-  //   dispatch({ type: 'GOT_FAMILYPICS', data: fres.body });
-  //   return Promise.resolve(true);
-  // }
-
-  // async fetchYouth() {
-  //   let fres;
-  //   const { dispatch } = this.props;
-  //   try { fres = await this.superagent.get(`${process.env.BackendUrl}/book?type=youthPics`).set('Accept', 'application/json'); } catch (e) {
-  //     console.log(e.message);// eslint-disable-line no-console
-  //     return Promise.resolve(false);
-  //   }
-  //   dispatch({ type: 'GOT_YOUTHPICS', data: fres.body });
-  //   return Promise.resolve(true);
-  // }
-
-  // /* Fetches books for newsContent */
-  // async fetchBooks() {
-  //   let bres;
-  //   const { dispatch } = this.props;
-  //   try { bres = await this.superagent.get(`${process.env.BackendUrl}/book`).set('Accept', 'application/json'); } catch (e) {
-  //     console.log(e.message);// eslint-disable-line no-console
-  //     return Promise.resolve(false);
-  //   }
-  //   dispatch({ type: 'GOT_BOOKS', data: bres.body });
-  //   return Promise.resolve(true);
-  // }
 
   render() {
     const { auth } = this.props;
@@ -112,7 +63,6 @@ export class App extends Component {
   }
 }
 App.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
   auth: PropTypes.shape({ user: PropTypes.shape({ userType: PropTypes.string }), isAuthenticated: PropTypes.bool }),
 };
 App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
