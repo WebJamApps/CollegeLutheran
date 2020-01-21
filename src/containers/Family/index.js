@@ -7,7 +7,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 export class Family extends Component {
   constructor(props) {
     super(props);
-    this.children = props.children;// eslint-disable-line react/prop-types
+    this.children = props.children;
   }
 
   componentDidMount() {
@@ -27,6 +27,7 @@ Family.propTypes = {
   familyPics: PropTypes.arrayOf(PropTypes.shape({
     comments: PropTypes.string,
   })),
+  children: PropTypes.node.isRequired,
 };
 
 export default connect(mapStoreToProps, null)(Family);

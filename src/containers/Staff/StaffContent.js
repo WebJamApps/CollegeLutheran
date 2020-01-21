@@ -2,6 +2,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
+import ELCALogo from '../../components/elcaLogo';
 
 const makeStaff = () => {
   let moreStaff = '';
@@ -14,6 +15,9 @@ const makeStaff = () => {
   }
   return ReactHtmlParser(moreStaff);
 };
+
+const pageName = 'staff';
+
 const StaffContent = () => (
   <div className="page-content">
     <div>
@@ -192,16 +196,7 @@ const StaffContent = () => (
               </p>
             </div>
           </section> */}
-          <div className="staffElca">
-            <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
-              <img
-                id="elcaLogo"
-                alt="ELCA LOGO"
-                src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-                style={{ width: '380px', margin: 'auto' }}
-              />
-            </a>
-          </div>
+          <ELCALogo pageName={pageName} />
         </div>
       </div>
     </div>

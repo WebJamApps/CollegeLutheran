@@ -10,8 +10,8 @@ import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
 import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
-import AdminDashboardDefault from '../containers/AdminDashboard';
 import DefaultYouth from '../containers/Youth';
+import AdminDashboardDefault from '../containers/AdminDashboard';
 import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
@@ -26,12 +26,14 @@ export class App extends Component {
     this.superagent = superagent;
     this.fetchHomepage = this.fetchHomepage.bind(this);
     this.fetchFamily = this.fetchFamily.bind(this);
+    this.fetchYouth = this.fetchYouth.bind(this);
     this.fetchBooks = this.fetchBooks.bind(this);
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetchHomepage();
     this.fetchFamily();
+    this.fetchYouth();
     this.fetchBooks();
   }
 
@@ -53,6 +55,17 @@ export class App extends Component {
       return Promise.resolve(false);
     }
     dispatch({ type: 'GOT_FAMILYPICS', data: fres.body });
+    return Promise.resolve(true);
+  }
+
+  async fetchYouth() {
+    let fres;
+    const { dispatch } = this.props;
+    try { fres = await this.superagent.get(`${process.env.BackendUrl}/book?type=youthPics`).set('Accept', 'application/json'); } catch (e) {
+      console.log(e.message);// eslint-disable-line no-console
+      return Promise.resolve(false);
+    }
+    dispatch({ type: 'GOT_YOUTHPICS', data: fres.body });
     return Promise.resolve(true);
   }
 

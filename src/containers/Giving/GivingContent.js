@@ -1,4 +1,7 @@
 import React from 'react';
+import ELCALogo from '../../components/elcaLogo';
+
+const pageName = 'giving';
 
 const GivingContent = () => (
 
@@ -28,19 +31,7 @@ const GivingContent = () => (
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <div style={{
-        textAlign: 'center', margin: 'auto', paddingTop: '0', paddingBottom: '-40px',
-      }}
-      >
-        <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
-          <img
-            id="elcaLogo"
-            alt="ELCA LOGO"
-            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-            style={{ width: '350px', margin: 'auto' }}
-          />
-        </a>
-      </div>
+      <ELCALogo pageName={pageName} />
       <p>&nbsp;</p>
     </div>
   </div>

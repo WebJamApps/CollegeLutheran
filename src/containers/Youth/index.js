@@ -1,40 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import DefaultYouthContent from './YouthContent';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
-export default class Youth extends Component {
-  constructor(props) { super(props); }// eslint-disable-line no-useless-constructor
+export class Youth extends Component {
+  constructor(props) {
+    super(props);
+    this.children = props.children;
+  }
 
   componentDidMount() { document.title = 'Youth Ministry | College Lutheran Church'; }
 
   render() {
+    const { youthPics } = this.props;
     return (
-      <div className="page-content">
-        <h3 style={{ textAlign: 'center', margin: '20px', fontWeight: 'bold' }}>Youth Ministry</h3>
-        <div
-          className="main"
-          style={{
-            paddingLeft: '20px', paddingRight: '20px', maxWidth: '9in', margin: 'auto',
-          }}
-        >
-          <p style={{ fontSize: '40pt' }}>
-            {' '}
-          </p>
-          <p style={{ fontSize: '14pt' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p style={{ fontSize: '14pt' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </div>
-        <div style={{ minHeight: '4.7in' }}>&nbsp;</div>
-      </div>
+      <DefaultYouthContent youthPics={youthPics} />
     );
   }
 }
+
+Youth.defaultProps = { youthPics: [] };
+Youth.propTypes = {
+  youthPics: PropTypes.arrayOf(PropTypes.shape({
+    comments: PropTypes.string,
+  })),
+  children: PropTypes.node.isRequired,
+};
+
+export default connect(mapStoreToProps, null)(Youth);
