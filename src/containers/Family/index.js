@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DefaultFamilyContent from './FamilyContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-export class Family extends Component {
-  constructor(props) {
-    super(props);
-    this.children = props.children;
-  }
-
-  componentDidMount() {
-    document.title = 'Children & Families | College Lutheran Church';
-  }
-
-  render() {
-    const { familyPics } = this.props;
-    return (
-      <DefaultFamilyContent familyPics={familyPics} />
-    );
-  }
-}
+export const Family = ({ familyPics }) => {
+  document.title = 'Children & Families | College Lutheran Church';
+  return (<DefaultFamilyContent familyPics={familyPics} />);
+};
 
 Family.defaultProps = { familyPics: [] };
 Family.propTypes = {
   familyPics: PropTypes.arrayOf(PropTypes.shape({
     comments: PropTypes.string,
   })),
-  children: PropTypes.node.isRequired,
 };
 
 export default connect(mapStoreToProps, null)(Family);

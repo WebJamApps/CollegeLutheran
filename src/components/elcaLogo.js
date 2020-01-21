@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ELCALogo = ({ pageName }) => (
-  <div className={`${pageName}ELCA`}>
+  <div className={`${pageName}ELCA`} style={{ textAlign: 'center' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
         id="elcaLogo"
