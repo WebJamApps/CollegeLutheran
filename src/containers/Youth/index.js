@@ -7,7 +7,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 export class Youth extends Component {
   constructor(props) {
     super(props);
-    this.children = props.children;// eslint-disable-line react/prop-types
+    this.children = props.children;
   }
 
   componentDidMount() { document.title = 'Youth Ministry | College Lutheran Church'; }
@@ -25,6 +25,7 @@ Youth.propTypes = {
   youthPics: PropTypes.arrayOf(PropTypes.shape({
     comments: PropTypes.string,
   })),
+  children: PropTypes.node.isRequired,
 };
 
 export default connect(mapStoreToProps, null)(Youth);
