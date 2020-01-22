@@ -30,6 +30,7 @@ export class AdminDashboard extends Component {
     this.setState({ [evt.target.id]: evt.target.value });
   }
 
+  /* TODO: Fix POST url */
   async createYouthApi(youthForm1) {
     let r;
     const youthForm = youthForm1;
@@ -68,22 +69,13 @@ export class AdminDashboard extends Component {
         <form>
           <label htmlFor="youthName">
               Picture Name
-            <input
-              id="youthName"
-              value={youthName}
-              onChange={this.onChange}
-            />
+            <input id="youthName" value={youthName} onChange={this.onChange} />
           </label>
           <label htmlFor="youthURL">
               Image Address
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
-          <button
-            type="button"
-            id="addYouthPic"
-            className="button-lib"
-            onClick={this.createYouth}
-          >
+          <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouth}>
               Add Pic
           </button>
         </form>
