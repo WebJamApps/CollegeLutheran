@@ -3,25 +3,26 @@ import { withRouter } from 'react-router-dom';
 // import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import superagent from 'superagent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.superagent = superagent;
     this.state = {
+      title: '', homePageContent: '',
       // redirect: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.createHome = this.createHome.bind(this);
   }
 
   componentDidMount() { document.title = 'Staff Dashboard | College Lutheran Church'; }
 
-  onChange(evt) {
-    evt.preventDefault();
-    this.setState({ [evt.target.id]: evt.target.value });
-  }
+  onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
 
   // validateForm() {
   //   const {
@@ -30,15 +31,57 @@ export class AdminDashboard extends Component {
   //   if (date && time && location && venue && date !== '') return false;
   //   return true;
   // }
+  async createHome() {
+    console.log(this.state);
+    const { auth } = this.props;
+    const { title, homePageContent } = this.state;
+    let r;
+    try {
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({ title, comments: homePageContent, type: 'homePageContent' });
+    } catch (e) { console.log(e.message); return Promise.resolve(false); }
+    console.log(r);
+    if (r.status === 200) {
+      window.location.assign('/');
+      return Promise.resolve(true);
+    }
+    console.log(r.body);
+    return Promise.resolve(false);
+  }
 
   render() {
+    const { title, homePageContent } = this.state;
     // const { redirect } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
+        <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
+          <h5>Change Homepage Section</h5>
+          <form
+            id="create-homepage"
+            style={{
+              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            }}
+          >
+            {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
+            <label htmlFor="content">
+Content
+              <br />
+              <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
+            </label>
+            <div style={{ marginLeft: '60%' }}>
+              <button type="button" id="changeStuff" disabled={false} onClick={this.createHome}>
+                Update Homepage
+              </button>
+            </div>
+          </form>
+        </div>
+        <p>{' '}</p>
         <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
           <h5>Add Monthly Forum</h5>
-          <form>
+          {/* <form>
             <label htmlFor="dropbox-url">
 Full URL to PDF
               <input id="dropbox-url" value="" />
@@ -47,7 +90,7 @@ Full URL to PDF
                 Submit
             </button>
           </form>
-          <hr />
+          <hr /> */}
           {/* <h5>Delete Monthly Forum</h5>
           <form>
             <label htmlFor="selectBookTitle">
@@ -62,30 +105,6 @@ Select
         </div>
         {/*
         <p>{' '}</p>
-        <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-          <h5>Change Homepage Section</h5>
-          <form style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-          >
-            <label htmlFor="title" style={{ textAlign: 'left' }}>
-Title
-              <br />
-              <input id="title" />
-            </label>
-            <label htmlFor="content">
-Content
-              <br />
-              <textarea id="content" rows="15" value="homePageContent.comments" style={{ width: '90%' }} />
-            </label>
-            <div style={{ marginLeft: '60%' }}>
-              <button type="button" id="changeStuff">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-
         <div className="material-content elevation3">
           <h4 className="material-header-h4">Change Youthpage Section</h4>
           <form>
