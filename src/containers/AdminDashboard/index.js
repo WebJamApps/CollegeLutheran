@@ -30,7 +30,6 @@ export class AdminDashboard extends Component {
     this.setState({ [evt.target.id]: evt.target.value });
   }
 
-  /* TODO: Fix POST url */
   async createYouthApi(youthForm1) {
     let r;
     const youthForm = youthForm1;
