@@ -59,10 +59,10 @@ describe('authUtils', () => {
     const result = await authUtils.responseGoogleLogout('howdy', () => {});
     expect(result).toBe('howdy');
   });
-  it('logs out when /dashboard', async () => {
+  it('logs out when /admin', async () => {
     delete window.location;
     window.location = {
-      href: '/dashboard',
+      href: '/admin',
       assign: jest.fn(),
       reload: jest.fn(),
     };
