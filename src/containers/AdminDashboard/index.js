@@ -9,16 +9,18 @@ import forms from '../../lib/forms';
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.superagent = superagent;
     this.state = {
-      redirect: false,
-      youthURL: '',
+      title: '',
+      homePageContent: '',
+      // redirect: '',
       youthName: '',
+      youthURL: '',
     };
     this.forms = forms;
-    this.createYouth = this.createYouth.bind(this);
     this.createYouthApi = this.createYouthApi.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.superagent = superagent;
+    this.createHome = this.createHome.bind(this);
   }
 
   componentDidMount() {
@@ -26,32 +28,30 @@ export class AdminDashboard extends Component {
   }
 
   onChange(evt) {
-    evt.preventDefault();
-    this.setState({ [evt.target.id]: evt.target.value });
+    return this.setState({ [evt.target.id]: evt.target.value });
   }
 
-  async createYouthApi(youthForm1) {
+  async createYouthApi() {
     let r;
-    const youthForm = youthForm1;
+    const { auth } = this.props;
+    const { youthURL, youthName } = this.state;
     try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/newYouthPic`)
+      r = await this.superagent
+        .post(`${process.env.BackendUrl}/book`)
+        .set('Authorization', `Bearer ${auth.token}`)
         .set('Content-Type', 'application/json')
-        .send(youthForm);
+        .send({
+          title: youthName, url: youthURL, comments: youthURL, type: 'youthPics',
+        });
     } catch (e) {
-      return Promise.reject(e);
+      console.log(e.message);
+      return Promise.resolve(false);
     }
-    this.setState({ redirect: true });
-    return Promise.resolve(r.status);
-  }
-
-  createYouth() {
-    const {
-      youthName, youthURL,
-    } = this.state;
-    const youthForm = {
-      youthName, youthURL,
-    };
-    return this.createYouthApi(youthForm);
+    if (r.status === 201) {
+      window.location.assign('/youth');
+      return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
   }
 
   youthForm(youthName, youthURL, redirect) {
@@ -63,19 +63,24 @@ export class AdminDashboard extends Component {
         {redirect ? <Redirect to="/youth" /> : null}
         <hr />
         <h4 className="material-header-h4">
-            Add Youthpage Pic from Image Address
+          Add Youthpage Pic from Image Address
         </h4>
         <form>
           <label htmlFor="youthName">
-              Picture Name
+            Picture Name
             <input id="youthName" value={youthName} onChange={this.onChange} />
           </label>
           <label htmlFor="youthURL">
-              Image Address
+            Image Address
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
-          <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouth}>
-              Add Pic
+          <button
+            type="button"
+            id="addYouthPic"
+            className="button-lib"
+            onClick={this.createYouthApi}
+          >
+            Add Pic
           </button>
         </form>
       </div>
@@ -89,9 +94,34 @@ export class AdminDashboard extends Component {
   //   if (date && time && location && venue && date !== '') return false;
   //   return true;
   // }
+  async createHome() {
+    console.log(this.state);
+    const { auth } = this.props;
+    const { title, homePageContent } = this.state;
+    let r;
+    try {
+      r = await this.superagent
+        .put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({ title, comments: homePageContent, type: 'homePageContent' });
+    } catch (e) {
+      console.log(e.message);
+      return Promise.resolve(false);
+    }
+    console.log(r);
+    if (r.status === 200) {
+      window.location.assign('/');
+      return Promise.resolve(true);
+    }
+    console.log(r.body);
+    return Promise.resolve(false);
+  }
 
   render() {
-    const { youthName, youthURL, redirect } = this.state;
+    const {
+      title, homePageContent, youthName, youthURL,
+    } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -99,10 +129,56 @@ export class AdminDashboard extends Component {
         </h4>
         <div
           className="material-content elevation3"
+          style={{ maxWidth: '8in', margin: 'auto' }}
+        >
+          <h5>Change Homepage Section</h5>
+          <form
+            id="create-homepage"
+            style={{
+              textAlign: 'left',
+              marginLeft: '4px',
+              width: '100%',
+              maxWidth: '100%',
+            }}
+          >
+            {this.forms.makeInput(
+              'text',
+              'Title',
+              false,
+              this.onChange,
+              title,
+              '90%',
+            )}
+            <label htmlFor="content">
+              Content
+              <br />
+              <textarea
+                id="homePageContent"
+                rows="15"
+                value={homePageContent}
+                style={{ width: '90%' }}
+                onChange={this.onChange}
+              />
+            </label>
+            <div style={{ marginLeft: '60%' }}>
+              <button
+                type="button"
+                id="changeStuff"
+                disabled={false}
+                onClick={this.createHome}
+              >
+                Update Homepage
+              </button>
+            </div>
+          </form>
+        </div>
+        <p> </p>
+        <div
+          className="material-content elevation3"
           style={{ maxWidth: '320px', margin: 'auto' }}
         >
           <h5>Add Monthly Forum</h5>
-          <form>
+          {/* <form>
             <label htmlFor="dropbox-url">
               Full URL to PDF
               <input id="dropbox-url" value="" />
@@ -111,7 +187,7 @@ export class AdminDashboard extends Component {
               Submit
             </button>
           </form>
-          <hr />
+          <hr /> */}
           {/* <h5>Delete Monthly Forum</h5>
           <form>
             <label htmlFor="selectBookTitle">
@@ -126,31 +202,7 @@ export class AdminDashboard extends Component {
         </div>
         {/*
         <p>{' '}</p>
-        <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-          <h5>Change Homepage Section</h5>
-          <form style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-          >
-            <label htmlFor="title" style={{ textAlign: 'left' }}>
-              Title
-              <br />
-              <input id="title" />
-            </label>
-            <label htmlFor="content">
-              Content
-              <br />
-              <textarea id="content" rows="15" value="homePageContent.comments" style={{ width: '90%' }} />
-            </label>
-            <div style={{ marginLeft: '60%' }}>
-              <button type="button" id="changeStuff">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-        */}
-        {/*
+        <div className="material-content elevation3">
           <h4 className="material-header-h4">Change Youthpage Section</h4>
           <form>
             <label htmlFor="youth-content">
@@ -163,7 +215,7 @@ export class AdminDashboard extends Component {
           </form>
           */}
 
-        { this.youthForm(youthName, youthURL, redirect) }
+        {this.youthForm(youthName, youthURL)}
 
         {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
