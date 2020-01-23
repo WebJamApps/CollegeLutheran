@@ -12,27 +12,25 @@ export class AdminDashboard extends Component {
     super(props);
     this.superagent = superagent;
     this.state = {
-      title: '', homePageContent: '',
-      // redirect: '',
+      title: '',
+      homePageContent: '',
+      forumtitle: '',
+      forumurl: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
+    this.changeHomepage = this.changeHomepage.bind(this);
+    this.validateForum = this.validateForum.bind(this);
+    this.addForum = this.addForum.bind(this);
+    this.addForumAPI = this.addForumAPI.bind(this);
   }
 
   componentDidMount() { document.title = 'Staff Dashboard | College Lutheran Church'; }
 
   onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
 
-  // validateForm() {
-  //   const {
-  //     date, time, location, venue,
-  //   } = this.state;
-  //   if (date && time && location && venue && date !== '') return false;
-  //   return true;
-  // }
   async createHome() {
-    console.log(this.state);
     const { auth } = this.props;
     const { title, homePageContent } = this.state;
     let r;
@@ -41,57 +39,97 @@ export class AdminDashboard extends Component {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }
-    console.log(r);
+    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    }
-    console.log(r.body);
+    }console.log(r.body);// eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
-  render() {
+  async addForumAPI() {
+    const { auth } = this.props;
+    const { forumtitle, forumurl } = this.state;
+    let r;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({
+          title: forumtitle, url: forumurl, comments: forumurl, type: 'Forum', access: 'CLC',
+        });
+    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    if (r.status === 201) {
+      window.location.assign('/news');
+      return Promise.resolve(true);
+    }console.log(r.body);// eslint-disable-line no-console
+    return Promise.resolve(false);
+  }
+
+  validateForum() {
+    const { forumtitle, forumurl } = this.state;
+    if (forumtitle !== '' && forumurl !== '') return false;
+    return true;
+  }
+
+  addForum() {
+    const { forumtitle, forumurl } = this.state;
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
+        <h5>Add Monthly Forum</h5>
+        <form
+          id="create-homepage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
+          {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
+          <div style={{ marginLeft: '60%' }}>
+            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>
+              Add Forum
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  changeHomepage() {
     const { title, homePageContent } = this.state;
-    // const { redirect } = this.state;
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
+        <h5>Change Homepage Section</h5>
+        <form
+          id="create-homepage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
+          <label htmlFor="content">
+Content
+            <br />
+            <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
+          </label>
+          <div style={{ marginLeft: '60%' }}>
+            <button type="button" id="changeStuff" disabled={false} onClick={this.createHome}>
+              Update Homepage
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  render() {
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-        <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-          <h5>Change Homepage Section</h5>
-          <form
-            id="create-homepage"
-            style={{
-              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-            }}
-          >
-            {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
-            <label htmlFor="content">
-Content
-              <br />
-              <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
-            </label>
-            <div style={{ marginLeft: '60%' }}>
-              <button type="button" id="changeStuff" disabled={false} onClick={this.createHome}>
-                Update Homepage
-              </button>
-            </div>
-          </form>
-        </div>
+        {this.changeHomepage()}
         <p>{' '}</p>
-        <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-          <h5>Add Monthly Forum</h5>
-          {/* <form>
-            <label htmlFor="dropbox-url">
-Full URL to PDF
-              <input id="dropbox-url" value="" />
-            </label>
-            <button type="button" id="createMediaButton" className="button-lib">
-                Submit
-            </button>
-          </form>
-          <hr /> */}
-          {/* <h5>Delete Monthly Forum</h5>
+        {this.addForum()}
+        {/* <h5>Delete Monthly Forum</h5>
           <form>
             <label htmlFor="selectBookTitle">
 Select
@@ -102,7 +140,7 @@ Select
                 Delete
             </button>
           </form> */}
-        </div>
+
         {/*
         <p>{' '}</p>
         <div className="material-content elevation3">
