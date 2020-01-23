@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import superagent from 'superagent';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -11,11 +11,7 @@ export class AdminDashboard extends Component {
     super(props);
     this.superagent = superagent;
     this.state = {
-      title: '',
-      homePageContent: '',
-      // redirect: '',
-      youthName: '',
-      youthURL: '',
+      title: '', homePageContent: '', youthName: '', youthURL: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
@@ -44,7 +40,6 @@ export class AdminDashboard extends Component {
           title: youthName, url: youthURL, comments: youthURL, type: 'youthPics',
         });
     } catch (e) {
-      console.log(e.message);
       return Promise.resolve(false);
     }
     if (r.status === 201) {
@@ -54,13 +49,12 @@ export class AdminDashboard extends Component {
     return Promise.resolve(false);
   }
 
-  youthForm(youthName, youthURL, redirect) {
+  youthForm(youthName, youthURL) {
     return (
       <div
         className="material-content elevation3"
         style={{ maxWidth: '320px', margin: 'auto' }}
       >
-        {redirect ? <Redirect to="/youth" /> : null}
         <hr />
         <h4 className="material-header-h4">
           Add Youthpage Pic from Image Address
@@ -95,7 +89,6 @@ export class AdminDashboard extends Component {
   //   return true;
   // }
   async createHome() {
-    console.log(this.state);
     const { auth } = this.props;
     const { title, homePageContent } = this.state;
     let r;
@@ -106,15 +99,12 @@ export class AdminDashboard extends Component {
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
     } catch (e) {
-      console.log(e.message);
       return Promise.resolve(false);
     }
-    console.log(r);
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
     }
-    console.log(r.body);
     return Promise.resolve(false);
   }
 
