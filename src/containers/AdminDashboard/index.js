@@ -44,7 +44,10 @@ export class AdminDashboard extends Component {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Content-Type', 'application/json')
         .send({
-          title: youthName, url: youthURL, comments: youthURL, type: 'youthPics',
+          title: youthName,
+          url: youthURL,
+          comments: youthURL,
+          type: 'youthPics',
         });
     } catch (e) {
       return Promise.resolve(false);
@@ -58,14 +61,9 @@ export class AdminDashboard extends Component {
 
   youthForm(youthName, youthURL) {
     return (
-      <div
-        className="material-content elevation3"
-        style={{ maxWidth: '320px', margin: 'auto' }}
-      >
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <hr />
-        <h4 className="material-header-h4">
-          Add Youthpage Pic from Image Address
-        </h4>
+        <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
         <form>
           <label htmlFor="youthName">
             Picture Name
@@ -75,12 +73,7 @@ export class AdminDashboard extends Component {
             Image Address
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
-          <button
-            type="button"
-            id="addYouthPic"
-            className="button-lib"
-            onClick={this.createYouthApi}
-          >
+          <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouthApi}>
             Add Pic
           </button>
         </form>
@@ -98,11 +91,15 @@ export class AdminDashboard extends Component {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) {
+      console.log(e.message);
+      return Promise.resolve(false);
+    } // eslint-disable-line no-console
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    }
+    console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -111,17 +108,26 @@ export class AdminDashboard extends Component {
     const { forumtitle, forumurl } = this.state;
     let r;
     try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/book`)
+      r = await this.superagent
+        .post(`${process.env.BackendUrl}/book`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: forumtitle, url: forumurl, comments: forumurl, type: 'Forum', access: 'CLC',
+          title: forumtitle,
+          url: forumurl,
+          comments: forumurl,
+          type: 'Forum',
+          access: 'CLC',
         });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) {
+      console.log(e.message);
+      return Promise.resolve(false);
+    } // eslint-disable-line no-console
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    }
+    console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -139,7 +145,10 @@ export class AdminDashboard extends Component {
         <form
           id="create-homepage"
           style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            textAlign: 'left',
+            marginLeft: '4px',
+            width: '100%',
+            maxWidth: '100%',
           }}
         >
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
@@ -162,12 +171,15 @@ export class AdminDashboard extends Component {
         <form
           id="create-homepage"
           style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            textAlign: 'left',
+            marginLeft: '4px',
+            width: '100%',
+            maxWidth: '100%',
           }}
         >
           {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
           <label htmlFor="content">
-Content
+            Content
             <br />
             <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
           </label>
@@ -181,12 +193,12 @@ Content
     );
   }
 
-  render() {
+  render(youthName, youthURL) {
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
-        <p>{' '}</p>
+        <p> </p>
         {this.addForum()}
         {/* <h5>Delete Monthly Forum</h5>
           <form>
