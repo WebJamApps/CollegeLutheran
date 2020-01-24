@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=13.5.0"
+    "node": ">=13.6.0"
   },
   "files": [
     "webpack.config.js",
@@ -31,7 +31,7 @@
     "start": "nps",
     "test:lint-fix": "yarn test:stylelint && nps test.lint.fix",
     "test:lint": "yarn test:stylelint && nps test.lint",
-    "test": "yarn test:lint && yarn test:jest && yarn test:puppeteer",
+    "test": "yarn test:lint && yarn test:jest",
     "test:local": "yarn test:lint-fix && yarn test:jest && yarn test:puppeteer && yarn cc",
     "test:jest": "jest --no-cache --config jest.config.json --notify",
     "test:puppeteer": "jest --preset jest-puppeteer /test/puppeteer",

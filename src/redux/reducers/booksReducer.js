@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
     case 'GOT_BOOKS':
       return {
         ...state,
-        books: action.data,
+        books: Array.isArray(action.data) ? action.data.reverse() : [],
       };
     default:
       return state;

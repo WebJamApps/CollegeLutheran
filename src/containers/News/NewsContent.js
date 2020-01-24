@@ -55,7 +55,7 @@ const NewsContent = ({ books }) => (
                   {books.map((d) => (
                     <tr key={d._id}>
                       <td className="newsUrl">
-                        <a href={d.url}>{d.title}</a>
+                        <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
                       </td>
                       <td>{d.created_at.split('T')[0]}</td>
                     </tr>
