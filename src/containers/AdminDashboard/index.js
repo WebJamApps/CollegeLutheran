@@ -26,22 +26,16 @@ export class AdminDashboard extends Component {
     this.addForumAPI = this.addForumAPI.bind(this);
   }
 
-  componentDidMount() {
-    document.title = 'Staff Dashboard | College Lutheran Church';
-  }
+  componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
 
-  onChange(evt) {
-    return this.setState({ [evt.target.id]: evt.target.value });
-  }
+  onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
 
   async createYouthApi() {
     let r;
     const { auth } = this.props;
     const { youthURL, youthName } = this.state;
     try {
-      r = await this.superagent
-        .post(`${process.env.BackendUrl}/book`)
-        .set('Authorization', `Bearer ${auth.token}`)
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Content-Type', 'application/json')
         .send({
           title: youthName,
@@ -49,14 +43,11 @@ export class AdminDashboard extends Component {
           comments: youthURL,
           type: 'youthPics',
         });
-    } catch (e) {
-      return Promise.resolve(false);
-    }
+    } catch (e) { return Promise.resolve(false); }
     if (r.status === 201) {
       window.location.assign('/youth');
       return Promise.resolve(true);
-    }
-    return Promise.resolve(false);
+    } return Promise.resolve(false);
   }
 
   youthForm(youthName, youthURL) {
@@ -86,20 +77,15 @@ export class AdminDashboard extends Component {
     const { title, homePageContent } = this.state;
     let r;
     try {
-      r = await this.superagent
-        .put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) {
-      console.log(e.message);
-      return Promise.resolve(false);
-    } // eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    }
-    console.log(r.body); // eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -108,9 +94,7 @@ export class AdminDashboard extends Component {
     const { forumtitle, forumurl } = this.state;
     let r;
     try {
-      r = await this.superagent
-        .post(`${process.env.BackendUrl}/book`)
-        .set('Authorization', `Bearer ${auth.token}`)
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
           title: forumtitle,
@@ -119,15 +103,11 @@ export class AdminDashboard extends Component {
           type: 'Forum',
           access: 'CLC',
         });
-    } catch (e) {
-      console.log(e.message);
-      return Promise.resolve(false);
-    } // eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
-    }
-    console.log(r.body); // eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -145,10 +125,7 @@ export class AdminDashboard extends Component {
         <form
           id="create-homepage"
           style={{
-            textAlign: 'left',
-            marginLeft: '4px',
-            width: '100%',
-            maxWidth: '100%',
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
@@ -171,10 +148,7 @@ export class AdminDashboard extends Component {
         <form
           id="create-homepage"
           style={{
-            textAlign: 'left',
-            marginLeft: '4px',
-            width: '100%',
-            maxWidth: '100%',
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
           {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
@@ -198,7 +172,7 @@ export class AdminDashboard extends Component {
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
-        <p> </p>
+        <p>{' '}</p>
         {this.addForum()}
         {/* <h5>Delete Monthly Forum</h5>
           <form>
