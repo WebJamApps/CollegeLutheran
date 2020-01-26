@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Home from '../../src/containers/Homepage';
+import { Homepage } from '../../src/containers/Homepage';
 import WideAboutUs from '../../src/containers/Homepage/Widescreen/WideAbout';
 import WideFacebookFeed from '../../src/containers/Homepage/Widescreen/WideFacebookFeed';
 
-const wrapper = shallow(<Home />);
+const wrapper = shallow(<Homepage />);
 
 describe('Home', () => {
   it('Renders the homepage', () => {

@@ -8,10 +8,10 @@ checks:
       threshold:          30
   similar-code:
     config:
-      threshold:          95
+      threshold:          85
   identical-code:
     config:
-      threshold:          50
+      threshold:          45
   method-complexity:
     config:
       threshold:          10
@@ -27,7 +27,7 @@ plugins:
     config:
       languages:
         javascript:
-          mass_threshold: 50
+          mass_threshold: 45
   fixme:
     enabled:              true
 ratings:

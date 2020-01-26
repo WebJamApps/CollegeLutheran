@@ -1,52 +1,61 @@
 import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import superagent from 'superagent';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
-import Family from '../containers/Family';
+import DefaultFamily from '../containers/Family';
 import Giving from '../containers/Giving';
 import Staff from '../containers/Staff';
-import Youth from '../containers/Youth';
-import News from '../containers/News';
+import DefaultYouth from '../containers/Youth';
+import AdminDashboardDefault from '../containers/AdminDashboard';
+import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
-import AppMain from './app-main';
-import HomePage from '../containers/Homepage';
+import AppTemplateDefault from './AppTemplate';
+import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
+import fetch from './fetch';
 
 export class App extends Component {
   constructor(props) {
     super(props);
+    this.fetch = fetch;
     this.state = {};
+    this.superagent = superagent;
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
-
+    this.fetch(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+    this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
+    this.fetch(this, 'book?type=Forum', 'GOT_BOOKS');
+    this.fetch(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
   }
 
   render() {
-    // const { auth } = this.props;
-    // console.log(auth);//eslint-disable-line
+    const { auth } = this.props;
     return (
       <div id="App" className="App">
         <Router>
-          <AppMain id="homepage">
+          <AppTemplateDefault id="homepage">
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route exact path="/" component={DefaultHome} />
               <Route path="/music" component={DefaultMusic} />
               <Route path="/belief" component={Beliefs} />
-              <Route path="/family" component={Family} />
+              <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
-              <Route path="/staff" component={Staff} />
-              <Route path="/youth" component={Youth} />
-              <Route path="/news" component={News} />
+              <Route exact path="/staff" component={Staff} />
+              {auth.isAuthenticated && auth.user.userType === 'Developer'
+                ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
+              <Route path="/youth" component={DefaultYouth} />
+              <Route path="/news" component={DefaultNews} />
               <Route path="/calendar" component={Calendar} />
               <Route component={AppFourOhFour} />
             </Switch>
-          </AppMain>
+          </AppTemplateDefault>
         </Router>
       </div>
 
@@ -54,13 +63,7 @@ export class App extends Component {
   }
 }
 App.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  // songs: PropTypes.arrayOf(PropTypes.shape({})),
-  // images: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape({})), PropTypes.shape({})]),
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-    user: PropTypes.shape({ userType: PropTypes.string }),
-  }),
+  auth: PropTypes.shape({ user: PropTypes.shape({ userType: PropTypes.string }), isAuthenticated: PropTypes.bool }),
 };
 App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 

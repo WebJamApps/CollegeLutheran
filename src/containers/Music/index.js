@@ -7,7 +7,7 @@ export class Music extends Component {
     this.state = {};
   }
 
-  componentDidMount() { document.title = 'Music | Web Jam LLC'; }
+  componentDidMount() { document.title = 'Music | College Lutheran Church'; }
 
   render() {
     return (

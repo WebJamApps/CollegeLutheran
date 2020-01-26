@@ -18,6 +18,7 @@ const setUser = async (controller) => {
     dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
   }
   window.location.reload();
+  window.location.assign('/admin');
   return Promise.resolve(true);
 };
 const responseGoogleLogin = async (response, controller) => {
@@ -46,7 +47,7 @@ const responseGoogleFailLogin = (response) => {
 
 const responseGoogleLogout = (response, dispatch) => {
   dispatch(logout());
-  if (window.location.href.includes('/dashboard')) window.location.assign('/music');
+  if (window.location.href.includes('/admin')) window.location.assign('/staff');
   return Promise.resolve(response);
 };
 

@@ -8,7 +8,7 @@ const MusicContent = () => (
           <img alt="churchBalcony" src="https://dl.dropboxusercontent.com/s/g8lhfjk64uixl9r/choir.png?dl=0" />
         </div>
       </div>
-      <div className="material-content elevation2" style={{ maxWidth: '998px', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '998px', margin: 'auto' }}>
         <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>Music at College Lutheran</h3>
         <p>
           Music Ministry at College Lutheran involves all members of the congregation as they participate in the hymns, songs, psalms, acclamations,
