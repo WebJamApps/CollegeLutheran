@@ -12,6 +12,7 @@ export class AdminDashboard extends Component {
     super(props);
     this.superagent = superagent;
     this.state = {
+      forumId: '',
       title: '',
       homePageContent: '',
       forumtitle: '',
@@ -28,7 +29,10 @@ export class AdminDashboard extends Component {
 
   componentDidMount() { document.title = 'Staff Dashboard | College Lutheran Church'; }
 
-  onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
+  onChange(evt, stateValue) {
+    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
+      : this.setState({ [evt.target.id]: evt.target.value });
+  }
 
   async createHome() {
     const { auth } = this.props;
@@ -72,11 +76,19 @@ export class AdminDashboard extends Component {
     return true;
   }
 
+  validateDelete() {
+    const { forumId } = this.state;
+    console.log(forumId);
+    if (forumId !== '') return false;
+    return true;
+  }
+
   addForum() {
-    const { forumtitle, forumurl } = this.state;
+    const { forumtitle, forumurl, forumId } = this.state;
+    const { books } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-        <h5>Add Monthly Forum</h5>
+        <h5>Change Monthly Forum</h5>
         <form
           id="create-homepage"
           style={{
@@ -90,6 +102,18 @@ export class AdminDashboard extends Component {
               Add Forum
             </button>
           </div>
+        </form>
+        <hr />
+        <form
+          id="delete-forum"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+          <button type="button" className="button-lib" disabled={this.validateDelete()}>
+                Delete Forum
+          </button>
         </form>
       </div>
     );
@@ -123,24 +147,15 @@ Content
   }
 
   render() {
+    // const { forum } = this.state;
+    // const { books } = this.props;
+    // console.log(books);
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         <p>{' '}</p>
         {this.addForum()}
-        {/* <h5>Delete Monthly Forum</h5>
-          <form>
-            <label htmlFor="selectBookTitle">
-Select
-              <br />
-              <select id="selectBookTitle" className="form-control" value="" />
-            </label>
-            <button type="button" className="button-lib">
-                Delete
-            </button>
-          </form> */}
-
         {/*
         <p>{' '}</p>
         <div className="material-content elevation3">
@@ -233,5 +248,6 @@ Select
 }
 AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
