@@ -11,12 +11,7 @@ export class AdminDashboard extends Component {
     super(props);
     this.superagent = superagent;
     this.state = {
-      title: '',
-      homePageContent: '',
-      forumtitle: '',
-      forumurl: '',
-      youthName: '',
-      youthURL: '',
+      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
