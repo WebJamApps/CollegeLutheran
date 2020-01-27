@@ -23,7 +23,6 @@ export class AdminDashboard extends Component {
     this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    // this.deleteForum = this.deleteForum.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -113,21 +112,6 @@ export class AdminDashboard extends Component {
     } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
-
-  // async deleteForum() {
-  //   const { auth } = this.props;
-  //   const { forumId } = this.state;
-  //   let r;
-  //   try {
-  //     r = await this.superagent.delete(`${process.env.BackendUrl}/book/${forumId}`).set('Authorization', `Bearer ${auth.token}`)
-  //       .set('Accept', 'application/json');
-  //   } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
-  //   if (r.status === 200) {
-  //     window.location.assign('/news');
-  //     return Promise.resolve(true);
-  //   } console.log(r.body); // eslint-disable-line no-console
-  //   return Promise.resolve(false);
-  // }
 
   validateForum() {
     const { forumtitle, forumurl } = this.state;
