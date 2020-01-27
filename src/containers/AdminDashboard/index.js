@@ -140,9 +140,7 @@ export class AdminDashboard extends Component {
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
           {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
           <div style={{ marginLeft: '60%' }}>
-            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>
-              Add Forum
-            </button>
+            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>Add Forum</button>
           </div>
         </form>
         <hr />
@@ -153,9 +151,7 @@ export class AdminDashboard extends Component {
           }}
         >
           { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
-          <button type="button" className="button-lib" disabled={this.validateDelete()}>
-                Delete Forum
-          </button>
+          <button type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
         </form>
       </div>
     );
