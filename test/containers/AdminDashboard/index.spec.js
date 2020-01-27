@@ -7,7 +7,7 @@ describe('Dashboard Container', () => {
   function setup() {
     const auth = { token: '' };
     const props = { auth };
-    const wrapper = shallow(<AdminDashboard auth={auth} />);
+    const wrapper = shallow(<AdminDashboard auth={auth} books={[]} />);
     return { props, wrapper };
   }
   it('is defined', () => {

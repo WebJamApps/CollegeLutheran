@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
+import AdminController from './AdminController';
 
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
-      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '',
+      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
@@ -25,7 +27,10 @@ export class AdminDashboard extends Component {
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
 
-  onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
+  onChange(evt, stateValue) {
+    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
+      : this.setState({ [evt.target.id]: evt.target.value });
+  }
 
   async createYouthApi() {
     let r;
@@ -47,11 +52,11 @@ export class AdminDashboard extends Component {
     } return Promise.resolve(false);
   }
 
-  youthForm(youthName, youthURL) {
+  youthForm() {
+    const { youthName, youthURL } = this.state;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-        <hr />
-        <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
+        <h4 className="material-header-h4">Change Youth Pictures</h4>
         <form>
           <label htmlFor="youthName">
             Picture Name
@@ -114,13 +119,20 @@ export class AdminDashboard extends Component {
     return true;
   }
 
+  validateDelete() {
+    const { forumId } = this.state;
+    if (forumId !== '') return false;
+    return true;
+  }
+
   addForum() {
-    const { forumtitle, forumurl } = this.state;
+    const { forumtitle, forumurl, forumId } = this.state;
+    const { books } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-        <h5>Add Monthly Forum</h5>
+        <h5>Change Monthly Forum</h5>
         <form
-          id="create-homepage"
+          id="create-forum"
           style={{
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
@@ -128,10 +140,18 @@ export class AdminDashboard extends Component {
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
           {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
           <div style={{ marginLeft: '60%' }}>
-            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>
-              Add Forum
-            </button>
+            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>Add Forum</button>
           </div>
+        </form>
+        <hr />
+        <form
+          id="delete-forum"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+          <button onClick={this.controller.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
         </form>
       </div>
     );
@@ -164,42 +184,15 @@ export class AdminDashboard extends Component {
     );
   }
 
-  render(youthName, youthURL) {
+  render() {
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         <p>{' '}</p>
         {this.addForum()}
-        {/* <h5>Delete Monthly Forum</h5>
-          <form>
-            <label htmlFor="selectBookTitle">
-              Select
-              <br />
-              <select id="selectBookTitle" className="form-control" value="" />
-            </label>
-            <button type="button" className="button-lib">
-                Delete
-            </button>
-          </form> */}
-
-        {/*
         <p>{' '}</p>
-        <div className="material-content elevation3">
-          <h4 className="material-header-h4">Change Youthpage Section</h4>
-          <form>
-            <label htmlFor="youth-content">
-              Content
-              <textarea if="youth-content" rows="15" cols="32" value="youthPageContent.comments" />
-            </label>
-            <button type="button" id="changeYouth" className="button-lib">
-                Submit
-            </button>
-          </form>
-          */}
-
-        {this.youthForm(youthName, youthURL)}
-
+        {this.youthForm()}
         {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
           <h4 className="material-header-h4">Delete Youthpage Picture</h4>
@@ -260,5 +253,6 @@ export class AdminDashboard extends Component {
 }
 AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));

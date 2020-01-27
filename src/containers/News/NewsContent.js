@@ -48,7 +48,7 @@ const NewsContent = ({ books }) => (
                 <thead>
                   <tr>
                     <th style={{ padding: '8px' }}>Title</th>
-                    <th style={{ padding: '8px', minWidth: '100px' }}>Date</th>
+                    <th style={{ padding: '8px', width: '110px' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>
