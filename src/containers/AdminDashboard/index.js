@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
+import AdminController from './AdminController';
 
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
       title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '',
@@ -21,7 +23,7 @@ export class AdminDashboard extends Component {
     this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    this.deleteForum = this.deleteForum.bind(this);
+    // this.deleteForum = this.deleteForum.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -112,20 +114,20 @@ export class AdminDashboard extends Component {
     return Promise.resolve(false);
   }
 
-  async deleteForum() {
-    const { auth } = this.props;
-    const { forumId } = this.state;
-    let r;
-    try {
-      r = await this.superagent.delete(`${process.env.BackendUrl}/book/${forumId}`).set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json');
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
-    if (r.status === 200) {
-      window.location.assign('/news');
-      return Promise.resolve(true);
-    } console.log(r.body); // eslint-disable-line no-console
-    return Promise.resolve(false);
-  }
+  // async deleteForum() {
+  //   const { auth } = this.props;
+  //   const { forumId } = this.state;
+  //   let r;
+  //   try {
+  //     r = await this.superagent.delete(`${process.env.BackendUrl}/book/${forumId}`).set('Authorization', `Bearer ${auth.token}`)
+  //       .set('Accept', 'application/json');
+  //   } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+  //   if (r.status === 200) {
+  //     window.location.assign('/news');
+  //     return Promise.resolve(true);
+  //   } console.log(r.body); // eslint-disable-line no-console
+  //   return Promise.resolve(false);
+  // }
 
   validateForum() {
     const { forumtitle, forumurl } = this.state;
@@ -165,7 +167,7 @@ export class AdminDashboard extends Component {
           }}
         >
           { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
-          <button onClick={this.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
+          <button onClick={this.controller.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
         </form>
       </div>
     );
