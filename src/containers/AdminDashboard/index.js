@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import superagent from 'superagent';
 import { withRouter } from 'react-router-dom';
-// import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import superagent from 'superagent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 
@@ -12,12 +11,10 @@ export class AdminDashboard extends Component {
     super(props);
     this.superagent = superagent;
     this.state = {
-      title: '',
-      homePageContent: '',
-      forumtitle: '',
-      forumurl: '',
+      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '',
     };
     this.forms = forms;
+    this.createYouthApi = this.createYouthApi.bind(this);
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
@@ -26,9 +23,51 @@ export class AdminDashboard extends Component {
     this.addForumAPI = this.addForumAPI.bind(this);
   }
 
-  componentDidMount() { document.title = 'Staff Dashboard | College Lutheran Church'; }
+  componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
 
   onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
+
+  async createYouthApi() {
+    let r;
+    const { auth } = this.props;
+    const { youthURL, youthName } = this.state;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
+        .set('Content-Type', 'application/json')
+        .send({
+          title: youthName,
+          url: youthURL,
+          comments: youthURL,
+          type: 'youthPics',
+        });
+    } catch (e) { return Promise.resolve(false); }
+    if (r.status === 201) {
+      window.location.assign('/youth');
+      return Promise.resolve(true);
+    } return Promise.resolve(false);
+  }
+
+  youthForm(youthName, youthURL) {
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+        <hr />
+        <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
+        <form>
+          <label htmlFor="youthName">
+            Picture Name
+            <input id="youthName" value={youthName} onChange={this.onChange} />
+          </label>
+          <label htmlFor="youthURL">
+            Image Address
+            <input id="youthURL" value={youthURL} onChange={this.onChange} />
+          </label>
+          <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouthApi}>
+            Add Pic
+          </button>
+        </form>
+      </div>
+    );
+  }
 
   async createHome() {
     const { auth } = this.props;
@@ -39,11 +78,11 @@ export class AdminDashboard extends Component {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -52,17 +91,20 @@ export class AdminDashboard extends Component {
     const { forumtitle, forumurl } = this.state;
     let r;
     try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/book`)
-        .set('Authorization', `Bearer ${auth.token}`)
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: forumtitle, url: forumurl, comments: forumurl, type: 'Forum', access: 'CLC',
+          title: forumtitle,
+          url: forumurl,
+          comments: forumurl,
+          type: 'Forum',
+          access: 'CLC',
         });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -108,7 +150,7 @@ export class AdminDashboard extends Component {
         >
           {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
           <label htmlFor="content">
-Content
+            Content
             <br />
             <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
           </label>
@@ -122,7 +164,7 @@ Content
     );
   }
 
-  render() {
+  render(youthName, youthURL) {
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -132,7 +174,7 @@ Content
         {/* <h5>Delete Monthly Forum</h5>
           <form>
             <label htmlFor="selectBookTitle">
-Select
+              Select
               <br />
               <select id="selectBookTitle" className="form-control" value="" />
             </label>
@@ -147,34 +189,23 @@ Select
           <h4 className="material-header-h4">Change Youthpage Section</h4>
           <form>
             <label htmlFor="youth-content">
-Content
+              Content
               <textarea if="youth-content" rows="15" cols="32" value="youthPageContent.comments" />
             </label>
             <button type="button" id="changeYouth" className="button-lib">
                 Submit
             </button>
           </form>
-          <hr />
-          <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
-          <form>
-            <label htmlFor="youth-pic-title">
-Title
-              <input id="youth-pic-title" value="newYouthPic.title" />
-            </label>
-            <label htmlFor="youth-pic-url">
-Image Address
-              <input id="youth-pic-url" value="newYouthPic.url" />
-            </label>
-            <button type="button" id="addYouthPic" className="button-lib">
-                Add Pic
-            </button>
-          </form>
-          <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
+          */}
+
+        {this.youthForm(youthName, youthURL)}
+
+        {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
           <h4 className="material-header-h4">Delete Youthpage Picture</h4>
           <form>
             <label htmlFor="delete-youth-pic">
-Select
+            Select
              <select id="delete-youth-pic" className="form-control" value="titleSelected" />
             </label>
             <button type="button" id="deleteYouth" className="button-lib">
@@ -188,7 +219,7 @@ Select
           <h4 className="material-header-h4">Change Familypage Section</h4>
           <form>
             <label htmlFor="family-content">
-Content
+              Content
               <textarea id="family-content" rows="15" cols="32" value="familyPageContent.comments" />
             </label>
             <button type="button" id="changeFamily" className="button-lib">
@@ -199,12 +230,8 @@ Content
           <h4 className="material-header-h4">Add Familypage Pic from Image Address</h4>
           <form>
             <label htmlFor="family-pic-title">
-Title
-              <input id="family-pic-title" value="newFamilyPic.title" />
-            </label>
-            <label htmlFor="family-pic-url">
-Image Address
-              <input id="family-pic-url" value="newFamilyPic.url" />
+              Title
+              <inpformt id="family-pic-url" value="newFamilyPic.url" />
             </label>
             <button type="button" id="addFamilyPic" className="button-lib">
                 Add Pic
@@ -212,14 +239,14 @@ Image Address
           </form>
           <p style={{ color: 'red' }}>
             <strong>
-familyPicError
+            familyPicError
             </strong>
           </p>
           <hr />
           <h4 className="material-header-h4">Delete Familypage Picture</h4>
           <form>
             <label htmlFor="delete-family-pic">
-Select
+              Select
               <select id="delete-family-pic" className="form-control" />
             </label>
             <button type="button" id="deleteFamily" className="button-lib">
