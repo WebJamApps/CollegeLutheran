@@ -15,6 +15,8 @@ export class AdminDashboard extends Component {
       homePageContent: '',
       forumtitle: '',
       forumurl: '',
+      youthName: '',
+      youthURL: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
