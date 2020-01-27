@@ -21,6 +21,7 @@ export class AdminDashboard extends Component {
     this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
+    this.deleteForum = this.deleteForum.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -54,8 +55,7 @@ export class AdminDashboard extends Component {
     const { youthName, youthURL } = this.state;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-        <hr />
-        <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
+        <h4 className="material-header-h4">Change Youth Pictures</h4>
         <form>
           <label htmlFor="youthName">
             Picture Name
@@ -112,6 +112,21 @@ export class AdminDashboard extends Component {
     return Promise.resolve(false);
   }
 
+  async deleteForum() {
+    const { auth } = this.props;
+    const { forumId } = this.state;
+    let r;
+    try {
+      r = await this.superagent.delete(`${process.env.BackendUrl}/book/${forumId}`).set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json');
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    if (r.status === 200) {
+      window.location.assign('/news');
+      return Promise.resolve(true);
+    } console.log(r.body); // eslint-disable-line no-console
+    return Promise.resolve(false);
+  }
+
   validateForum() {
     const { forumtitle, forumurl } = this.state;
     if (forumtitle !== '' && forumurl !== '') return false;
@@ -120,7 +135,6 @@ export class AdminDashboard extends Component {
 
   validateDelete() {
     const { forumId } = this.state;
-    console.log(forumId);
     if (forumId !== '') return false;
     return true;
   }
@@ -132,7 +146,7 @@ export class AdminDashboard extends Component {
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
         <h5>Change Monthly Forum</h5>
         <form
-          id="create-homepage"
+          id="create-forum"
           style={{
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
@@ -151,7 +165,7 @@ export class AdminDashboard extends Component {
           }}
         >
           { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
-          <button type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
+          <button onClick={this.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
         </form>
       </div>
     );

@@ -50,6 +50,7 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
     "@types/react": "latest",
+    "@popperjs/core": "latest",
     "babel-loader": "latest",
     "bluebird": "latest",
     "bootstrap": "latest",
