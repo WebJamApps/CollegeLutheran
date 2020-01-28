@@ -13,10 +13,20 @@ export class AdminDashboard extends Component {
     this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
-      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '', youthPicsId: '', childName: '', childURL: '',
+      title: '',
+      homePageContent: '',
+      forumtitle: '',
+      forumurl: '',
+      youthName: '',
+      youthURL: '',
+      forumId: '',
+      youthPicsId: '',
+      childName: '',
+      childURL: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
+    this.validateYouth = this.validateYouth.bind(this);
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
@@ -76,6 +86,12 @@ export class AdminDashboard extends Component {
     } return Promise.resolve(false);
   }
 
+  validateYouth() {
+    const { youthName, youthURL } = this.state;
+    if (youthName !== '' && youthURL !== '') return false;
+    return true;
+  }
+
   youthForm() {
     const { youthName, youthURL, youthPicsId } = this.state;
     const { youthPics } = this.props;
@@ -93,10 +109,27 @@ export class AdminDashboard extends Component {
           </label>
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
-            <button type="button" id="addYouthPic" onClick={this.createYouthApi}>
+            <button disabled={this.validateYouth()} type="button" id="addYouthPic" onClick={this.createYouthApi}>
             Add Pic
             </button>
           </div>
+        </form>
+        <hr />
+        <form
+          id="delete-youth"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          { this.forms.makeYouthDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+          <button
+            onClick={this.controller.deleteYouth}
+            type="button"
+            className="button-lib"
+            disabled={this.validateDeleteYouth()}
+          >
+          Delete Youth
+          </button>
         </form>
       </div>
     );
@@ -128,23 +161,6 @@ export class AdminDashboard extends Component {
             Add Pic
             </button>
           </div>
-        </form>
-        <hr />
-        <form
-          id="delete-youth"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          { this.forms.makeYouthDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
-          <button
-            onClick={this.controller.deleteYouth}
-            type="button"
-            className="button-lib"
-            disabled={this.validateDeleteYouth()}
-          >
-          Delete Youth
-          </button>
         </form>
       </div>
     );
