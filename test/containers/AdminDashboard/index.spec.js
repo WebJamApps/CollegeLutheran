@@ -1,18 +1,18 @@
 /* eslint-disable jest/no-commented-out-tests */
 // import React from 'react';
 // import { shallow } from 'enzyme';
-// import { AdminDashboard } from '../../../src/containers/AdminDashboard';
+import { AdminDashboard } from '../../../src/containers/AdminDashboard';
 
-// describe('Dashboard Container', () => {
-//   function setup() {
-//     const auth = { token: '' };
-//     const props = { auth };
-//     const wrapper = shallow(<AdminDashboard auth={auth} books={[]} />);
-//     return { props, wrapper };
-//   }
-//   it('is defined', () => {
-//     expect(AdminDashboard).toBeDefined();
-//   });
+describe('Dashboard Container', () => {
+  // function setup() {
+  //   const auth = { token: '' };
+  //   const props = { auth };
+  //   const wrapper = shallow(<AdminDashboard auth={auth} books={[]} />);
+  //   return { props, wrapper };
+  // }
+  it('is defined', () => {
+    expect(AdminDashboard).toBeDefined();
+  });
 //   it('renders correctly', () => {
 //     const { wrapper } = setup();
 //     expect(wrapper).toMatchSnapshot();
@@ -54,4 +54,4 @@
 //   //   const result = await wrapper.instance().createHome();
 //   //   expect(result).toBe(200);
 //   // });
-// });
+});
