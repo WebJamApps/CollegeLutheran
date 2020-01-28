@@ -13,7 +13,7 @@ export class AdminDashboard extends Component {
     this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
-      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '',
+      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '', childName: '', childURL: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
@@ -23,6 +23,8 @@ export class AdminDashboard extends Component {
     this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
+    this.createChildPic = this.createChildPic.bind(this);
+    this.validateChild = this.validateChild.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -44,10 +46,32 @@ export class AdminDashboard extends Component {
           url: youthURL,
           comments: youthURL,
           type: 'youthPics',
+          access: 'CLC',
         });
     } catch (e) { return Promise.resolve(false); }
     if (r.status === 201) {
       window.location.assign('/youth');
+      return Promise.resolve(true);
+    } return Promise.resolve(false);
+  }
+
+  async createChildPic() {
+    let r;
+    const { auth } = this.props;
+    const { childURL, childName } = this.state;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
+        .set('Content-Type', 'application/json')
+        .send({
+          title: childName,
+          url: childURL,
+          comments: childURL,
+          type: 'familyPics',
+          access: 'CLC',
+        });
+    } catch (e) { return Promise.resolve(false); }
+    if (r.status === 201) {
+      window.location.assign('/family');
       return Promise.resolve(true);
     } return Promise.resolve(false);
   }
@@ -66,9 +90,43 @@ export class AdminDashboard extends Component {
             Image Address
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
-          <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouthApi}>
+          <div style={{ marginLeft: '70%' }}>
+            <p>{' '}</p>
+            <button type="button" id="addYouthPic" onClick={this.createYouthApi}>
             Add Pic
-          </button>
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  validateChild() {
+    const { childName, childURL } = this.state;
+    if (childName !== '' && childURL !== '') return false;
+    return true;
+  }
+
+  childForm() {
+    const { childName, childURL } = this.state;
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+        <h4 className="material-header-h4">Change Children Pictures</h4>
+        <form>
+          <label htmlFor="familyName">
+            * Picture Name
+            <input id="childName" value={childName} onChange={this.onChange} />
+          </label>
+          <label htmlFor="youthURL">
+            * Image Address
+            <input id="childURL" value={childURL} onChange={this.onChange} />
+          </label>
+          <div style={{ marginLeft: '70%' }}>
+            <p>{' '}</p>
+            <button disabled={this.validateChild()} type="button" id="addChildPic" onClick={this.createChildPic}>
+            Add Pic
+            </button>
+          </div>
         </form>
       </div>
     );
@@ -139,7 +197,8 @@ export class AdminDashboard extends Component {
         >
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
           {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
-          <div style={{ marginLeft: '60%' }}>
+          <div style={{ marginLeft: '70%' }}>
+            <p>{' '}</p>
             <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>Add Forum</button>
           </div>
         </form>
@@ -147,11 +206,12 @@ export class AdminDashboard extends Component {
         <form
           id="delete-forum"
           style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
           }}
         >
           { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
-          <button onClick={this.controller.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
+          <p>{' '}</p>
+          <button onClick={this.controller.deleteForum} type="button" disabled={this.validateDelete()}>Delete Forum</button>
         </form>
       </div>
     );
@@ -193,6 +253,8 @@ export class AdminDashboard extends Component {
         {this.addForum()}
         <p>{' '}</p>
         {this.youthForm()}
+        <p>{' '}</p>
+        {this.childForm()}
         {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
           <h4 className="material-header-h4">Delete Youthpage Picture</h4>
