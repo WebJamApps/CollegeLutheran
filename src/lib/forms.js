@@ -4,6 +4,19 @@ const makeDropdown = (htmlFor, labelText, value, onChange, options, oValue, dVal
   <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
     {labelText}
     <br />
+    <select id={htmlFor} value={value} onChange={(event) => onChange(event, 'forumId')}>
+      <option id="blank-option" key="blank-option" value="">---</option>
+      {// eslint-disable-next-line security/detect-object-injection
+          options.map((cv) => (<option id={cv[oValue]} key={cv[oValue]} value={cv[oValue]}>{cv[dValue]}</option>))
+        }
+    </select>
+  </label>
+);
+
+const makeYouthDropdown = (htmlFor, labelText, value, onChange, options, oValue, dValue) => (
+  <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
+    {labelText}
+    <br />
     <select id={htmlFor} value={value} onChange={(event) => onChange(event, 'youthPicsId')}>
       <option id="blank-option" key="blank-option" value="">---</option>
       {// eslint-disable-next-line security/detect-object-injection
@@ -34,4 +47,4 @@ const makeInput = (type, label, isRequired, onChange, value, width) => {
     </label>
   );
 };
-export default { makeInput, makeDropdown };
+export default { makeInput, makeDropdown, makeYouthDropdown };

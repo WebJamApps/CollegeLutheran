@@ -78,8 +78,15 @@ export class AdminDashboard extends Component {
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          { this.forms.makeDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
-          <button onClick={this.controller.deleteYouth} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Youth</button>
+          { this.forms.makeYouthDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+          <button
+            onClick={this.controller.deleteYouth}
+            type="button"
+            className="button-lib"
+            disabled={this.validateDeleteYouth()}
+          >
+          Delete Youth
+          </button>
         </form>
       </div>
     );
@@ -130,10 +137,19 @@ export class AdminDashboard extends Component {
     return true;
   }
 
-  validateDelete() {
-    const { forumId, youthPicsId } = this.state;
+  validateDeleteForum() {
+    const { forumId } = this.state;
     let notEmpty = false;
     if (forumId !== '') notEmpty = true;
+    if (notEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  validateDeleteYouth() {
+    const { youthPicsId } = this.state;
+    let notEmpty = false;
     if (youthPicsId !== '') notEmpty = true;
     if (notEmpty) {
       return false;
@@ -167,7 +183,14 @@ export class AdminDashboard extends Component {
           }}
         >
           { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
-          <button onClick={this.controller.deleteForum} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Forum</button>
+          <button
+            onClick={this.controller.deleteForum}
+            type="button"
+            className="button-lib"
+            disabled={this.validateDeleteForum()}
+          >
+          Delete Forum
+          </button>
         </form>
       </div>
     );
