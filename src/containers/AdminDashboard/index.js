@@ -13,7 +13,7 @@ export class AdminDashboard extends Component {
     this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
-      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '',
+      title: '', homePageContent: '', forumtitle: '', forumurl: '', youthName: '', youthURL: '', forumId: '', youthPicsId: '',
     };
     this.forms = forms;
     this.createYouthApi = this.createYouthApi.bind(this);
@@ -53,7 +53,8 @@ export class AdminDashboard extends Component {
   }
 
   youthForm() {
-    const { youthName, youthURL } = this.state;
+    const { youthName, youthURL, youthPicsId } = this.state;
+    const { youthPics } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">Change Youth Pictures</h4>
@@ -69,6 +70,16 @@ export class AdminDashboard extends Component {
           <button type="button" id="addYouthPic" className="button-lib" onClick={this.createYouthApi}>
             Add Pic
           </button>
+        </form>
+        <hr />
+        <form
+          id="delete-youth"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          { this.forms.makeDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+          <button onClick={this.controller.deleteYouth} type="button" className="button-lib" disabled={this.validateDelete()}>Delete Youth</button>
         </form>
       </div>
     );
@@ -120,8 +131,13 @@ export class AdminDashboard extends Component {
   }
 
   validateDelete() {
-    const { forumId } = this.state;
-    if (forumId !== '') return false;
+    const { forumId, youthPicsId } = this.state;
+    let notEmpty = false;
+    if (forumId !== '') notEmpty = true;
+    if (youthPicsId !== '') notEmpty = true;
+    if (notEmpty) {
+      return false;
+    }
     return true;
   }
 
@@ -193,21 +209,7 @@ export class AdminDashboard extends Component {
         {this.addForum()}
         <p>{' '}</p>
         {this.youthForm()}
-        {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
-          <hr />
-          <h4 className="material-header-h4">Delete Youthpage Picture</h4>
-          <form>
-            <label htmlFor="delete-youth-pic">
-            Select
-             <select id="delete-youth-pic" className="form-control" value="titleSelected" />
-            </label>
-            <button type="button" id="deleteYouth" className="button-lib">
-                Delete
-            </button>
-          </form>
-        </div>
-        <p>{' '}</p>
-
+        {/*
         <div className="material-content elevation3">
           <h4 className="material-header-h4">Change Familypage Section</h4>
           <form>
@@ -254,5 +256,6 @@ export class AdminDashboard extends Component {
 AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));

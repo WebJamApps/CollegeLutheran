@@ -4,7 +4,7 @@ const makeDropdown = (htmlFor, labelText, value, onChange, options, oValue, dVal
   <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
     {labelText}
     <br />
-    <select id={htmlFor} value={value} onChange={(event) => onChange(event, 'forumId')}>
+    <select id={htmlFor} value={value} onChange={(event) => onChange(event, 'youthPicsId')}>
       <option id="blank-option" key="blank-option" value="">---</option>
       {// eslint-disable-next-line security/detect-object-injection
           options.map((cv) => (<option id={cv[oValue]} key={cv[oValue]} value={cv[oValue]}>{cv[dValue]}</option>))
