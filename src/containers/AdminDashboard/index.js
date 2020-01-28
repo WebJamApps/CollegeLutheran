@@ -121,7 +121,7 @@ export class AdminDashboard extends Component {
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          { this.forms.makeYouthDropdown('youth', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+          { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
           <button
             onClick={this.controller.deleteYouth}
             type="button"
@@ -213,21 +213,13 @@ export class AdminDashboard extends Component {
 
   validateDeleteForum() {
     const { forumId } = this.state;
-    let notEmpty = false;
-    if (forumId !== '') notEmpty = true;
-    if (notEmpty) {
-      return false;
-    }
+    if (forumId !== '') return false;
     return true;
   }
 
   validateDeleteYouth() {
     const { youthPicsId } = this.state;
-    let notEmpty = false;
-    if (youthPicsId !== '') notEmpty = true;
-    if (notEmpty) {
-      return false;
-    }
+    if (youthPicsId !== '') return false;
     return true;
   }
 
@@ -257,7 +249,7 @@ export class AdminDashboard extends Component {
             textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
           }}
         >
-          { this.forms.makeDropdown('forum', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+          { this.forms.makeDropdown('forumId', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
           <button
             onClick={this.controller.deleteForum}
             type="button"
