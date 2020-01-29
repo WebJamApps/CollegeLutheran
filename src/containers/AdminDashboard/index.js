@@ -25,7 +25,6 @@ export class AdminDashboard extends Component {
       childURL: '',
     };
     this.forms = forms;
-    this.createYouthApi = this.createYouthApi.bind(this);
     this.validateYouth = this.validateYouth.bind(this);
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
@@ -33,10 +32,10 @@ export class AdminDashboard extends Component {
     this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    this.createChildPic = this.createChildPic.bind(this);
     this.validateChild = this.validateChild.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteYouth = this.deleteYouth.bind(this);
+    this.createPicApi = this.createPicApi.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -46,44 +45,17 @@ export class AdminDashboard extends Component {
       : this.setState({ [evt.target.id]: evt.target.value });
   }
 
-  async createYouthApi() {
+  async createPicApi(evt, body, redirect) {
+    evt.preventDefault();
     let r;
     const { auth } = this.props;
-    const { youthURL, youthName } = this.state;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Content-Type', 'application/json')
-        .send({
-          title: youthName,
-          url: youthURL,
-          comments: youthURL,
-          type: 'youthPics',
-          access: 'CLC',
-        });
+        .send(body);
     } catch (e) { return Promise.resolve(false); }
     if (r.status === 201) {
-      window.location.assign('/youth');
-      return Promise.resolve(true);
-    } return Promise.resolve(false);
-  }
-
-  async createChildPic() {
-    let r;
-    const { auth } = this.props;
-    const { childURL, childName } = this.state;
-    try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
-        .set('Content-Type', 'application/json')
-        .send({
-          title: childName,
-          url: childURL,
-          comments: childURL,
-          type: 'familyPics',
-          access: 'CLC',
-        });
-    } catch (e) { return Promise.resolve(false); }
-    if (r.status === 201) {
-      window.location.assign('/family');
+      window.location.assign(redirect);
       return Promise.resolve(true);
     } return Promise.resolve(false);
   }
@@ -156,31 +128,6 @@ Pictures
       </div>
     );
   }
-
-  // childForm() {
-  //   const { childName, childURL } = this.state;
-  //   return (
-  //     <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-  //       <h4 className="material-header-h4">Change Children Pictures</h4>
-  //       <form>
-  //         <label htmlFor="familyName">
-  //           * Picture Name
-  //           <input id="childName" value={childName} onChange={this.onChange} />
-  //         </label>
-  //         <label htmlFor="youthURL">
-  //           * Image Address
-  //           <input id="childURL" value={childURL} onChange={this.onChange} />
-  //         </label>
-  //         <div style={{ marginLeft: '70%' }}>
-  //           <p>{' '}</p>
-  //           <button disabled={this.validateChild()} type="button" id="addChildPic" onClick={this.createChildPic}>
-  //           Add Pic
-  //           </button>
-  //         </div>
-  //       </form>
-  //     </div>
-  //   );
-  // }
 
   validateChild() {
     const { childName, childURL } = this.state;
@@ -314,6 +261,9 @@ Pictures
   }
 
   render() {
+    const {
+      youthName, youthURL, childName, childURL,
+    } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -327,7 +277,13 @@ Pictures
           urlId: 'youthURL',
           disabled: this.validateYouth,
           buttonId: 'addYouthPic',
-          buttonClick: this.createYouthApi,
+          buttonClick: (e) => this.createPicApi(e, {
+            title: youthName,
+            url: youthURL,
+            comments: youthURL,
+            type: 'youthPics',
+            access: 'CLC',
+          }, '/youth'),
           deleteSection: this.deleteYouth,
         })}
         <p>{' '}</p>
@@ -337,7 +293,13 @@ Pictures
           urlId: 'childURL',
           disabled: this.validateChild,
           buttonId: 'addFamilyPic',
-          buttonClick: this.createChildPic,
+          buttonClick: (e) => this.createPicApi(e, {
+            title: childName,
+            url: childURL,
+            comments: childURL,
+            type: 'familyPics',
+            access: 'CLC',
+          }, '/family'),
           deleteSection: () => null,
         })}
         {/* {this.childForm()} */}
