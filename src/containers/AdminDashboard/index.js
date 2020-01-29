@@ -78,7 +78,7 @@ export class AdminDashboard extends Component {
       >
         { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
         <button
-          onClick={this.controller.deleteYouth}
+          onClick={(evt) => this.controller.deleteBookApi(evt, youthPicsId, '/youth')}
           type="button"
           className="button-lib"
           disabled={this.validateDeleteYouth()}
@@ -220,7 +220,7 @@ Pictures
         >
           { this.forms.makeDropdown('forumId', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
           <button
-            onClick={this.controller.deleteForum}
+            onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
             type="button"
             className="button-lib"
             disabled={this.validateDeleteForum()}
