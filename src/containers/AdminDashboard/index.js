@@ -35,6 +35,8 @@ export class AdminDashboard extends Component {
     this.addForumAPI = this.addForumAPI.bind(this);
     this.createChildPic = this.createChildPic.bind(this);
     this.validateChild = this.validateChild.bind(this);
+    this.changePicForm = this.changePicForm.bind(this);
+    this.deleteYouth = this.deleteYouth.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -92,78 +94,98 @@ export class AdminDashboard extends Component {
     return true;
   }
 
-  youthForm() {
-    const { youthName, youthURL, youthPicsId } = this.state;
+  deleteYouth() {
+    const { youthPicsId } = this.state;
     const { youthPics } = this.props;
     return (
+      <form
+        id="delete-youth"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+        <button
+          onClick={this.controller.deleteYouth}
+          type="button"
+          className="button-lib"
+          disabled={this.validateDeleteYouth()}
+        >
+        Delete Youth
+        </button>
+      </form>
+    );
+  }
+
+  changePicForm(picData) {
+    return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-        <h4 className="material-header-h4">Change Youth Pictures</h4>
+        <h4 className="material-header-h4">
+Change
+          {' '}
+          {picData.title}
+          {' '}
+Pictures
+        </h4>
         <form>
-          <label htmlFor="youthName">
+          <label htmlFor={picData.nameId}>
             Picture Name
-            <input id="youthName" value={youthName} onChange={this.onChange} />
+            <input
+              id={picData.nameId}
+              value={this.state[picData.nameId]}// eslint-disable-line react/destructuring-assignment
+              onChange={this.onChange}
+            />
           </label>
-          <label htmlFor="youthURL">
+          <label htmlFor={picData.urlId}>
             Image Address
-            <input id="youthURL" value={youthURL} onChange={this.onChange} />
+            <input
+              id={picData.urlId}
+              value={this.state[picData.urlId]}// eslint-disable-line react/destructuring-assignment
+              onChange={this.onChange}
+            />
           </label>
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
-            <button disabled={this.validateYouth()} type="button" id="addYouthPic" onClick={this.createYouthApi}>
+            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>
             Add Pic
             </button>
           </div>
         </form>
         <hr />
-        <form
-          id="delete-youth"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
-          <button
-            onClick={this.controller.deleteYouth}
-            type="button"
-            className="button-lib"
-            disabled={this.validateDeleteYouth()}
-          >
-          Delete Youth
-          </button>
-        </form>
+        {picData.deleteSection()}
       </div>
     );
   }
+
+  // childForm() {
+  //   const { childName, childURL } = this.state;
+  //   return (
+  //     <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+  //       <h4 className="material-header-h4">Change Children Pictures</h4>
+  //       <form>
+  //         <label htmlFor="familyName">
+  //           * Picture Name
+  //           <input id="childName" value={childName} onChange={this.onChange} />
+  //         </label>
+  //         <label htmlFor="youthURL">
+  //           * Image Address
+  //           <input id="childURL" value={childURL} onChange={this.onChange} />
+  //         </label>
+  //         <div style={{ marginLeft: '70%' }}>
+  //           <p>{' '}</p>
+  //           <button disabled={this.validateChild()} type="button" id="addChildPic" onClick={this.createChildPic}>
+  //           Add Pic
+  //           </button>
+  //         </div>
+  //       </form>
+  //     </div>
+  //   );
+  // }
 
   validateChild() {
     const { childName, childURL } = this.state;
     if (childName !== '' && childURL !== '') return false;
     return true;
-  }
-
-  childForm() {
-    const { childName, childURL } = this.state;
-    return (
-      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
-        <h4 className="material-header-h4">Change Children Pictures</h4>
-        <form>
-          <label htmlFor="familyName">
-            * Picture Name
-            <input id="childName" value={childName} onChange={this.onChange} />
-          </label>
-          <label htmlFor="youthURL">
-            * Image Address
-            <input id="childURL" value={childURL} onChange={this.onChange} />
-          </label>
-          <div style={{ marginLeft: '70%' }}>
-            <p>{' '}</p>
-            <button disabled={this.validateChild()} type="button" id="addChildPic" onClick={this.createChildPic}>
-            Add Pic
-            </button>
-          </div>
-        </form>
-      </div>
-    );
   }
 
   async createHome() {
@@ -299,9 +321,26 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.addForum()}
         <p>{' '}</p>
-        {this.youthForm()}
+        {this.changePicForm({
+          title: 'Youth',
+          nameId: 'youthName',
+          urlId: 'youthURL',
+          disabled: this.validateYouth,
+          buttonId: 'addYouthPic',
+          buttonClick: this.createYouthApi,
+          deleteSection: this.deleteYouth,
+        })}
         <p>{' '}</p>
-        {this.childForm()}
+        {this.changePicForm({
+          title: 'Family',
+          nameId: 'childName',
+          urlId: 'childURL',
+          disabled: this.validateChild,
+          buttonId: 'addFamilyPic',
+          buttonClick: this.createChildPic,
+          deleteSection: () => null,
+        })}
+        {/* {this.childForm()} */}
         {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
           <h4 className="material-header-h4">Delete Youthpage Picture</h4>
