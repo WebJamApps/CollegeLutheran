@@ -23,6 +23,7 @@ export class AdminDashboard extends Component {
       youthPicsId: '',
       childName: '',
       childURL: '',
+      familyPicsId: '',
     };
     this.forms = forms;
     this.validateYouth = this.validateYouth.bind(this);
@@ -36,6 +37,8 @@ export class AdminDashboard extends Component {
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteYouth = this.deleteYouth.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
+    this.deleteFamily = this.deleteFamily.bind(this);
+    this.validateDeleteFamily = this.validateDeleteFamily.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -66,6 +69,12 @@ export class AdminDashboard extends Component {
     return true;
   }
 
+  validateDeleteFamily() {
+    const { familyPicsId } = this.state;
+    if (familyPicsId !== '') return false;
+    return true;
+  }
+
   deleteYouth() {
     const { youthPicsId } = this.state;
     const { youthPics } = this.props;
@@ -84,6 +93,29 @@ export class AdminDashboard extends Component {
           disabled={this.validateDeleteYouth()}
         >
         Delete Youth
+        </button>
+      </form>
+    );
+  }
+
+  deleteFamily() {
+    const { familyPicsId } = this.state;
+    const { familyPics } = this.props;
+    return (
+      <form
+        id="delete-family"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.forms.makeDropdown('familyPicsId', '* Select Family to Delete', familyPicsId, this.onChange, familyPics, '_id', 'title') }
+        <button
+          onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
+          type="button"
+          className="button-lib"
+          disabled={this.validateDeleteFamily()}
+        >
+        Delete Family
         </button>
       </form>
     );
@@ -300,7 +332,7 @@ Pictures
             type: 'familyPics',
             access: 'CLC',
           }, '/family'),
-          deleteSection: () => null,
+          deleteSection: this.deleteFamily,
         })}
         {/* {this.childForm()} */}
         {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
@@ -364,5 +396,6 @@ AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
