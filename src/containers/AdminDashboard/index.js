@@ -32,12 +32,12 @@ export class AdminDashboard extends Component {
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
-    this.deleteYouth = this.deleteYouth.bind(this);
+    // this.deleteYouth = this.deleteYouth.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.deleteFamily = this.deleteFamily.bind(this);
     this.validateBook = this.validateBook.bind(this);
     this.validateDeleteBook = this.validateDeleteBook.bind(this);
-    // this.deleteBook = this.deleteBook.bind(this);
+    this.deleteBookForm = this.deleteBookForm.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -62,40 +62,38 @@ export class AdminDashboard extends Component {
     } return Promise.resolve(false);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  validateBook(bookName, bookURL) {
+  validateBook(bookName, bookURL) { // eslint-disable-line class-methods-use-this
     if (bookName !== '' && bookURL !== '') return false;
     return true;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  validateDeleteBook(bookId) {
-    if (bookId !== '') return false;
+  validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
+    if (stateId !== '') return false;
     return true;
   }
 
-  deleteYouth() {
-    const { youthPicsId } = this.state;
-    const { youthPics } = this.props;
-    return (
-      <form
-        id="delete-youth"
-        style={{
-          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-        }}
-      >
-        { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
-        <button
-          onClick={(evt) => this.controller.deleteBookApi(evt, youthPicsId, '/youth')}
-          type="button"
-          className="button-lib"
-          disabled={this.validateDeleteBook(youthPicsId)}
-        >
-        Delete Youth
-        </button>
-      </form>
-    );
-  }
+  // deleteYouth() {
+  //   const { youthPicsId } = this.state;
+  //   const { youthPics } = this.props;
+  //   return (
+  //     <form
+  //       id="delete-youth"
+  //       style={{
+  //         textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+  //       }}
+  //     >
+  //       { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+  //       <button
+  //         onClick={(evt) => this.controller.deleteBookApi(evt, youthPicsId, '/youth')}
+  //         type="button"
+  //         className="button-lib"
+  //         disabled={this.validateDeleteBook(youthPicsId)}
+  //       >
+  //       Delete Youth
+  //       </button>
+  //     </form>
+  //   );
+  // }
 
   deleteFamily() {
     const { familyPicsId } = this.state;
@@ -120,26 +118,30 @@ export class AdminDashboard extends Component {
     );
   }
 
-  // deleteBook(bookName, bookId, bookTitle, redirect) {
-  //   return (
-  //     <form
-  //       id="delete-book"
-  //       style={{
-  //         textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-  //       }}
-  //     >
-  //       { this.forms.makeDropdown(`${bookId}`, `* Select ${bookName} to Delete`, bookId, this.onChange, bookTitle, '_id', 'title') }
-  //       <button
-  //         onClick={(evt) => this.controller.deleteBookApi(evt, bookId, `${redirect}`)}
-  //         type="button"
-  //         className="button-lib"
-  //         disabled={this.validateDeleteBook(bookId)}
-  //       >
-  //       Delete Family
-  //       </button>
-  //     </form>
-  //   );
-  // }
+  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
+    return (
+      <form
+        id="delete-book"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.onChange, propsArr, '_id', 'title') }
+        <div style={{ marginLeft: '60%' }}>
+          <p>{' '}</p>
+          <button
+            onClick={(evt) => this.controller.deleteBookApi(evt, stateId, redirect)}
+            type="button"
+            disabled={this.validateDeleteBook(stateId)}
+          >
+        Delete
+            {' '}
+            {labelTxt}
+          </button>
+        </div>
+      </form>
+    );
+  }
 
   changePicForm(picData) {
     return (
@@ -247,15 +249,14 @@ export class AdminDashboard extends Component {
           }}
         >
           { this.forms.makeDropdown('forumId', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+          <p>{' '}</p>
           <button
             onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
             type="button"
-            className="button-lib"
             disabled={this.validateDeleteBook(forumId)}
           >
           Delete Forum
           </button>
-          <p>{' '}</p>
         </form>
       </div>
     );
@@ -290,8 +291,9 @@ export class AdminDashboard extends Component {
 
   render() {
     const {
-      youthName, /* youthId, */ youthURL, childName, childURL,
+      youthName, youthPicsId, youthURL, childName, childURL,
     } = this.state;
+    const { youthPics } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -312,8 +314,7 @@ export class AdminDashboard extends Component {
             type: 'youthPics',
             access: 'CLC',
           }, '/youth'),
-          deleteSection: this.deleteYouth,
-          // deleteSection: () => this.deleteBook(youthName, youthId, youthURL, '/youth'),
+          deleteSection: () => this.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
         })}
         <p>{' '}</p>
         {this.changePicForm({
