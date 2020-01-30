@@ -37,6 +37,7 @@ export class AdminDashboard extends Component {
     this.deleteFamily = this.deleteFamily.bind(this);
     this.validateBook = this.validateBook.bind(this);
     this.validateDeleteBook = this.validateDeleteBook.bind(this);
+    // this.deleteBook = this.deleteBook.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -118,6 +119,27 @@ export class AdminDashboard extends Component {
       </form>
     );
   }
+
+  // deleteBook(bookName, bookId, bookTitle, redirect) {
+  //   return (
+  //     <form
+  //       id="delete-book"
+  //       style={{
+  //         textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+  //       }}
+  //     >
+  //       { this.forms.makeDropdown(`${bookId}`, `* Select ${bookName} to Delete`, bookId, this.onChange, bookTitle, '_id', 'title') }
+  //       <button
+  //         onClick={(evt) => this.controller.deleteBookApi(evt, bookId, `${redirect}`)}
+  //         type="button"
+  //         className="button-lib"
+  //         disabled={this.validateDeleteBook(bookId)}
+  //       >
+  //       Delete Family
+  //       </button>
+  //     </form>
+  //   );
+  // }
 
   changePicForm(picData) {
     return (
@@ -268,7 +290,7 @@ export class AdminDashboard extends Component {
 
   render() {
     const {
-      youthName, youthURL, childName, childURL,
+      youthName, /* youthId, */ youthURL, childName, childURL,
     } = this.state;
     return (
       <div className="page-content">
@@ -291,6 +313,7 @@ export class AdminDashboard extends Component {
             access: 'CLC',
           }, '/youth'),
           deleteSection: this.deleteYouth,
+          // deleteSection: () => this.deleteBook(youthName, youthId, youthURL, '/youth'),
         })}
         <p>{' '}</p>
         {this.changePicForm({
