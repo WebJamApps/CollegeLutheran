@@ -26,19 +26,17 @@ export class AdminDashboard extends Component {
       familyPicsId: '',
     };
     this.forms = forms;
-    this.validateYouth = this.validateYouth.bind(this);
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
-    this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    this.validateChild = this.validateChild.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteYouth = this.deleteYouth.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.deleteFamily = this.deleteFamily.bind(this);
-    this.validateDeleteFamily = this.validateDeleteFamily.bind(this);
+    this.validateBook = this.validateBook.bind(this);
+    this.validateDeleteBook = this.validateDeleteBook.bind(this);
   }
 
   componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
@@ -63,15 +61,15 @@ export class AdminDashboard extends Component {
     } return Promise.resolve(false);
   }
 
-  validateYouth() {
-    const { youthName, youthURL } = this.state;
-    if (youthName !== '' && youthURL !== '') return false;
+  // eslint-disable-next-line class-methods-use-this
+  validateBook(bookName, bookURL) {
+    if (bookName !== '' && bookURL !== '') return false;
     return true;
   }
 
-  validateDeleteFamily() {
-    const { familyPicsId } = this.state;
-    if (familyPicsId !== '') return false;
+  // eslint-disable-next-line class-methods-use-this
+  validateDeleteBook(bookId) {
+    if (bookId !== '') return false;
     return true;
   }
 
@@ -90,7 +88,7 @@ export class AdminDashboard extends Component {
           onClick={(evt) => this.controller.deleteBookApi(evt, youthPicsId, '/youth')}
           type="button"
           className="button-lib"
-          disabled={this.validateDeleteYouth()}
+          disabled={this.validateDeleteBook(youthPicsId)}
         >
         Delete Youth
         </button>
@@ -113,7 +111,7 @@ export class AdminDashboard extends Component {
           onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
           type="button"
           className="button-lib"
-          disabled={this.validateDeleteFamily()}
+          disabled={this.validateDeleteBook(familyPicsId)}
         >
         Delete Family
         </button>
@@ -125,11 +123,11 @@ export class AdminDashboard extends Component {
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
-Change
+          Change
           {' '}
           {picData.title}
           {' '}
-Pictures
+          Pictures
         </h4>
         <form>
           <label htmlFor={picData.nameId}>
@@ -159,12 +157,6 @@ Pictures
         {picData.deleteSection()}
       </div>
     );
-  }
-
-  validateChild() {
-    const { childName, childURL } = this.state;
-    if (childName !== '' && childURL !== '') return false;
-    return true;
   }
 
   async createHome() {
@@ -206,24 +198,6 @@ Pictures
     return Promise.resolve(false);
   }
 
-  validateForum() {
-    const { forumtitle, forumurl } = this.state;
-    if (forumtitle !== '' && forumurl !== '') return false;
-    return true;
-  }
-
-  validateDeleteForum() {
-    const { forumId } = this.state;
-    if (forumId !== '') return false;
-    return true;
-  }
-
-  validateDeleteYouth() {
-    const { youthPicsId } = this.state;
-    if (youthPicsId !== '') return false;
-    return true;
-  }
-
   addForum() {
     const { forumtitle, forumurl, forumId } = this.state;
     const { books } = this.props;
@@ -240,7 +214,7 @@ Pictures
           {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
-            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>Add Forum</button>
+            <button type="button" id="addForum" disabled={this.validateBook(forumtitle, forumurl)} onClick={this.addForumAPI}>Add Forum</button>
           </div>
         </form>
         <hr />
@@ -255,7 +229,7 @@ Pictures
             onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
             type="button"
             className="button-lib"
-            disabled={this.validateDeleteForum()}
+            disabled={this.validateDeleteBook(forumId)}
           >
           Delete Forum
           </button>
@@ -307,7 +281,7 @@ Pictures
           title: 'Youth',
           nameId: 'youthName',
           urlId: 'youthURL',
-          disabled: this.validateYouth,
+          disabled: () => this.validateBook(youthName, youthURL),
           buttonId: 'addYouthPic',
           buttonClick: (e) => this.createPicApi(e, {
             title: youthName,
@@ -323,7 +297,7 @@ Pictures
           title: 'Family',
           nameId: 'childName',
           urlId: 'childURL',
-          disabled: this.validateChild,
+          disabled: () => this.validateBook(childName, childURL),
           buttonId: 'addFamilyPic',
           buttonClick: (e) => this.createPicApi(e, {
             title: childName,
