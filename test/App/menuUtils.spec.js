@@ -10,16 +10,10 @@ describe('menuUtils', () => {
       dispatch: () => Promise.resolve(true),
     },
   };
-  it('handles menuItem for Develper', () => new Promise((done) => {
-    const result = menuUtils.menuItem({ link: '/music', type: 'link', auth: true },
+  it('handles menuItem for Developer', () => new Promise((done) => {
+    const result = menuUtils.menuItem({ link: '/staff', type: 'link', auth: true },
       1, controllerStub);
-    expect(result).toBe(true);
-    done();
-  }));
-  it('handles menuItem for GoogleLogout', () => new Promise((done) => {
-    const result = menuUtils.continueMenuItem({ link: '/', type: 'googleLogout', auth: true },
-      1, { pathname: '/music' }, { isAuthenticated: true }, controllerStub);
-    expect(result).toBe(true);
+    expect(result).toBe(null);
     done();
   }));
 });

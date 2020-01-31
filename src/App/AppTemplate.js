@@ -42,41 +42,6 @@ export class AppTemplate extends Component {
     return result;
   }
 
-  // get menus() { // eslint-disable-line class-methods-use-this
-  //   return [
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-arrows-alt', link: '/belief', name: 'Our Lutheran Beliefs',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-users', link: '/staff', name: 'Church Staff',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-music', link: '/music', name: 'Music',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-handshake', link: '/giving', name: 'Giving',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-futbol', link: '/youth', name: 'Youth Ministry',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'fas fa-child', link: '/family', name: 'Child & Families',
-  //     },
-  //     {
-  //       className: '', type: 'link', iconClass: 'far fa-newspaper', link: '/news', name: 'News & Forum',
-  //     },
-  //     {
-  //       className: 'home', type: 'link', iconClass: 'fas fa-heart', link: '/', name: 'Home',
-  //     },
-  //     {
-  //       className: 'login', type: 'googleLogin', iconClass: 'fas fa-login', link: '', name: 'Login',
-  //     },
-  //     {
-  //       className: 'logout', type: 'googleLogout', iconClass: 'fas fa-logout', link: '', name: 'Logout', auth: true,
-  //     },
-  //   ];
-  // }
-
   toggleMobileMenu() {
     const { menuOpen } = this.state;
     const mO = !menuOpen;

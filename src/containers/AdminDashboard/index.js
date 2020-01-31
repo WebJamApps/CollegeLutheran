@@ -1,34 +1,187 @@
 import React, { Component } from 'react';
+import superagent from 'superagent';
 import { withRouter } from 'react-router-dom';
-// import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import superagent from 'superagent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
+import AdminController from './AdminController';
 
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.controller = new AdminController(this);
     this.superagent = superagent;
     this.state = {
       title: '',
       homePageContent: '',
       forumtitle: '',
       forumurl: '',
+      youthName: '',
+      youthURL: '',
+      forumId: '',
+      youthPicsId: '',
+      childName: '',
+      childURL: '',
+      familyPicsId: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
     this.createHome = this.createHome.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
-    this.validateForum = this.validateForum.bind(this);
     this.addForum = this.addForum.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
+    this.changePicForm = this.changePicForm.bind(this);
+    // this.deleteYouth = this.deleteYouth.bind(this);
+    this.createPicApi = this.createPicApi.bind(this);
+    this.deleteFamily = this.deleteFamily.bind(this);
+    this.validateBook = this.validateBook.bind(this);
+    this.validateDeleteBook = this.validateDeleteBook.bind(this);
+    this.deleteBookForm = this.deleteBookForm.bind(this);
   }
 
-  componentDidMount() { document.title = 'Staff Dashboard | College Lutheran Church'; }
+  componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
 
-  onChange(evt) { return this.setState({ [evt.target.id]: evt.target.value }); }
+  onChange(evt, stateValue) {
+    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
+      : this.setState({ [evt.target.id]: evt.target.value });
+  }
+
+  async createPicApi(evt, body, redirect) {
+    evt.preventDefault();
+    let r;
+    const { auth } = this.props;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
+        .set('Content-Type', 'application/json')
+        .send(body);
+    } catch (e) { return Promise.resolve(false); }
+    if (r.status === 201) {
+      window.location.assign(redirect);
+      return Promise.resolve(true);
+    } return Promise.resolve(false);
+  }
+
+  validateBook(bookName, bookURL) { // eslint-disable-line class-methods-use-this
+    if (bookName !== '' && bookURL !== '') return false;
+    return true;
+  }
+
+  validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
+    if (stateId !== '') return false;
+    return true;
+  }
+
+  // deleteYouth() {
+  //   const { youthPicsId } = this.state;
+  //   const { youthPics } = this.props;
+  //   return (
+  //     <form
+  //       id="delete-youth"
+  //       style={{
+  //         textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+  //       }}
+  //     >
+  //       { this.forms.makeDropdown('youthPicsId', '* Select Youth to Delete', youthPicsId, this.onChange, youthPics, '_id', 'title') }
+  //       <button
+  //         onClick={(evt) => this.controller.deleteBookApi(evt, youthPicsId, '/youth')}
+  //         type="button"
+  //         className="button-lib"
+  //         disabled={this.validateDeleteBook(youthPicsId)}
+  //       >
+  //       Delete Youth
+  //       </button>
+  //     </form>
+  //   );
+  // }
+
+  deleteFamily() {
+    const { familyPicsId } = this.state;
+    const { familyPics } = this.props;
+    return (
+      <form
+        id="delete-family"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.forms.makeDropdown('familyPicsId', '* Select Family to Delete', familyPicsId, this.onChange, familyPics, '_id', 'title') }
+        <button
+          onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
+          type="button"
+          className="button-lib"
+          disabled={this.validateDeleteBook(familyPicsId)}
+        >
+        Delete Family
+        </button>
+      </form>
+    );
+  }
+
+  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
+    return (
+      <form
+        id="delete-book"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.onChange, propsArr, '_id', 'title') }
+        <div style={{ marginLeft: '60%' }}>
+          <p>{' '}</p>
+          <button
+            onClick={(evt) => this.controller.deleteBookApi(evt, stateId, redirect)}
+            type="button"
+            disabled={this.validateDeleteBook(stateId)}
+          >
+        Delete
+            {' '}
+            {labelTxt}
+          </button>
+        </div>
+      </form>
+    );
+  }
+
+  changePicForm(picData) {
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+        <h4 className="material-header-h4">
+          Change
+          {' '}
+          {picData.title}
+          {' '}
+          Pictures
+        </h4>
+        <form>
+          <label htmlFor={picData.nameId}>
+            Picture Name
+            <input
+              id={picData.nameId}
+              value={this.state[picData.nameId]}// eslint-disable-line react/destructuring-assignment
+              onChange={this.onChange}
+            />
+          </label>
+          <label htmlFor={picData.urlId}>
+            Image Address
+            <input
+              id={picData.urlId}
+              value={this.state[picData.urlId]}// eslint-disable-line react/destructuring-assignment
+              onChange={this.onChange}
+            />
+          </label>
+          <div style={{ marginLeft: '70%' }}>
+            <p>{' '}</p>
+            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>
+            Add Pic
+            </button>
+          </div>
+        </form>
+        <hr />
+        {picData.deleteSection()}
+      </div>
+    );
+  }
 
   async createHome() {
     const { auth } = this.props;
@@ -39,11 +192,11 @@ export class AdminDashboard extends Component {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
@@ -52,44 +205,58 @@ export class AdminDashboard extends Component {
     const { forumtitle, forumurl } = this.state;
     let r;
     try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/book`)
-        .set('Authorization', `Bearer ${auth.token}`)
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: forumtitle, url: forumurl, comments: forumurl, type: 'Forum', access: 'CLC',
+          title: forumtitle,
+          url: forumurl,
+          comments: forumurl,
+          type: 'Forum',
+          access: 'CLC',
         });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); }// eslint-disable-line no-console
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
-    }console.log(r.body);// eslint-disable-line no-console
+    } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
   }
 
-  validateForum() {
-    const { forumtitle, forumurl } = this.state;
-    if (forumtitle !== '' && forumurl !== '') return false;
-    return true;
-  }
-
   addForum() {
-    const { forumtitle, forumurl } = this.state;
+    const { forumtitle, forumurl, forumId } = this.state;
+    const { books } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-        <h5>Add Monthly Forum</h5>
+        <h5>Change Monthly Forum</h5>
         <form
-          id="create-homepage"
+          id="create-forum"
           style={{
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
           {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
           {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
-          <div style={{ marginLeft: '60%' }}>
-            <button type="button" id="addForum" disabled={this.validateForum()} onClick={this.addForumAPI}>
-              Add Forum
-            </button>
+          <div style={{ marginLeft: '70%' }}>
+            <p>{' '}</p>
+            <button type="button" id="addForum" disabled={this.validateBook(forumtitle, forumurl)} onClick={this.addForumAPI}>Add Forum</button>
           </div>
+        </form>
+        <hr />
+        <form
+          id="delete-forum"
+          style={{
+            textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
+          }}
+        >
+          { this.forms.makeDropdown('forumId', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+          <p>{' '}</p>
+          <button
+            onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
+            type="button"
+            disabled={this.validateDeleteBook(forumId)}
+          >
+          Delete Forum
+          </button>
         </form>
       </div>
     );
@@ -108,7 +275,7 @@ export class AdminDashboard extends Component {
         >
           {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
           <label htmlFor="content">
-Content
+            Content
             <br />
             <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
           </label>
@@ -123,58 +290,55 @@ Content
   }
 
   render() {
+    const {
+      youthName, youthPicsId, youthURL, childName, childURL,
+    } = this.state;
+    const { youthPics } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         <p>{' '}</p>
         {this.addForum()}
-        {/* <h5>Delete Monthly Forum</h5>
-          <form>
-            <label htmlFor="selectBookTitle">
-Select
-              <br />
-              <select id="selectBookTitle" className="form-control" value="" />
-            </label>
-            <button type="button" className="button-lib">
-                Delete
-            </button>
-          </form> */}
-
-        {/*
         <p>{' '}</p>
-        <div className="material-content elevation3">
-          <h4 className="material-header-h4">Change Youthpage Section</h4>
-          <form>
-            <label htmlFor="youth-content">
-Content
-              <textarea if="youth-content" rows="15" cols="32" value="youthPageContent.comments" />
-            </label>
-            <button type="button" id="changeYouth" className="button-lib">
-                Submit
-            </button>
-          </form>
-          <hr />
-          <h4 className="material-header-h4">Add Youthpage Pic from Image Address</h4>
-          <form>
-            <label htmlFor="youth-pic-title">
-Title
-              <input id="youth-pic-title" value="newYouthPic.title" />
-            </label>
-            <label htmlFor="youth-pic-url">
-Image Address
-              <input id="youth-pic-url" value="newYouthPic.url" />
-            </label>
-            <button type="button" id="addYouthPic" className="button-lib">
-                Add Pic
-            </button>
-          </form>
-          <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
+        {this.changePicForm({
+          title: 'Youth',
+          nameId: 'youthName',
+          urlId: 'youthURL',
+          disabled: () => this.validateBook(youthName, youthURL),
+          buttonId: 'addYouthPic',
+          buttonClick: (e) => this.createPicApi(e, {
+            title: youthName,
+            url: youthURL,
+            comments: youthURL,
+            type: 'youthPics',
+            access: 'CLC',
+          }, '/youth'),
+          deleteSection: () => this.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+        })}
+        <p>{' '}</p>
+        {this.changePicForm({
+          title: 'Family',
+          nameId: 'childName',
+          urlId: 'childURL',
+          disabled: () => this.validateBook(childName, childURL),
+          buttonId: 'addFamilyPic',
+          buttonClick: (e) => this.createPicApi(e, {
+            title: childName,
+            url: childURL,
+            comments: childURL,
+            type: 'familyPics',
+            access: 'CLC',
+          }, '/family'),
+          deleteSection: this.deleteFamily,
+        })}
+        {/* {this.childForm()} */}
+        {/* <p style={{ color: 'red' }}><strong>errorMessage</strong></p>
           <hr />
           <h4 className="material-header-h4">Delete Youthpage Picture</h4>
           <form>
             <label htmlFor="delete-youth-pic">
-Select
+            Select
              <select id="delete-youth-pic" className="form-control" value="titleSelected" />
             </label>
             <button type="button" id="deleteYouth" className="button-lib">
@@ -183,12 +347,11 @@ Select
           </form>
         </div>
         <p>{' '}</p>
-
         <div className="material-content elevation3">
           <h4 className="material-header-h4">Change Familypage Section</h4>
           <form>
             <label htmlFor="family-content">
-Content
+              Content
               <textarea id="family-content" rows="15" cols="32" value="familyPageContent.comments" />
             </label>
             <button type="button" id="changeFamily" className="button-lib">
@@ -199,12 +362,8 @@ Content
           <h4 className="material-header-h4">Add Familypage Pic from Image Address</h4>
           <form>
             <label htmlFor="family-pic-title">
-Title
-              <input id="family-pic-title" value="newFamilyPic.title" />
-            </label>
-            <label htmlFor="family-pic-url">
-Image Address
-              <input id="family-pic-url" value="newFamilyPic.url" />
+              Title
+              <inpformt id="family-pic-url" value="newFamilyPic.url" />
             </label>
             <button type="button" id="addFamilyPic" className="button-lib">
                 Add Pic
@@ -212,14 +371,14 @@ Image Address
           </form>
           <p style={{ color: 'red' }}>
             <strong>
-familyPicError
+            familyPicError
             </strong>
           </p>
           <hr />
           <h4 className="material-header-h4">Delete Familypage Picture</h4>
           <form>
             <label htmlFor="delete-family-pic">
-Select
+              Select
               <select id="delete-family-pic" className="form-control" />
             </label>
             <button type="button" id="deleteFamily" className="button-lib">
@@ -233,5 +392,8 @@ Select
 }
 AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));

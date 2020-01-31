@@ -35,6 +35,13 @@ describe('AppTemplate', () => {
     expect(result).toBe(true);
     done();
   }));
+  it('renders the login button', () => new Promise((done) => {
+    const { wrapper } = setup();
+    const loginButton = wrapper.instance().googleButtons('login', 'login');
+    const rLogin = shallow(loginButton);
+    expect(rLogin.find('div.googleLogin').length).toBe(1);
+    done();
+  }));
   it('renders the logout button', () => new Promise((done) => {
     const { wrapper } = setup();
     const logoutButton = wrapper.instance().googleButtons('logout', 'logout');
