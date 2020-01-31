@@ -15,7 +15,7 @@ class AdminController {
     const { auth } = this.view.props;
     let r;
     try {
-      r = await this.view.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
+      r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json');
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
