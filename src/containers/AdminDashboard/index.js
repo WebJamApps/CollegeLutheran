@@ -121,7 +121,7 @@ export class AdminDashboard extends Component {
     );
   }
 
-  deleteFormForm(forumId, books) {
+  deleteForumForm(forumId, books) {
     return (
       <form
         id="delete-forum"
