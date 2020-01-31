@@ -29,7 +29,6 @@ export class AdminDashboard extends Component {
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteFamily = this.deleteFamily.bind(this);
-    this.deleteBookForm = this.deleteBookForm.bind(this);
     this.changeFamilyForm = this.changeFamilyForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
   }
@@ -51,38 +50,15 @@ export class AdminDashboard extends Component {
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.forms.makeDropdown('familyPicsId', '* Select Family to Delete', familyPicsId, this.onChange, familyPics, '_id', 'title') }
-        <button
-          onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
-          type="button"
-          className="button-lib"
-          disabled={this.controller.validateDeleteBook(familyPicsId)}
-        >
-        Delete Family
-        </button>
-      </form>
-    );
-  }
-
-  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
-    return (
-      <form
-        id="delete-book"
-        style={{
-          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-        }}
-      >
-        { this.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.onChange, propsArr, '_id', 'title') }
+        { this.forms.makeDropdown('familyPicsId', '* Select Pic to Delete', familyPicsId, this.onChange, familyPics, '_id', 'title') }
         <div style={{ marginLeft: '60%' }}>
           <p>{' '}</p>
           <button
-            onClick={(evt) => this.controller.deleteBookApi(evt, stateId, redirect)}
+            onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
             type="button"
-            disabled={this.controller.validateDeleteBook(stateId)}
+            disabled={this.controller.validateDeleteBook(familyPicsId)}
           >
-        Delete
-            {' '}
-            {labelTxt}
+        Delete Pic
           </button>
         </div>
       </form>
@@ -192,7 +168,7 @@ Add Forum
             <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
           </label>
           <div style={{ marginLeft: '60%' }}>
-            <button type="button" id="changeStuff" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
+            <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
           </div>
         </form>
       </div>
@@ -244,7 +220,7 @@ Add Forum
             type: 'youthPics',
             access: 'CLC',
           }, '/youth'),
-          deleteSection: () => this.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+          deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
         })}
         <p>{' '}</p>
         {this.changeFamilyForm(childName, childURL)}

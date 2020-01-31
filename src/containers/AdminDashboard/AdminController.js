@@ -1,4 +1,5 @@
 import superagent from 'superagent';
+import React from 'react';
 
 class AdminController {
   constructor(view) {
@@ -8,6 +9,7 @@ class AdminController {
     this.createHomeAPI = this.createHomeAPI.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
+    this.deletebookForm = this.deleteBookForm.bind(this);
   }
 
   async deleteBookApi(evt, id, redirect) {
@@ -87,6 +89,31 @@ class AdminController {
       window.location.assign('/news');
       return Promise.resolve(true);
     } console.log(r.body); return Promise.resolve(false);// eslint-disable-line no-console
+  }
+
+  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
+    return (
+      <form
+        id="delete-book"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        { this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title') }
+        <div style={{ marginLeft: '60%' }}>
+          <p>{' '}</p>
+          <button
+            onClick={(evt) => this.deleteBookApi(evt, stateId, redirect)}
+            type="button"
+            disabled={this.validateDeleteBook(stateId)}
+          >
+        Delete
+            {' '}
+            {labelTxt}
+          </button>
+        </div>
+      </form>
+    );
   }
 }
 
