@@ -32,7 +32,7 @@ const NewsContent = ({ books }) => (
       </div>
       <div>
         {books.length > 0 ? (
-          <div>
+          <div className="forumsTable">
             <h3
               style={{
                 paddingTop: '22px',
