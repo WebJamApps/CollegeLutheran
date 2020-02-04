@@ -58,7 +58,7 @@ export class AdminDashboard extends Component {
             type="button"
             disabled={this.controller.validateDeleteBook(familyPicsId)}
           >
-        Delete Pic
+            Delete Pic
           </button>
         </div>
       </form>
@@ -112,7 +112,7 @@ export class AdminDashboard extends Component {
           type="button"
           disabled={this.controller.validateDeleteBook(forumId)}
         >
-        Delete Forum
+          Delete Forum
         </button>
       </form>
     );
@@ -140,7 +140,7 @@ export class AdminDashboard extends Component {
               disabled={this.controller.validateBook(forumtitle, forumurl)}
               onClick={this.controller.addForumAPI}
             >
-Add Forum
+              Add Forum
             </button>
           </div>
         </form>

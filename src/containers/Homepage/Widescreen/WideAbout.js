@@ -8,9 +8,9 @@ const WideAbout = ({ homeContent, width }) => (
       <div className="row">
         <div className="col" style={{ top: '0', paddingRight: '6px' }}>
           <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
-          College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
-          The church is situated on College Avenue, within easy walking distance of Roanoke College.
-          College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
+            College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
+            The church is situated on College Avenue, within easy walking distance of Roanoke College.
+            College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
           <h5>Join Us for Holy Communion</h5>
           <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
@@ -40,9 +40,14 @@ const WideAbout = ({ homeContent, width }) => (
         </div>
         {width >= 1004 ? (
           <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
-            <div id="slideshow1" style={{ marginTop: '40px', marginRight: 0, textAlign: 'center' }}>
+            <div
+              id="slideshow1"
+              style={{
+                marginTop: '40px', marginRight: '100px', textAlign: 'left', marginLeft: '8px', 
+              }}
+            >
               <img
-                style={{ borderRadius: '50%', width: '80%' }}
+                style={{ borderRadius: '50%', width: '100%' }}
                 alt="churchBuilding"
                 src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
               />
