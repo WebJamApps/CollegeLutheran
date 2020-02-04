@@ -107,7 +107,7 @@ class AdminController {
             type="button"
             disabled={this.validateDeleteBook(stateId)}
           >
-        Delete
+            Delete
             {' '}
             {labelTxt}
           </button>
