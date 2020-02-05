@@ -20,4 +20,8 @@ describe('Home', () => {
     wrapper.instance().onResize(100);
     expect(wrapper.instance().state.width).toBe(100);
   });
+  it('Renders WideFacebook when at least 1092', () => {
+    const wrapper2 = shallow(<WideFacebookFeed width={1092} />);
+    expect(wrapper2.find('p#wideFacebook').prop('style')).toHaveProperty('marginBottom', '32px');
+  });
 });
