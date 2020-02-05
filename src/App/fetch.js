@@ -1,11 +1,11 @@
 const fetch = async (view, route, reducer) => {
-  let bres;
+  let res;
   const { dispatch } = view.props;
-  try { bres = await view.superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json'); } catch (e) {
+  try { res = await view.superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json'); } catch (e) {
     console.log(e.message);// eslint-disable-line no-console
     return Promise.resolve(false);
   }
-  dispatch({ type: `${reducer}`, data: bres.body });
+  dispatch({ type: `${reducer}`, data: res.body });
   return Promise.resolve(true);
 };
 

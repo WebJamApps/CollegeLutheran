@@ -112,7 +112,7 @@ export class AppTemplate extends Component {
               <span>210 S. College Ave</span>
             </a>
             <br />
-              Salem, VA 24153
+            Salem, VA 24153
           </p>
         </div>
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>

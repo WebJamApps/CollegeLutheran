@@ -24,22 +24,22 @@ const FamilyContent = ({ familyPics }) => (
           </span>
         </p>
         <p>
-            Children are indispensable at College Lutheran Church. The Children and Family Ministry at College Lutheran Church supports kids in
-            preschool through 5th grade and their families. Age appropriate Sunday School, monthly meet-ups, and
-            seasonal events such as Trunk or Treating, Christmas Programs, Easter Parties, and Vacation Bible School are a few of the ways that
-            we familiarize our children with Biblical stories and the power of living in Christian community.
+          Children are indispensable at College Lutheran Church. The Children and Family Ministry at College Lutheran Church supports kids in
+          preschool through 5th grade and their families. Age appropriate Sunday School, monthly meet-ups, and
+          seasonal events such as Trunk or Treating, Christmas Programs, Easter Parties, and Vacation Bible School are a few of the ways that
+          we familiarize our children with Biblical stories and the power of living in Christian community.
         </p>
         <p>
-            Children are also encouraged to be full participants in worship. They may follow along in the bulletin with a parent or use the
-            children’s activity bags located outside the doors at the back of the sanctuary. Both the children’s
-            sermon
-            and the kid’s food offering are special parts of the service designated for kid participation. Additionally, there
-            is a Nursery available during worship (located on the 2nd floor), if parents prefer to have their children enjoy a safe
-            play zone.
+          Children are also encouraged to be full participants in worship. They may follow along in the bulletin with a parent or use the
+          children’s activity bags located outside the doors at the back of the sanctuary. Both the children’s
+          sermon
+          and the kid’s food offering are special parts of the service designated for kid participation. Additionally, there
+          is a Nursery available during worship (located on the 2nd floor), if parents prefer to have their children enjoy a safe
+          play zone.
         </p>
         <p>
-            We celebrate the milestones of Baptism and First Communion and offer guidance for parents during these momentous events. If you
-            would like your child to be baptized or receive First communion, please contact Pastor David at
+          We celebrate the milestones of Baptism and First Communion and offer guidance for parents during these momentous events. If you
+          would like your child to be baptized or receive First communion, please contact Pastor David at
           {' '}
           <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
           <br />

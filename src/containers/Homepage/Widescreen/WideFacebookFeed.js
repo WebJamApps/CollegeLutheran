@@ -33,7 +33,7 @@ const WideFacebookFeed = ({ width }) => {
         }}
         >
           <i>
-        Like Us On
+            Like Us On
             {' '}
             <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
           </i>
