@@ -6,16 +6,18 @@ import WideAbout from './Widescreen/WideAbout';
 import WideFacebookFeed from './Widescreen/WideFacebookFeed';
 import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import commonUtils from '../../lib/commonUtils';
 
 export class Homepage extends Component {
   constructor(props) {
     super(props);
+    this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
     this.onResize = this.onResize.bind(this);
     this.state = { width: 100 };
   }
 
-  componentDidMount() { document.title = 'College Lutheran Church'; }
+  componentDidMount() { this.commonUtils.setTitleAndScroll(''); }
 
   onResize(width) { this.setState({ width }); }
 

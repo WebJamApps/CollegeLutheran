@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DefaultYouthContent from './YouthContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import commonUtils from '../../lib/commonUtils';
 
 export const Youth = ({ youthPics }) => {
-  document.title = 'Youth Ministry | College Lutheran Church';
+  commonUtils.setTitleAndScroll('Youth Ministry');
   return (<DefaultYouthContent youthPics={youthPics} />);
 };
 
