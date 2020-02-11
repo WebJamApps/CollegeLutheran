@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
+import commonUtils from '../../lib/commonUtils';
 
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
       title: '',
@@ -33,7 +35,7 @@ export class AdminDashboard extends Component {
     this.deleteForumForm = this.deleteForumForm.bind(this);
   }
 
-  componentDidMount() { document.title = 'Admin Dashboard | College Lutheran Church'; }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
 
   onChange(evt, stateValue) {
     return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })

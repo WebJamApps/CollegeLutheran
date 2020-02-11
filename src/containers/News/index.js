@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DefaultNewsContent from './NewsContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import commonUtils from '../../lib/commonUtils';
 
 export const News = ({ books }) => {
-  document.title = 'News & Forum | College Lutheran Church';
+  commonUtils.setTitleAndScroll('News & Forum');
   return <DefaultNewsContent books={books} />;
 };
 
