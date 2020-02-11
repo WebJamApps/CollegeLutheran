@@ -37,6 +37,7 @@ export class App extends Component {
 
   render() {
     const { auth } = this.props;
+    const userRoles = JSON.parse(process.env.userRoles).roles;
     return (
       <div id="App" className="App">
         <Router>
@@ -48,7 +49,7 @@ export class App extends Component {
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
               <Route exact path="/staff" component={Staff} />
-              {auth.isAuthenticated && auth.user.userType === 'Developer'
+              {auth.isAuthenticated && userRoles.indexOf(auth.user.userType) !== -1
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />

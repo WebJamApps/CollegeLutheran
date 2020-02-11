@@ -6,10 +6,11 @@ const continueMenuItem = (menu, index, location, auth, view) => {
 };
 
 const menuItem = (menu, index, view) => {
+  const userRoles = JSON.parse(process.env.userRoles).roles;
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;
   if ((menu.link === '/staff' || menu.link === '/belief') && auth.isAuthenticated) return null;
-  if (menu.name === 'Admin Dashboard' && !auth.isAuthenticated) return null;
+  if (menu.name === 'Admin Dashboard' && (!auth.isAuthenticated || userRoles.indexOf(auth.user.userType) === -1)) return null;
   return continueMenuItem(menu, index, location, auth, view);
 };
 
