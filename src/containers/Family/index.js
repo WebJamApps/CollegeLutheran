@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DefaultFamilyContent from './FamilyContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import commonUtils from '../../lib/commonUtils';
 
 export const Family = ({ familyPics }) => {
-  document.title = 'Children & Families | College Lutheran Church';
+  commonUtils.setTitleAndScroll('Children & Families');
   return (<DefaultFamilyContent familyPics={familyPics} />);
 };
 

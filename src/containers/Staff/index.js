@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import DefaultStaffContent from './StaffContent';
+import commonUtils from '../../lib/commonUtils';
 
 export default class Staff extends Component {
   constructor(props) {
     super(props);
-    this.children = props.children;// eslint-disable-line react/prop-types
+    this.commonUtils = commonUtils;
   }
 
-  componentDidMount() {
-    document.title = 'Church Staff | College Lutheran Church';
-  }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Church Staff'); }
 
-  render() {
-    return (
-      <DefaultStaffContent />
-    );
-  }
+  render() { return (<DefaultStaffContent />); }
 }

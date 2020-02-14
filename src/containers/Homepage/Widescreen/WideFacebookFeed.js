@@ -28,12 +28,14 @@ const WideFacebookFeed = ({ width }) => {
           width: '600px', margin: 'auto', paddingRight: '10px', paddingLeft: '10px', textAlign: 'center',
         }}
       >
-        <p style={{
-          textAlign: 'center', fontSize: '10pt', marginBottom: mb, marginTop: mt,
-        }}
+        <p
+          id="wideFacebook"
+          style={{
+            textAlign: 'center', fontSize: '10pt', marginBottom: mb, marginTop: mt,
+          }}
         >
           <i>
-        Like Us On
+            Like Us On
             {' '}
             <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
           </i>
