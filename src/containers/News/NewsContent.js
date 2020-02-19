@@ -47,14 +47,14 @@ const NewsContent = ({ books }) => (
               <table className="newsTable">
                 <thead>
                   <tr>
-                    <th style={{ padding: '8px' }}>Title</th>
+                    <th style={{ padding: '8px', width: '180px' }}>Title</th>
                     <th style={{ padding: '8px', width: '110px' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {books.map((d) => (
                     <tr key={d._id}>
-                      <td className="newsUrl" style={{ paddingTop: '25px' }}>
+                      <td className="newsUrl">
                         <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
                       </td>
                       <td>{d.created_at.split('T')[0]}</td>
