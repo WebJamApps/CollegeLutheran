@@ -1,12 +1,11 @@
-import setTitleAndScroll from '../../src/lib/commonUtils'; // eslint-disable-line no-unused-vars
+import commonUtils from '../../src/lib/commonUtils';
 
 describe('forms', () => {
   it('calls scrollIntoView', () => {
-    const top = {};
-    top.scrollIntoView = jest.fn();
-    if (typeof top.scrollIntoView === 'function') {
-      top.scrollIntoView();
-    }
-    expect(top.scrollIntoView).toHaveBeenCalled();
+    const scrollIntoViewMock = jest.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+    document.body.innerHTML = '<div class="page-content"></div>';
+    commonUtils.setTitleAndScroll('home');
+    expect(scrollIntoViewMock).toHaveBeenCalled();
   });
 });
