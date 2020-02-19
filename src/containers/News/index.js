@@ -7,7 +7,13 @@ import commonUtils from '../../lib/commonUtils';
 
 export const News = ({ books }) => {
   commonUtils.setTitleAndScroll('News & Forum');
-  books.sort((a, b) => (a.created_at.split('T')[0] - b.created_at.split('T')[0]));
+  books.sort((a, b) => {
+    const dataA = a.created_at.split('T')[0];
+    const dateB = b.created_at.split('T')[0];
+    if (dataA < dateB) return 1;
+    if (dataA > dateB) return -1;
+    return 0;
+  });
   return <DefaultNewsContent books={books} />;
 };
 
