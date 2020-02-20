@@ -143,7 +143,7 @@ export class AppTemplate extends Component {
               <h2 className="header-text" style={{ marginBottom: '0px', marginTop: '1px', fontSize: '34px' }}>
                 <a className="header-text" href="/" style={{ textAlign: 'left', textDecoration: 'none' }}>College Lutheran Church</a>
               </h2>
-              <p className="subTitle" style={{ marginTop: '-6px', maxWidth: '100%' }}>
+              <p className="subTitle" style={{ maxWidth: '100%' }}>
                 We celebrate God&apos;s grace and share His love in Christ!
               </p>
             </div>
