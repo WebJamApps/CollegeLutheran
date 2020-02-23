@@ -809,12 +809,18 @@ div.fof {
   border: 1px solid #d3d3d3;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 330px) {
   .newsIFrame {
     width: 117% !important;
   }
   .news-div {
     margin: auto auto auto -30px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .newsIFrame {
+    width: 110% !important;
   }
 }
 
