@@ -782,6 +782,7 @@ div.fof {
 }
 
 .footer {
+  flex-shrink: 0;
   background-color: rgb(36, 74, 139) !important;
 }
 
@@ -840,9 +841,12 @@ div.fof {
     overflow: auto;
     margin-top: 91px;
     margin-right: inherit;
+    display: flex;
+    flex-direction: column;
   }
 
   .page-content {
+    flex: 1 0 auto;
     border-right: 1px solid #000000;
   }
 
@@ -922,6 +926,10 @@ div.fof {
     max-height: 100%;
   }
 
+  .page-content {
+    flex: 1 0 auto;
+  }
+
   .menu-item {
     padding-left: 10px;
     display: flex;
@@ -980,6 +988,8 @@ div.fof {
     width: 100vw !important;
     margin: 0 auto;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .navImage {
