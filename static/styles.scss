@@ -810,10 +810,12 @@ div.fof {
 }
 
 @media (max-width: 600px) {
-.footer_copy.update-profile-footer {
-    width: auto !important;
-    margin: auto;
-}
+  .newsIFrame {
+    width: 117% !important;
+  }
+  .news-div {
+    margin: auto auto auto -30px !important;
+  }
 }
 
 @media screen and (min-width: 900px) {

@@ -9,6 +9,7 @@ const NewsContent = ({ books }) => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div
+        className="news-div"
         style={{
           margin: 'auto',
           textAlign: 'center',
