@@ -9,6 +9,7 @@ const NewsContent = ({ books }) => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div
+        className="news-div"
         style={{
           margin: 'auto',
           textAlign: 'center',
@@ -47,8 +48,8 @@ const NewsContent = ({ books }) => (
               <table className="newsTable">
                 <thead>
                   <tr>
-                    <th style={{ padding: '8px', width: '180px' }}>Title</th>
-                    <th style={{ padding: '8px', width: '110px' }}>Date</th>
+                    <th style={{ padding: '8px', width: '230px' }}>Title</th>
+                    <th style={{ padding: '8px', width: '105px' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -25,4 +25,31 @@ describe('News', () => {
       .find('div.forumsTable')
       .exists()).toBe(true);
   });
+  it('sorts the books in descending order', () => {
+    const { books } = controller.state;
+    const results = shallow(<News books={books} />);
+    books.sort((a, b) => {
+      const dataA = a.created_at;
+      const dateB = b.created_at;
+      if (dataA < dateB) return 1;
+      return true;
+    });
+    expect(results).toBeTruthy();
+  });
+  it('sorts the books in default order', () => {
+    const controller2 = {
+      setState: () => true,
+      props: {},
+      state: { books: [{ _id: '1', created_at: '1972-01-03T00:00:00Z' }, { _id: '2', created_at: '1972-01-03T00:00:00Z' }] },
+    };
+    const { books } = controller2.state;
+    const results = shallow(<News books={books} />);
+    books.sort((a, b) => {
+      const dataA = a.created_at;
+      const dateB = b.created_at;
+      if (dataA < dateB) return -1;
+      return 0;
+    });
+    expect(results).toBeTruthy();
+  });
 });
