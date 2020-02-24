@@ -810,6 +810,21 @@ div.fof {
   border: 1px solid #d3d3d3;
 }
 
+@media (max-width: 330px) {
+  .newsIFrame {
+    width: 117% !important;
+  }
+  .news-div {
+    margin: auto auto auto -30px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .newsIFrame {
+    width: 110% !important;
+  }
+}
+
 @media screen and (min-width: 900px) {
   .drawer-container {
     float: right;
@@ -1348,6 +1363,7 @@ div.familyELCA, div.youthELCA, div.givingELCA {
 .table-responsive {
   display: block;
   width: 100%;
+  height: 500px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -1361,7 +1377,6 @@ div.familyELCA, div.youthELCA, div.givingELCA {
 
 .newsTable td {
   width: 50% ;
-  word-wrap: break-word
 }
 
 .newsTable td, .newsTable th {
