@@ -782,6 +782,7 @@ div.fof {
 }
 
 .footer {
+  flex-shrink: 0;
   background-color: rgb(36, 74, 139) !important;
 }
 
@@ -807,6 +808,21 @@ div.fof {
   width: 800px;
   height: 460px;
   border: 1px solid #d3d3d3;
+}
+
+@media (max-width: 330px) {
+  .newsIFrame {
+    width: 117% !important;
+  }
+  .news-div {
+    margin: auto auto auto -30px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .newsIFrame {
+    width: 110% !important;
+  }
 }
 
 @media screen and (min-width: 900px) {
@@ -840,9 +856,12 @@ div.fof {
     overflow: auto;
     margin-top: 91px;
     margin-right: inherit;
+    display: flex;
+    flex-direction: column;
   }
 
   .page-content {
+    flex: 1 0 auto;
     border-right: 1px solid #000000;
   }
 
@@ -922,6 +941,10 @@ div.fof {
     max-height: 100%;
   }
 
+  .page-content {
+    flex: 1 0 auto;
+  }
+
   .menu-item {
     padding-left: 10px;
     display: flex;
@@ -980,6 +1003,8 @@ div.fof {
     width: 100vw !important;
     margin: 0 auto;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .navImage {
@@ -1338,6 +1363,7 @@ div.familyELCA, div.youthELCA, div.givingELCA {
 .table-responsive {
   display: block;
   width: 100%;
+  height: 500px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -1351,7 +1377,6 @@ div.familyELCA, div.youthELCA, div.givingELCA {
 
 .newsTable td {
   width: 50% ;
-  word-wrap: break-word
 }
 
 .newsTable td, .newsTable th {
