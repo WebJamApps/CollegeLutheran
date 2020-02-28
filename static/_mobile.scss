@@ -1,0 +1,243 @@
+@media screen and (min-width: 900px) {
+  .drawer-container {
+    float: right;
+    position: fixed;
+    right: 0;
+    z-index: 100;
+  }
+
+  .main-panel {
+    position: relative;
+    float: left;
+    clear: both;
+    height: 100vh;
+    width: calc(100% - 220px);
+    display: block;
+    overflow: hidden;
+  }
+
+  .material-header {
+    width: 100%;
+  }
+
+  .content-block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    margin-top: 91px;
+    margin-right: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-content {
+    flex: 1 0 auto;
+    border-right: 1px solid #000000;
+  }
+
+  ::-webkit-scrollbar:vertical {
+    width: 0;
+  }
+
+  .newsIFrame {
+    width:350px;
+    height: 610px;
+    border: 1px solid #d3d3d3;
+  }
+}
+
+@media (max-width: 330px) {
+  .newsIFrame {
+    width: 117% !important;
+  }
+  .news-div {
+    margin: auto auto auto -30px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .newsIFrame {
+    width: 110% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .flex-header {
+    margin-top: -20px;
+    width: 100% !important;
+  }
+
+  img#elcaLogo {
+    width: 290px !important;
+  }
+
+  .subTitle {
+    width: 80% !important;
+  }
+
+  #copyInput {
+    width: 95%;
+    margin-left: 8px;
+  }
+
+  #playSection audio {
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header-text {
+    line-height: 1.2em;
+    font-size: 26px !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .drawer {
+    background-color: rgb(192, 192, 192);
+    float: right;
+    height: 100%;
+  }
+
+  .elevation2 {
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .page-content {
+    flex: 1 0 auto;
+  }
+
+  .menu-item {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    position: relative;
+    min-height: 40px;
+    padding-top: 0;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    margin: auto;
+    padding-top: 1px;
+  }
+
+  span {
+    text-align: left;
+  }
+
+  .main-panel {
+    position: relative;
+    float: left;
+    clear: both;
+    height: 100vh;
+    width: 100vw;
+    display: block;
+  }
+
+  .material-header {
+    width: 100vw;
+  }
+
+  .drawer-container.close {
+    display: none;
+  }
+
+  .drawer-container.open {
+    display: block !important;
+    width: 100vw !important;
+    z-index: 100 !important;
+    background-color: rgba(42, 34, 42, 0.67);
+  }
+
+  .content-block {
+    width: 100vw !important;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navImage {
+    display: none;
+  }
+
+  .swipe-area {
+    width: 30px;
+    height: 100vh;
+  }
+
+  #playerAndButtons button {
+    border: 1px solid #cccccc;
+  }
+
+  ::-webkit-scrollbar:vertical {
+    width: 0;
+  }
+
+  .giving-iframe {
+    width: 320px;
+    height: 700px;
+    border: 1px solid #d3d3d3;
+  }
+}
+
+.swipe-area {
+  position: absolute;
+  width: 0px;
+  left: 128px;
+  top: 0;
+  height: 100%;
+  /* background: #f3f3f3; */
+  z-index: 9999;
+  /* touch-action: auto; */
+}
+
+.drawer-container {
+  height: 100vh;
+  position: fixed;
+  float: right;
+  z-index: 100;
+  width: 220px;
+}
+
+#mobilemenutoggle {
+  cursor: pointer;
+  position: fixed;
+  right: 16px;
+  top: 32px;
+  z-index: 95;
+  color: #f4c00eff;
+  background-color: #244a8bff;
+  padding: 6px;
+}
+
+#mobilemenutoggle img {
+  width: 30px;
+  height: 20px;
+}
+
+.mobile-menu-toggle {
+  position: fixed;
+  top: 32px;
+  right: 16px;
+  background-color: #2a222a;
+  color: white;
+  padding: 6px;
+  z-index: 90000;
+}
