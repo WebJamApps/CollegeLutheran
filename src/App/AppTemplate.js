@@ -140,7 +140,7 @@ export class AppTemplate extends Component {
         <div>
           <div style={{ marginLeft: '5px', marginTop: '-18px' }}>
             <div className="flex-header">
-              <h2 className="header-text" style={{ marginBottom: '0px', marginTop: '1px', fontSize: '34px' }}>
+              <h2 className="header-text" style={{ marginBottom: '4px', marginTop: '1px', fontSize: '34px' }}>
                 <a className="header-text" href="/" style={{ textAlign: 'left', textDecoration: 'none' }}>College Lutheran Church</a>
               </h2>
               <p className="subTitle" style={{ maxWidth: '100%' }}>

@@ -21,7 +21,8 @@ const NewsContent = ({ books }) => (
           style={{
             width: '100%',
             height: '540px',
-            border: '1px solid #d3d3d3',
+            border: 'none',
+            marginLeft: '10px',
           }}
           className="newsIFrame"
           src="https://visitor.r20.constantcontact.com/d.jsp?
@@ -49,7 +50,7 @@ const NewsContent = ({ books }) => (
                 <thead>
                   <tr>
                     <th style={{ padding: '8px', width: '230px' }}>Title</th>
-                    <th style={{ padding: '8px', width: '105px' }}>Date</th>
+                    <th style={{ padding: '8px', width: '110px' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>
