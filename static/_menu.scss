@@ -49,12 +49,12 @@
     width: 220px;
     background-color: #244a8bff;
     margin: auto;
-    padding-top: 3px;
+    padding-top: 5px;
     text-align: center;
 }
 
 .nav-link {
-  padding-left: 0;
+  padding-left: 0 !important;
   display: block !important;
   color: #23527c;
   outline: none !important;
@@ -66,7 +66,7 @@ button.nav-link {
   border: none;
   padding-top: 14px;
   padding-bottom: 14px;
-  padding-left: 0;
+  padding-left: 0 !important;
   padding-right: 0;
 }
 

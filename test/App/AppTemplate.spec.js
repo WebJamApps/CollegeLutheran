@@ -53,7 +53,7 @@ describe('AppTemplate', () => {
     document.body.innerHTML = '<button class="googleLogin"/><button class="googleLogout"/>';
     const aT = new AppTemplate({ dispatch: () => Promise.resolve(true) });
     aT.setState = () => {};
-    const result = aT.close({ target: { classList: { contains() { return false; } } } });
+    const result = aT.wjclose({ target: { classList: { contains() { return false; } } } });
     expect(result).toBe(true);
     done();
   }));
@@ -63,7 +63,7 @@ describe('AppTemplate', () => {
     aT.setState = () => {};
     aT.changeNav = () => false;
     aT.loginGoogle = () => true;
-    const result = aT.close({
+    const result = aT.wjclose({
       target: {
         classList: {
           contains(name) {
