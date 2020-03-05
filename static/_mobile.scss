@@ -49,6 +49,12 @@
   }
 }
 
+@media (min-width: 500px) {
+  .flex-header {
+    padding-top: 7px;
+  }
+}
+
 @media (max-width: 330px) {
   .newsIFrame {
     width: 117% !important;
