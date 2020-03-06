@@ -36,6 +36,8 @@
   .page-content {
     flex: 1 0 auto;
     border-right: 1px solid #000000;
+    margin-right: 0px;
+    overflow-x: hidden;
   }
 
   ::-webkit-scrollbar:vertical {
@@ -115,6 +117,8 @@
 
   .page-content {
     flex: 1 0 auto;
+    margin-right: 0px;
+    overflow-x: hidden;
   }
 
   .menu-item {

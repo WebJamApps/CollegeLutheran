@@ -44,7 +44,7 @@ export class Homepage extends Component {
     const { width } = this.state;
     const { homeContent } = this.props;
     return (
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {width >= 1004
           ? (
             <div className="page-content">
