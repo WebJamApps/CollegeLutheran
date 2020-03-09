@@ -31,7 +31,7 @@ module.exports = ({
 
   entry: {
     app: [`${srcDir}/main.js`],
-    vendor: ['reactstrap'],
+    vendor: ['jquery', 'bootstrap'],
   },
 
   mode: production ? 'production' : 'development',
@@ -134,6 +134,9 @@ module.exports = ({
 
   plugins: [
     new ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
     }),
     new HtmlWebpackPlugin({
