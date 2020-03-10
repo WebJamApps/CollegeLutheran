@@ -153,19 +153,35 @@ export class AppTemplate extends Component {
     );
   }
 
+  drawerContainer(style) {
+    return (
+      <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
+        <div
+          className="drawer"
+          style={{
+            backgroundColor: '#c0c0c0', zIndex: -1, position: 'relative',
+          }}
+        >
+          <div className="navImage">
+            <img
+              alt="Luther Rose"
+              id="webjamwidelogo"
+              src={`${this.currentStyles.sidebarImagePath}`}
+              style={{ width: '86px', marginRight: 0, marginLeft: 0 }}
+            />
+          </div>
+          { this.navLinks() }
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { menuOpen } = this.state;
     const style = `${this.currentStyles.sidebarClass} ${menuOpen ? 'open' : 'close'}`;
     return (
       <div className="page-host">
-        <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
-          <div className="drawer" style={{ backgroundColor: '#c0c0c0' }}>
-            <div className="navImage">
-              <img alt="Luther Rose" id="webjamwidelogo" src={`${this.currentStyles.sidebarImagePath}`} style={{ marginRight: 0, width: '86px' }} />
-            </div>
-            { this.navLinks() }
-          </div>
-        </div>
+        {this.drawerContainer(style)}
         <div className="main-panel">
           <span onClick={this.toggleMobileMenu} onKeyPress={this.handleKeyMenu} id="mobilemenutoggle" tabIndex={0} role="button">
             <i className="fas fa-bars" />
