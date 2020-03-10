@@ -67,6 +67,7 @@
     "html-webpack-plugin": "latest",
     "jasmine-spec-reporter": "latest",
     "jwt-simple": "latest",
+    "jquery": "latest",
     "mini-css-extract-plugin": "latest",
     "moment": "latest",
     "mui-datatables": "latest",
