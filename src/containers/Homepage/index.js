@@ -17,7 +17,7 @@ export class Homepage extends Component {
     this.state = { width: 100 };
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll(''); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('', window.screen.width); }
 
   onResize(width) { this.setState({ width }); }
 

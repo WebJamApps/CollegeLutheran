@@ -104,7 +104,7 @@ export class AppTemplate extends Component {
 
   navLinks() {
     return (
-      <div className="nav-list">
+      <div className="nav-list" style={{ width: '220px' }}>
         <p style={{ fontSize: '1px', marginBottom: '2px' }} />
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
           <p style={{ color: '#fff', marginBottom: '2px' }}>
@@ -162,7 +162,7 @@ export class AppTemplate extends Component {
             backgroundColor: '#c0c0c0', zIndex: -1, position: 'relative',
           }}
         >
-          <div className="navImage">
+          <div className="navImage" style={{ width: '220px' }}>
             <img
               alt="Luther Rose"
               id="webjamwidelogo"

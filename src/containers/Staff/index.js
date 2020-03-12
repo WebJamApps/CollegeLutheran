@@ -8,7 +8,7 @@ export default class Staff extends Component {
     this.commonUtils = commonUtils;
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Church Staff'); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Church Staff', window.screen.width); }
 
   render() { return (<DefaultStaffContent />); }
 }

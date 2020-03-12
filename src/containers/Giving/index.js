@@ -8,7 +8,7 @@ export default class Giving extends Component {
     this.commonUtils = commonUtils;
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Giving'); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Giving', window.screen.width); }
 
   render() { return (<DefaultGivingContent />); }
 }
