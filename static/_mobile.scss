@@ -96,6 +96,15 @@
 }
 
 @media screen and (max-width: 900px) {
+  * {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .drawer {
     background-color: rgb(192, 192, 192);
     float: right;
