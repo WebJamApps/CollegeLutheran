@@ -9,7 +9,7 @@ export class Music extends Component {
     this.state = {};
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Music'); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Music', window.screen.width); }
 
   render() {
     return (

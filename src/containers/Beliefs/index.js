@@ -8,7 +8,7 @@ export default class Staff extends Component {
     this.commonUtils = commonUtils;
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Our Lutheran Beliefs'); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Our Lutheran Beliefs', window.screen.width); }
 
   render() { return (<DefaultBeliefsContent />); }
 }
