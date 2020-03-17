@@ -203,6 +203,11 @@
     height: 700px;
     border: 1px solid #d3d3d3;
   }
+
+  .container-fluid {
+    overflow-y: auto;
+    padding-bottom: 15px;
+  }
 }
 
 .drawer-container {
