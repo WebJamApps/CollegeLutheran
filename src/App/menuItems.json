@@ -54,7 +54,7 @@
       "type": "link",
       "iconClass": "far fa-newspaper",
       "link": "/news",
-      "name": "News & Forum"
+      "name": "News"
     },
     {
       "classname": "home",
