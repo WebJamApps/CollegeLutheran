@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
 export const News = ({ books }) => {
-  commonUtils.setTitleAndScroll('News & Forum', window.screen.width);
+  commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
     const dataA = a.created_at.split('T')[0];
     const dateB = b.created_at.split('T')[0];

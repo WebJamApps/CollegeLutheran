@@ -43,7 +43,7 @@ const NewsContent = ({ books }) => (
                 textAlign: 'center',
               }}
             >
-              Monthly Forums
+              Announcements
             </h3>
             <div className="table-responsive">
               <table className="newsTable">
