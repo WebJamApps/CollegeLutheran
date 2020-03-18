@@ -18,6 +18,16 @@ const WideAbout = ({ homeContent, width }) => (
             please sign up for our regular emails at
             {' '}
             <a href="https://www.collegelutheran.org/news" rel="noopener noreferrer" target="_blank">https://www.collegelutheran.org/news</a>
+            <br />
+            Links to previously sent emails are also on our
+            {' '}
+            <i>News</i>
+            {' '}
+            page in the
+            {' '}
+            <i>Accouncements</i>
+            {' '}
+            table.
           </p>
           {/* <h5>Join Us for Holy Communion</h5>
           <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
