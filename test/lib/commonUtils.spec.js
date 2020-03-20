@@ -9,7 +9,7 @@ describe('commonUtils', () => {
     expect(scrollIntoViewMock).toHaveBeenCalled();
   });
   it('shuffles the pictures after 5 seconds', async () => {
-    const vStub = { props: { familyPics: [{}, {}] }, setState: (obj) => expect(obj.picsState.length).toBe(2) };
+    const vStub = { props: { familyPics: [{}, {}], youthPics: [{}] }, setState: (obj) => expect(obj.picsState.length).toBe(3) };
     global.setTimeout = jest.fn((cb) => cb());
     await commonUtils.randomizePics(vStub);
   });
