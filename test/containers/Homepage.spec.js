@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import { Homepage } from '../../src/containers/Homepage';
 import WideAboutUs from '../../src/containers/Homepage/Widescreen/WideAbout';
 import WideFacebookFeed from '../../src/containers/Homepage/Widescreen/WideFacebookFeed';
+import NarrowFacebookFeed from '../../src/containers/Homepage/Narrowscreen/NarrowFacebookFeed';
+import PicSlider from '../../src/components/pic-slider';
 
 const wrapper = shallow(<Homepage />);
 
@@ -23,5 +25,13 @@ describe('Home', () => {
   it('Renders WideFacebook when at least 1092', () => {
     const wrapper2 = shallow(<WideFacebookFeed width={1092} />);
     expect(wrapper2.find('p#wideFacebook').prop('style')).toHaveProperty('marginBottom', '32px');
+  });
+  it('Renders NarrowFacebook with familyPics', () => {
+    const wrapper2 = shallow(<NarrowFacebookFeed familyPics={[{}]} />);
+    expect(wrapper2.find(PicSlider).exists()).toBe(true);
+  });
+  it('Renders WideAbout with familyPics', () => {
+    const wrapper2 = shallow(<WideAboutUs familyPics={[{}]} />);
+    expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
 });

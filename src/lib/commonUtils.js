@@ -6,4 +6,18 @@ const setTitleAndScroll = (pageTitle, width) => {
   const top = document.getElementsByClassName(getClass)[0];
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
-export default { setTitleAndScroll };
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+const randomizePics = async (view) => {
+  await delay(5000);
+  const { familyPics } = view.props;
+  for (let i = familyPics.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * i);
+    const temp = familyPics[i];// eslint-disable-line security/detect-object-injection
+    familyPics[i] = familyPics[j];// eslint-disable-line security/detect-object-injection
+    familyPics[j] = temp;// eslint-disable-line security/detect-object-injection
+  }
+  view.setState({ picsState: familyPics });
+};
+
+export default { setTitleAndScroll, randomizePics, delay };
