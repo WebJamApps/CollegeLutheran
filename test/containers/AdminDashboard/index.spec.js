@@ -6,9 +6,19 @@ describe('Dashboard Container', () => {
   let props, wrapper;
   beforeEach(() => {
     props = {
-      auth: { token: 'token' }, books: [{ _id: '123' }], youthPics: [{ _id: '456' }], familyPics: [{ _id: '789' }],
+      auth: { token: 'token' },
+      books: [{ _id: '123' }],
+      youthPics: [{ _id: '456' }],
+      familyPics: [{ _id: '789' }],
+      otherPics: [{ _id: '999' }],
     };
-    wrapper = shallow(<AdminDashboard auth={props.auth} books={props.books} youthPics={props.youthPics} familyPics={props.familyPics} />);
+    wrapper = shallow(<AdminDashboard
+      auth={props.auth}
+      books={props.books}
+      youthPics={props.youthPics}
+      familyPics={props.familyPics}
+      otherPics={props.otherPics}
+    />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
   it('handles click to delete a forum', () => {
