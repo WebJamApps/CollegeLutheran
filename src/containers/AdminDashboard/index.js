@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
+// import DefaultTable from '../../components/tour-table';
 
 export class AdminDashboard extends Component {
   constructor(props) {
