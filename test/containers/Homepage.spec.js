@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Homepage } from '../../src/containers/Homepage';
-import WideAboutUs from '../../src/containers/Homepage/Widescreen/WideAbout';
-import WideFacebookFeed from '../../src/containers/Homepage/Widescreen/WideFacebookFeed';
-import NarrowFacebookFeed from '../../src/containers/Homepage/Narrowscreen/NarrowFacebookFeed';
+import WideAboutUs from '../../src/containers/Homepage/About';
+import WideFacebookFeed from '../../src/containers/Homepage/WideFacebookFeed';
+import NarrowFacebookFeed from '../../src/containers/Homepage/NarrowFacebookFeed';
 import PicSlider from '../../src/components/pic-slider';
 
 const wrapper = shallow(<Homepage />);

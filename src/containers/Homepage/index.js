@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
-import WideAbout from './Widescreen/WideAbout';
-import WideFacebookFeed from './Widescreen/WideFacebookFeed';
-import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
+import About from './About';
+import WideFacebookFeed from './WideFacebookFeed';
+import NarrowFacebookFeed from './NarrowFacebookFeed';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
@@ -51,7 +51,7 @@ export class Homepage extends Component {
         {width >= 900
           ? (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -59,7 +59,7 @@ export class Homepage extends Component {
           )
           : (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
               <NarrowFacebookFeed allPics={picsState} />

@@ -5,6 +5,7 @@ import homeReducer from './reducers/homeReducer';
 import familyReducer from './reducers/familyReducer';
 import youthReducer from './reducers/youthReducer';
 import booksReducer from './reducers/booksReducer';
+import otherReducer from './reducers/otherReducer';
 
 const reducer = combineReducers({
   images: imagesReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   familyPics: familyReducer,
   youthPics: youthReducer,
   books: booksReducer,
+  otherPics: otherReducer,
 });
 
 export default reducer;

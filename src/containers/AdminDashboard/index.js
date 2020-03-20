@@ -197,11 +197,44 @@ export class AdminDashboard extends Component {
     );
   }
 
+  changeOtherPics(otherName, otherURL) {
+    const postBody = {
+      title: otherName, url: otherURL, comments: otherURL, type: 'otherPics', access: 'CLC',
+    };
+    return (
+      this.changePicForm({
+        title: 'Other',
+        nameId: 'otherName',
+        urlId: 'otherURL',
+        disabled: () => this.controller.validateBook(otherName, otherURL),
+        buttonId: 'addOtherPic',
+        buttonClick: (e) => this.controller.createPicApi(e, postBody, ''),
+        deleteSection: () => null,
+      })
+    );
+  }
+
+  changeYouthForm() {
+    const { youthPics } = this.props;
+    const { youthName, youthPicsId, youthURL } = this.state;
+    const postBody = {
+      title: youthName, url: youthURL, comments: youthURL, type: 'youthPics', access: 'CLC',
+    };
+    return this.changePicForm({
+      title: 'Youth',
+      nameId: 'youthName',
+      urlId: 'youthURL',
+      disabled: () => this.controller.validateBook(youthName, youthURL),
+      buttonId: 'addYouthPic',
+      buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
+      deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+    });
+  }
+
   render() {
     const {
-      youthName, youthPicsId, youthURL, childName, childURL,
+      childName, childURL, otherName, otherURL,
     } = this.state;
-    const { youthPics } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -209,23 +242,11 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.addForumForm()}
         <p>{' '}</p>
-        {this.changePicForm({
-          title: 'Youth',
-          nameId: 'youthName',
-          urlId: 'youthURL',
-          disabled: () => this.controller.validateBook(youthName, youthURL),
-          buttonId: 'addYouthPic',
-          buttonClick: (e) => this.controller.createPicApi(e, {
-            title: youthName,
-            url: youthURL,
-            comments: youthURL,
-            type: 'youthPics',
-            access: 'CLC',
-          }, '/youth'),
-          deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
-        })}
+        {this.changeYouthForm()}
         <p>{' '}</p>
         {this.changeFamilyForm(childName, childURL)}
+        <p>{' '}</p>
+        {this.changeOtherPics(otherName, otherURL)}
       </div>
     );
   }

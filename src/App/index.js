@@ -33,6 +33,7 @@ export class App extends Component {
     this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch(this, 'book?type=Forum', 'GOT_BOOKS');
     this.fetch(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
+    this.fetch(this, 'book?type=otherPics', 'GOT_OTHERPICS');
   }
 
   render() {

@@ -37,6 +37,14 @@ describe('Dashboard Container', () => {
     button.find('button#addYouthPic').simulate('click');
     expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
   });
+  it('handles click to create other pic', () => {
+    wrapper.instance().controller.createPicApi = jest.fn();
+    wrapper.update();
+    const createForm = wrapper.find('form').get(7);
+    const button = shallow(createForm);
+    button.find('button#addOtherPic').simulate('click');
+    expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
+  });
   it('handles click to delete family pic', () => {
     wrapper.instance().controller.deleteBookApi = jest.fn();
     wrapper.update();
