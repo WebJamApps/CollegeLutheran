@@ -181,21 +181,18 @@ export class AdminDashboard extends Component {
   }
 
   changeFamilyForm(childName, childURL) {
+    const postBody = {
+      title: childName, url: childURL, comments: childURL, type: 'familyPics', access: 'CLC',
+    };
     return (
       this.changePicForm({
+        disabled: () => this.controller.validateBook(childName, childURL),
+        buttonId: 'addFamilyPic',
+        buttonClick: (e) => this.controller.createPicApi(e, postBody, '/family'),
+        deleteSection: this.deleteFamily,
         title: 'Family',
         nameId: 'childName',
         urlId: 'childURL',
-        disabled: () => this.controller.validateBook(childName, childURL),
-        buttonId: 'addFamilyPic',
-        buttonClick: (e) => this.controller.createPicApi(e, {
-          title: childName,
-          url: childURL,
-          comments: childURL,
-          type: 'familyPics',
-          access: 'CLC',
-        }, '/family'),
-        deleteSection: this.deleteFamily,
       })
     );
   }
@@ -225,13 +222,13 @@ export class AdminDashboard extends Component {
       title: youthName, url: youthURL, comments: youthURL, type: 'youthPics', access: 'CLC',
     };
     return this.changePicForm({
-      title: 'Youth',
-      nameId: 'youthName',
-      urlId: 'youthURL',
       disabled: () => this.controller.validateBook(youthName, youthURL),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
       deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+      title: 'Youth',
+      nameId: 'youthName',
+      urlId: 'youthURL',
     });
   }
 
