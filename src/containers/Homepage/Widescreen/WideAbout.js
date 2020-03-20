@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../../components/pic-slider';
 
-const WideAbout = ({ homeContent, width, familyPics }) => (
+const WideAbout = ({ homeContent, width, allPics }) => (
   <div className="widescreenHomepage">
     <div className="container-fluid">
       <div className="row">
@@ -56,17 +56,17 @@ const WideAbout = ({ homeContent, width, familyPics }) => (
             <br />
           </p>
         </div>
-        {width >= 900 && familyPics.length > 0 ? (
+        {width >= 900 && allPics.length > 0 ? (
           <div
             id="familySlideshowWide"
             style={{
               display: 'flex', flexDirection: 'column', marginTop: '45px', marginRight: 0,
             }}
           >
-            <PicSlider data={familyPics} />
+            <PicSlider data={allPics} />
           </div>
         ) : null}
-        {width >= 900 && familyPics.length === 0 ? (
+        {width >= 900 && allPics.length === 0 ? (
           <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
             <div
               id="slideshow1"
@@ -86,15 +86,10 @@ const WideAbout = ({ homeContent, width, familyPics }) => (
     </div>
   </div>
 );
-WideAbout.defaultProps = { homeContent: {}, width: 1004, familyPics: [] };
+WideAbout.defaultProps = { homeContent: {}, width: 1004, allPics: [] };
 WideAbout.propTypes = {
-  familyPics: PropTypes.arrayOf(PropTypes.shape({
-    comments: PropTypes.string,
-  })),
+  allPics: PropTypes.arrayOf(PropTypes.shape({})),
   width: PropTypes.number,
-  homeContent: PropTypes.shape({
-    title: PropTypes.string,
-    comments: PropTypes.string,
-  }),
+  homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }),
 };
 export default WideAbout;

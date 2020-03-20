@@ -10,14 +10,15 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const randomizePics = async (view) => {
   await delay(5000);
-  const { familyPics } = view.props;
-  for (let i = familyPics.length - 1; i > 0; i -= 1) {
+  const { familyPics, youthPics } = view.props;
+  const arr = familyPics.concat(youthPics);
+  for (let i = arr.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * i);
-    const temp = familyPics[i];// eslint-disable-line security/detect-object-injection
-    familyPics[i] = familyPics[j];// eslint-disable-line security/detect-object-injection
-    familyPics[j] = temp;// eslint-disable-line security/detect-object-injection
+    const temp = arr[i];// eslint-disable-line security/detect-object-injection
+    arr[i] = arr[j];// eslint-disable-line security/detect-object-injection
+    arr[j] = temp;// eslint-disable-line security/detect-object-injection
   }
-  view.setState({ picsState: familyPics });
+  view.setState({ picsState: arr });
 };
 
 export default { setTitleAndScroll, randomizePics, delay };

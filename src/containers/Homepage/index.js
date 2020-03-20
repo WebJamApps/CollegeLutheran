@@ -45,13 +45,13 @@ export class Homepage extends Component {
 
   render() {
     const { width, picsState } = this.state;
-    const { homeContent, familyPics } = this.props;
+    const { homeContent } = this.props;
     return (
       <div>
         {width >= 900
           ? (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} familyPics={picsState} />
+              <WideAbout homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -59,10 +59,10 @@ export class Homepage extends Component {
           )
           : (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} familyPics={familyPics} />
+              <WideAbout homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <NarrowFacebookFeed familyPics={familyPics} />
+              <NarrowFacebookFeed allPics={picsState} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
@@ -73,11 +73,8 @@ export class Homepage extends Component {
   }
 }
 
-Homepage.defaultProps = { homeContent: {}, familyPics: [] };
+Homepage.defaultProps = { homeContent: {} };
 Homepage.propTypes = {
-  familyPics: PropTypes.arrayOf(PropTypes.shape({
-    comments: PropTypes.string,
-  })),
   homeContent: PropTypes.shape({
     title: PropTypes.string,
     comments: PropTypes.string,
