@@ -13,7 +13,7 @@ class PicSlider extends Component {
       autoplay: true,
       autoplaySpeed: 3000,
       infinite: true,
-      speed: 1000,
+      speed: 3000,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,

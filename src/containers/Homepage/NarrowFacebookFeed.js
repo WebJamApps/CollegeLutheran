@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import PicSlider from '../../components/pic-slider';
 
-const FacebookFeed = () => (
+const FacebookFeed = ({ allPics }) => (
   <div className="notWidescreen" style={{ maxWidth: '320px', margin: 'auto' }}>
     <p style={{
       textAlign: 'center', fontSize: '10pt', marginTop: 0, marginBottom: 0, paddingBottom: '2px',
@@ -44,8 +46,27 @@ const FacebookFeed = () => (
         allow="encrypted-media"
       />
     </div>
-    <p>{' '}</p>
+    <hr />
+    <p style={{
+      textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
+    }}
+    >
+      {' '}
+    </p>
+    <div
+      id="familySlideshowWide"
+      style={{
+        display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
+      }}
+    >
+      {allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
+    </div>
   </div>
 );
+
+FacebookFeed.defaultProps = { allPics: [] };
+FacebookFeed.propTypes = {
+  allPics: PropTypes.arrayOf(PropTypes.shape({})),
+};
 
 export default FacebookFeed;

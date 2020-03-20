@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
-import WideAbout from './Widescreen/WideAbout';
-import WideFacebookFeed from './Widescreen/WideFacebookFeed';
-import NarrowFacebookFeed from './Narrowscreen/NarrowFacebookFeed';
+import About from './About';
+import WideFacebookFeed from './WideFacebookFeed';
+import NarrowFacebookFeed from './NarrowFacebookFeed';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
@@ -14,10 +14,13 @@ export class Homepage extends Component {
     this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
     this.onResize = this.onResize.bind(this);
-    this.state = { width: 100 };
+    this.state = { width: 100, picsState: [] };
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('', window.screen.width); }
+  async componentDidMount() {
+    this.commonUtils.setTitleAndScroll('', window.screen.width);
+    return this.commonUtils.randomizePics(this);
+  }
 
   onResize(width) { this.setState({ width }); }
 
@@ -41,14 +44,14 @@ export class Homepage extends Component {
   }
 
   render() {
-    const { width } = this.state;
+    const { width, picsState } = this.state;
     const { homeContent } = this.props;
     return (
       <div>
-        {width >= 1004
+        {width >= 900
           ? (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} />
+              <About homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -56,10 +59,10 @@ export class Homepage extends Component {
           )
           : (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} />
+              <About homeContent={homeContent} width={width} allPics={picsState} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <NarrowFacebookFeed />
+              <NarrowFacebookFeed allPics={picsState} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}

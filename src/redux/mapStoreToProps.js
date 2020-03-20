@@ -5,5 +5,6 @@ const mapStoreToProps = (store) => ({
   familyPics: store.familyPics.familyPics,
   youthPics: store.youthPics.youthPics,
   books: store.books.books,
+  otherPics: store.otherPics.otherPics,
 });
 export default mapStoreToProps;

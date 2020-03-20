@@ -24,6 +24,9 @@ export class AdminDashboard extends Component {
       childName: '',
       childURL: '',
       familyPicsId: '',
+      otherPicsId: '',
+      otherName: '',
+      otherURL: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -178,30 +181,61 @@ export class AdminDashboard extends Component {
   }
 
   changeFamilyForm(childName, childURL) {
+    const postBody = {
+      title: childName, url: childURL, comments: childURL, type: 'familyPics', access: 'CLC',
+    };
     return (
       this.changePicForm({
+        disabled: () => this.controller.validateBook(childName, childURL),
+        buttonId: 'addFamilyPic',
+        buttonClick: (e) => this.controller.createPicApi(e, postBody, '/family'),
+        deleteSection: this.deleteFamily,
         title: 'Family',
         nameId: 'childName',
         urlId: 'childURL',
-        disabled: () => this.controller.validateBook(childName, childURL),
-        buttonId: 'addFamilyPic',
-        buttonClick: (e) => this.controller.createPicApi(e, {
-          title: childName,
-          url: childURL,
-          comments: childURL,
-          type: 'familyPics',
-          access: 'CLC',
-        }, '/family'),
-        deleteSection: this.deleteFamily,
       })
     );
   }
 
+  changeOtherPics(otherName, otherURL, otherPicsId) {
+    const { otherPics } = this.props;
+    const postBody = {
+      title: otherName, url: otherURL, comments: otherURL, type: 'otherPics', access: 'CLC',
+    };
+    return (
+      this.changePicForm({
+        title: 'Other',
+        nameId: 'otherName',
+        urlId: 'otherURL',
+        disabled: () => this.controller.validateBook(otherName, otherURL),
+        buttonId: 'addOtherPic',
+        buttonClick: (e) => this.controller.createPicApi(e, postBody, ''),
+        deleteSection: () => this.controller.deleteBookForm('otherPicsId', 'Pic', otherPicsId, otherPics, '/home'),
+      })
+    );
+  }
+
+  changeYouthForm() {
+    const { youthPics } = this.props;
+    const { youthName, youthPicsId, youthURL } = this.state;
+    const postBody = {
+      title: youthName, url: youthURL, comments: youthURL, type: 'youthPics', access: 'CLC',
+    };
+    return this.changePicForm({
+      disabled: () => this.controller.validateBook(youthName, youthURL),
+      buttonId: 'addYouthPic',
+      buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
+      deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+      title: 'Youth',
+      nameId: 'youthName',
+      urlId: 'youthURL',
+    });
+  }
+
   render() {
     const {
-      youthName, youthPicsId, youthURL, childName, childURL,
+      childName, childURL, otherName, otherURL, otherPicsId,
     } = this.state;
-    const { youthPics } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -209,23 +243,11 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.addForumForm()}
         <p>{' '}</p>
-        {this.changePicForm({
-          title: 'Youth',
-          nameId: 'youthName',
-          urlId: 'youthURL',
-          disabled: () => this.controller.validateBook(youthName, youthURL),
-          buttonId: 'addYouthPic',
-          buttonClick: (e) => this.controller.createPicApi(e, {
-            title: youthName,
-            url: youthURL,
-            comments: youthURL,
-            type: 'youthPics',
-            access: 'CLC',
-          }, '/youth'),
-          deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
-        })}
+        {this.changeYouthForm()}
         <p>{' '}</p>
         {this.changeFamilyForm(childName, childURL)}
+        <p>{' '}</p>
+        {this.changeOtherPics(otherName, otherURL, otherPicsId)}
       </div>
     );
   }
@@ -235,5 +257,6 @@ AdminDashboard.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
