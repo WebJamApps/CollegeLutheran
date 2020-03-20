@@ -24,6 +24,9 @@ export class AdminDashboard extends Component {
       childName: '',
       childURL: '',
       familyPicsId: '',
+      otherPicsId: '',
+      otherName: '',
+      otherURL: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -197,7 +200,8 @@ export class AdminDashboard extends Component {
     );
   }
 
-  changeOtherPics(otherName, otherURL) {
+  changeOtherPics(otherName, otherURL, otherPicsId) {
+    const { otherPics } = this.props;
     const postBody = {
       title: otherName, url: otherURL, comments: otherURL, type: 'otherPics', access: 'CLC',
     };
@@ -209,7 +213,7 @@ export class AdminDashboard extends Component {
         disabled: () => this.controller.validateBook(otherName, otherURL),
         buttonId: 'addOtherPic',
         buttonClick: (e) => this.controller.createPicApi(e, postBody, ''),
-        deleteSection: () => null,
+        deleteSection: () => this.controller.deleteBookForm('otherPicsId', 'Pic', otherPicsId, otherPics, '/home'),
       })
     );
   }
@@ -233,7 +237,7 @@ export class AdminDashboard extends Component {
 
   render() {
     const {
-      childName, childURL, otherName, otherURL,
+      childName, childURL, otherName, otherURL, otherPicsId,
     } = this.state;
     return (
       <div className="page-content">
@@ -246,7 +250,7 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.changeFamilyForm(childName, childURL)}
         <p>{' '}</p>
-        {this.changeOtherPics(otherName, otherURL)}
+        {this.changeOtherPics(otherName, otherURL, otherPicsId)}
       </div>
     );
   }
@@ -256,5 +260,6 @@ AdminDashboard.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
