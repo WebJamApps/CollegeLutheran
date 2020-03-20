@@ -14,10 +14,13 @@ export class Homepage extends Component {
     this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
     this.onResize = this.onResize.bind(this);
-    this.state = { width: 100 };
+    this.state = { width: 100, picsState: [] };
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('', window.screen.width); }
+  async componentDidMount() {
+    this.commonUtils.setTitleAndScroll('', window.screen.width);
+    return this.commonUtils.randomizePics(this);
+  }
 
   onResize(width) { this.setState({ width }); }
 
@@ -41,14 +44,14 @@ export class Homepage extends Component {
   }
 
   render() {
-    const { width } = this.state;
-    const { homeContent } = this.props;
+    const { width, picsState } = this.state;
+    const { homeContent, familyPics } = this.props;
     return (
       <div>
-        {width >= 1004
+        {width >= 900
           ? (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} />
+              <WideAbout homeContent={homeContent} width={width} familyPics={picsState} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -56,10 +59,10 @@ export class Homepage extends Component {
           )
           : (
             <div className="page-content">
-              <WideAbout homeContent={homeContent} width={width} />
+              <WideAbout homeContent={homeContent} width={width} familyPics={familyPics} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <NarrowFacebookFeed />
+              <NarrowFacebookFeed familyPics={familyPics} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
@@ -70,8 +73,11 @@ export class Homepage extends Component {
   }
 }
 
-Homepage.defaultProps = { homeContent: {} };
+Homepage.defaultProps = { homeContent: {}, familyPics: [] };
 Homepage.propTypes = {
+  familyPics: PropTypes.arrayOf(PropTypes.shape({
+    comments: PropTypes.string,
+  })),
   homeContent: PropTypes.shape({
     title: PropTypes.string,
     comments: PropTypes.string,
