@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import PicSlider from '../../../components/pic-slider';
+import PicSlider from '../../components/pic-slider';
 
-const WideAbout = ({ homeContent, width, allPics }) => (
+const About = ({ homeContent, width, allPics }) => (
   <div className="widescreenHomepage">
     <div className="container-fluid">
       <div className="row">
-        <div className="col" style={{ top: '0', paddingRight: '6px' }}>
+        <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: 0 }}>
           <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
             College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
@@ -49,18 +49,19 @@ const WideAbout = ({ homeContent, width, allPics }) => (
           <p>
             Click
             {' '}
-            <a href="/news">News &amp; Forum</a>
+            <a href="/news">News</a>
             {' '}
-            to view a copy of our monthly forum or subscribe to our weekly email announcements.
+            and subscribe to our email announcements or view a copy of our monthly forum.
             Scroll below to view our CLC Events Calendar, and follow us on social media.
             <br />
           </p>
         </div>
         {width >= 900 && allPics.length > 0 ? (
           <div
+            className="col"
             id="familySlideshowWide"
             style={{
-              display: 'flex', flexDirection: 'column', marginTop: '45px', marginRight: 0,
+              width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0,
             }}
           >
             <PicSlider data={allPics} />
@@ -71,7 +72,7 @@ const WideAbout = ({ homeContent, width, allPics }) => (
             <div
               id="slideshow1"
               style={{
-                marginTop: '40px', marginRight: 0, textAlign: 'left', marginLeft: '8px',
+                margin: 'auto', marginTop: '40px', textAlign: 'center', 
               }}
             >
               <img
@@ -86,10 +87,10 @@ const WideAbout = ({ homeContent, width, allPics }) => (
     </div>
   </div>
 );
-WideAbout.defaultProps = { homeContent: {}, width: 1004, allPics: [] };
-WideAbout.propTypes = {
+About.defaultProps = { homeContent: {}, width: 1004, allPics: [] };
+About.propTypes = {
   allPics: PropTypes.arrayOf(PropTypes.shape({})),
   width: PropTypes.number,
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }),
 };
-export default WideAbout;
+export default About;
