@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
-// import DefaultTable from '../../components/tour-table';
+import PTable from '../../components/PhotoTable';
 
 export class AdminDashboard extends Component {
   constructor(props) {
@@ -249,6 +249,8 @@ export class AdminDashboard extends Component {
         {this.changeFamilyForm(childName, childURL)}
         <p>{' '}</p>
         {this.changeOtherPics(otherName, otherURL, otherPicsId)}
+        <p>{' '}</p>
+        <PTable />
       </div>
     );
   }
