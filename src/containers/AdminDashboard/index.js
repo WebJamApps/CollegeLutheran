@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
+import PTable from '../../components/PhotoTable';
 
 export class AdminDashboard extends Component {
   constructor(props) {
@@ -20,11 +21,8 @@ export class AdminDashboard extends Component {
       youthName: '',
       youthURL: '',
       forumId: '',
-      youthPicsId: '',
       childName: '',
       childURL: '',
-      familyPicsId: '',
-      otherPicsId: '',
       otherName: '',
       otherURL: '',
     };
@@ -33,7 +31,6 @@ export class AdminDashboard extends Component {
     this.changeHomepage = this.changeHomepage.bind(this);
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
-    this.deleteFamily = this.deleteFamily.bind(this);
     this.changeFamilyForm = this.changeFamilyForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
   }
@@ -45,38 +42,13 @@ export class AdminDashboard extends Component {
       : this.setState({ [evt.target.id]: evt.target.value });
   }
 
-  deleteFamily() {
-    const { familyPicsId } = this.state;
-    const { familyPics } = this.props;
-    return (
-      <form
-        id="delete-family"
-        style={{
-          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-        }}
-      >
-        { this.forms.makeDropdown('familyPicsId', '* Select Pic to Delete', familyPicsId, this.onChange, familyPics, '_id', 'title') }
-        <div style={{ marginLeft: '60%' }}>
-          <p>{' '}</p>
-          <button
-            onClick={(evt) => this.controller.deleteBookApi(evt, familyPicsId, '/family')}
-            type="button"
-            disabled={this.controller.validateDeleteBook(familyPicsId)}
-          >
-            Delete Pic
-          </button>
-        </div>
-      </form>
-    );
-  }
-
   changePicForm(picData) {
     const imageUrlValue = this.state[picData.urlId];// eslint-disable-line react/destructuring-assignment
     const imageNameValue = this.state[picData.nameId];// eslint-disable-line react/destructuring-assignment
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
-          Change
+          Add
           {' '}
           {picData.title}
           {' '}
@@ -96,8 +68,6 @@ export class AdminDashboard extends Component {
             <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>Add Pic</button>
           </div>
         </form>
-        <hr />
-        {picData.deleteSection()}
       </div>
     );
   }
@@ -110,14 +80,14 @@ export class AdminDashboard extends Component {
           textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.forms.makeDropdown('forumId', '* Select Forum to Delete', forumId, this.onChange, books, '_id', 'title') }
+        { this.forms.makeDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
         <p>{' '}</p>
         <button
           onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
           type="button"
           disabled={this.controller.validateDeleteBook(forumId)}
         >
-          Delete Forum
+          Delete Announcement
         </button>
       </form>
     );
@@ -128,15 +98,15 @@ export class AdminDashboard extends Component {
     const { books } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-        <h5>Change Monthly Forum</h5>
+        <h5>Announcements Table</h5>
         <form
           id="create-forum"
           style={{
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          {this.forms.makeInput('text', 'Forum Title', false, this.onChange, forumtitle, '90%')}
-          {this.forms.makeInput('text', 'Forum URL', false, this.onChange, forumurl, '90%')}
+          {this.forms.makeInput('text', 'Title', false, this.onChange, forumtitle, '90%')}
+          {this.forms.makeInput('text', 'URL', false, this.onChange, forumurl, '90%')}
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
             <button
@@ -145,7 +115,7 @@ export class AdminDashboard extends Component {
               disabled={this.controller.validateBook(forumtitle, forumurl)}
               onClick={this.controller.addForumAPI}
             >
-              Add Forum
+              Add
             </button>
           </div>
         </form>
@@ -189,7 +159,6 @@ export class AdminDashboard extends Component {
         disabled: () => this.controller.validateBook(childName, childURL),
         buttonId: 'addFamilyPic',
         buttonClick: (e) => this.controller.createPicApi(e, postBody, '/family'),
-        deleteSection: this.deleteFamily,
         title: 'Family',
         nameId: 'childName',
         urlId: 'childURL',
@@ -197,8 +166,7 @@ export class AdminDashboard extends Component {
     );
   }
 
-  changeOtherPics(otherName, otherURL, otherPicsId) {
-    const { otherPics } = this.props;
+  changeOtherPics(otherName, otherURL) {
     const postBody = {
       title: otherName, url: otherURL, comments: otherURL, type: 'otherPics', access: 'CLC',
     };
@@ -210,14 +178,12 @@ export class AdminDashboard extends Component {
         disabled: () => this.controller.validateBook(otherName, otherURL),
         buttonId: 'addOtherPic',
         buttonClick: (e) => this.controller.createPicApi(e, postBody, ''),
-        deleteSection: () => this.controller.deleteBookForm('otherPicsId', 'Pic', otherPicsId, otherPics, '/home'),
       })
     );
   }
 
   changeYouthForm() {
-    const { youthPics } = this.props;
-    const { youthName, youthPicsId, youthURL } = this.state;
+    const { youthName, youthURL } = this.state;
     const postBody = {
       title: youthName, url: youthURL, comments: youthURL, type: 'youthPics', access: 'CLC',
     };
@@ -225,7 +191,7 @@ export class AdminDashboard extends Component {
       disabled: () => this.controller.validateBook(youthName, youthURL),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
-      deleteSection: () => this.controller.deleteBookForm('youthPicsId', 'Pic', youthPicsId, youthPics, '/youth'),
+      deleteSection: () => null,
       title: 'Youth',
       nameId: 'youthName',
       urlId: 'youthURL',
@@ -234,7 +200,7 @@ export class AdminDashboard extends Component {
 
   render() {
     const {
-      childName, childURL, otherName, otherURL, otherPicsId,
+      childName, childURL, otherName, otherURL,
     } = this.state;
     return (
       <div className="page-content">
@@ -247,7 +213,9 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.changeFamilyForm(childName, childURL)}
         <p>{' '}</p>
-        {this.changeOtherPics(otherName, otherURL, otherPicsId)}
+        {this.changeOtherPics(otherName, otherURL)}
+        <p>{' '}</p>
+        <PTable />
       </div>
     );
   }
@@ -255,8 +223,5 @@ export class AdminDashboard extends Component {
 AdminDashboard.propTypes = {
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
