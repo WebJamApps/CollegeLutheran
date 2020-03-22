@@ -7,8 +7,8 @@ import JSOG from 'jsog';
 import allReducers from '../allReducers';
 
 export const JSOGTransform = createTransform(
-  (inboundState, key) => JSOG.encode(inboundState),
-  (outboundState, key) => JSOG.decode(outboundState),
+  (inboundState, key) => JSOG.encode(inboundState), // eslint-disable-line no-unused-vars
+  (outboundState, key) => JSOG.decode(outboundState), // eslint-disable-line no-unused-vars
 );
 const persistConfig = {
   key: 'root',

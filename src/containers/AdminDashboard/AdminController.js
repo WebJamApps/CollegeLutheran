@@ -13,17 +13,21 @@ class AdminController {
   }
 
   async deleteBookApi(evt, id, redirect) {
-    evt.preventDefault();
-    const { auth } = this.view.props;
-    let r;
-    try {
-      r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json');
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
-    if (r.status === 200) {
-      window.location.assign(`${redirect}`);
-      return Promise.resolve(true);
-    } console.log(r.body); // eslint-disable-line no-console
+    evt.preventDefault();// eslint-disable-next-line no-restricted-globals
+    const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
+    if (result) {
+      const { auth } = this.view.props;
+      let r;
+      try {
+        r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
+          .set('Accept', 'application/json');
+      } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+      if (r.status === 200) {
+        window.location.assign(`${redirect}`);
+        return Promise.resolve(true);
+      } console.log(r.body); // eslint-disable-line no-console
+      return Promise.resolve(false);
+    }
     return Promise.resolve(false);
   }
 

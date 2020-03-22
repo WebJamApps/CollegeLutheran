@@ -15,7 +15,6 @@ export class PhotoTable extends Component {
     this.superagent = superagent;
     this.setColumns = this.setColumns.bind(this);
     this.getMuiTheme = this.getMuiTheme.bind(this);
-    // this.checkTourTable = this.checkTourTable.bind(this);
     this.setColumns = this.setColumns.bind(this);
     this.addThumbs = this.addThumbs.bind(this);
     this.state = {
@@ -24,11 +23,6 @@ export class PhotoTable extends Component {
   }
 
   componentDidMount() { this.setColumns(); }
-
-  // componentDidUpdate(prevProps) {
-  //   const { tourUpdated } = this.props;
-  //   return this.checkTourTable(prevProps.tourUpdated, tourUpdated);
-  // }
 
   getMuiTheme() { // eslint-disable-line class-methods-use-this
     return createMuiTheme({
@@ -54,9 +48,10 @@ export class PhotoTable extends Component {
     const columns = [];
     const titles = ['Thumbnail', 'Title', 'Link', 'Type', 'Modify'];
     for (let i = 0; i < titles.length; i += 1) {
+      const label = titles[i];// eslint-disable-line security/detect-object-injection
       columns.push({
-        name: titles[i].toLowerCase(), // eslint-disable-line security/detect-object-injection
-        label: titles[i], // eslint-disable-line security/detect-object-injection
+        name: label.toLowerCase(),
+        label,
         options: {
           filter: false,
           sort: true,
@@ -65,7 +60,7 @@ export class PhotoTable extends Component {
               margin: 0, fontSize: '12pt', maxWidth: '200px',
             }}
             >
-              { titles[i] !== 'Modify' ? ReactHtmlParser(value) : value }
+              { label !== 'Modify' ? ReactHtmlParser(value) : value }
             </div>
           ),
         },
@@ -74,29 +69,21 @@ export class PhotoTable extends Component {
     this.setState({ columns });
   }
 
-  // checkTourTable(pTupdated, nTupdated) {
-  //   if (!pTupdated && nTupdated) {
-  //     const { dispatch } = this.props;
-  //     dispatch({ type: 'RESET_TOUR' });
-  //     this.setState({ columns: [] });
-  //     this.setColumns();
-  //     return Promise.resolve(true);
-  //   }
-  //   return Promise.resolve(false);
-  // }
-
-  async deletePic(id) {
-    const { auth } = this.props;
-    let res;
-    try {
-      res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
-        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-    } catch (e) {
-      console.log(e.message);// eslint-disable-line no-console
+  async deletePic(id) { // eslint-disable-next-line no-restricted-globals
+    const result = confirm('Deleting picture, are you sure?');// eslint-disable-line no-alert
+    if (result) {
+      const { auth } = this.props;
+      let res;
+      try {
+        res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
+          .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
+      } catch (e) {
+        console.log(e.message);// eslint-disable-line no-console
+        return Promise.resolve(false);
+      }
+      if (res.status === 200) { window.location.reload(); return Promise.resolve(true); }
       return Promise.resolve(false);
     }
-    if (res.status === 200) { window.location.reload(); return Promise.resolve(true); }
-    console.log(res);
     return Promise.resolve(false);
   }
 
@@ -105,7 +92,7 @@ export class PhotoTable extends Component {
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
       newArr[i].link = `<a href=${arr[i].url} target="_blank">click to view</a>`;// eslint-disable-line security/detect-object-injection
-      newArr[i].modify = (<button type="button" onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>);
+      newArr[i].modify = (<button type="button" onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>);// eslint-disable-line
     }
     return newArr;
   }
