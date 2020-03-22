@@ -6,32 +6,7 @@ const pageName = 'news';
 
 const NewsContent = ({ books }) => (
   <div className="page-content">
-    <div className="container-fluid">
-      <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
-      <div
-        className="news-div"
-        style={{
-          margin: 'auto',
-          textAlign: 'center',
-          padding: '0',
-          marginLeft: '-8px',
-        }}
-      >
-        <iframe
-          style={{
-            width: '100%',
-            height: '540px',
-            border: 'none',
-            marginLeft: '10px',
-          }}
-          className="newsIFrame"
-          src="https://visitor.r20.constantcontact.com/d.jsp?
-            llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
-          title="News Content"
-        >
-          <p>Your browser does not support iframe.</p>
-        </iframe>
-      </div>
+    <div>
       <div>
         {books.length > 0 ? (
           <div className="forumsTable">
@@ -70,9 +45,38 @@ const NewsContent = ({ books }) => (
           <p>There are currently no pdfs links to display</p>
         )}
       </div>
+      <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
+      <div
+        className="news-div"
+        style={{
+          margin: 'auto',
+          textAlign: 'center',
+          padding: '0',
+          marginLeft: '-5px',
+          width: '100%',
+          overflow: 'hidden',
+          marginRight: 0,
+        }}
+      >
+        <iframe
+          className="newsIFrame"
+          style={{
+            overflow: 'hidden',
+            padding: 0,
+            width: '100%',
+            height: '540px',
+            border: 'none',
+            marginleft: '-5px',
+          }}
+
+          src="https://visitor.r20.constantcontact.com/d.jsp?
+            llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
+          title="News Content"
+        >
+          <p>Your browser does not support iframe.</p>
+        </iframe>
+      </div>
     </div>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
     <ELCALogo pageName={pageName} />
   </div>
 );
