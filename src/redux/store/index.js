@@ -1,14 +1,20 @@
 import { createStore, applyMiddleware } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import storageSession from 'redux-persist/lib/storage/session';
+import JSOG from 'jsog';
 import allReducers from '../allReducers';
 
+export const JSOGTransform = createTransform(
+  (inboundState, key) => JSOG.encode(inboundState), // eslint-disable-line no-unused-vars
+  (outboundState, key) => JSOG.decode(outboundState), // eslint-disable-line no-unused-vars
+);
 const persistConfig = {
   key: 'root',
   storage: storageSession,
   blacklist: ['sc'],
+  transforms: [JSOGTransform],
 };
 let mWares = applyMiddleware(thunk);
 /* istanbul ignore if */

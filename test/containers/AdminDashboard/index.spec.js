@@ -39,30 +39,6 @@ describe('Dashboard Container', () => {
     button.find('button#addFamilyPic').simulate('click');
     expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
   });
-  it('handles click to create youth pic', () => {
-    wrapper.instance().controller.createPicApi = jest.fn();
-    wrapper.update();
-    const createForm = wrapper.find('form').get(3);
-    const button = shallow(createForm);
-    button.find('button#addYouthPic').simulate('click');
-    expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
-  });
-  it('handles click to create other pic', () => {
-    wrapper.instance().controller.createPicApi = jest.fn();
-    wrapper.update();
-    const createForm = wrapper.find('form').get(7);
-    const button = shallow(createForm);
-    button.find('button#addOtherPic').simulate('click');
-    expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
-  });
-  it('handles click to delete family pic', () => {
-    wrapper.instance().controller.deleteBookApi = jest.fn();
-    wrapper.update();
-    const form = wrapper.instance().deleteFamily();
-    const f = shallow(form);
-    f.find('button').simulate('click');
-    expect(wrapper.instance().controller.deleteBookApi).toHaveBeenCalled();
-  });
   it('sets the stateValue on change', () => {
     wrapper.instance().setState = jest.fn();
     wrapper.update();

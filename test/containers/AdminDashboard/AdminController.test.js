@@ -15,16 +15,19 @@ describe('AdminController', () => {
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => {} }, writable: true });
     window.location.assign = jest.fn();
+    global.confirm = jest.fn(() => true);
     r = await controller.deleteBookApi({ preventDefault: () => {} }, '123', '/news');
     expect(r).toBe(true);
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error on delete book request to the backend', async () => {
+    global.confirm = jest.fn(() => true);
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     r = await controller.deleteBookApi({ preventDefault: () => {} }, '123', '/news');
     expect(r).toBe(false);
   });
   it('handles 300 responses from sending delete book request to the backend', async () => {
+    global.confirm = jest.fn(() => true);
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 300 }) }) }));
     r = await controller.deleteBookApi({ preventDefault: () => {} }, '123', '/news');
     expect(r).toBe(false);
