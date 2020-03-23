@@ -191,7 +191,6 @@ export class AdminDashboard extends Component {
       disabled: () => this.controller.validateBook(youthName, youthURL),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
-      deleteSection: () => null,
       title: 'Youth',
       nameId: 'youthName',
       urlId: 'youthURL',

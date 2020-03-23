@@ -32,6 +32,12 @@ describe('AdminController', () => {
     r = await controller.deleteBookApi({ preventDefault: () => {} }, '123', '/news');
     expect(r).toBe(false);
   });
+  it('handles cancel sending delete book request to the backend', async () => {
+    global.confirm = jest.fn(() => false);
+    controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 300 }) }) }));
+    r = await controller.deleteBookApi({ preventDefault: () => {} }, '123', '/news');
+    expect(r).toBe(false);
+  });
   it('sends an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => {} }, writable: true });
