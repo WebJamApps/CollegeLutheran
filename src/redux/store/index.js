@@ -5,11 +5,13 @@ import thunk from 'redux-thunk';
 import storageSession from 'redux-persist/lib/storage/session';
 import JSOG from 'jsog';
 import allReducers from '../allReducers';
+import jsonTransform from './jsonTransform';
 
-export const JSOGTransform = createTransform(
-  (inboundState, key) => JSOG.encode(inboundState), // eslint-disable-line no-unused-vars
-  (outboundState, key) => JSOG.decode(outboundState), // eslint-disable-line no-unused-vars
-);
+// export const JSOGTransform = createTransform(
+//   (inboundState, key) => JSOG.encode(inboundState), // eslint-disable-line no-unused-vars
+//   (outboundState, key) => JSOG.decode(outboundState), // eslint-disable-line no-unused-vars
+// );
+const JSOGTransform = jsonTransform.makeTransform(createTransform, JSOG);
 const persistConfig = {
   key: 'root',
   storage: storageSession,
