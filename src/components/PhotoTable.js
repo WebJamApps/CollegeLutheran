@@ -91,8 +91,9 @@ export class PhotoTable extends Component {
     const newArr = arr;
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
+      const deletePicId = `deletePic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       newArr[i].link = `<a href=${arr[i].url} target="_blank">click to view</a>`;// eslint-disable-line security/detect-object-injection
-      newArr[i].modify = (<button type="button" onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>);// eslint-disable-line
+      newArr[i].modify = (<button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>);// eslint-disable-line
     }
     return newArr;
   }
@@ -131,8 +132,6 @@ export class PhotoTable extends Component {
   }
 }
 PhotoTable.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  // tourUpdated: PropTypes.bool.isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
