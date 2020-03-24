@@ -46,6 +46,7 @@ const NewsContent = ({ books }) => (
         )}
       </div>
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
+      <hr />
       <div
         className="news-div"
         style={{
