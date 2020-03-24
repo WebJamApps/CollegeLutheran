@@ -31,8 +31,8 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName, bookURL) { // eslint-disable-line class-methods-use-this
-    if (bookName !== '' && bookURL !== '') return false;
+  validateBook(bookName, bookURL, type) { // eslint-disable-line class-methods-use-this
+    if (bookName !== '' && bookURL !== '' && type !== '') return false;
     return true;
   }
 
