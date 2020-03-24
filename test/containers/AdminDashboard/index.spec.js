@@ -11,6 +11,7 @@ describe('Dashboard Container', () => {
       youthPics: [{ _id: '456' }],
       familyPics: [{ _id: '789' }],
       otherPics: [{ _id: '999' }],
+      homeContent: { title: 'title', comments: 'comments' },
     };
     wrapper = shallow(<AdminDashboard
       auth={props.auth}
@@ -18,6 +19,7 @@ describe('Dashboard Container', () => {
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
+      homeContent={props.homeContent}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
@@ -70,6 +72,12 @@ describe('Dashboard Container', () => {
     wrapper.instance().setState = jest.fn();
     wrapper.update();
     wrapper.instance().onChange({ target: { id: 'youthPicsId', value: '456' } });
+    expect(wrapper.instance().setState).toHaveBeenCalled();
+  });
+  it('runs handleEditorChange to set state when entering something into tinymce editor', () => {
+    wrapper.instance().setState = jest.fn();
+    wrapper.update();
+    wrapper.instance().handleEditorChange('hi');
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
 });
