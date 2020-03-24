@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -14,8 +15,8 @@ export class AdminDashboard extends Component {
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
-      title: '',
-      homePageContent: '',
+      title: props.homeContent.title,
+      homePageContent: props.homeContent.comments,
       announcementtitle: '',
       announcementurl: '',
       youthName: '',
@@ -33,6 +34,7 @@ export class AdminDashboard extends Component {
     this.changePicForm = this.changePicForm.bind(this);
     this.changeFamilyForm = this.changeFamilyForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
@@ -40,6 +42,37 @@ export class AdminDashboard extends Component {
   onChange(evt, stateValue) {
     return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
       : this.setState({ [evt.target.id]: evt.target.value });
+  }
+
+  handleEditorChange(homePageContent) {
+    console.log(homePageContent);// eslint-disable-line no-console
+    this.setState({ homePageContent });
+  }
+
+  editor() {
+    const { homeContent } = this.props;
+    return (
+      <Editor
+        apiKey={process.env.TINY_KEY}
+        initialValue={homeContent.comments}
+        init={{
+          height: 400,
+          menubar: 'insert',
+          selector: 'textarea',
+          menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount',
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor forecolor |'
+          + 'alignleft aligncenter alignright alignjustify |'
+          + 'bullist numlist outdent indent | removeformat | help',
+        }}
+        onEditorChange={this.handleEditorChange}
+      />
+    );
   }
 
   changePicForm(picData) {
@@ -126,7 +159,7 @@ export class AdminDashboard extends Component {
   }
 
   changeHomepage() {
-    const { title, homePageContent } = this.state;
+    const { title } = this.state;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
         <h5>Change Homepage Section</h5>
@@ -140,7 +173,8 @@ export class AdminDashboard extends Component {
           <label htmlFor="content">
             Content
             <br />
-            <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} />
+            {this.editor()}
+            {/* <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} /> */}
           </label>
           <div style={{ marginLeft: '60%' }}>
             <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
@@ -220,6 +254,7 @@ export class AdminDashboard extends Component {
   }
 }
 AdminDashboard.propTypes = {
+  homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };

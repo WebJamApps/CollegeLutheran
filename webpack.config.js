@@ -154,7 +154,7 @@ module.exports = ({
       // { from: 'static/imgs', to: 'static/imgs' },
     ]),
     new webpack.EnvironmentPlugin(['NODE_ENV',
-      'AuthProductionBaseURL', 'PORT', 'BackendUrl', 'GoogleClientId', 'userRoles', 'HashString']),
+      'AuthProductionBaseURL', 'PORT', 'BackendUrl', 'GoogleClientId', 'userRoles', 'HashString', 'TINY_KEY']),
     ...when(analyze, new BundleAnalyzerPlugin()),
   ],
 });
