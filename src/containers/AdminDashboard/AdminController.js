@@ -76,15 +76,15 @@ class AdminController {
 
   async addForumAPI() {
     const { auth } = this.view.props;
-    const { forumtitle, forumurl } = this.view.state;
+    const { announcementtitle, announcementurl } = this.view.state;
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: forumtitle,
-          url: forumurl,
-          comments: forumurl,
+          title: announcementtitle,
+          url: announcementurl,
+          comments: announcementurl,
           type: 'Forum',
           access: 'CLC',
         });
