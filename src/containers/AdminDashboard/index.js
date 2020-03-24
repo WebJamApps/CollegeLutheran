@@ -15,6 +15,7 @@ export class AdminDashboard extends Component {
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
+      type: '',
       title: props.homeContent.title,
       homePageContent: props.homeContent.comments,
       announcementtitle: '',
@@ -32,7 +33,6 @@ export class AdminDashboard extends Component {
     this.changeHomepage = this.changeHomepage.bind(this);
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
-    this.changeFamilyForm = this.changeFamilyForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
   }
@@ -76,14 +76,15 @@ export class AdminDashboard extends Component {
   }
 
   changePicForm(picData) {
+    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
+      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
+    const { type } = this.state;
     const imageUrlValue = this.state[picData.urlId];// eslint-disable-line react/destructuring-assignment
     const imageNameValue = this.state[picData.nameId];// eslint-disable-line react/destructuring-assignment
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
           Add
-          {' '}
-          {picData.title}
           {' '}
           Pictures
         </h4>
@@ -96,6 +97,7 @@ export class AdminDashboard extends Component {
             Image Address
             <input id={picData.urlId} value={imageUrlValue} onChange={this.onChange} />
           </label>
+          {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
             <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>Add Pic</button>
@@ -145,7 +147,7 @@ export class AdminDashboard extends Component {
             <button
               type="button"
               id="addForum"
-              disabled={this.controller.validateBook(announcementtitle, announcementurl)}
+              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum')}
               onClick={this.controller.addForumAPI}
             >
               Add
@@ -184,57 +186,22 @@ export class AdminDashboard extends Component {
     );
   }
 
-  changeFamilyForm(childName, childURL) {
-    const postBody = {
-      title: childName, url: childURL, comments: childURL, type: 'familyPics', access: 'CLC',
-    };
-    return (
-      this.changePicForm({
-        disabled: () => this.controller.validateBook(childName, childURL),
-        buttonId: 'addFamilyPic',
-        buttonClick: (e) => this.controller.createPicApi(e, postBody, '/family'),
-        title: 'Family',
-        nameId: 'childName',
-        urlId: 'childURL',
-      })
-    );
-  }
-
-  changeOtherPics(otherName, otherURL) {
-    const postBody = {
-      title: otherName, url: otherURL, comments: otherURL, type: 'otherPics', access: 'CLC',
-    };
-    return (
-      this.changePicForm({
-        title: 'Other',
-        nameId: 'otherName',
-        urlId: 'otherURL',
-        disabled: () => this.controller.validateBook(otherName, otherURL),
-        buttonId: 'addOtherPic',
-        buttonClick: (e) => this.controller.createPicApi(e, postBody, ''),
-      })
-    );
-  }
-
   changeYouthForm() {
-    const { youthName, youthURL } = this.state;
+    const { youthName, youthURL, type } = this.state;
     const postBody = {
-      title: youthName, url: youthURL, comments: youthURL, type: 'youthPics', access: 'CLC',
+      title: youthName, url: youthURL, comments: youthURL, type, access: 'CLC',
     };
     return this.changePicForm({
-      disabled: () => this.controller.validateBook(youthName, youthURL),
+      disabled: () => this.controller.validateBook(youthName, youthURL, type),
       buttonId: 'addYouthPic',
-      buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
-      title: 'Youth',
+      buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
+      title: '',
       nameId: 'youthName',
       urlId: 'youthURL',
     });
   }
 
   render() {
-    const {
-      childName, childURL, otherName, otherURL,
-    } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -243,10 +210,6 @@ export class AdminDashboard extends Component {
         {this.addForumForm()}
         <p>{' '}</p>
         {this.changeYouthForm()}
-        <p>{' '}</p>
-        {this.changeFamilyForm(childName, childURL)}
-        <p>{' '}</p>
-        {this.changeOtherPics(otherName, otherURL)}
         <p>{' '}</p>
         <PTable />
       </div>
