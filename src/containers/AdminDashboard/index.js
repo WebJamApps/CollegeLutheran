@@ -16,8 +16,8 @@ export class AdminDashboard extends Component {
     this.state = {
       title: '',
       homePageContent: '',
-      forumtitle: '',
-      forumurl: '',
+      announcementtitle: '',
+      announcementurl: '',
       youthName: '',
       youthURL: '',
       forumId: '',
@@ -94,7 +94,7 @@ export class AdminDashboard extends Component {
   }
 
   addForumForm() {
-    const { forumtitle, forumurl, forumId } = this.state;
+    const { announcementtitle, announcementurl, forumId } = this.state;
     const { books } = this.props;
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
@@ -105,14 +105,14 @@ export class AdminDashboard extends Component {
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          {this.forms.makeInput('text', 'Title', false, this.onChange, forumtitle, '90%')}
-          {this.forms.makeInput('text', 'URL', false, this.onChange, forumurl, '90%')}
+          {this.forms.makeInput('text', 'Announcement Title', false, this.onChange, announcementtitle, '90%')}
+          {this.forms.makeInput('text', 'Announcement URL', false, this.onChange, announcementurl, '90%')}
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
             <button
               type="button"
               id="addForum"
-              disabled={this.controller.validateBook(forumtitle, forumurl)}
+              disabled={this.controller.validateBook(announcementtitle, announcementurl)}
               onClick={this.controller.addForumAPI}
             >
               Add
@@ -191,7 +191,6 @@ export class AdminDashboard extends Component {
       disabled: () => this.controller.validateBook(youthName, youthURL),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/youth'),
-      deleteSection: () => null,
       title: 'Youth',
       nameId: 'youthName',
       urlId: 'youthURL',
