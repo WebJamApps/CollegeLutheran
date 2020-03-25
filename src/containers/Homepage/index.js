@@ -19,12 +19,13 @@ export class Homepage extends Component {
 
   async componentDidMount() {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    return this.commonUtils.randomizePics(this);
+    return this.commonUtils.randomizePics(this, window.innerWidth);
   }
 
   onResize(width) { this.setState({ width }); }
 
-  elca() { // eslint-disable-line class-methods-use-this
+  elca(w) { // eslint-disable-line class-methods-use-this
+    const width = w < 420 ? '300px' : '400px';
     return (
       <div style={{
         textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
@@ -35,7 +36,7 @@ export class Homepage extends Component {
             id="elcaLogo"
             alt="ELCA LOGO"
             src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-            style={{ width: '340px', margin: 'auto auto auto -2px', paddingTop: '30px' }}
+            style={{ width, margin: 'auto auto auto -2px', paddingTop: '30px' }}
           />
         </a>
         <p>{' '}</p>
@@ -66,7 +67,7 @@ export class Homepage extends Component {
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
-        {this.elca()}
+        {this.elca(width)}
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} targetDomEl={this.parentRef.current} />
       </div>
     );

@@ -5,9 +5,9 @@ import PicSlider from '../../components/pic-slider';
 
 const About = ({ homeContent, width, allPics }) => (
   <div className="widescreenHomepage">
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ paddingRight: 0 }}>
       <div className="row">
-        <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: 0 }}>
+        <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
           <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
             College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
@@ -61,7 +61,7 @@ const About = ({ homeContent, width, allPics }) => (
             className="col"
             id="familySlideshowWide"
             style={{
-              width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0,
+              width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0, paddingRight: 0,
             }}
           >
             <PicSlider data={allPics} />
@@ -72,7 +72,7 @@ const About = ({ homeContent, width, allPics }) => (
             <div
               id="slideshow1"
               style={{
-                margin: 'auto', marginTop: '40px', textAlign: 'center', 
+                margin: 'auto', marginTop: '40px', textAlign: 'center',
               }}
             >
               <img
