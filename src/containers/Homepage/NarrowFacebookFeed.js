@@ -53,13 +53,15 @@ const FacebookFeed = ({ allPics }) => (
     >
       {' '}
     </p>
-    <div
-      id="familySlideshowWide"
-      style={{
-        display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
-      }}
-    >
-      {allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
+    <div className="familySlideContainer">
+      <div
+        id="familySlideshowWide"
+        style={{
+          display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
+        }}
+      >
+        {allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
+      </div>
     </div>
   </div>
 );
