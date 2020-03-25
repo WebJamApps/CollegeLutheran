@@ -56,8 +56,8 @@ export class AdminDashboard extends Component {
         apiKey={process.env.TINY_KEY}
         initialValue={homeContent.comments}
         init={{
-          height: 400,
-          menubar: 'insert',
+          height: 500,
+          menubar: 'insert tools',
           selector: 'textarea',
           menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
           plugins: [
@@ -163,25 +163,32 @@ export class AdminDashboard extends Component {
   changeHomepage() {
     const { title } = this.state;
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
-        <h5>Change Homepage Section</h5>
-        <form
-          id="create-homepage"
+      <div className="horiz-scroll">
+        <div
+          className="material-content elevation3"
           style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            width: '850px', margin: 'auto',
           }}
         >
-          {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
-          <label htmlFor="content">
-            Content
-            <br />
-            {this.editor()}
-            {/* <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} /> */}
-          </label>
-          <div style={{ marginLeft: '60%' }}>
-            <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
-          </div>
-        </form>
+          <h5>Change Homepage Section</h5>
+          <form
+            id="create-homepage"
+            style={{
+              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            }}
+          >
+            {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
+            <label htmlFor="content">
+              Content
+              <br />
+              {this.editor()}
+              {/* <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} /> */}
+            </label>
+            <div style={{ marginLeft: '60%' }}>
+              <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
@@ -207,6 +214,8 @@ export class AdminDashboard extends Component {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         <p>{' '}</p>
+        <p>{' '}</p>
+        <hr />
         {this.addForumForm()}
         <p>{' '}</p>
         {this.changeYouthForm()}
