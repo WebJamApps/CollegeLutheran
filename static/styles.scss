@@ -434,6 +434,13 @@ div.familyELCA, div.youthELCA, div.givingELCA, div.beliefsELCA, div.newsELCA {
   display: none;
 }
 
+.horiz-scroll {
+    white-space: nowrap;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
 @import 'footer';
 @import 'home';
 @import 'materialui';
