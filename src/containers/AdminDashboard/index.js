@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
+import superagent from 'superagent';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -12,9 +13,11 @@ import PTable from '../../components/PhotoTable';
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    this.superagent = superagent;
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
+      isEdit: false,
       type: '',
       title: props.homeContent.title,
       homePageContent: props.homeContent.comments,
@@ -30,18 +33,32 @@ export class AdminDashboard extends Component {
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.editPic = this.editPic.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
 
   onChange(evt, stateValue) {
+    this.checkEdit();
     return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
       : this.setState({ [evt.target.id]: evt.target.value });
+  }
+
+  checkEdit() {
+    let { youthName, youthURL, type } = this.state;
+    const { editPic } = this.props;
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+    this.setState({
+      youthName, youthURL, type,
+    });
   }
 
   handleEditorChange(homePageContent) {
@@ -75,16 +92,41 @@ export class AdminDashboard extends Component {
     );
   }
 
+  async editPic(evt) {
+    evt.preventDefault();
+    const { auth, editPic, dispatch } = this.props;
+    const { youthName, youthURL, type } = this.state;
+    let r;
+    try {
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({ title: youthName, url: youthURL, type });
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    if (r.status === 200) {
+      dispatch({ type: 'EDIT_PIC', picData: {} });
+      this.setState({
+        isEdit: false, youthName: '', youthURL: '', type: '',
+      });
+      window.location.reload();
+      return Promise.resolve(true);
+    } console.log(r.body); // eslint-disable-line no-console
+    return Promise.resolve(false);
+  }
+
   changePicForm(picData) {
     const options = [{ type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
-    const { type } = this.state;
-    const imageUrlValue = this.state[picData.urlId];// eslint-disable-line react/destructuring-assignment
-    const imageNameValue = this.state[picData.nameId];// eslint-disable-line react/destructuring-assignment
+      { type: 'familyPics', Category: 'Family Pics' },
+      { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
+    let { type } = this.state, imageUrlValue = this.state[picData.urlId], imageNameValue = this.state[picData.nameId];
+    const { editPic } = this.props;
+    if (imageUrlValue === '' && editPic.url !== undefined) { imageUrlValue = editPic.url; }
+    if (imageNameValue === '' && editPic.title !== undefined) { imageNameValue = editPic.title; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
-          Add
+          {editPic._id ? 'Edit' : 'Add'}
           {' '}
           Pictures
         </h4>
@@ -100,7 +142,11 @@ export class AdminDashboard extends Component {
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
           <div style={{ marginLeft: '70%' }}>
             <p>{' '}</p>
-            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>Add Pic</button>
+            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={editPic._id ? this.editPic : picData.buttonClick}>
+              {editPic._id ? 'Edit' : 'Add'}
+              {' '}
+              Pic
+            </button>
           </div>
         </form>
       </div>
@@ -225,7 +271,12 @@ export class AdminDashboard extends Component {
     );
   }
 }
+AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  editPic: PropTypes.shape({
+    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string,
+  }),
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
