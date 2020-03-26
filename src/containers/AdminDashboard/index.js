@@ -23,6 +23,7 @@ export class AdminDashboard extends Component {
       youthName: '',
       youthURL: '',
       forumId: '',
+      showCaption: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -32,7 +33,8 @@ export class AdminDashboard extends Component {
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.deletePicButton = this.deletePicButton.bind(this);
+    this.picButton = this.picButton.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
@@ -44,12 +46,17 @@ export class AdminDashboard extends Component {
   }
 
   checkEdit() {
-    let { youthName, youthURL, type } = this.state;
+    let {
+      youthName, youthURL, type, showCaption,
+    } = this.state;
     const { editPic } = this.props;
     if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
     if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    this.setState({ youthName, youthURL, type });
+    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+    this.setState({
+      youthName, youthURL, type, showCaption,
+    });
   }
 
   handleEditorChange(homePageContent) {
@@ -83,7 +90,7 @@ export class AdminDashboard extends Component {
     );
   }
 
-  deletePicButton(picData, editPic) {
+  picButton(picData, editPic) {
     return (
       <div style={{ marginLeft: '70%', marginTop: '10px' }}>
         <button
@@ -100,15 +107,25 @@ export class AdminDashboard extends Component {
     );
   }
 
+  handleRadioChange(evt) {
+    this.checkEdit();
+    this.setState({
+      showCaption: evt.target.value,
+    });
+  }
+
   changePicForm(picData) {
     const options = [{ type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
       { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
-    let { type, youthURL, youthName } = this.state;
+    let {
+      type, youthURL, youthName, showCaption,
+    } = this.state;
     const { editPic } = this.props;
     if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
     if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
@@ -126,7 +143,34 @@ export class AdminDashboard extends Component {
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
-          {this.deletePicButton(picData, editPic)}
+          <div>
+            <label htmlFor="hide-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
+              <input
+                id="hide-caption"
+                type="radio"
+                name="hide-caption"
+                value=""
+                checked={showCaption !== 'showCaption'}
+                onChange={this.handleRadioChange}
+                className="form-check-input"
+                style={{ minWidth: 0 }}
+              />
+              Hide Caption
+            </label>
+            <label htmlFor="show-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
+              <input
+                type="radio"
+                name="show-caption"
+                value="showCaption"
+                checked={showCaption === 'showCaption'}
+                onChange={this.handleRadioChange}
+                className="form-check-input"
+                style={{ minWidth: 0 }}
+              />
+              Show Caption
+            </label>
+          </div>
+          {this.picButton(picData, editPic)}
         </form>
       </div>
     );
@@ -212,9 +256,11 @@ export class AdminDashboard extends Component {
   }
 
   changeYouthForm() {
-    const { youthName, youthURL, type } = this.state;
+    const {
+      youthName, youthURL, type, showCaption,
+    } = this.state;
     const postBody = {
-      title: youthName, url: youthURL, comments: youthURL, type, access: 'CLC',
+      title: youthName, url: youthURL, comments: showCaption, type, access: 'CLC',
     };
     return this.changePicForm({
       disabled: () => this.controller.validateBook(youthName, youthURL, type),
@@ -245,7 +291,7 @@ export class AdminDashboard extends Component {
 AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
   editPic: PropTypes.shape({
-    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string,
+    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string, comments: PropTypes.string,
   }),
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,

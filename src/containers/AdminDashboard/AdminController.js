@@ -85,7 +85,7 @@ class AdminController {
         .send({
           title: announcementtitle,
           url: announcementurl,
-          comments: announcementurl,
+          comments: '',
           type: 'Forum',
           access: 'CLC',
         });
@@ -124,14 +124,16 @@ class AdminController {
   async editPicAPI(evt) {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
-    const { youthName, youthURL, type } = this.view.state;
+    const {
+      youthName, youthURL, type, showCaption,
+    } = this.view.state;
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: youthName, url: youthURL, type, comments: youthURL, 
+          title: youthName, url: youthURL, type, comments: showCaption,
         });
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
