@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import superagent from 'superagent';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -13,7 +12,6 @@ import PTable from '../../components/PhotoTable';
 export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
-    this.superagent = superagent;
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
@@ -39,7 +37,7 @@ export class AdminDashboard extends Component {
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.editPic = this.editPic.bind(this);
+    this.deletePicButton = this.deletePicButton.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
@@ -56,9 +54,7 @@ export class AdminDashboard extends Component {
     if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
     if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    this.setState({
-      youthName, youthURL, type,
-    });
+    this.setState({ youthName, youthURL, type });
   }
 
   handleEditorChange(homePageContent) {
@@ -92,26 +88,21 @@ export class AdminDashboard extends Component {
     );
   }
 
-  async editPic(evt) {
-    evt.preventDefault();
-    const { auth, editPic, dispatch } = this.props;
-    const { youthName, youthURL, type } = this.state;
-    let r;
-    try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
-        .send({ title: youthName, url: youthURL, type });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
-    if (r.status === 200) {
-      dispatch({ type: 'EDIT_PIC', picData: {} });
-      this.setState({
-        isEdit: false, youthName: '', youthURL: '', type: '',
-      });
-      window.location.reload();
-      return Promise.resolve(true);
-    } console.log(r.body); // eslint-disable-line no-console
-    return Promise.resolve(false);
+  deletePicButton(picData, editPic) {
+    return (
+      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+        <button
+          disabled={picData.disabled()}
+          type="button"
+          id={picData.buttonId}
+          onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
+        >
+          {editPic._id ? 'Edit' : 'Add'}
+          {' '}
+          Pic
+        </button>
+      </div>
+    );
   }
 
   changePicForm(picData) {
@@ -140,14 +131,7 @@ export class AdminDashboard extends Component {
             <input id={picData.urlId} value={imageUrlValue} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
-          <div style={{ marginLeft: '70%' }}>
-            <p>{' '}</p>
-            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={editPic._id ? this.editPic : picData.buttonClick}>
-              {editPic._id ? 'Edit' : 'Add'}
-              {' '}
-              Pic
-            </button>
-          </div>
+          {this.deletePicButton(picData, editPic)}
         </form>
       </div>
     );
@@ -188,8 +172,7 @@ export class AdminDashboard extends Component {
         >
           {this.forms.makeInput('text', 'Announcement Title', false, this.onChange, announcementtitle, '90%')}
           {this.forms.makeInput('text', 'Announcement URL', false, this.onChange, announcementurl, '90%')}
-          <div style={{ marginLeft: '70%' }}>
-            <p>{' '}</p>
+          <div style={{ marginLeft: '70%', marginTop: '10px' }}>
             <button
               type="button"
               id="addForum"
@@ -210,12 +193,7 @@ export class AdminDashboard extends Component {
     const { title } = this.state;
     return (
       <div className="horiz-scroll">
-        <div
-          className="material-content elevation3"
-          style={{
-            width: '850px', margin: 'auto',
-          }}
-        >
+        <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
           <h5>Change Homepage Section</h5>
           <form
             id="create-homepage"
@@ -228,9 +206,8 @@ export class AdminDashboard extends Component {
               Content
               <br />
               {this.editor()}
-              {/* <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} /> */}
             </label>
-            <div style={{ marginLeft: '60%' }}>
+            <div style={{ marginLeft: '60%', marginTop: '10px' }}>
               <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
             </div>
           </form>
@@ -273,7 +250,6 @@ export class AdminDashboard extends Component {
 }
 AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   editPic: PropTypes.shape({
     _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string,
   }),
