@@ -23,25 +23,33 @@ export class AdminDashboard extends Component {
       youthName: '',
       youthURL: '',
       forumId: '',
-      childName: '',
-      childURL: '',
-      otherName: '',
-      otherURL: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.deletePicButton = this.deletePicButton.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
 
   onChange(evt, stateValue) {
+    this.checkEdit();
     return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
       : this.setState({ [evt.target.id]: evt.target.value });
+  }
+
+  checkEdit() {
+    let { youthName, youthURL, type } = this.state;
+    const { editPic } = this.props;
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+    this.setState({ youthName, youthURL, type });
   }
 
   handleEditorChange(homePageContent) {
@@ -50,11 +58,11 @@ export class AdminDashboard extends Component {
   }
 
   editor() {
-    const { homeContent } = this.props;
+    const { homePageContent } = this.state;
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={homeContent.comments}
+        initialValue={homePageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
@@ -75,33 +83,50 @@ export class AdminDashboard extends Component {
     );
   }
 
+  deletePicButton(picData, editPic) {
+    return (
+      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+        <button
+          disabled={picData.disabled()}
+          type="button"
+          id={picData.buttonId}
+          onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
+        >
+          {editPic._id ? 'Edit' : 'Add'}
+          {' '}
+          Pic
+        </button>
+      </div>
+    );
+  }
+
   changePicForm(picData) {
     const options = [{ type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
-    const { type } = this.state;
-    const imageUrlValue = this.state[picData.urlId];// eslint-disable-line react/destructuring-assignment
-    const imageNameValue = this.state[picData.nameId];// eslint-disable-line react/destructuring-assignment
+      { type: 'familyPics', Category: 'Family Pics' },
+      { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
+    let { type, youthURL, youthName } = this.state;
+    const { editPic } = this.props;
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
-          Add
+          {editPic._id ? 'Edit' : 'Add'}
           {' '}
           Pictures
         </h4>
         <form>
-          <label htmlFor={picData.nameId}>
-            Picture Name
-            <input id={picData.nameId} value={imageNameValue} onChange={this.onChange} />
+          <label htmlFor="youthName">
+            Picture Title
+            <input id="youthName" value={youthName} onChange={this.onChange} />
           </label>
-          <label htmlFor={picData.urlId}>
+          <label htmlFor="youthURL">
             Image Address
-            <input id={picData.urlId} value={imageUrlValue} onChange={this.onChange} />
+            <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
-          <div style={{ marginLeft: '70%' }}>
-            <p>{' '}</p>
-            <button disabled={picData.disabled()} type="button" id={picData.buttonId} onClick={picData.buttonClick}>Add Pic</button>
-          </div>
+          {this.deletePicButton(picData, editPic)}
         </form>
       </div>
     );
@@ -142,8 +167,7 @@ export class AdminDashboard extends Component {
         >
           {this.forms.makeInput('text', 'Announcement Title', false, this.onChange, announcementtitle, '90%')}
           {this.forms.makeInput('text', 'Announcement URL', false, this.onChange, announcementurl, '90%')}
-          <div style={{ marginLeft: '70%' }}>
-            <p>{' '}</p>
+          <div style={{ marginLeft: '70%', marginTop: '10px' }}>
             <button
               type="button"
               id="addForum"
@@ -164,12 +188,7 @@ export class AdminDashboard extends Component {
     const { title } = this.state;
     return (
       <div className="horiz-scroll">
-        <div
-          className="material-content elevation3"
-          style={{
-            width: '850px', margin: 'auto',
-          }}
-        >
+        <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
           <h5>Change Homepage Section</h5>
           <form
             id="create-homepage"
@@ -182,9 +201,8 @@ export class AdminDashboard extends Component {
               Content
               <br />
               {this.editor()}
-              {/* <textarea id="homePageContent" rows="15" value={homePageContent} style={{ width: '90%' }} onChange={this.onChange} /> */}
             </label>
-            <div style={{ marginLeft: '60%' }}>
+            <div style={{ marginLeft: '60%', marginTop: '10px' }}>
               <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
             </div>
           </form>
@@ -204,7 +222,6 @@ export class AdminDashboard extends Component {
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
       nameId: 'youthName',
-      urlId: 'youthURL',
     });
   }
 
@@ -225,7 +242,11 @@ export class AdminDashboard extends Component {
     );
   }
 }
+AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
+  editPic: PropTypes.shape({
+    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string,
+  }),
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
