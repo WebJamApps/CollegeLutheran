@@ -10,6 +10,7 @@ class AdminController {
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
     this.deletebookForm = this.deleteBookForm.bind(this);
+    this.editPicAPI = this.editPicAPI.bind(this);
   }
 
   async deleteBookApi(evt, id, redirect) {
@@ -119,6 +120,29 @@ class AdminController {
       </form>
     );
   }
-}
 
+  async editPicAPI(evt) {
+    evt.preventDefault();
+    const { auth, editPic, dispatch } = this.view.props;
+    const { youthName, youthURL, type } = this.view.state;
+    let r;
+    try {
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({
+          title: youthName, url: youthURL, type, comments: youthURL, 
+        });
+    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    if (r.status === 200) {
+      dispatch({ type: 'EDIT_PIC', picData: {} });
+      this.view.setState({
+        isEdit: false, youthName: '', youthURL: '', type: '',
+      });
+      window.location.reload();
+      return Promise.resolve(true);
+    } console.log(r.body); // eslint-disable-line no-console
+    return Promise.resolve(false);
+  }
+}
 export default AdminController;

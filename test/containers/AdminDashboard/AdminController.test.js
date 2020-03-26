@@ -5,9 +5,12 @@ describe('AdminController', () => {
   let r, controller, vStub;
   beforeEach(() => {
     vStub = {
+      setState: jest.fn(),
       forms: { makeDropdown: () => null },
-      state: { title: 'Exciting News!', homePageContent: 'Lots of stuff here!' },
-      props: { auth: { token: 'token' } },
+      state: {
+        title: 'Exciting News!', homePageContent: 'Lots of stuff here!', youthURL: 'url', type: 'youthPics',
+      },
+      props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
     };
     controller = new AdminController(vStub);
   });
@@ -74,11 +77,29 @@ describe('AdminController', () => {
     r = await controller.createPicApi({ preventDefault: () => {} }, {}, '/youth');
     expect(r).toBe(false);
   });
+  it('sends an edit pic request to the backend', async () => {
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
+    Object.defineProperty(window, 'location', { value: { reload: () => {} }, writable: true });
+    window.location.reload = jest.fn();
+    r = await controller.editPicAPI({ preventDefault: () => {} });
+    expect(r).toBe(true);
+    expect(window.location.reload).toHaveBeenCalled();
+  });
+  it('catches error when sends edit pic request to the backend', async () => {
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    r = await controller.editPicAPI({ preventDefault: () => {} });
+    expect(r).toBe(false);
+  });
+  it('handles 300 res from sending edit pic request to the backend', async () => {
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
+    r = await controller.editPicAPI({ preventDefault: () => {} });
+    expect(r).toBe(false);
+  });
   it('sends an add forum request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => {} }, writable: true });
     window.location.assign = jest.fn();
-    r = await controller.addForumAPI({ preventDefault: () => {} }, {}, '/youth');
+    r = await controller.addForumAPI({ preventDefault: () => {} });
     expect(r).toBe(true);
     expect(window.location.assign).toHaveBeenCalled();
   });
