@@ -5,6 +5,7 @@ describe('fetch reducer', () => {
     expect(reducer(undefined, {})).toEqual(
       {
         otherPics: [],
+        editPic: {},
       },
     );
   });
@@ -17,6 +18,7 @@ describe('fetch reducer', () => {
     ).toEqual(
       {
         otherPics: [{}],
+        editPic: {},
       },
     );
   });

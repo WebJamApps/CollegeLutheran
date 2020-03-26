@@ -22,6 +22,7 @@ describe('PhotoTable', () => {
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
+      dispatch={(fun) => fun}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
