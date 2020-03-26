@@ -87,12 +87,13 @@ export class PhotoTable extends Component {
     return Promise.resolve(false);
   }
 
-  editPic(picData) { // eslint-disable-line class-methods-use-this
+  editPic(picData) {
     const { dispatch } = this.props;
     dispatch({ type: 'EDIT_PIC', picData });
+    return true;
   }
 
-  addThumbs(arr) { // eslint-disable-line class-methods-use-this
+  addThumbs(arr) { 
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;

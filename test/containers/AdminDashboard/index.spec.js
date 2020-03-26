@@ -60,4 +60,38 @@ describe('Dashboard Container', () => {
     wrapper.instance().handleEditorChange('hi');
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
+  it('renders with edit pic form', () => {
+    const wrapper2 = shallow(<AdminDashboard
+      auth={props.auth}
+      books={props.books}
+      youthPics={props.youthPics}
+      familyPics={props.familyPics}
+      otherPics={props.otherPics}
+      homeContent={props.homeContent}
+      editPic={{
+        title: 'title', url: 'url', type: 'otherPics', _id: '123',
+      }}
+    />);
+    const cpf = wrapper2.instance().changePicForm({ disabled: jest.fn() });
+    const d = shallow(cpf);
+    const h = d.find('h4').text();
+    expect(h).toBe('Edit Pictures');
+  });
+  it('checks for edit data to set state for edit pictures', () => {
+    const wrapper2 = shallow(<AdminDashboard
+      auth={props.auth}
+      books={props.books}
+      youthPics={props.youthPics}
+      familyPics={props.familyPics}
+      otherPics={props.otherPics}
+      homeContent={props.homeContent}
+      editPic={{
+        title: 'title', url: 'url', type: 'otherPics', _id: '123',
+      }}
+    />);
+    wrapper2.instance().setState = jest.fn();
+    wrapper2.update();
+    wrapper2.instance().checkEdit();
+    expect(wrapper2.instance().setState).toHaveBeenCalled();
+  });
 });

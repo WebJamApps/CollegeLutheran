@@ -15,7 +15,6 @@ export class AdminDashboard extends Component {
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
-      isEdit: false,
       type: '',
       title: props.homeContent.title,
       homePageContent: props.homeContent.comments,
@@ -24,10 +23,6 @@ export class AdminDashboard extends Component {
       youthName: '',
       youthURL: '',
       forumId: '',
-      childName: '',
-      childURL: '',
-      otherName: '',
-      otherURL: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -63,11 +58,11 @@ export class AdminDashboard extends Component {
   }
 
   editor() {
-    const { homeContent } = this.props;
+    const { homePageContent } = this.state;
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={homeContent.comments}
+        initialValue={homePageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
@@ -109,10 +104,10 @@ export class AdminDashboard extends Component {
     const options = [{ type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
       { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
-    let { type } = this.state, imageUrlValue = this.state[picData.urlId], imageNameValue = this.state[picData.nameId];
+    let { type, youthURL, youthName } = this.state;
     const { editPic } = this.props;
-    if (imageUrlValue === '' && editPic.url !== undefined) { imageUrlValue = editPic.url; }
-    if (imageNameValue === '' && editPic.title !== undefined) { imageNameValue = editPic.title; }
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
@@ -122,13 +117,13 @@ export class AdminDashboard extends Component {
           Pictures
         </h4>
         <form>
-          <label htmlFor={picData.nameId}>
-            Picture Name
-            <input id={picData.nameId} value={imageNameValue} onChange={this.onChange} />
+          <label htmlFor="youthName">
+            Picture Title
+            <input id="youthName" value={youthName} onChange={this.onChange} />
           </label>
-          <label htmlFor={picData.urlId}>
+          <label htmlFor="youthURL">
             Image Address
-            <input id={picData.urlId} value={imageUrlValue} onChange={this.onChange} />
+            <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
           {this.deletePicButton(picData, editPic)}
@@ -227,7 +222,6 @@ export class AdminDashboard extends Component {
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
       nameId: 'youthName',
-      urlId: 'youthURL',
     });
   }
 

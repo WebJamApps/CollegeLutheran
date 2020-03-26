@@ -22,4 +22,17 @@ describe('fetch reducer', () => {
       },
     );
   });
+  it('handles EDIT_PIC', () => {
+    expect(
+      reducer(undefined, {
+        type: 'EDIT_PIC',
+        picData: { _id: '123' },
+      }),
+    ).toEqual(
+      {
+        otherPics: [],
+        editPic: { _id: '123' },
+      },
+    );
+  });
 });

@@ -130,7 +130,9 @@ class AdminController {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
-        .send({ title: youthName, url: youthURL, type });
+        .send({
+          title: youthName, url: youthURL, type, comments: youthURL, 
+        });
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
