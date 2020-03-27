@@ -35,6 +35,7 @@ export class AdminDashboard extends Component {
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.picButton = this.picButton.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
+    this.resetEditForm = this.resetEditForm.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
@@ -90,10 +91,33 @@ export class AdminDashboard extends Component {
     );
   }
 
+  resetEditForm(evt) { // eslint-disable-line class-methods-use-this
+    evt.preventDefault();
+    const { dispatch } = this.props;
+    dispatch({ type: 'EDIT_PIC', picData: {} });
+    this.setState({
+      youthName: '',
+      youthURL: '',
+      type: '',
+      showCaption: '',
+    });
+  }
+
   picButton(picData, editPic) {
     return (
-      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+      <div style={{ marginLeft: '50%', marginTop: '10px' }}>
+        {editPic._id ? (
+          <button
+            style={{ display: 'relative', position: 'inline-block', marginRight: '20px' }}
+            type="button"
+            id="cancel-edit-pic"
+            onClick={this.resetEditForm}
+          >
+            Cancel
+          </button>
+        ) : null}
         <button
+          style={{ display: 'relative', position: 'inline-block' }}
           disabled={picData.disabled()}
           type="button"
           id={picData.buttonId}
@@ -149,7 +173,7 @@ export class AdminDashboard extends Component {
                 id="hide-caption"
                 type="radio"
                 name="hide-caption"
-                value=""
+                value="hideCaption"
                 checked={showCaption !== 'showCaption'}
                 onChange={this.handleRadioChange}
                 className="form-check-input"
@@ -215,7 +239,7 @@ export class AdminDashboard extends Component {
             <button
               type="button"
               id="addForum"
-              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum')}
+              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum', null)}
               onClick={this.controller.addForumAPI}
             >
               Add
@@ -263,7 +287,7 @@ export class AdminDashboard extends Component {
       title: youthName, url: youthURL, comments: showCaption, type, access: 'CLC',
     };
     return this.changePicForm({
-      disabled: () => this.controller.validateBook(youthName, youthURL, type),
+      disabled: () => this.controller.validateBook(youthName, youthURL, type, showCaption),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
@@ -290,6 +314,7 @@ export class AdminDashboard extends Component {
 }
 AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   editPic: PropTypes.shape({
     _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string, comments: PropTypes.string,
   }),

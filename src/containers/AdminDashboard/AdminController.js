@@ -33,8 +33,9 @@ class AdminController {
   }
 
   validateBook(bookName, bookURL, type) { // eslint-disable-line class-methods-use-this
-    if (bookName !== '' && bookURL !== '' && type !== '') return false;
-    return true;
+    let disabled = true;
+    if (bookName !== '' && bookURL !== '' && type !== '') disabled = false;
+    return disabled;
   }
 
   validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
