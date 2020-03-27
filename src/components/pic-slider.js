@@ -13,7 +13,7 @@ class PicSlider extends Component {
       autoplay: true,
       autoplaySpeed: 3000,
       infinite: true,
-      speed: 3000,
+      speed: 5000,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
@@ -29,10 +29,8 @@ class PicSlider extends Component {
           {
             data.map((d) => (
               <div key={d._id}>
-                {' '}
                 <img className="slide-show" src={d.url} alt={d.title} />
-                {' '}
-                <Caption caption={d.title} />
+                {d.comments === 'showCaption' ? <Caption caption={d.title} /> : null}
               </div>
             ))
           }
