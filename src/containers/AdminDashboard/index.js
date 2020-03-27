@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-// import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
