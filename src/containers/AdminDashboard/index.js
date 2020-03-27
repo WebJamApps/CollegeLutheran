@@ -148,7 +148,7 @@ export class AdminDashboard extends Component {
           textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.forms.makeDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
+        { this.forms.makeDataDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
         <p>{' '}</p>
         <button
           onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}

@@ -15,6 +15,18 @@ const makeDropdown = (htmlFor, labelText, value, onChange, options) => {
     </label>
   );
 };
+const makeDataDropdown = (htmlFor, labelText, value, onChange, options, oValue, dValue) => (
+  <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
+    {labelText}
+    <br />
+    <select id={htmlFor} value={value} onChange={(event) => onChange(event, htmlFor)}>
+      <option id="blank-option" key="blank-option" value="">---</option>
+      {// eslint-disable-next-line security/detect-object-injection
+          options.map((cv) => (<option id={cv[oValue]} key={cv[oValue]} value={cv[oValue]}>{cv[dValue]}</option>))
+        }
+    </select>
+  </label>
+);
 const makeInput = (type, label, isRequired, onChange, value, width) => {
   let fId = label.toLowerCase();
   fId = fId.replace(/\s/g, '');
@@ -66,4 +78,6 @@ const radioButtons = (showCaption, onChange) => (
     </label>
   </div>
 );
-export default { makeInput, makeDropdown, radioButtons };
+export default {
+  makeInput, makeDropdown, radioButtons, makeDataDropdown, 
+};
