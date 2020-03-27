@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/pic-slider';
 
 const YouthContent = ({ youthPics }) => (
@@ -50,7 +49,6 @@ const YouthContent = ({ youthPics }) => (
         </p>
         <section style={{ textAlign: 'left', marginTop: '0' }} />
       </div>
-      {ReactHtmlParser(youthPics.comments)}
       <div className="youthELCA">
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img

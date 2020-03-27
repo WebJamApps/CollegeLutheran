@@ -3,17 +3,9 @@ const initialState = {
 };
 
 const fixUrl = (state, action) => {
-  let picArr = [], familyPics = [];
-  if (Array.isArray(action.data)) picArr = action.data.reverse();
-  familyPics = picArr.map((i) => {
-    const newPic = i;
-    newPic.url = i.comments;
-    return newPic;
-  });
-  return {
-    ...state,
-    familyPics,
-  };
+  let familyPics = [];
+  if (Array.isArray(action.data)) familyPics = action.data.reverse();
+  return { ...state, familyPics };
 };
 
 const reducer = (state = initialState, action) => {
