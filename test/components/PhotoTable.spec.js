@@ -11,10 +11,10 @@ describe('PhotoTable', () => {
         _id: '456', url: 'url', title: 'title', type: 'youthPics',
       }],
       familyPics: [{
-        _id: '789', url: 'url', title: 'title', type: 'familyPics',
+        _id: '789', url: 'url', title: 'title', type: 'familyPics', comments: 'hideCaption',
       }],
       otherPics: [{
-        _id: '999', url: 'url', title: 'title', type: 'otherPics',
+        _id: '999', url: 'url', title: 'title', type: 'otherPics', comments: 'showCaption',
       }],
     };
     wrapper = shallow(<PhotoTable

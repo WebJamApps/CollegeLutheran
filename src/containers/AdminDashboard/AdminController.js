@@ -151,10 +151,7 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent) {
-    console.log(homePageContent);// eslint-disable-line no-console
-    this.view.setState({ homePageContent });
-  }
+  handleEditorChange(homePageContent) { this.view.setState({ homePageContent }); return true; }
 
   editor(homePageContent) {
     return (

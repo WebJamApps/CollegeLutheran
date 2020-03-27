@@ -83,12 +83,22 @@ describe('Dashboard Container', () => {
       otherPics={props.otherPics}
       homeContent={props.homeContent}
       editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123',
+        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
       }}
     />);
     wrapper2.instance().setState = jest.fn();
     wrapper2.update();
     wrapper2.instance().checkEdit();
     expect(wrapper2.instance().setState).toHaveBeenCalled();
+  });
+  it('sets state from a radio button change', () => {
+    wrapper.instance().setState = jest.fn((obj) => { if (obj.showCaption) expect(obj.showCaption).toBe('showCaption'); });
+    wrapper.update();
+    wrapper.instance().handleRadioChange({ target: { value: 'showCaption' } });
+  });
+  it('resets the edit pic form', () => {
+    wrapper.instance().setState = jest.fn((obj) => expect(obj.youthName).toBe(''));
+    wrapper.update();
+    wrapper.instance().resetEditForm({ preventDefault: () => {} });
   });
 });
