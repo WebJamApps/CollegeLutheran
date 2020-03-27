@@ -4,7 +4,14 @@ import forms from '../../src/lib/forms';
 describe('forms', () => {
   it('handles on change dropdown', () => {
     const onChange = jest.fn();
-    const mdd = forms.makeDropdown('id', 'txt', 'value', onChange, [], 'oValue', 'dValue');
+    const mdd = forms.makeDropdown('id', 'txt', 'value', onChange, []);
+    const dd = shallow(mdd);
+    dd.find('select').simulate('change');
+    expect(onChange).toHaveBeenCalled();
+  });
+  it('handles on change datadropdown', () => {
+    const onChange = jest.fn();
+    const mdd = forms.makeDataDropdown('id', 'txt', 'value', onChange, [], 'oValue', 'dValue');
     const dd = shallow(mdd);
     dd.find('select').simulate('change');
     expect(onChange).toHaveBeenCalled();

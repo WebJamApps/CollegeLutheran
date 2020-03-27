@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -23,6 +22,7 @@ export class AdminDashboard extends Component {
       youthName: '',
       youthURL: '',
       forumId: '',
+      showCaption: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -31,8 +31,9 @@ export class AdminDashboard extends Component {
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
-    this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.deletePicButton = this.deletePicButton.bind(this);
+    this.picButton = this.picButton.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
+    this.resetEditForm = this.resetEditForm.bind(this);
   }
 
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
@@ -44,50 +45,44 @@ export class AdminDashboard extends Component {
   }
 
   checkEdit() {
-    let { youthName, youthURL, type } = this.state;
+    let {
+      youthName, youthURL, type, showCaption,
+    } = this.state;
     const { editPic } = this.props;
     if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
     if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    this.setState({ youthName, youthURL, type });
+    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+    this.setState({
+      youthName, youthURL, type, showCaption,
+    });
   }
 
-  handleEditorChange(homePageContent) {
-    console.log(homePageContent);// eslint-disable-line no-console
-    this.setState({ homePageContent });
+  resetEditForm(evt) {
+    evt.preventDefault();
+    const { dispatch } = this.props;
+    dispatch({ type: 'EDIT_PIC', picData: {} });
+    this.setState({
+      youthName: '', youthURL: '', type: '', showCaption: '',
+    });
   }
 
-  editor() {
-    const { homePageContent } = this.state;
+  picButton(picData, editPic, youthName, youthURL, type) {
     return (
-      <Editor
-        apiKey={process.env.TINY_KEY}
-        initialValue={homePageContent}
-        init={{
-          height: 500,
-          menubar: 'insert tools',
-          selector: 'textarea',
-          menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
-          plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount',
-          ],
-          toolbar:
-          'undo redo | formatselect | bold italic backcolor forecolor |'
-          + 'alignleft aligncenter alignright alignjustify |'
-          + 'bullist numlist outdent indent | removeformat | help',
-        }}
-        onEditorChange={this.handleEditorChange}
-      />
-    );
-  }
-
-  deletePicButton(picData, editPic) {
-    return (
-      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+      <div style={{ marginLeft: '50%', marginTop: '10px' }}>
+        {editPic._id ? (
+          <button
+            style={{ display: 'relative', position: 'inline-block', marginRight: '20px' }}
+            type="button"
+            id="cancel-edit-pic"
+            onClick={this.resetEditForm}
+          >
+            Cancel
+          </button>
+        ) : null}
         <button
-          disabled={picData.disabled()}
+          style={{ display: 'relative', position: 'inline-block' }}
+          disabled={this.controller.validateBook(youthName, youthURL, type)}
           type="button"
           id={picData.buttonId}
           onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
@@ -100,15 +95,12 @@ export class AdminDashboard extends Component {
     );
   }
 
-  changePicForm(picData) {
-    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' },
-      { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
-    let { type, youthURL, youthName } = this.state;
-    const { editPic } = this.props;
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
-    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
-    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+  handleRadioChange(evt) {
+    this.checkEdit();
+    this.setState({ showCaption: evt.target.value });
+  }
+
+  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
@@ -126,10 +118,25 @@ export class AdminDashboard extends Component {
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
-          {this.deletePicButton(picData, editPic)}
+          {this.forms.radioButtons(showCaption, this.handleRadioChange)}
+          {this.picButton(picData, editPic, youthName, youthURL, type)}
         </form>
       </div>
     );
+  }
+
+  changePicForm(picData) {
+    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
+      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
+    let {
+      type, youthURL, youthName, showCaption,
+    } = this.state;
+    const { editPic } = this.props;
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+    return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
   deleteForumForm(forumId, books) {
@@ -140,7 +147,7 @@ export class AdminDashboard extends Component {
           textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.forms.makeDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
+        { this.forms.makeDataDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
         <p>{' '}</p>
         <button
           onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
@@ -171,7 +178,7 @@ export class AdminDashboard extends Component {
             <button
               type="button"
               id="addForum"
-              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum')}
+              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum', null)}
               onClick={this.controller.addForumAPI}
             >
               Add
@@ -185,7 +192,7 @@ export class AdminDashboard extends Component {
   }
 
   changeHomepage() {
-    const { title } = this.state;
+    const { title, homePageContent } = this.state;
     return (
       <div className="horiz-scroll">
         <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
@@ -200,7 +207,7 @@ export class AdminDashboard extends Component {
             <label htmlFor="content">
               Content
               <br />
-              {this.editor()}
+              {this.controller.editor(homePageContent)}
             </label>
             <div style={{ marginLeft: '60%', marginTop: '10px' }}>
               <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
@@ -212,12 +219,13 @@ export class AdminDashboard extends Component {
   }
 
   changeYouthForm() {
-    const { youthName, youthURL, type } = this.state;
+    const {
+      youthName, youthURL, type, showCaption,
+    } = this.state;
     const postBody = {
-      title: youthName, url: youthURL, comments: youthURL, type, access: 'CLC',
+      title: youthName, url: youthURL, comments: showCaption, type, access: 'CLC',
     };
     return this.changePicForm({
-      disabled: () => this.controller.validateBook(youthName, youthURL, type),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
@@ -244,8 +252,9 @@ export class AdminDashboard extends Component {
 }
 AdminDashboard.defaultProps = { editPic: {} };
 AdminDashboard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   editPic: PropTypes.shape({
-    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string,
+    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string, comments: PropTypes.string,
   }),
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,

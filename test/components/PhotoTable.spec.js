@@ -11,10 +11,10 @@ describe('PhotoTable', () => {
         _id: '456', url: 'url', title: 'title', type: 'youthPics',
       }],
       familyPics: [{
-        _id: '789', url: 'url', title: 'title', type: 'familyPics',
+        _id: '789', url: 'url', title: 'title', type: 'familyPics', comments: 'hideCaption',
       }],
       otherPics: [{
-        _id: '999', url: 'url', title: 'title', type: 'otherPics',
+        _id: '999', url: 'url', title: 'title', type: 'otherPics', comments: 'showCaption',
       }],
     };
     wrapper = shallow(<PhotoTable
@@ -34,10 +34,10 @@ describe('PhotoTable', () => {
     expect(custom.type).toBe('div');
   });
   it('sets the columns with customBodyRender for Modify column', () => {
+    const buttonjsx = (<button type="button" style={{ display: 'block' }}>howdy</button>);
     expect(typeof wrapper.instance().setColumns).toBe('function');
     wrapper.instance().setColumns();
-    const custom = wrapper.instance().state.columns[4].options.customBodyRender('<a href="http://collegelutheran.org/"'
-    + ' rel="noopener noreferrer" target="_blank">College Lutheran Church</a>');
+    const custom = wrapper.instance().state.columns[5].options.customBodyRender(buttonjsx);
     expect(custom.type).toBe('div');
   });
   it('handles click on delete pic button', () => {

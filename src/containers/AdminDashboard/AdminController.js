@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import React from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 
 class AdminController {
   constructor(view) {
@@ -11,6 +12,8 @@ class AdminController {
     this.addForumAPI = this.addForumAPI.bind(this);
     this.deletebookForm = this.deleteBookForm.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
+    this.editor = this.editor.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   async deleteBookApi(evt, id, redirect) {
@@ -33,8 +36,9 @@ class AdminController {
   }
 
   validateBook(bookName, bookURL, type) { // eslint-disable-line class-methods-use-this
-    if (bookName !== '' && bookURL !== '' && type !== '') return false;
-    return true;
+    let disabled = true;
+    if (bookName !== '' && bookURL !== '' && type !== '') disabled = false;
+    return disabled;
   }
 
   validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
@@ -85,7 +89,7 @@ class AdminController {
         .send({
           title: announcementtitle,
           url: announcementurl,
-          comments: announcementurl,
+          comments: '',
           type: 'Forum',
           access: 'CLC',
         });
@@ -124,14 +128,16 @@ class AdminController {
   async editPicAPI(evt) {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
-    const { youthName, youthURL, type } = this.view.state;
+    const {
+      youthName, youthURL, type, showCaption,
+    } = this.view.state;
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: youthName, url: youthURL, type, comments: youthURL, 
+          title: youthName, url: youthURL, type, comments: showCaption,
         });
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
@@ -143,6 +149,33 @@ class AdminController {
       return Promise.resolve(true);
     } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
+  }
+
+  handleEditorChange(homePageContent) { this.view.setState({ homePageContent }); return true; }
+
+  editor(homePageContent) {
+    return (
+      <Editor
+        apiKey={process.env.TINY_KEY}
+        initialValue={homePageContent}
+        init={{
+          height: 500,
+          menubar: 'insert tools',
+          selector: 'textarea',
+          menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount',
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor forecolor |'
+          + 'alignleft aligncenter alignright alignjustify |'
+          + 'bullist numlist outdent indent | removeformat | help',
+        }}
+        onEditorChange={this.handleEditorChange}
+      />
+    );
   }
 }
 export default AdminController;

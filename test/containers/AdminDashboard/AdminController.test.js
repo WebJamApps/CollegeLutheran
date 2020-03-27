@@ -119,4 +119,8 @@ describe('AdminController', () => {
     f.find('button').simulate('click');
     expect(controller.deleteBookApi).toHaveBeenCalled();
   });
+  it('handles change within the tinymce editor', () => {
+    r = controller.handleEditorChange('howdy');
+    expect(r).toBe(true);
+  });
 });

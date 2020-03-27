@@ -46,7 +46,7 @@ export class PhotoTable extends Component {
 
   setColumns() {
     const columns = [];
-    const titles = ['Thumbnail', 'Title', 'Link', 'Type', 'Modify'];
+    const titles = ['Thumbnail', 'Title', 'Caption', 'Link', 'Type', 'Modify'];
     for (let i = 0; i < titles.length; i += 1) {
       const label = titles[i];// eslint-disable-line security/detect-object-injection
       columns.push({
@@ -93,13 +93,14 @@ export class PhotoTable extends Component {
     return true;
   }
 
-  addThumbs(arr) { 
+  addThumbs(arr) {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
       const deletePicId = `deletePic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       const editPicId = `editPic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       newArr[i].link = `<a href=${arr[i].url} target="_blank">click to view</a>`;// eslint-disable-line security/detect-object-injection
+      newArr[i].caption = newArr[i].comments === 'showCaption' ? 'display' : 'hide'; 
       newArr[i].modify = (// eslint-disable-line security/detect-object-injection
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
