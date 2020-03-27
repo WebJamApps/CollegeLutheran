@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Editor } from '@tinymce/tinymce-react';
+// import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -32,7 +32,6 @@ export class AdminDashboard extends Component {
     this.addForumForm = this.addForumForm.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
-    this.handleEditorChange = this.handleEditorChange.bind(this);
     this.picButton = this.picButton.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.resetEditForm = this.resetEditForm.bind(this);
@@ -60,50 +59,16 @@ export class AdminDashboard extends Component {
     });
   }
 
-  handleEditorChange(homePageContent) {
-    console.log(homePageContent);// eslint-disable-line no-console
-    this.setState({ homePageContent });
-  }
-
-  editor() {
-    const { homePageContent } = this.state;
-    return (
-      <Editor
-        apiKey={process.env.TINY_KEY}
-        initialValue={homePageContent}
-        init={{
-          height: 500,
-          menubar: 'insert tools',
-          selector: 'textarea',
-          menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
-          plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount',
-          ],
-          toolbar:
-          'undo redo | formatselect | bold italic backcolor forecolor |'
-          + 'alignleft aligncenter alignright alignjustify |'
-          + 'bullist numlist outdent indent | removeformat | help',
-        }}
-        onEditorChange={this.handleEditorChange}
-      />
-    );
-  }
-
-  resetEditForm(evt) { // eslint-disable-line class-methods-use-this
+  resetEditForm(evt) {
     evt.preventDefault();
     const { dispatch } = this.props;
     dispatch({ type: 'EDIT_PIC', picData: {} });
     this.setState({
-      youthName: '',
-      youthURL: '',
-      type: '',
-      showCaption: '',
+      youthName: '', youthURL: '', type: '', showCaption: '',
     });
   }
 
-  picButton(picData, editPic) {
+  picButton(picData, editPic, youthName, youthURL, type) {
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
         {editPic._id ? (
@@ -118,7 +83,7 @@ export class AdminDashboard extends Component {
         ) : null}
         <button
           style={{ display: 'relative', position: 'inline-block' }}
-          disabled={picData.disabled()}
+          disabled={this.controller.validateBook(youthName, youthURL, type)}
           type="button"
           id={picData.buttonId}
           onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
@@ -133,23 +98,10 @@ export class AdminDashboard extends Component {
 
   handleRadioChange(evt) {
     this.checkEdit();
-    this.setState({
-      showCaption: evt.target.value,
-    });
+    this.setState({ showCaption: evt.target.value });
   }
 
-  changePicForm(picData) {
-    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' },
-      { type: 'otherPics', Category: 'Other Pics' }];// eslint-disable-next-line react/destructuring-assignment
-    let {
-      type, youthURL, youthName, showCaption,
-    } = this.state;
-    const { editPic } = this.props;
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
-    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
-    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
@@ -167,37 +119,25 @@ export class AdminDashboard extends Component {
             <input id="youthURL" value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
-          <div>
-            <label htmlFor="hide-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
-              <input
-                id="hide-caption"
-                type="radio"
-                name="hide-caption"
-                value="hideCaption"
-                checked={showCaption !== 'showCaption'}
-                onChange={this.handleRadioChange}
-                className="form-check-input"
-                style={{ minWidth: 0 }}
-              />
-              Hide Caption
-            </label>
-            <label htmlFor="show-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
-              <input
-                type="radio"
-                name="show-caption"
-                value="showCaption"
-                checked={showCaption === 'showCaption'}
-                onChange={this.handleRadioChange}
-                className="form-check-input"
-                style={{ minWidth: 0 }}
-              />
-              Show Caption
-            </label>
-          </div>
-          {this.picButton(picData, editPic)}
+          {this.forms.radioButtons(showCaption, this.handleRadioChange)}
+          {this.picButton(picData, editPic, youthName, youthURL, type)}
         </form>
       </div>
     );
+  }
+
+  changePicForm(picData) {
+    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
+      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
+    let {
+      type, youthURL, youthName, showCaption,
+    } = this.state;
+    const { editPic } = this.props;
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
+    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+    return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
   deleteForumForm(forumId, books) {
@@ -253,7 +193,7 @@ export class AdminDashboard extends Component {
   }
 
   changeHomepage() {
-    const { title } = this.state;
+    const { title, homePageContent } = this.state;
     return (
       <div className="horiz-scroll">
         <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
@@ -268,7 +208,7 @@ export class AdminDashboard extends Component {
             <label htmlFor="content">
               Content
               <br />
-              {this.editor()}
+              {this.controller.editor(homePageContent)}
             </label>
             <div style={{ marginLeft: '60%', marginTop: '10px' }}>
               <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
@@ -287,7 +227,6 @@ export class AdminDashboard extends Component {
       title: youthName, url: youthURL, comments: showCaption, type, access: 'CLC',
     };
     return this.changePicForm({
-      disabled: () => this.controller.validateBook(youthName, youthURL, type, showCaption),
       buttonId: 'addYouthPic',
       buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',

@@ -14,6 +14,7 @@ describe('Dashboard Container', () => {
       homeContent: { title: 'title', comments: 'comments' },
     };
     wrapper = shallow(<AdminDashboard
+      dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
       youthPics={props.youthPics}
@@ -54,14 +55,9 @@ describe('Dashboard Container', () => {
     wrapper.instance().onChange({ target: { id: 'youthPicsId', value: '456' } });
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
-  it('runs handleEditorChange to set state when entering something into tinymce editor', () => {
-    wrapper.instance().setState = jest.fn();
-    wrapper.update();
-    wrapper.instance().handleEditorChange('hi');
-    expect(wrapper.instance().setState).toHaveBeenCalled();
-  });
   it('renders with edit pic form', () => {
     const wrapper2 = shallow(<AdminDashboard
+      dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
       youthPics={props.youthPics}
@@ -79,6 +75,7 @@ describe('Dashboard Container', () => {
   });
   it('checks for edit data to set state for edit pictures', () => {
     const wrapper2 = shallow(<AdminDashboard
+      dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
       youthPics={props.youthPics}

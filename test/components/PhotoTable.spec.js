@@ -34,10 +34,10 @@ describe('PhotoTable', () => {
     expect(custom.type).toBe('div');
   });
   it('sets the columns with customBodyRender for Modify column', () => {
+    const buttonjsx = (<button type="button" style={{ display: 'block' }}>howdy</button>);
     expect(typeof wrapper.instance().setColumns).toBe('function');
     wrapper.instance().setColumns();
-    const custom = wrapper.instance().state.columns[4].options.customBodyRender('<a href="http://collegelutheran.org/"'
-    + ' rel="noopener noreferrer" target="_blank">College Lutheran Church</a>');
+    const custom = wrapper.instance().state.columns[5].options.customBodyRender(buttonjsx);
     expect(custom.type).toBe('div');
   });
   it('handles click on delete pic button', () => {

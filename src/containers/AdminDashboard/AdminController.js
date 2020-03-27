@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import React from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 
 class AdminController {
   constructor(view) {
@@ -11,6 +12,8 @@ class AdminController {
     this.addForumAPI = this.addForumAPI.bind(this);
     this.deletebookForm = this.deleteBookForm.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
+    this.editor = this.editor.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   async deleteBookApi(evt, id, redirect) {
@@ -146,6 +149,36 @@ class AdminController {
       return Promise.resolve(true);
     } console.log(r.body); // eslint-disable-line no-console
     return Promise.resolve(false);
+  }
+
+  handleEditorChange(homePageContent) {
+    console.log(homePageContent);// eslint-disable-line no-console
+    this.view.setState({ homePageContent });
+  }
+
+  editor(homePageContent) {
+    return (
+      <Editor
+        apiKey={process.env.TINY_KEY}
+        initialValue={homePageContent}
+        init={{
+          height: 500,
+          menubar: 'insert tools',
+          selector: 'textarea',
+          menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount',
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor forecolor |'
+          + 'alignleft aligncenter alignright alignjustify |'
+          + 'bullist numlist outdent indent | removeformat | help',
+        }}
+        onEditorChange={this.handleEditorChange}
+      />
+    );
   }
 }
 export default AdminController;
