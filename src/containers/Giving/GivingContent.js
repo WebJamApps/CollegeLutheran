@@ -12,7 +12,9 @@ const GivingContent = () => (
         <h3 style={{ paddingTop: '22px', paddingBottom: '15px', fontWeight: '100' }}>Giving</h3>
         <p>
           College Lutheran Church now accepts online gifts through GivePlus and Vanco Payment Services.
-          Giving with your credit card is easy. Just complete the form below to support the ministries of CLC with your offering!
+          Giving electronically from your bank account or credit card is easy.
+          {' '}
+          Just complete the form below to support the ministries of CLC with your offering!
         </p>
       </div>
       <p>&nbsp;</p>
