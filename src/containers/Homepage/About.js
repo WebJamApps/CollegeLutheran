@@ -13,23 +13,6 @@ const About = ({ homeContent, width, allPics }) => (
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
             College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          <h5>Due to COVID-19, All Gatherings at CLC Are Canceled until April 1</h5>
-          <p>
-            This includes worship services and community groups who use our building. To keep in contact during this uncertain time,
-            please sign up for our regular emails at
-            {' '}
-            <a href="https://www.collegelutheran.org/news" rel="noopener noreferrer" target="_blank">https://www.collegelutheran.org/news</a>
-            <br />
-            Links to previously sent emails are also on our
-            {' '}
-            <i>News</i>
-            {' '}
-            page in the
-            {' '}
-            <i>Accouncements</i>
-            {' '}
-            table.
-          </p>
           {/* <h5>Join Us for Holy Communion</h5>
           <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
             <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Service of Holy Communion, Sunday at 10:00 am</li>
