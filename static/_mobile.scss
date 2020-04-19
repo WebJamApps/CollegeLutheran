@@ -49,6 +49,55 @@
   }
 }
 
+// NavList Fixes
+
+@media screen and (max-width: 350px) {
+  // 320x480 android
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+
+// Galaxy S9/S9+
+@media screen and (min-width: 351px) and (max-width: 370px) {
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+// iPhone 6/7/8 iOS 11 && iPhone X/XS iOS 12
+@media screen and (min-width: 375px) and (max-width: 376px) {
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+// iPhone 6/7/8 Plus iOS 11
+@media screen and (min-width: 377px) and (max-width: 425px) {
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+
+// iPad
+@media screen and (min-width: 750px) and (max-width: 769px) {
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+// Kindle Fire HDX && Nexus 10
+@media screen and (min-width: 800px) and (max-width: 899px) {
+  .nav-list {
+    overflow-y: auto;
+    height: 100% !important;
+  }
+}
+
+// End NavList Fixes
+
 @media (min-width: 300px) and (max-width: 325px) {
   div.familySlideContainer {
     margin: 0 !important;
@@ -240,6 +289,11 @@
   height: 100%;
   z-index: 90000;
   background-color: rgb(192, 192, 192);
+  overflow-y: auto;
+  -webkit-appearance: none;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+
 }
 
 .navImage {
