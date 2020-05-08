@@ -100,12 +100,16 @@ export class PhotoTable extends Component {
       const deletePicId = `deletePic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       const editPicId = `editPic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       newArr[i].link = `<a href=${arr[i].url} target="_blank">click to view</a>`;// eslint-disable-line security/detect-object-injection
-      newArr[i].caption = newArr[i].comments === 'showCaption' ? 'display' : 'hide'; 
+      newArr[i].caption = newArr[i].comments === 'showCaption' ? 'display' : 'hide';
       newArr[i].modify = (// eslint-disable-line security/detect-object-injection
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
           <p>{' '}</p>
-          <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>Edit Pic</button>
+          <a href="admin/#picsForm" onClick="return false;">
+            <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>
+              Edit Pic
+            </button>
+          </a>
         </div>
       );
     }

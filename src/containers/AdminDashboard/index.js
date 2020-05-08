@@ -108,7 +108,7 @@ export class AdminDashboard extends Component {
           {' '}
           Pictures
         </h4>
-        <form>
+        <form id="picsForm">
           <label htmlFor="youthName">
             Picture Title
             <input id="youthName" value={youthName} onChange={this.onChange} />
