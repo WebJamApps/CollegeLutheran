@@ -17,9 +17,11 @@ export class PhotoTable extends Component {
     this.setColumns = this.setColumns.bind(this);
     this.getMuiTheme = this.getMuiTheme.bind(this);
     this.setColumns = this.setColumns.bind(this);
+    this.handleHideTable = this.handleHideTable.bind(this);
     this.addThumbs = this.addThumbs.bind(this);
     this.state = {
       columns: [],
+      showTable: true,
     };
   }
 
@@ -94,6 +96,10 @@ export class PhotoTable extends Component {
     return true;
   }
 
+  handleHideTable() {
+    this.setState({ showTable: false });
+  }
+
   addThumbs(arr) {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
@@ -107,7 +113,7 @@ export class PhotoTable extends Component {
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
           <p>{' '}</p>
           <Link to="/admin/#picsForm">
-            <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>
+            <button type="button" id={editPicId} onClick={() => { this.editPic(newArr[i]); this.handleHideTable(); }}>
               Edit Pic
             </button>
           </Link>
@@ -118,35 +124,40 @@ export class PhotoTable extends Component {
   }
 
   render() {
-    const { columns } = this.state;
+    const { columns, showTable } = this.state;
     const { familyPics, youthPics, otherPics } = this.props;
     let arr = familyPics.concat(youthPics);
     arr = arr.concat(otherPics);
     arr = this.addThumbs(arr);
-    return (
-      <div className="photoTable">
-        <div style={{ maxWidth: '9in', margin: 'auto' }}>
-          <MuiThemeProvider theme={this.getMuiTheme()}>
-            <MUIDataTable
-              options={{
-                filterType: 'dropdown',
-                pagination: false,
-                responsive: 'scrollMaxHeight',
-                filter: false,
-                download: false,
-                search: false,
-                print: false,
-                viewColumns: false,
-                selectableRows: 'none',
-                fixedHeader: false,
-              }}
-              columns={columns}
-              data={arr}
-              title="All Images"
-            />
-          </MuiThemeProvider>
+    if (showTable) {
+      return (
+        <div className="photoTable">
+          <div style={{ maxWidth: '9in', margin: 'auto' }}>
+            <MuiThemeProvider theme={this.getMuiTheme()}>
+              <MUIDataTable
+                options={{
+                  filterType: 'dropdown',
+                  pagination: false,
+                  responsive: 'scrollMaxHeight',
+                  filter: false,
+                  download: false,
+                  search: false,
+                  print: false,
+                  viewColumns: false,
+                  selectableRows: 'none',
+                  fixedHeader: false,
+                }}
+                columns={columns}
+                data={arr}
+                title="All Images"
+              />
+            </MuiThemeProvider>
+          </div>
         </div>
-      </div>
+      );
+    }
+    return (
+      <p>{' '}</p>
     );
   }
 }
