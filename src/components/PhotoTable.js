@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
+import { HashLink as Link } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -105,11 +106,11 @@ export class PhotoTable extends Component {
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
           <p>{' '}</p>
-          <a href="admin/#picsForm">
+          <Link to="/admin/#picsForm">
             <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>
               Edit Pic
             </button>
-          </a>
+          </Link>
         </div>
       );
     }
@@ -123,7 +124,7 @@ export class PhotoTable extends Component {
     arr = arr.concat(otherPics);
     arr = this.addThumbs(arr);
     return (
-      <div className="tourTable">
+      <div className="photoTable">
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
           <MuiThemeProvider theme={this.getMuiTheme()}>
             <MUIDataTable
