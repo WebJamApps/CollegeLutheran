@@ -105,7 +105,7 @@ export class PhotoTable extends Component {
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
           <p>{' '}</p>
-          <a href="admin/#picsForm" onClick="return false;">
+          <a href="admin/#picsForm">
             <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>
               Edit Pic
             </button>
