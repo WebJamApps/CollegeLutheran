@@ -35,9 +35,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName, bookURL, type) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName, bookURL, type, firstEdit) { // eslint-disable-line class-methods-use-this
     let disabled = true;
-    if (bookName !== '' && bookURL !== '' && type !== '') disabled = false;
+    if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 

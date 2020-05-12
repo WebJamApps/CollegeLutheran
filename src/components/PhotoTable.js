@@ -97,7 +97,9 @@ export class PhotoTable extends Component {
   }
 
   handleHideTable() {
-    this.setState({ showTable: false });
+    const { dispatch } = this.props;
+    dispatch({ type: 'SHOW_TABLE', showTable: false });
+    return true;
   }
 
   addThumbs(arr) {
@@ -125,11 +127,14 @@ export class PhotoTable extends Component {
 
   render() {
     const { columns, showTable } = this.state;
-    const { familyPics, youthPics, otherPics } = this.props;
+    const {
+      // eslint-disable-next-line react/prop-types
+      familyPics, youthPics, otherPics, showTableProp,
+    } = this.props;
     let arr = familyPics.concat(youthPics);
     arr = arr.concat(otherPics);
     arr = this.addThumbs(arr);
-    if (showTable) {
+    if (showTable || showTableProp) {
       return (
         <div className="photoTable">
           <div style={{ maxWidth: '9in', margin: 'auto' }}>

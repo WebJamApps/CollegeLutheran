@@ -23,6 +23,7 @@ export class AdminDashboard extends Component {
       youthURL: '',
       forumId: '',
       showCaption: '',
+      firstEdit: true,
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -40,8 +41,8 @@ export class AdminDashboard extends Component {
 
   onChange(evt, stateValue) {
     this.checkEdit();
-    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
-      : this.setState({ [evt.target.id]: evt.target.value });
+    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value, firstEdit: false })
+      : this.setState({ [evt.target.id]: evt.target.value, firstEdit: false });
   }
 
   checkEdit() {
@@ -62,12 +63,14 @@ export class AdminDashboard extends Component {
     evt.preventDefault();
     const { dispatch } = this.props;
     dispatch({ type: 'EDIT_PIC', picData: {} });
+    dispatch({ type: 'SHOW_TABLE', showTable: true });
     this.setState({
-      youthName: '', youthURL: '', type: '', showCaption: '',
+      youthName: '', youthURL: '', type: '', showCaption: '', firstEdit: true,
     });
   }
 
   picButton(picData, editPic, youthName, youthURL, type) {
+    const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
         {editPic._id ? (
@@ -82,7 +85,7 @@ export class AdminDashboard extends Component {
         ) : null}
         <button
           style={{ display: 'relative', position: 'inline-block' }}
-          disabled={this.controller.validateBook(youthName, youthURL, type)}
+          disabled={this.controller.validateBook(youthName, youthURL, type, firstEdit)}
           type="button"
           id={picData.buttonId}
           onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
@@ -234,6 +237,7 @@ export class AdminDashboard extends Component {
   }
 
   render() {
+    const { showTable } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -245,12 +249,12 @@ export class AdminDashboard extends Component {
         <p>{' '}</p>
         {this.changeYouthForm()}
         <p>{' '}</p>
-        <PTable />
+        {showTable ? <PTable /> : null }
       </div>
     );
   }
 }
-AdminDashboard.defaultProps = { editPic: {} };
+AdminDashboard.defaultProps = { editPic: {}, showTable: true };
 AdminDashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
   editPic: PropTypes.shape({
@@ -259,5 +263,6 @@ AdminDashboard.propTypes = {
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  showTable: PropTypes.bool,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));
