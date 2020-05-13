@@ -21,7 +21,6 @@ export class PhotoTable extends Component {
     this.addThumbs = this.addThumbs.bind(this);
     this.state = {
       columns: [],
-      showTable: true,
       options: {
         filterType: 'dropdown',
         pagination: false,
@@ -138,39 +137,35 @@ export class PhotoTable extends Component {
   }
 
   render() {
-    const { columns, showTable, options } = this.state;
+    const { columns, options } = this.state;
     const {
-      familyPics, youthPics, otherPics, showTableProp,
+      familyPics, youthPics, otherPics,
     } = this.props;
     let arr = familyPics.concat(youthPics);
     arr = arr.concat(otherPics);
     arr = this.addThumbs(arr);
-    if (showTable || showTableProp) {
-      return (
-        <div className="photoTable">
-          <div style={{ maxWidth: '9in', margin: 'auto' }}>
-            <MuiThemeProvider theme={this.getMuiTheme()}>
-              <MUIDataTable
-                options={options}
-                columns={columns}
-                data={arr}
-                title="All Images"
-              />
-            </MuiThemeProvider>
-          </div>
+    return (
+      <div className="photoTable">
+        <div style={{ maxWidth: '9in', margin: 'auto' }}>
+          <MuiThemeProvider theme={this.getMuiTheme()}>
+            <MUIDataTable
+              options={options}
+              columns={columns}
+              data={arr}
+              title="All Images"
+            />
+          </MuiThemeProvider>
         </div>
-      );
-    } return null;
+      </div>
+    );
   }
 }
-PhotoTable.defaultProps = { showTableProp: true };
 PhotoTable.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  showTableProp: PropTypes.bool,
 };
 
 export default connect(mapStoreToProps)(PhotoTable);
