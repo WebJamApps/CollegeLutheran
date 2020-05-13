@@ -142,6 +142,7 @@ class AdminController {
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
+      dispatch({ type: 'SHOW_TABLE', showTable: true });
       this.view.setState({
         isEdit: false, youthName: '', youthURL: '', type: '',
       });
