@@ -112,11 +112,11 @@ export class AdminDashboard extends Component {
         <form id="picsForm">
           <label htmlFor="youthName">
             Picture Title
-            <input id="youthName" value={youthName} onChange={this.onChange} />
+            <input id="youthName" placeholder={editPic.title} value={youthName} onChange={this.onChange} />
           </label>
           <label htmlFor="youthURL">
             Image Address
-            <input id="youthURL" value={youthURL} onChange={this.onChange} />
+            <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
           {this.forms.radioButtons(showCaption, this.handleRadioChange)}
@@ -133,8 +133,8 @@ export class AdminDashboard extends Component {
       type, youthURL, youthName, showCaption,
     } = this.state;
     const { editPic } = this.props;
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
-    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = youthURL.state; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = youthName.state; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
     return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
