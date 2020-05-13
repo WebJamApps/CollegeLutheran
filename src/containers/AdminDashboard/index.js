@@ -104,7 +104,7 @@ export class AdminDashboard extends Component {
 
   changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}>
         <h4 className="material-header-h4">
           {editPic._id ? 'Edit ' : 'Add '}
           Pictures
@@ -165,7 +165,7 @@ export class AdminDashboard extends Component {
     const { announcementtitle, announcementurl, forumId } = this.state;
     const { books } = this.props;
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>Announcements Table</h5>
         <form
           id="create-forum"
@@ -196,7 +196,7 @@ export class AdminDashboard extends Component {
     const { title, homePageContent } = this.state;
     return (
       <div className="horiz-scroll">
-        <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
+        <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
           <h5>Change Homepage Section</h5>
           <form
             id="create-homepage"
@@ -240,12 +240,8 @@ export class AdminDashboard extends Component {
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
-        <p>{' '}</p>
-        <p><hr /></p>
         {this.addForumForm()}
-        <p>{' '}</p>
         {this.changeYouthForm()}
-        <p>{' '}</p>
         {showTable ? <PTable /> : null }
       </div>
     );
