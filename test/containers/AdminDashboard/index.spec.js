@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
+import PTable from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
   let props, wrapper;
@@ -68,6 +69,7 @@ describe('Dashboard Container', () => {
         title: 'title', url: 'url', type: 'otherPics', _id: '123',
       }}
     />);
+    wrapper2.instance().setState = jest.fn();
     const cpf = wrapper2.instance().changePicForm({ disabled: jest.fn() });
     const d = shallow(cpf);
     const h = d.find('h4').text();
@@ -100,5 +102,21 @@ describe('Dashboard Container', () => {
     wrapper.instance().setState = jest.fn((obj) => expect(obj.youthName).toBe(''));
     wrapper.update();
     wrapper.instance().resetEditForm({ preventDefault: () => {} });
+  });
+  it('doesnt show PTable when showTable is true', () => {
+    const wrapper2 = shallow(<AdminDashboard
+      dispatch={(fun) => fun}
+      auth={props.auth}
+      books={props.books}
+      youthPics={props.youthPics}
+      familyPics={props.familyPics}
+      otherPics={props.otherPics}
+      homeContent={props.homeContent}
+      editPic={{
+        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
+      }}
+      showTable={false}
+    />);
+    expect(wrapper2.find(<PTable />).exists()).toBe(false);
   });
 });
