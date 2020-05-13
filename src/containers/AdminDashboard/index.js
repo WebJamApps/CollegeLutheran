@@ -90,8 +90,7 @@ export class AdminDashboard extends Component {
           id={picData.buttonId}
           onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
         >
-          {editPic._id ? 'Edit' : 'Add'}
-          {' '}
+          {editPic._id ? 'Edit ' : 'Add '}
           Pic
         </button>
       </div>
@@ -107,8 +106,7 @@ export class AdminDashboard extends Component {
     return (
       <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
         <h4 className="material-header-h4">
-          {editPic._id ? 'Edit' : 'Add'}
-          {' '}
+          {editPic._id ? 'Edit ' : 'Add '}
           Pictures
         </h4>
         <form id="picsForm">
@@ -243,8 +241,7 @@ export class AdminDashboard extends Component {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         <p>{' '}</p>
-        <p>{' '}</p>
-        <hr />
+        <p><hr /></p>
         {this.addForumForm()}
         <p>{' '}</p>
         {this.changeYouthForm()}

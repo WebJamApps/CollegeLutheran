@@ -22,6 +22,18 @@ export class PhotoTable extends Component {
     this.state = {
       columns: [],
       showTable: true,
+      options: {
+        filterType: 'dropdown',
+        pagination: false,
+        responsive: 'scrollMaxHeight',
+        filter: false,
+        download: false,
+        search: false,
+        print: false,
+        viewColumns: false,
+        selectableRows: 'none',
+        fixedHeader: false,
+      },
     };
   }
 
@@ -126,9 +138,8 @@ export class PhotoTable extends Component {
   }
 
   render() {
-    const { columns, showTable } = this.state;
+    const { columns, showTable, options } = this.state;
     const {
-      // eslint-disable-next-line react/prop-types
       familyPics, youthPics, otherPics, showTableProp,
     } = this.props;
     let arr = familyPics.concat(youthPics);
@@ -140,18 +151,7 @@ export class PhotoTable extends Component {
           <div style={{ maxWidth: '9in', margin: 'auto' }}>
             <MuiThemeProvider theme={this.getMuiTheme()}>
               <MUIDataTable
-                options={{
-                  filterType: 'dropdown',
-                  pagination: false,
-                  responsive: 'scrollMaxHeight',
-                  filter: false,
-                  download: false,
-                  search: false,
-                  print: false,
-                  viewColumns: false,
-                  selectableRows: 'none',
-                  fixedHeader: false,
-                }}
+                options={options}
                 columns={columns}
                 data={arr}
                 title="All Images"
@@ -160,18 +160,17 @@ export class PhotoTable extends Component {
           </div>
         </div>
       );
-    }
-    return (
-      <p>{' '}</p>
-    );
+    } return null;
   }
 }
+PhotoTable.defaultProps = { showTableProp: true };
 PhotoTable.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  showTableProp: PropTypes.bool,
 };
 
 export default connect(mapStoreToProps)(PhotoTable);
