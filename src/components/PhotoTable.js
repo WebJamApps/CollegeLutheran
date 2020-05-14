@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
+import { HashLink as Link } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -16,9 +17,22 @@ export class PhotoTable extends Component {
     this.setColumns = this.setColumns.bind(this);
     this.getMuiTheme = this.getMuiTheme.bind(this);
     this.setColumns = this.setColumns.bind(this);
+    this.handleHideTable = this.handleHideTable.bind(this);
     this.addThumbs = this.addThumbs.bind(this);
     this.state = {
       columns: [],
+      options: {
+        filterType: 'dropdown',
+        pagination: false,
+        responsive: 'scrollMaxHeight',
+        filter: false,
+        download: false,
+        search: false,
+        print: false,
+        viewColumns: false,
+        selectableRows: 'none',
+        fixedHeader: false,
+      },
     };
   }
 
@@ -93,6 +107,12 @@ export class PhotoTable extends Component {
     return true;
   }
 
+  handleHideTable() {
+    const { dispatch } = this.props;
+    dispatch({ type: 'SHOW_TABLE', showTable: false });
+    return true;
+  }
+
   addThumbs(arr) {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
@@ -100,12 +120,16 @@ export class PhotoTable extends Component {
       const deletePicId = `deletePic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       const editPicId = `editPic${newArr[i]._id}`;// eslint-disable-line security/detect-object-injection
       newArr[i].link = `<a href=${arr[i].url} target="_blank">click to view</a>`;// eslint-disable-line security/detect-object-injection
-      newArr[i].caption = newArr[i].comments === 'showCaption' ? 'display' : 'hide'; 
+      newArr[i].caption = newArr[i].comments === 'showCaption' ? 'display' : 'hide';
       newArr[i].modify = (// eslint-disable-line security/detect-object-injection
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
           <p>{' '}</p>
-          <button type="button" id={editPicId} onClick={() => this.editPic(newArr[i])}>Edit Pic</button>
+          <Link to="/admin/#picsForm">
+            <button type="button" id={editPicId} onClick={() => { this.editPic(newArr[i]); this.handleHideTable(); }}>
+              Edit Pic
+            </button>
+          </Link>
         </div>
       );
     }
@@ -113,28 +137,19 @@ export class PhotoTable extends Component {
   }
 
   render() {
-    const { columns } = this.state;
-    const { familyPics, youthPics, otherPics } = this.props;
+    const { columns, options } = this.state;
+    const {
+      familyPics, youthPics, otherPics,
+    } = this.props;
     let arr = familyPics.concat(youthPics);
     arr = arr.concat(otherPics);
     arr = this.addThumbs(arr);
     return (
-      <div className="tourTable">
+      <div className="photoTable">
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
           <MuiThemeProvider theme={this.getMuiTheme()}>
             <MUIDataTable
-              options={{
-                filterType: 'dropdown',
-                pagination: false,
-                responsive: 'scrollMaxHeight',
-                filter: false,
-                download: false,
-                search: false,
-                print: false,
-                viewColumns: false,
-                selectableRows: 'none',
-                fixedHeader: false,
-              }}
+              options={options}
               columns={columns}
               data={arr}
               title="All Images"

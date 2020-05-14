@@ -5,6 +5,7 @@ import familyReducer from './reducers/familyReducer';
 import youthReducer from './reducers/youthReducer';
 import booksReducer from './reducers/booksReducer';
 import otherReducer from './reducers/otherReducer';
+import tableReducer from './reducers/tableReducer';
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   youthPics: youthReducer,
   books: booksReducer,
   otherPics: otherReducer,
+  showTable: tableReducer,
 });
 
 export default reducer;
