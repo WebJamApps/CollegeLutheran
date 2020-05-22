@@ -1,5 +1,6 @@
 {
   "verbose": true,
+  "resetMocks": true,
   "bail": true,
   "setupFiles": [
     "core-js/stable",
