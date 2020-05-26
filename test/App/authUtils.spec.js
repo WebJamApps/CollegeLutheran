@@ -21,7 +21,7 @@ describe('authUtils', () => {
   it('sets the user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
     jwt.encode = jest.fn(() => 'token');
-    request.setMockResponse({ body: {} });
+    request.get = () => ({ set: () => ({ set: () => Promise.resolve({ body: {} }) }) });
     delete window.location;
     window.location = {
       href: '/',

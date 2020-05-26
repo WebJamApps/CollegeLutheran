@@ -1,6 +1,7 @@
 {
   "verbose": true,
   "bail": true,
+  "resetMocks": true,
   "setupFiles": [
     "core-js/stable",
     "regenerator-runtime/runtime",

@@ -20,4 +20,16 @@ describe('fetch reducer', () => {
       },
     );
   });
+  it('sets empty array if data is null', () => {
+    expect(
+      reducer(undefined, {
+        type: 'GOT_FAMILYPICS',
+        data: null,
+      }),
+    ).toEqual(
+      {
+        familyPics: [],
+      },
+    );
+  });
 });
