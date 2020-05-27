@@ -1,6 +1,6 @@
 {
-  "name": "CollegeLutheran",
-  "version": "0.1.0",
+  "name": "collegelutheran",
+  "version": "0.1.1",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=14.1.0"
+    "node": ">=14.2.0"
   },
   "files": [
     "webpack.config.js",
@@ -19,7 +19,7 @@
   ],
   "keywords": [
     "React",
-    "Babel",
+    "Typescript",
     "Webpack",
     "Jest"
   ],
@@ -52,6 +52,7 @@
     "@popperjs/core": "latest",
     "@tinymce/tinymce-react": "latest",
     "@types/react": "latest",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "latest",
     "bluebird": "latest",
     "bootstrap": "latest",
@@ -94,6 +95,7 @@
     "slick-carousel": "latest",
     "snyk": "^1.290.1",
     "socketcluster-client": "latest",
+    "source-map-loader": "^1.0.0",
     "style-loader": "latest",
     "stylelint-config-recommended-scss": "latest",
     "superagent": "latest",
