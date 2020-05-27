@@ -35,9 +35,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName, bookURL, type) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName, bookURL, type, firstEdit) { // eslint-disable-line class-methods-use-this
     let disabled = true;
-    if (bookName !== '' && bookURL !== '' && type !== '') disabled = false;
+    if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 
@@ -142,6 +142,7 @@ class AdminController {
     } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
+      dispatch({ type: 'SHOW_TABLE', showTable: true });
       this.view.setState({
         isEdit: false, youthName: '', youthURL: '', type: '',
       });

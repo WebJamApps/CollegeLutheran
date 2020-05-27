@@ -23,6 +23,7 @@ export class AdminDashboard extends Component {
       youthURL: '',
       forumId: '',
       showCaption: '',
+      firstEdit: true,
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -40,8 +41,8 @@ export class AdminDashboard extends Component {
 
   onChange(evt, stateValue) {
     this.checkEdit();
-    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value })
-      : this.setState({ [evt.target.id]: evt.target.value });
+    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value, firstEdit: false })
+      : this.setState({ [evt.target.id]: evt.target.value, firstEdit: false });
   }
 
   checkEdit() {
@@ -62,12 +63,14 @@ export class AdminDashboard extends Component {
     evt.preventDefault();
     const { dispatch } = this.props;
     dispatch({ type: 'EDIT_PIC', picData: {} });
+    dispatch({ type: 'SHOW_TABLE', showTable: true });
     this.setState({
-      youthName: '', youthURL: '', type: '', showCaption: '',
+      youthName: '', youthURL: '', type: '', showCaption: '', firstEdit: true,
     });
   }
 
   picButton(picData, editPic, youthName, youthURL, type) {
+    const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
         {editPic._id ? (
@@ -82,13 +85,12 @@ export class AdminDashboard extends Component {
         ) : null}
         <button
           style={{ display: 'relative', position: 'inline-block' }}
-          disabled={this.controller.validateBook(youthName, youthURL, type)}
+          disabled={this.controller.validateBook(youthName, youthURL, type, firstEdit)}
           type="button"
           id={picData.buttonId}
           onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
         >
-          {editPic._id ? 'Edit' : 'Add'}
-          {' '}
+          {editPic._id ? 'Edit ' : 'Add '}
           Pic
         </button>
       </div>
@@ -102,20 +104,19 @@ export class AdminDashboard extends Component {
 
   changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}>
         <h4 className="material-header-h4">
-          {editPic._id ? 'Edit' : 'Add'}
-          {' '}
+          {editPic._id ? 'Edit ' : 'Add '}
           Pictures
         </h4>
-        <form>
+        <form id="picsForm">
           <label htmlFor="youthName">
             Picture Title
-            <input id="youthName" value={youthName} onChange={this.onChange} />
+            <input id="youthName" placeholder={editPic.title} value={youthName} onChange={this.onChange} />
           </label>
           <label htmlFor="youthURL">
             Image Address
-            <input id="youthURL" value={youthURL} onChange={this.onChange} />
+            <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.onChange} />
           </label>
           {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
           {this.forms.radioButtons(showCaption, this.handleRadioChange)}
@@ -132,8 +133,8 @@ export class AdminDashboard extends Component {
       type, youthURL, youthName, showCaption,
     } = this.state;
     const { editPic } = this.props;
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
-    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
+    if (youthURL === '' && editPic.url !== undefined) { youthURL = youthURL.state; }
+    if (youthName === '' && editPic.title !== undefined) { youthName = youthName.state; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
     return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
@@ -164,7 +165,7 @@ export class AdminDashboard extends Component {
     const { announcementtitle, announcementurl, forumId } = this.state;
     const { books } = this.props;
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: 'auto' }}>
+      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>Announcements Table</h5>
         <form
           id="create-forum"
@@ -195,7 +196,7 @@ export class AdminDashboard extends Component {
     const { title, homePageContent } = this.state;
     return (
       <div className="horiz-scroll">
-        <div className="material-content elevation3" style={{ width: '850px', margin: 'auto' }}>
+        <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
           <h5>Change Homepage Section</h5>
           <form
             id="create-homepage"
@@ -234,23 +235,19 @@ export class AdminDashboard extends Component {
   }
 
   render() {
+    const { showTable } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
-        <p>{' '}</p>
-        <p>{' '}</p>
-        <hr />
         {this.addForumForm()}
-        <p>{' '}</p>
         {this.changeYouthForm()}
-        <p>{' '}</p>
-        <PTable />
+        {showTable ? <PTable /> : null }
       </div>
     );
   }
 }
-AdminDashboard.defaultProps = { editPic: {} };
+AdminDashboard.defaultProps = { editPic: {}, showTable: true };
 AdminDashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
   editPic: PropTypes.shape({
@@ -259,5 +256,6 @@ AdminDashboard.propTypes = {
   homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
   books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  showTable: PropTypes.bool,
 };
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));

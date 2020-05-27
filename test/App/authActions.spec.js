@@ -8,6 +8,7 @@ const mockStore = configureMockStore(middlewares);
 
 describe('authActions', () => {
   it('authenticates', async () => {
+    request.post = jest.fn(() => ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) }));
     const store = mockStore({ auth: { isAuthenticated: false } });
     const result = await store.dispatch(authenticate({ code: 'someCode' }));
     expect(result).toBe(true);
@@ -19,7 +20,9 @@ describe('authActions', () => {
   });
   it('returns false when nothing is returned from Google', async () => {
     const store = mockStore({ auth: { isAuthenticated: false } });
-    request.setMockResponse({ });
+    request.post = () => ({
+      set: () => ({ send: async () => ({ body: undefined }) }),
+    });
     const result = await store.dispatch(authenticate({ code: 'someCode' }));
     expect(result).toBe(false);
   });
