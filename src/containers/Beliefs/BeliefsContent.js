@@ -8,7 +8,7 @@ const BeliefsContent = () => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingBottom: '15px', fontWeight: '100', paddingTop: '22px' }}>Our Lutheran Beliefs</h3>
+        <h3 style={{ paddingBottom: '15px', paddingTop: '22px' }}>Our Lutheran Beliefs</h3>
         <p>
           <span style={{ color: 'rgb(0, 51, 102)' }}>
             <strong>We believe that the Holy Bible is God&rsquo;s inspired Word.</strong>

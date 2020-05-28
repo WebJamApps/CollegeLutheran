@@ -14,7 +14,7 @@ const FamilyContent = ({ familyPics }) => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>Children and Families</h3>
+        <h3 style={{ paddingBottom: '15px' }}>Children and Families</h3>
         <p>
           <span style={{ color: 'rgb(0, 51, 102)' }}>
             <strong>

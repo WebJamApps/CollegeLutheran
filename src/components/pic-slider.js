@@ -44,6 +44,7 @@ PicSlider.defaultProps = {
 };
 
 PicSlider.propTypes = {
+  // @ts-ignore
   data: PropTypes.arrayOf(PropTypes.shape),
 };
 
