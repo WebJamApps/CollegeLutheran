@@ -21,7 +21,7 @@ const baseUrl = '/';
 const scssRules = [{ loader: 'sass-loader' }];
 
 module.exports = ({
-  production, coverage, analyze,
+  production, analyze,
 } = {
 }) => ({
   resolve: {
