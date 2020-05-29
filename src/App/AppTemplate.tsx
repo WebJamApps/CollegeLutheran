@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
@@ -9,6 +8,13 @@ import Footer from './Footer';
 import menuUtils from './menuUtils';
 import menuItems from './menuItems.json';
 
+interface AppMainProps {
+  location: { pathname: string };
+  heartBeat: string;
+  userCount: number;
+  auth: { isAuthenticated: boolean; user: { userType: string }};
+  dispatch: (...args: any) => any;
+}
 export class AppTemplate extends Component {
   constructor(props) {
     super(props);
