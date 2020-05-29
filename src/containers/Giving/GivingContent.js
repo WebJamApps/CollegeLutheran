@@ -9,7 +9,7 @@ const GivingContent = () => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingTop: '22px', paddingBottom: '15px', fontWeight: '100' }}>Giving</h3>
+        <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Giving</h3>
         <p>
           College Lutheran Church now accepts online gifts through GivePlus and Vanco Payment Services.
           Giving electronically from your bank account or credit card is easy.

@@ -40,10 +40,10 @@ export class PhotoTable extends Component {
 
   getMuiTheme() { // eslint-disable-line class-methods-use-this
     return createMuiTheme({
-      typography: {
-        useNextVariants: true,
-      },
+      // @ts-ignore
+      typography: { useNextVariants: true },
       overrides: {
+        // @ts-ignore
         MUIDataTableHeadCell: {
           root: {
             padding: '4px', fontWeight: 'bold', color: 'black', fontSize: '11pt',

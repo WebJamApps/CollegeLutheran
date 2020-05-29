@@ -15,4 +15,5 @@ render(
   </Provider>, document.getElementById('root'),
 );
 /* istanbul ignore if */
+// @ts-ignore
 if (process.env.NODE_ENV === 'development') module.hot.accept();

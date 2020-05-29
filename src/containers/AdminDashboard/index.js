@@ -75,7 +75,7 @@ export class AdminDashboard extends Component {
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
         {editPic._id ? (
           <button
-            style={{ display: 'relative', position: 'inline-block', marginRight: '20px' }}
+            style={{ display: 'relative', marginRight: '20px' }}
             type="button"
             id="cancel-edit-pic"
             onClick={this.resetEditForm}
@@ -84,7 +84,7 @@ export class AdminDashboard extends Component {
           </button>
         ) : null}
         <button
-          style={{ display: 'relative', position: 'inline-block' }}
+          style={{ display: 'relative' }}
           disabled={this.controller.validateBook(youthName, youthURL, type, firstEdit)}
           type="button"
           id={picData.buttonId}
@@ -129,12 +129,9 @@ export class AdminDashboard extends Component {
   changePicForm(picData) {
     const options = [{ type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
-    let {
-      type, youthURL, youthName, showCaption,
-    } = this.state;
+    const { youthURL, youthName } = this.state;
+    let { type, showCaption } = this.state;
     const { editPic } = this.props;
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = youthURL.state; }
-    if (youthName === '' && editPic.title !== undefined) { youthName = youthName.state; }
     if (type === '' && editPic.type !== undefined) { type = editPic.type; }
     if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
     return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);

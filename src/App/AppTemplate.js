@@ -37,8 +37,8 @@ export class AppTemplate extends Component {
       headerImageClass: 'home-header-image',
       sidebarClass: 'home-sidebar',
       menuToggleClass: 'home-menu-toggle',
+      sidebarImagePath: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png',
     };
-    result.sidebarImagePath = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png';
     return result;
   }
 
@@ -52,9 +52,9 @@ export class AppTemplate extends Component {
 
   responseGoogleLogout(response) { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(response, dispatch); }
 
-  close(e) {
+  close() {
     this.setState({ menuOpen: false });
-    if (e.target.classList.contains('loginGoogle')) return this.loginGoogle();
+    // if (e.target.classList.contains('loginGoogle')) return this.loginGoogle();
     return true;
   }
 
@@ -85,7 +85,7 @@ export class AppTemplate extends Component {
       );
     } return (
       <div key={index} className="menu-item googleLogout">
-        <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={this.responseGoogleLogout} cookiePolicy="single_host_origin" />
+        <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={this.responseGoogleLogout} />
       </div>
     );
   }

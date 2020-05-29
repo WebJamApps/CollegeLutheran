@@ -23,7 +23,7 @@ const StaffContent = () => (
     <div>
       <div className="container-fluid">
         <div style={{ padding: '15px', marginTop: '20px' }}>
-          <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>
+          <h3 style={{ paddingBottom: '15px' }}>
             Meet Our Staff
           </h3>
           <p>

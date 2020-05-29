@@ -10,7 +10,7 @@ const YouthContent = ({ youthPics }) => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingTop: '22px', paddingBottom: '15px', fontWeight: '100' }}>Youth Ministry</h3>
+        <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Youth Ministry</h3>
         <p>
           <span style={{ color: 'rgb(0, 51, 102)' }}>
             <strong>

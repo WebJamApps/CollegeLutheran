@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const WideFacebookFeed = ({ width }) => {
-  let mb = '32px', mt = 0;
-  if (width < 1092) { mb = 0; mt = '32px'; }
+  let mb = '32px', mt = '0px';
+  if (width < 1092) { mb = '0px'; mt = '32px'; }
   return (
     <div className="row" style={{ marginLeft: '10px' }}>
       <div className="col" style={{ maxWidth: '600px', margin: 'auto', paddingRight: '10px' }}>
