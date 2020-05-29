@@ -49,24 +49,24 @@ describe('authUtils', () => {
     const result = await authUtils.setUser(controllerStub);
     expect(result).toBe(true);
   });
-  it('logs out when not /dashboard', async () => {
+  it('logs out when not /dashboard', () => {
     delete window.location;
     window.location = {
       href: '/',
       assign: jest.fn(),
       reload: jest.fn(),
     };
-    const result = await authUtils.responseGoogleLogout('howdy', () => {});
-    expect(result).toBe('howdy');
+    authUtils.responseGoogleLogout(() => {});
+    expect(window.location.reload).toHaveBeenCalled();
   });
-  it('logs out when /admin', async () => {
+  it('logs out when /admin', () => {
     delete window.location;
     window.location = {
       href: '/admin',
       assign: jest.fn(),
       reload: jest.fn(),
     };
-    const result = await authUtils.responseGoogleLogout('howdy', () => {});
-    expect(result).toBe('howdy');
+    authUtils.responseGoogleLogout(() => {});
+    expect(window.location.assign).toHaveBeenCalled();
   });
 });

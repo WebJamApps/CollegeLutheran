@@ -79,5 +79,5 @@ const radioButtons = (showCaption, onChange) => (
   </div>
 );
 export default {
-  makeInput, makeDropdown, radioButtons, makeDataDropdown, 
+  makeInput, makeDropdown, radioButtons, makeDataDropdown,
 };
