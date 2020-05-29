@@ -45,10 +45,10 @@ const responseGoogleFailLogin = (response) => {
   return false;
 };
 
-const responseGoogleLogout = (response, dispatch) => {
+const responseGoogleLogout = (dispatch) => {
   dispatch(logout());
-  if (window.location.href.includes('/admin')) window.location.assign('/staff');
-  return Promise.resolve(response);
+  if (window.location.href.includes('/admin')) return window.location.assign('/staff');
+  return window.location.reload();
 };
 
 export default {
