@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
@@ -9,8 +8,30 @@ import Footer from './Footer';
 import menuUtils from './menuUtils';
 import menuItems from './menuItems.json';
 
-export class AppTemplate extends Component {
-  constructor(props) {
+interface AppMainProps {
+  children: any;
+  location: { pathname: string };
+  auth: { isAuthenticated: boolean; user: { userType: string } };
+  dispatch: (...args: any) => any;
+}
+
+interface AppMainState { menuOpen: boolean }
+export class AppTemplate extends Component<AppMainProps, AppMainState> {
+  static defaultProps = {
+    dispatch: /* istanbul ignore next */() => { }, auth: { isAuthenticated: false, user: { userType: '' } },
+  };
+
+  menuUtils: any;
+
+  children: any;
+
+  authUtils: any;
+
+  appMainUtils: any;
+
+  menus: any[];
+
+  constructor(props: any) {
     super(props);
     this.menus = menuItems.menus;
     this.menuUtils = menuUtils;
@@ -27,16 +48,10 @@ export class AppTemplate extends Component {
     this.authUtils = authUtils;
   }
 
-  get currentStyles() {
-    let result = {};
-    this.style = 'wj';
-    result = {
-      headerImagePath: '../static/imgs/webjamicon7.png',
-      headerText1: 'Web Jam LLC',
+  get currentStyles() { // eslint-disable-line class-methods-use-this
+    const result = {
       headerClass: 'home-header',
-      headerImageClass: 'home-header-image',
       sidebarClass: 'home-sidebar',
-      menuToggleClass: 'home-menu-toggle',
       sidebarImagePath: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png',
     };
     return result;
@@ -50,7 +65,7 @@ export class AppTemplate extends Component {
 
   responseGoogleLogin(response) { return this.authUtils.responseGoogleLogin(response, this); }
 
-  responseGoogleLogout(response) { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(response, dispatch); }
+  responseGoogleLogout() { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
 
   close() {
     this.setState({ menuOpen: false });
@@ -95,7 +110,7 @@ export class AppTemplate extends Component {
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>
           <i className={`${menu.iconClass}`} />
-        &nbsp;
+          &nbsp;
           <span className="nav-item">{menu.name}</span>
         </Link>
       </div>
@@ -170,7 +185,7 @@ export class AppTemplate extends Component {
               style={{ width: '86px', marginRight: 0, marginLeft: 0 }}
             />
           </div>
-          { this.navLinks() }
+          {this.navLinks()}
         </div>
       </div>
     );
@@ -190,7 +205,7 @@ export class AppTemplate extends Component {
             <div className="swipe-area" />
             {this.headerSection()}
             <div style={{ width: 'auto' }} id="contentBlock" className="content-block">
-              { this.children }
+              {this.children}
               <Footer />
             </div>
           </div>
@@ -199,18 +214,5 @@ export class AppTemplate extends Component {
     );
   }
 }
-/* istanbul ignore next */
-AppTemplate.defaultProps = {
-  dispatch: () => {}, auth: { isAuthenticated: false, user: { userType: '' } },
-};
-
-AppTemplate.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool,
-    user: PropTypes.shape({ userType: PropTypes.string }),
-  }),
-  dispatch: PropTypes.func,
-  children: PropTypes.element.isRequired,
-};
+// @ts-ignore
 export default withRouter(connect(mapStoreToProps, null)(AppTemplate));

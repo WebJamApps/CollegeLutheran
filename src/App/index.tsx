@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import superagent from 'superagent';
@@ -20,8 +19,26 @@ import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from './fetch';
 
-export class App extends Component {
-  constructor(props) {
+export interface AppProps {
+  dispatch: (...args: any[]) => any;
+  auth: {
+    user: {
+      userType?: string;
+    };
+    isAuthenticated?: boolean;
+  };
+}
+export class App extends Component<AppProps> {
+  fetch:any;
+
+  superagent:any;
+
+  static defaultProps = {
+    dispatch: () => {},
+    auth: { isAuthenticated: false, user: { userType: '' } },
+  };
+
+  constructor(props: any) {
     super(props);
     this.fetch = fetch;
     this.state = {};
@@ -42,7 +59,7 @@ export class App extends Component {
     return (
       <div id="App" className="App">
         <Router>
-          <AppTemplateDefault id="homepage">
+          <AppTemplateDefault>
             <Switch>
               <Route exact path="/" component={DefaultHome} />
               <Route path="/music" component={DefaultMusic} />
@@ -64,9 +81,5 @@ export class App extends Component {
     );
   }
 }
-App.propTypes = {
-  auth: PropTypes.shape({ user: PropTypes.shape({ userType: PropTypes.string }), isAuthenticated: PropTypes.bool }),
-};
-App.defaultProps = { auth: { isAuthenticated: false, user: { userType: '' } } };
 
 export default connect(mapStoreToProps, null)(App);

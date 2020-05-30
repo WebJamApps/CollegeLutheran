@@ -149,6 +149,7 @@ export class PhotoTable extends Component {
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
           <MuiThemeProvider theme={this.getMuiTheme()}>
             <MUIDataTable
+            // @ts-ignore
               options={options}
               columns={columns}
               data={arr}
