@@ -10,6 +10,7 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const randomizePics = async (view, w) => {
   if (w >= 900) await delay(4000);
+  if (w < 900) await delay(3000);
   const { familyPics, youthPics, otherPics } = view.props;
   let arr = familyPics.concat(youthPics);
   arr = arr.concat(otherPics);
