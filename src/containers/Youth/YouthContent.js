@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PicSlider from '../../components/pic-slider';
+import PicSlider from '../../components/PicSlider';
 
 const YouthContent = ({ youthPics }) => (
   <div className="page-content">

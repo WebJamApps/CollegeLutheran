@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
@@ -8,9 +8,8 @@ import Footer from './Footer';
 import menuUtils from './menuUtils';
 import menuItems from './menuItems.json';
 
-interface AppMainProps {
+interface AppMainProps extends RouteComponentProps{
   children: any;
-  location: { pathname: string };
   auth: { isAuthenticated: boolean; user: { userType: string } };
   dispatch: (...args: any) => any;
 }
@@ -69,7 +68,6 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
 
   close() {
     this.setState({ menuOpen: false });
-    // if (e.target.classList.contains('loginGoogle')) return this.loginGoogle();
     return true;
   }
 
@@ -214,5 +212,5 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
     );
   }
 }
-// @ts-ignore
+
 export default withRouter(connect(mapStoreToProps, null)(AppTemplate));

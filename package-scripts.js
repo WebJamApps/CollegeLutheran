@@ -17,8 +17,8 @@ module.exports = {
         watch: crossEnv('BABEL_TARGET=node jest --watch'),
       },
       lint: {
-        default: 'eslint . --ext .js',
-        fix: 'eslint . --ext .js --fix',
+        default: 'eslint . --ext .js,.ts,.tsx',
+        fix: 'eslint . --ext .js,.ts,.tsx --fix',
       },
       react: {
         default: crossEnv('BABEL_TARGET=node jest --no-cache --config jest.React.json --notify'),

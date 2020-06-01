@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Youth } from '../../src/containers/Youth/index';
 import DefaultYouthContent from '../../src/containers/Youth/YouthContent';
-import PicSlider from '../../src/components/pic-slider';
+import PicSlider from '../../src/components/PicSlider';
 
 function setup(data) {
   let wrapper;

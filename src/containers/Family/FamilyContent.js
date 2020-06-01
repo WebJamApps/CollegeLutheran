@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import PicSlider from '../../components/pic-slider';
+import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'family';// eslint-disable-next-line max-len
