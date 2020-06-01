@@ -13,4 +13,10 @@ describe('commonUtils', () => {
     global.setTimeout = jest.fn((cb) => cb());
     await commonUtils.randomizePics(vStub);
   });
+  it('shuffles the pictures after 4 seconds', async () => {
+    const vStub = { props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] }, setState: (obj) => expect(obj.picsState.length).toBe(4) };
+    const w = 800;
+    global.setTimeout = jest.fn((cb) => cb());
+    await commonUtils.randomizePics(vStub, w);
+  });
 });
