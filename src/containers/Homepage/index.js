@@ -47,7 +47,6 @@ export class Homepage extends Component {
   render() {
     const { width, picsState } = this.state;
     const { homeContent } = this.props;
-    console.log(picsState.length);
     return (
       <div>
         {width >= 900
