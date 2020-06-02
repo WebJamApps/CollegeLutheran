@@ -30,7 +30,7 @@ module.exports = ({
   },
 
   entry: {
-    app: [`${srcDir}/main.js`],
+    app: [`${srcDir}/main.tsx`],
     vendor: ['jquery', 'bootstrap'],
   },
 

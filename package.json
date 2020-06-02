@@ -38,7 +38,6 @@
     "installglobals": "yarn config set registry https://registry.yarnpkg.com -g",
     "cleaninstall": "rm -rf yarn.lock && rm -rf node_modules && yarn cache clean && yarn installglobals && yarn install",
     "snyk-protect": "snyk protect",
-    "eslint:fix": "./node_modules/eslint/bin/eslint.js --fix .",
     "postinstall": "yarn start build",
     "test:stylelint": "stylelint \"static/**/*.scss\""
   },

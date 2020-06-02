@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Family } from '../../src/containers/Family/index';
 import DefaultFamilyContent from '../../src/containers/Family/FamilyContent';
-import PicSlider from '../../src/components/pic-slider';
+import PicSlider from '../../src/components/PicSlider';
 
 function setup(data) {
   let wrapper;

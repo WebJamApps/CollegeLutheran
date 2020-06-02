@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import PicSlider from '../../src/components/pic-slider';
+import PicSlider from '../../src/components/PicSlider';
 
 const data = [
   { _id: 1, url: '../static/imgs/ohaf/slideshow2.png', comments: 'showCaption' },
