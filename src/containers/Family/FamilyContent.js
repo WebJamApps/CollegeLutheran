@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import PicSlider from '../../components/pic-slider';
+import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'family';// eslint-disable-next-line max-len
@@ -14,7 +14,7 @@ const FamilyContent = ({ familyPics }) => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>Children and Families</h3>
+        <h3 style={{ paddingBottom: '15px' }}>Children and Families</h3>
         <p>
           <span style={{ color: 'rgb(0, 51, 102)' }}>
             <strong>

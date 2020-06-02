@@ -1,12 +1,19 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import Slider from 'react-slick';
-import PropTypes from 'prop-types';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Caption from './PicSlider/caption';
+import Caption from './caption';
 
-class PicSlider extends Component {
+export interface PicSliderProps {
+  settings: any;
+  data: any;
+  slider?: any;
+}
+class PicSlider extends Component<PicSliderProps> {
+  static defaultProps: { data: [{ url: ''; title: '';_id: 0 }]; settings };
+
+  settings: any;
+
   constructor(props) {
     super(props);
     this.settings = {
@@ -21,6 +28,7 @@ class PicSlider extends Component {
     };
   }
 
+  /* eslint-disable react/jsx-props-no-spreading */
   render() {
     const { data } = this.props;
     return (
@@ -39,12 +47,5 @@ class PicSlider extends Component {
     );
   }
 }
-PicSlider.defaultProps = {
-  data: [{ url: '', title: '', _id: 0 }],
-};
-
-PicSlider.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape),
-};
 
 export default PicSlider;

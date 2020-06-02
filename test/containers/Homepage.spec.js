@@ -4,7 +4,7 @@ import { Homepage } from '../../src/containers/Homepage';
 import WideAboutUs from '../../src/containers/Homepage/About';
 import WideFacebookFeed from '../../src/containers/Homepage/WideFacebookFeed';
 import NarrowFacebookFeed from '../../src/containers/Homepage/NarrowFacebookFeed';
-import PicSlider from '../../src/components/pic-slider';
+import PicSlider from '../../src/components/PicSlider';
 
 const wrapper = shallow(<Homepage />);
 

@@ -9,7 +9,7 @@ const MusicContent = () => (
         </div>
       </div>
       <div className="material-content elevation3" style={{ maxWidth: '998px', margin: 'auto' }}>
-        <h3 style={{ paddingBottom: '15px', fontWeight: '100' }}>Music at College Lutheran</h3>
+        <h3 style={{ paddingBottom: '15px' }}>Music at College Lutheran</h3>
         <p>
           Music Ministry at College Lutheran involves all members of the congregation as they participate in the hymns, songs, psalms, acclamations,
           and musical responses of the liturgy. There are also members who sing in the choir, play an

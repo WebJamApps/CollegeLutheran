@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -40,10 +41,10 @@ export class PhotoTable extends Component {
 
   getMuiTheme() { // eslint-disable-line class-methods-use-this
     return createMuiTheme({
-      typography: {
-        useNextVariants: true,
-      },
+      // @ts-ignore
+      typography: { useNextVariants: true },
       overrides: {
+        // @ts-ignore
         MUIDataTableHeadCell: {
           root: {
             padding: '4px', fontWeight: 'bold', color: 'black', fontSize: '11pt',
@@ -149,6 +150,7 @@ export class PhotoTable extends Component {
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
           <MuiThemeProvider theme={this.getMuiTheme()}>
             <MUIDataTable
+            // @ts-ignore
               options={options}
               columns={columns}
               data={arr}

@@ -14,7 +14,6 @@ const NewsContent = ({ books }) => (
               style={{
                 paddingTop: '22px',
                 marginBottom: '8px',
-                fontWeight: '100',
                 textAlign: 'center',
               }}
             >
@@ -67,9 +66,7 @@ const NewsContent = ({ books }) => (
             width: '100%',
             height: '540px',
             border: 'none',
-            marginleft: '-5px',
           }}
-
           src="https://visitor.r20.constantcontact.com/d.jsp?
             llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
           title="News Content"
