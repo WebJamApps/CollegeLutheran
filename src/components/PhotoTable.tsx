@@ -4,14 +4,38 @@ import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
-import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps from '../redux/mapStoreToProps';
 
-export class PhotoTable extends Component {
+interface PhotoTableProps {
+  dispatch: (...args: any) => any;
+  auth: { token: string };
+  familyPics: any;
+  youthPics: any;
+  otherPics: any;
+}
+
+type PhotoTableState = {
+  columns: any[];
+  options: {
+    filterType: string,
+    pagination: boolean,
+    responsive: string,
+    filter: boolean,
+    download: boolean,
+    search: boolean,
+    print: boolean,
+    viewColumns: boolean,
+    selectableRows: string,
+    fixedHeader: boolean };
+};
+
+export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
+  superagent: superagent.SuperAgentStatic;
+
   constructor(props) {
     super(props);
     this.superagent = superagent;
@@ -162,12 +186,5 @@ export class PhotoTable extends Component {
     );
   }
 }
-PhotoTable.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
-  familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-};
 
-export default connect(mapStoreToProps)(PhotoTable);
+export default connect(mapStoreToProps, null)(PhotoTable);

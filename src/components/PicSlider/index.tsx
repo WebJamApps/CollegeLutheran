@@ -10,7 +10,7 @@ export interface PicSliderProps {
   slider?: any;
 }
 class PicSlider extends Component<PicSliderProps> {
-  static defaultProps: { data: [{ url: ''; title: '';_id: 0 }]; settings };
+  static defaultProps: { data: [{ url: ''; title: ''; _id: 0 }]; settings };
 
   settings: any;
 
