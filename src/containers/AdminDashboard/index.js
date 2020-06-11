@@ -37,7 +37,7 @@ export class AdminDashboard extends Component {
     this.resetEditForm = this.resetEditForm.bind(this);
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard'); }
+  componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
 
   onChange(evt, stateValue) {
     this.checkEdit();
