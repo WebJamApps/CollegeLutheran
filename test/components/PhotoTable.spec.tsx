@@ -17,7 +17,7 @@ describe('PhotoTable', () => {
         _id: '999', url: 'url', title: 'title', type: 'otherPics', comments: 'showCaption',
       }],
     };
-    wrapper = shallow(<PhotoTable
+    wrapper = shallow<PhotoTable>(<PhotoTable
       auth={props.auth}
       youthPics={props.youthPics}
       familyPics={props.familyPics}
@@ -61,11 +61,13 @@ describe('PhotoTable', () => {
     expect(r).toBe(true);
   });
   it('runs the deletePic api', async () => {
+    const loc = window.location;
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
     delete window.location;
     window.location = {
+      ...loc,
       href: '/',
       assign: jest.fn(),
       reload: jest.fn(),
