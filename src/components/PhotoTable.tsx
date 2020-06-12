@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -19,9 +18,7 @@ type PhotoTableProps = {
   otherPics: any;
 };
 
-type PhotoTableState = {
-  columns: any[];
-};
+type PhotoTableState = { columns: any[]; };
 
 export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
   superagent: superagent.SuperAgentStatic;
@@ -120,12 +117,9 @@ export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
 
   render() {
     const { columns } = this.state;
-    const {
-      familyPics, youthPics, otherPics,
-    } = this.props;
+    const { familyPics, youthPics, otherPics } = this.props;
     let arr = familyPics.concat(youthPics);
-    arr = arr.concat(otherPics);
-    arr = this.addThumbs(arr);
+    arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
