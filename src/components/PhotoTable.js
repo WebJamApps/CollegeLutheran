@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
+import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
@@ -10,19 +12,7 @@ import superagent from 'superagent';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import TableTheme from '../lib/photoTableTheme';
 
-type PhotoTableProps = {
-  dispatch: (...args: any) => any;
-  auth: { token: string };
-  familyPics: any;
-  youthPics: any;
-  otherPics: any;
-};
-
-type PhotoTableState = { columns: any[]; };
-
-export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
-  superagent: superagent.SuperAgentStatic;
-
+export class PhotoTable extends Component {
   constructor(props) {
     super(props);
     this.superagent = superagent;
@@ -147,5 +137,12 @@ export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
     );
   }
 }
+PhotoTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
+  familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
 
-export default connect(mapStoreToProps, null)(PhotoTable);
+export default connect(mapStoreToProps)(PhotoTable);
