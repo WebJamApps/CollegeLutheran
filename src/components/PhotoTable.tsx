@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import 'core-js/stable';
@@ -9,28 +9,18 @@ import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps from '../redux/mapStoreToProps';
+import TableTheme from '../lib/photoTableTheme';
 
-interface PhotoTableProps {
+type PhotoTableProps = {
   dispatch: (...args: any) => any;
   auth: { token: string };
   familyPics: any;
   youthPics: any;
   otherPics: any;
-}
+};
 
 type PhotoTableState = {
   columns: any[];
-  options: {
-    filterType: string,
-    pagination: boolean,
-    responsive: string,
-    filter: boolean,
-    download: boolean,
-    search: boolean,
-    print: boolean,
-    viewColumns: boolean,
-    selectableRows: string,
-    fixedHeader: boolean };
 };
 
 export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
@@ -40,48 +30,15 @@ export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
     super(props);
     this.superagent = superagent;
     this.setColumns = this.setColumns.bind(this);
-    this.getMuiTheme = this.getMuiTheme.bind(this);
     this.setColumns = this.setColumns.bind(this);
     this.handleHideTable = this.handleHideTable.bind(this);
     this.addThumbs = this.addThumbs.bind(this);
     this.state = {
       columns: [],
-      options: {
-        filterType: 'dropdown',
-        pagination: false,
-        responsive: 'scrollMaxHeight',
-        filter: false,
-        download: false,
-        search: false,
-        print: false,
-        viewColumns: false,
-        selectableRows: 'none',
-        fixedHeader: false,
-      },
     };
   }
 
   componentDidMount() { this.setColumns(); }
-
-  getMuiTheme() { // eslint-disable-line class-methods-use-this
-    return createMuiTheme({
-      // @ts-ignore
-      typography: { useNextVariants: true },
-      overrides: {
-        // @ts-ignore
-        MUIDataTableHeadCell: {
-          root: {
-            padding: '4px', fontWeight: 'bold', color: 'black', fontSize: '11pt',
-          },
-        },
-        MuiTableRow: { head: { height: '40px' } },
-        MuiTableCell: { root: { padding: '4px' } },
-        MUIDataTableToolbar: { actions: { display: 'none' }, root: { paddingLeft: 0, minHeight: 'inherit' } },
-        MUIDataTable: { responsiveScroll: { maxHeight: '4.3in' } },
-        MuiTypography: { h6: { color: 'black', fontWeight: 'bold', fontStyle: 'italic' } },
-      },
-    });
-  }
 
   setColumns() {
     const columns = [];
@@ -162,7 +119,7 @@ export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
   }
 
   render() {
-    const { columns, options } = this.state;
+    const { columns } = this.state;
     const {
       familyPics, youthPics, otherPics,
     } = this.props;
@@ -172,10 +129,20 @@ export class PhotoTable extends Component<PhotoTableProps, PhotoTableState> {
     return (
       <div className="photoTable">
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
-          <MuiThemeProvider theme={this.getMuiTheme()}>
+          <MuiThemeProvider theme={TableTheme}>
             <MUIDataTable
-            // @ts-ignore
-              options={options}
+              options={{
+                filterType: 'dropdown',
+                pagination: false,
+                responsive: 'scrollMaxHeight',
+                filter: false,
+                download: false,
+                search: false,
+                print: false,
+                viewColumns: false,
+                selectableRows: 'none',
+                fixedHeader: false,
+              }}
               columns={columns}
               data={arr}
               title="All Images"
