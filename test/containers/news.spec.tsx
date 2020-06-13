@@ -18,7 +18,8 @@ describe('News', () => {
       .exists()).toBe(true);
   });
   it('renders the table when books exist', () => {
-    const { books, _id } = controller.state;
+    const { books } = controller.state;
+    const _id = '1';
     const results = shallow(<News key={_id} books={books} />);
     expect(results.find(DefaultNewsContent)
       .dive()
@@ -32,7 +33,7 @@ describe('News', () => {
       const dataA = a.created_at;
       const dateB = b.created_at;
       if (dataA < dateB) return 1;
-      return true;
+      return null;
     });
     expect(results).toBeTruthy();
   });
