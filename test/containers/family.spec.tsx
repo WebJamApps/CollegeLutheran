@@ -14,7 +14,8 @@ function setup(data) {
 
 describe('Family', () => {
   it('Renders the Family component', () => {
-    const { wrapper } = setup();
+    const data = [{}];
+    const { wrapper } = setup(data);
     expect(wrapper.find(DefaultFamilyContent).exists()).toBe(true);
     expect(wrapper.find(DefaultFamilyContent).dive().find('div.page-content').exists()).toBe(true);
   });

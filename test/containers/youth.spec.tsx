@@ -14,7 +14,8 @@ function setup(data) {
 
 describe('Youth', () => {
   it('Renders the Youth component', () => {
-    const { wrapper } = setup();
+    const data = [{}];
+    const { wrapper } = setup(data);
     expect(wrapper.find(DefaultYouthContent).exists()).toBe(true);
     expect(wrapper.find(DefaultYouthContent).dive().find('div.page-content').exists()).toBe(true);
   });
