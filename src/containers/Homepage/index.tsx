@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
 import About from './About';
 import WideFacebookFeed from './WideFacebookFeed';
@@ -8,7 +7,30 @@ import NarrowFacebookFeed from './NarrowFacebookFeed';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export class Homepage extends Component {
+type HomepageProps = {
+  homeContent: {
+    title: string;
+    comments: string;
+  }
+};
+
+interface HomepageState {
+  width: number;
+  picsState: any[];
+  homeContent?: any;
+}
+
+export class Homepage extends Component<HomepageProps, HomepageState> {
+  static defaultProps = {
+    homeContent: {},
+  };
+
+  commonUtils: {
+    setTitleAndScroll: (pageTitle: any, width: any) => void;
+    randomizePics: (view: any, w: any) => Promise<void>; delay: (ms: any) => Promise<unknown>; };
+
+  parentRef: React.RefObject<unknown>;
+
   constructor(props) {
     super(props);
     this.commonUtils = commonUtils;
@@ -74,12 +96,4 @@ export class Homepage extends Component {
   }
 }
 
-Homepage.defaultProps = { homeContent: {} };
-Homepage.propTypes = {
-  homeContent: PropTypes.shape({
-    title: PropTypes.string,
-    comments: PropTypes.string,
-  }),
-};
-
-export default connect(mapStoreToProps, null)(Homepage);
+export default connect(mapStoreToProps)(Homepage as any);

@@ -3,6 +3,8 @@ import DefaultCalendarContent from './CalendarContent';
 import commonUtils from '../../lib/commonUtils';
 
 export default class Calendar extends Component {
+  commonUtils: any;
+
   constructor(props) {
     super(props);
     this.commonUtils = commonUtils;
