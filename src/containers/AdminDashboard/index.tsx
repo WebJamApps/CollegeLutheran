@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -10,36 +10,42 @@ import PTable from '../../components/PhotoTable';
 
 interface DashboardProps extends RouteComponentProps<any> {
   dispatch: (...args: any) => any;
-  homeContent: { title: string, comments: string };
+  homeContent: { title: string; comments: string };
   auth: { token: string };
   books: any[];
   showTable: boolean;
-  editPic: { _id: string, type: string, title: string, url: string, comments: string, };
+  editPic: {
+    _id: string;
+    type: string;
+    title: string;
+    url: string;
+    comments: string;
+  };
 }
 type DashboardState = {
   type: string;
-  title: string,
-  homePageContent: string,
-  announcementtitle: string,
-  announcementurl: string,
-  youthName: string,
-  youthURL: string,
-  forumId: string,
-  showCaption: string,
-  firstEdit: boolean,
+  title: string;
+  homePageContent: string;
+  announcementtitle: string;
+  announcementurl: string;
+  youthName: string;
+  youthURL: string;
+  forumId: string;
+  showCaption: string;
+  firstEdit: boolean;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
-  commonUtils: { setTitleAndScroll: (pageTitle: any, width: any) => void;
-    randomizePics: (view: any, w: any) => Promise<void>; delay: (ms: any) => Promise<unknown>; };
+  commonUtils: {
+    setTitleAndScroll: (pageTitle: any, width: any) => void;
+    randomizePics: (view: any, w: any) => Promise<void>;
+    delay: (ms: any) => Promise<unknown>;
+  };
 
   controller: AdminController;
 
-  forms: { makeInput: (type: any, label: any, isRequired: any, onChange: any, value: any, width: any) => JSX.Element;
-    makeDropdown: (htmlFor: any, labelText: any, value: any, onChange: any, options: any) => JSX.Element;
-    radioButtons: (showCaption: any, onChange: any) => JSX.Element;
-    makeDataDropdown: (htmlFor: any, labelText: any, value: any, onChange: any, options: any, oValue: any, dValue: any) => JSX.Element; };
+  forms:any;
 
-  constructor(props) {
+  constructor(props: DashboardProps) {
     super(props);
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
@@ -67,14 +73,17 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.resetEditForm = this.resetEditForm.bind(this);
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
+  componentDidMount() {
+    this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width);
+  }
 
-  onChange(evt, stateValue) {
+  onChange(evt: ChangeEvent, stateValue: any): void {
     this.checkEdit();
-    // @ts-ignore
-    return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value, firstEdit: false })
-    // @ts-ignore
-      : this.setState({ [evt.target.id]: evt.target.value, firstEdit: false });
+    if (typeof stateValue === 'string') {
+      this.setState((prevState) => ({ ...prevState, [stateValue]: evt.target.value, firstEdit: false }));
+    } else {
+      this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    }
   }
 
   checkEdit() {
@@ -82,12 +91,23 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       youthName, youthURL, type, showCaption,
     } = this.state;
     const { editPic } = this.props;
-    if (youthName === '' && editPic.title !== undefined) { youthName = editPic.title; }
-    if (youthURL === '' && editPic.url !== undefined) { youthURL = editPic.url; }
-    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
+    if (youthName === '' && editPic.title !== undefined) {
+      youthName = editPic.title;
+    }
+    if (youthURL === '' && editPic.url !== undefined) {
+      youthURL = editPic.url;
+    }
+    if (type === '' && editPic.type !== undefined) {
+      type = editPic.type;
+    }
+    if (showCaption === '' && editPic.comments !== undefined) {
+      showCaption = editPic.comments;
+    }
     this.setState({
-      youthName, youthURL, type, showCaption,
+      youthName,
+      youthURL,
+      type,
+      showCaption,
     });
   }
 
@@ -97,7 +117,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     dispatch({ type: 'EDIT_PIC', picData: {} });
     dispatch({ type: 'SHOW_TABLE', showTable: true });
     this.setState({
-      youthName: '', youthURL: '', type: '', showCaption: '', firstEdit: true,
+      youthName: '',
+      youthURL: '',
+      type: '',
+      showCaption: '',
+      firstEdit: true,
     });
   }
 
@@ -117,10 +141,17 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         ) : null}
         <button
           style={{ display: 'relative' }}
-          disabled={this.controller.validateBook(youthName, youthURL, type, firstEdit)}
+          disabled={this.controller.validateBook(
+            youthName,
+            youthURL,
+            type,
+            firstEdit,
+          )}
           type="button"
           id={picData.buttonId}
-          onClick={editPic._id ? this.controller.editPicAPI : picData.buttonClick}
+          onClick={
+            editPic._id ? this.controller.editPicAPI : picData.buttonClick
+          }
         >
           {editPic._id ? 'Edit ' : 'Add '}
           Pic
@@ -129,14 +160,25 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
-  handleRadioChange(evt) {
+  handleRadioChange(evt: {target: {value:string}}) {
     this.checkEdit();
     this.setState({ showCaption: evt.target.value });
   }
 
-  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
+  changePicDiv(
+    editPic,
+    youthName,
+    youthURL,
+    type,
+    options,
+    showCaption,
+    picData,
+  ) {
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}>
+      <div
+        className="material-content elevation3"
+        style={{ maxWidth: '320px', margin: '30px auto' }}
+      >
         <h4 className="material-header-h4">
           {editPic._id ? 'Edit ' : 'Add '}
           Pictures
@@ -144,13 +186,29 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         <form id="picsForm">
           <label htmlFor="youthName">
             Picture Title
-            <input id="youthName" placeholder={editPic.title} value={youthName} onChange={this.onChange} />
+            <input
+              id="youthName"
+              placeholder={editPic.title}
+              value={youthName}
+              onChange={this.onChange}
+            />
           </label>
           <label htmlFor="youthURL">
             Image Address
-            <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.onChange} />
+            <input
+              id="youthURL"
+              placeholder={editPic.url}
+              value={youthURL}
+              onChange={this.onChange}
+            />
           </label>
-          {this.forms.makeDropdown('type', 'Category', type, this.onChange, options)}
+          {this.forms.makeDropdown(
+            'type',
+            'Category',
+            type,
+            this.onChange,
+            options,
+          )}
           {this.forms.radioButtons(showCaption, this.handleRadioChange)}
           {this.picButton(picData, editPic, youthName, youthURL, type)}
         </form>
@@ -159,14 +217,29 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 
   changePicForm(picData) {
-    const options = [{ type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' }, { type: 'otherPics', Category: 'Other Pics' }];
+    const options = [
+      { type: 'youthPics', Category: 'Youth Pics' },
+      { type: 'familyPics', Category: 'Family Pics' },
+      { type: 'otherPics', Category: 'Other Pics' },
+    ];
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;
     const { editPic } = this.props;
-    if (type === '' && editPic.type !== undefined) { type = editPic.type; }
-    if (showCaption === '' && editPic.comments !== undefined) { showCaption = editPic.comments; }
-    return this.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
+    if (type === '' && editPic.type !== undefined) {
+      type = editPic.type;
+    }
+    if (showCaption === '' && editPic.comments !== undefined) {
+      showCaption = editPic.comments;
+    }
+    return this.changePicDiv(
+      editPic,
+      youthName,
+      youthURL,
+      type,
+      options,
+      showCaption,
+      picData,
+    );
   }
 
   deleteForumForm(forumId, books) {
@@ -174,11 +247,22 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       <form
         id="delete-forum"
         style={{
-          textAlign: 'left', margin: 'auto', width: '100%', maxWidth: '100%',
+          textAlign: 'left',
+          margin: 'auto',
+          width: '100%',
+          maxWidth: '100%',
         }}
       >
-        { this.forms.makeDataDropdown('forumId', '* Select Title to Delete', forumId, this.onChange, books, '_id', 'title') }
-        <p>{' '}</p>
+        {this.forms.makeDataDropdown(
+          'forumId',
+          '* Select Title to Delete',
+          forumId,
+          this.onChange,
+          books,
+          '_id',
+          'title',
+        )}
+        <p> </p>
         <button
           onClick={(evt) => this.controller.deleteBookApi(evt, forumId, '/news')}
           type="button"
@@ -194,21 +278,46 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const { announcementtitle, announcementurl, forumId } = this.state;
     const { books } = this.props;
     return (
-      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
+      <div
+        className="material-content elevation3"
+        style={{ maxWidth: '8in', margin: '30px auto auto auto' }}
+      >
         <h5>Announcements Table</h5>
         <form
           id="create-forum"
           style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            textAlign: 'left',
+            marginLeft: '4px',
+            width: '100%',
+            maxWidth: '100%',
           }}
         >
-          {this.forms.makeInput('text', 'Announcement Title', false, this.onChange, announcementtitle, '90%')}
-          {this.forms.makeInput('text', 'Announcement URL', false, this.onChange, announcementurl, '90%')}
+          {this.forms.makeInput(
+            'text',
+            'Announcement Title',
+            false,
+            this.onChange,
+            announcementtitle,
+            '90%',
+          )}
+          {this.forms.makeInput(
+            'text',
+            'Announcement URL',
+            false,
+            this.onChange,
+            announcementurl,
+            '90%',
+          )}
           <div style={{ marginLeft: '70%', marginTop: '10px' }}>
             <button
               type="button"
               id="addForum"
-              disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum', null)}
+              disabled={this.controller.validateBook(
+                announcementtitle,
+                announcementurl,
+                'Forum',
+                null,
+              )}
               onClick={this.controller.addForumAPI}
             >
               Add
@@ -225,22 +334,42 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const { title, homePageContent } = this.state;
     return (
       <div className="horiz-scroll">
-        <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <div
+          className="material-content elevation3"
+          style={{ width: '850px', margin: '30px auto' }}
+        >
           <h5>Change Homepage Section</h5>
           <form
             id="create-homepage"
             style={{
-              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+              textAlign: 'left',
+              marginLeft: '4px',
+              width: '100%',
+              maxWidth: '100%',
             }}
           >
-            {this.forms.makeInput('text', 'Title', false, this.onChange, title, '90%')}
+            {this.forms.makeInput(
+              'text',
+              'Title',
+              false,
+              this.onChange,
+              title,
+              '90%',
+            )}
             <label htmlFor="content">
               Content
               <br />
               {this.controller.editor(homePageContent)}
             </label>
             <div style={{ marginLeft: '60%', marginTop: '10px' }}>
-              <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>Update Homepage</button>
+              <button
+                type="button"
+                id="c-h"
+                disabled={false}
+                onClick={this.controller.createHomeAPI}
+              >
+                Update Homepage
+              </button>
             </div>
           </form>
         </div>
@@ -253,7 +382,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       youthName, youthURL, type, showCaption,
     } = this.state;
     const postBody = {
-      title: youthName, url: youthURL, comments: showCaption, type, access: 'CLC',
+      title: youthName,
+      url: youthURL,
+      comments: showCaption,
+      type,
+      access: 'CLC',
     };
     return this.changePicForm({
       buttonId: 'addYouthPic',
@@ -267,11 +400,13 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const { showTable } = this.props;
     return (
       <div className="page-content">
-        <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
+        <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
+          CLC Admin Dashboard
+        </h4>
         {this.changeHomepage()}
         {this.addForumForm()}
         {this.changeYouthForm()}
-        {showTable ? <PTable /> : null }
+        {showTable ? <PTable /> : null}
       </div>
     );
   }
