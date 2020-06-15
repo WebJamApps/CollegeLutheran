@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
@@ -8,7 +8,37 @@ import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
-export class AdminDashboard extends Component {
+interface DashboardProps extends RouteComponentProps<any> {
+  dispatch: (...args: any) => any;
+  homeContent: { title: string, comments: string };
+  auth: { token: string };
+  books: any[];
+  showTable: boolean;
+  editPic: { _id: string, type: string, title: string, url: string, comments: string, };
+}
+type DashboardState = {
+  type: string;
+  title: string,
+  homePageContent: string,
+  announcementtitle: string,
+  announcementurl: string,
+  youthName: string,
+  youthURL: string,
+  forumId: string,
+  showCaption: string,
+  firstEdit: boolean,
+};
+export class AdminDashboard extends Component<DashboardProps, DashboardState> {
+  commonUtils: { setTitleAndScroll: (pageTitle: any, width: any) => void;
+    randomizePics: (view: any, w: any) => Promise<void>; delay: (ms: any) => Promise<unknown>; };
+
+  controller: AdminController;
+
+  forms: { makeInput: (type: any, label: any, isRequired: any, onChange: any, value: any, width: any) => JSX.Element;
+    makeDropdown: (htmlFor: any, labelText: any, value: any, onChange: any, options: any) => JSX.Element;
+    radioButtons: (showCaption: any, onChange: any) => JSX.Element;
+    makeDataDropdown: (htmlFor: any, labelText: any, value: any, onChange: any, options: any, oValue: any, dValue: any) => JSX.Element; };
+
   constructor(props) {
     super(props);
     this.commonUtils = commonUtils;
@@ -41,7 +71,9 @@ export class AdminDashboard extends Component {
 
   onChange(evt, stateValue) {
     this.checkEdit();
+    // @ts-ignore
     return typeof stateValue === 'string' ? this.setState({ [stateValue]: evt.target.value, firstEdit: false })
+    // @ts-ignore
       : this.setState({ [evt.target.id]: evt.target.value, firstEdit: false });
   }
 
@@ -244,15 +276,5 @@ export class AdminDashboard extends Component {
     );
   }
 }
-AdminDashboard.defaultProps = { editPic: {}, showTable: true };
-AdminDashboard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  editPic: PropTypes.shape({
-    _id: PropTypes.string, type: PropTypes.string, title: PropTypes.string, url: PropTypes.string, comments: PropTypes.string,
-  }),
-  homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }).isRequired,
-  auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
-  books: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  showTable: PropTypes.bool,
-};
+
 export default withRouter(connect(mapStoreToProps)(AdminDashboard));

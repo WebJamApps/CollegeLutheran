@@ -3,6 +3,12 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 class AdminController {
+  view: any;
+
+  superagent: superagent.SuperAgentStatic;
+
+  deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
+
   constructor(view) {
     this.view = view;
     this.superagent = superagent;
