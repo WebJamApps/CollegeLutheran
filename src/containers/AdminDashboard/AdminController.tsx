@@ -22,6 +22,64 @@ class AdminController {
     this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
+  addForumForm() {
+    const { announcementtitle, announcementurl, forumId } = this.view.state;
+    const { books } = this.view.props;
+    return (
+      <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
+        <h5>Announcements Table</h5>
+        <form
+          id="create-forum"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          {this.view.forms.makeInput('text', 'Announcement Title', false, this.view.onChange, announcementtitle, '90%')}
+          {this.view.forms.makeInput('text', 'Announcement URL', false, this.view.onChange, announcementurl, '90%')}
+          <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+            <button
+              type="button"
+              id="addForum"
+              disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
+              onClick={this.addForumAPI}
+            >
+              Add
+            </button>
+          </div>
+        </form>
+        <hr />
+        {this.view.deleteForumForm(forumId, books)}
+      </div>
+    );
+  }
+
+  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
+    return (
+      <div
+        className="material-content elevation3"
+        style={{ maxWidth: '320px', margin: '30px auto' }}
+      >
+        <h4 className="material-header-h4">
+          {editPic._id ? 'Edit ' : 'Add '}
+          Pictures
+        </h4>
+        <form id="picsForm">
+          <label htmlFor="youthName">
+            Picture Title
+            <input id="youthName" placeholder={editPic.title} value={youthName} onChange={this.view.onChange} />
+          </label>
+          <label htmlFor="youthURL">
+            Image Address
+            <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.view.onChange} />
+          </label>
+          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChange, options)}
+          {this.view.forms.radioButtons(showCaption, this.view.handleRadioChange)}
+          {this.view.picButton(picData, editPic, youthName, youthURL, type)}
+        </form>
+      </div>
+    );
+  }
+
   async deleteBookApi(evt, id, redirect) {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
