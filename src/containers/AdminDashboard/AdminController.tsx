@@ -89,11 +89,11 @@ class AdminController {
       try {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
-      } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+      } catch (e) { return Promise.resolve(false); }
       if (r.status === 200) {
         window.location.assign(`${redirect}`);
         return Promise.resolve(true);
-      } console.log(r.body); // eslint-disable-line no-console
+      }
       return Promise.resolve(false);
     }
     return Promise.resolve(false);
@@ -120,11 +120,11 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    } catch (e) { return Promise.resolve(false); }
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
-    } console.log(r.body); // eslint-disable-line no-console
+    }
     return Promise.resolve(false);
   }
 
@@ -157,11 +157,11 @@ class AdminController {
           type: 'Forum',
           access: 'CLC',
         });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    } catch (e) { return Promise.resolve(false); }
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
-    } console.log(r.body); return Promise.resolve(false);// eslint-disable-line no-console
+    } return Promise.resolve(false);
   }
 
   deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
@@ -203,7 +203,7 @@ class AdminController {
         .send({
           title: youthName, url: youthURL, type, comments: showCaption,
         });
-    } catch (e) { console.log(e.message); return Promise.resolve(false); } // eslint-disable-line no-console
+    } catch (e) { return Promise.resolve(false); }
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
       dispatch({ type: 'SHOW_TABLE', showTable: true });
@@ -212,7 +212,7 @@ class AdminController {
       });
       window.location.reload();
       return Promise.resolve(true);
-    } console.log(r.body); // eslint-disable-line no-console
+    }
     return Promise.resolve(false);
   }
 

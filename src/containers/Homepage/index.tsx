@@ -31,7 +31,7 @@ export class Homepage extends Component<HomepageProps, HomepageState> {
 
   parentRef: React.RefObject<unknown>;
 
-  constructor(props) {
+  constructor(props: HomepageProps) {
     super(props);
     this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
@@ -44,9 +44,9 @@ export class Homepage extends Component<HomepageProps, HomepageState> {
     return this.commonUtils.randomizePics(this, window.innerWidth);
   }
 
-  onResize(width) { this.setState({ width }); }
+  onResize(width: number) { this.setState({ width }); }
 
-  elca(w) { // eslint-disable-line class-methods-use-this
+  elca(w:number) { // eslint-disable-line class-methods-use-this
     const width = w < 420 ? '300px' : '400px';
     return (
       <div style={{

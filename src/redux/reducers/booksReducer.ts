@@ -2,7 +2,7 @@ const initialState = {
   books: [],
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: { type: string; data: any[]; }) => {
   switch (action.type) {
     case 'GOT_BOOKS':
       return {

@@ -1,4 +1,4 @@
-const mapStoreToProps = (store) => ({
+const mapStoreToProps = (store: any) => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,

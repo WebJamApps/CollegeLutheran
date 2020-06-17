@@ -5,7 +5,7 @@ const initialState = {
   token: '',
   user: {},
 };
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: { type: string; data: { email: string; token: string; }; error: { message: string; }; }) => {
   switch (action.type) {
     case 'GOT_TOKEN':
       return {

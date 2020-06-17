@@ -19,8 +19,8 @@ describe('News', () => {
   });
   it('renders the table when books exist', () => {
     const { books } = controller.state;
-    const _id = '1';
-    const results = shallow(<News key={_id} books={books} />);
+    const key = '1';
+    const results = shallow(<News key={key} books={books} />);
     expect(results.find(DefaultNewsContent)
       .dive()
       .find('div.forumsTable')
