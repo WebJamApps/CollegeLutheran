@@ -13,7 +13,7 @@
   },
   "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx"],
   "testPathIgnorePatterns": ["/node_modules/", "/puppeteer/"],
-  "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+  "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
   "collectCoverage": true,
   "testEnvironment": "jest-environment-jsdom",
   "testURL": "http://localhost/"

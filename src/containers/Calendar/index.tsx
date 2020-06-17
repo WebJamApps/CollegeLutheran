@@ -3,9 +3,7 @@ import DefaultCalendarContent from './CalendarContent';
 import commonUtils from '../../lib/commonUtils';
 
 export default class Calendar extends Component {
-  commonUtils: {
-    setTitleAndScroll: (pageTitle: any, width: any) => void;
-    randomizePics: (view: any, w: any) => Promise<void>; delay: (ms: any) => Promise<unknown>; };
+  commonUtils: {setTitleAndScroll: (pageTitle: string, width: number) => void;};
 
   constructor(props) {
     super(props);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
@@ -14,14 +15,14 @@ describe('Dashboard Container', () => {
       otherPics: [{ _id: '999' }],
       homeContent: { title: 'title', comments: 'comments' },
     };
-    wrapper = shallow(<AdminDashboard
+    // @ts-ignore
+    wrapper = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
-      youthPics={props.youthPics}
-      familyPics={props.familyPics}
-      otherPics={props.otherPics}
       homeContent={props.homeContent}
+      showTable
+      editPic={{}}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
@@ -57,11 +58,11 @@ describe('Dashboard Container', () => {
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
   it('renders with edit pic form', () => {
-    const wrapper2 = shallow(<AdminDashboard
+    // @ts-ignore
+    const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
-      youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent}
@@ -76,7 +77,8 @@ describe('Dashboard Container', () => {
     expect(h).toBe('Edit Pictures');
   });
   it('checks for edit data to set state for edit pictures', () => {
-    const wrapper2 = shallow(<AdminDashboard
+    // @ts-ignore
+    const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
@@ -104,6 +106,7 @@ describe('Dashboard Container', () => {
     wrapper.instance().resetEditForm({ preventDefault: () => {} });
   });
   it('doesnt show PTable when showTable is true', () => {
+    // @ts-ignore
     const wrapper2 = shallow(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}

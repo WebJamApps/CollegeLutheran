@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Music } from '../../src/containers/Music';
+import Music from '../../src/containers/Music';
 import DefaultMusicContent from '../../src/containers/Music/MusicContent';
 
 describe('/music', () => {
