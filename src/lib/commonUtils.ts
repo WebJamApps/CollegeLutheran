@@ -1,4 +1,4 @@
-const setTitleAndScroll = (pageTitle, width) => {
+const setTitleAndScroll = (pageTitle:string, width?:number) => {
   if (pageTitle !== '') pageTitle += ' | ';// eslint-disable-line no-param-reassign
   document.title = `${pageTitle}College Lutheran Church`;
   let getClass = 'page-content';
@@ -6,7 +6,7 @@ const setTitleAndScroll = (pageTitle, width) => {
   const top = document.getElementsByClassName(getClass)[0];
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+const delay = (ms:number):Promise<void> => new Promise((res) => setTimeout(res, ms));
 
 const randomizePics = async (view, w) => {
   if (w >= 900) await delay(4000);
