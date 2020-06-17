@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component, ChangeEvent } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -8,7 +7,7 @@ import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
-interface DashboardProps extends RouteComponentProps<any> {
+export interface DashboardProps extends RouteComponentProps {
   dispatch: (...args: any) => any;
   homeContent: { title: string; comments: string };
   auth: { token: string };

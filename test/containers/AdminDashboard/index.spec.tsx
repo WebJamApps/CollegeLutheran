@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
@@ -6,6 +5,9 @@ import PTable from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
   let props, wrapper;
+  const history:any = {};
+  const location:any = {};
+  const match:any = {};
   beforeEach(() => {
     props = {
       auth: { token: 'token' },
@@ -15,7 +17,6 @@ describe('Dashboard Container', () => {
       otherPics: [{ _id: '999' }],
       homeContent: { title: 'title', comments: 'comments' },
     };
-    // @ts-ignore
     wrapper = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
@@ -23,6 +24,9 @@ describe('Dashboard Container', () => {
       homeContent={props.homeContent}
       showTable
       editPic={{}}
+      history={history}
+      location={location}
+      match={match}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
@@ -58,9 +62,9 @@ describe('Dashboard Container', () => {
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
   it('renders with edit pic form', () => {
-    // @ts-ignore
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
+      showTable
       auth={props.auth}
       books={props.books}
       familyPics={props.familyPics}
@@ -69,6 +73,9 @@ describe('Dashboard Container', () => {
       editPic={{
         title: 'title', url: 'url', type: 'otherPics', _id: '123',
       }}
+      history={history}
+      location={location}
+      match={match}
     />);
     wrapper2.instance().setState = jest.fn();
     const cpf = wrapper2.instance().changePicForm({ disabled: jest.fn() });
@@ -77,9 +84,9 @@ describe('Dashboard Container', () => {
     expect(h).toBe('Edit Pictures');
   });
   it('checks for edit data to set state for edit pictures', () => {
-    // @ts-ignore
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
+      showTable
       auth={props.auth}
       books={props.books}
       youthPics={props.youthPics}
@@ -89,6 +96,9 @@ describe('Dashboard Container', () => {
       editPic={{
         title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
       }}
+      history={history}
+      location={location}
+      match={match}
     />);
     wrapper2.instance().setState = jest.fn();
     wrapper2.update();
@@ -106,7 +116,6 @@ describe('Dashboard Container', () => {
     wrapper.instance().resetEditForm({ preventDefault: () => {} });
   });
   it('doesnt show PTable when showTable is true', () => {
-    // @ts-ignore
     const wrapper2 = shallow(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
@@ -119,6 +128,9 @@ describe('Dashboard Container', () => {
         title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
       }}
       showTable={false}
+      history={history}
+      location={location}
+      match={match}
     />);
     expect(wrapper2.find(<PTable />).exists()).toBe(false);
   });

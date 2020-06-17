@@ -76,7 +76,6 @@
     "@types/terser-webpack-plugin": "^2.2.0",
     "@types/webpack-bundle-analyzer": "^2.13.3",
     "@types/webpack-env": "^1.15.1",
-    "awesome-typescript-loader": "^5.2.1",
     "bootstrap": "latest",
     "copy-webpack-plugin": "latest",
     "core-js": "latest",

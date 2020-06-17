@@ -5,7 +5,7 @@
   ],
   "rules": {
     "react/jsx-filename-extension": [1, {
-      "extensions": [".js", "tsx"]
+      "extensions": ["tsx"]
     }],
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/camelcase": 0,
@@ -52,6 +52,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 11,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.eslint.json"
   }
 }
