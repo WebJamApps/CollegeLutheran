@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
@@ -55,9 +54,5 @@ const FamilyContent = ({ familyPics }) => (
   </div>
 );
 FamilyContent.defaultProps = { familyPics: [] };
-FamilyContent.propTypes = {
-  familyPics: PropTypes.arrayOf(PropTypes.shape({
-    comments: PropTypes.string,
-  })),
-};
+
 export default FamilyContent;
