@@ -1,8 +1,8 @@
 import reducer from '../../src/redux/reducers/tableReducer';
 
-describe('fetch reducer', () => {
+describe('table reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(
+    expect(reducer(undefined, { type: '' })).toEqual(
       {
         showTable: true,
       },

@@ -2,7 +2,7 @@ import reducer from '../../src/redux/reducers/authReducer';
 
 describe('auth reducer', () => {
   it('returns the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(
+    expect(reducer(undefined, { type: '' })).toEqual(
       {
         isAuthenticated: false,
         error: '',

@@ -2,7 +2,7 @@ import reducer from '../../src/redux/reducers/familyReducer';
 
 describe('fetch reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(
+    expect(reducer(undefined, { type: '' })).toEqual(
       {
         familyPics: [],
       },

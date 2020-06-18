@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { ProvidePlugin } = require('webpack');
 const webpack = require('webpack');
-// const TerserPlugin = require('terser-webpack-plugin');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || []; // eslint-disable-line no-mixed-operators
@@ -16,7 +15,6 @@ const when = (condition, config, negativeConfig) => (condition ? ensureArray(con
 const title = 'College Lutheran Church';
 const outDir = path.resolve(__dirname, 'dist');
 const srcDir = path.resolve(__dirname, 'src');
-// const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const baseUrl = '/';
 const scssRules = [{ loader: 'sass-loader' }];
 
@@ -26,7 +24,6 @@ module.exports = ({
 }) => ({
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    // modules: [srcDir, 'node_modules'],
   },
 
   entry: {
@@ -40,7 +37,6 @@ module.exports = ({
     path: outDir,
     publicPath: baseUrl,
     filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
-    // sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js',
   },
 
@@ -49,8 +45,7 @@ module.exports = ({
   devServer: {
     contentBase: outDir,
     hot: true,
-    // // serve index.html for all 404 (required for push-state)
-    historyApiFallback: {
+    historyApiFallback: { // serve index.html for all 404 (required for push-state)
       rewrites: [
         { from: /^\/$/, to: '/' },
         { from: /^\//, to: '/' },
@@ -63,28 +58,10 @@ module.exports = ({
   devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
 
   optimization: {
-    // minimizer: production ? [
-    //   new TerserPlugin({
-    //     extractComments: true,
-    //     cache: true,
-    //     parallel: true,
-    //     sourceMap: true,
-    //     terserOptions: {
-    //     // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
-    //       extractComments: 'all',
-    //       compress: {
-    //         drop_console: true,
-    //       },
-    //     },
-    //   }),
-    // ] : [],
     splitChunks: {
       cacheGroups: {
         styles: {
-          name: 'styles',
-          test: /\.css$/i,
-          chunks: 'all',
-          enforce: true,
+          name: 'styles', test: /\.css$/i, chunks: 'all', enforce: true,
         },
       },
     },
@@ -94,7 +71,7 @@ module.exports = ({
     rules: [
       {
         test: /\.(t|j)sx?$/,
-        use: { loader: 'awesome-typescript-loader' },
+        use: { loader: 'ts-loader' },
         exclude: [/node_modules/],
       },
       {

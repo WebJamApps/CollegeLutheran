@@ -2,7 +2,7 @@ import reducer from '../../src/redux/reducers/homeReducer';
 
 describe('home reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(
+    expect(reducer(undefined, { type: '' })).toEqual(
       {
         homeContent: {},
       },

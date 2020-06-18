@@ -1,4 +1,8 @@
-const mapStoreToProps = (store) => ({
+export interface Book {
+  _id: number,
+  title: string
+}
+const mapStoreToProps = (store: any) => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,

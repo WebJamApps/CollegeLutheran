@@ -3,7 +3,7 @@ const initialState = {
   editPic: {},
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: { type: string; data?: any[]; picData?: any; }) => {
   switch (action.type) {
     case 'GOT_OTHERPICS':
       return {
