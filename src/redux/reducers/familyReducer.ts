@@ -10,10 +10,8 @@ const fixUrl = (state: { familyPics: any[]; }, action: { type: string; data?: an
 
 const reducer = (state = initialState, action: { type: string; data?: any[]; }) => {
   switch (action.type) {
-    case 'GOT_FAMILYPICS':
-      return fixUrl(state, action);
-    default:
-      return state;
+    case 'GOT_FAMILYPICS': return fixUrl(state, action);
+    default: return state;
   }
 };
 
