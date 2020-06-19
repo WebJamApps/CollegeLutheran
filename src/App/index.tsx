@@ -34,7 +34,7 @@ export class App extends Component<AppProps> {
   superagent:any;
 
   static defaultProps = {
-    dispatch: () => {},
+    dispatch: /* istanbul ignore next */() => {},
     auth: { isAuthenticated: false, user: { userType: '' } },
   };
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PicSlider from '../../components/PicSlider';
 
-const YouthContent = ({ youthPics }) => (
+const YouthContent: React.FC<{ youthPics: any[]}> = ({ youthPics }) => (
   <div className="page-content">
     <div id="youthSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
       {youthPics.length > 0 ? (<PicSlider data={youthPics} />) : null}
@@ -65,9 +64,5 @@ const YouthContent = ({ youthPics }) => (
 );
 
 YouthContent.defaultProps = { youthPics: [] };
-YouthContent.propTypes = {
-  youthPics: PropTypes.arrayOf(PropTypes.shape({
-    comments: PropTypes.string,
-  })),
-};
+
 export default YouthContent;

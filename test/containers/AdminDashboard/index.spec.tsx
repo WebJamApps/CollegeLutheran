@@ -49,17 +49,13 @@ describe('Dashboard Container', () => {
     button.find('button#addYouthPic').simulate('click');
     expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
   });
-  it('sets the stateValue on change', () => {
-    wrapper.instance().setState = jest.fn();
-    wrapper.update();
-    wrapper.instance().onChange({ target: {} }, '');
-    expect(wrapper.instance().setState).toHaveBeenCalled();
+  it('uses the stateValue on change', () => {
+    const result = wrapper.instance().onChange({ target: {} }, 'stateValue');
+    expect(result).toBe('stateValue');
   });
-  it('sets the target value on change', () => {
-    wrapper.instance().setState = jest.fn();
-    wrapper.update();
-    wrapper.instance().onChange({ target: { id: 'youthPicsId', value: '456' } });
-    expect(wrapper.instance().setState).toHaveBeenCalled();
+  it('uses the event target id on change', () => {
+    const result = wrapper.instance().onChange({ target: { id: 'youthPicsId', value: '456' } });
+    expect(result).toBe('youthPicsId');
   });
   it('renders with edit pic form', () => {
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard

@@ -82,7 +82,7 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
   }
 
   googleButtons(type: string, index: string | number | undefined) {
-    const cId = process.env.GoogleClientId || '';
+    const cId = process.env.GoogleClientId || /* istanbul ignore next */'';
     if (type === 'login') {
       return (
         <div key={index} className="menu-item googleLogin">

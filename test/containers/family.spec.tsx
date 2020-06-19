@@ -1,11 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
+import renderer from 'react-test-renderer';
 import { Family } from '../../src/containers/Family/index';
 import DefaultFamilyContent from '../../src/containers/Family/FamilyContent';
 import PicSlider from '../../src/components/PicSlider';
 
-function setup(data) {
-  let wrapper;
+function setup(data: any[]) {
+  let wrapper: ShallowWrapper<any, Readonly<any>, React.Component<any, any, any>>;
   if (data !== null && data !== undefined) {
     wrapper = shallow(<Family familyPics={data} />);
   } else wrapper = shallow(<Family />);
@@ -13,6 +14,12 @@ function setup(data) {
 }
 
 describe('Family', () => {
+  it('renders correctly without images', () => {
+    const tree = renderer
+      .create(<Family familyPics={[]} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it('Renders the Family component', () => {
     const data = [{}];
     const { wrapper } = setup(data);

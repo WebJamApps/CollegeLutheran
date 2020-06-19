@@ -2,7 +2,11 @@ import { shallow } from 'enzyme';
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
-  let r, controller, vStub;
+  let r: any, controller: any,
+    vStub: { setState: jest.Mock<any, any>;
+      forms: { makeDropdown: () => any; };
+      state: { title: string; homePageContent: string; youthURL: string; type: string; };
+      props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
   beforeEach(() => {
     vStub = {
       setState: jest.fn(),

@@ -14,5 +14,5 @@ render(
     </PersistGate>
   </Provider>, document.getElementById('root'),
 );
-/* istanbul ignore if */
+/* istanbul ignore next */
 if (process.env.NODE_ENV === 'development' && module.hot) module.hot.accept();
