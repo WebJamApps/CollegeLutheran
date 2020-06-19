@@ -1,11 +1,12 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { Youth } from '../../src/containers/Youth/index';
 import DefaultYouthContent from '../../src/containers/Youth/YouthContent';
 import PicSlider from '../../src/components/PicSlider';
 
-function setup(data) {
-  let wrapper;
+function setup(data: any[]) {
+  let wrapper: any;
   if (data !== null && data !== undefined) {
     wrapper = shallow(<Youth youthPics={data} />);
   } else wrapper = shallow(<Youth />);
@@ -13,6 +14,12 @@ function setup(data) {
 }
 
 describe('Youth', () => {
+  it('renders correctly without images', () => {
+    const tree = renderer
+      .create(<Youth youthPics={[]} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it('Renders the Youth component', () => {
     const data = [{}];
     const { wrapper } = setup(data);

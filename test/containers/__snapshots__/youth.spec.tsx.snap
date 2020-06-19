@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Youth renders correctly without images 1`] = `
+<div
+  className="page-content"
+>
+  <div
+    id="youthSlideshowWide"
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+      }
+    }
+  />
+  <div
+    className="container-fluid"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "4pt",
+          "margin": "0",
+        }
+      }
+    >
+       
+    </p>
+    <div
+      className="material-content elevation3"
+      style={
+        Object {
+          "margin": "auto",
+          "maxWidth": "998px",
+          "paddingBottom": "-80px",
+        }
+      }
+    >
+      <h3
+        style={
+          Object {
+            "paddingBottom": "15px",
+            "paddingTop": "22px",
+          }
+        }
+      >
+        Youth Ministry
+      </h3>
+      <p>
+        <span
+          style={
+            Object {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            <i>
+              "Think of us in this way, as servants of Christ and stewards of God’s mysteries."
+            </i>
+               1 Corinthians 4:1
+          </strong>
+        </span>
+      </p>
+      <p>
+        Youth ministry (6th- 12th grades) at College Lutheran church focuses on God’s mysteries and serving Christ. We are deeply committed to helping students explore and live out their faith. Weekly Sunday school, worship, and youth group, as well as annual Virginia Synod youth events challenge our students to think deeply about their religious beliefs and build on the foundations of the Christian faith. These gatherings provide dynamic contexts for students to examine how real-world issues and religion are intertwined. We believe that when our students are encouraged to think about what they believe and ask questions, they develop a stronger faith that can withstand the complexities of the teen years and adulthood.
+      </p>
+      <p>
+        <span
+          style={
+            Object {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            <i>
+              "Faith without works is dead."
+            </i>
+               James 2:17
+          </strong>
+        </span>
+      </p>
+      <p>
+        Not only do our youth have faith, but they show it at every opportunity! Youth at CLC are lifted up and celebrated as essential members in the worship, service, and recreational life of the congregation. They assist in worship as acolytes, crucifers, communion assistants, assisting ministers, ushers, greeters, coffee hour hosts, and children’s sermon speakers. They serve the community through events such as the CROP walk for hunger, Trick or Treat So Others May Eat, Trunk or Treating, Souper Bowl Sunday, and environmental initiatives. And, they are always excited about fun youth group events like snowtubing, bowling, and hiking!
+        <br />
+        <br />
+        We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
+      </p>
+      <section
+        style={
+          Object {
+            "marginTop": "0",
+            "textAlign": "left",
+          }
+        }
+      />
+    </div>
+    <div
+      className="youthELCA"
+    >
+      <a
+        href="http://www.elca.org/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <img
+          alt="ELCA LOGO"
+          id="elcaLogo"
+          src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+          style={
+            Object {
+              "margin": "auto",
+              "paddingTop": "30px",
+              "width": "350px",
+            }
+          }
+        />
+      </a>
+    </div>
+    <p>
+       
+    </p>
+  </div>
+</div>
+`;
