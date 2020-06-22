@@ -6,21 +6,17 @@ import WideFacebookFeed from '../../src/containers/Homepage/WideFacebookFeed';
 import NarrowFacebookFeed from '../../src/containers/Homepage/NarrowFacebookFeed';
 import PicSlider from '../../src/components/PicSlider';
 
-const wrapper = shallow<Homepage>(<Homepage />);
+const targetRef:any = {};
+const wrapper = shallow<Homepage>(<Homepage targetRef={targetRef} width={1000} height={800} />);
 
 describe('Home', () => {
   it('Renders the homepage', () => {
-    wrapper.instance().setState({ width: 1009 });
     wrapper.instance().forceUpdate();
     expect(wrapper.find(WideAboutUs).exists()).toBe(true);
     expect(wrapper.find(WideAboutUs).dive().find('div.widescreenHomepage').exists()).toBe(true);
     expect(wrapper.find(WideFacebookFeed).dive()
       .find('div')
       .exists()).toBe(true);
-  });
-  it('Resizes the page', () => {
-    wrapper.instance().onResize(100);
-    expect(wrapper.instance().state.width).toBe(100);
   });
   it('Renders WideFacebook when at least 1092', () => {
     const wrapper2 = shallow(<WideFacebookFeed width={1092} />);
@@ -33,5 +29,9 @@ describe('Home', () => {
   it('Renders WideAbout with familyPics', () => {
     const wrapper2 = shallow(<WideAboutUs allPics={[{}]} />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
+  });
+  it('renders the homepage with cellphone width', () => {
+    const wrapper2 = shallow<Homepage>(<Homepage width={320} height={800} targetRef={targetRef} />);
+    expect(wrapper2.find(NarrowFacebookFeed).exists()).toBe(true);
   });
 });
