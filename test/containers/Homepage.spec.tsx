@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Homepage } from '../../src/containers/Homepage';
@@ -6,8 +5,9 @@ import WideAboutUs from '../../src/containers/Homepage/About';
 import WideFacebookFeed from '../../src/containers/Homepage/WideFacebookFeed';
 import NarrowFacebookFeed from '../../src/containers/Homepage/NarrowFacebookFeed';
 import PicSlider from '../../src/components/PicSlider';
-// @ts-ignore
-const wrapper = shallow<Homepage>(<Homepage width={1000} />);
+
+const targetRef:any = {};
+const wrapper = shallow<Homepage>(<Homepage targetRef={targetRef} width={1000} height={800} />);
 
 describe('Home', () => {
   it('Renders the homepage', () => {
@@ -31,8 +31,7 @@ describe('Home', () => {
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('renders the homepage with cellphone width', () => {
-    // @ts-ignore
-    const wrapper2 = shallow<Homepage>(<Homepage width={320} />);
+    const wrapper2 = shallow<Homepage>(<Homepage width={320} height={800} targetRef={targetRef}/>);
     expect(wrapper2.find(NarrowFacebookFeed).exists()).toBe(true);
   });
 });
