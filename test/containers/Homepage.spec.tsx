@@ -31,7 +31,7 @@ describe('Home', () => {
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('renders the homepage with cellphone width', () => {
-    const wrapper2 = shallow<Homepage>(<Homepage width={320} height={800} targetRef={targetRef}/>);
+    const wrapper2 = shallow<Homepage>(<Homepage width={320} height={800} targetRef={targetRef} />);
     expect(wrapper2.find(NarrowFacebookFeed).exists()).toBe(true);
   });
 });
