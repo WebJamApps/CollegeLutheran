@@ -30,4 +30,9 @@ describe('Home', () => {
     const wrapper2 = shallow(<WideAboutUs allPics={[{}]} />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
+  it('renders the homepage with cellphone width', () => {
+    // @ts-ignore
+    const wrapper2 = shallow<Homepage>(<Homepage width={320} />);
+    expect(wrapper2.find(NarrowFacebookFeed).exists()).toBe(true);
+  });
 });
