@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'news';
@@ -80,12 +79,5 @@ const NewsContent = ({ books }) => (
 );
 
 NewsContent.defaultProps = { books: [] };
-NewsContent.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      comments: PropTypes.string,
-    }),
-  ),
-};
 
 export default NewsContent;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Caption = (props) => {
   const { caption } = props;
@@ -24,10 +23,6 @@ const Caption = (props) => {
 
 Caption.defaultProps = {
   caption: '',
-};
-
-Caption.propTypes = {
-  caption: PropTypes.string,
 };
 
 export default Caption;

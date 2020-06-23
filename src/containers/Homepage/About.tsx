@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 
@@ -71,9 +70,5 @@ const About = ({ homeContent, width, allPics }) => (
   </div>
 );
 About.defaultProps = { homeContent: {}, width: 1004, allPics: [] };
-About.propTypes = {
-  allPics: PropTypes.arrayOf(PropTypes.shape({})),
-  width: PropTypes.number,
-  homeContent: PropTypes.shape({ title: PropTypes.string, comments: PropTypes.string }),
-};
+
 export default About;

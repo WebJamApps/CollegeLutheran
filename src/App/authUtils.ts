@@ -2,10 +2,12 @@ import request from 'superagent';
 import jwt from 'jwt-simple';
 import authenticate, { logout } from './authActions';
 
-const setUser = async (controller) => {
+const setUser = async (controller: { props: { auth: any; dispatch: any; }; }) => {
   const { auth, dispatch } = controller.props;
   let decoded: { user: any; sub: any; }, user: request.Response;
-  try { decoded = jwt.decode(auth.token, process.env.HashString || ''); } catch (e) { return Promise.reject(e); }
+  try {
+    decoded = jwt.decode(auth.token, process.env.HashString || /* istanbul ignore next */'');
+  } catch (e) { return Promise.reject(e); }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
     try {
@@ -14,14 +16,14 @@ const setUser = async (controller) => {
     } catch (e) { return Promise.reject(e); }
     dispatch({ type: 'SET_USER', data: user.body });
     decoded.user = user.body;
-    const newToken = jwt.encode(decoded, process.env.HashString || '');
+    const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
     dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
   }
   window.location.reload();
   window.location.assign('/admin');
   return Promise.resolve(true);
 };
-const responseGoogleLogin = async (response, controller) => {
+const responseGoogleLogin = async (response: { code: any; }, controller: { props: any; }) => {
   const { dispatch } = controller.props;
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
@@ -40,12 +42,12 @@ const responseGoogleLogin = async (response, controller) => {
   return setUser(controller);
 };
 
-const responseGoogleFailLogin = (response) => {
+const responseGoogleFailLogin = (response: any) => {
   console.log(response);// eslint-disable-line no-console
   return false;
 };
 
-const responseGoogleLogout = (dispatch) => {
+const responseGoogleLogout = (dispatch: (arg0: (dispatch: any) => any) => void) => {
   dispatch(logout());
   if (window.location.href.includes('/admin')) return window.location.assign('/staff');
   return window.location.reload();

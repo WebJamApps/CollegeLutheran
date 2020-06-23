@@ -20,7 +20,7 @@ const reducer = (state = initialState,
       };
     case 'AUTH_ERROR':
       // eslint-disable-next-line no-param-reassign
-      if (!action.error)action.error = {};
+      if (!action.error)action.error = { message: '' };
       return {
         ...state, isAuthenticated: false, email: '', token: '', error: action.error.message, user: {},
       };

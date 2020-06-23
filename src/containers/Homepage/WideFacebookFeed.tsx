@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const WideFacebookFeed = ({ width }) => {
   let mb = '32px', mt = '0px';
@@ -56,7 +55,5 @@ const WideFacebookFeed = ({ width }) => {
   );
 };
 WideFacebookFeed.defaultProps = { width: 1004 };
-WideFacebookFeed.propTypes = {
-  width: PropTypes.number,
-};
+
 export default WideFacebookFeed;

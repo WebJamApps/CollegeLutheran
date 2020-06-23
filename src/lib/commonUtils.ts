@@ -1,12 +1,12 @@
-const setTitleAndScroll = (pageTitle:string, width?:number) => {
+const setTitleAndScroll = (pageTitle: string, width?: number) => {
   if (pageTitle !== '') pageTitle += ' | ';// eslint-disable-line no-param-reassign
   document.title = `${pageTitle}College Lutheran Church`;
   let getClass = 'page-content';
-  if (width !== undefined && width < 1004)getClass = 'material-header';
+  if (width !== undefined && width < 1004) getClass = 'material-header';
   const top = document.getElementsByClassName(getClass)[0];
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
-const delay = (ms:number):Promise<void> => new Promise((res) => setTimeout(res, ms));
+const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
 
 const randomizePics = async (view, w) => {
   if (w >= 900) await delay(4000);
@@ -21,4 +21,14 @@ const randomizePics = async (view, w) => {
   view.setState({ picsState: arr });
 };
 
-export default { setTitleAndScroll, randomizePics, delay };
+function getUserRoles(): any[] {
+  let userRoles: any[] = [];
+  try {
+    userRoles = JSON.parse(process.env.userRoles || /* istanbul ignore next */'').roles;
+  } catch (e) { /* istanbul ignore next */userRoles = []; }
+  return userRoles;
+}
+
+export default {
+  getUserRoles, setTitleAndScroll, randomizePics, delay,
+};

@@ -23,7 +23,7 @@ interface Pstate {
 export class PhotoTable extends Component<Pprops, Pstate> {
   superagent: superagent.SuperAgentStatic;
 
-  constructor(props) {
+  constructor(props: Readonly<Pprops>) {
     super(props);
     this.superagent = superagent;
     this.setColumns = this.setColumns.bind(this);
@@ -70,10 +70,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-      } catch (e) {
-        console.log(e.message);// eslint-disable-line no-console
-        return Promise.resolve(false);
-      }
+      } catch (e) { return `${e.message}`; }
       if (res.status === 200) { window.location.reload(); return Promise.resolve(true); }
       return Promise.resolve(false);
     }

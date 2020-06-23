@@ -87,7 +87,7 @@ describe('PhotoTable', () => {
     wrapper.update();
     global.confirm = jest.fn(() => true);
     r = await wrapper.instance().deletePic('456');
-    expect(r).toBe(false);
+    expect(r).toBe('bad');
   });
   it('handles cancel on the deletePic api', async () => {
     global.confirm = jest.fn(() => false);

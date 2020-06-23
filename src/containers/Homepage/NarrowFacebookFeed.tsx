@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PicSlider from '../../components/PicSlider';
 
 const FacebookFeed = ({ allPics }) => (
@@ -67,8 +66,5 @@ const FacebookFeed = ({ allPics }) => (
 );
 
 FacebookFeed.defaultProps = { allPics: [] };
-FacebookFeed.propTypes = {
-  allPics: PropTypes.arrayOf(PropTypes.shape({})),
-};
 
 export default FacebookFeed;

@@ -2,7 +2,7 @@ import reducer from '../../src/redux/reducers/familyReducer';
 
 describe('fetch reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, { type: '' })).toEqual(
+    expect(reducer(undefined, { type: '', data: [] })).toEqual(
       {
         familyPics: [],
       },
@@ -20,11 +20,11 @@ describe('fetch reducer', () => {
       },
     );
   });
-  it('sets empty array if data is null', () => {
+  it('sets empty array if data is undefined', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_FAMILYPICS',
-        data: null,
+        data: undefined,
       }),
     ).toEqual(
       {

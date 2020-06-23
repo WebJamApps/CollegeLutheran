@@ -1,6 +1,6 @@
 import reducer from '../../src/redux/reducers/booksReducer';
 
-describe('fetch reducer', () => {
+describe('books reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(
       {
@@ -12,19 +12,19 @@ describe('fetch reducer', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_BOOKS',
-        data: [{ _id: 1, title: 'cool' }],
+        data: [{ _id: '1', title: 'cool', created_at: '' }],
       }),
     ).toEqual(
       {
-        books: [{ _id: 1, title: 'cool' }],
+        books: [{ _id: '1', title: 'cool', created_at: '' }],
       },
     );
   });
-  it('sets empty array if data is null', () => {
+  it('sets empty array if data is undefined', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_BOOKS',
-        data: null,
+        data: undefined,
       }),
     ).toEqual(
       {

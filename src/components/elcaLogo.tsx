@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const ELCALogo = ({ pageName }) => (
+const ELCALogo = ({ pageName }: any) => (
   <div className={`${pageName}ELCA`} style={{ textAlign: 'center' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
@@ -13,9 +12,5 @@ const ELCALogo = ({ pageName }) => (
     </a>
   </div>
 );
-
-ELCALogo.propTypes = {
-  pageName: PropTypes.string.isRequired,
-};
 
 export default ELCALogo;

@@ -25,6 +25,19 @@ describe('auth reducer', () => {
       },
     );
   });
+  it('handles GOT_TOKEN with undefined data', () => {
+    expect(
+      reducer(undefined, { type: 'GOT_TOKEN', data: undefined }),
+    ).toEqual(
+      {
+        isAuthenticated: true,
+        error: '',
+        email: '',
+        token: '',
+        user: {},
+      },
+    );
+  });
   it('handles LOGOUT', () => {
     expect(
       reducer(undefined, { type: 'LOGOUT' }),
@@ -48,6 +61,22 @@ describe('auth reducer', () => {
       {
         isAuthenticated: false,
         error: 'bad',
+        email: '',
+        token: '',
+        user: {},
+      },
+    );
+  });
+  it('handles AUTH_ERROR with no error', () => {
+    expect(
+      reducer(undefined, {
+        type: 'AUTH_ERROR',
+        error: undefined,
+      }),
+    ).toEqual(
+      {
+        isAuthenticated: false,
+        error: '',
         email: '',
         token: '',
         user: {},
