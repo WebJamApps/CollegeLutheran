@@ -1,12 +1,15 @@
-const continueMenuItem = (menu, index, location, auth, view) => {
+function continueMenuItem(menu:
+{ link: any; name?: string; type?: any; }, index: any, location: { pathname: string | string[]; },
+auth: { isAuthenticated: any; },
+view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons?: any; }) {
   if (menu.link !== '') return view.makeMenuLink(menu, index);
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
   if (menu.type === 'googleLogout' && auth.isAuthenticated) return view.googleButtons('logout', index);
   return null;
-};
+}
 
-const menuItem = (menu, index, view) => {
-  const userRoles = JSON.parse(process.env.userRoles).roles;
+const menuItem = (menu: { link: string; name: string; }, index: any, view: { props: { location: any; auth: any; }; }) => {
+  const userRoles = JSON.parse(process.env.userRoles || '').roles;
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;
   if ((menu.link === '/staff' || menu.link === '/belief') && auth.isAuthenticated) return null;

@@ -55,7 +55,7 @@ export class App extends Component<AppProps> {
 
   render() {
     const { auth } = this.props;
-    const userRoles = JSON.parse(process.env.userRoles).roles;
+    const userRoles = JSON.parse(process.env.userRoles || '').roles;
     return (
       <div id="App" className="App">
         <Router>

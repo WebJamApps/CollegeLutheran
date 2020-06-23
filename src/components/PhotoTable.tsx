@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
-// import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
@@ -13,14 +11,14 @@ import mapStoreToProps from '../redux/mapStoreToProps';
 import TableTheme from '../lib/photoTableTheme';
 
 interface Pprops {
-  dispatch: (...args:any)=>any,
+  dispatch: (...args: any) => any,
   auth: { token: string },
   familyPics: any[],
   youthPics: any[],
   otherPics: any[],
 }
 interface Pstate {
-  columns:any[]
+  columns: any[]
 }
 export class PhotoTable extends Component<Pprops, Pstate> {
   superagent: superagent.SuperAgentStatic;
@@ -40,7 +38,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
   componentDidMount() { this.setColumns(); }
 
   setColumns() {
-    const columns = [];
+    const columns: any[] = [];
     const titles = ['Thumbnail', 'Title', 'Caption', 'Link', 'Type', 'Modify'];
     for (let i = 0; i < titles.length; i += 1) {
       const label = titles[i];// eslint-disable-line security/detect-object-injection
@@ -50,12 +48,12 @@ export class PhotoTable extends Component<Pprops, Pstate> {
         options: {
           filter: false,
           sort: true,
-          customBodyRender: (value) => (
+          customBodyRender: (value: any | null | undefined) => (
             <div style={{
               margin: 0, fontSize: '12pt', maxWidth: '200px',
             }}
             >
-              { label !== 'Modify' ? ReactHtmlParser(value) : value }
+              {label !== 'Modify' ? ReactHtmlParser(value) : value}
             </div>
           ),
         },
@@ -64,11 +62,11 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     this.setState({ columns });
   }
 
-  async deletePic(id) { // eslint-disable-next-line no-restricted-globals
+  async deletePic(id: any) { // eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting picture, are you sure?');// eslint-disable-line no-alert
     if (result) {
       const { auth } = this.props;
-      let res;
+      let res: superagent.Response;
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
@@ -82,7 +80,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     return Promise.resolve(false);
   }
 
-  editPic(picData) {
+  editPic(picData: any) {
     const { dispatch } = this.props;
     dispatch({ type: 'EDIT_PIC', picData });
     return true;
@@ -94,7 +92,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     return true;
   }
 
-  addThumbs(arr) {
+  addThumbs(arr: any[]): any[] {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
@@ -120,7 +118,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
   render() {
     const { columns } = this.state;
     const { familyPics, youthPics, otherPics } = this.props;
-    let arr = familyPics.concat(youthPics);
+    let arr: any[] = familyPics.concat(youthPics);
     arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">
@@ -149,12 +147,5 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     );
   }
 }
-// PhotoTable.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   auth: PropTypes.shape({ token: PropTypes.string }).isRequired,
-//   familyPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-//   youthPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-//   otherPics: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-// };
 
 export default connect(mapStoreToProps)(PhotoTable);
