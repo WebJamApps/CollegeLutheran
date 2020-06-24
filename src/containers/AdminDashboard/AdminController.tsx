@@ -20,11 +20,36 @@ class AdminController {
     this.editPicAPI = this.editPicAPI.bind(this);
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.addForumButton = this.addForumButton.bind(this);
+  }
+
+  addForumButton(announcementtitle: string, announcementurl: string) {
+    return (
+      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+        <button
+          type="button"
+          id="addForum"
+          disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
+          onClick={this.addForumAPI}
+        >
+          Add
+        </button>
+      </div>
+    );
   }
 
   addForumForm() {
     const { announcementtitle, announcementurl, forumId } = this.view.state;
     const { books } = this.view.props;
+    const inputParams = {
+      type: 'text',
+      label: 'Announcement Title',
+      isRequired: false,
+      onChange: this.view.onChange,
+      value: announcementtitle,
+      width: '90%',
+    };
+    const ip2 = { ...inputParams, label: 'Announcement URL', value: announcementurl };
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>Announcements Table</h5>
@@ -34,18 +59,9 @@ class AdminController {
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          {this.view.forms.makeInput('text', 'Announcement Title', false, this.view.onChange, announcementtitle, '90%')}
-          {this.view.forms.makeInput('text', 'Announcement URL', false, this.view.onChange, announcementurl, '90%')}
-          <div style={{ marginLeft: '70%', marginTop: '10px' }}>
-            <button
-              type="button"
-              id="addForum"
-              disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
-              onClick={this.addForumAPI}
-            >
-              Add
-            </button>
-          </div>
+          {this.view.forms.makeInput(inputParams)}
+          {this.view.forms.makeInput(ip2)}
+          {this.addForumButton(announcementtitle, announcementurl)}
         </form>
         <hr />
         {this.view.deleteForumForm(forumId, books)}
@@ -176,7 +192,7 @@ class AdminController {
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title') }
+        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title')}
         <div style={{ marginLeft: '60%' }}>
           <p>{' '}</p>
           <button
@@ -238,9 +254,9 @@ class AdminController {
             'insertdatetime media table paste code help wordcount',
           ],
           toolbar:
-          'undo redo | formatselect | bold italic backcolor forecolor |'
-          + 'alignleft aligncenter alignright alignjustify |'
-          + 'bullist numlist outdent indent | removeformat | help',
+            'undo redo | formatselect | bold italic backcolor forecolor |'
+            + 'alignleft aligncenter alignright alignjustify |'
+            + 'bullist numlist outdent indent | removeformat | help',
         }}
         onEditorChange={this.handleEditorChange}
       />

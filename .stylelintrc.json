@@ -6,9 +6,6 @@
     "no-empty-source": null,
     "no-eol-whitespace": null,
     "color-hex-length": null,
-    "rule-empty-line-before": ["always", {
-      "ignore": ["after-comment", "inside-block"]
-    }],
     "comment-empty-line-before": null,
     "color-no-invalid-hex": true,
     "comment-whitespace-inside": null,
@@ -17,9 +14,6 @@
     "unit-no-unknown": true,
     "declaration-block-semicolon-space-after": null,
     "no-descending-specificity": null,
-    "font-family-no-missing-generic-family-keyword": null,
-    "declaration-block-trailing-semicolon": null,
-    "indentation": null,
-    "no-missing-end-of-source-newline": null
+    "font-family-no-missing-generic-family-keyword": null
   }
 }

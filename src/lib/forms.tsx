@@ -18,44 +18,50 @@ function makeDropdown(htmlFor: string,
     </label>
   );
 }
-function makeDataDropdown(htmlFor: string | undefined,
+export interface DataDropParams {
+  htmlFor: string | undefined,
   labelText: React.ReactNode,
   value: string | number | readonly string[] | undefined,
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void,
-  options: any[], oValue: React.Key, dValue: React.Key) {
+  options: any[], oValue: React.Key, dValue: React.Key
+}
+function makeDataDropdown(p: DataDropParams) {
   return (
-    <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
-      {labelText}
+    <label htmlFor={p.htmlFor} style={{ paddingTop: '12px' }} id={p.htmlFor}>
+      {p.labelText}
       <br />
-      <select id={htmlFor} value={value} onChange={(event) => onChange(event, htmlFor)}>
+      <select id={p.htmlFor} value={p.value} onChange={(event) => p.onChange(event, p.htmlFor)}>
         <option id="blank-option" key="blank-option" value="">---</option>
         {// eslint-disable-next-line security/detect-object-injection
-          options.map((cv: any) => (<option id={cv[oValue]} key={cv[oValue]} value={cv[oValue]}>{cv[dValue]}</option>))
+          p.options.map((cv: any) => (<option id={cv[p.oValue]} key={cv[p.oValue]} value={cv[p.oValue]}>{cv[p.dValue]}</option>))
         }
       </select>
     </label>
   );
 }
-function makeInput(type: string | undefined,
+export interface InputParams {
+  type: string | undefined,
   label: any | null | undefined, isRequired: boolean | undefined,
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: any, width: any) {
-  let fId = label.toLowerCase();
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: any, width: any
+}
+function makeInput(p: InputParams) {
+  let fId = p.label.toLowerCase();
   fId = fId.replace(/\s/g, '');
   fId = fId.split('(');
   [fId] = fId;
   return (
     <label className="inquiryLabel" htmlFor={fId}>
-      {isRequired ? '* ' : ''}
-      {label}
+      {p.isRequired ? '* ' : ''}
+      {p.label}
       <br />
       <input
-        style={{ paddingLeft: 0, minWidth: 'inherit', width }}
+        style={{ paddingLeft: 0, minWidth: 'inherit', width: p.width }}
         id={fId}
-        type={type}
+        type={p.type}
         name={fId}
-        onChange={onChange}
-        required={isRequired}
-        value={value || ''}
+        onChange={p.onChange}
+        required={p.isRequired}
+        value={p.value || ''}
       />
     </label>
   );
