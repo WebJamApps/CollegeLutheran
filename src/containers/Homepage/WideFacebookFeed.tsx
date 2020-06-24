@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const WideFacebookFeed = ({ width }) => {
+const WideFacebookFeed = ({ width }: any) => {
   let mb = '32px', mt = '0px';
   if (width < 1092) { mb = '0px'; mt = '32px'; }
   return (
@@ -42,7 +41,7 @@ const WideFacebookFeed = ({ width }) => {
         </p>
         <iframe
           className="widescreenHomepage"
-      // eslint-disable-next-line max-len
+          // eslint-disable-next-line max-len
           src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=500&height=485&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
           width="500"
           height="485"
@@ -56,7 +55,5 @@ const WideFacebookFeed = ({ width }) => {
   );
 };
 WideFacebookFeed.defaultProps = { width: 1004 };
-WideFacebookFeed.propTypes = {
-  width: PropTypes.number,
-};
+
 export default WideFacebookFeed;

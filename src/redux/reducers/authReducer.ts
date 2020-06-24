@@ -6,17 +6,21 @@ const initialState = {
   user: {},
 };
 const reducer = (state = initialState,
-  action: { type: string; data?: { name?: string, email?: string; token?: string; }; error?: { message: string; }; }) => {
+  action: { type: string; data?: { name?: string, email?: string; token?: string; }; error?: { message?: string; }; }) => {
   switch (action.type) {
     case 'GOT_TOKEN':
+      // eslint-disable-next-line no-param-reassign
+      if (!action.data)action.data = {};
       return {
-        ...state, isAuthenticated: true, email: action.data.email, token: action.data.token, error: '',
+        ...state, isAuthenticated: true, email: action.data.email || '', token: action.data.token || '', error: '',
       };
     case 'LOGOUT':
       return {
         ...state, isAuthenticated: false, email: '', token: '', error: '', user: {},
       };
     case 'AUTH_ERROR':
+      // eslint-disable-next-line no-param-reassign
+      if (!action.error)action.error = { message: '' };
       return {
         ...state, isAuthenticated: false, email: '', token: '', error: action.error.message, user: {},
       };

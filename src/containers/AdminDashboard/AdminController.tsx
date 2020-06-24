@@ -9,7 +9,7 @@ class AdminController {
 
   deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
 
-  constructor(view) {
+  constructor(view: any) {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
@@ -20,11 +20,36 @@ class AdminController {
     this.editPicAPI = this.editPicAPI.bind(this);
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.addForumButton = this.addForumButton.bind(this);
+  }
+
+  addForumButton(announcementtitle: string, announcementurl: string) {
+    return (
+      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+        <button
+          type="button"
+          id="addForum"
+          disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
+          onClick={this.addForumAPI}
+        >
+          Add
+        </button>
+      </div>
+    );
   }
 
   addForumForm() {
     const { announcementtitle, announcementurl, forumId } = this.view.state;
     const { books } = this.view.props;
+    const inputParams = {
+      type: 'text',
+      label: 'Announcement Title',
+      isRequired: false,
+      onChange: this.view.onChange,
+      value: announcementtitle,
+      width: '90%',
+    };
+    const ip2 = { ...inputParams, label: 'Announcement URL', value: announcementurl };
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>Announcements Table</h5>
@@ -34,18 +59,9 @@ class AdminController {
             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
           }}
         >
-          {this.view.forms.makeInput('text', 'Announcement Title', false, this.view.onChange, announcementtitle, '90%')}
-          {this.view.forms.makeInput('text', 'Announcement URL', false, this.view.onChange, announcementurl, '90%')}
-          <div style={{ marginLeft: '70%', marginTop: '10px' }}>
-            <button
-              type="button"
-              id="addForum"
-              disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
-              onClick={this.addForumAPI}
-            >
-              Add
-            </button>
-          </div>
+          {this.view.forms.makeInput(inputParams)}
+          {this.view.forms.makeInput(ip2)}
+          {this.addForumButton(announcementtitle, announcementurl)}
         </form>
         <hr />
         {this.view.deleteForumForm(forumId, books)}
@@ -53,7 +69,11 @@ class AdminController {
     );
   }
 
-  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
+  changePicDiv(editPic: any,
+    youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
+    type: string, options: { type: string; Category: string; }[],
+    showCaption: string,
+    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string; }) {
     return (
       <div
         className="material-content elevation3"
@@ -80,7 +100,7 @@ class AdminController {
     );
   }
 
-  async deleteBookApi(evt, id, redirect) {
+  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: any, redirect: string) {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
     if (result) {
@@ -99,18 +119,18 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName, bookURL, type, firstEdit) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null) { // eslint-disable-line class-methods-use-this
     let disabled = true;
     if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 
-  validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
+  validateDeleteBook(stateId: string) { // eslint-disable-line class-methods-use-this
     if (stateId !== '') return false;
     return true;
   }
 
-  async createHomeAPI(evt) {
+  async createHomeAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth } = this.view.props;
     const { title, homePageContent } = this.view.state;
@@ -128,7 +148,7 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  async createPicApi(evt, body, redirect) {
+  async createPicApi(evt: { preventDefault: () => void; }, body: any, redirect: string) {
     evt.preventDefault();
     let r;
     const { auth } = this.view.props;
@@ -164,7 +184,7 @@ class AdminController {
     } return Promise.resolve(false);
   }
 
-  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
+  deleteBookForm(bookId: any, labelTxt: React.ReactNode, stateId: any, propsArr: any, redirect: any) {
     return (
       <form
         id="delete-book"
@@ -172,7 +192,7 @@ class AdminController {
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        { this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title') }
+        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title')}
         <div style={{ marginLeft: '60%' }}>
           <p>{' '}</p>
           <button
@@ -189,7 +209,7 @@ class AdminController {
     );
   }
 
-  async editPicAPI(evt) {
+  async editPicAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
     const {
@@ -216,9 +236,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent) { this.view.setState({ homePageContent }); return true; }
+  handleEditorChange(homePageContent: any) { this.view.setState({ homePageContent }); return true; }
 
-  editor(homePageContent) {
+  editor(homePageContent: string | undefined) {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
@@ -234,9 +254,9 @@ class AdminController {
             'insertdatetime media table paste code help wordcount',
           ],
           toolbar:
-          'undo redo | formatselect | bold italic backcolor forecolor |'
-          + 'alignleft aligncenter alignright alignjustify |'
-          + 'bullist numlist outdent indent | removeformat | help',
+            'undo redo | formatselect | bold italic backcolor forecolor |'
+            + 'alignleft aligncenter alignright alignjustify |'
+            + 'bullist numlist outdent indent | removeformat | help',
         }}
         onEditorChange={this.handleEditorChange}
       />

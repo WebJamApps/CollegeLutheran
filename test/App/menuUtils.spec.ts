@@ -1,7 +1,7 @@
 import menuUtils from '../../src/App/menuUtils';
 
 describe('menuUtils', () => {
-  let r;
+  let r: any;
   const viewStub = {
     googleButtons: () => true,
     makeMenuLink: () => true,

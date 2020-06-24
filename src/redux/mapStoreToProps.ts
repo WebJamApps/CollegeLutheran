@@ -1,6 +1,7 @@
 export interface Book {
-  _id: number,
+  _id: string,
   title: string
+  created_at: string
 }
 const mapStoreToProps = (store: any) => ({
   auth: store.auth,

@@ -1,6 +1,9 @@
 import React from 'react';
 
-const makeDropdown = (htmlFor, labelText, value, onChange, options) => {
+function makeDropdown(htmlFor: string,
+  labelText: any | null | undefined,
+  value: string | number | readonly string[] | undefined,
+  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void, options: any[]) {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
@@ -9,47 +12,61 @@ const makeDropdown = (htmlFor, labelText, value, onChange, options) => {
       <select id={htmlFor} value={value} onChange={(event) => onChange(event, htmlFor)}>
         <option id="blank-option" key="blank-option" value="">---</option>
         {// eslint-disable-next-line security/detect-object-injection
-          options.map((cv) => { key += 1; return (<option id={cv[htmlFor]} key={key} value={cv[htmlFor]}>{cv[labelText]}</option>); })
+          options.map((cv: any) => { key += 1; return (<option id={cv[htmlFor]} key={key} value={cv[htmlFor]}>{cv[labelText]}</option>); })
         }
       </select>
     </label>
   );
-};
-const makeDataDropdown = (htmlFor, labelText, value, onChange, options, oValue, dValue) => (
-  <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
-    {labelText}
-    <br />
-    <select id={htmlFor} value={value} onChange={(event) => onChange(event, htmlFor)}>
-      <option id="blank-option" key="blank-option" value="">---</option>
-      {// eslint-disable-next-line security/detect-object-injection
-          options.map((cv) => (<option id={cv[oValue]} key={cv[oValue]} value={cv[oValue]}>{cv[dValue]}</option>))
+}
+export interface DataDropParams {
+  htmlFor: string | undefined,
+  labelText: React.ReactNode,
+  value: string | number | readonly string[] | undefined,
+  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void,
+  options: any[], oValue: React.Key, dValue: React.Key
+}
+function makeDataDropdown(p: DataDropParams) {
+  return (
+    <label htmlFor={p.htmlFor} style={{ paddingTop: '12px' }} id={p.htmlFor}>
+      {p.labelText}
+      <br />
+      <select id={p.htmlFor} value={p.value} onChange={(event) => p.onChange(event, p.htmlFor)}>
+        <option id="blank-option" key="blank-option" value="">---</option>
+        {// eslint-disable-next-line security/detect-object-injection
+          p.options.map((cv: any) => (<option id={cv[p.oValue]} key={cv[p.oValue]} value={cv[p.oValue]}>{cv[p.dValue]}</option>))
         }
-    </select>
-  </label>
-);
-const makeInput = (type, label, isRequired, onChange, value, width) => {
-  let fId = label.toLowerCase();
+      </select>
+    </label>
+  );
+}
+export interface InputParams {
+  type: string | undefined,
+  label: any | null | undefined, isRequired: boolean | undefined,
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: any, width: any
+}
+function makeInput(p: InputParams) {
+  let fId = p.label.toLowerCase();
   fId = fId.replace(/\s/g, '');
   fId = fId.split('(');
   [fId] = fId;
   return (
     <label className="inquiryLabel" htmlFor={fId}>
-      {isRequired ? '* ' : ''}
-      {label}
+      {p.isRequired ? '* ' : ''}
+      {p.label}
       <br />
       <input
-        style={{ paddingLeft: 0, minWidth: 'inherit', width }}
+        style={{ paddingLeft: 0, minWidth: 'inherit', width: p.width }}
         id={fId}
-        type={type}
+        type={p.type}
         name={fId}
-        onChange={onChange}
-        required={isRequired}
-        value={value || ''}
+        onChange={p.onChange}
+        required={p.isRequired}
+        value={p.value || ''}
       />
     </label>
   );
-};
-const radioButtons = (showCaption, onChange) => (
+}
+const radioButtons = (showCaption: string, onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined) => (
   <div>
     <label htmlFor="hide-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
       <input

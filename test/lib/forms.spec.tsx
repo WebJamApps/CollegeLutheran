@@ -11,14 +11,20 @@ describe('forms', () => {
   });
   it('handles on change datadropdown', () => {
     const onChange = jest.fn();
-    const mdd = forms.makeDataDropdown('id', 'txt', 'value', onChange, [], 'oValue', 'dValue');
+    const ddParams = {
+      htmlFor: 'id', labelText: 'txt', value: 'value', onChange, options: [], oValue: 'oValue', dValue: 'dValue',
+    };
+    const mdd = forms.makeDataDropdown(ddParams);
     const dd = shallow(mdd);
     dd.find('select').simulate('change');
     expect(onChange).toHaveBeenCalled();
   });
   it('makes a required input', () => {
     const onChange = jest.fn();
-    const i = forms.makeInput('text', 'txt', true, onChange, 'value', '90px');
+    const iParams = {
+      type: 'text', label: 'txt', isRequired: true, onChange, value: 'value', width: '90px',
+    };
+    const i = forms.makeInput(iParams);
     const inp = shallow(i);
     expect(inp.find('input').prop('required')).toBe(true);
   });

@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PicSlider from '../../components/PicSlider';
 
-const FacebookFeed = ({ allPics }) => (
+const FacebookFeed = ({ allPics }: any) => (
   <div className="notWidescreen" style={{ maxWidth: '320px', margin: 'auto' }}>
     <p style={{
       textAlign: 'center', fontSize: '10pt', marginTop: 0, marginBottom: 0, paddingBottom: '2px',
@@ -67,8 +66,5 @@ const FacebookFeed = ({ allPics }) => (
 );
 
 FacebookFeed.defaultProps = { allPics: [] };
-FacebookFeed.propTypes = {
-  allPics: PropTypes.arrayOf(PropTypes.shape({})),
-};
 
 export default FacebookFeed;

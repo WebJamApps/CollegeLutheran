@@ -20,11 +20,11 @@ describe('fetch reducer', () => {
       },
     );
   });
-  it('sets empty array if data is null', () => {
+  it('sets empty array if data is undefined', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_YOUTHPICS',
-        data: null,
+        data: undefined,
       }),
     ).toEqual(
       {

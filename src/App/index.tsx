@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import commonUtils from '../lib/commonUtils';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
@@ -29,12 +30,12 @@ export interface AppProps {
   };
 }
 export class App extends Component<AppProps> {
-  fetch:any;
+  fetch: any;
 
-  superagent:any;
+  superagent: any;
 
   static defaultProps = {
-    dispatch: /* istanbul ignore next */() => {},
+    dispatch: /* istanbul ignore next */() => { },
     auth: { isAuthenticated: false, user: { userType: '' } },
   };
 
@@ -55,7 +56,7 @@ export class App extends Component<AppProps> {
 
   render() {
     const { auth } = this.props;
-    const userRoles = JSON.parse(process.env.userRoles).roles;
+    const userRoles: any[] = commonUtils.getUserRoles();
     return (
       <div id="App" className="App">
         <Router>

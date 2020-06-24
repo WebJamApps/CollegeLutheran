@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const fixUrl = (state: { familyPics: any[]; }, action: { type: string; data?: any[]; }) => {
-  let familyPics = [];
+  let familyPics: any[] = [];
   if (Array.isArray(action.data)) familyPics = action.data.reverse();
   return { ...state, familyPics };
 };

@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DefaultNewsContent from './NewsContent';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Book } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export const News = ({ books }) => {
+interface Nprops {
+  books: Book[]
+}
+export function News({ books }: Nprops): JSX.Element {
   commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
     const dataA = a.created_at.split('T')[0];
@@ -15,15 +17,8 @@ export const News = ({ books }) => {
     return 0;
   });
   return <DefaultNewsContent books={books} />;
-};
+}
 
 News.defaultProps = { books: [] };
-News.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      comments: PropTypes.string,
-    }),
-  ),
-};
 
 export default connect(mapStoreToProps, null)(News);

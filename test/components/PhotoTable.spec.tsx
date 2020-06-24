@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { PhotoTable } from '../../src/components/PhotoTable';
 
 describe('PhotoTable', () => {
-  let props, wrapper, r;
+  let props: { auth: any; youthPics: any; familyPics: any; otherPics: any; },
+    wrapper: any, r: ShallowWrapper<HTMLAttributes, any, React.Component<any, any, any>>;
   beforeEach(() => {
     props = {
       auth: { token: 'token' },
@@ -30,7 +31,7 @@ describe('PhotoTable', () => {
     expect(typeof wrapper.instance().setColumns).toBe('function');
     wrapper.instance().setColumns();
     const custom = wrapper.instance().state.columns[0].options.customBodyRender('<a href="http://collegelutheran.org/"'
-    + ' rel="noopener noreferrer" target="_blank">College Lutheran Church</a>');
+      + ' rel="noopener noreferrer" target="_blank">College Lutheran Church</a>');
     expect(custom.type).toBe('div');
   });
   it('sets the columns with customBodyRender for Modify column', () => {
@@ -87,7 +88,7 @@ describe('PhotoTable', () => {
     wrapper.update();
     global.confirm = jest.fn(() => true);
     r = await wrapper.instance().deletePic('456');
-    expect(r).toBe(false);
+    expect(r).toBe('bad');
   });
   it('handles cancel on the deletePic api', async () => {
     global.confirm = jest.fn(() => false);

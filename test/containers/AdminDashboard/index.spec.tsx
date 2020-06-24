@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
 import PTable from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
-  let props, wrapper;
-  const history:any = {};
-  const location:any = {};
-  const match:any = {};
+  let props: any, wrapper: any;
+  const history: any = {};
+  const location: any = {};
+  const match: any = {};
   beforeEach(() => {
     props = {
       auth: { token: 'token' },
@@ -74,6 +75,7 @@ describe('Dashboard Container', () => {
       match={match}
     />);
     wrapper2.instance().setState = jest.fn();
+    // @ts-ignore
     const cpf = wrapper2.instance().changePicForm({ disabled: jest.fn() });
     const d = shallow(cpf);
     const h = d.find('h4').text();
@@ -109,7 +111,7 @@ describe('Dashboard Container', () => {
   it('resets the edit pic form', () => {
     wrapper.instance().setState = jest.fn((obj) => expect(obj.youthName).toBe(''));
     wrapper.update();
-    wrapper.instance().resetEditForm({ preventDefault: () => {} });
+    wrapper.instance().resetEditForm({ preventDefault: () => { } });
   });
   it('doesnt show PTable when showTable is true', () => {
     const wrapper2 = shallow(<AdminDashboard
