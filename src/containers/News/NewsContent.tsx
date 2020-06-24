@@ -3,7 +3,7 @@ import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'news';
 
-const NewsContent = ({ books }) => (
+const NewsContent = ({ books }: any) => (
   <div className="page-content">
     <div>
       <div>
@@ -27,7 +27,7 @@ const NewsContent = ({ books }) => (
                   </tr>
                 </thead>
                 <tbody>
-                  {books.map((d) => (
+                  {books.map((d: { _id: string | number | undefined; url: string | undefined; title: React.ReactNode; created_at: string; }) => (
                     <tr key={d._id}>
                       <td className="newsUrl">
                         <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>

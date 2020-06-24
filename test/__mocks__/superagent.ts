@@ -1,4 +1,4 @@
-let mockError,
+let mockError: string,
   mockResponse = {
     status: () => 200,
     ok: true,
@@ -29,13 +29,13 @@ const Request = {
     }
     return resolve(callback(mockResponse));
   })),
-  setMockResponse: (mockRes) => {
+  setMockResponse: (mockRes: { status: () => number; ok: boolean; get: jest.Mock<any, any>; toError: jest.Mock<any, any>; body: any; }) => {
     mockResponse = mockRes;
   },
-  setMockError: (mockErr) => {
+  setMockError: (mockErr: any) => {
     mockError = mockErr;
   },
-  __setMockResponseBody: (body) => {
+  __setMockResponseBody: (body: any) => {
     mockResponse.body = body;
   },
 };

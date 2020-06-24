@@ -79,7 +79,7 @@ describe('AppTemplate', () => {
     const result = aT.close({
       target: {
         classList: {
-          contains(name) {
+          contains(name: string) {
             if (name === 'loginGoogle') return true;
             return false;
           },

@@ -30,17 +30,6 @@ describe('News', () => {
       .find('div.forumsTable')
       .exists()).toBe(true);
   });
-  // it('sorts the books in descending order', () => {
-  //   const { books } = controller.state;
-  //   const results = shallow(<News books={books} />);
-  //   books.sort((a, b) => {
-  //     const dataA = a.created_at;
-  //     const dateB = b.created_at;
-  //     if (dataA < dateB) return 1;
-  //     return null;
-  //   });
-  //   expect(results).toBeTruthy();
-  // });
   it('sorts the books in default order', () => {
     const controller2 = {
       setState: () => true,

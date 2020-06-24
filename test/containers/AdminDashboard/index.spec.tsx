@@ -4,10 +4,10 @@ import { AdminDashboard } from '../../../src/containers/AdminDashboard';
 import PTable from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
-  let props, wrapper;
-  const history:any = {};
-  const location:any = {};
-  const match:any = {};
+  let props: any, wrapper: any;
+  const history: any = {};
+  const location: any = {};
+  const match: any = {};
   beforeEach(() => {
     props = {
       auth: { token: 'token' },
@@ -109,7 +109,7 @@ describe('Dashboard Container', () => {
   it('resets the edit pic form', () => {
     wrapper.instance().setState = jest.fn((obj) => expect(obj.youthName).toBe(''));
     wrapper.update();
-    wrapper.instance().resetEditForm({ preventDefault: () => {} });
+    wrapper.instance().resetEditForm({ preventDefault: () => { } });
   });
   it('doesnt show PTable when showTable is true', () => {
     const wrapper2 = shallow(<AdminDashboard

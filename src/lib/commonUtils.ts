@@ -8,7 +8,8 @@ const setTitleAndScroll = (pageTitle: string, width?: number) => {
 };
 const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
 
-const randomizePics = async (view, w) => {
+async function randomizePics(view: { props: { familyPics: any; youthPics: any; otherPics: any; }; setState: (arg0: { picsState: any; }) => void; },
+  w: number) {
   if (w >= 900) await delay(4000);
   if (w < 900) await delay(3000);
   const { familyPics, youthPics, otherPics } = view.props;
@@ -19,7 +20,7 @@ const randomizePics = async (view, w) => {
     [arr[i], arr[j]] = [arr[j], arr[i]];// eslint-disable-line security/detect-object-injection
   }
   view.setState({ picsState: arr });
-};
+}
 
 function getUserRoles(): any[] {
   let userRoles: any[] = [];

@@ -9,7 +9,7 @@ class AdminController {
 
   deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
 
-  constructor(view) {
+  constructor(view: any) {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
@@ -53,7 +53,11 @@ class AdminController {
     );
   }
 
-  changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData) {
+  changePicDiv(editPic: any,
+    youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
+    type: string, options: { type: string; Category: string; }[],
+    showCaption: string,
+    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string; }) {
     return (
       <div
         className="material-content elevation3"
@@ -80,7 +84,7 @@ class AdminController {
     );
   }
 
-  async deleteBookApi(evt, id, redirect) {
+  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: any, redirect: string) {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
     if (result) {
@@ -99,18 +103,18 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName, bookURL, type, firstEdit) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null) { // eslint-disable-line class-methods-use-this
     let disabled = true;
     if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 
-  validateDeleteBook(stateId) { // eslint-disable-line class-methods-use-this
+  validateDeleteBook(stateId: string) { // eslint-disable-line class-methods-use-this
     if (stateId !== '') return false;
     return true;
   }
 
-  async createHomeAPI(evt) {
+  async createHomeAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth } = this.view.props;
     const { title, homePageContent } = this.view.state;
@@ -128,7 +132,7 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  async createPicApi(evt, body, redirect) {
+  async createPicApi(evt: { preventDefault: () => void; }, body: any, redirect: string) {
     evt.preventDefault();
     let r;
     const { auth } = this.view.props;
@@ -164,7 +168,7 @@ class AdminController {
     } return Promise.resolve(false);
   }
 
-  deleteBookForm(bookId, labelTxt, stateId, propsArr, redirect) {
+  deleteBookForm(bookId: any, labelTxt: React.ReactNode, stateId: any, propsArr: any, redirect: any) {
     return (
       <form
         id="delete-book"
@@ -189,7 +193,7 @@ class AdminController {
     );
   }
 
-  async editPicAPI(evt) {
+  async editPicAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
     const {
@@ -216,9 +220,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent) { this.view.setState({ homePageContent }); return true; }
+  handleEditorChange(homePageContent: any) { this.view.setState({ homePageContent }); return true; }
 
-  editor(homePageContent) {
+  editor(homePageContent: string | undefined) {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}

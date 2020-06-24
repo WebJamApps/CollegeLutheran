@@ -114,7 +114,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     });
   }
 
-  picButton(picData, editPic, youthName, youthURL, type) {
+  picButton(picData: { buttonId: string | undefined; buttonClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined; },
+    editPic: { _id: any; }, youthName: any, youthURL: any, type: any) {
     const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
@@ -149,7 +150,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.setState({ showCaption: evt.target.value });
   }
 
-  changePicForm(picData) {
+  changePicForm(picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string; }) {
     const options = [
       { type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
@@ -167,7 +168,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
-  deleteForumForm(forumId, books) {
+  deleteForumForm(forumId: any, books: any) {
     return (
       <form
         id="delete-forum"
@@ -241,7 +242,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     };
     return this.changePicForm({
       buttonId: 'addYouthPic',
-      buttonClick: (e) => this.controller.createPicApi(e, postBody, '/admin'),
+      buttonClick: (e: any) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
       nameId: 'youthName',
     });

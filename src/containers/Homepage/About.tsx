@@ -2,7 +2,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 
-const About = ({ homeContent, width, allPics }) => (
+const About = ({ homeContent, width, allPics }: any) => (
   <div className="widescreenHomepage">
     <div className="container-fluid" style={{ paddingRight: 0 }}>
       <div className="row">
