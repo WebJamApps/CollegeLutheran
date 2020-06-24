@@ -21,6 +21,7 @@ class AdminController {
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.addForumButton = this.addForumButton.bind(this);
+    this.newHpContent = this.newHpContent.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string) {
@@ -130,6 +131,22 @@ class AdminController {
     return true;
   }
 
+  async newHpContent(data: any) {
+    const { auth } = this.view.props;
+    let r;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/book`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send(data);
+    } catch (e) { return `${e.message}`; }
+    if (r.status === 200) {
+      window.location.assign('/');
+      return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
+  }
+
   async createHomeAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth } = this.view.props;
@@ -140,7 +157,10 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) {
+      if (e.status === 400) return this.newHpContent({ title, comments: homePageContent, type: 'homePageContent' });
+      return `${e.message}`;
+    }
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);

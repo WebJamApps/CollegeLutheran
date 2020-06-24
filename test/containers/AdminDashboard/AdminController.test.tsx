@@ -56,7 +56,7 @@ describe('AdminController', () => {
   it('catches error when sends an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe(false);
+    expect(r).toBe('bad');
   });
   it('handles 300 res from sending an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
