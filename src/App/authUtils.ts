@@ -1,17 +1,17 @@
-import request from 'superagent';
+import superagent from 'superagent';
 import jwt from 'jwt-simple';
 import authenticate, { logout } from './authActions';
 
 const setUser = async (controller: { props: { auth: any; dispatch: any; }; }) => {
   const { auth, dispatch } = controller.props;
-  let decoded: { user: any; sub: any; }, user: request.Response;
+  let decoded: { user: any; sub: any; }, user: any;
   try {
     decoded = jwt.decode(auth.token, process.env.HashString || /* istanbul ignore next */'');
   } catch (e) { return Promise.reject(e); }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
     try {
-      user = await request.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
+      user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
         .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
     } catch (e) { return Promise.reject(e); }
     dispatch({ type: 'SET_USER', data: user.body });
@@ -47,10 +47,13 @@ const responseGoogleFailLogin = (response: any) => {
   return false;
 };
 
-const responseGoogleLogout = (dispatch: (arg0: (dispatch: any) => any) => void) => {
+const responseGoogleLogout = (dispatch: (arg0: (dispatch: any) => any) => void): string => {
   dispatch(logout());
-  if (window.location.href.includes('/admin')) return window.location.assign('/staff');
-  return window.location.reload();
+  if (window.location.href.includes('/admin')) {
+    window.location.assign('/staff');
+    return 'assign';
+  }
+  window.location.reload(); return 'reload';
 };
 
 export default {

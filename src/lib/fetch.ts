@@ -1,13 +1,7 @@
-
 const fetchGet = async (view:
 {
   props: { dispatch: any; };
-  superagent: {
-    get: (arg0: string) => {
-      (): any; new(): any;
-      set: { (arg0: string, arg1: string): any; new(): any; };
-    };
-  };
+  superagent: any;
 }, route: any, reducer: any) => {
   let res;
   const { dispatch } = view.props;
