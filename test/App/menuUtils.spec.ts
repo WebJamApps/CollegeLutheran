@@ -1,7 +1,7 @@
 import menuUtils from '../../src/App/menuUtils';
 
 describe('menuUtils', () => {
-  let r;
+  let r: any;
   const viewStub = {
     googleButtons: () => true,
     makeMenuLink: () => true,
@@ -33,7 +33,7 @@ describe('menuUtils', () => {
     expect(r).toBe(null);
   });
   it('Prevents access to Admin Dashboard when auth user userType is incorrect', () => {
-    viewStub.props.auth = { isAuthenticated: true, user: { userType: 'booya' } };
+    viewStub.props.auth = { isAuthenticated: true, token: '', user: { userType: 'booya' } };
     r = menuUtils.menuItem({
       name: 'Admin Dashboard', link: '/admin', type: '', auth: true,
     },

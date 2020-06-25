@@ -1,18 +1,19 @@
 import request from 'superagent';
 
-export const gotToken = (doc) => ({
+export const gotToken = (doc: any) => ({
   type: 'GOT_TOKEN',
   data: doc,
 });
 
-export const authError = (e) => ({
+export const authError = (e: Error) => ({
   type: 'AUTH_ERROR',
   error: e,
 });
 
-export const logout = () => (dispatch) => dispatch({ type: 'LOGOUT' });
+export const logout = () => (dispatch: (arg0: { type: string; }) => any) => dispatch({ type: 'LOGOUT' });
 
-const authFunc = (body) => async (dispatch, getState) => {
+const authFunc = (body: string | any | undefined) => async (dispatch:
+(arg0: { type: string; error?: any; data?: any; }) => void, getState: () => { auth: any; }) => {
   const { auth } = getState();
   if (auth.isAuthenticated) return Promise.resolve(true);
   let data;

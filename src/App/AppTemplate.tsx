@@ -62,7 +62,7 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response) { return this.authUtils.responseGoogleLogin(response, this); }
+  responseGoogleLogin(response: any) { return this.authUtils.responseGoogleLogin(response, this); }
 
   responseGoogleLogout() { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
 
@@ -71,18 +71,18 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
     return true;
   }
 
-  handleKeyPress(e) {
+  handleKeyPress(e: { key: string; }) {
     if (e.key === 'Escape') return this.setState({ menuOpen: false });
     return null;
   }
 
-  handleKeyMenu(e) {
+  handleKeyMenu(e: { key: string; }) {
     if (e.key === 'Enter') return this.toggleMobileMenu();
     return null;
   }
 
-  googleButtons(type, index) {
-    const cId = process.env.GoogleClientId;
+  googleButtons(type: string, index: string | number | undefined) {
+    const cId = process.env.GoogleClientId || /* istanbul ignore next */'';
     if (type === 'login') {
       return (
         <div key={index} className="menu-item googleLogin">
@@ -103,7 +103,7 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
     );
   }
 
-  makeMenuLink(menu, index) {
+  makeMenuLink(menu: any, index: string): any {
     return (
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>
@@ -166,7 +166,7 @@ export class AppTemplate extends Component<AppMainProps, AppMainState> {
     );
   }
 
-  drawerContainer(style) {
+  drawerContainer(style: any) {
     return (
       <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
         <div

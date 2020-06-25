@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import commonUtils from '../lib/commonUtils';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
@@ -17,7 +18,7 @@ import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import fetch from './fetch';
+import fetch from '../lib/fetch';
 
 export interface AppProps {
   dispatch: (...args: any[]) => any;
@@ -29,12 +30,12 @@ export interface AppProps {
   };
 }
 export class App extends Component<AppProps> {
-  fetch:any;
+  fetch: any;
 
-  superagent:any;
+  superagent: any;
 
   static defaultProps = {
-    dispatch: () => {},
+    dispatch: /* istanbul ignore next */() => { },
     auth: { isAuthenticated: false, user: { userType: '' } },
   };
 
@@ -46,16 +47,16 @@ export class App extends Component<AppProps> {
   }
 
   componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
-    this.fetch(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
-    this.fetch(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
-    this.fetch(this, 'book?type=Forum', 'GOT_BOOKS');
-    this.fetch(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
-    this.fetch(this, 'book?type=otherPics', 'GOT_OTHERPICS');
+    this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+    this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
+    this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
+    this.fetch.fetchGet(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
+    this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
   }
 
   render() {
     const { auth } = this.props;
-    const userRoles = JSON.parse(process.env.userRoles).roles;
+    const userRoles: any[] = commonUtils.getUserRoles();
     return (
       <div id="App" className="App">
         <Router>
