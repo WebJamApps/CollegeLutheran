@@ -25,7 +25,7 @@ class AdminController {
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.addForumButton = this.addForumButton.bind(this);
-    this.newHpContent = this.newHpContent.bind(this);
+    this.createBook = this.createBook.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string) {
@@ -135,14 +135,12 @@ class AdminController {
     return true;
   }
 
-  async newHpContent(data: any) {
+  async createBook(data: any, redirect: string) {
     const { auth } = this.view.props;
     let r;
-    try {
-      r = await this.fetch.fetchPost(this.superagent, auth, data);
-    } catch (e) { return `${e.message}`; }
+    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
     if (r.status === 201) {
-      window.location.assign('/');
+      window.location.assign(redirect);
       return Promise.resolve(true);
     }
     return Promise.resolve(false);
@@ -159,7 +157,7 @@ class AdminController {
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
     } catch (e) {
-      return this.newHpContent({ title, comments: homePageContent, type: 'homePageContent' });
+      return this.createBook({ title, comments: homePageContent, type: 'homePageContent' }, '/');
     }
     if (r.status === 200) {
       window.location.assign('/');
@@ -168,17 +166,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  async createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string) {
+  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string) {
     evt.preventDefault();
-    let r;
-    const { auth } = this.view.props;
-    try {
-      r = await this.fetch.fetchPost(this.superagent, auth, data);
-    } catch (e) { return `${e.message}`; }
-    if (r.status === 201) {
-      window.location.assign(redirect);
-      return true;
-    } return false;
+    return this.createBook(data, redirect);
   }
 
   async addForumAPI() {
