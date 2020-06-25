@@ -54,9 +54,22 @@ describe('AdminController', () => {
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error when sends an update homepage request to the backend', async () => {
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe('bad');
+    const res = await controller.createHomeAPI({ preventDefault: () => { } });
+    expect(res).toBe('bad');
+  });
+  it('catches error when sends an update homepage request but successfully create new content', async () => {
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    const res = await controller.createHomeAPI({ preventDefault: () => { } });
+    expect(res).toBe(true);
+  });
+  it('catches error when sends an update homepage request but unsuccessfully create new content', async () => {
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    const res = await controller.createHomeAPI({ preventDefault: () => { } });
+    expect(res).toBe(false);
   });
   it('handles 300 res from sending an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
@@ -73,8 +86,8 @@ describe('AdminController', () => {
   });
   it('catches error when sends create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-    expect(r).toBe(false);
+    const res = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
+    expect(res).toBe('bad');
   });
   it('handles 300 res from sending create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));

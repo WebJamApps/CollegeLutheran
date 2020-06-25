@@ -8,7 +8,7 @@ import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
 export interface PicData {
-  buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string;
+  buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: (...args: any) => any;
