@@ -1,15 +1,19 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import fetch from '../../lib/fetch';
 
 class AdminController {
   view: any;
+
+  fetch: any;
 
   superagent: superagent.SuperAgentStatic;
 
   deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
 
   constructor(view: any) {
+    this.fetch = fetch;
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
@@ -21,6 +25,7 @@ class AdminController {
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.addForumButton = this.addForumButton.bind(this);
+    this.createBook = this.createBook.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string) {
@@ -73,7 +78,7 @@ class AdminController {
     youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
     type: string, options: { type: string; Category: string; }[],
     showCaption: string,
-    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string; }) {
+    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string; }) {
     return (
       <div
         className="material-content elevation3"
@@ -130,6 +135,17 @@ class AdminController {
     return true;
   }
 
+  async createBook(data: any, redirect: string) {
+    const { auth } = this.view.props;
+    let r;
+    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
+    if (r.status === 201) {
+      window.location.assign(redirect);
+      return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
+  }
+
   async createHomeAPI(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
     const { auth } = this.view.props;
@@ -140,7 +156,9 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) {
+      return this.createBook({ title, comments: homePageContent, type: 'homePageContent' }, '/');
+    }
     if (r.status === 200) {
       window.location.assign('/');
       return Promise.resolve(true);
@@ -148,19 +166,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  async createPicApi(evt: { preventDefault: () => void; }, body: any, redirect: string) {
+  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string) {
     evt.preventDefault();
-    let r;
-    const { auth } = this.view.props;
-    try {
-      r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
-        .set('Content-Type', 'application/json')
-        .send(body);
-    } catch (e) { return Promise.resolve(false); }
-    if (r.status === 201) {
-      window.location.assign(redirect);
-      return Promise.resolve(true);
-    } return Promise.resolve(false);
+    return this.createBook(data, redirect);
   }
 
   async addForumAPI() {

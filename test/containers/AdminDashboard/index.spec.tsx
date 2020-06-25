@@ -51,11 +51,11 @@ describe('Dashboard Container', () => {
     expect(wrapper.instance().controller.createPicApi).toHaveBeenCalled();
   });
   it('uses the stateValue on change', () => {
-    const result = wrapper.instance().onChange({ target: {} }, 'stateValue');
+    const result = wrapper.instance().onChange({ persist: jest.fn(), target: {} }, 'stateValue');
     expect(result).toBe('stateValue');
   });
   it('uses the event target id on change', () => {
-    const result = wrapper.instance().onChange({ target: { id: 'youthPicsId', value: '456' } });
+    const result = wrapper.instance().onChange({ persist: jest.fn(), target: { id: 'youthPicsId', value: '456' } });
     expect(result).toBe('youthPicsId');
   });
   it('renders with edit pic form', () => {

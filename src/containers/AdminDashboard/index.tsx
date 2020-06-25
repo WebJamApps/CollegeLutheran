@@ -8,7 +8,7 @@ import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
 export interface PicData {
-  buttonId: string; buttonClick: (e: any) => Promise<boolean>; title: string; nameId: string;
+  buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: (...args: any) => any;
@@ -76,6 +76,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
 
   onChange(evt: React.ChangeEvent<HTMLInputElement>, stateValue?: string): string {
+    evt.persist();
     this.checkEdit();
     if (typeof stateValue === 'string') {
       this.setState((prevState) => ({ ...prevState, [stateValue]: evt.target.value, firstEdit: false }));
