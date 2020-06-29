@@ -26,7 +26,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
 
   commonUtils: {
     setTitleAndScroll: (pageTitle: any, width: any) => void;
-    randomizePics: (view: any, w: any) => Promise<void>; delay: (ms: any) => Promise<unknown>;
+    randomizePics: (view: any, delay:any) => Promise<void>;
   };
 
   parentRef: React.RefObject<unknown>;
@@ -40,7 +40,8 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
 
   async componentDidMount() {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    return this.commonUtils.randomizePics(this, window.innerWidth);
+    const delay = (): Promise<void> => new Promise((res) => setTimeout(res, 4000));
+    return this.commonUtils.randomizePics(this, delay);
   }
 
   elca(w: number) { // eslint-disable-line class-methods-use-this

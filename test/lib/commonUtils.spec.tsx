@@ -8,20 +8,19 @@ describe('commonUtils', () => {
     commonUtils.setTitleAndScroll('home');
     expect(scrollIntoViewMock).toHaveBeenCalled();
   });
-  it('shuffles the pictures after 4 seconds when widescreen', async () => {
+  it('shuffles the pictures', async () => {
     const vStub = {
       props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
       setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
     };
-    jest.runAllTimers();
-    await commonUtils.randomizePics(vStub, 1200);
+    await commonUtils.randomizePics(vStub, jest.fn());
   });
-  it('shuffles the pictures after 4 seconds', async () => {
-    const vStub = {
-      props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
-      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
-    };
-    jest.runAllTimers();
-    await commonUtils.randomizePics(vStub, 800);
-  });
+  // it('shuffles the pictures after 4 seconds', async () => {
+  //   const vStub = {
+  //     props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
+  //     setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
+  //   };
+  //   jest.runAllTimers();
+  //   await commonUtils.randomizePics(vStub, 800);
+  // });
 });
