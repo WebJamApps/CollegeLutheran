@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
@@ -75,8 +74,9 @@ describe('Dashboard Container', () => {
       match={match}
     />);
     wrapper2.instance().setState = jest.fn();
-    // @ts-ignore
-    const cpf = wrapper2.instance().changePicForm({ disabled: jest.fn() });
+    const cpf = wrapper2.instance().changePicForm({
+      buttonId: '', buttonClick: jest.fn(), title: '', nameId: '',
+    });
     const d = shallow(cpf);
     const h = d.find('h4').text();
     expect(h).toBe('Edit Pictures');

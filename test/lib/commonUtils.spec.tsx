@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import commonUtils from '../../src/lib/commonUtils';
 
 describe('commonUtils', () => {
@@ -9,24 +8,11 @@ describe('commonUtils', () => {
     commonUtils.setTitleAndScroll('home');
     expect(scrollIntoViewMock).toHaveBeenCalled();
   });
-  it('shuffles the pictures after 5 seconds', async () => {
+  it('shuffles the pictures', async () => {
     const vStub = {
       props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
       setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
     };
-    // @ts-ignore
-    global.setTimeout = jest.fn((cb) => cb());
-    // @ts-ignore
-    await commonUtils.randomizePics(vStub);
-  });
-  it('shuffles the pictures after 4 seconds', async () => {
-    const vStub = {
-      props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
-      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
-    };
-    const w = 800;
-    // @ts-ignore
-    global.setTimeout = jest.fn((cb) => cb());
-    await commonUtils.randomizePics(vStub, w);
+    await commonUtils.randomizePics(vStub, jest.fn());
   });
 });

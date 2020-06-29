@@ -20,6 +20,6 @@ window.HTMLMediaElement.prototype.pause = () => { /* do nothing */ };
 window.location = {
   ...window.location,
   href: 'https://web-jam.com',
-  reload: jest.fn(),
-  assign: jest.fn(),
+  reload: () => {},
+  assign: () => {},
 };

@@ -33,15 +33,14 @@ describe('AppTemplate', () => {
     expect(result).toBe(true);
     done();
   }));
-  it('handles response from google logout', () => new Promise((done) => {
-    authUtils.responseGoogleLogout = jest.fn(() => true);
+  it('handles response from google logout', () => {
+    authUtils.responseGoogleLogout = jest.fn(() => '');
     // @ts-ignore
     const wrapper2 = shallow(<AppTemplate dispatch={dFunc} location={{ pathname: '/' }}><div /></AppTemplate>);
     // @ts-ignore
     const result = wrapper2.instance().responseGoogleLogout({});
-    expect(result).toBe(true);
-    done();
-  }));
+    expect(result).toBe('');
+  });
   it('renders the login button', () => new Promise((done) => {
     const { wrapper } = setup();
     // @ts-ignore

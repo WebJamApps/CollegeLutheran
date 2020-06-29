@@ -6,12 +6,11 @@ const setTitleAndScroll = (pageTitle: string, width?: number) => {
   const top = document.getElementsByClassName(getClass)[0];
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
-const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
 
-async function randomizePics(view: { props: { familyPics: any; youthPics: any; otherPics: any; }; setState: (arg0: { picsState: any; }) => void; },
-  w: number) {
-  if (w >= 900) await delay(4000);
-  if (w < 900) await delay(3000);
+async function randomizePics(view: { props: { familyPics: any; youthPics: any; otherPics: any; };
+  setState: (arg0: { picsState: any; }) => void; },
+delay:any) {
+  await delay();
   const { familyPics, youthPics, otherPics } = view.props;
   let arr = familyPics.concat(youthPics);
   arr = arr.concat(otherPics);
@@ -31,5 +30,5 @@ function getUserRoles(): any[] {
 }
 
 export default {
-  getUserRoles, setTitleAndScroll, randomizePics, delay,
+  getUserRoles, setTitleAndScroll, randomizePics,
 };
