@@ -1,4 +1,4 @@
-import request from 'superagent';
+import superagent from 'superagent';
 
 export const gotToken = (doc: any) => ({
   type: 'GOT_TOKEN',
@@ -12,24 +12,23 @@ export const authError = (e: Error) => ({
 
 export const logout = () => (dispatch: (arg0: { type: string; }) => any) => dispatch({ type: 'LOGOUT' });
 
-const authFunc = (body: string | any | undefined) => async (dispatch:
-(arg0: { type: string; error?: any; data?: any; }) => void, getState: () => { auth: any; }) => {
-  const { auth } = getState();
+async function authFunc(body: any, props:any) {
+  const { auth } = props;
   if (auth.isAuthenticated) return Promise.resolve(true);
   let data;
   try {
-    data = await request.post(`${process.env.BackendUrl}/user/auth/google`)
+    data = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
       .set({ Accept: 'application/json' }).send(body);
   } catch (e) {
-    dispatch(authError(e));
+    props.dispatch(authError(e));
     return Promise.reject(e);
   }
   if (!data.body) {
-    dispatch(authError(new Error('authentication failed')));
+    props.dispatch(authError(new Error('authentication failed')));
     return Promise.resolve(false);
   }
-  dispatch(gotToken(data.body));
+  props.dispatch(gotToken(data.body));
   return Promise.resolve(true);
-};
+}
 
 export default authFunc;

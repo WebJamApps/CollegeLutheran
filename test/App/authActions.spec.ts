@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import request from 'superagent';
+import superagent from 'superagent';
 import authenticate, { logout } from '../../src/App/authActions';
 
 const middlewares = [thunk];
@@ -9,35 +9,28 @@ const mockStore = configureMockStore(middlewares);
 
 describe('authActions', () => {
   it('authenticates', async () => {
-    // @ts-ignore
-    request.post = jest.fn(() => ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) }));
-    const store = mockStore({ auth: { isAuthenticated: false } });
-    // @ts-ignore
-    const result = await store.dispatch(authenticate({ code: 'someCode' }));
+    const postReturn: any = ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) });
+    superagent.post = jest.fn(() => postReturn);
+    const result = await authenticate({ code: 'someCode' }, { dispatch: jest.fn(), auth: { isAuthenticated: false } });
     expect(result).toBe(true);
   });
   it('does not fetch if already authenticated', async () => {
-    const store = mockStore({ auth: { isAuthenticated: true } });
-    // @ts-ignore
-    const result = await store.dispatch(authenticate({ code: 'someCode' }));
+    const result = await authenticate({ code: 'someCode' }, { dispatch: jest.fn(), auth: { isAuthenticated: true } });
     expect(result).toBe(true);
   });
   it('returns false when nothing is returned from Google', async () => {
-    const store = mockStore({ auth: { isAuthenticated: false } });
-    request.post = () => ({
-      // @ts-ignore
+    const postReturn: any = ({
       set: () => ({ send: async () => ({ body: undefined }) }),
     });
-    // @ts-ignore
-    const result = await store.dispatch(authenticate({ code: 'someCode' }));
+    superagent.post = jest.fn(() => postReturn);
+    const result = await authenticate({ code: 'someCode' }, { dispatch: jest.fn(), auth: { isAuthenticated: false } });
     expect(result).toBe(false);
   });
   it('returns false when fetch error', async () => {
-    const store = mockStore({ auth: { isAuthenticated: false } });
-    // @ts-ignore
-    request.post = jest.fn(() => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }));
-    // @ts-ignore
-    await expect(store.dispatch(authenticate({ code: 'someCode' }))).rejects.toThrow('bad');
+    const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
+    superagent.post = jest.fn(() => postReturn);
+    await expect(authenticate({ code: 'someCode' }, { dispatch: jest.fn(), auth: { isAuthenticated: false } }))
+      .rejects.toThrow('bad');
   });
   it('logs out the user', async () => {
     const store = mockStore({ auth: { isAuthenticated: true } });

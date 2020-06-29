@@ -23,8 +23,8 @@ const setUser = async (controller: { props: { auth: any; dispatch: any; }; }) =>
   window.location.assign('/admin');
   return Promise.resolve(true);
 };
-const responseGoogleLogin = async (response: { code: any; }, controller: { props: any; }) => {
-  const { dispatch } = controller.props;
+const responseGoogleLogin = async (response: { code: any; }, view: { props: any; }) => {
+  // const { dispatch } = controller.props;
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body = {
@@ -36,10 +36,10 @@ const responseGoogleLogin = async (response: { code: any; }, controller: { props
       return encodeURIComponent(rand);
     },
   };
-  try { await dispatch(authenticate(body)); } catch (e) {
+  try { await authenticate(body, view.props); } catch (e) {
     return Promise.reject(e);
   }
-  return setUser(controller);
+  return setUser(view);
 };
 
 const responseGoogleFailLogin = (response: any) => {
