@@ -10,7 +10,7 @@ export const authError = (e: Error) => ({
   error: e,
 });
 
-export const logout = () => (dispatch: (arg0: { type: string; }) => any) => dispatch({ type: 'LOGOUT' });
+export const logout = (dispatch:any) => dispatch({ type: 'LOGOUT' });
 
 async function authFunc(body: any, props:any) {
   const { auth } = props;

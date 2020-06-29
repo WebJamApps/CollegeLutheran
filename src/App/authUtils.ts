@@ -24,7 +24,6 @@ const setUser = async (controller: { props: { auth: any; dispatch: any; }; }) =>
   return Promise.resolve(true);
 };
 const responseGoogleLogin = async (response: { code: any; }, view: { props: any; }) => {
-  // const { dispatch } = controller.props;
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body = {
@@ -48,7 +47,7 @@ const responseGoogleFailLogin = (response: any) => {
 };
 
 const responseGoogleLogout = (dispatch: (arg0: (dispatch: any) => any) => void): string => {
-  dispatch(logout());
+  logout(dispatch);
   if (window.location.href.includes('/admin')) {
     window.location.assign('/staff');
     return 'assign';

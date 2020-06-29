@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import superagent from 'superagent';
@@ -34,8 +33,7 @@ describe('authActions', () => {
   });
   it('logs out the user', async () => {
     const store = mockStore({ auth: { isAuthenticated: true } });
-    // @ts-ignore
-    const result = await store.dispatch(logout());
+    const result = logout(store.dispatch);
     expect(result.type).toBe('LOGOUT');
   });
 });
