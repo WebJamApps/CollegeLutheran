@@ -15,12 +15,4 @@ describe('commonUtils', () => {
     };
     await commonUtils.randomizePics(vStub, jest.fn());
   });
-  // it('shuffles the pictures after 4 seconds', async () => {
-  //   const vStub = {
-  //     props: { familyPics: [{}, {}], youthPics: [{}], otherPics: [{}] },
-  //     setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(4),
-  //   };
-  //   jest.runAllTimers();
-  //   await commonUtils.randomizePics(vStub, 800);
-  // });
 });
