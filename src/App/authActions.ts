@@ -1,4 +1,6 @@
 import superagent from 'superagent';
+import { Dispatch } from 'react';
+import { AppProps, GoogleBody } from './AppTypes';
 
 export const gotToken = (doc: string): unknown => ({
   type: 'GOT_TOKEN',
@@ -10,9 +12,9 @@ export const authError = (e: Error): unknown => ({
   error: e,
 });
 
-export const logout = (dispatch: any): void => dispatch({ type: 'LOGOUT' });
+export const logout = (dispatch: Dispatch<unknown>): void => dispatch({ type: 'LOGOUT' });
 
-async function authFunc(body: any, props: any): Promise<string|Error> {
+async function authFunc(body: GoogleBody, props: AppProps): Promise<string|Error> {
   const { auth } = props;
   if (auth.isAuthenticated) return 'authenticated';
   let data;

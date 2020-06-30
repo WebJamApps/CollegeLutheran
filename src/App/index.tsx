@@ -19,27 +19,25 @@ import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
+import { AppProps } from './AppTypes';
 
-export interface AppProps {
-  dispatch: (...args: any[]) => any;
-  auth: {
-    user: {
-      userType?: string;
-    };
-    isAuthenticated?: boolean;
-  };
-}
 export class App extends Component<AppProps> {
   fetch: any;
 
   superagent: any;
 
   static defaultProps = {
-    dispatch: /* istanbul ignore next */() => { },
-    auth: { isAuthenticated: false, user: { userType: '' } },
+    dispatch: /* istanbul ignore next */(): void => { },
+    auth: {
+      isAuthenticated: false,
+      user: { userType: '' },
+      error: '',
+      email: '',
+      token: '',
+    },
   };
 
-  constructor(props: any) {
+  constructor(props: AppProps) {
     super(props);
     this.fetch = fetch;
     this.state = {};

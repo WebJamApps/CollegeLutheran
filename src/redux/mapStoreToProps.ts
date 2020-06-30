@@ -8,7 +8,9 @@ export interface Auth {
   error: string,
   email: string,
   token: string,
-  user: any,
+  user: {
+    userType?: string;
+  };
 }
 const mapStoreToProps = (store: any):any => ({
   auth: store.auth,

@@ -1,6 +1,8 @@
 import superagent from 'superagent';
 import jwt from 'jwt-simple';
+import { Dispatch } from 'react';
 import authenticate, { logout } from './authActions';
+import { AppProps, GoogleBody } from './AppTypes';
 
 export interface AuthUtils {
   setUser: (...args: any) => any,
@@ -8,11 +10,12 @@ export interface AuthUtils {
   responseGoogleFailLogin: (...args: any) => any,
   responseGoogleLogout: (...args: any) => any,
 }
-async function setUser(controller: { props: { auth: any; dispatch: any; }; }): Promise<string> {
-  const { auth, dispatch } = controller.props;
+async function setUser(view: { props: AppProps; }): Promise<string> {
+  const { auth, dispatch } = view.props;
   let decoded: { user: any; sub: any; }, user: any;
   try {
-    decoded = jwt.decode(auth.token, process.env.HashString || /* istanbul ignore next */'');
+    decoded = jwt.decode(auth.token || '',
+      process.env.HashString || /* istanbul ignore next */'');
   } catch (e) { return `${e.message}`; }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
@@ -28,11 +31,11 @@ async function setUser(controller: { props: { auth: any; dispatch: any; }; }): P
   window.location.assign('/admin');
   return 'user set';
 }
-async function responseGoogleLogin(response: { code: any; }, view: { props: any; }): Promise<string> {
+async function responseGoogleLogin(response: { code: any; }, view: { props: AppProps; }): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
-  const body = {
-    clientId: process.env.GoogleClientId,
+  const body: GoogleBody = {
+    clientId: process.env.GoogleClientId || /* istanbul ignore next */'',
     redirectUri: /* istanbul ignore next */process.env.NODE_ENV === 'production' ? `https://${baseUri}` : `http://${baseUri}`,
     code: `${response.code}`,
     /* istanbul ignore next */state() {
@@ -51,7 +54,7 @@ function responseGoogleFailLogin(response: any): any {
   return false;
 }
 
-function responseGoogleLogout(dispatch: (arg0: (dispatch: any) => any) => void): string {
+function responseGoogleLogout(dispatch: Dispatch<unknown>): string {
   logout(dispatch);
   if (window.location.href.includes('/admin')) {
     window.location.assign('/staff');

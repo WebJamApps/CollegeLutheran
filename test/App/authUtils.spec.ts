@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import authUtils from '../../src/App/authUtils';
 
 describe('authUtils', () => {
-  const vStub = {
+  const vStub: any = {
     props: { auth: { token: 'token' }, dispatch: () => Promise.resolve(true) },
   };
   it('is defined', () => {
@@ -50,6 +50,13 @@ describe('authUtils', () => {
     };
     const result = await authUtils.setUser(vStub);
     expect(result).toBe('user set');
+  });
+  it('sets the user fails to decode the token', async () => {
+    jwt.decode = jest.fn(() => { throw new Error('bad'); });
+    vStub.props.auth = {};
+    const result = await authUtils.setUser(vStub);
+    expect(result).toBe('bad');
+    vStub.props.auth = { token: 'token' };
   });
   it('sets the user to the already decoded user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
