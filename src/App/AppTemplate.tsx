@@ -4,16 +4,22 @@ import {
   GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { connect } from 'react-redux';
-import authUtils from './authUtils';
+import authUtils, { AuthUtils } from './authUtils';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import Footer from './Footer';
-import menuUtils from './menuUtils';
-import menuItems from './menuItems.json';
+import menuUtils, { MenuUtils } from './menuUtils';
+import menuItems, { MenuItem } from './menuItems';
 
 interface AppMainProps extends RouteComponentProps {
   children: React.ReactNode;
   auth: { isAuthenticated: boolean; user: { userType: string } };
   dispatch: Dispatch<unknown>;
+}
+
+interface CurrentStyles {
+  headerClass: string,
+  sidebarClass: string,
+  sidebarImagePath: string
 }
 
 interface AppMainState { menuOpen: boolean }
@@ -23,17 +29,15 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     auth: { isAuthenticated: false, user: { userType: '' } },
   };
 
-  menuUtils: any;
+  menuUtils: MenuUtils;
 
-  authUtils: any;
+  authUtils: AuthUtils;
 
-  appMainUtils: any;
-
-  menus: any[];
+  menus: MenuItem[];
 
   constructor(props: AppMainProps) {
     super(props);
-    this.menus = menuItems.menus;
+    this.menus = menuItems;
     this.menuUtils = menuUtils;
     this.state = { menuOpen: false };
     this.close = this.close.bind(this);
@@ -47,7 +51,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.authUtils = authUtils;
   }
 
-  get currentStyles(): any { // eslint-disable-line class-methods-use-this
+  get currentStyles(): CurrentStyles { // eslint-disable-line class-methods-use-this
     const result = {
       headerClass: 'home-header',
       sidebarClass: 'home-sidebar',
@@ -62,7 +66,9 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): void { return this.authUtils.responseGoogleLogin(response, this); }
+  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): AuthUtils['responseGoogleLogin'] {
+    return this.authUtils.responseGoogleLogin(response, this);
+  }
 
   responseGoogleLogout(): void { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
 
@@ -103,7 +109,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     );
   }
 
-  makeMenuLink(menu: any, index: string): JSX.Element {
+  makeMenuLink(menu: MenuItem, index: string): JSX.Element {
     return (
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>
@@ -166,9 +172,9 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     );
   }
 
-  drawerContainer(style: any): JSX.Element {
+  drawerContainer(className: string): JSX.Element {
     return (
-      <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${style} drawer-container`}>
+      <div tabIndex={0} role="button" id="sidebar" onClick={this.close} onKeyPress={this.handleKeyPress} className={`${className} drawer-container`}>
         <div
           className="drawer"
           style={{

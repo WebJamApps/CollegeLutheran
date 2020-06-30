@@ -2,28 +2,33 @@ import superagent from 'superagent';
 import jwt from 'jwt-simple';
 import authenticate, { logout } from './authActions';
 
-const setUser = async (controller: { props: { auth: any; dispatch: any; }; }) => {
+export interface AuthUtils {
+  setUser: (...args: any) => any,
+  responseGoogleLogin: (...args: any) => any,
+  responseGoogleFailLogin: (...args: any) => any,
+  responseGoogleLogout: (...args: any) => any,
+}
+async function setUser(controller: { props: { auth: any; dispatch: any; }; }): Promise<string> {
   const { auth, dispatch } = controller.props;
   let decoded: { user: any; sub: any; }, user: any;
   try {
     decoded = jwt.decode(auth.token, process.env.HashString || /* istanbul ignore next */'');
-  } catch (e) { return Promise.reject(e); }
+  } catch (e) { return `${e.message}`; }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
     try {
       user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
         .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
-    } catch (e) { return Promise.reject(e); }
-    dispatch({ type: 'SET_USER', data: user.body });
-    decoded.user = user.body;
-    const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
-    dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
+      dispatch({ type: 'SET_USER', data: user.body });
+      const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
+      dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
+    } catch (e) { return `${e.message}`; }
   }
   window.location.reload();
   window.location.assign('/admin');
-  return Promise.resolve(true);
-};
-const responseGoogleLogin = async (response: { code: any; }, view: { props: any; }) => {
+  return 'user set';
+}
+async function responseGoogleLogin(response: { code: any; }, view: { props: any; }): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body = {
@@ -36,24 +41,24 @@ const responseGoogleLogin = async (response: { code: any; }, view: { props: any;
     },
   };
   try { await authenticate(body, view.props); } catch (e) {
-    return Promise.reject(e);
+    return `${e.message}`;
   }
   return setUser(view);
-};
+}
 
-const responseGoogleFailLogin = (response: any) => {
+function responseGoogleFailLogin(response: any): any {
   console.log(response);// eslint-disable-line no-console
   return false;
-};
+}
 
-const responseGoogleLogout = (dispatch: (arg0: (dispatch: any) => any) => void): string => {
+function responseGoogleLogout(dispatch: (arg0: (dispatch: any) => any) => void): string {
   logout(dispatch);
   if (window.location.href.includes('/admin')) {
     window.location.assign('/staff');
     return 'assign';
   }
   window.location.reload(); return 'reload';
-};
+}
 
 export default {
   responseGoogleLogin, responseGoogleLogout, responseGoogleFailLogin, setUser,
