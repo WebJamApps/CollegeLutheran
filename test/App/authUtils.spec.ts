@@ -24,10 +24,13 @@ describe('authUtils', () => {
     expect(result).toBe(false);
   });
   it('handles google login with bad token', async () => {
+    const postReturn: any = ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) });
+    superagent.post = jest.fn(() => postReturn);
     await expect(authUtils.responseGoogleLogin({ code: '' }, vStub)).rejects.toThrow('Not enough or too many segments');
   });
   it('handles google login with authenticate error', async () => {
-    vStub.props.dispatch = jest.fn(() => Promise.reject(new Error('bad')));
+    const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
+    superagent.post = jest.fn(() => postReturn);
     await expect(authUtils.responseGoogleLogin({ code: '' }, vStub)).rejects.toThrow('bad');
   });
   it('sets the user', async () => {
