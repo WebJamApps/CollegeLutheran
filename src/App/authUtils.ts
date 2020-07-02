@@ -49,9 +49,8 @@ async function responseGoogleLogin(response: { code: any; }, view: { props: AppP
   return setUser(view);
 }
 
-function responseGoogleFailLogin(response: any): any {
-  console.log(response);// eslint-disable-line no-console
-  return false;
+function responseGoogleFailLogin(response: unknown): string {
+  return `${response}`;
 }
 
 function responseGoogleLogout(dispatch: Dispatch<unknown>): string {

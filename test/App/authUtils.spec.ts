@@ -21,7 +21,7 @@ describe('authUtils', () => {
   });
   it('handles failed login', () => {
     const result = authUtils.responseGoogleFailLogin('no way');
-    expect(result).toBe(false);
+    expect(result).toBe('no way');
   });
   it('handles google login with bad token', async () => {
     const postReturn: any = ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) });

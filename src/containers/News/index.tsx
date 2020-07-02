@@ -4,10 +4,9 @@ import DefaultNewsContent from './NewsContent';
 import mapStoreToProps, { Book } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-interface Nprops {
-  books: Book[]
-}
-export function News({ books }: Nprops): JSX.Element {
+export function News(props: { books?: Book[]}): JSX.Element {
+  let { books } = props;
+  if (!books)books = [];
   commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
     const dataA = a.created_at.split('T')[0];
