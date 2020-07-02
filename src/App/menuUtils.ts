@@ -1,9 +1,12 @@
 import commonUtils from '../lib/commonUtils';
 
+export interface MenuUtils {
+  menuItem: (...args: any) => JSX.Element | null
+}
 function continueMenuItem(menu:
 { link: any; name?: string; type?: any; auth?: boolean }, index: any, location: { pathname: string | string[]; },
 auth: { isAuthenticated: any; },
-view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons?: any; }) {
+view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons?: any; }): JSX.Element | null {
   if (menu.link !== '') return view.makeMenuLink(menu, index);
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
   if (menu.type === 'googleLogout' && auth.isAuthenticated) return view.googleButtons('logout', index);
@@ -11,7 +14,7 @@ view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons
 }
 
 function menuItem(menu: { link: string; name?: string; type?: any; auth?: boolean },
-  index: any, view: { props: { location: any; auth: any; }; }) {
+  index: any, view: { props: { location: any; auth: any; }; }): JSX.Element | null {
   const userRoles: any[] = commonUtils.getUserRoles();
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Caption = (props: { caption: any; }) => {
+const Caption = (props: { caption?: (JSX.Element|string); }):JSX.Element => {
   const { caption } = props;
   return (
     <div

@@ -3,7 +3,16 @@ export interface Book {
   title: string
   created_at: string
 }
-const mapStoreToProps = (store: any) => ({
+export interface Auth {
+  isAuthenticated: boolean,
+  error: string,
+  email: string,
+  token: string,
+  user: {
+    userType?: string;
+  };
+}
+const mapStoreToProps = (store: any):any => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,

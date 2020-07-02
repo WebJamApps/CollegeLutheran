@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
-import PTable from '../../../src/components/PhotoTable';
+import { PhotoTable } from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
   let props: any, wrapper: any;
@@ -27,6 +27,9 @@ describe('Dashboard Container', () => {
       history={history}
       location={location}
       match={match}
+      youthPics={[]}
+      familyPics={[]}
+      otherPics={[]}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
@@ -114,7 +117,7 @@ describe('Dashboard Container', () => {
     wrapper.instance().resetEditForm({ preventDefault: () => { } });
   });
   it('doesnt show PTable when showTable is true', () => {
-    const wrapper2 = shallow(<AdminDashboard
+    const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
       books={props.books}
@@ -130,6 +133,6 @@ describe('Dashboard Container', () => {
       location={location}
       match={match}
     />);
-    expect(wrapper2.find(<PTable />).exists()).toBe(false);
+    expect(wrapper2.find(PhotoTable).exists()).toBe(false);
   });
 });
