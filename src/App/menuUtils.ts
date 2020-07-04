@@ -4,8 +4,8 @@ export interface MenuUtils {
   menuItem: (...args: any) => JSX.Element | null
 }
 function continueMenuItem(menu:
-{ link: any; name?: string; type?: any; auth?: boolean }, index: any, location: { pathname: string | string[]; },
-auth: { isAuthenticated: any; },
+{ link: string; name?: string; type?: string; auth?: boolean }, index: number, location: { pathname: string | string[]; },
+auth: { isAuthenticated: boolean; },
 view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons?: any; }): JSX.Element | null {
   if (menu.link !== '') return view.makeMenuLink(menu, index);
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
@@ -13,8 +13,8 @@ view: { props?: { location: any; auth: any; }; makeMenuLink?: any; googleButtons
   return null;
 }
 
-function menuItem(menu: { link: string; name?: string; type?: any; auth?: boolean },
-  index: any, view: { props: { location: any; auth: any; }; }): JSX.Element | null {
+function menuItem(menu: { link: string; name?: string; type?: string; auth?: boolean },
+  index: number, view: { props: { location: any; auth: any; }; }): JSX.Element | null {
   const userRoles: any[] = commonUtils.getUserRoles();
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;

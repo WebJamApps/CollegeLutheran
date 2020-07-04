@@ -24,7 +24,7 @@ const footerLinks = () => {
   );
 };
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
   <div
     id="wjfooter"
     className="footer"

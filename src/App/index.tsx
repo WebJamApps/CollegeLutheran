@@ -44,7 +44,7 @@ export class App extends Component<AppProps> {
     this.superagent = superagent;
   }
 
-  componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
+  componentDidMount(): void { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
     this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
