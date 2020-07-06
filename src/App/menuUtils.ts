@@ -4,6 +4,7 @@ import { Auth } from '../redux/mapStoreToProps';
 export interface MenuUtils {
   menuItem: (...args: any) => JSX.Element | null
 }
+
 function continueMenuItem(menu:
 { link: string; name?: string; type?: string; auth?: boolean }, index: number, location: { pathname: string | string[]; },
 auth: { isAuthenticated: boolean; },

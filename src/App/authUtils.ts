@@ -6,9 +6,9 @@ import { AppProps, GoogleBody } from './AppTypes';
 
 export interface AuthUtils {
   setUser: (...args: any) => any,
-  responseGoogleLogin: (...args: any) => GoogleBody,
-  responseGoogleFailLogin: (...args: any) => GoogleBody,
-  responseGoogleLogout: (...args: any) => GoogleBody,
+  responseGoogleLogin: (...args: any) => any,
+  responseGoogleFailLogin: (...args: any) => any,
+  responseGoogleLogout: (...args: any) => any,
 }
 async function setUser(view: { props: AppProps; }): Promise<string> {
   const { auth, dispatch } = view.props;

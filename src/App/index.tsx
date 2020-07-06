@@ -24,7 +24,7 @@ import { AppProps } from './AppTypes';
 export class App extends Component<AppProps> {
   fetch: any;
 
-  superagent: any;
+  superagent: superagent.SuperAgentStatic;
 
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
@@ -52,7 +52,7 @@ export class App extends Component<AppProps> {
     this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
   }
 
-  render() {
+  render(): JSX.Element {
     const { auth } = this.props;
     const userRoles: any[] = commonUtils.getUserRoles();
     return (
