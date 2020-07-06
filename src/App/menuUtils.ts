@@ -1,22 +1,24 @@
 import commonUtils from '../lib/commonUtils';
-import { Auth } from '../redux/mapStoreToProps';
 
 export interface MenuUtils {
   menuItem: (...args: any) => JSX.Element | null
 }
 
 function continueMenuItem(menu:
-{ link: string; name?: string; type?: string; auth?: boolean }, index: number, location: { pathname: string | string[]; },
-auth: { isAuthenticated: boolean; },
-view: { props?: { location: string; auth: Auth; }; makeMenuLink?: any; googleButtons?: any; }): JSX.Element | null {
+{ link: string; name?: string; type?: string;
+  auth?: { isAuthenticated: boolean; user: { userType: string; }} }, index: number, location: { pathname: string | string[]; },
+auth: { isAuthenticated: boolean; user: { userType: string; }},
+view: { props?: { location: { pathname: string | string[]; };
+  auth: { isAuthenticated: boolean; user: { userType: string; }}}; makeMenuLink?: any; googleButtons?: any; }): JSX.Element | null {
   if (menu.link !== '') return view.makeMenuLink(menu, index);
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
   if (menu.type === 'googleLogout' && auth.isAuthenticated) return view.googleButtons('logout', index);
   return null;
 }
 
-function menuItem(menu: { link: string; name?: string; type?: string; auth?: boolean },
-  index: number, view: { props: { location: any; auth: Auth; }; }): JSX.Element | null {
+function menuItem(menu: { link: string; name?: string; type?: string; auth: { isAuthenticated: boolean; user: { userType: string; }} },
+  index: number, view: { props: { location: { pathname: string | string[]; };
+    auth: { isAuthenticated: boolean; user: { userType: string; }}; }; }): JSX.Element | null {
   const userRoles: any[] = commonUtils.getUserRoles();
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;

@@ -1,9 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { App } from '../../src/App';
+import { Auth } from '../../src/redux/mapStoreToProps';
 
 describe('App component', () => {
-  const auth: any = { user: {} };
+  const auth: Auth = {
+    isAuthenticated: true, error: '', email: '', token: '', user: { userType: '' },
+  };
   const wrapper = shallow<App>(<App dispatch={jest.fn()} auth={auth} />);
   it('renders the component', () => {
     expect(wrapper.find('div#App').exists()).toBe(true);
@@ -13,7 +16,9 @@ describe('App component', () => {
     expect(wrapper2.find('div#App').exists()).toBe(true);
   });
   it('renders the music dashboard route', () => {
-    const auth2: any = { isAuthenticated: true, user: { userType: 'Developer' } };
+    const auth2: Auth = {
+      isAuthenticated: true, error: 'none', email: 'devemail@cool.com', token: '', user: { userType: 'Developer' },
+    };
     const wrapper2 = shallow(<App dispatch={jest.fn()} auth={auth2} />);
     expect(wrapper2.find('div#App').exists()).toBe(true);
   });
