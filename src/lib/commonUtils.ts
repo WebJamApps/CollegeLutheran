@@ -22,7 +22,7 @@ delay:any) {
 }
 
 function getUserRoles(): any[] {
-  let userRoles: any[] = [];
+  let userRoles: string[] = [];
   try {
     userRoles = JSON.parse(process.env.userRoles || /* istanbul ignore next */'').roles;
   } catch (e) { /* istanbul ignore next */userRoles = []; }

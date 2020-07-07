@@ -1,18 +1,18 @@
 import React, { Dispatch } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
-  GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline,
+  GoogleLogin, GoogleLogout,
 } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils, { AuthUtils } from './authUtils';
-import mapStoreToProps from '../redux/mapStoreToProps';
+import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
 import Footer from './Footer';
 import menuUtils, { MenuUtils } from './menuUtils';
 import menuItems, { MenuItem } from './menuItems';
 
 interface AppMainProps extends RouteComponentProps {
   children: React.ReactNode;
-  auth: { isAuthenticated: boolean; user: { userType: string } };
+  auth: Auth;
   dispatch: Dispatch<unknown>;
 }
 
@@ -26,7 +26,9 @@ interface AppMainState { menuOpen: boolean }
 export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
-    auth: { isAuthenticated: false, user: { userType: '' } },
+    auth: {
+      isAuthenticated: false, user: { userType: '' }, email: '', error: '', token: '',
+    },
   };
 
   menuUtils: MenuUtils;
@@ -66,11 +68,11 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): AuthUtils['responseGoogleLogin'] {
+  responseGoogleLogin(response: any): Promise<string> {
     return this.authUtils.responseGoogleLogin(response, this);
   }
 
-  responseGoogleLogout(): void { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
+  responseGoogleLogout(): string { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
 
   close(): boolean {
     this.setState({ menuOpen: false });
@@ -109,7 +111,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     );
   }
 
-  makeMenuLink(menu: MenuItem, index: string): JSX.Element {
+  makeMenuLink(menu: MenuItem, index: number): JSX.Element {
     return (
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>

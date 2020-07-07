@@ -2,17 +2,18 @@ import superagent from 'superagent';
 import jwt from 'jwt-simple';
 import { Dispatch } from 'react';
 import authenticate, { logout } from './authActions';
-import { AppProps, GoogleBody } from './AppTypes';
+import { GoogleBody } from './AppTypes';
+import type { AppTemplate } from './AppTemplate';
 
 export interface AuthUtils {
-  setUser: (...args: any) => any,
-  responseGoogleLogin: (...args: any) => any,
-  responseGoogleFailLogin: (...args: any) => any,
-  responseGoogleLogout: (...args: any) => any,
+  setUser: (view: AppTemplate) => Promise<string>,
+  responseGoogleLogin: (response: any, view: AppTemplate) => Promise<string>,
+  responseGoogleFailLogin: (response: unknown) => string,
+  responseGoogleLogout: (dispatch: Dispatch<unknown>) => string,
 }
-async function setUser(view: { props: AppProps; }): Promise<string> {
+async function setUser(view: AppTemplate): Promise<string> {
   const { auth, dispatch } = view.props;
-  let decoded: { user: any; sub: any; }, user: any;
+  let decoded: { user: string; sub: string; }, user: superagent.Response;
   try {
     decoded = jwt.decode(auth.token || '',
       process.env.HashString || /* istanbul ignore next */'');
@@ -31,7 +32,7 @@ async function setUser(view: { props: AppProps; }): Promise<string> {
   window.location.assign('/admin');
   return 'user set';
 }
-async function responseGoogleLogin(response: { code: any; }, view: { props: AppProps; }): Promise<string> {
+async function responseGoogleLogin(response: any, view: AppTemplate): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body: GoogleBody = {

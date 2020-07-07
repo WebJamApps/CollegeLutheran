@@ -1,25 +1,24 @@
 import commonUtils from '../lib/commonUtils';
+import { MenuItem } from './menuItems';
+import type { AppTemplate } from './AppTemplate';
 
 export interface MenuUtils {
-  menuItem: (...args: any) => JSX.Element | null
+  menuItem: (menu: MenuItem,
+    index: number, view: AppTemplate) => JSX.Element | null
 }
 
-function continueMenuItem(menu:
-{ link: string; name?: string; type?: string;
-  auth?: { isAuthenticated: boolean; user: { userType: string; }} }, index: number, location: { pathname: string | string[]; },
-auth: { isAuthenticated: boolean; user: { userType: string; }},
-view: { props?: { location: { pathname: string | string[]; };
-  auth: { isAuthenticated: boolean; user: { userType: string; }}}; makeMenuLink?: any; googleButtons?: any; }): JSX.Element | null {
+function continueMenuItem(menu: MenuItem, index: number, location: { pathname: string | string[]; },
+  auth: { isAuthenticated: boolean; user: { userType: string; }},
+  view: AppTemplate): JSX.Element | null {
   if (menu.link !== '') return view.makeMenuLink(menu, index);
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
   if (menu.type === 'googleLogout' && auth.isAuthenticated) return view.googleButtons('logout', index);
   return null;
 }
 
-function menuItem(menu: { link: string; name?: string; type?: string; auth: { isAuthenticated: boolean; user: { userType: string; }} },
-  index: number, view: { props: { location: { pathname: string | string[]; };
-    auth: { isAuthenticated: boolean; user: { userType: string; }}; }; }): JSX.Element | null {
-  const userRoles: any[] = commonUtils.getUserRoles();
+function menuItem(menu: MenuItem,
+  index: number, view: AppTemplate): JSX.Element | null {
+  const userRoles: string[] = commonUtils.getUserRoles();
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;
   if ((menu.link === '/staff' || menu.link === '/belief') && auth.isAuthenticated) return null;

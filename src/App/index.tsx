@@ -18,11 +18,11 @@ import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import fetch from '../lib/fetch';
+import fetch, { Fetch } from '../lib/fetch';
 import { AppProps } from './AppTypes';
 
 export class App extends Component<AppProps> {
-  fetch: any;
+  fetch: Fetch;
 
   superagent: superagent.SuperAgentStatic;
 
@@ -54,7 +54,7 @@ export class App extends Component<AppProps> {
 
   render(): JSX.Element {
     const { auth } = this.props;
-    const userRoles: any[] = commonUtils.getUserRoles();
+    const userRoles: string[] = commonUtils.getUserRoles();
     return (
       <div id="App" className="App">
         <Router>
@@ -66,7 +66,7 @@ export class App extends Component<AppProps> {
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
               <Route exact path="/staff" component={Staff} />
-              {auth.isAuthenticated && userRoles.indexOf(auth.user.userType) !== -1
+              {auth.isAuthenticated && userRoles.indexOf(auth.user.userType || '') !== -1
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />

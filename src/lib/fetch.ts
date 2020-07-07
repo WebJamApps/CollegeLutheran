@@ -1,3 +1,8 @@
+export interface Fetch {
+  fetchPost: any;
+  fetchGet: any;
+}
+
 const fetchGet = async (view:
 {
   props: { dispatch: any; };
