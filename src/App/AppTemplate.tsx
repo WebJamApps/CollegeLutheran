@@ -4,15 +4,15 @@ import {
   GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { connect } from 'react-redux';
-import authUtils, { AuthUtils } from './authUtils';
-import mapStoreToProps from '../redux/mapStoreToProps';
+import authUtils from './authUtils';
+import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
 import Footer from './Footer';
 import menuUtils, { MenuUtils } from './menuUtils';
 import menuItems, { MenuItem } from './menuItems';
 
 interface AppMainProps extends RouteComponentProps {
   children: React.ReactNode;
-  auth: { isAuthenticated: boolean; user: { userType: string } };
+  auth: Auth;
   dispatch: Dispatch<unknown>;
 }
 
@@ -26,12 +26,14 @@ interface AppMainState { menuOpen: boolean }
 export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
-    auth: { isAuthenticated: false, user: { userType: '' } },
+    auth: {
+      isAuthenticated: false, token: '', error: '', email: '', user: { userType: '' },
+    },
   };
 
   menuUtils: MenuUtils;
 
-  authUtils: AuthUtils;
+  authUtils: typeof authUtils;
 
   menus: MenuItem[];
 
@@ -66,11 +68,11 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): AuthUtils['responseGoogleLogin'] {
+  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): Promise<string> {
     return this.authUtils.responseGoogleLogin(response, this);
   }
 
-  responseGoogleLogout(): void { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
+  responseGoogleLogout(): string { const { dispatch } = this.props; return this.authUtils.responseGoogleLogout(dispatch); }
 
   close(): boolean {
     this.setState({ menuOpen: false });
@@ -96,6 +98,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
             responseType="code"
             clientId={cId}
             buttonText="Login"
+            accessType="offline"
             onSuccess={this.responseGoogleLogin}
             onFailure={this.authUtils.responseGoogleFailLogin}
             cookiePolicy="single_host_origin"
