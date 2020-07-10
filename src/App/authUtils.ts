@@ -1,15 +1,11 @@
 import superagent from 'superagent';
 import jwt from 'jwt-simple';
 import { Dispatch } from 'react';
+import { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
 import { AppProps, GoogleBody } from './AppTypes';
+import type { AppTemplate } from './AppTemplate';
 
-export interface AuthUtils {
-  setUser: (...args: any) => any,
-  responseGoogleLogin: (...args: any) => any,
-  responseGoogleFailLogin: (...args: any) => any,
-  responseGoogleLogout: (...args: any) => any,
-}
 async function setUser(view: { props: AppProps; }): Promise<string> {
   const { auth, dispatch } = view.props;
   let decoded: { user: any; sub: any; }, user: any;
@@ -31,7 +27,7 @@ async function setUser(view: { props: AppProps; }): Promise<string> {
   window.location.assign('/admin');
   return 'user set';
 }
-async function responseGoogleLogin(response: { code: any; }, view: { props: AppProps; }): Promise<string> {
+async function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse, view: AppTemplate): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body: GoogleBody = {
