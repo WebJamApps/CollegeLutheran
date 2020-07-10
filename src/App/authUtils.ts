@@ -1,13 +1,14 @@
 import superagent from 'superagent';
 import jwt from 'jwt-simple';
 import { Dispatch } from 'react';
+import { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
 import { GoogleBody } from './AppTypes';
 import type { AppTemplate } from './AppTemplate';
 
 export interface AuthUtils {
   setUser: (view: AppTemplate) => Promise<string>,
-  responseGoogleLogin: (response: any, view: AppTemplate) => Promise<string>,
+  responseGoogleLogin: (response: GoogleLoginResponseOffline | GoogleLoginResponse, view: AppTemplate) => Promise<string>,
   responseGoogleFailLogin: (response: unknown) => string,
   responseGoogleLogout: (dispatch: Dispatch<unknown>) => string,
 }

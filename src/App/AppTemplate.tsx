@@ -1,13 +1,13 @@
 import React, { Dispatch } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
-  GoogleLogin, GoogleLogout,
+  GoogleLogin, GoogleLogout, GoogleLoginResponseOffline, GoogleLoginResponse,
 } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils, { AuthUtils } from './authUtils';
 import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
 import Footer from './Footer';
-import menuUtils, { MenuUtils } from './menuUtils';
+import menuUtils from './menuUtils';
 import menuItems, { MenuItem } from './menuItems';
 
 interface AppMainProps extends RouteComponentProps {
@@ -31,7 +31,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     },
   };
 
-  menuUtils: MenuUtils;
+  menuUtils: typeof menuUtils;
 
   authUtils: AuthUtils;
 
@@ -68,7 +68,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response: any): Promise<string> {
+  responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<string> {
     return this.authUtils.responseGoogleLogin(response, this);
   }
 
