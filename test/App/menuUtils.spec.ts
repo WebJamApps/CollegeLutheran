@@ -4,7 +4,7 @@ import { MenuItem } from '../../src/App/menuItems';
 // import { AppTemplate } from '../../src/App/AppTemplate';
 
 describe('menuUtils', () => {
-  let r: any;
+  let r: JSX.Element | null;
   const viewStub: any = {
     googleButtons: () => true,
     makeMenuLink: () => true,

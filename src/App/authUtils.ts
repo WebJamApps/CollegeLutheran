@@ -33,7 +33,7 @@ async function setUser(view: AppTemplate): Promise<string> {
   window.location.assign('/admin');
   return 'user set';
 }
-async function responseGoogleLogin(response: any, view: AppTemplate): Promise<string> {
+async function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse, view: AppTemplate): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body: GoogleBody = {

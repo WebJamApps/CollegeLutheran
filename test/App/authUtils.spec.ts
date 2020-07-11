@@ -38,7 +38,7 @@ describe('authUtils', () => {
   it('sets the user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
     jwt.encode = jest.fn(() => 'token');
-    const returnBody: any = { body: {} };
+    const returnBody: Record<string, unknown> = { body: {} };
     const sa: any = superagent;
     sa.get = () => ({ set: () => ({ set: () => Promise.resolve(returnBody) }) });
     delete window.location;
