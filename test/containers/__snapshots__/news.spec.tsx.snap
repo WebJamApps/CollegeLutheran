@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`News Renders the News component correctly 1`] = `
+<div
+  className="page-content"
+>
+  <div>
+    <div>
+      <p>
+        There are currently no pdfs links to display
+      </p>
+    </div>
+    <p
+      style={
+        Object {
+          "fontSize": "4pt",
+          "margin": "0",
+        }
+      }
+    >
+       
+    </p>
+    <hr />
+    <div
+      className="news-div"
+      style={
+        Object {
+          "margin": "auto",
+          "marginLeft": "-5px",
+          "marginRight": 0,
+          "overflow": "hidden",
+          "padding": "0",
+          "textAlign": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <iframe
+        className="newsIFrame"
+        src="https://visitor.r20.constantcontact.com/d.jsp?
+            llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
+        style={
+          Object {
+            "border": "none",
+            "height": "540px",
+            "overflow": "hidden",
+            "padding": 0,
+            "width": "100%",
+          }
+        }
+        title="News Content"
+      >
+        <p>
+          Your browser does not support iframe.
+        </p>
+      </iframe>
+    </div>
+  </div>
+  <div
+    className="newsELCA"
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <a
+      href="http://www.elca.org/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="ELCA LOGO"
+        id="elcaLogo"
+        src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+        style={
+          Object {
+            "margin": "auto",
+            "paddingTop": "30px",
+            "width": "350px",
+          }
+        }
+      />
+    </a>
+  </div>
+</div>
+`;

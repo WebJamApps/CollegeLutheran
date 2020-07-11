@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import { News } from '../../src/containers/News/index';
 import DefaultNewsContent from '../../src/containers/News/NewsContent';
 
@@ -15,11 +16,17 @@ describe('News', () => {
   };
 
   it('Renders the News component', () => {
-    const results = shallow(<News />);
+    const results = shallow(<News books={[]} />);
     expect(results.find(DefaultNewsContent)
       .dive()
       .find('div.page-content')
       .exists()).toBe(true);
+  });
+  it('Renders the News component correctly', () => {
+    const tree = renderer
+      .create(<News books={[]} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
   it('renders the table when books exist', () => {
     const { books } = controller.state;

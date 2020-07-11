@@ -33,7 +33,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
 
   menuUtils: typeof menuUtils;
 
-  authUtils: AuthUtils;
+  authUtils: typeof authUtils;
 
   menus: MenuItem[];
 
@@ -98,6 +98,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
             responseType="code"
             clientId={cId}
             buttonText="Login"
+            accessType="offline"
             onSuccess={this.responseGoogleLogin}
             onFailure={this.authUtils.responseGoogleFailLogin}
             cookiePolicy="single_host_origin"
