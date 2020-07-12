@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AppTemplate } from '../../src/App/AppTemplate';
 import authUtils from '../../src/App/authUtils';
+import { MenuItem } from '../../src/App/menuItems';
 
 const dFunc = () => { };
 let anyProp: any = {};
@@ -88,5 +89,14 @@ describe('AppTemplate', () => {
     aT.toggleMobileMenu = () => true;
     const result = aT.handleKeyMenu({ key: 'Escape' });
     expect(result).toBe(null);
+  });
+  it('calls the makeMenu function', () => {
+    const aT = new AppTemplate(anyProp);
+    const menu: MenuItem = {
+      classname: '', type: '', iconClass: '', link: '', name: '',
+    };
+    const index = 1;
+    const result = aT.makeMenuLink(menu, index);
+    expect(result).toBeTruthy();
   });
 });
