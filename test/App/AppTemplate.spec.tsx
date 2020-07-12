@@ -4,13 +4,12 @@ import { AppTemplate } from '../../src/App/AppTemplate';
 import authUtils from '../../src/App/authUtils';
 
 const dFunc = () => { };
-const location: any = { pathname: '/' };
-const history: any = {};
-const match: any = {};
+let anyProp: any = {};
+const location: any = {};
 function setup() {
   const props = { children: '<div></div>' };
   document.body.innerHTML = '<div class="page-content"></div>';
-  const wrapper = shallow<AppTemplate>(<AppTemplate match={match} history={history} dispatch={dFunc} location={location}><div /></AppTemplate>);
+  const wrapper = shallow<AppTemplate>(<AppTemplate match={anyProp} history={anyProp} dispatch={dFunc} location={location}><div /></AppTemplate>);
   return { wrapper, props };
 }
 
@@ -26,13 +25,13 @@ describe('AppTemplate', () => {
   });
   it('handles response from google login', async () => {
     authUtils.responseGoogleLogin = jest.fn(() => Promise.resolve(''));
-    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={match} history={history}><div /></AppTemplate>);
+    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={anyProp} history={anyProp}><div /></AppTemplate>);
     const result = await wrapper2.instance().responseGoogleLogin({ code: '' });
     expect(result).toBe('');
   });
   it('handles response from google logout', () => {
     authUtils.responseGoogleLogout = jest.fn(() => '');
-    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={match} history={history}><div /></AppTemplate>);
+    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={anyProp} history={anyProp}><div /></AppTemplate>);
     const result = wrapper2.instance().responseGoogleLogout();
     expect(result).toBe('');
   });
@@ -50,8 +49,8 @@ describe('AppTemplate', () => {
   });
   it('closes the menu without navigating away from the react app', () => {
     document.body.innerHTML = '<button class="googleLogin"/><button class="googleLogout"/>';
-    const props: any = { dispatch: () => Promise.resolve(true) };
-    const aT = new AppTemplate(props);
+    anyProp = { dispatch: () => Promise.resolve(true) };
+    const aT = new AppTemplate(anyProp);
     aT.setState = () => { };
     const result = aT.close();
     expect(result).toBe(true);
@@ -64,28 +63,28 @@ describe('AppTemplate', () => {
     expect(wrapper.instance().setState).toHaveBeenCalled();
   });
   it('closes the mobile menu on clicking escape key', () => {
-    const props: any = { dispatch: () => Promise.resolve(true) };
-    const aT = new AppTemplate(props);
+    anyProp = { dispatch: () => Promise.resolve(true) };
+    const aT = new AppTemplate(anyProp);
     aT.setState = jest.fn(() => true);
     const result = aT.handleKeyPress({ key: 'Escape' });
     expect(result).toBe(true);
   });
   it('does not closes the mobile menu on clicking Enter key', () => {
-    const props: any = { dispatch: () => Promise.resolve(true) };
-    const aT = new AppTemplate(props);
+    anyProp = { dispatch: () => Promise.resolve(true) };
+    const aT = new AppTemplate(anyProp);
     const result = aT.handleKeyPress({ key: 'Enter' });
     expect(result).toBe(null);
   });
   it('toggles the mobile menu on clicking Enter key', () => {
-    const props: any = { dispatch: () => Promise.resolve(true) };
-    const aT = new AppTemplate(props);
+    anyProp = { dispatch: () => Promise.resolve(true) };
+    const aT = new AppTemplate(anyProp);
     aT.toggleMobileMenu = () => true;
     const result = aT.handleKeyMenu({ key: 'Enter' });
     expect(result).toBe(true);
   });
   it('does not toggle the mobile menu on clicking Escape key', () => {
-    const props: any = { dispatch: () => Promise.resolve(true) };
-    const aT = new AppTemplate(props);
+    anyProp = { dispatch: () => Promise.resolve(true) };
+    const aT = new AppTemplate(anyProp);
     aT.toggleMobileMenu = () => true;
     const result = aT.handleKeyMenu({ key: 'Escape' });
     expect(result).toBe(null);
