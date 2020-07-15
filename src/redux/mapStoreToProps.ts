@@ -9,7 +9,7 @@ export interface Auth {
   email: string,
   token: string,
   user: {
-    userType: string;
+    userType?: string;
   };
 }
 

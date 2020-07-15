@@ -16,7 +16,7 @@ function menuItem(menu: MenuItem,
   const { location, auth } = view.props;
   if (location.pathname === '/staff' && menu.link === '/staff') return null;
   if ((menu.link === '/staff' || menu.link === '/belief') && auth.isAuthenticated) return null;
-  if (menu.name === 'Admin Dashboard' && (!auth.isAuthenticated || userRoles.indexOf(auth.user.userType || '') === -1)) return null;
+  if (menu.name === 'Admin Dashboard' && (!auth.isAuthenticated || !auth.user.userType || userRoles.indexOf(auth.user.userType) === -1)) return null;
   return continueMenuItem(menu, index, auth, view);
 }
 

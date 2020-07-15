@@ -66,7 +66,7 @@ export class App extends Component<AppProps> {
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
               <Route exact path="/staff" component={Staff} />
-              {auth.isAuthenticated && userRoles.indexOf(auth.user.userType || '') !== -1
+              {auth.isAuthenticated && auth.user.userType && userRoles.indexOf(auth.user.userType) !== -1
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />
