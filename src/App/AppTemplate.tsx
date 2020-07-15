@@ -1,13 +1,13 @@
 import React, { Dispatch } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
-  GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline,
+  GoogleLogin, GoogleLogout, GoogleLoginResponseOffline, GoogleLoginResponse,
 } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
 import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
 import Footer from './Footer';
-import menuUtils, { MenuUtils } from './menuUtils';
+import menuUtils from './menuUtils';
 import menuItems, { MenuItem } from './menuItems';
 
 interface AppMainProps extends RouteComponentProps {
@@ -27,11 +27,11 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
     auth: {
-      isAuthenticated: false, token: '', error: '', email: '', user: { userType: '' },
+      isAuthenticated: false, user: { userType: '' }, email: '', error: '', token: '',
     },
   };
 
-  menuUtils: MenuUtils;
+  menuUtils: typeof menuUtils;
 
   authUtils: typeof authUtils;
 
@@ -68,7 +68,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.setState({ menuOpen: mO });
   }
 
-  responseGoogleLogin(response: GoogleLoginResponse | GoogleLoginResponseOffline): Promise<string> {
+  responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<string> {
     return this.authUtils.responseGoogleLogin(response, this);
   }
 
@@ -112,7 +112,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     );
   }
 
-  makeMenuLink(menu: MenuItem, index: string): JSX.Element {
+  makeMenuLink(menu: MenuItem, index: number): JSX.Element {
     return (
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>

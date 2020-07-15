@@ -3,12 +3,18 @@ import jwt from 'jwt-simple';
 import { Dispatch } from 'react';
 import { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
-import { AppProps, GoogleBody } from './AppTypes';
+import { GoogleBody } from './AppTypes';
 import type { AppTemplate } from './AppTemplate';
 
-async function setUser(view: { props: AppProps; }): Promise<string> {
+export interface AuthUtils {
+  setUser: (view: AppTemplate) => Promise<string>,
+  responseGoogleLogin: (response: GoogleLoginResponseOffline | GoogleLoginResponse, view: AppTemplate) => Promise<string>,
+  responseGoogleFailLogin: (response: unknown) => string,
+  responseGoogleLogout: (dispatch: Dispatch<unknown>) => string,
+}
+async function setUser(view: AppTemplate): Promise<string> {
   const { auth, dispatch } = view.props;
-  let decoded: { user: any; sub: any; }, user: any;
+  let decoded: { user: string; sub: string; }, user: superagent.Response;
   try {
     decoded = jwt.decode(auth.token || '',
       process.env.HashString || /* istanbul ignore next */'');

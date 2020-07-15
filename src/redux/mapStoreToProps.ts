@@ -12,7 +12,18 @@ export interface Auth {
     userType?: string;
   };
 }
-const mapStoreToProps = (store: any):any => ({
+
+export interface Store {
+  auth: Auth;
+  homeContent: any;
+  familyPics: any;
+  youthPics: any;
+  books: any;
+  otherPics: any;
+  showTable: any;
+}
+
+const mapStoreToProps = (store: Store): any => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,
