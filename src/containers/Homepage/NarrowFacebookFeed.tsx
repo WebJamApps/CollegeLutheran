@@ -1,7 +1,7 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
 
-const FacebookFeed = ({ allPics }: any) => (
+const FacebookFeed = ({ allPics }: any): JSX.Element => (
   <div className="notWidescreen" style={{ maxWidth: '320px', margin: 'auto' }}>
     <p style={{
       textAlign: 'center', fontSize: '10pt', marginTop: 0, marginBottom: 0, paddingBottom: '2px',

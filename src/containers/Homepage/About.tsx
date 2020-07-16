@@ -2,7 +2,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 
-const About = ({ homeContent, width, allPics }: any) => (
+const About = ({ homeContent, width, allPics }: any): JSX.Element => (
   <div className="widescreenHomepage">
     <div className="container-fluid" style={{ paddingRight: 0 }}>
       <div className="row">
@@ -12,14 +12,6 @@ const About = ({ homeContent, width, allPics }: any) => (
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
             College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          {/* <h5>Join Us for Holy Communion</h5>
-          <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Service of Holy Communion, Sunday at 10:00 am</li>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Sunday school for all ages begins at 9:00 am</li>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Choir rehearses at 9:15 on Sunday mornings</li>
-            <li style={{ marginLeft: '-10px' }}>Wednesday Bible study at 11:15 am followed by Holy Communion at 12:15 pm</li>
-          </ul> */}
-          {/* <p><i>Please join us as we celebrate God’s grace and share His love in Christ</i></p> */}
           <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent.title)}</h5>
           <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{ReactHtmlParser(homeContent.comments)}</section>
           <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>

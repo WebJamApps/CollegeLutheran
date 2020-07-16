@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WideFacebookFeed = ({ width }: any) => {
+const WideFacebookFeed = ({ width }: any): JSX.Element => {
   let mb = '32px', mt = '0px';
   if (width < 1092) { mb = '0px'; mt = '32px'; }
   return (

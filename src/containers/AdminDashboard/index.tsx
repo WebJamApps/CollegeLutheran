@@ -1,7 +1,7 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { Component, ChangeEvent, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Book } from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
@@ -11,10 +11,10 @@ export interface PicData {
   buttonId: string; buttonClick: (e: any) => Promise<boolean | string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
-  dispatch: (...args: any) => any;
+  dispatch: Dispatch<unknown>;
   homeContent: { title: string; comments: string };
   auth: { token: string };
-  books: any[];
+  books: Book[];
   showTable: boolean;
   editPic: {
     _id?: string;
@@ -77,7 +77,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.resetEditForm = this.resetEditForm.bind(this);
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
+  componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
 
   onChange(evt: React.ChangeEvent<HTMLInputElement>, stateValue?: string): string {
     evt.persist();
@@ -90,7 +90,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return evt.target.id;
   }
 
-  checkEdit() {
+  checkEdit(): void {
     let {
       youthName, youthURL, type, showCaption,
     } = this.state;
@@ -123,7 +123,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 
   picButton(picData: { buttonId: string | undefined; buttonClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined; },
-    editPic: { _id: any; }, youthName: any, youthURL: any, type: any) {
+    editPic: { _id: any; }, youthName: any, youthURL: any, type: any): JSX.Element {
     const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>
@@ -153,12 +153,12 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
-  handleRadioChange(evt: { target: { value: string } }) {
+  handleRadioChange(evt: { target: { value: string } }): void {
     this.checkEdit();
     this.setState({ showCaption: evt.target.value });
   }
 
-  changePicForm(picData: PicData) {
+  changePicForm(picData: PicData): any {
     const options = [
       { type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
@@ -176,7 +176,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
-  deleteForumForm(forumId: any, books: any) {
+  deleteForumForm(forumId: any, books: Book[]): JSX.Element {
     const ddParams = {
       htmlFor: 'forumId',
       labelText: '* Select Title to Delete',
@@ -206,7 +206,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
-  changeHomepage() {
+  changeHomepage(): JSX.Element {
     const { title, homePageContent } = this.state;
     const inputParams = {
       type: 'text', label: 'Title', isRequired: false, onChange: this.onChange, value: title, width: '90%',
@@ -238,7 +238,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
-  changeYouthForm() {
+  changeYouthForm(): string {
     const {
       youthName, youthURL, type, showCaption,
     } = this.state;
@@ -257,7 +257,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     });
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       showTable, auth, dispatch, youthPics, familyPics, otherPics,
     } = this.props;

@@ -4,7 +4,7 @@ import DefaultYouthContent from './YouthContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export const Youth = ({ youthPics }: any) => {
+export const Youth = ({ youthPics }: any): JSX.Element => {
   commonUtils.setTitleAndScroll('Youth Ministry', window.screen.width);
   return (<DefaultYouthContent youthPics={youthPics} />);
 };

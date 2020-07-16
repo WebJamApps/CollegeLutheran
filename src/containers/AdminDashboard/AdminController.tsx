@@ -1,18 +1,19 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import fetch from '../../lib/fetch';
+import fetch, { Fetch } from '../../lib/fetch';
+import type { AdminDashboard } from './index';
 
 class AdminController {
   view: any;
 
-  fetch: any;
+  fetch: Fetch;
 
   superagent: superagent.SuperAgentStatic;
 
-  deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
+  deletebookForm: (bookId: string, labelTxt: string, stateId: string, propsArr: AdminDashboard, redirect: string) => JSX.Element;
 
-  constructor(view: any) {
+  constructor(view: AdminDashboard) {
     this.fetch = fetch;
     this.view = view;
     this.superagent = superagent;
@@ -28,7 +29,7 @@ class AdminController {
     this.createBook = this.createBook.bind(this);
   }
 
-  addForumButton(announcementtitle: string, announcementurl: string) {
+  addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
     return (
       <div style={{ marginLeft: '70%', marginTop: '10px' }}>
         <button
@@ -43,7 +44,7 @@ class AdminController {
     );
   }
 
-  addForumForm() {
+  addForumForm(): JSX.Element {
     const { announcementtitle, announcementurl, forumId } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
@@ -78,7 +79,7 @@ class AdminController {
     youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
     type: string, options: { type: string; Category: string; }[],
     showCaption: string,
-    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string; }) {
+    picData: { buttonId: string; buttonClick: (e: string) => Promise<boolean|string>; title: string; nameId: string; }): JSX.Element {
     return (
       <div
         className="material-content elevation3"
@@ -105,7 +106,7 @@ class AdminController {
     );
   }
 
-  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: any, redirect: string) {
+  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string, redirect: string): Promise<boolean> {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
     if (result) {
@@ -124,18 +125,18 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null): boolean { // eslint-disable-line class-methods-use-this
     let disabled = true;
     if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 
-  validateDeleteBook(stateId: string) { // eslint-disable-line class-methods-use-this
+  validateDeleteBook(stateId: string): boolean { // eslint-disable-line class-methods-use-this
     if (stateId !== '') return false;
     return true;
   }
 
-  async createBook(data: any, redirect: string) {
+  async createBook(data: any, redirect: string): Promise<any> {
     const { auth } = this.view.props;
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
@@ -146,7 +147,7 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  async createHomeAPI(evt: { preventDefault: () => void; }) {
+  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
     evt.preventDefault();
     const { auth } = this.view.props;
     const { title, homePageContent } = this.view.state;
@@ -166,12 +167,12 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string) {
+  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string): Promise<any> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
 
-  async addForumAPI() {
+  async addForumAPI(): Promise<boolean> {
     const { auth } = this.view.props;
     const { announcementtitle, announcementurl } = this.view.state;
     let r;
@@ -192,7 +193,7 @@ class AdminController {
     } return Promise.resolve(false);
   }
 
-  deleteBookForm(bookId: any, labelTxt: React.ReactNode, stateId: any, propsArr: any, redirect: any) {
+  deleteBookForm(bookId: string, labelTxt: React.ReactNode, stateId: string, propsArr: AdminDashboard, redirect: string): JSX.Element {
     return (
       <form
         id="delete-book"
@@ -217,7 +218,7 @@ class AdminController {
     );
   }
 
-  async editPicAPI(evt: { preventDefault: () => void; }) {
+  async editPicAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
     const {
@@ -244,9 +245,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent: any) { this.view.setState({ homePageContent }); return true; }
+  handleEditorChange(homePageContent: string): boolean { this.view.setState({ homePageContent }); return true; }
 
-  editor(homePageContent: string | undefined) {
+  editor(homePageContent: string | undefined): JSX.Element {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}

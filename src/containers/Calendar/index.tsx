@@ -5,12 +5,12 @@ import commonUtils from '../../lib/commonUtils';
 export default class Calendar extends Component {
   commonUtils: {setTitleAndScroll: (pageTitle: string, width: number) => void;};
 
-  constructor(props: Readonly<any>) {
+  constructor(props: Readonly<Calendar>) {
     super(props);
     this.commonUtils = commonUtils;
   }
 
-  componentDidMount() { this.commonUtils.setTitleAndScroll('Church Calendar', window.screen.width); }
+  componentDidMount(): void { this.commonUtils.setTitleAndScroll('Church Calendar', window.screen.width); }
 
-  render() { return (<DefaultCalendarContent />); }
+  render(): JSX.Element { return (<DefaultCalendarContent />); }
 }

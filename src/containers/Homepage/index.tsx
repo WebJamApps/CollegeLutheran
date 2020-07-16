@@ -16,7 +16,7 @@ type HomepageProps = {
 
 interface HomepageState {
   picsState: any[];
-  homeContent?: any;
+  homeContent?: string;
 }
 
 export class Homepage extends React.Component<HomepageProps, HomepageState> {
@@ -25,8 +25,8 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   };
 
   commonUtils: {
-    setTitleAndScroll: (pageTitle: any, width: any) => void;
-    randomizePics: (view: any, delay:any) => Promise<void>;
+    setTitleAndScroll: (pageTitle: string, width: number) => void;
+    randomizePics: (view: any, delay: () => Promise<void>) => Promise<void>;
   };
 
   parentRef: React.RefObject<unknown>;
@@ -38,13 +38,13 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
     this.state = { picsState: [] };
   }
 
-  async componentDidMount() {
+  async componentDidMount(): Promise<void> {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
     const delay = (): Promise<void> => new Promise((res) => setTimeout(res, 4000));
     return this.commonUtils.randomizePics(this, delay);
   }
 
-  elca(w: number) { // eslint-disable-line class-methods-use-this
+  elca(w: number): JSX.Element { // eslint-disable-line class-methods-use-this
     const width = w < 420 ? '300px' : '400px';
     return (
       <div style={{
@@ -64,7 +64,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
     );
   }
 
-  render() {
+  render(): JSX.Element {
     const { picsState } = this.state;
     const { homeContent, width, targetRef } = this.props;
     return (
