@@ -118,8 +118,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     });
   }
 
-  picButton(picData: { buttonId: string | undefined; buttonClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined; },
-    editPic: { _id: any; }, youthName: any, youthURL: any, type: any): JSX.Element {
+  picButton(picData: PicData,
+    editPic: { _id: string; }, youthName: string, youthURL: string, type: string): JSX.Element {
     const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>

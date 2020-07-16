@@ -1,7 +1,8 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
+import { Store } from '../../redux/mapStoreToProps';
 
-const YouthContent: React.FC<{ youthPics: any[]}> = ({ youthPics }): JSX.Element => (
+const YouthContent: React.FC<Store['youthPics']> = ({ youthPics }): JSX.Element => (
   <div className="page-content">
     <div id="youthSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
       {youthPics.length > 0 ? (<PicSlider data={youthPics} />) : null}

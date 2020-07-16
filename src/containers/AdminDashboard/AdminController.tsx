@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import fetch, { Fetch } from '../../lib/fetch';
-import type { AdminDashboard } from './index';
+import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
   view: any;
@@ -75,11 +75,11 @@ class AdminController {
     );
   }
 
-  changePicDiv(editPic: any,
+  changePicDiv(editPic: DashboardProps['editPic'],
     youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
     type: string, options: { type: string; Category: string; }[],
     showCaption: string,
-    picData: { buttonId: string; buttonClick: (e: string) => Promise<boolean|string>; title: string; nameId: string; }): JSX.Element {
+    picData: PicData): JSX.Element {
     return (
       <div
         className="material-content elevation3"
