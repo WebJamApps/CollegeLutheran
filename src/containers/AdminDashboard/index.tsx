@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps, { Book } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Store } from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
@@ -14,7 +14,7 @@ export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
   homeContent: { title: string; comments: string };
   auth: { token: string };
-  books: Book[];
+  books: Store['books'];
   showTable: boolean;
   editPic: {
     _id?: string;
@@ -23,9 +23,9 @@ export interface DashboardProps extends RouteComponentProps {
     url?: string;
     comments?: string;
   };
-  youthPics: any[];
-  familyPics: any[];
-  otherPics: any[];
+  youthPics: Store['youthPics'];
+  familyPics: Store['familyPics'];
+  otherPics: Store['otherPics'];
 }
 type DashboardState = {
   type: string;
@@ -40,10 +40,6 @@ type DashboardState = {
   firstEdit: boolean;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
-  static defaultProps = {
-    youthPics: [], familtyPics: [], otherPics: [],
-  };
-
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
 
   controller: AdminController;
@@ -176,7 +172,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
-  deleteForumForm(forumId: any, books: Book[]): JSX.Element {
+  deleteForumForm(forumId: string, books: Store['books']): JSX.Element {
     const ddParams = {
       htmlFor: 'forumId',
       labelText: '* Select Title to Delete',

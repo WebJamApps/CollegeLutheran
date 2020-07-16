@@ -13,9 +13,9 @@ import TableTheme from '../lib/photoTableTheme';
 interface Pprops {
   dispatch: (...args: any) => any,
   auth: { token: string },
-  familyPics: any[],
-  youthPics: any[],
-  otherPics: any[],
+  familyPics: any,
+  youthPics: any,
+  otherPics: any,
 }
 interface Pstate {
   columns: any[]
@@ -35,9 +35,9 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     };
   }
 
-  componentDidMount() { this.setColumns(); }
+  componentDidMount(): void { this.setColumns(); }
 
-  setColumns() {
+  setColumns(): void {
     const columns: any[] = [];
     const titles = ['Thumbnail', 'Title', 'Caption', 'Link', 'Type', 'Modify'];
     for (let i = 0; i < titles.length; i += 1) {
