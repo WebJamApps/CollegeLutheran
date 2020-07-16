@@ -16,7 +16,7 @@ describe('AdminController', () => {
       },
       props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
     };
-    controller = new AdminController(vStub);
+    controller = new AdminController(vStub as any);
   });
   it('sends a delete book request to the backend', async () => {
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
