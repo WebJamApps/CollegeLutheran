@@ -69,6 +69,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent}
+      youthPics={props.youthPics}
       editPic={{
         title: 'title', url: 'url', type: 'otherPics', _id: '123',
       }}

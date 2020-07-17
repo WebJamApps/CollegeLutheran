@@ -21,13 +21,13 @@ describe('Family', () => {
     expect(tree).toMatchSnapshot();
   });
   it('Renders the Family component', () => {
-    const data = [{}];
+    const data = [{ title: '', type: '' }];
     const { wrapper } = setup(data);
     expect(wrapper.find(DefaultFamilyContent).exists()).toBe(true);
     expect(wrapper.find(DefaultFamilyContent).dive().find('div.page-content').exists()).toBe(true);
   });
   it('renders with images', () => new Promise((done) => {
-    const data = [{}];
+    const data = [{ title: '', type: '' }];
     const wrapper2 = shallow(<DefaultFamilyContent familyPics={data} />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
     done();
