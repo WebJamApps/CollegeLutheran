@@ -30,14 +30,30 @@ export interface Auth {
   };
 }
 
+export interface Ibook {
+  title: string,
+  type: string,
+  author?: string,
+  numberPages?: number,
+  dateOfPub?: number,
+  url?: string,
+  isbn?: string,
+  siteLocation?: string,
+  numberOfCopies?: number,
+  access?: string,
+  comments?: string,
+  checkedOutBy?: string,
+  checkedOutByName?: string,
+}
+
 export interface Store {
   auth: Auth;
-  homeContent: {homeContent: { title: string; comments: string }};
-  familyPics: {familyPics: IAnyPics[] | []};
-  youthPics: {youthPics: IAnyPics[] | []};
-  books: {books: IAnyPics[] | []};
-  otherPics: {otherPics: IAnyPics[], editPic: IAnyPics};
-  showTable: {showTable: boolean};
+  homeContent: { homeContent: Ibook };
+  familyPics: { familyPics: Ibook[] };
+  youthPics: { youthPics: Ibook[] };
+  books: { books: Ibook[] };
+  otherPics: { otherPics: Ibook[], editPic: Ibook };
+  showTable: { showTable: boolean };
 }
 
 const mapStoreToProps = (store: Store): any => ({

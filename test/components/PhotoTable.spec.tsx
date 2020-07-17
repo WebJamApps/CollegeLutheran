@@ -74,14 +74,14 @@ describe('PhotoTable', () => {
       reload: jest.fn(),
     };
     r = await wrapper.instance().deletePic('456');
-    expect(r).toBe(true);
+    expect(r).toBe('deleted pic');
   });
   it('runs the deletePic api but has 304 error', async () => {
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 304 }) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
     r = await wrapper.instance().deletePic('456');
-    expect(r).toBe(false);
+    expect(r).toBe('304 undefined');
   });
   it('runs the deletePic api but catches error', async () => {
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
@@ -93,6 +93,6 @@ describe('PhotoTable', () => {
   it('handles cancel on the deletePic api', async () => {
     global.confirm = jest.fn(() => false);
     r = await wrapper.instance().deletePic('456');
-    expect(r).toBe(false);
+    expect(r).toBe('no delete');
   });
 });

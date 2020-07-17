@@ -1,5 +1,5 @@
-import React, { Component, Dispatch } from 'react';
-import MUIDataTable from 'mui-datatables';
+import React, { Dispatch } from 'react';
+import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -7,23 +7,21 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
-import mapStoreToProps from '../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
 import TableTheme from '../lib/photoTableTheme';
 import type { PicData } from '../containers/AdminDashboard/index';
 
 interface Pprops {
   dispatch: Dispatch<unknown>,
   auth: { token: string },
-  familyPics: any,
-  youthPics: any,
-  otherPics: any,
+  familyPics: Ibook[],
+  youthPics: Ibook[],
+  otherPics: Ibook[],
 }
 interface Pstate {
-  columns: { name: string; label: string;
-    options: { filter: boolean; sort: boolean;
-      customBodyRender: (value: string) => JSX.Element; }; }[]
+  columns: MUIDataTableColumnDef[]
 }
-export class PhotoTable extends Component<Pprops, Pstate> {
+export class PhotoTable extends React.Component<Pprops, Pstate> {
   superagent: superagent.SuperAgentStatic;
 
   constructor(props: Readonly<Pprops>) {
@@ -41,9 +39,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
   componentDidMount(): void { this.setColumns(); }
 
   setColumns(): void {
-    const columns: { name: string; label: string;
-      options: { filter: boolean; sort: boolean;
-        customBodyRender: (value: string) => JSX.Element; }; }[] = [];
+    const columns: MUIDataTableColumnDef[] = [];
     const titles = ['Thumbnail', 'Title', 'Caption', 'Link', 'Type', 'Modify'];
     for (let i = 0; i < titles.length; i += 1) {
       const label = titles[i];// eslint-disable-line security/detect-object-injection
@@ -67,7 +63,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
     this.setState({ columns });
   }
 
-  async deletePic(id: string): Promise<boolean | string> { // eslint-disable-next-line no-restricted-globals
+  async deletePic(id: string): Promise<string> { // eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting picture, are you sure?');// eslint-disable-line no-alert
     if (result) {
       const { auth } = this.props;
@@ -76,10 +72,10 @@ export class PhotoTable extends Component<Pprops, Pstate> {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
       } catch (e) { return `${e.message}`; }
-      if (res.status === 200) { window.location.reload(); return Promise.resolve(true); }
-      return Promise.resolve(false);
+      if (res.status === 200) { window.location.reload(); return 'deleted pic'; }
+      return `${res.status} ${res.body}`;
     }
-    return Promise.resolve(false);
+    return 'no delete';
   }
 
   editPic(picData: PicData): boolean {
@@ -120,7 +116,7 @@ export class PhotoTable extends Component<Pprops, Pstate> {
   render(): JSX.Element {
     const { columns } = this.state;
     const { familyPics, youthPics, otherPics } = this.props;
-    let arr: any[] = familyPics.concat(youthPics);
+    let arr: Ibook[] = familyPics.concat(youthPics);
     arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">
