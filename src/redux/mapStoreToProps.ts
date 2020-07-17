@@ -13,14 +13,30 @@ export interface Auth {
   };
 }
 
+export interface Ibook {
+  title: string,
+  type: string,
+  author?: string,
+  numberPages?: number,
+  dateOfPub?: number,
+  url?: string,
+  isbn?: string,
+  siteLocation?: string,
+  numberOfCopies?: number,
+  access?: string,
+  comments?: string,
+  checkedOutBy?: string,
+  checkedOutByName?: string,
+}
+
 export interface Store {
   auth: Auth;
-  homeContent: any;
-  familyPics: any;
-  youthPics: any;
-  books: any;
-  otherPics: any;
-  showTable: any;
+  homeContent: { homeContent: Ibook };
+  familyPics: { familyPics: Ibook[] };
+  youthPics: { youthPics: Ibook[] };
+  books: { books: Ibook[] };
+  otherPics: { otherPics: Ibook[], editPic: Ibook };
+  showTable: { showTable: boolean };
 }
 
 const mapStoreToProps = (store: Store): any => ({
