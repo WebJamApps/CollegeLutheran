@@ -4,22 +4,6 @@ export interface Book {
   created_at: string
 }
 
-export interface IAnyPics {
-  title: string,
-  type: string,
-  author?: string,
-  numberPages?: number,
-  dateOfPub?: number,
-  url?: string,
-  isbn?: string,
-  siteLocation?: string,
-  numberOfCopies?: number,
-  access?: string,
-  comments?: string,
-  checkedOutBy?: string,
-  checkedOutByName?: string,
-}
-
 export interface Auth {
   isAuthenticated: boolean,
   error: string,

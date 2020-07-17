@@ -1,14 +1,14 @@
 import React, { Component, ChangeEvent, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps, { Store } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Store, Ibook } from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
 export interface PicData {
-  buttonId: string; buttonClick: (e: any) => Promise<boolean | string>; title: string; nameId: string;
+  buttonId: string; buttonClick: (e: any) => Promise<string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
@@ -23,9 +23,9 @@ export interface DashboardProps extends RouteComponentProps {
     url?: string;
     comments?: string;
   };
-  youthPics: Store['youthPics'];
-  familyPics: Store['familyPics'];
-  otherPics: Store['otherPics'];
+  youthPics: Ibook[];
+  familyPics: Ibook[];
+  otherPics: Ibook[];
 }
 type DashboardState = {
   type: string;
