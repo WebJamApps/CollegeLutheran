@@ -11,7 +11,7 @@ const setTitleAndScroll = (pageTitle: string, width?: number): void => {
 
 async function randomizePics(view: { props: { familyPics: Ibook[]; youthPics: Ibook[]; otherPics: Ibook[]; };
   setState: (arg0: { picsState: Ibook[]; }) => void; },
-delay: any): Promise<void> {
+delay: () => void): Promise<void> {
   await delay();
   const { familyPics, youthPics, otherPics } = view.props;
   let arr: Ibook[] = familyPics.concat(youthPics);

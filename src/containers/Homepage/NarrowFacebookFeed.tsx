@@ -1,7 +1,11 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
 
-const FacebookFeed = ({ allPics }: any): JSX.Element => (
+interface IallPics {
+  allPics?: string[]
+}
+
+const FacebookFeed = ({ allPics }: IallPics): JSX.Element => (
   <div className="notWidescreen" style={{ maxWidth: '320px', margin: 'auto' }}>
     <p style={{
       textAlign: 'center', fontSize: '10pt', marginTop: 0, marginBottom: 0, paddingBottom: '2px',
@@ -59,7 +63,7 @@ const FacebookFeed = ({ allPics }: any): JSX.Element => (
           display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
         }}
       >
-        {allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
+        {allPics !== undefined && allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
       </div>
     </div>
   </div>
