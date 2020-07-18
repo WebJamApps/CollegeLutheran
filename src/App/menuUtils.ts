@@ -17,6 +17,7 @@ function menuItem(menu: MenuItem,
   if (location.pathname === '/staff' && menu.link === '/staff') return null;
   if ((menu.link === '/staff' || menu.link === '/belief') && auth.isAuthenticated) return null;
   if (menu.name === 'Admin Dashboard' && (!auth.isAuthenticated || !auth.user.userType || userRoles.indexOf(auth.user.userType) === -1)) return null;
+  if (menu.type === 'link' && menu.link.includes('/') && location.pathname.includes('/')) return view.makeMenuLink(menu, index);
   return continueMenuItem(menu, index, auth, view);
 }
 
