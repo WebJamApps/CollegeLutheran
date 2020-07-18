@@ -1,9 +1,9 @@
 import React from 'react';
 
 function makeDropdown(htmlFor: string,
-  labelText: any | null | undefined,
+  labelText: string,
   value: string | number | readonly string[] | undefined,
-  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void, options: any[]) {
+  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void, options: string[]): JSX.Element {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
@@ -23,9 +23,9 @@ export interface DataDropParams {
   labelText: React.ReactNode,
   value: string | number | readonly string[] | undefined,
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void,
-  options: any[], oValue: React.Key, dValue: React.Key
+  options: string[], oValue: React.Key, dValue: React.Key
 }
-function makeDataDropdown(p: DataDropParams) {
+function makeDataDropdown(p: DataDropParams): JSX.Element {
   return (
     <label htmlFor={p.htmlFor} style={{ paddingTop: '12px' }} id={p.htmlFor}>
       {p.labelText}
@@ -42,9 +42,9 @@ function makeDataDropdown(p: DataDropParams) {
 export interface InputParams {
   type: string | undefined,
   label: any | null | undefined, isRequired: boolean | undefined,
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: any, width: any
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: string, width: string
 }
-function makeInput(p: InputParams) {
+function makeInput(p: InputParams): JSX.Element {
   let fId = p.label.toLowerCase();
   fId = fId.replace(/\s/g, '');
   fId = fId.split('(');
@@ -66,7 +66,7 @@ function makeInput(p: InputParams) {
     </label>
   );
 }
-const radioButtons = (showCaption: string, onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined) => (
+const radioButtons = (showCaption: string, onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined): JSX.Element => (
   <div>
     <label htmlFor="hide-caption" style={{ position: 'relative', display: 'inline-block', width: '130px' }}>
       <input

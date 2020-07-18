@@ -6,7 +6,7 @@ import WideFacebookFeed from '../../src/containers/Homepage/WideFacebookFeed';
 import NarrowFacebookFeed from '../../src/containers/Homepage/NarrowFacebookFeed';
 import PicSlider from '../../src/components/PicSlider';
 
-const targetRef:any = {};
+const targetRef: any = {};
 const wrapper = shallow<Homepage>(<Homepage targetRef={targetRef} width={1000} height={800} />);
 
 describe('Home', () => {

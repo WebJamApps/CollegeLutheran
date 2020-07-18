@@ -8,7 +8,7 @@ import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
 export interface PicData {
-  buttonId: string; buttonClick: (e: any) => Promise<string>; title: string; nameId: string;
+  buttonId: string; buttonClick: (e: React.ChangeEvent<EventTarget>) => Promise<string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
@@ -154,7 +154,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.setState({ showCaption: evt.target.value });
   }
 
-  changePicForm(picData: PicData): any {
+  changePicForm(picData: PicData): JSX.Element['props'] {
     const options = [
       { type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
@@ -247,7 +247,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     };
     return this.changePicForm({
       buttonId: 'addYouthPic',
-      buttonClick: (e: any) => this.controller.createPicApi(e, postBody, '/admin'),
+      buttonClick: (e: React.ChangeEvent<EventTarget>) => this.controller.createPicApi(e, postBody, '/admin'),
       title: '',
       nameId: 'youthName',
     });

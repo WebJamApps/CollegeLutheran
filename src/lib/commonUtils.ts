@@ -1,4 +1,6 @@
-const setTitleAndScroll = (pageTitle: string, width?: number) => {
+import { Ibook } from '../redux/mapStoreToProps';
+
+const setTitleAndScroll = (pageTitle: string, width?: number): void => {
   if (pageTitle !== '') pageTitle += ' | ';// eslint-disable-line no-param-reassign
   document.title = `${pageTitle}College Lutheran Church`;
   let getClass = 'page-content';
@@ -7,12 +9,12 @@ const setTitleAndScroll = (pageTitle: string, width?: number) => {
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
 
-async function randomizePics(view: { props: { familyPics: any; youthPics: any; otherPics: any; };
-  setState: (arg0: { picsState: any; }) => void; },
-delay:any) {
+async function randomizePics(view: { props: { familyPics: Ibook[]; youthPics: Ibook[]; otherPics: Ibook[]; };
+  setState: (arg0: { picsState: Ibook[]; }) => void; },
+delay: any): Promise<void> {
   await delay();
   const { familyPics, youthPics, otherPics } = view.props;
-  let arr = familyPics.concat(youthPics);
+  let arr: Ibook[] = familyPics.concat(youthPics);
   arr = arr.concat(otherPics);
   for (let i = arr.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -21,7 +23,7 @@ delay:any) {
   view.setState({ picsState: arr });
 }
 
-function getUserRoles(): any[] {
+function getUserRoles(): string[] {
   let userRoles: string[] = [];
   try {
     userRoles = JSON.parse(process.env.userRoles || /* istanbul ignore next */'').roles;

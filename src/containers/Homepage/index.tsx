@@ -8,22 +8,18 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
 type HomepageProps = {
-  homeContent: { title: string; comments: string };
   targetRef: RefObject<HTMLDivElement>;
   width: number;
   height: number;
+  homeContent?: { title: string; comments: string };
 };
 
 interface HomepageState {
-  picsState: any[];
-  homeContent?: string;
+  picsState: string[];
+  homeContent?: { title: string; comments: string };
 }
 
 export class Homepage extends React.Component<HomepageProps, HomepageState> {
-  static defaultProps = {
-    homeContent: {},
-  };
-
   commonUtils: {
     setTitleAndScroll: (pageTitle: string, width: number) => void;
     randomizePics: (view: any, delay: () => Promise<void>) => Promise<void>;
@@ -93,4 +89,4 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   }
 }
 
-export default connect(mapStoreToProps)(withResizeDetector(Homepage as any));
+export default connect(mapStoreToProps)(withResizeDetector(Homepage));

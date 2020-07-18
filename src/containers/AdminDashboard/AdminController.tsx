@@ -136,18 +136,18 @@ class AdminController {
     return true;
   }
 
-  async createBook(data: any, redirect: string): Promise<any> {
+  async createBook(data: { title: string, comments: string, type: string}, redirect: string): Promise<string> {
     const { auth } = this.view.props;
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
     if (r.status === 201) {
       window.location.assign(redirect);
-      return Promise.resolve(true);
+      return `${r.status}`;
     }
-    return Promise.resolve(false);
+    return 'Didnt create book';
   }
 
-  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
+  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
     evt.preventDefault();
     const { auth } = this.view.props;
     const { title, homePageContent } = this.view.state;
@@ -162,12 +162,12 @@ class AdminController {
     }
     if (r.status === 200) {
       window.location.assign('/');
-      return Promise.resolve(true);
+      return `${r.status}`;
     }
-    return Promise.resolve(false);
+    return 'Failed to create.';
   }
 
-  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string): Promise<any> {
+  createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }

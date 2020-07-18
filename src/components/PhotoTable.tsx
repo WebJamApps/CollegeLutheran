@@ -90,7 +90,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     return true;
   }
 
-  addThumbs(arr: any[]): any[] {
+  addThumbs(arr: any): Ibook[] {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
