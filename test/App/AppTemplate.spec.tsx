@@ -6,7 +6,7 @@ import { MenuItem } from '../../src/App/menuItems';
 
 const dFunc = () => { };
 let anyProp: any = {};
-const location: any = {};
+const location: any = { pathname: '/' };
 function setup() {
   const props = { children: '<div></div>' };
   document.body.innerHTML = '<div class="page-content"></div>';
