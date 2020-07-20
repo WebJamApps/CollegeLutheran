@@ -4,7 +4,8 @@ import DefaultFamilyContent from './FamilyContent';
 import mapStoreToProps, { Store } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export const Family = ({ familyPics }: Store['familyPics']): JSX.Element => {
+export const Family = ({ familyPics }: Store['familyPics']):
+JSX.Element => {
   commonUtils.setTitleAndScroll('Children & Families', window.screen.width);
   return (<DefaultFamilyContent familyPics={familyPics} />);
 };
