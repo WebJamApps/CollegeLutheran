@@ -9,9 +9,15 @@ describe('News', () => {
     setState: () => true,
     props: {},
     state: {
-      books: [{ _id: '1', created_at: '1971-01-03T00:00:00Z', title: 'howdy' },
-        { _id: '3', created_at: '1973-01-03T00:00:00Z', title: 'howdy' },
-        { title: 'howdy2', _id: '2', created_at: '1972-01-03T00:00:00Z' }],
+      books: [{
+        _id: '1', created_at: '1971-01-03T00:00:00Z', title: 'howdy', type: '',
+      },
+      {
+        _id: '3', created_at: '1973-01-03T00:00:00Z', title: 'howdy', type: '',
+      },
+      {
+        title: 'howdy2', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
+      }],
     },
   };
 
@@ -42,8 +48,12 @@ describe('News', () => {
       setState: () => true,
       props: {},
       state: {
-        books: [{ title: 'howdy2', _id: '1', created_at: '1972-01-03T00:00:00Z' },
-          { title: 'howdy3', _id: '2', created_at: '1972-01-03T00:00:00Z' }],
+        books: [{
+          title: 'howdy2', _id: '1', created_at: '1972-01-03T00:00:00Z', type: '',
+        },
+        {
+          title: 'howdy3', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
+        }],
       },
     };
     const { books } = controller2.state;

@@ -10,9 +10,20 @@ describe('commonUtils', () => {
   });
   it('shuffles the pictures', async () => {
     const vStub = {
-      props: { familyPics: [{ title: '', type: '' }], youthPics: [{ title: '', type: '' }], otherPics: [{ title: '', type: '' }] },
-      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(3),
+      props: {
+        familyPics: [{ title: '', type: '' }], youthPics: [{ title: '', type: '' }], otherPics: [{ title: '', type: '' }],
+      },
+      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(2),
     };
-    await commonUtils.randomizePics(vStub, jest.fn());
+    await commonUtils.randomizePics(vStub as any, jest.fn());
+  });
+  it('Sets arr to a blank', async () => {
+    const vStub = {
+      props: {
+        arr: [],
+      },
+      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(0),
+    };
+    await commonUtils.randomizePics(vStub as any, jest.fn());
   });
 });

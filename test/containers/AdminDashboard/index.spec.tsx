@@ -15,7 +15,7 @@ describe('Dashboard Container', () => {
       youthPics: [{ _id: '456' }],
       familyPics: [{ _id: '789' }],
       otherPics: [{ _id: '999' }],
-      homeContent: { title: 'title', comments: 'comments' },
+      homeContent: { title: '', comments: '' },
     };
     wrapper = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
@@ -23,7 +23,9 @@ describe('Dashboard Container', () => {
       books={props.books}
       homeContent={props.homeContent}
       showTable
-      editPic={{}}
+      editPic={{
+        title: '', _id: '', type: '', created_at: '',
+      }}
       history={history}
       location={location}
       match={match}
@@ -56,8 +58,16 @@ describe('Dashboard Container', () => {
     const result = wrapper.instance().onChange({ persist: jest.fn(), target: {} }, 'stateValue');
     expect(result).toBe('stateValue');
   });
+  it('uses the stateValue on selectChange', () => {
+    const result = wrapper.instance().onChangeSelect({ persist: jest.fn(), target: {} }, 'stateValue');
+    expect(result).toBe('stateValue');
+  });
   it('uses the event target id on change', () => {
     const result = wrapper.instance().onChange({ persist: jest.fn(), target: { id: 'youthPicsId', value: '456' } });
+    expect(result).toBe('youthPicsId');
+  });
+  it('uses the event target id on changeSelect', () => {
+    const result = wrapper.instance().onChangeSelect({ persist: jest.fn(), target: { id: 'youthPicsId', value: '456' } });
     expect(result).toBe('youthPicsId');
   });
   it('renders with edit pic form', () => {
@@ -71,7 +81,7 @@ describe('Dashboard Container', () => {
       homeContent={props.homeContent}
       youthPics={props.youthPics}
       editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123',
+        title: '', url: 'url', type: 'otherPics', _id: '123', created_at: '',
       }}
       history={history}
       location={location}
@@ -96,7 +106,7 @@ describe('Dashboard Container', () => {
       otherPics={props.otherPics}
       homeContent={props.homeContent}
       editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
+        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
       }}
       history={history}
       location={location}
@@ -125,9 +135,9 @@ describe('Dashboard Container', () => {
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
-      homeContent={props.homeContent}
+      homeContent={props.homeContent || ''}
       editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption',
+        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
       }}
       showTable={false}
       history={history}

@@ -23,11 +23,17 @@ describe('Home', () => {
     expect(wrapper2.find('p#wideFacebook').prop('style')).toHaveProperty('marginBottom', '32px');
   });
   it('Renders NarrowFacebook with familyPics', () => {
-    const wrapper2 = shallow(<NarrowFacebookFeed allPics={['']} />);
+    const wrapper2 = shallow(<NarrowFacebookFeed allPics={[{
+      title: '', _id: '', type: '', created_at: '',
+    }]}
+    />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('Renders WideAbout with familyPics', () => {
-    const wrapper2 = shallow(<WideAboutUs allPics={[{}]} />);
+    const wrapper2 = shallow(<WideAboutUs allPics={[{
+      title: '', _id: '', type: '', created_at: '',
+    }]}
+    />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('renders the homepage with cellphone width', () => {

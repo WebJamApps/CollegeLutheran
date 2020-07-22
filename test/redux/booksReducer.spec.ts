@@ -12,11 +12,15 @@ describe('books reducer', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_BOOKS',
-        data: [{ _id: '1', title: 'cool', created_at: '' }],
+        data: [{
+          _id: '1', title: 'cool', created_at: '', type: 'howdy',
+        }],
       }),
     ).toEqual(
       {
-        books: [{ _id: '1', title: 'cool', created_at: '' }],
+        books: [{
+          _id: '1', title: 'cool', created_at: '', type: 'howdy',
+        }],
       },
     );
   });
