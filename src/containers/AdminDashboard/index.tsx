@@ -12,17 +12,11 @@ export interface PicData {
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
-  homeContent: { title: string; comments: string };
+  homeContent: Ibook;
   auth: { token: string };
   books: Store['books'];
   showTable: boolean;
-  editPic: {
-    _id?: string;
-    type?: string;
-    title?: string;
-    url?: string;
-    comments?: string;
-  };
+  editPic: Ibook;
   youthPics: Ibook[];
   familyPics: Ibook[];
   otherPics: Ibook[];
@@ -52,8 +46,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.controller = new AdminController(this);
     this.state = {
       type: '',
-      title: props.homeContent.title,
-      homePageContent: props.homeContent.comments,
+      title: props.homeContent.title || '',
+      homePageContent: props.homeContent.comments || '',
       announcementtitle: '',
       announcementurl: '',
       youthName: '',
@@ -119,7 +113,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 
   picButton(picData: PicData,
-    editPic: { _id: string; }, youthName: string, youthURL: string, type: string): JSX.Element {
+    editPic: { _id: string }, youthName: string, youthURL: string, type: string): JSX.Element {
     const { firstEdit } = this.state;
     return (
       <div style={{ marginLeft: '50%', marginTop: '10px' }}>

@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
+import { Ibook } from '../../redux/mapStoreToProps';
 
-const About = ({ homeContent, width, allPics }: any): JSX.Element => (
+interface IAbout {
+  homeContent?: any;
+  width?: number;
+  allPics?: Ibook[];
+}
+
+const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
   <div className="widescreenHomepage">
     <div className="container-fluid" style={{ paddingRight: 0 }}>
       <div className="row">
@@ -12,8 +19,10 @@ const About = ({ homeContent, width, allPics }: any): JSX.Element => (
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
             College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent.title)}</h5>
-          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{ReactHtmlParser(homeContent.comments)}</section>
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent && homeContent.title)}</h5>
+          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+            {ReactHtmlParser(homeContent && homeContent.comments)}
+          </section>
           <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
             <span style={{ fontSize: '18px' }}>
               {' '}
@@ -30,7 +39,7 @@ const About = ({ homeContent, width, allPics }: any): JSX.Element => (
             <br />
           </p>
         </div>
-        {width >= 900 && allPics.length > 0 ? (
+        {width && width >= 900 && allPics && allPics.length > 0 ? (
           <div
             className="col"
             id="familySlideshowWide"
@@ -41,7 +50,7 @@ const About = ({ homeContent, width, allPics }: any): JSX.Element => (
             <PicSlider data={allPics} />
           </div>
         ) : null}
-        {width >= 900 && allPics.length === 0 ? (
+        {width && width >= 900 && allPics && allPics.length === 0 ? (
           <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
             <div
               id="slideshow1"

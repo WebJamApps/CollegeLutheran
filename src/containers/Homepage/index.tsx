@@ -62,7 +62,8 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
 
   render(): JSX.Element {
     const { picsState } = this.state;
-    const { homeContent, width, targetRef } = this.props;
+    const { width, targetRef } = this.props;
+    const { homeContent } = this.props;
     return (
       <div ref={targetRef}>
         {width >= 900

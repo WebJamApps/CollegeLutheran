@@ -35,7 +35,7 @@ class PicSlider extends Component<PicSliderProps> {
       <div>
         <Slider {...this.settings}>
           {
-            data.map((d: { _id: string | number | undefined; url: string | undefined; title: string | undefined; comments: string; }) => (
+            data.map((d: { _id: string; url: string; title: string; comments: string; }) => (
               <div key={d._id}>
                 <img className="slide-show" src={d.url} alt={d.title} />
                 {d.comments === 'showCaption' ? <Caption caption={d.title} /> : null}

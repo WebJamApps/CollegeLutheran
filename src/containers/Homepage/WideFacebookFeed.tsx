@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface Iwidth {
+interface IWideFBFeed {
   width?: number;
 }
 
-const WideFacebookFeed = ({ width }: Iwidth): JSX.Element => {
+const WideFacebookFeed = ({ width }: IWideFBFeed): JSX.Element => {
   let mb = '32px', mt = '0px';
   if (width && width < 1092) { mb = '0px'; mt = '32px'; }
   return (

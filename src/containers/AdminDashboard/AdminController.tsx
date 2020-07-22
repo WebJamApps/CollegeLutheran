@@ -5,7 +5,7 @@ import fetch, { Fetch } from '../../lib/fetch';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
-  view: any;
+  view: AdminDashboard;
 
   fetch: Fetch;
 
@@ -76,9 +76,7 @@ class AdminController {
   }
 
   changePicDiv(editPic: DashboardProps['editPic'],
-    youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
-    type: string, options: { type: string; Category: string; }[],
-    showCaption: string,
+    youthName: string, youthURL: string, type: string, options: { type: string; Category: string; }[], showCaption: string,
     picData: PicData): JSX.Element {
     return (
       <div
