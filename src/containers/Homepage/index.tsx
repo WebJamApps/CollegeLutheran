@@ -4,26 +4,26 @@ import { withResizeDetector } from 'react-resize-detector';
 import About from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import NarrowFacebookFeed from './NarrowFacebookFeed';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
 type HomepageProps = {
   targetRef: RefObject<HTMLDivElement>;
   width: number;
   height: number;
-  homeContent?: { title: string; comments: string };
+  homeContent?: Ibook;
+  familyPics?: Ibook[];
+  youthPics?: Ibook[];
+  otherPics?: Ibook[];
 };
 
 interface HomepageState {
-  picsState: string[];
-  homeContent?: { title: string; comments: string };
+  picsState: Ibook[];
+  homeContent?: Ibook;
 }
 
 export class Homepage extends React.Component<HomepageProps, HomepageState> {
-  commonUtils: {
-    setTitleAndScroll: (pageTitle: string, width: number) => void;
-    randomizePics: (view: any, delay: () => Promise<void>) => Promise<void>;
-  };
+  commonUtils: typeof commonUtils;
 
   parentRef: React.RefObject<unknown>;
 

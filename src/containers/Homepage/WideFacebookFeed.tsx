@@ -6,7 +6,7 @@ interface Iwidth {
 
 const WideFacebookFeed = ({ width }: Iwidth): JSX.Element => {
   let mb = '32px', mt = '0px';
-  if (width !== undefined && width < 1092) { mb = '0px'; mt = '32px'; }
+  if (width && width < 1092) { mb = '0px'; mt = '32px'; }
   return (
     <div className="row" style={{ marginLeft: '10px' }}>
       <div className="col" style={{ maxWidth: '600px', margin: 'auto', paddingRight: '10px' }}>

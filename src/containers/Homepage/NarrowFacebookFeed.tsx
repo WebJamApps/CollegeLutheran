@@ -1,8 +1,9 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
+import { Ibook } from '../../redux/mapStoreToProps';
 
 interface IallPics {
-  allPics?: string[]
+  allPics?: Ibook[]
 }
 
 const FacebookFeed = ({ allPics }: IallPics): JSX.Element => (
@@ -63,7 +64,7 @@ const FacebookFeed = ({ allPics }: IallPics): JSX.Element => (
           display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
         }}
       >
-        {allPics !== undefined && allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
+        {allPics && allPics.length > 0 ? (<PicSlider data={allPics} />) : null}
       </div>
     </div>
   </div>
