@@ -76,7 +76,8 @@ class AdminController {
   }
 
   changePicDiv(editPic: DashboardProps['editPic'],
-    youthName: string, youthURL: string, type: string, options: { type: string; Category: string; }[], showCaption: string,
+    youthName: string, youthURL: string, type: string, options: {type: string, category: string}[],
+    showCaption: string,
     picData: PicData): JSX.Element {
     return (
       <div
@@ -96,7 +97,7 @@ class AdminController {
             Image Address
             <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.view.onChange} />
           </label>
-          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChange, options)}
+          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChangeSelect, options)}
           {this.view.forms.radioButtons(showCaption, this.view.handleRadioChange)}
           {this.view.picButton(picData, editPic, youthName, youthURL, type)}
         </form>
@@ -191,7 +192,7 @@ class AdminController {
     } return Promise.resolve(false);
   }
 
-  deleteBookForm(bookId: string, labelTxt: React.ReactNode, stateId: string, propsArr: AdminDashboard, redirect: string): JSX.Element {
+  deleteBookForm(bookId: string, labelTxt: React.ReactNode, stateId: string, propsArr: any, redirect: string): JSX.Element {
     return (
       <form
         id="delete-book"
@@ -199,7 +200,7 @@ class AdminController {
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title')}
+        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChangeSelect, propsArr)}
         <div style={{ marginLeft: '60%' }}>
           <p>{' '}</p>
           <button
@@ -235,7 +236,7 @@ class AdminController {
       dispatch({ type: 'EDIT_PIC', picData: {} });
       dispatch({ type: 'SHOW_TABLE', showTable: true });
       this.view.setState({
-        isEdit: false, youthName: '', youthURL: '', type: '',
+        youthName: '', youthURL: '', type: '',
       });
       window.location.reload();
       return Promise.resolve(true);

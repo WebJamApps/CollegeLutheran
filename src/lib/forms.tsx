@@ -3,7 +3,7 @@ import React from 'react';
 function makeDropdown(htmlFor: string,
   labelText: string,
   value: string | number | readonly string[] | undefined,
-  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void, options: string[]): JSX.Element {
+  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: any) => void, options: {type: string, category: string}[]): JSX.Element {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>

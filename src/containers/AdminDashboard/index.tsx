@@ -38,7 +38,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   controller: AdminController;
 
-  forms: any;
+  forms: typeof forms;
 
   constructor(props: DashboardProps) {
     super(props);
@@ -58,6 +58,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
     this.changePicForm = this.changePicForm.bind(this);
@@ -70,6 +71,17 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
 
   onChange(evt: React.ChangeEvent<HTMLInputElement>, stateValue?: string): string {
+    evt.persist();
+    this.checkEdit();
+    if (typeof stateValue === 'string') {
+      this.setState((prevState) => ({ ...prevState, [stateValue]: evt.target.value, firstEdit: false }));
+      return stateValue;
+    }
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    return evt.target.id;
+  }
+
+  onChangeSelect(evt: React.ChangeEvent<HTMLSelectElement>, stateValue?: string): string {
     evt.persist();
     this.checkEdit();
     if (typeof stateValue === 'string') {
@@ -150,9 +162,9 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   changePicForm(picData: PicData): JSX.Element['props'] {
     const options = [
-      { type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' },
-      { type: 'otherPics', Category: 'Other Pics' },
+      { type: 'youthPics', category: 'Youth Pics' },
+      { type: 'familyPics', category: 'Family Pics' },
+      { type: 'otherPics', category: 'Other Pics' },
     ];
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;
@@ -166,12 +178,12 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
-  deleteForumForm(forumId: string, books: Store['books']): JSX.Element {
+  deleteForumForm(forumId: string, books: any): JSX.Element {
     const ddParams = {
       htmlFor: 'forumId',
       labelText: '* Select Title to Delete',
       value: forumId,
-      onChange: this.onChange,
+      onChange: this.onChangeSelect,
       options: books,
       oValue: '_id',
       dValue: 'title',
