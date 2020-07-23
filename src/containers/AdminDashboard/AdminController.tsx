@@ -11,7 +11,7 @@ class AdminController {
 
   superagent: superagent.SuperAgentStatic;
 
-  deletebookForm: (bookId: string, labelTxt: string, stateId: string, propsArr: AdminDashboard, redirect: string) => JSX.Element;
+  deletebookForm: (bookId: string, labelTxt: string, stateId: string, propsArr: AdminDashboard[], redirect: string) => JSX.Element;
 
   constructor(view: AdminDashboard) {
     this.fetch = fetch;

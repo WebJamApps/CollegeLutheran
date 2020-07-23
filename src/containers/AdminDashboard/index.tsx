@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps, { Store, Ibook } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
@@ -14,7 +14,7 @@ export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
   homeContent: Ibook;
   auth: { token: string };
-  books: Store['books'];
+  books: Ibook[ ];
   showTable: boolean;
   editPic: Ibook;
   youthPics: Ibook[];
@@ -85,10 +85,10 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     evt.persist();
     this.checkEdit();
     if (typeof stateValue === 'string') {
-      this.setState((prevState) => ({ ...prevState, [stateValue]: evt.target.value, firstEdit: false }));
+      this.setState((prevState) => ({ ...prevState, [stateValue]: evt.target.value }));
       return stateValue;
     }
-    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value }));
     return evt.target.id;
   }
 
