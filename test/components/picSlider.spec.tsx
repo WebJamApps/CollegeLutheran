@@ -3,11 +3,21 @@ import { shallow } from 'enzyme';
 import PicSlider from '../../src/components/PicSlider';
 
 const data = [
-  { _id: 1, url: '../static/imgs/ohaf/slideshow2.png', comments: 'showCaption' },
-  { _id: 2, url: '../static/imgs/ohaf/slideshow3.png' },
-  { _id: 3, url: '../static/imgs/ohaf/slideshow4.png' },
-  { _id: 4, url: '../static/imgs/ohaf/slideshow5.png' },
-  { _id: 5, url: '../static/imgs/ohaf/slideshow6.png' },
+  {
+    _id: '1', url: '../static/imgs/ohaf/slideshow2.png', comments: 'showCaption', title: '', type: '', created_at: '',
+  },
+  {
+    _id: '2', url: '../static/imgs/ohaf/slideshow3.png', title: '', type: '', created_at: '',
+  },
+  {
+    _id: '3', url: '../static/imgs/ohaf/slideshow4.png', title: '', type: '', created_at: '',
+  },
+  {
+    _id: '4', url: '../static/imgs/ohaf/slideshow5.png', title: '', type: '', created_at: '',
+  },
+  {
+    _id: '5', url: '../static/imgs/ohaf/slideshow6.png', title: '', type: '', created_at: '',
+  },
 ];
 
 const wrapper = shallow(<PicSlider data={data} />);
