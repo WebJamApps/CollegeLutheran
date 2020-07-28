@@ -9,7 +9,7 @@ const fetchGet = async (view:
 {
   props: { dispatch: Dispatch<unknown>; };
   superagent: any;
-}, route: any, reducer: any): Promise<any> => {
+}, route: string, reducer: string): Promise<boolean | string | void> => {
   let res;
   const { dispatch } = view.props;
   try {
@@ -27,21 +27,21 @@ const fetchGet = async (view:
 function fetchPost(superagent:
 {
   post: (arg0: string) => {
-    (): string; new(): string;
+    (): any; new(): any;
     set: {
       (arg0: string, arg1: string): {
-        (): string; new(): string;
+        (): any; new(): any;
         set: {
           (arg0: string, arg1: string): {
-            (): string; new(): string;
-            send: { (arg0: string): string; new(): string; };
-          }; new(): string;
+            (): any; new(): any;
+            send: { (arg0: any): any; new(): any; };
+          }; new(): any;
         };
-      }; new(): string;
+      }; new(): any;
     };
   };
 },
-auth: { token: any; }, data: any): any {
+auth: { token: string; }, data: string): string {
   return superagent.post(`${process.env.BackendUrl}/book`)
     .set('Authorization', `Bearer ${auth.token}`)
     .set('Content-Type', 'application/json')

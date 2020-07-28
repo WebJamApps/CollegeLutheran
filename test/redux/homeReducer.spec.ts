@@ -12,11 +12,15 @@ describe('home reducer', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_HOMEPAGE',
-        data: {},
+        data: {
+          title: '', _id: '', created_at: '', type: '',
+        },
       }),
     ).toEqual(
       {
-        homeContent: {},
+        homeContent: {
+          title: '', _id: '', created_at: '', type: '',
+        },
       },
     );
   });
