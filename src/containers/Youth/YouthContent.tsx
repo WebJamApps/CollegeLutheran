@@ -1,11 +1,11 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
-import { Ibook } from '../../redux/mapStoreToProps';
+import type { YouthProps } from './index';
 
-const YouthContent: React.FC<{ youthPics: Ibook[]}> = ({ youthPics }): JSX.Element => (
+const YouthContent = ({ youthPics }: YouthProps): JSX.Element => (
   <div className="page-content">
     <div id="youthSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
-      {youthPics.length > 0 ? (<PicSlider data={youthPics} />) : null}
+      {youthPics && youthPics.length > 0 ? (<PicSlider data={youthPics} />) : null}
     </div>
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>

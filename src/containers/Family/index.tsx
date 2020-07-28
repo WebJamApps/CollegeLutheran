@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DefaultFamilyContent from './FamilyContent';
-import mapStoreToProps, { Store } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
+
+export interface FamilyProps {
+  familyPics?: Ibook[];
+}
 
 const pageName = ('Children & Families');
 
-export const Family = ({ familyPics }: Store['familyPics']): JSX.Element => {
+export const Family = ({ familyPics }: FamilyProps): JSX.Element => {
   commonUtils.setTitleAndScroll(`${pageName}`, window.screen.width);
   return (<DefaultFamilyContent familyPics={familyPics} />);
 };

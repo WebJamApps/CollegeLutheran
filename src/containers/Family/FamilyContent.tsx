@@ -2,14 +2,15 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
-import { Store } from '../../redux/mapStoreToProps';
+import type { FamilyProps } from './index';
 
 const pageName = 'family';// eslint-disable-next-line max-len
 const additionalContent = '<hr><h5>Resources for Families</h5><p><strong><em>Roots and Wings</em></strong>, a monthly publication of the Virginia Synod that provides suggestions of daily family time activities:<a target="_blank" href="https://www.vasynod.org/ministries/roots-and-wings/">https://www.vasynod.org/ministries/roots-and-wings/</a></p><p><strong>Ideas to bring worship to the home:</strong>&nbsp;<a target="_blank" href="https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf">https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf</a></p><p><strong>Hand Prayer:</strong>&nbsp;<a target="_blank" href="http://www.vibrantfaithathome.org/item/hand-prayers">http://www.vibrantfaithathome.org/item/hand-prayers</a></p>';
-const FamilyContent = ({ familyPics }: Store['familyPics']): JSX.Element => (
+
+const FamilyContent = ({ familyPics }: FamilyProps): JSX.Element => (
   <div className="page-content">
     <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
-      {familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
+      {familyPics && familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
     </div>
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
@@ -54,6 +55,7 @@ const FamilyContent = ({ familyPics }: Store['familyPics']): JSX.Element => (
     </div>
   </div>
 );
+
 FamilyContent.defaultProps = { familyPics: [] };
 
 export default FamilyContent;
