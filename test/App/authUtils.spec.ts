@@ -1,81 +1,90 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import jwt from 'jwt-simple';
-import request from 'superagent';
+import superagent from 'superagent';
 import authUtils from '../../src/App/authUtils';
 
 describe('authUtils', () => {
-  const controllerStub = {
+  const vStub: any = {
     props: { auth: { token: 'token' }, dispatch: () => Promise.resolve(true) },
   };
-  it('handles failed login', () => new Promise((done) => {
+  it('is defined', () => {
+    expect(authUtils).toBeDefined();
+  });
+  it('logs out when not /dashboard', () => {
+    delete window.location;
+    window.location = {
+      ...window.location,
+      href: '/',
+      reload: jest.fn(),
+    };
+    const r = authUtils.responseGoogleLogout(() => { });
+    expect(r).toBe('reload');
+  });
+  it('handles failed login', () => {
     const result = authUtils.responseGoogleFailLogin('no way');
-    expect(result).toBe(false);
-    done();
-  }));
+    expect(result).toBe('no way');
+  });
   it('handles google login with bad token', async () => {
-    await expect(authUtils.responseGoogleLogin({ code: '' }, controllerStub)).rejects.toThrow('Not enough or too many segments');
+    const postReturn: any = ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) });
+    superagent.post = jest.fn(() => postReturn);
+    const res = await authUtils.responseGoogleLogin({ code: '' }, vStub);
+    expect(res).toBe('Not enough or too many segments');
   });
   it('handles google login with authenticate error', async () => {
-    controllerStub.props.dispatch = () => Promise.reject(new Error('bad'));
-    await expect(authUtils.responseGoogleLogin({ code: '' }, controllerStub)).rejects.toThrow('bad');
+    const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
+    superagent.post = jest.fn(() => postReturn);
+    const res = await authUtils.responseGoogleLogin({ code: '' }, vStub);
+    expect(res).toBe('bad');
   });
   it('sets the user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
     jwt.encode = jest.fn(() => 'token');
-    // @ts-ignore
-    request.get = () => ({ set: () => ({ set: () => Promise.resolve({ body: {} }) }) });
+    const returnBody: Record<string, unknown> = { body: {} };
+    const sa: any = superagent;
+    sa.get = () => ({ set: () => ({ set: () => Promise.resolve(returnBody) }) });
     delete window.location;
-    // @ts-ignore
     window.location = {
+      ...window.location,
       href: '/',
       assign: jest.fn(),
       reload: jest.fn(),
     };
-    // @ts-ignore
-    controllerStub.props.dispatch = (obj) => { expect(obj.type).toBeDefined(); };
-    const result = await authUtils.setUser(controllerStub);
-    expect(result).toBe(true);
+    const result = await authUtils.setUser(vStub);
+    expect(result).toBe('user set');
   });
-  it('catches fetch user error when sets the user', async () => {
-    jwt.decode = jest.fn(() => ({ sub: '123' }));
-    // @ts-ignore
-    request.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
-    await expect(authUtils.setUser(controllerStub)).rejects.toThrow('bad');
+  it('sets the user fails to decode the token', async () => {
+    jwt.decode = jest.fn(() => { throw new Error('bad'); });
+    vStub.props.auth = {};
+    const result = await authUtils.setUser(vStub);
+    expect(result).toBe('bad');
+    vStub.props.auth = { token: 'token' };
   });
   it('sets the user to the already decoded user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
     delete window.location;
-    // @ts-ignore
     window.location = {
+      ...window.location,
       href: '/',
       assign: jest.fn(),
       reload: jest.fn(),
     };
-    // @ts-ignore
-    controllerStub.props.dispatch = (obj) => { expect(obj.type).toBe('SET_USER'); };
-    const result = await authUtils.setUser(controllerStub);
-    expect(result).toBe(true);
+    const result = await authUtils.setUser(vStub);
+    expect(result).toBe('user set');
   });
-  it('logs out when not /dashboard', () => {
-    delete window.location;
-    // @ts-ignore
-    window.location = {
-      href: '/',
-      assign: jest.fn(),
-      reload: jest.fn(),
-    };
-    authUtils.responseGoogleLogout(() => {});
-    expect(window.location.reload).toHaveBeenCalled();
+  it('catches fetch user error when sets the user', async () => {
+    jwt.decode = jest.fn(() => ({ sub: '123' }));
+    const sa: any = superagent;
+    sa.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
+    const res = await authUtils.setUser(vStub);
+    expect(res).toBe('bad');
   });
   it('logs out when /admin', () => {
     delete window.location;
-    // @ts-ignore
     window.location = {
+      ...window.location,
       href: '/admin',
       assign: jest.fn(),
-      reload: jest.fn(),
     };
-    authUtils.responseGoogleLogout(() => {});
-    expect(window.location.assign).toHaveBeenCalled();
+    const r = authUtils.responseGoogleLogout(() => { });
+    expect(r).toBe('assign');
   });
 });

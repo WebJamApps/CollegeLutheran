@@ -18,35 +18,33 @@ import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import fetch from '../lib/fetch';
+import fetch, { Fetch } from '../lib/fetch';
+import { AppProps } from './AppTypes';
 
-export interface AppProps {
-  dispatch: (...args: any[]) => any;
-  auth: {
-    user: {
-      userType?: string;
-    };
-    isAuthenticated?: boolean;
-  };
-}
 export class App extends Component<AppProps> {
-  fetch: any;
+  fetch: Fetch;
 
-  superagent: any;
+  superagent: superagent.SuperAgentStatic;
 
   static defaultProps = {
-    dispatch: /* istanbul ignore next */() => { },
-    auth: { isAuthenticated: false, user: { userType: '' } },
+    dispatch: /* istanbul ignore next */(): void => { },
+    auth: {
+      isAuthenticated: false,
+      user: { userType: '' },
+      error: '',
+      email: '',
+      token: '',
+    },
   };
 
-  constructor(props: any) {
+  constructor(props: AppProps) {
     super(props);
     this.fetch = fetch;
     this.state = {};
     this.superagent = superagent;
   }
 
-  componentDidMount() { // fetch the books to populate homepage content, youth pics, and children pics
+  componentDidMount(): void { // fetch the books to populate homepage content, youth pics, and children pics
     this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
     this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
@@ -54,9 +52,9 @@ export class App extends Component<AppProps> {
     this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
   }
 
-  render() {
+  render(): JSX.Element {
     const { auth } = this.props;
-    const userRoles: any[] = commonUtils.getUserRoles();
+    const userRoles: string[] = commonUtils.getUserRoles();
     return (
       <div id="App" className="App">
         <Router>
@@ -68,7 +66,7 @@ export class App extends Component<AppProps> {
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
               <Route exact path="/staff" component={Staff} />
-              {auth.isAuthenticated && userRoles.indexOf(auth.user.userType) !== -1
+              {auth.isAuthenticated && auth.user.userType && userRoles.indexOf(auth.user.userType) !== -1
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />

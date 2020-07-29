@@ -1,35 +1,36 @@
-import request from 'superagent';
+import superagent from 'superagent';
+import { Dispatch } from 'react';
+import { AppProps, GoogleBody } from './AppTypes';
 
-export const gotToken = (doc: any) => ({
+export const gotToken = (doc: string): unknown => ({
   type: 'GOT_TOKEN',
   data: doc,
 });
 
-export const authError = (e: Error) => ({
+export const authError = (e: Error): unknown => ({
   type: 'AUTH_ERROR',
   error: e,
 });
 
-export const logout = () => (dispatch: (arg0: { type: string; }) => any) => dispatch({ type: 'LOGOUT' });
+export const logout = (dispatch: Dispatch<unknown>): void => dispatch({ type: 'LOGOUT' });
 
-const authFunc = (body: string | any | undefined) => async (dispatch:
-(arg0: { type: string; error?: any; data?: any; }) => void, getState: () => { auth: any; }) => {
-  const { auth } = getState();
-  if (auth.isAuthenticated) return Promise.resolve(true);
+async function authFunc(body: GoogleBody, props: AppProps): Promise<string|Error> {
+  const { auth } = props;
+  if (auth.isAuthenticated) return 'authenticated';
   let data;
   try {
-    data = await request.post(`${process.env.BackendUrl}/user/auth/google`)
+    data = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
       .set({ Accept: 'application/json' }).send(body);
   } catch (e) {
-    dispatch(authError(e));
+    props.dispatch(authError(e));
     return Promise.reject(e);
   }
   if (!data.body) {
-    dispatch(authError(new Error('authentication failed')));
-    return Promise.resolve(false);
+    props.dispatch(authError(new Error('authentication failed')));
+    return 'authentication failed';
   }
-  dispatch(gotToken(data.body));
-  return Promise.resolve(true);
-};
+  props.dispatch(gotToken(data.body));
+  return 'authenticated';
+}
 
 export default authFunc;

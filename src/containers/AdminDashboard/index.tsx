@@ -8,7 +8,7 @@ import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 
 export interface PicData {
-  buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string;
+  buttonId: string; buttonClick: (e: any) => Promise<boolean | string>; title: string; nameId: string;
 }
 export interface DashboardProps extends RouteComponentProps {
   dispatch: (...args: any) => any;
@@ -23,9 +23,9 @@ export interface DashboardProps extends RouteComponentProps {
     url?: string;
     comments?: string;
   };
-  youthPics?: any[];
-  familyPics?: any[];
-  otherPics?: any[];
+  youthPics: any[];
+  familyPics: any[];
+  otherPics: any[];
 }
 type DashboardState = {
   type: string;
@@ -40,6 +40,10 @@ type DashboardState = {
   firstEdit: boolean;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
+  static defaultProps = {
+    youthPics: [], familtyPics: [], otherPics: [],
+  };
+
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
 
   controller: AdminController;
@@ -254,7 +258,9 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 
   render() {
-    const { showTable } = this.props;
+    const {
+      showTable, auth, dispatch, youthPics, familyPics, otherPics,
+    } = this.props;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -263,7 +269,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         {this.changeHomepage()}
         {this.controller.addForumForm()}
         {this.changeYouthForm()}
-        {showTable ? <PTable /> : null}
+        {showTable ? <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} /> : null}
       </div>
     );
   }
