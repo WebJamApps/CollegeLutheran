@@ -24,24 +24,8 @@ const fetchGet = async (view:
   return Promise.resolve(true);
 };
 
-function fetchPost(superagent:
-{
-  post: (arg0: string) => {
-    (): any; new(): any;
-    set: {
-      (arg0: string, arg1: string): {
-        (): any; new(): any;
-        set: {
-          (arg0: string, arg1: string): {
-            (): any; new(): any;
-            send: { (arg0: any): any; new(): any; };
-          }; new(): any;
-        };
-      }; new(): any;
-    };
-  };
-},
-auth: { token: string; }, data: string): string {
+function fetchPost(superagent: any,
+  auth: { token: string; }, data: string): any {
   return superagent.post(`${process.env.BackendUrl}/book`)
     .set('Authorization', `Bearer ${auth.token}`)
     .set('Content-Type', 'application/json')
