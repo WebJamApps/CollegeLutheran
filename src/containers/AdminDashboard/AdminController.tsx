@@ -1,18 +1,19 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import fetch from '../../lib/fetch';
+import fetch, { Fetch } from '../../lib/fetch';
+import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
-  view: any;
+  view: AdminDashboard;
 
-  fetch: any;
+  fetch: Fetch;
 
   superagent: superagent.SuperAgentStatic;
 
-  deletebookForm: (bookId: any, labelTxt: any, stateId: any, propsArr: any, redirect: any) => JSX.Element;
+  deletebookForm: (bookId: string, labelTxt: string, stateId: string, propsArr: AdminDashboard[], redirect: string) => JSX.Element;
 
-  constructor(view: any) {
+  constructor(view: AdminDashboard) {
     this.fetch = fetch;
     this.view = view;
     this.superagent = superagent;
@@ -28,7 +29,7 @@ class AdminController {
     this.createBook = this.createBook.bind(this);
   }
 
-  addForumButton(announcementtitle: string, announcementurl: string) {
+  addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
     return (
       <div style={{ marginLeft: '70%', marginTop: '10px' }}>
         <button
@@ -43,7 +44,7 @@ class AdminController {
     );
   }
 
-  addForumForm() {
+  addForumForm(): JSX.Element {
     const { announcementtitle, announcementurl, forumId } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
@@ -74,11 +75,10 @@ class AdminController {
     );
   }
 
-  changePicDiv(editPic: any,
-    youthName: string | number | readonly string[] | undefined, youthURL: string | number | readonly string[] | undefined,
-    type: string, options: { type: string; Category: string; }[],
+  changePicDiv(editPic: DashboardProps['editPic'],
+    youthName: string, youthURL: string, type: string, options: {type: string, category: string}[],
     showCaption: string,
-    picData: { buttonId: string; buttonClick: (e: any) => Promise<boolean|string>; title: string; nameId: string; }) {
+    picData: PicData): JSX.Element {
     return (
       <div
         className="material-content elevation3"
@@ -97,7 +97,7 @@ class AdminController {
             Image Address
             <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.view.onChange} />
           </label>
-          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChange, options)}
+          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChangeSelect, options)}
           {this.view.forms.radioButtons(showCaption, this.view.handleRadioChange)}
           {this.view.picButton(picData, editPic, youthName, youthURL, type)}
         </form>
@@ -105,7 +105,7 @@ class AdminController {
     );
   }
 
-  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: any, redirect: string) {
+  async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string, redirect: string): Promise<boolean> {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
     if (result) {
@@ -124,29 +124,29 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null) { // eslint-disable-line class-methods-use-this
+  validateBook(bookName: string, bookURL: string, type: string, firstEdit: boolean | null): boolean { // eslint-disable-line class-methods-use-this
     let disabled = true;
     if (bookName !== '' && bookURL !== '' && type !== '' && !firstEdit) disabled = false;
     return disabled;
   }
 
-  validateDeleteBook(stateId: string) { // eslint-disable-line class-methods-use-this
+  validateDeleteBook(stateId: string): boolean { // eslint-disable-line class-methods-use-this
     if (stateId !== '') return false;
     return true;
   }
 
-  async createBook(data: any, redirect: string) {
+  async createBook(data: { title: string, comments: string, type: string}, redirect: string): Promise<string> {
     const { auth } = this.view.props;
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
     if (r.status === 201) {
       window.location.assign(redirect);
-      return Promise.resolve(true);
+      return `${r.status}`;
     }
-    return Promise.resolve(false);
+    return 'Didnt create book';
   }
 
-  async createHomeAPI(evt: { preventDefault: () => void; }) {
+  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
     evt.preventDefault();
     const { auth } = this.view.props;
     const { title, homePageContent } = this.view.state;
@@ -161,17 +161,17 @@ class AdminController {
     }
     if (r.status === 200) {
       window.location.assign('/');
-      return Promise.resolve(true);
+      return `${r.status}`;
     }
-    return Promise.resolve(false);
+    return 'Failed to create.';
   }
 
-  createPicApi(evt: { preventDefault: () => void; }, data: any, redirect: string) {
+  createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
 
-  async addForumAPI() {
+  async addForumAPI(): Promise<boolean> {
     const { auth } = this.view.props;
     const { announcementtitle, announcementurl } = this.view.state;
     let r;
@@ -192,7 +192,7 @@ class AdminController {
     } return Promise.resolve(false);
   }
 
-  deleteBookForm(bookId: any, labelTxt: React.ReactNode, stateId: any, propsArr: any, redirect: any) {
+  deleteBookForm(bookId: string, labelTxt: React.ReactNode, stateId: string, propsArr: any, redirect: string): JSX.Element {
     return (
       <form
         id="delete-book"
@@ -200,7 +200,7 @@ class AdminController {
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChange, propsArr, '_id', 'title')}
+        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChangeSelect, propsArr)}
         <div style={{ marginLeft: '60%' }}>
           <p>{' '}</p>
           <button
@@ -217,7 +217,7 @@ class AdminController {
     );
   }
 
-  async editPicAPI(evt: { preventDefault: () => void; }) {
+  async editPicAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
     const {
@@ -236,7 +236,7 @@ class AdminController {
       dispatch({ type: 'EDIT_PIC', picData: {} });
       dispatch({ type: 'SHOW_TABLE', showTable: true });
       this.view.setState({
-        isEdit: false, youthName: '', youthURL: '', type: '',
+        youthName: '', youthURL: '', type: '',
       });
       window.location.reload();
       return Promise.resolve(true);
@@ -244,9 +244,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent: any) { this.view.setState({ homePageContent }); return true; }
+  handleEditorChange(homePageContent: string): boolean { this.view.setState({ homePageContent }); return true; }
 
-  editor(homePageContent: string | undefined) {
+  editor(homePageContent: string | undefined): JSX.Element {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}

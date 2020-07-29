@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DefaultNewsContent from './NewsContent';
-import mapStoreToProps, { Book } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export function News(props: { books: Book[]}): JSX.Element {
+export function News(props: { books: Ibook[] }): JSX.Element {
   const { books } = props;
   commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
