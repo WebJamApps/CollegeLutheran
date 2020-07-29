@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MusicContent = () => (
+const MusicContent = (): JSX.Element => (
   <div className="page-content">
     <div className="container-fluid">
       <div>

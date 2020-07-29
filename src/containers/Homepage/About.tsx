@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
+import { Ibook } from '../../redux/mapStoreToProps';
 
-const About = ({ homeContent, width, allPics }: any) => (
+interface IAbout {
+  homeContent?: any;
+  width?: number;
+  allPics?: Ibook[];
+}
+
+const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
   <div className="widescreenHomepage">
     <div className="container-fluid" style={{ paddingRight: 0 }}>
       <div className="row">
@@ -12,16 +19,10 @@ const About = ({ homeContent, width, allPics }: any) => (
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
             College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          {/* <h5>Join Us for Holy Communion</h5>
-          <ul style={{ marginBottom: '10px', paddingTop: 0 }}>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Service of Holy Communion, Sunday at 10:00 am</li>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Sunday school for all ages begins at 9:00 am</li>
-            <li style={{ marginLeft: '-10px', paddingBottom: '4px' }}>Choir rehearses at 9:15 on Sunday mornings</li>
-            <li style={{ marginLeft: '-10px' }}>Wednesday Bible study at 11:15 am followed by Holy Communion at 12:15 pm</li>
-          </ul> */}
-          {/* <p><i>Please join us as we celebrate God’s grace and share His love in Christ</i></p> */}
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent.title)}</h5>
-          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>{ReactHtmlParser(homeContent.comments)}</section>
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent && homeContent.title)}</h5>
+          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+            {ReactHtmlParser(homeContent && homeContent.comments)}
+          </section>
           <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
             <span style={{ fontSize: '18px' }}>
               {' '}
@@ -38,7 +39,7 @@ const About = ({ homeContent, width, allPics }: any) => (
             <br />
           </p>
         </div>
-        {width >= 900 && allPics.length > 0 ? (
+        {width && width >= 900 && allPics && allPics.length > 0 ? (
           <div
             className="col"
             id="familySlideshowWide"
@@ -49,7 +50,7 @@ const About = ({ homeContent, width, allPics }: any) => (
             <PicSlider data={allPics} />
           </div>
         ) : null}
-        {width >= 900 && allPics.length === 0 ? (
+        {width && width >= 900 && allPics && allPics.length === 0 ? (
           <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
             <div
               id="slideshow1"
