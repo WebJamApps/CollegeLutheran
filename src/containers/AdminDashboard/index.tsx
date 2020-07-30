@@ -162,9 +162,9 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   changePicForm(picData: PicData): JSX.Element['props'] {
     const options = [
-      { type: 'youthPics', category: 'Youth Pics' },
-      { type: 'familyPics', category: 'Family Pics' },
-      { type: 'otherPics', category: 'Other Pics' },
+      { type: 'youthPics', Category: 'Youth Pics' },
+      { type: 'familyPics', Category: 'Family Pics' },
+      { type: 'otherPics', Category: 'Other Pics' },
     ];
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;

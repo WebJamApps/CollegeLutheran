@@ -11,8 +11,6 @@ class AdminController {
 
   superagent: superagent.SuperAgentStatic;
 
-  deletebookForm: (bookId: string, labelTxt: string, stateId: string, propsArr: AdminDashboard[], redirect: string) => JSX.Element;
-
   constructor(view: AdminDashboard) {
     this.fetch = fetch;
     this.view = view;
@@ -21,7 +19,6 @@ class AdminController {
     this.createHomeAPI = this.createHomeAPI.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    this.deletebookForm = this.deleteBookForm.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -76,7 +73,8 @@ class AdminController {
   }
 
   changePicDiv(editPic: DashboardProps['editPic'],
-    youthName: string, youthURL: string, type: string, options: {type: string, category: string}[],
+    youthName: string, youthURL: string,
+    type: string, options: { type: string; Category: string; }[],
     showCaption: string,
     picData: PicData): JSX.Element {
     return (
@@ -190,31 +188,6 @@ class AdminController {
       window.location.assign('/news');
       return Promise.resolve(true);
     } return Promise.resolve(false);
-  }
-
-  deleteBookForm(bookId: string, labelTxt: React.ReactNode, stateId: string, propsArr: any, redirect: string): JSX.Element {
-    return (
-      <form
-        id="delete-book"
-        style={{
-          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-        }}
-      >
-        {this.view.forms.makeDropdown(bookId, `* Select ${labelTxt} to Delete`, stateId, this.view.onChangeSelect, propsArr)}
-        <div style={{ marginLeft: '60%' }}>
-          <p>{' '}</p>
-          <button
-            onClick={(evt) => this.deleteBookApi(evt, stateId, redirect)}
-            type="button"
-            disabled={this.validateDeleteBook(stateId)}
-          >
-            Delete
-            {' '}
-            {labelTxt}
-          </button>
-        </div>
-      </form>
-    );
   }
 
   async editPicAPI(evt: { preventDefault: () => void; }): Promise<boolean> {

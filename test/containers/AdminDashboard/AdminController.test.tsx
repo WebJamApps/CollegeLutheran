@@ -1,4 +1,3 @@
-import { shallow } from 'enzyme';
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
@@ -129,12 +128,6 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.addForumAPI({ preventDefault: () => { } }, {}, '/youth');
     expect(r).toBe(false);
-  });
-  it('handles click to delete a picture', () => {
-    controller.deleteBookApi = jest.fn();
-    const f = shallow(controller.deleteBookForm('id', 'label', '123', [], '/youth'));
-    f.find('button').simulate('click');
-    expect(controller.deleteBookApi).toHaveBeenCalled();
   });
   it('handles change within the tinymce editor', () => {
     r = controller.handleEditorChange('howdy');
