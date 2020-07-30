@@ -1,5 +1,4 @@
 import menuUtils from '../../src/App/menuUtils';
-import { MenuItem } from '../../src/App/menuItems';
 import { Auth } from '../../src/redux/mapStoreToProps';
 
 describe('menuUtils', () => {
@@ -20,16 +19,26 @@ describe('menuUtils', () => {
     1, viewStub);
     expect(r).toBe(null);
   });
-  it('handles menuItem for GoogleLogout', () => {
-    const menuItem: MenuItem = {
-      link: '/', type: 'googleLogout', auth: true, classname: '', iconClass: '', name: '',
+  it('handles menuItem for GoogleLogin', () => {
+    viewStub.props.location.pathname = '/staff';
+    const auth: Auth = {
+      isAuthenticated: false, email: '', token: '', user: { userType: 'Developer' }, error: '',
     };
+    r = menuUtils.continueMenuItem({
+      link: '', type: 'googleLogin', auth: true, classname: '', iconClass: '', name: '',
+    },
+    1, auth, viewStub);
+    expect(r).toBe(true);
+  });
+  it('handles menuItem for GoogleLogout', () => {
     const auth: Auth = {
       isAuthenticated: true, error: '', email: '', token: '', user: { userType: '' },
     };
-    const result = menuUtils.continueMenuItem(menuItem,
-      1, auth, viewStub);
-    expect(result).toBe(true);
+    r = menuUtils.continueMenuItem({
+      link: '', type: 'googleLogout', auth: true, classname: '', iconClass: '', name: '',
+    },
+    1, auth, viewStub);
+    expect(r).toBe(true);
   });
   it('hides staff menu item when on staff page', () => {
     viewStub.props.location.pathname = '/staff';
@@ -41,14 +50,6 @@ describe('menuUtils', () => {
   });
   it('Prevents access to Admin Dashboard when auth user userType is incorrect', () => {
     viewStub.props.auth = { isAuthenticated: true, token: '', user: { userType: 'booya' } };
-    r = menuUtils.menuItem({
-      name: 'Admin Dashboard', link: '/admin', type: '', auth: true, classname: '', iconClass: '',
-    },
-    1, viewStub);
-    expect(r).toBe(null);
-  });
-  it('Prevents access to Admin Dashboard when auth user userType is not set', () => {
-    viewStub.props.auth = { isAuthenticated: true, token: '', user: { userType: '' } };
     r = menuUtils.menuItem({
       name: 'Admin Dashboard', link: '/admin', type: '', auth: true, classname: '', iconClass: '',
     },
