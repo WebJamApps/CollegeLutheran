@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+
 export interface Fetch {
   fetchPost: any;
   fetchGet: any;
@@ -5,9 +7,9 @@ export interface Fetch {
 
 const fetchGet = async (view:
 {
-  props: { dispatch: any; };
+  props: { dispatch: Dispatch<unknown>; };
   superagent: any;
-}, route: any, reducer: any) => {
+}, route: string, reducer: string): Promise<boolean | string | void> => {
   let res;
   const { dispatch } = view.props;
   try {
@@ -22,24 +24,7 @@ const fetchGet = async (view:
   return Promise.resolve(true);
 };
 
-function fetchPost(superagent:
-{
-  post: (arg0: string) => {
-    (): any; new(): any;
-    set: {
-      (arg0: string, arg1: string): {
-        (): any; new(): any;
-        set: {
-          (arg0: string, arg1: string): {
-            (): any; new(): any;
-            send: { (arg0: any): any; new(): any; };
-          }; new(): any;
-        };
-      }; new(): any;
-    };
-  };
-},
-auth: { token: any; }, data: any) {
+function fetchPost(superagent: any, auth: { token: string; }, data: string): any {
   return superagent.post(`${process.env.BackendUrl}/book`)
     .set('Authorization', `Bearer ${auth.token}`)
     .set('Content-Type', 'application/json')

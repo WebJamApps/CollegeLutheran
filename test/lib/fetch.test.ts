@@ -1,7 +1,7 @@
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {
-  let r: string;
+  let r: any;
   it('catches error', async () => {
     r = await fetch.fetchGet({
       props: { dispatch: (fun: any) => fun },
