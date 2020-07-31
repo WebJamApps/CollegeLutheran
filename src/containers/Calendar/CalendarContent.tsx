@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CalendarContent = () => (
+const CalendarContent = (): JSX.Element => (
   <div className="page-content">
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
