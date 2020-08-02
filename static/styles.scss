@@ -64,7 +64,6 @@ h3 {
 
 h3.au-target.header-text.ohaf-header {
   padding: 0;
-  /*margin: 5px;*/
 }
 
 h4 {
@@ -79,13 +78,13 @@ h5 {
 
 h6 {
   text-align: center;
-  margin-bottom: 0;
-  font-weight: 'bold';
-  color: 'black';
-  font-style: 'italic';
+  font-weight: bold;
+  color: black;
+  font-style: italic;
+  font-family: 'PT Sans Caption';
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5 {
   margin-top: 0;
   margin-bottom: .5rem;
   font-family: 'PT Sans Caption';
