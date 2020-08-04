@@ -18,11 +18,11 @@ import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import mapStoreToProps from '../redux/mapStoreToProps';
-import fetch, { Fetch } from '../lib/fetch';
+import fetch from '../lib/fetch';
 import { AppProps } from './AppTypes';
 
 export class App extends Component<AppProps> {
-  fetch: Fetch;
+  fetch: typeof fetch;
 
   superagent: superagent.SuperAgentStatic;
 
