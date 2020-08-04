@@ -18,7 +18,7 @@ const makeStaff = () => {
 
 const pageName = 'staff';
 
-const StaffContent = () => (
+const StaffContent = (): JSX.Element => (
   <div className="page-content">
     <div>
       <div className="container-fluid">

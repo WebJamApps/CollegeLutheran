@@ -3,7 +3,7 @@ import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'giving';
 
-const GivingContent = () => (
+const GivingContent = (): JSX.Element => (
 
   <div className="page-content">
     <div className="container-fluid">

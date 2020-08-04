@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultStaffContent from './StaffContent';
 import commonUtils from '../../lib/commonUtils';
 
-const Staff = () => {
+const Staff = (): JSX.Element => {
   commonUtils.setTitleAndScroll('Church Staff', window.screen.width);
   return (<DefaultStaffContent />);
 };

@@ -3,7 +3,7 @@ import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'beliefs';
 
-const BeliefsContent = () => (
+const BeliefsContent = (): JSX.Element => (
   <div className="page-content">
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>

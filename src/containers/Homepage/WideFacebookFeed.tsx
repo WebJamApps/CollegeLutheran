@@ -1,8 +1,12 @@
 import React from 'react';
 
-const WideFacebookFeed = ({ width }: any) => {
+interface IWideFBFeed {
+  width?: number;
+}
+
+const WideFacebookFeed = ({ width }: IWideFBFeed): JSX.Element => {
   let mb = '32px', mt = '0px';
-  if (width < 1092) { mb = '0px'; mt = '32px'; }
+  if (width && width < 1092) { mb = '0px'; mt = '32px'; }
   return (
     <div className="row" style={{ marginLeft: '10px' }}>
       <div className="col" style={{ maxWidth: '600px', margin: 'auto', paddingRight: '10px' }}>

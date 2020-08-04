@@ -1,4 +1,3 @@
-import { shallow } from 'enzyme';
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
@@ -16,7 +15,7 @@ describe('AdminController', () => {
       },
       props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
     };
-    controller = new AdminController(vStub);
+    controller = new AdminController(vStub as any);
   });
   it('sends a delete book request to the backend', async () => {
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
@@ -50,7 +49,7 @@ describe('AdminController', () => {
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
     window.location.assign = jest.fn();
     r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe(true);
+    expect(r).toBe('200');
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error when sends an update homepage request to the backend', async () => {
@@ -63,25 +62,25 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe(true);
+    expect(res).toBe('201');
   });
   it('catches error when sends an update homepage request but unsuccessfully create new content', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe(false);
+    expect(res).toBe('Didnt create book');
   });
   it('handles 300 res from sending an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe(false);
+    expect(r).toBe('Failed to create.');
   });
   it('sends an create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
     window.location.assign = jest.fn();
     r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-    expect(r).toBe(true);
+    expect(r).toBe('201');
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error when sends create pic request to the backend', async () => {
@@ -92,7 +91,7 @@ describe('AdminController', () => {
   it('handles 300 res from sending create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-    expect(r).toBe(false);
+    expect(r).toBe('Didnt create book');
   });
   it('sends an edit pic request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
@@ -129,12 +128,6 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.addForumAPI({ preventDefault: () => { } }, {}, '/youth');
     expect(r).toBe(false);
-  });
-  it('handles click to delete a picture', () => {
-    controller.deleteBookApi = jest.fn();
-    const f = shallow(controller.deleteBookForm('id', 'label', '123', [], '/youth'));
-    f.find('button').simulate('click');
-    expect(controller.deleteBookApi).toHaveBeenCalled();
   });
   it('handles change within the tinymce editor', () => {
     r = controller.handleEditorChange('howdy');

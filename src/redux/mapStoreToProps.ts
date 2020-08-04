@@ -1,8 +1,3 @@
-export interface Book {
-  _id: string,
-  title: string
-  created_at: string
-}
 export interface Auth {
   isAuthenticated: boolean,
   error: string,
@@ -15,7 +10,9 @@ export interface Auth {
 
 export interface Ibook {
   title: string,
+  _id: string,
   type: string,
+  created_at: string,
   author?: string,
   numberPages?: number,
   dateOfPub?: number,
