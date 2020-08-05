@@ -1,13 +1,13 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import fetch, { Fetch } from '../../lib/fetch';
+import fetch from '../../lib/fetch';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
   view: AdminDashboard;
 
-  fetch: Fetch;
+  fetch: typeof fetch;
 
   superagent: superagent.SuperAgentStatic;
 

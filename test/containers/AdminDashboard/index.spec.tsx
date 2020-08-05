@@ -117,6 +117,27 @@ describe('Dashboard Container', () => {
     wrapper2.instance().checkEdit();
     expect(wrapper2.instance().setState).toHaveBeenCalled();
   });
+  it('checks for edit data to set state when not edit pictures', () => {
+    const editPic: any = {};
+    const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
+      dispatch={(fun) => fun}
+      showTable
+      auth={props.auth}
+      books={props.books}
+      youthPics={props.youthPics}
+      familyPics={props.familyPics}
+      otherPics={props.otherPics}
+      homeContent={props.homeContent}
+      editPic={editPic}
+      history={history}
+      location={location}
+      match={match}
+    />);
+    wrapper2.instance().setState = jest.fn();
+    wrapper2.update();
+    wrapper2.instance().checkEdit();
+    expect(wrapper2.instance().setState).toHaveBeenCalled();
+  });
   it('sets state from a radio button change', () => {
     wrapper.instance().setState = jest.fn((obj) => { if (obj.showCaption) expect(obj.showCaption).toBe('showCaption'); });
     wrapper.update();
