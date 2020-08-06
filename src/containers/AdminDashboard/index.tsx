@@ -14,7 +14,7 @@ export interface DashboardProps extends RouteComponentProps {
   dispatch: Dispatch<unknown>;
   homeContent: Ibook;
   auth: { token: string };
-  books: string[];
+  books: Record<string, string>[];
   showTable: boolean;
   editPic: Ibook;
   youthPics: Ibook[];
@@ -178,13 +178,13 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
-  deleteForumForm(forumId: string, books: string[]): JSX.Element {
+  deleteForumForm(forumId: string, options: Record<string, string>[]): JSX.Element {
     const ddParams = {
       htmlFor: 'forumId',
       labelText: '* Select Title to Delete',
       value: forumId,
       onChange: this.onChangeSelect,
-      options: books,
+      options,
       oValue: '_id',
       dValue: 'title',
     };

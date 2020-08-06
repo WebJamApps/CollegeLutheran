@@ -7,7 +7,8 @@ interface IMkDropDownCv {
 function makeDropdown(htmlFor: string,
   labelText: string,
   value: string,
-  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void, options: {type: string, Category: string}[]): JSX.Element {
+  onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void,
+  options: { type: string, Category: string }[]): JSX.Element {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
@@ -27,7 +28,7 @@ export interface DataDropParams {
   labelText: string,
   value: string,
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void,
-  options: string[], oValue: string, dValue: string
+  options: Record<string, string>[], oValue: string, dValue: string
 }
 function makeDataDropdown(p: DataDropParams): JSX.Element {
   return (
@@ -37,7 +38,7 @@ function makeDataDropdown(p: DataDropParams): JSX.Element {
       <select id={p.htmlFor} value={p.value} onChange={(event) => p.onChange(event, p.htmlFor)}>
         <option id="blank-option" key="blank-option" value="">---</option>
         {// eslint-disable-next-line security/detect-object-injection
-          p.options.map((cv: any) => (<option id={cv[p.oValue]} key={cv[p.oValue]} value={cv[p.oValue]}>{cv[p.dValue]}</option>))
+          p.options.map((cv) => (<option id={cv[p.oValue]} key={cv[p.oValue]} value={cv[p.oValue]}>{cv[p.dValue]}</option>))
         }
       </select>
     </label>
