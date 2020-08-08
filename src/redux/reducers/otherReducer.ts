@@ -1,9 +1,13 @@
+import { Ibook } from '../mapStoreToProps';
+
 const initialState = {
   otherPics: [],
   editPic: {},
 };
 
-const reducer = (state = initialState, action: { type: string; data?: any[]; picData?: any; }) => {
+const reducer = (state = initialState, action: { type: string; data?: Ibook[]; picData?: Record<string, unknown>; }): {
+  otherPics: Ibook[]; editPic: Record<string, unknown> | undefined
+} => {
   switch (action.type) {
     case 'GOT_OTHERPICS':
       return {

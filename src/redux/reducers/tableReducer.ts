@@ -2,7 +2,7 @@ const initialState = {
   showTable: true,
 };
 
-const reducer = (state = initialState, action: { type: string; showTable?: boolean; }) => {
+const reducer = (state = initialState, action: { type: string; showTable: boolean; }): { showTable: boolean } => {
   switch (action.type) {
     case 'SHOW_TABLE':
       return {

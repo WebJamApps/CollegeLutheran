@@ -6,7 +6,7 @@ const initialState = {
   user: {},
 };
 const reducer = (state = initialState,
-  action: { type: string; data?: { name?: string, email?: string; token?: string; }; error?: { message?: string; }; }) => {
+  action: { type: string; data?: { name?: string, email?: string; token?: string; }; error?: { message?: string; }; }): any => {
   switch (action.type) {
     case 'GOT_TOKEN':
       // eslint-disable-next-line no-param-reassign
@@ -20,7 +20,7 @@ const reducer = (state = initialState,
       };
     case 'AUTH_ERROR':
       // eslint-disable-next-line no-param-reassign
-      if (!action.error)action.error = { message: '' };
+      if (!action.error)action.error = {};
       return {
         ...state, isAuthenticated: false, email: '', token: '', error: action.error.message, user: {},
       };

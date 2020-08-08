@@ -3,7 +3,7 @@ import ELCALogo from '../../components/elcaLogo';
 
 const pageName = 'news';
 
-const NewsContent = ({ books }: any) => (
+const NewsContent = ({ books }: any): JSX.Element => (
   <div className="page-content">
     <div>
       <div>
