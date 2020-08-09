@@ -1,13 +1,18 @@
 import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
+import { Ibook } from '../../redux/mapStoreToProps';
+
+interface NewsContentProps {
+  books?: Ibook[];
+}
 
 const pageName = 'news';
 
-const NewsContent = ({ books }: any): JSX.Element => (
+const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
   <div className="page-content">
     <div>
       <div>
-        {books.length > 0 ? (
+        {books && books.length > 0 ? (
           <div className="forumsTable">
             <h3
               style={{
@@ -27,14 +32,16 @@ const NewsContent = ({ books }: any): JSX.Element => (
                   </tr>
                 </thead>
                 <tbody>
-                  {books.map((d: { _id: string | number | undefined; url: string | undefined; title: React.ReactNode; created_at: string; }) => (
-                    <tr key={d._id}>
-                      <td className="newsUrl">
-                        <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
-                      </td>
-                      <td>{d.created_at.split('T')[0]}</td>
-                    </tr>
-                  ))}
+                  {books && books.map(
+                    (d: { _id: string | number | undefined; url?: string | undefined; title: React.ReactNode; created_at: string; }) => (
+                      <tr key={d._id}>
+                        <td className="newsUrl">
+                          <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
+                        </td>
+                        <td>{d.created_at.split('T')[0]}</td>
+                      </tr>
+                    ),
+                  )}
                 </tbody>
               </table>
             </div>

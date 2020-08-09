@@ -2,7 +2,12 @@ import reducer from '../../src/redux/reducers/homeReducer';
 
 describe('home reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, { type: '' })).toEqual(
+    expect(reducer(undefined, {
+      type: '',
+      data: {
+        title: '', _id: '', type: '', created_at: '',
+      },
+    })).toEqual(
       {
         homeContent: {},
       },
@@ -12,11 +17,15 @@ describe('home reducer', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_HOMEPAGE',
-        data: {},
+        data: {
+          title: '', _id: '', type: '', created_at: '',
+        },
       }),
     ).toEqual(
       {
-        homeContent: {},
+        homeContent: {
+          title: '', _id: '', type: '', created_at: '',
+        },
       },
     );
   });

@@ -12,11 +12,15 @@ describe('fetch reducer', () => {
     expect(
       reducer(undefined, {
         type: 'GOT_YOUTHPICS',
-        data: [{}],
+        data: [{
+          title: '', _id: '', type: '', created_at: '',
+        }],
       }),
     ).toEqual(
       {
-        youthPics: [{}],
+        youthPics: [{
+          title: '', _id: '', type: '', created_at: '',
+        }],
       },
     );
   });
