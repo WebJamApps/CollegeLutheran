@@ -30,9 +30,12 @@ describe('Home', () => {
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('Renders WideAbout with familyPics', () => {
-    const wrapper2 = shallow(<WideAboutUs allPics={[{
-      title: '', type: '', _id: '', created_at: '',
-    }]}
+    const homeContent: any = '';
+    const wrapper2 = shallow(<WideAboutUs
+      allPics={[{
+        title: '', type: '', _id: '', created_at: '',
+      }]}
+      homeContent={homeContent}
     />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });

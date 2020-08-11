@@ -141,4 +141,4 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
   }
 }
 
-export default connect(mapStoreToProps)(PhotoTable);
+export default connect(mapStoreToProps, null)(PhotoTable);

@@ -4,7 +4,7 @@ import PicSlider from '../../components/PicSlider';
 import { Ibook } from '../../redux/mapStoreToProps';
 
 interface IAbout {
-  homeContent?: {title: string, comments: string};
+  homeContent?: any;
   width?: number;
   allPics?: Ibook[];
 }
