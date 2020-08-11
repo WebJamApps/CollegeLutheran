@@ -36,7 +36,7 @@ export interface Store {
   showTable: { showTable: boolean };
 }
 
-const mapStoreToProps = (store: Store): any => ({
+const mapStoreToProps = (store: Store): Record<string, unknown> => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,

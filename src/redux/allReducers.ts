@@ -8,13 +8,13 @@ import otherReducer from './reducers/otherReducer';
 import tableReducer from './reducers/tableReducer';
 
 const reducer = combineReducers({
-  auth: authReducer,
-  homeContent: homeReducer,
-  familyPics: familyReducer,
-  youthPics: youthReducer,
-  books: booksReducer,
-  otherPics: otherReducer,
-  showTable: tableReducer,
+  auth: authReducer || {},
+  homeContent: homeReducer || {},
+  familyPics: familyReducer || {},
+  youthPics: youthReducer || {},
+  books: booksReducer || {},
+  otherPics: otherReducer || {},
+  showTable: tableReducer || {},
 });
 
 export default reducer;
