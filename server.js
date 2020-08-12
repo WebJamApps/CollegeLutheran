@@ -14,7 +14,7 @@ app.use('/', express.static(path.normalize(path.join(__dirname, 'dist'))));
 app.get('/*', (request, response) => {
   response.sendFile(path.normalize(path.join(__dirname, 'dist/index.html')));
 });
-app.listen(process.env.PORT, () => {
+app.listen(Number(process.env.PORT) + 10, () => {
   console.log(`Magic happens on port ${process.env.PORT}`); // eslint-disable-line no-console
 });
 
