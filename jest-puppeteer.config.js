@@ -6,6 +6,6 @@ module.exports = {
     setTimeout: 10000,
     launchTimeout: 100000,
     command: 'yarn build:prod && node server.js',
-    port: process.env.PORT,
+    port: Number(process.env.PORT) + 10,
   },
 };
