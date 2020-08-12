@@ -9,6 +9,10 @@ export interface Auth {
 }
 
 export interface Ibook {
+  link: string | undefined,
+  caption: string | undefined,
+  modify: JSX.Element | undefined,
+  thumbnail: string | undefined,
   title: string,
   _id: string,
   type: string,

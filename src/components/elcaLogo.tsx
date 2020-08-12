@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ELCALogo = ({ pageName }: any) => (
+type ElcaProps = {
+  pageName: string;
+};
+
+const ELCALogo = ({ pageName }: ElcaProps): JSX.Element => (
   <div className={`${pageName}ELCA`} style={{ textAlign: 'center' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
