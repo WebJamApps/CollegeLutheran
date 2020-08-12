@@ -45,7 +45,7 @@ const StaffContent = (): JSX.Element => (
               {' '}
               Short, Director of Music,
               {' '}
-              <a href="mailto:34vt@comcast.net ">34vt@comcast.net</a>
+              <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               <Link to="/staff/#Sandi">Sandi</Link>

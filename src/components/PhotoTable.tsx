@@ -1,6 +1,5 @@
 import React, { Dispatch } from 'react';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import 'core-js/stable';
@@ -8,7 +7,6 @@ import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
-import TableTheme from '../lib/photoTableTheme';
 
 interface Pprops {
   dispatch: Dispatch<unknown>,
@@ -120,25 +118,23 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     return (
       <div className="photoTable">
         <div style={{ maxWidth: '9in', margin: 'auto' }}>
-          <MuiThemeProvider theme={TableTheme}>
-            <MUIDataTable
-              options={{
-                filterType: 'dropdown',
-                pagination: false,
-                responsive: 'scrollMaxHeight',
-                filter: false,
-                download: false,
-                search: false,
-                print: false,
-                viewColumns: false,
-                selectableRows: 'none',
-                fixedHeader: false,
-              }}
-              columns={columns}
-              data={arr}
-              title="All Images"
-            />
-          </MuiThemeProvider>
+          <MUIDataTable
+            options={{
+              filterType: 'dropdown',
+              pagination: false,
+              responsive: 'scrollMaxHeight',
+              filter: false,
+              download: false,
+              search: false,
+              print: false,
+              viewColumns: false,
+              selectableRows: 'none',
+              fixedHeader: false,
+            }}
+            columns={columns}
+            data={arr}
+            title="All Images"
+          />
         </div>
       </div>
     );
