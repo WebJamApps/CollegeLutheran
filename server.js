@@ -5,7 +5,8 @@ const express = require('express');
 const enforce = require('express-sslify');
 
 const app = express();
-
+let port = Number(process.env.PORT);
+if (process.env.NODE_ENV === 'test') port += 10;
 /* istanbul ignore if */
 if (process.env.NODE_ENV === 'production') app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
@@ -14,7 +15,7 @@ app.use('/', express.static(path.normalize(path.join(__dirname, 'dist'))));
 app.get('/*', (request, response) => {
   response.sendFile(path.normalize(path.join(__dirname, 'dist/index.html')));
 });
-app.listen(Number(process.env.PORT) + 10, () => {
+app.listen(port, () => {
   console.log(`Magic happens on port ${process.env.PORT}`); // eslint-disable-line no-console
 });
 
