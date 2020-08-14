@@ -55,17 +55,15 @@ describe('auth reducer', () => {
     expect(
       reducer(undefined, {
         type: 'AUTH_ERROR',
-        error: { message: 'bad' },
+        error: { message: 'Error' },
       }),
-    ).toEqual(
-      {
-        isAuthenticated: false,
-        error: 'bad',
-        email: '',
-        token: '',
-        user: {},
-      },
-    );
+    ).toEqual({
+      isAuthenticated: false,
+      error: 'Error',
+      email: '',
+      token: '',
+      user: {},
+    });
   });
   it('handles AUTH_ERROR with no error', () => {
     expect(
@@ -76,7 +74,7 @@ describe('auth reducer', () => {
     ).toEqual(
       {
         isAuthenticated: false,
-        error: '',
+        error: undefined,
         email: '',
         token: '',
         user: {},

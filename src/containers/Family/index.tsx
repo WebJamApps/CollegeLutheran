@@ -8,7 +8,7 @@ export interface FamilyProps {
   familyPics?: Ibook[];
 }
 
-export const Family = ({ familyPics }: FamilyProps) => {
+export const Family = ({ familyPics }: FamilyProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Children & Families', window.screen.width);
   return (<DefaultFamilyContent familyPics={familyPics} />);
 };
