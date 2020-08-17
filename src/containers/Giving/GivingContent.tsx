@@ -16,6 +16,12 @@ const GivingContent = (): JSX.Element => (
           {' '}
           Just complete the form below to support the ministries of CLC with your offering!
         </p>
+        <p>
+          <strong>
+            This Vanco web form is currently not working from Chrome.
+            They will be fixing it soon, so until then please use Firefox.
+          </strong>
+        </p>
       </div>
       <p>&nbsp;</p>
       <div style={{
