@@ -32,6 +32,12 @@
   background-color: #fff;
 }
 
+@media screen and (max-width: 320px) {
+  .newsTable {
+    width: auto;
+  }
+}
+
 @media screen and (min-width: 912px) {
   .table-responsive {
     width: 100%;
