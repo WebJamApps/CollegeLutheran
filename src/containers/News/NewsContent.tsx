@@ -27,7 +27,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
               <table className="newsTable">
                 <thead>
                   <tr>
-                    <th style={{ padding: '8px', width: '230px' }}>Title</th>
+                    <th className="newsTitle" style={{ padding: '8px', width: '230px' }}>Title</th>
                     <th style={{ padding: '8px', width: '110px' }}>Date</th>
                   </tr>
                 </thead>
