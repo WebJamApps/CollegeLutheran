@@ -90,4 +90,4 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   }
 }
 
-export default connect(mapStoreToProps)(withResizeDetector(Homepage));
+export default connect(mapStoreToProps, null)(withResizeDetector(Homepage));

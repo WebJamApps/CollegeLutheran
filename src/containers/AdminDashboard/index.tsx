@@ -277,4 +277,4 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 }
 
-export default withRouter(connect(mapStoreToProps)(AdminDashboard));
+export default withRouter(connect(mapStoreToProps, null)(AdminDashboard));
