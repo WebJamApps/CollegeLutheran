@@ -25,18 +25,19 @@ describe('Home', () => {
     expect(wrapper2.find('p#wideFacebook').prop('style')).toHaveProperty('marginBottom', '32px');
   });
   it('Renders NarrowFacebook with familyPics', () => {
-    const wrapper2 = shallow(<NarrowFacebookFeed allPics={[{
+    const allPics:any = {
       title: '', type: '', _id: '', created_at: '',
-    }]}
-    />);
+    };
+    const wrapper2 = shallow(<NarrowFacebookFeed allPics={[allPics]} />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
   });
   it('Renders WideAbout with familyPics', () => {
     const homeContent: any = '';
+    const allPics:any[] = [{
+      title: '', type: '', _id: '', created_at: '',
+    }];
     const wrapper2 = shallow(<WideAboutUs
-      allPics={[{
-        title: '', type: '', _id: '', created_at: '',
-      }]}
+      allPics={allPics}
       homeContent={homeContent}
     />);
     expect(wrapper2.find(PicSlider).exists()).toBe(true);

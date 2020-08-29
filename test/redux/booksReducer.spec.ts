@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import reducer from '../../src/redux/reducers/booksReducer';
 
 describe('books reducer', () => {
@@ -9,12 +10,13 @@ describe('books reducer', () => {
     );
   });
   it('should handle fetched images', () => {
+    const dataArr:any[] = [{
+      _id: '1', title: 'cool', created_at: '', type: '',
+    }];
     expect(
       reducer(undefined, {
         type: 'GOT_BOOKS',
-        data: [{
-          _id: '1', title: 'cool', created_at: '', type: '',
-        }],
+        data: dataArr,
       }),
     ).toEqual(
       {
