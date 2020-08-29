@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import renderer from 'react-test-renderer';
@@ -27,7 +28,7 @@ describe('Family', () => {
     expect(wrapper.find(DefaultFamilyContent).dive().find('div.page-content').exists()).toBe(true);
   });
   it('renders with images', () => new Promise((done) => {
-    const data = [{
+    const data:any[] = [{
       title: '', type: '', _id: '', created_at: '',
     }];
     const wrapper2 = shallow(<DefaultFamilyContent familyPics={data} />);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
@@ -5,19 +6,20 @@ import { News } from '../../src/containers/News/index';
 import DefaultNewsContent from '../../src/containers/News/NewsContent';
 
 describe('News', () => {
+  const booksArr: any[] = [{
+    _id: '1', created_at: '1971-01-03T00:00:00Z', title: 'howdy', type: '',
+  },
+  {
+    _id: '3', created_at: '1973-01-03T00:00:00Z', title: 'howdy', type: '',
+  },
+  {
+    title: 'howdy2', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
+  }];
   const controller = {
     setState: () => true,
     props: {},
     state: {
-      books: [{
-        _id: '1', created_at: '1971-01-03T00:00:00Z', title: 'howdy', type: '',
-      },
-      {
-        _id: '3', created_at: '1973-01-03T00:00:00Z', title: 'howdy', type: '',
-      },
-      {
-        title: 'howdy2', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
-      }],
+      books: booksArr,
     },
   };
 
@@ -44,16 +46,17 @@ describe('News', () => {
       .exists()).toBe(true);
   });
   it('sorts the books in default order', () => {
+    const bArr: any[] = [{
+      title: 'howdy2', _id: '1', created_at: '1972-01-03T00:00:00Z', type: '',
+    },
+    {
+      title: 'howdy3', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
+    }];
     const controller2 = {
       setState: () => true,
       props: {},
       state: {
-        books: [{
-          title: 'howdy2', _id: '1', created_at: '1972-01-03T00:00:00Z', type: '',
-        },
-        {
-          title: 'howdy3', _id: '2', created_at: '1972-01-03T00:00:00Z', type: '',
-        }],
+        books: bArr,
       },
     };
     const { books } = controller2.state;

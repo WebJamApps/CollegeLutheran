@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import reducer from '../../src/redux/reducers/homeReducer';
 
 describe('home reducer', () => {
+  const data: any = {
+    title: '', _id: '', type: '', created_at: '',
+  };
   it('should return the initial state', () => {
     expect(reducer(undefined, {
       type: '',
-      data: {
-        title: '', _id: '', type: '', created_at: '',
-      },
+      data,
     })).toEqual(
       {
         homeContent: {},
@@ -14,12 +16,13 @@ describe('home reducer', () => {
     );
   });
   it('should handle fetch homepage', () => {
+    const data2: any = {
+      title: '', _id: '', type: '', created_at: '',
+    };
     expect(
       reducer(undefined, {
         type: 'GOT_HOMEPAGE',
-        data: {
-          title: '', _id: '', type: '', created_at: '',
-        },
+        data: data2,
       }),
     ).toEqual(
       {
