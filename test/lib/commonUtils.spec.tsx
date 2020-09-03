@@ -13,7 +13,7 @@ describe('commonUtils', () => {
       props: {
         familyPics: [{ title: '', type: '' }], youthPics: [{ title: '', type: '' }], otherPics: [{ title: '', type: '' }],
       },
-      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(2),
+      setState: (obj: { picsState: string | any[]; }) => expect(obj.picsState.length).toBe(3),
     };
     await commonUtils.randomizePics(vStub as any, jest.fn());
   });

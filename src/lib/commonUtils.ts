@@ -14,8 +14,8 @@ async function randomizePics(view: Homepage, delay: () => void): Promise<void> {
   await delay();
   const { familyPics, youthPics, otherPics } = view.props;
   let arr: Ibook[] | never[] = familyPics || [];
-  arr.concat(youthPics || []);
-  arr = arr.concat(otherPics || []);
+  const arr2: Ibook[] = youthPics || [];
+  arr = arr.concat(otherPics || []).concat(arr2);
 
   for (let i = arr.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
