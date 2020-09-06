@@ -20,6 +20,7 @@ export interface DashboardProps extends RouteComponentProps {
   youthPics: Ibook[];
   familyPics: Ibook[];
   otherPics: Ibook[];
+  musicPics: Ibook[];
 }
 type DashboardState = {
   type: string;
@@ -165,6 +166,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       { type: 'youthPics', Category: 'Youth Pics' },
       { type: 'familyPics', Category: 'Family Pics' },
       { type: 'otherPics', Category: 'Other Pics' },
+      { type: 'musicPics', Category: 'Music Pics' },
     ];
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;
@@ -261,7 +263,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   render(): JSX.Element {
     const {
-      showTable, auth, dispatch, youthPics, familyPics, otherPics,
+      showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
     return (
       <div className="page-content">
@@ -271,7 +273,16 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         {this.changeHomepage()}
         {this.controller.addForumForm()}
         {this.changeYouthForm()}
-        {showTable ? <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} /> : null}
+        {showTable ? (
+          <PTable
+            auth={auth}
+            dispatch={dispatch}
+            youthPics={youthPics}
+            familyPics={familyPics}
+            otherPics={otherPics}
+            musicPics={musicPics}
+          />
+        ) : null}
       </div>
     );
   }
