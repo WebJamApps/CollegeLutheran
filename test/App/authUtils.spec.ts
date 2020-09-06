@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jwt-simple';
 import superagent from 'superagent';
@@ -11,6 +12,7 @@ describe('authUtils', () => {
     expect(authUtils).toBeDefined();
   });
   it('logs out when not /dashboard', () => {
+    // @ts-ignore
     delete window.location;
     window.location = {
       ...window.location,
@@ -42,6 +44,7 @@ describe('authUtils', () => {
     const returnBody: Record<string, unknown> = { body: {} };
     const sa: any = superagent;
     sa.get = () => ({ set: () => ({ set: () => Promise.resolve(returnBody) }) });
+    // @ts-ignore
     delete window.location;
     window.location = {
       ...window.location,
@@ -61,6 +64,7 @@ describe('authUtils', () => {
   });
   it('sets the user to the already decoded user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
+    // @ts-ignore
     delete window.location;
     window.location = {
       ...window.location,
@@ -79,6 +83,7 @@ describe('authUtils', () => {
     expect(res).toBe('bad');
   });
   it('logs out when /admin', () => {
+    // @ts-ignore
     delete window.location;
     window.location = {
       ...window.location,
