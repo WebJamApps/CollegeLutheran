@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {

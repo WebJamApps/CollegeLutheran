@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { PhotoTable } from '../../src/components/PhotoTable';

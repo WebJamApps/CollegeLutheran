@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { createTransform, Transform } from 'redux-persist';
 import jsog from 'jsog';
 
