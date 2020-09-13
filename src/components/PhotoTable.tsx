@@ -114,9 +114,9 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
   render(): JSX.Element {
     const { columns } = this.state;
     const {
-      familyPics, youthPics, otherPics,
+      familyPics, youthPics, otherPics, musicPics,
     } = this.props;
-    let arr: Ibook[] = familyPics.concat(youthPics);
+    let arr: Ibook[] = familyPics.concat(youthPics).concat(musicPics);
     arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">
