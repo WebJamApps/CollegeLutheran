@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent, Dispatch } from 'react';
+import React, { Component, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';

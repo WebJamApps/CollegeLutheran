@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { PhotoTable } from '../../src/components/PhotoTable';
@@ -70,6 +72,7 @@ describe('PhotoTable', () => {
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
+    // @ts-ignore
     delete window.location;
     window.location = {
       ...loc,
