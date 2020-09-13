@@ -125,7 +125,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
             options={{
               filterType: 'dropdown',
               pagination: false,
-              responsive: 'scrollMaxHeight',
+              responsive: 'standard',
               filter: false,
               download: false,
               search: false,

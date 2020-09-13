@@ -1,13 +1,13 @@
 import React from 'react';
+import PicSlider from '../../components/PicSlider';
+import type { MusicProps } from './index';
 
-const MusicContent = (): JSX.Element => (
+const MusicContent = ({ musicPics }: MusicProps): JSX.Element => (
   <div className="page-content">
+    <div id="musicSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
+      {musicPics && musicPics.length > 0 ? (<PicSlider data={musicPics} />) : null}
+    </div>
     <div className="container-fluid">
-      <div>
-        <div id="musicSlide1">
-          <img alt="churchBalcony" src="https://dl.dropboxusercontent.com/s/g8lhfjk64uixl9r/choir.png?dl=0" />
-        </div>
-      </div>
       <div className="material-content elevation3" style={{ maxWidth: '998px', margin: 'auto' }}>
         <h3 style={{ paddingBottom: '15px' }}>Music at College Lutheran</h3>
         <p>
@@ -39,5 +39,7 @@ const MusicContent = (): JSX.Element => (
     </div>
   </div>
 );
+
+MusicContent.defaultProps = { musicPics: [] };
 
 export default MusicContent;
