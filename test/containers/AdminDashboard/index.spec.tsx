@@ -143,6 +143,7 @@ describe('Dashboard Container', () => {
     expect(wrapper2.instance().setState).toHaveBeenCalled();
   });
   it('sets state from a radio button change', () => {
+    // eslint-disable-next-line jest/no-conditional-expect
     wrapper.instance().setState = jest.fn((obj) => { if (obj.showCaption) expect(obj.showCaption).toBe('showCaption'); });
     wrapper.update();
     wrapper.instance().handleRadioChange({ target: { value: 'showCaption' } });

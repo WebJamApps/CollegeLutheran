@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import superagent from 'superagent';
 import authenticate, { logout } from '../../src/App/authActions';
 import { Auth } from '../../src/redux/mapStoreToProps';

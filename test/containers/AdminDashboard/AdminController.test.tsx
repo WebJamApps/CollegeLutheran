@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
