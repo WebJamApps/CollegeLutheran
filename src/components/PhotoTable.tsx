@@ -75,19 +75,21 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     return 'no delete';
   }
 
-  editPic(picData: any) {
+  editPic(picData: Ibook): boolean {
     const { dispatch } = this.props;
+    // eslint-disable-next-line no-param-reassign
+    delete picData.modify;
     dispatch({ type: 'EDIT_PIC', picData });
     return true;
   }
 
-  handleHideTable() {
+  handleHideTable(): boolean {
     const { dispatch } = this.props;
     dispatch({ type: 'SHOW_TABLE', showTable: false });
     return true;
   }
 
-  addThumbs(arr: any[]): any[] {
+  addThumbs(arr: Ibook[]): Ibook[] {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
@@ -110,7 +112,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     return newArr;
   }
 
-  render() {
+  render(): JSX.Element {
     const { columns } = this.state;
     const { familyPics, youthPics, otherPics } = this.props;
     let arr: Ibook[] = familyPics.concat(youthPics);
@@ -122,7 +124,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
             options={{
               filterType: 'dropdown',
               pagination: false,
-              responsive: 'scrollMaxHeight',
+              responsive: 'standard',
               filter: false,
               download: false,
               search: false,

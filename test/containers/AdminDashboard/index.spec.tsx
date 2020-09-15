@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
@@ -8,6 +9,9 @@ describe('Dashboard Container', () => {
   const history: any = {};
   const location: any = {};
   const match: any = {};
+  const editPic:any = {
+    title: '', _id: '', type: '', created_at: '',
+  };
   beforeEach(() => {
     props = {
       auth: { token: 'token' },
@@ -23,9 +27,7 @@ describe('Dashboard Container', () => {
       books={props.books}
       homeContent={props.homeContent}
       showTable
-      editPic={{
-        title: '', _id: '', type: '', created_at: '',
-      }}
+      editPic={editPic}
       history={history}
       location={location}
       match={match}
@@ -71,6 +73,9 @@ describe('Dashboard Container', () => {
     expect(result).toBe('youthPicsId');
   });
   it('renders with edit pic form', () => {
+    const editPic2:any = {
+      title: '', url: 'url', type: 'otherPics', _id: '123', created_at: '',
+    };
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       showTable
@@ -80,9 +85,7 @@ describe('Dashboard Container', () => {
       otherPics={props.otherPics}
       homeContent={props.homeContent}
       youthPics={props.youthPics}
-      editPic={{
-        title: '', url: 'url', type: 'otherPics', _id: '123', created_at: '',
-      }}
+      editPic={editPic2}
       history={history}
       location={location}
       match={match}
@@ -96,6 +99,9 @@ describe('Dashboard Container', () => {
     expect(h).toBe('Edit Pictures');
   });
   it('checks for edit data to set state for edit pictures', () => {
+    const editPic2:any = {
+      title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
+    };
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       showTable
@@ -105,9 +111,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent}
-      editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
-      }}
+      editPic={editPic2}
       history={history}
       location={location}
       match={match}
@@ -118,7 +122,7 @@ describe('Dashboard Container', () => {
     expect(wrapper2.instance().setState).toHaveBeenCalled();
   });
   it('checks for edit data to set state when not edit pictures', () => {
-    const editPic: any = {};
+    const editPic2: any = {};
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       showTable
@@ -128,7 +132,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent}
-      editPic={editPic}
+      editPic={editPic2}
       history={history}
       location={location}
       match={match}
@@ -139,6 +143,7 @@ describe('Dashboard Container', () => {
     expect(wrapper2.instance().setState).toHaveBeenCalled();
   });
   it('sets state from a radio button change', () => {
+    // eslint-disable-next-line jest/no-conditional-expect
     wrapper.instance().setState = jest.fn((obj) => { if (obj.showCaption) expect(obj.showCaption).toBe('showCaption'); });
     wrapper.update();
     wrapper.instance().handleRadioChange({ target: { value: 'showCaption' } });
@@ -149,6 +154,9 @@ describe('Dashboard Container', () => {
     wrapper.instance().resetEditForm({ preventDefault: () => { } });
   });
   it('doesnt show PTable when showTable is true', () => {
+    const editPic2:any = {
+      title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
+    };
     const wrapper2 = shallow<AdminDashboard>(<AdminDashboard
       dispatch={(fun) => fun}
       auth={props.auth}
@@ -157,9 +165,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent || ''}
-      editPic={{
-        title: 'title', url: 'url', type: 'otherPics', _id: '123', comments: 'showCaption', created_at: '',
-      }}
+      editPic={editPic2}
       showTable={false}
       history={history}
       location={location}

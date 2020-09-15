@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 let mockError: string,
   mockResponse = {
-    status: () => 200,
+    status: (): any => 200,
     ok: true,
     get: jest.fn(),
     toError: jest.fn(),
@@ -29,13 +31,13 @@ const Request = {
     }
     return resolve(callback(mockResponse));
   })),
-  setMockResponse: (mockRes: { status: () => number; ok: boolean; get: jest.Mock<any, any>; toError: jest.Mock<any, any>; body: any; }) => {
+  setMockResponse: (mockRes: { status: () => number; ok: boolean; get: jest.Mock<any, any>; toError: jest.Mock<any, any>; body: any; }): any => {
     mockResponse = mockRes;
   },
-  setMockError: (mockErr: any) => {
+  setMockError: (mockErr: any): any => {
     mockError = mockErr;
   },
-  __setMockResponseBody: (body: any) => {
+  __setMockResponseBody: (body: any): any => {
     mockResponse.body = body;
   },
 };

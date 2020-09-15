@@ -3,16 +3,27 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Caption from './caption';
+import { Ibook } from '../../redux/mapStoreToProps';
+
+type SettingsType = {
+  autoplay: boolean;
+  autoplaySpeed: number;
+  infinite: boolean;
+  speed: number;
+  slidesToShow: number;
+  slidesToScroll: number;
+  arrows: boolean;
+  fade: boolean;
+};
 
 export interface PicSliderProps {
-  settings: any;
-  data: any;
-  slider?: any;
+  settings?: SettingsType;
+  data: Ibook[];
 }
 class PicSlider extends Component<PicSliderProps> {
-  static defaultProps: { data: [{ url: ''; title: ''; _id: 0 }]; settings: any };
+  static defaultProps: { data: [{ url: ''; title: ''; _id: 0 }]; };
 
-  settings: any;
+  settings: SettingsType;
 
   constructor(props: Readonly<PicSliderProps>) {
     super(props);
@@ -29,13 +40,13 @@ class PicSlider extends Component<PicSliderProps> {
   }
 
   /* eslint-disable react/jsx-props-no-spreading */
-  render() {
+  render(): JSX.Element {
     const { data } = this.props;
     return (
       <div>
         <Slider {...this.settings}>
           {
-            data.map((d: { _id: string | number | undefined; url: string | undefined; title: string | undefined; comments: string; }) => (
+            data.map((d: Ibook) => (
               <div key={d._id}>
                 <img className="slide-show" src={d.url} alt={d.title} />
                 {d.comments === 'showCaption' ? <Caption caption={d.title} /> : null}

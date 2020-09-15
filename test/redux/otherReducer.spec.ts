@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import reducer from '../../src/redux/reducers/otherReducer';
 
 describe('fetch reducer', () => {
@@ -10,12 +11,13 @@ describe('fetch reducer', () => {
     );
   });
   it('should handle fetched images', () => {
+    const dataArr:any[] = [{
+      title: '', _id: '', type: '', created_at: '',
+    }];
     expect(
       reducer(undefined, {
         type: 'GOT_OTHERPICS',
-        data: [{
-          title: '', _id: '', type: '', created_at: '',
-        }],
+        data: dataArr,
       }),
     ).toEqual(
       {

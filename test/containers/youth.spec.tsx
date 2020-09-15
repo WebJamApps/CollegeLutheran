@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
@@ -27,7 +28,7 @@ describe('Youth', () => {
     expect(wrapper.find(DefaultYouthContent).dive().find('div.page-content').exists()).toBe(true);
   });
   it('renders with images', () => new Promise((done) => {
-    const data = [{
+    const data:any[] = [{
       title: '', type: '', _id: '', created_at: '',
     }];
     const wrapper2 = shallow(<DefaultYouthContent youthPics={data} />);
