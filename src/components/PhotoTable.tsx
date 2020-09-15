@@ -77,6 +77,8 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
 
   editPic(picData: Ibook): boolean {
     const { dispatch } = this.props;
+    // eslint-disable-next-line no-param-reassign
+    delete picData.modify;
     dispatch({ type: 'EDIT_PIC', picData });
     return true;
   }
