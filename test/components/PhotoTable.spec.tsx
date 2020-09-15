@@ -5,7 +5,7 @@ import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { PhotoTable } from '../../src/components/PhotoTable';
 
 describe('PhotoTable', () => {
-  let props: { auth: any; youthPics: any; familyPics: any; otherPics: any; },
+  let props: { auth: any; youthPics: any; familyPics: any; musicPics: any; otherPics: any; },
     wrapper: any, r: ShallowWrapper<HTMLAttributes, any, React.Component<any, any, any>>;
   beforeEach(() => {
     props = {
@@ -19,12 +19,16 @@ describe('PhotoTable', () => {
       otherPics: [{
         _id: '999', url: 'url', title: 'title', type: 'otherPics', comments: 'showCaption',
       }],
+      musicPics: [{
+        _id: '787', url: 'url', title: 'title', type: 'musicPics', comments: 'showCaption',
+      }],
     };
     wrapper = shallow<PhotoTable>(<PhotoTable
       auth={props.auth}
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
+      musicPics={props.musicPics}
       dispatch={(fun) => fun}
     />);
   });
