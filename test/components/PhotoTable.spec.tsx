@@ -68,18 +68,9 @@ describe('PhotoTable', () => {
     expect(r).toBe(true);
   });
   it('runs the deletePic api', async () => {
-    const loc = window.location;
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...loc,
-      href: '/',
-      assign: jest.fn(),
-      reload: jest.fn(),
-    };
     r = await wrapper.instance().deletePic('456');
     expect(r).toBe('deleted pic');
   });
