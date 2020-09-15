@@ -8,7 +8,7 @@ import allReducers from '../allReducers';
 const persistConfig = {
   key: 'root',
   storage: storageSession,
-  blacklist: ['sc', 'familyPics', 'otherPics', 'youthPics'],
+  blacklist: ['sc', 'familyPics', 'otherPics', 'youthPics', 'musicPics'],
 };
 let mWares = applyMiddleware(thunk);
 /* istanbul ignore if */
