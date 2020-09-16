@@ -14,6 +14,7 @@ interface Pprops {
   familyPics: Ibook[],
   youthPics: Ibook[],
   otherPics: Ibook[],
+  musicPics: Ibook[],
 }
 interface Pstate {
   columns: MUIDataTableColumnDef[]
@@ -114,8 +115,10 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
 
   render(): JSX.Element {
     const { columns } = this.state;
-    const { familyPics, youthPics, otherPics } = this.props;
-    let arr: Ibook[] = familyPics.concat(youthPics);
+    const {
+      familyPics, youthPics, otherPics, musicPics,
+    } = this.props;
+    let arr: Ibook[] = familyPics.concat(youthPics).concat(musicPics);
     arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">

@@ -12,13 +12,6 @@ describe('authUtils', () => {
     expect(authUtils).toBeDefined();
   });
   it('logs out when not /dashboard', () => {
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...window.location,
-      href: '/',
-      reload: jest.fn(),
-    };
     const r = authUtils.responseGoogleLogout(() => { });
     expect(r).toBe('reload');
   });
@@ -44,14 +37,6 @@ describe('authUtils', () => {
     const returnBody: Record<string, unknown> = { body: {} };
     const sa: any = superagent;
     sa.get = () => ({ set: () => ({ set: () => Promise.resolve(returnBody) }) });
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...window.location,
-      href: '/',
-      assign: jest.fn(),
-      reload: jest.fn(),
-    };
     const result = await authUtils.setUser(vStub);
     expect(result).toBe('user set');
   });
@@ -64,14 +49,6 @@ describe('authUtils', () => {
   });
   it('sets the user to the already decoded user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...window.location,
-      href: '/',
-      assign: jest.fn(),
-      reload: jest.fn(),
-    };
     const result = await authUtils.setUser(vStub);
     expect(result).toBe('user set');
   });
@@ -83,13 +60,7 @@ describe('authUtils', () => {
     expect(res).toBe('bad');
   });
   it('logs out when /admin', () => {
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...window.location,
-      href: '/admin',
-      assign: jest.fn(),
-    };
+    Object.defineProperty(window, 'location', { value: { reload: jest.fn(), assign: jest.fn(), href: '/admin' }, writable: true });
     const r = authUtils.responseGoogleLogout(() => { });
     expect(r).toBe('assign');
   });

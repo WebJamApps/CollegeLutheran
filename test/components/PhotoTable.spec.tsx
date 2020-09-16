@@ -5,7 +5,7 @@ import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { PhotoTable } from '../../src/components/PhotoTable';
 
 describe('PhotoTable', () => {
-  let props: { auth: any; youthPics: any; familyPics: any; otherPics: any; },
+  let props: { auth: any; youthPics: any; familyPics: any; musicPics: any; otherPics: any; },
     wrapper: any, r: ShallowWrapper<HTMLAttributes, any, React.Component<any, any, any>>;
   beforeEach(() => {
     props = {
@@ -19,12 +19,16 @@ describe('PhotoTable', () => {
       otherPics: [{
         _id: '999', url: 'url', title: 'title', type: 'otherPics', comments: 'showCaption',
       }],
+      musicPics: [{
+        _id: '787', url: 'url', title: 'title', type: 'musicPics', comments: 'showCaption',
+      }],
     };
     wrapper = shallow<PhotoTable>(<PhotoTable
       auth={props.auth}
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       otherPics={props.otherPics}
+      musicPics={props.musicPics}
       dispatch={(fun) => fun}
     />);
   });
@@ -64,18 +68,9 @@ describe('PhotoTable', () => {
     expect(r).toBe(true);
   });
   it('runs the deletePic api', async () => {
-    const loc = window.location;
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
-    // @ts-ignore
-    delete window.location;
-    window.location = {
-      ...loc,
-      href: '/',
-      assign: jest.fn(),
-      reload: jest.fn(),
-    };
     r = await wrapper.instance().deletePic('456');
     expect(r).toBe('deleted pic');
   });

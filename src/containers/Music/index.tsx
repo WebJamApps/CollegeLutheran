@@ -1,10 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import DefaultMusicContent from './MusicContent';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-const Music = (): JSX.Element => {
+export interface MusicProps {
+  musicPics?: Ibook[];
+}
+
+export const Music = ({ musicPics }: MusicProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Music', window.screen.width);
-  return (<DefaultMusicContent />);
+  return (<DefaultMusicContent musicPics={musicPics} />);
 };
 
-export default Music;
+Music.defaultProps = { musicPics: [] };
+
+export default connect(mapStoreToProps, null)(Music);

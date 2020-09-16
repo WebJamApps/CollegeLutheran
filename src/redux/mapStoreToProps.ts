@@ -35,6 +35,7 @@ export interface Store {
   homeContent: { homeContent: Ibook };
   familyPics: { familyPics: Ibook[] };
   youthPics: { youthPics: Ibook[] };
+  musicPics: { musicPics: Ibook[] };
   books: { books: Ibook[] };
   otherPics: { otherPics: Ibook[], editPic: Ibook };
   showTable: { showTable: boolean };
@@ -45,6 +46,7 @@ const mapStoreToProps = (store: Store): Record<string, unknown> => ({
   homeContent: store.homeContent.homeContent,
   familyPics: store.familyPics.familyPics,
   youthPics: store.youthPics.youthPics,
+  musicPics: store.musicPics.musicPics,
   books: store.books.books,
   otherPics: store.otherPics.otherPics,
   editPic: store.otherPics.editPic,
