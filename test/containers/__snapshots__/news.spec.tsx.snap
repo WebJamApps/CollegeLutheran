@@ -25,13 +25,12 @@ exports[`News Renders the News component correctly 1`] = `
       className="news-div"
       style={
         Object {
-          "margin": "auto",
+          "margin": "auto 0px auto -9px",
           "marginLeft": "-5px",
-          "marginRight": 0,
           "overflow": "hidden",
           "padding": "0",
           "textAlign": "center",
-          "width": "100%",
+          "width": "108%",
         }
       }
     >
