@@ -55,13 +55,12 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
       <div
         className="news-div"
         style={{
-          margin: 'auto',
+          margin: 'auto 0px auto -9px',
           textAlign: 'center',
           padding: '0',
           marginLeft: '-5px',
-          width: '100%',
+          width: '108%',
           overflow: 'hidden',
-          marginRight: 0,
         }}
       >
         <iframe

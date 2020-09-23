@@ -18,7 +18,6 @@
 }
 
 .newsTable td, .newsTable th {
-  padding: .75rem;
   vertical-align: top;
 }
 
@@ -35,6 +34,12 @@
 @media screen and (max-width: 320px) {
   .newsTable {
     width: auto;
+  }
+}
+
+@media screen and (max-width: 911px) {
+  .table-responsive {
+    height: 220px !important;
   }
 }
 
