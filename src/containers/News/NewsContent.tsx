@@ -23,27 +23,29 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
             >
               Announcements
             </h3>
-            <div className="table-responsive">
-              <table className="newsTable">
-                <thead>
-                  <tr>
-                    <th className="newsTitle" style={{ padding: '8px', width: '230px' }}>Title</th>
-                    <th style={{ padding: '8px', width: '110px' }}>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {books && books.map(
-                    (d: { _id: string | number | undefined; url?: string | undefined; title: React.ReactNode; created_at: string; }) => (
-                      <tr key={d._id}>
-                        <td className="newsUrl">
-                          <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
-                        </td>
-                        <td>{d.created_at.split('T')[0]}</td>
-                      </tr>
-                    ),
-                  )}
-                </tbody>
-              </table>
+            <div className="TableStyle-root">
+              <div className="TableContainer-root">
+                <table className="TableHeader" aria-label="News Anouncement Table">
+                  <thead className="TableHead-root">
+                    <tr className="TableRow-root">
+                      <th className="TableCell-root TableCell-head StickyHeader newsTitle">Title</th>
+                      <th className="TableCell-root TableCell-head StickyHeader">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="TableBody-root">
+                    {books && books.map(
+                      (d: { _id: string | number | undefined; url?: string | undefined; title: React.ReactNode; created_at: string; }) => (
+                        <tr className="TableRow-root" key={d._id}>
+                          <td className="TableCell-root TableCell-body newsUrl">
+                            <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
+                          </td>
+                          <td className="TableCell-root TableCell-body">{d.created_at.split('T')[0]}</td>
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         ) : (
@@ -59,7 +61,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
           textAlign: 'center',
           padding: '0',
           marginLeft: '-5px',
-          width: '108%',
+          // width: '108%',
           overflow: 'hidden',
         }}
       >
