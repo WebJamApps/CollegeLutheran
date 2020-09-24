@@ -24,8 +24,8 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
               Announcements
             </h3>
             <div className="TableStyle-root">
-              <div className="TableContainer-root">
-                <table className="TableHeader" aria-label="News Anouncement Table">
+              <div className="TableContainer-root table-responsive">
+                <table className="TableHeader newsTable" aria-label="News Anouncement Table">
                   <thead className="TableHead-root">
                     <tr className="TableRow-root">
                       <th className="TableCell-root TableCell-head StickyHeader newsTitle">Title</th>
