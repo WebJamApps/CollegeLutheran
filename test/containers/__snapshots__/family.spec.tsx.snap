@@ -152,7 +152,7 @@ exports[`Family renders correctly without images 1`] = `
             Object {
               "margin": "auto",
               "paddingTop": "30px",
-              "width": "350px",
+              "width": "310px",
             }
           }
         />

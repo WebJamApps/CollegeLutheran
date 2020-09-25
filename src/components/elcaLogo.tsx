@@ -11,7 +11,7 @@ const ELCALogo = ({ pageName }: ElcaProps): JSX.Element => (
         id="elcaLogo"
         alt="ELCA LOGO"
         src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-        style={{ width: '350px', paddingTop: '30px', margin: 'auto' }}
+        style={{ width: '310px', paddingTop: '30px', margin: 'auto' }}
       />
     </a>
   </div>

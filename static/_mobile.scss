@@ -26,7 +26,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     margin-top: 91px;
     margin-right: inherit;
     display: flex;
@@ -144,6 +145,7 @@
 }
 
 @media (min-width: 400px) and (max-width: 419px) {
+
   .flex-header {
     margin-top: -20px;
     width: 100% !important;
@@ -171,7 +173,10 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 425px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .familySlideContainer {
     margin: 0 -47px;
   }
@@ -181,6 +186,7 @@
   .header-text {
     font-size: 24px !important;
   }
+
 }
 
 @media screen and (max-width: 900px) {
@@ -189,9 +195,9 @@
     scrollbar-width: none;  /* Firefox */
   }
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  // ::-webkit-scrollbar {
+  //   display: none;
+  // }
 
   .drawer {
     background-color: rgb(192, 192, 192);
