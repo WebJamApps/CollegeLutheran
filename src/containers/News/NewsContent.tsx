@@ -29,7 +29,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
                   <thead className="TableHead-root">
                     <tr className="TableRow-root">
                       <th className="TableCell-root TableCell-head StickyHeader newsTitle">Title</th>
-                      <th className="TableCell-root TableCell-head StickyHeader">Date</th>
+                      <th className="TableCell-root TableCell-head StickyHeader" style={{ width: '103px' }}>Date</th>
                     </tr>
                   </thead>
                   <tbody className="TableBody-root">
@@ -53,15 +53,14 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
         )}
       </div>
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
-      <hr />
+      <hr style={{ margin: '0px' }} />
       <div
         className="news-div"
         style={{
-          margin: 'auto 0px auto -9px',
+          margin: '0px 0px auto -8px',
           textAlign: 'center',
           padding: '0',
-          marginLeft: '-5px',
-          // width: '108%',
+          width: '108%',
           overflow: 'hidden',
         }}
       >
