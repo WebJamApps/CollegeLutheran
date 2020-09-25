@@ -1,0 +1,113 @@
+@import 'news';
+
+/* Tables Generic */
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #d8ecf3;
+}
+
+tbody.regformtbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+th, td {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  padding: 8px;
+  text-align: left;
+}
+
+tbody.regformtbody td,
+tbody.regformtbody th {
+  border: none;
+}
+
+tbody.regformtbody th {
+  padding-bottom: 0;
+}
+
+tbody.regformtbody td {
+  padding: 10px;
+  padding-top: 4px;
+}
+
+/* Responsive/Sticky */
+
+.forumsTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.TableStyle-root {
+  width: 80%;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.TableContainer-root {
+  height: 300px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.TableHeader {
+  border-collapse: separate;
+  width: 100%;
+  display: table;
+  border-spacing: 0;
+}
+
+.TableHead-root {
+  display: table-header-group;
+}
+
+.TableRow-root {
+  color: inherit;
+  display: table-row;
+  outline: 0;
+  vertical-align: middle;
+}
+
+
+.StickyHeader {
+  min-width: 170px;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  position: sticky;
+  background-color: #fff;
+}
+
+.TableCell-head {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.TableCell-root {
+  display: table-cell;
+  padding: 8px;
+  font-size: 0.875rem;
+  text-align: left;
+  // font-family: "Roboto", "Helveitca", "Arial", sans-serif;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  letter-spacing: 0.02em;
+  vertical-align: inherit;
+}
+
+.TableBody-root {
+  display: table-row-group;
+}
+
+.TableCell-body {
+  color: rgba(0, 0, 0, 0.87);
+}
