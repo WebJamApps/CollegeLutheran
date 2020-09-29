@@ -20,18 +20,22 @@ exports[`News Renders the News component correctly 1`] = `
     >
        
     </p>
-    <hr />
+    <hr
+      style={
+        Object {
+          "margin": "0px",
+        }
+      }
+    />
     <div
       className="news-div"
       style={
         Object {
-          "margin": "auto",
-          "marginLeft": "-5px",
-          "marginRight": 0,
+          "margin": "0px 0px auto -8px",
           "overflow": "hidden",
           "padding": "0",
           "textAlign": "center",
-          "width": "100%",
+          "width": "108%",
         }
       }
     >
@@ -77,7 +81,7 @@ exports[`News Renders the News component correctly 1`] = `
           Object {
             "margin": "auto",
             "paddingTop": "30px",
-            "width": "350px",
+            "width": "310px",
           }
         }
       />

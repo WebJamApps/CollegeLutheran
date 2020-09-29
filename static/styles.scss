@@ -116,42 +116,6 @@ select {
   width: 120px;
 }
 
-/* Tables Generic */
-
-table {
-  margin: auto;
-  border-collapse: collapse;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #d8ecf3;
-}
-
-tbody.regformtbody tr:nth-child(odd) {
-  background-color: white;
-}
-
-th, td {
-  border-collapse: collapse;
-  border: 1px solid #777;
-  padding: 8px;
-  text-align: left;
-}
-
-tbody.regformtbody td,
-tbody.regformtbody th {
-  border: none;
-}
-
-tbody.regformtbody th {
-  padding-bottom: 0;
-}
-
-tbody.regformtbody td {
-  padding: 10px;
-  padding-top: 4px;
-}
-
 /* Home Header and Menu */
 
 .headercontent {
@@ -441,8 +405,8 @@ div.familyELCA, div.youthELCA, div.givingELCA, div.beliefsELCA, div.newsELCA {
 }
 
 @import 'footer';
+@import 'tables';
 @import 'home';
 @import 'materialui';
 @import 'mobile';
-@import 'news';
 @import 'slideshow';
