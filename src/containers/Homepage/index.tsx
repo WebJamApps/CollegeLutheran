@@ -15,6 +15,7 @@ type HomepageProps = {
   familyPics?: Ibook[];
   youthPics?: Ibook[];
   otherPics?: Ibook[];
+  musicPics?: Ibook[];
 };
 
 interface HomepageState {
