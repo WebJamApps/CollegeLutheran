@@ -12,10 +12,13 @@ const setTitleAndScroll = (pageTitle: string, width?: number): void => {
 
 async function randomizePics(view: Homepage, delay: () => void): Promise<void> {
   await delay();
-  const { familyPics, youthPics, otherPics } = view.props;
+  const {
+    familyPics, youthPics, otherPics, musicPics,
+  } = view.props;
   let arr: Ibook[] | never[] = familyPics || [];
   const arr2: Ibook[] = youthPics || [];
-  arr = arr.concat(otherPics || []).concat(arr2);
+  const arr3: Ibook[] = musicPics || [];
+  arr = arr.concat(otherPics || []).concat(arr2).concat(arr3);
 
   for (let i = arr.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
