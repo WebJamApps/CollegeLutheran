@@ -11,26 +11,33 @@ const GivingContent = (): JSX.Element => (
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
         <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Giving</h3>
         <p>
-          College Lutheran Church now accepts online gifts through GivePlus and Vanco Payment Services.
-          Giving electronically from your bank account or credit card is easy.
+          Thank you for supporting the ministries of College Lutheran Church through your online giving.
+          We now use
           {' '}
-          Just complete the form below to support the ministries of CLC with your offering!
+          <i>BreezeChMS</i>
+          {' '}
+          to process online gifts. Giving electronically from your bank account or credit card is easy!
+          Just complete the form below to support the ministries of CLC with your offering.
         </p>
-        <p>
-          <strong>
-            This Vanco web form is currently not working from Chrome.
-            They will be fixing it soon, so until then please use Firefox.
-          </strong>
-        </p>
+        <i>
+          Due to technical difficulties, we are transitioning away from our previous online giving processor.
+          If you require access to Vanco, click
+          {' '}
+          <a href="https://gp.vancopayments.com/gpo/#/donateNow/195e5d99-170c-4f3a-b5eb-e61ff13" target="_blank" rel="noreferrer">here</a>
+          . For further assistance, email us at
+          {' '}
+          <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
+        </i>
       </div>
       <p>&nbsp;</p>
+      {/* <div id="breeze_giving_embed" data-subdomain="collegelutheranchurch" /> */}
       <div style={{
-        margin: 'auto', textAlign: 'center', padding: '0', marginLeft: '-15px',
+        margin: 'auto', textAlign: 'center', padding: '0', width: '100%', marginLeft:'-15px',
       }}
       >
         <iframe
           className="giving-iframe"
-          src="https://gp.vancopayments.com/gpo/#/195e5d99-170c-4f3a-b5eb-e61ff13"
+          src="https://collegelutheranchurch.breezechms.com/give/online"
           title="Just Giving"
         >
           <p>Your browser does not support iframe.</p>
