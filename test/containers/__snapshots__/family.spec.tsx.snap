@@ -151,6 +151,7 @@ exports[`Family renders correctly without images 1`] = `
           style={
             Object {
               "margin": "auto",
+              "marginLeft": "-12px",
               "paddingTop": "30px",
               "width": "310px",
             }
