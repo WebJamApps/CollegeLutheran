@@ -32,7 +32,7 @@ const GivingContent = (): JSX.Element => (
       <p>&nbsp;</p>
       {/* <div id="breeze_giving_embed" data-subdomain="collegelutheranchurch" /> */}
       <div style={{
-        margin: 'auto', textAlign: 'center', padding: '0', width: '100%', marginLeft:'-15px',
+        margin: 'auto', textAlign: 'center', padding: '0', width: '100%', marginLeft: '-15px',
       }}
       >
         <iframe
