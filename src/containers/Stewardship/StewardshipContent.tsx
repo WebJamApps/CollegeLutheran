@@ -4,7 +4,14 @@ import ELCALogo from '../../components/elcaLogo';
 
 const makeThermo = (classString:string, style:any) => (
   <div className={classString} style={style}>
-    <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=300000&VT=1&T=Pledges as of Nov 4&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="Pledges+as+of+Nov+4" title="Pledges+as+of+Nov+4" width="240" height="425" />
+    <img
+      src="https://dl.dropboxusercontent.com/s/owq01nt0eul3dph/thermo.png?dl=0"
+      style={{ border: 'solid 1px black' }}
+      alt="Pledges+as+of+Nov+4"
+      title="Pledges+as+of+Nov+4"
+      width="240"
+      height="425"
+    />
   </div>
 );
 const pageName = 'giving';
