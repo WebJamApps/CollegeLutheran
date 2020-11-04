@@ -4,7 +4,6 @@ import ELCALogo from '../../components/elcaLogo';
 const pageName = 'giving';
 
 const GivingContent = (): JSX.Element => (
-
   <div className="page-content">
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
