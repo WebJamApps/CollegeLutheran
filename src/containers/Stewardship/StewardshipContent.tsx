@@ -2,6 +2,11 @@
 import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 
+const makeThermo = (classString:string, style:any) => (
+  <div className={classString} style={style}>
+    <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=300000&VT=1&T=Pledges as of Nov 4&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="Pledges+as+of+Nov+4" title="Pledges+as+of+Nov+4" width="240" height="425" />
+  </div>
+);
 const pageName = 'giving';
 const StewardshipContent = (): JSX.Element => (
   <div className="page-content">
@@ -9,9 +14,7 @@ const StewardshipContent = (): JSX.Element => (
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
         <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Stewardship</h3>
-        <div className="wide-thermo" style={{ float: 'right', marginRight: '-10px', marginLeft: '10px' }}>
-          <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=300000&VT=1&T=Pledges as of Nov 4&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="Pledges+as+of+Nov+4" title="Pledges+as+of+Nov+4" width="240" height="425" />
-        </div>
+        {makeThermo('wide-thermo', { float: 'right', marginRight: '-10px', marginLeft: '10px' })}
         <p>
           I hope you enjoy the approach we&apos;re taking with our stewardship campaign this year. How we give thanks for what God has given us, and how we share the gifts we&apos;ve been given, are yet another thing that&apos;s been complicated by this pandemic. I&apos;ve noticed ways that I&apos;ve had to step back from service I used to offer to God and my neighbor. And yet, there are other ways I&apos;ve been called to step up and serve that I never imagined before!
           That&apos;s why we&apos;ll be considering the theme of &quot;stepping back and stepping up,&quot; remembering all the while that
@@ -48,9 +51,7 @@ const StewardshipContent = (): JSX.Element => (
           <br />
           Stewardship Chair
         </p>
-        <div className="cell-thermo" style={{ margin: 'auto', textAlign: 'center' }}>
-          <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=300000&VT=1&T=Pledges as of Nov 4&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="Pledges+as+of+Nov+4" title="Pledges+as+of+Nov+4" width="240" height="425" />
-        </div>
+        {makeThermo('cell-thermo', { margin: 'auto', textAlign: 'center' })}
       </div>
       <p>&nbsp;</p>
       <ELCALogo pageName={pageName} />
