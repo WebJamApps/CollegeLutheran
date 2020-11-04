@@ -64,6 +64,13 @@ const menuItems = [{
   name: 'News',
 },
 {
+  classname: '',
+  type: 'link',
+  iconClass: 'fas fa-step-forward',
+  link: '/stewardship',
+  name: 'Stewardship',
+},
+{
   classname: 'home',
   type: 'link',
   iconClass: 'fas fa-heart',

@@ -50,6 +50,24 @@
   }
 }
 
+@media screen and (max-width: 699px) {
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .wide-thermo {
+    display:block;
+  }
+  .cell-thermo {
+    display:none
+  }
+}
+
 // NavList Fixes && News Anouncement Fixes
 
 @media screen and (max-width: 350px) {
