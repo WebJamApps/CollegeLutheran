@@ -17,6 +17,7 @@ import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
+import Stewardship from '../containers/Stewardship';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
 import { AppProps } from './AppTypes';
@@ -72,6 +73,7 @@ export class App extends Component<AppProps> {
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />
               <Route path="/calendar" component={Calendar} />
+              <Route path="/stewardship" component={Stewardship} />
               <Route component={AppFourOhFour} />
             </Switch>
           </AppTemplateDefault>

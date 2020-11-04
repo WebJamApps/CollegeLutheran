@@ -5,6 +5,13 @@
     right: 0;
     z-index: 100;
   }
+  .wide-thermo {
+    display:block;
+  }
+
+  .cell-thermo {
+    display:none;
+  }
 
   .main-panel {
     position: relative;
@@ -67,6 +74,12 @@
     align-self: normal;
     overflow-wrap: break-word;
   }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 
 // Galaxy S9/S9+
@@ -80,6 +93,12 @@
     align-self: normal;
     overflow-wrap: break-word;
   }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 // iPhone 6/7/8 iOS 11 && iPhone X/XS iOS 12
 @media screen and (min-width: 375px) and (max-width: 376px) {
@@ -91,6 +110,12 @@
     width: auto;
     align-self: normal;
     overflow-wrap: break-word;
+  }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
   }
 }
 // iPhone 6/7/8 Plus iOS 11
@@ -104,6 +129,12 @@
     align-self: normal;
     overflow-wrap: break-word;
   }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 
 // iPad
@@ -111,6 +142,12 @@
   .nav-list {
     overflow-y: auto;
     height: 100% !important;
+  }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
   }
 }
 // Kindle Fire HDX && Nexus 10
@@ -127,11 +164,17 @@
   div.familySlideContainer {
     margin: 0 !important;
   }
+  .cell-thermo {
+    display:block;
+  }
 }
 
 @media (min-width: 345px) and (max-width: 365px) {
   div.familySlideContainer {
     margin: 0 -20px;
+  }
+  .cell-thermo {
+    display:block;
   }
 }
 
@@ -141,6 +184,9 @@
   }
   div.familySlideContainer {
     margin: 0 -27px;
+  }
+  .cell-thermo {
+    display:block;
   }
 }
 
@@ -171,6 +217,13 @@
   .familySlideContainer {
     margin: 0 -27px;
   }
+
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 
 @media (max-width: 425px) {
@@ -180,13 +233,24 @@
   .familySlideContainer {
     margin: 0 -47px;
   }
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 
 @media screen and (max-width: 500px) {
   .header-text {
     font-size: 24px !important;
   }
-
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -369,4 +433,13 @@
   /* background: #f3f3f3; */
   z-index: 9999;
   /* touch-action: auto; */
+}
+
+@media (min-width: 300px) and (max-width: 700px) {
+  .wide-thermo {
+    display:none;
+  }
+  .cell-thermo {
+    display:block
+  }
 }
