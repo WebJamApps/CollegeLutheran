@@ -2,6 +2,7 @@ import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import fetch from '../../lib/fetch';
+import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
@@ -24,6 +25,8 @@ class AdminController {
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
+    this.addAdminUser = this.addAdminUser.bind(this);
+    this.validateAdmin
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -242,6 +245,43 @@ class AdminController {
         onEditorChange={this.handleEditorChange}
       />
     );
+  }
+
+  async addAdminUser(): Promise<boolean> {
+    const { adminEmail } = this.view.state;
+    const userRoles: string[] = commonUtils.getUserRoles();
+    const { auth } = this.view.props;
+    // validate it's a gmail address
+    const valid = adminEmail.includes('@gmail.com');
+    if (!valid) {
+      console.log('wrong');
+      // Include message stating to only include gmail emails && disable button until changed.
+      return false;
+    }
+    // determine if user exists or is already in the database
+    let r;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/user`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({
+          email: adminEmail,
+        });
+    } catch (e) { console.log(e); return false; }
+    if (r.status === 400) {
+      // Create user. Include userType for admin for clc (clc-admin)
+      return true;
+    }
+    console.log(r.body);
+    if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
+      // set variables to process.env types
+      // if user exists, and isn't an admin, update by user email. Set userType = clc-admin
+      return true;
+    }
+    // If user exists and is already a clc-admin, return error.
+    // Set message && disable button until non-admin is entered
+    console.log('Already an admin');
+    return false;
   }
 }
 export default AdminController;

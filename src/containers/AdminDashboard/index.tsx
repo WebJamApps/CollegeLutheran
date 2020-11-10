@@ -33,6 +33,7 @@ type DashboardState = {
   forumId: string;
   showCaption: string;
   firstEdit: boolean;
+  adminEmail: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -56,6 +57,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       forumId: '',
       showCaption: '',
       firstEdit: true,
+      adminEmail: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -283,6 +285,13 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
             musicPics={musicPics}
           />
         ) : null}
+        <div>
+          <h4>Modify Admin Users</h4>
+          <form>
+            <input type="email" onChange={(evt) => { this.onChange(evt, 'adminEmail'); }} />
+            <input type="submit" onClick={this.controller.addAdminUser} />
+          </form>
+        </div>
       </div>
     );
   }
