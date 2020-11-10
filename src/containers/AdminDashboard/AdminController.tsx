@@ -26,7 +26,6 @@ class AdminController {
     this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
-    this.validateAdmin
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -247,7 +246,9 @@ class AdminController {
     );
   }
 
-  async addAdminUser(): Promise<boolean> {
+  async addAdminUser(evt: { preventDefault: () => void; }): Promise<boolean | void> {
+    // Remove and move to API that controls validation
+    evt.preventDefault();
     const { adminEmail } = this.view.state;
     const userRoles: string[] = commonUtils.getUserRoles();
     const { auth } = this.view.props;

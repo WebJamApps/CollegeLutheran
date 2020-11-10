@@ -285,10 +285,27 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
             musicPics={musicPics}
           />
         ) : null}
-        <div>
-          <h4>Modify Admin Users</h4>
-          <form>
-            <input type="email" onChange={(evt) => { this.onChange(evt, 'adminEmail'); }} />
+        <div
+          className="material-content elevation3"
+          style={{ maxWidth: '320px', margin: '30px auto' }}
+        >
+          <h4 className="material-header-h4">
+            Add Admin User
+          </h4>
+          <form
+            id="modify-admins"
+            style={{
+              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+            }}
+          >
+            <label htmlFor="addAdminEmail">
+              Admin Email
+              <input id="addAdminEmail" type="email" onChange={(evt) => { this.onChange(evt, 'adminEmail'); }} />
+            </label>
+            {// Need to submit to API to check for validation
+            // If valid, send to API to add adminUser/change things.
+            // User to control button disabled/enabled, error messaging, etc.
+            }
             <input type="submit" onClick={this.controller.addAdminUser} />
           </form>
         </div>
