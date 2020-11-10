@@ -4,6 +4,23 @@ import ELCALogo from '../../components/elcaLogo';
 
 const makeThermo = (classString:string, style:any) => (
   <div className={classString} style={style}>
+    <p style={{ paddingRight: '6px', textAlign: 'center', marginBottom: '0px' }}>
+      <strong>
+        <i>
+          Click
+          {' '}
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSffntpB3lGbSpqzerLvtnaL1zDZVxOH92HbOAL2CPrFCs8eUQ/viewform"
+            rel="noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
+          {' '}
+          to make your pledge
+        </i>
+      </strong>
+    </p>
     <img
       src="https://dl.dropboxusercontent.com/s/owq01nt0eul3dph/thermo.png?dl=0"
       style={{ border: 'solid 1px black' }}
