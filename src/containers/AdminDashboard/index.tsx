@@ -34,6 +34,7 @@ type DashboardState = {
   showCaption: string;
   firstEdit: boolean;
   adminEmail: string;
+  formError: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -58,6 +59,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       showCaption: '',
       firstEdit: true,
       adminEmail: '',
+      formError: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -267,6 +269,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const {
       showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
+    const { formError } = this.state;
+    let disabled;
+    if (formError !== '') {
+      disabled = true;
+    }
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -306,7 +313,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
             // If valid, send to API to add adminUser/change things.
             // User to control button disabled/enabled, error messaging, etc.
             }
-            <input type="submit" onClick={this.controller.addAdminUser} />
+            <input type="submit" disabled={disabled} onClick={this.controller.addAdminUser} />
+            <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
           </form>
         </div>
       </div>

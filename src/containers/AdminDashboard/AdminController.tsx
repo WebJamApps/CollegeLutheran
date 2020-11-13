@@ -254,13 +254,14 @@ class AdminController {
     const { auth } = this.view.props;
     // validate it's a gmail address
     const valid = adminEmail.includes('@gmail.com');
+    let r;
     if (!valid) {
       console.log('wrong');
+      this.view.setState({ formError: 'Only use gmail accounts' });
       // Include message stating to only include gmail emails && disable button until changed.
       return false;
     }
     // determine if user exists or is already in the database
-    let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
         .set('Authorization', `Bearer ${auth.token}`)
@@ -271,6 +272,7 @@ class AdminController {
     } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
       // Create user. Include userType for admin for clc (clc-admin)
+      this.view.setState({ formError: '' });
       return true;
     }
     console.log(r.body);
@@ -281,6 +283,7 @@ class AdminController {
     }
     // If user exists and is already a clc-admin, return error.
     // Set message && disable button until non-admin is entered
+    this.view.setState({ formError: 'User already an admin' });
     console.log('Already an admin');
     return false;
   }
