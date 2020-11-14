@@ -284,7 +284,6 @@ class AdminController {
     // If user exists and is already a clc-admin, return error.
     // Set message && disable button until non-admin is entered
     this.view.setState({ formError: 'User already an admin' });
-    console.log('Already an admin');
     return false;
   }
 }

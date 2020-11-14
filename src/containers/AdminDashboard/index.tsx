@@ -294,7 +294,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         ) : null}
         <div
           className="material-content elevation3"
-          style={{ maxWidth: '320px', margin: '30px auto' }}
+          style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
         >
           <h4 className="material-header-h4">
             Add Admin User
