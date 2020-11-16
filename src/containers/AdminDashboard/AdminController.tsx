@@ -246,21 +246,26 @@ class AdminController {
     );
   }
 
+  validateAdmin(): boolean { // eslint-disable-line class-methods-use-this
+    let disabled = true;
+    const { adminEmail, formError } = this.view.state;
+    if (adminEmail !== '' && formError === '') disabled = false;
+    return disabled;
+  }
+
   async addAdminUser(evt: { preventDefault: () => void; }): Promise<boolean | void> {
     // Remove and move to API that controls validation
     evt.preventDefault();
     const { adminEmail } = this.view.state;
     const userRoles: string[] = commonUtils.getUserRoles();
     const { auth } = this.view.props;
-    // validate it's a gmail address
+
+    // Alternatively can set checks to disable button permanently unless gmail account is added.
     const valid = adminEmail.includes('@gmail.com');
-    let r;
     if (!valid) {
-      console.log('wrong');
       this.view.setState({ formError: 'Only use gmail accounts' });
-      // Include message stating to only include gmail emails && disable button until changed.
-      return false;
     }
+    let r;
     // determine if user exists or is already in the database
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
@@ -277,7 +282,6 @@ class AdminController {
     }
     console.log(r.body);
     if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
-      // set variables to process.env types
       // if user exists, and isn't an admin, update by user email. Set userType = clc-admin
       return true;
     }

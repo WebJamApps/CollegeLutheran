@@ -270,10 +270,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
     const { formError } = this.state;
-    let disabled;
-    if (formError !== '') {
-      disabled = true;
-    }
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -307,13 +303,17 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
           >
             <label htmlFor="addAdminEmail">
               Admin Email
-              <input id="addAdminEmail" type="email" onChange={(evt) => { this.onChange(evt, 'adminEmail'); }} />
+              <input
+                id="addAdminEmail"
+                type="email"
+                placeholder="placeholder@gmail.com"
+                onChange={(evt) => {
+                  this.onChange(evt, 'adminEmail');
+                  this.controller.validateAdmin();
+                }}
+              />
             </label>
-            {// Need to submit to API to check for validation
-            // If valid, send to API to add adminUser/change things.
-            // User to control button disabled/enabled, error messaging, etc.
-            }
-            <input type="submit" disabled={disabled} onClick={this.controller.addAdminUser} />
+            <input type="submit" disabled={this.controller.validateAdmin()} onClick={this.controller.addAdminUser} />
             <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
           </form>
         </div>
