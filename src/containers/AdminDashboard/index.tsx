@@ -33,7 +33,7 @@ type DashboardState = {
   forumId: string;
   showCaption: string;
   firstEdit: boolean;
-  adminEmail: string;
+  addAdminEmail: string;
   formError: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
@@ -58,7 +58,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       forumId: '',
       showCaption: '',
       firstEdit: true,
-      adminEmail: '',
+      addAdminEmail: '',
       formError: '',
     };
     this.forms = forms;
@@ -71,6 +71,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.picButton = this.picButton.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.resetEditForm = this.resetEditForm.bind(this);
+    this.onChangeAdminEmail = this.onChangeAdminEmail.bind(this);
   }
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
@@ -83,6 +84,13 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       return stateValue;
     }
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    return evt.target.id;
+  }
+
+  onChangeAdminEmail(evt: React.ChangeEvent<HTMLInputElement>): string {
+    evt.persist();
+    console.log(evt.target.value);
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, formError: '' }));
     return evt.target.id;
   }
 
@@ -307,10 +315,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
                 id="addAdminEmail"
                 type="email"
                 placeholder="placeholder@gmail.com"
-                onChange={(evt) => {
-                  this.onChange(evt, 'adminEmail');
-                  this.controller.validateAdmin();
-                }}
+                onChange={this.onChangeAdminEmail}
               />
             </label>
             <input type="submit" disabled={this.controller.validateAdmin()} onClick={this.controller.addAdminUser} />

@@ -247,24 +247,28 @@ class AdminController {
   }
 
   validateAdmin(): boolean { // eslint-disable-line class-methods-use-this
-    let disabled = true;
-    const { adminEmail, formError } = this.view.state;
-    if (adminEmail !== '' && formError === '') disabled = false;
+    let disabled = true,
+      validEmail = false;
+    const { addAdminEmail, formError } = this.view.state;
+    // eslint-disable-next-line no-useless-escape
+    const regEx = RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+    if (regEx.test(addAdminEmail) && addAdminEmail.includes('.') && addAdminEmail.includes('@gmail.com')) {
+      validEmail = true;
+    }
+    if (addAdminEmail !== '' && validEmail && !formError.includes('gmail')) disabled = false;
+    console.log(addAdminEmail);
+    console.log(this.view.state);
     return disabled;
   }
 
   async addAdminUser(evt: { preventDefault: () => void; }): Promise<boolean | void> {
     // Remove and move to API that controls validation
     evt.preventDefault();
-    const { adminEmail } = this.view.state;
+    const { addAdminEmail } = this.view.state;
     const userRoles: string[] = commonUtils.getUserRoles();
     const { auth } = this.view.props;
 
     // Alternatively can set checks to disable button permanently unless gmail account is added.
-    const valid = adminEmail.includes('@gmail.com');
-    if (!valid) {
-      this.view.setState({ formError: 'Only use gmail accounts' });
-    }
     let r;
     // determine if user exists or is already in the database
     try {
@@ -272,7 +276,7 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          email: adminEmail,
+          email: addAdminEmail,
         });
     } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
@@ -287,7 +291,7 @@ class AdminController {
     }
     // If user exists and is already a clc-admin, return error.
     // Set message && disable button until non-admin is entered
-    this.view.setState({ formError: 'User already an admin' });
+    this.view.setState({ formError: 'User already an admin', addAdminEmail: '' });
     return false;
   }
 }
