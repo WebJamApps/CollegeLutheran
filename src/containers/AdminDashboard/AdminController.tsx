@@ -256,8 +256,6 @@ class AdminController {
       validEmail = true;
     }
     if (addAdminEmail !== '' && validEmail && !formError.includes('gmail')) disabled = false;
-    console.log(addAdminEmail);
-    console.log(this.view.state);
     return disabled;
   }
 
@@ -284,7 +282,8 @@ class AdminController {
       this.view.setState({ formError: '' });
       return true;
     }
-    console.log(r.body);
+    console.log(r.body._id);
+    console.log(r.body.userType);
     if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
       // if user exists, and isn't an admin, update by user email. Set userType = clc-admin
       return true;
