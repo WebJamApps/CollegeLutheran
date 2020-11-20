@@ -155,9 +155,12 @@ describe('AdminController', () => {
     expect(r).toBe(true);
   });
   it('Returns non-admin user', async () => {
-    const returnBody: Record<string, unknown> = { body: { id: '1', user: { userType: 'Developer' } } };
+    let authRole = '';
+    // eslint-disable-next-line prefer-destructuring
+    if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[1];
+    const returnBody: Record<string, unknown> = { body: { id: '1', user: { userType: authRole } } };
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
     const res = await controller.addAdminUser({ preventDefault: () => { } });
-    expect(res).toBe(false);
+    expect(res).toBe(true);
   });
 });
