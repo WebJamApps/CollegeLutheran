@@ -89,7 +89,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   onChangeAdminEmail(evt: React.ChangeEvent<HTMLInputElement>): string {
     evt.persist();
-    console.log(evt.target.value);
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, formError: '' }));
     return evt.target.id;
   }
@@ -277,7 +276,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const {
       showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
-    const { formError } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -296,32 +294,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
             musicPics={musicPics}
           />
         ) : null}
-        <div
-          className="material-content elevation3"
-          style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
-        >
-          <h4 className="material-header-h4">
-            Add Admin User
-          </h4>
-          <form
-            id="modify-admins"
-            style={{
-              textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-            }}
-          >
-            <label htmlFor="addAdminEmail">
-              Admin Email
-              <input
-                id="addAdminEmail"
-                type="email"
-                placeholder="placeholder@gmail.com"
-                onChange={this.onChangeAdminEmail}
-              />
-            </label>
-            <input type="submit" disabled={this.controller.validateAdmin()} onClick={this.controller.addAdminUser} />
-            <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
-          </form>
-        </div>
+        {this.controller.adminUserForm()}
       </div>
     );
   }

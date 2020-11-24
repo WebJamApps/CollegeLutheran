@@ -246,6 +246,38 @@ class AdminController {
     );
   }
 
+  adminUserForm(): JSX.Element {
+    const { formError } = this.view.state;
+    return (
+      <div
+        className="material-content elevation3"
+        style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
+      >
+        <h4 className="material-header-h4">
+          Add Admin User
+        </h4>
+        <form
+          id="modify-admins"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <label htmlFor="addAdminEmail">
+            Admin Email
+            <input
+              id="addAdminEmail"
+              type="email"
+              placeholder="placeholder@gmail.com"
+              onChange={this.view.onChangeAdminEmail}
+            />
+          </label>
+          <input type="submit" disabled={this.validateAdmin()} onClick={this.addAdminUser} />
+          <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
+        </form>
+      </div>
+    );
+  }
+
   validateAdmin(): boolean { // eslint-disable-line class-methods-use-this
     let disabled = true,
       validEmail = false;
@@ -276,14 +308,13 @@ class AdminController {
         .send({
           email: addAdminEmail,
         });
+    // eslint-disable-next-line no-console
     } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
       // Create user. Include userType for admin for clc (clc-admin)
       this.view.setState({ formError: '' });
       return true;
     }
-    console.log(r.body._id);
-    console.log(r.body.userType);
     if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
       // if user exists, and isn't an admin, update by user email. Set userType = clc-admin
       return true;
