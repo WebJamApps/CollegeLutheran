@@ -292,15 +292,12 @@ class AdminController {
   }
 
   async addAdminUser(evt: { preventDefault: () => void; }): Promise<boolean | void> {
-    // Remove and move to API that controls validation
     evt.preventDefault();
     const { addAdminEmail } = this.view.state;
     const userRoles: string[] = commonUtils.getUserRoles();
     const { auth } = this.view.props;
 
-    // Alternatively can set checks to disable button permanently unless gmail account is added.
     let r;
-    // determine if user exists or is already in the database
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
         .set('Authorization', `Bearer ${auth.token}`)
@@ -311,16 +308,12 @@ class AdminController {
     // eslint-disable-next-line no-console
     } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
-      // Create user. Include userType for admin for clc (clc-admin)
       this.view.setState({ formError: '' });
       return true;
     }
     if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
-      // if user exists, and isn't an admin, update by user email. Set userType = clc-admin
       return true;
     }
-    // If user exists and is already a clc-admin, return error.
-    // Set message && disable button until non-admin is entered
     this.view.setState({ formError: 'User already an admin', addAdminEmail: '' });
     return false;
   }
