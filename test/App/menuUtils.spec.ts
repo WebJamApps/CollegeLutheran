@@ -3,13 +3,16 @@ import menuUtils from '../../src/App/menuUtils';
 import { Auth } from '../../src/redux/mapStoreToProps';
 
 describe('menuUtils', () => {
-  let r: JSX.Element | null;
+  let r: JSX.Element | null,
+    authRole = '';
+  // eslint-disable-next-line prefer-destructuring
+  if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[1];
   const viewStub: any = {
     googleButtons: () => true,
     makeMenuLink: () => true,
     props: {
       location: { pathname: '/' },
-      auth: { token: 'token', isAuthenticated: true, user: { userType: 'Developer' } },
+      auth: { token: 'token', isAuthenticated: true, user: { userType: authRole } },
       dispatch: () => Promise.resolve(true),
     },
   };
@@ -23,7 +26,7 @@ describe('menuUtils', () => {
   it('handles menuItem for GoogleLogin', () => {
     viewStub.props.location.pathname = '/staff';
     const auth: Auth = {
-      isAuthenticated: false, email: '', token: '', user: { userType: 'Developer' }, error: '',
+      isAuthenticated: false, email: '', token: '', user: { userType: authRole }, error: '',
     };
     r = menuUtils.continueMenuItem({
       link: '', type: 'googleLogin', auth: true, classname: '', iconClass: '', name: '',

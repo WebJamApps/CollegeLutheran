@@ -2,6 +2,7 @@ import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import fetch from '../../lib/fetch';
+import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
 
 class AdminController {
@@ -24,6 +25,7 @@ class AdminController {
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
+    this.addAdminUser = this.addAdminUser.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -242,6 +244,78 @@ class AdminController {
         onEditorChange={this.handleEditorChange}
       />
     );
+  }
+
+  adminUserForm(): JSX.Element {
+    const { formError } = this.view.state;
+    return (
+      <div
+        className="material-content elevation3"
+        style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
+      >
+        <h4 className="material-header-h4">
+          Add Admin User
+        </h4>
+        <form
+          id="modify-admins"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <label htmlFor="addAdminEmail">
+            Admin Email
+            <input
+              id="addAdminEmail"
+              type="email"
+              placeholder="placeholder@gmail.com"
+              onChange={this.view.onChangeAdminEmail}
+            />
+          </label>
+          <input type="submit" disabled={this.validateAdmin()} onClick={this.addAdminUser} />
+          <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
+        </form>
+      </div>
+    );
+  }
+
+  validateAdmin(): boolean { // eslint-disable-line class-methods-use-this
+    let disabled = true,
+      validEmail = false;
+    const { addAdminEmail, formError } = this.view.state;
+    // eslint-disable-next-line no-useless-escape
+    const regEx = RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+    if (regEx.test(addAdminEmail) && addAdminEmail.includes('.') && addAdminEmail.includes('@gmail.com')) {
+      validEmail = true;
+    }
+    if (addAdminEmail !== '' && validEmail && !formError.includes('gmail')) disabled = false;
+    return disabled;
+  }
+
+  async addAdminUser(evt: { preventDefault: () => void; }): Promise<boolean | void> {
+    evt.preventDefault();
+    const { addAdminEmail } = this.view.state;
+    const userRoles: string[] = commonUtils.getUserRoles();
+    const { auth } = this.view.props;
+
+    let r;
+    try {
+      r = await this.superagent.post(`${process.env.BackendUrl}/user`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({
+          email: addAdminEmail,
+        });
+    // eslint-disable-next-line no-console
+    } catch (e) { console.log(e); return false; }
+    if (r.status === 400) {
+      this.view.setState({ formError: '' });
+      return true;
+    }
+    if (r.body._id && userRoles.indexOf(r.body.userType) === -1) {
+      return true;
+    }
+    this.view.setState({ formError: 'User already an admin', addAdminEmail: '' });
+    return false;
   }
 }
 export default AdminController;
