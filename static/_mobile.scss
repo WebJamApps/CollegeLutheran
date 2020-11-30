@@ -86,6 +86,17 @@
   .giving-iframe {
     width: auto !important;
   }
+  // Fixes news table
+    // Aligns table properly, fixing words running into themselves
+  .TableStyle-root {
+    width: auto;
+    align-self: normal;
+    overflow-wrap: break-word;
+  }
+    // Makes table not stretch, aligning with the screen width
+  .newsTable {
+    width: 280px !important;
+  }
 }
 
 @media screen and (max-width: 350px) {
