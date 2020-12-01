@@ -97,6 +97,24 @@
   .newsTable {
     width: 280px !important;
   }
+  #elcaLogo {
+    width: 275px !important;
+  }
+  #wjfooter {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .footer-links {
+    padding: 7px 0 7px 0 !important;
+  }
+  // Pulls text a bit closer to social media icons
+  .nohover {
+    margin-left: 15px !important;
+  }
+  .staff-list li {
+    margin-left: -25px !important;
+    overflow-wrap: break-word;
+  }
 }
 
 @media screen and (max-width: 350px) {

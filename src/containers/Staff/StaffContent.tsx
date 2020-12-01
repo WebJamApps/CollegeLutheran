@@ -30,7 +30,7 @@ const StaffContent = (): JSX.Element => (
             At CLC, our staff is dedicated to serving the spiritual needs of our congregation and
             the greater Body of Christ in Salem, VA and the surrounding communities.
           </p>
-          <ul>
+          <ul className="staff-list">
             <li style={{ paddingTop: '5px', marginLeft: '-15px' }}>
               Reverend
               {' '}
