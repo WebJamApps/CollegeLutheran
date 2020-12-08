@@ -70,6 +70,13 @@ const menuItems = [{
   link: '/stewardship',
   name: 'Stewardship',
 },
+// {
+//   classname: '',
+//   type: 'link',
+//   iconClass: 'fas fa-video',
+//   link: '/livestream',
+//   name: 'Livestream',
+// },
 {
   classname: 'home',
   type: 'link',
