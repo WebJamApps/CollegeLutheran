@@ -5,14 +5,19 @@ describe('AdminController', () => {
   let r: any, controller: any,
     vStub: { setState: jest.Mock<any, any>;
       forms: { makeDropdown: () => any; };
-      state: { title: string; homePageContent: string; youthURL: string; type: string; };
+      state: { title: string; homePageContent: string; youthURL: string; type: string; addAdminEmail: string, formError: string };
       props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
   beforeEach(() => {
     vStub = {
       setState: jest.fn(),
       forms: { makeDropdown: () => null },
       state: {
-        title: 'Exciting News!', homePageContent: 'Lots of stuff here!', youthURL: 'url', type: 'youthPics',
+        title: 'Exciting News!',
+        homePageContent: 'Lots of stuff here!',
+        youthURL: 'url',
+        type: 'youthPics',
+        addAdminEmail: 'test@gmail.com',
+        formError: '',
       },
       props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
     };
@@ -137,5 +142,31 @@ describe('AdminController', () => {
   it('validates book when not firstEdit', () => {
     const dis = controller.validateBook(' ', ' ', ' ', false);
     expect(dis).toBe(false);
+  });
+  it('catches error when sends an add admin request to the backend', async () => {
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    const res = await controller.addAdminUser({ preventDefault: () => { } });
+    expect(res).toBe(false);
+  });
+  it('Sends 400 res when user doesnt exist', async () => {
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 400 }) }) }) }));
+    r = await controller.addAdminUser({ preventDefault: () => { } });
+    expect(r).toBe(true);
+  });
+  it('Returns non-admin user', async () => {
+    const returnBody: Record<string, unknown> = { body: { _id: '1', userType: 'Test' } };
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const res = await controller.addAdminUser({ preventDefault: () => { } });
+    expect(res).toBe(true);
+  });
+  it('Returns admin user', async () => {
+    let authRole = '';
+    // eslint-disable-next-line prefer-destructuring
+    if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[0];
+    const returnBody: Record<string, unknown> = { body: { _id: '1', userType: authRole } };
+    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const res = await controller.addAdminUser({ preventDefault: () => { } });
+    expect(res).toBe(false);
   });
 });

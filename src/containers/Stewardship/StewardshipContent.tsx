@@ -2,7 +2,7 @@
 import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 
-const makeThermo = (classString:string, style:any) => (
+const makeThermo = (classString:string, style: React.CSSProperties | undefined) => (
   <div className={classString} style={style}>
     <p style={{
       paddingRight: '6px', textAlign: 'center', marginBottom: '5px', fontSize: '14pt', marginLeft: '12px',

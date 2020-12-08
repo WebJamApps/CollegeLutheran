@@ -33,6 +33,8 @@ type DashboardState = {
   forumId: string;
   showCaption: string;
   firstEdit: boolean;
+  addAdminEmail: string;
+  formError: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -56,6 +58,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       forumId: '',
       showCaption: '',
       firstEdit: true,
+      addAdminEmail: '',
+      formError: '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -67,6 +71,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.picButton = this.picButton.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.resetEditForm = this.resetEditForm.bind(this);
+    this.onChangeAdminEmail = this.onChangeAdminEmail.bind(this);
   }
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
@@ -79,6 +84,12 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       return stateValue;
     }
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    return evt.target.id;
+  }
+
+  onChangeAdminEmail(evt: React.ChangeEvent<HTMLInputElement>): string {
+    evt.persist();
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, formError: '' }));
     return evt.target.id;
   }
 
@@ -283,6 +294,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
             musicPics={musicPics}
           />
         ) : null}
+        {this.controller.adminUserForm()}
       </div>
     );
   }

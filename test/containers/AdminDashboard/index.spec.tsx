@@ -178,4 +178,8 @@ describe('Dashboard Container', () => {
     />);
     expect(wrapper2.find(PhotoTable).exists()).toBe(false);
   });
+  it('uses the event target id on onChangeAdminEmail', () => {
+    const result = wrapper.instance().onChangeAdminEmail({ persist: jest.fn(), target: { id: 'addAdminEmail', value: 'test@gmail.com' } });
+    expect(result).toBe('addAdminEmail');
+  });
 });
