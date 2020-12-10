@@ -9,9 +9,9 @@ const makeStaff = () => {
   for (let i = 0; i < staffItems.staff.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
     moreStaff += `<hr /><section id="${staffItems.staff[i].sectionId}"><h4>${staffItems.staff[i].title}</h4>`;
     // eslint-disable-next-line security/detect-object-injection
-    moreStaff += `<img style="width:288px" alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
+    moreStaff += `<img class="staffPicture" alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
     // eslint-disable-next-line security/detect-object-injection
-    moreStaff += `<div style="text-align:left;max-width:8in;margin:auto">${staffItems.staff[i].desc}</div></section>`;
+    moreStaff += `<div class="staffDescription">${staffItems.staff[i].desc}</div></section>`;
   }
   return ReactHtmlParser(moreStaff);
 };
@@ -20,9 +20,9 @@ const pageName = 'staff';
 
 const StaffContent = (): JSX.Element => (
   <div className="page-content">
-    <div>
-      <div className="container-fluid">
-        <div style={{ padding: '15px', marginTop: '20px' }}>
+    <div className="container-fluid">
+      <div style={{ padding: '15px', marginTop: '20px' }}>
+        <div>
           <h3 style={{ paddingBottom: '15px' }}>
             Meet Our Staff
           </h3>
@@ -66,8 +66,8 @@ const StaffContent = (): JSX.Element => (
             </li>
           </ul>
         </div>
+        <hr />
         <div>
-          <hr />
           <section id="David">
             <h4>Rev. David C. Drebes - Pastor</h4>
             <img
@@ -142,8 +142,8 @@ const StaffContent = (): JSX.Element => (
             </div>
           </section>
           {makeStaff()}
-          <ELCALogo pageName={pageName} />
         </div>
+        <ELCALogo pageName={pageName} />
       </div>
     </div>
   </div>

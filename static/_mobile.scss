@@ -112,8 +112,23 @@
     margin-left: 15px !important;
   }
   .staff-list li {
-    margin-left: -25px !important;
+    padding: 15px;
     overflow-wrap: break-word;
+  }
+
+  .staffPicture {
+    width: 230px !important;
+  }
+
+  // Causes stretching issues if much larger
+  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
+    margin: auto auto auto -20px !important;
+    width: 255px !important;
+  }
+
+  // Pushes text underneath the picture a bit to the center
+  .staffDescription {
+    margin: auto auto auto 12px;
   }
 }
 
