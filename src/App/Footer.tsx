@@ -8,7 +8,7 @@ const footerLinks = () => {
   ];
 
   return (
-    <div style={{ textAlign: 'center', padding: '6px' }}>
+    <div className="footer-links" style={{ textAlign: 'center', padding: '6px' }}>
       {
         links.map((link) => (
           <a key={Math.random().toString()} target="_blank" rel="noopener noreferrer" style={{ paddingRight: '5px' }} href={link.href}>

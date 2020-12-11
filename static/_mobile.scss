@@ -78,6 +78,77 @@
   }
 }
 
+// Fixes links breaking content box on several screen sizes
+@media screen and (min-width: 280px) and (max-width: 425px) {
+  #contentBlock > div.page-content.family-content > div.container-fluid > div.material-content.elevation3 > section > p
+  {
+    text-align: left;
+    > a {
+      overflow-wrap: break-word;
+    }
+  }
+}
+// Galaxy Fold
+@media (max-width: 285px) {
+  .header-text {
+    font-size: 20px !important;
+  }
+  .giving-iframe {
+    width: auto !important;
+  }
+  // Fixes news table
+    // Aligns table properly, fixing words running into themselves
+  .TableStyle-root {
+    width: auto;
+    align-self: normal;
+    overflow-wrap: break-word;
+  }
+    // Makes table not stretch, aligning with the screen width
+  .newsTable {
+    width: 280px !important;
+  }
+
+  // Causes stretching issues if much larger on staff page
+  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
+    margin: auto auto auto -20px !important;
+    width: 255px !important;
+  }
+
+  // Centers on /home and /news page
+  #contentBlock > div.page-content > div.newsELCA > a #elcaLogo, div.homeELCA > a #elcaLogo {
+    margin: auto auto auto -2px !important;
+  }
+
+  #elcaLogo {
+    width: 273px !important;
+    margin: auto auto auto -12px !important;
+  }
+  #wjfooter {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .footer-links {
+    padding: 7px 0 7px 0 !important;
+  }
+  // Pulls text a bit closer to social media icons
+  .nohover {
+    margin-left: 15px !important;
+  }
+  .staff-list li {
+    padding: 15px;
+    overflow-wrap: break-word;
+  }
+
+  .staffPicture {
+    width: 230px !important;
+  }
+
+  // Pushes text underneath the picture a bit to the center
+  .staffDescription {
+    margin: auto auto auto 12px;
+  }
+}
+
 @media screen and (max-width: 350px) {
   // 320x480 android
   .nav-list {
@@ -87,6 +158,15 @@
   .newsIframe {
     margin-left: -15px;
     width: 108%;
+  }
+  // Doesn't have equal spacing on both sides when larger
+  .staffPicture {
+    width: 270px;
+  }
+  // Causes stretching issues if much larger on staff page
+  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
+    margin: auto auto auto -20px !important;
+    width: 303px !important;
   }
 }
 
@@ -109,6 +189,11 @@
   .nav-list {
     overflow-y: auto;
     height: 100% !important;
+  }
+
+  // Brings in line with other pages
+  #contentBlock > div.page-content > div.newsELCA > a #elcaLogo, div.homeELCA > a #elcaLogo {
+    width: 310px !important;
   }
 }
 
@@ -188,7 +273,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 320px) and (max-width: 500px) {
   .header-text {
     font-size: 24px !important;
   }
