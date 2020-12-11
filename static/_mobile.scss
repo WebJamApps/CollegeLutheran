@@ -97,8 +97,29 @@
   .newsTable {
     width: 280px !important;
   }
+
+  #contentBlock > div.page-content.family-content > div.container-fluid > div.material-content.elevation3 > section > p
+    {
+      text-align: left;
+      > a {
+        overflow-wrap: break-word;
+      }
+    }
+
+  // Causes stretching issues if much larger on staff page
+  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
+    margin: auto auto auto -20px !important;
+    width: 255px !important;
+  }
+
+  // Centers on /home and /news page
+  #contentBlock > div.page-content > div.newsELCA > a #elcaLogo, div.homeELCA > a #elcaLogo {
+    margin: auto auto auto -2px !important;
+  }
+
   #elcaLogo {
-    width: 275px !important;
+    width: 273px !important;
+    margin: auto auto auto -12px !important;
   }
   #wjfooter {
     padding-top: 0 !important;
@@ -118,12 +139,6 @@
 
   .staffPicture {
     width: 230px !important;
-  }
-
-  // Causes stretching issues if much larger
-  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
-    margin: auto auto auto -20px !important;
-    width: 255px !important;
   }
 
   // Pushes text underneath the picture a bit to the center
@@ -163,6 +178,11 @@
   .nav-list {
     overflow-y: auto;
     height: 100% !important;
+  }
+
+  // Brings in line with other pages
+  #contentBlock > div.page-content > div.newsELCA > a #elcaLogo, div.homeELCA > a #elcaLogo {
+    width: 310px !important;
   }
 }
 
