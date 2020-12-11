@@ -78,6 +78,16 @@
   }
 }
 
+// Fixes links breaking content box on several screen sizes
+@media screen and (min-width: 280px) and (max-width: 425px) {
+  #contentBlock > div.page-content.family-content > div.container-fluid > div.material-content.elevation3 > section > p
+  {
+    text-align: left;
+    > a {
+      overflow-wrap: break-word;
+    }
+  }
+}
 // Galaxy Fold
 @media (max-width: 285px) {
   .header-text {
@@ -97,14 +107,6 @@
   .newsTable {
     width: 280px !important;
   }
-
-  #contentBlock > div.page-content.family-content > div.container-fluid > div.material-content.elevation3 > section > p
-    {
-      text-align: left;
-      > a {
-        overflow-wrap: break-word;
-      }
-    }
 
   // Causes stretching issues if much larger on staff page
   #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
@@ -156,6 +158,15 @@
   .newsIframe {
     margin-left: -15px;
     width: 108%;
+  }
+  // Doesn't have equal spacing on both sides when larger
+  .staffPicture {
+    width: 270px;
+  }
+  // Causes stretching issues if much larger on staff page
+  #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
+    margin: auto auto auto -20px !important;
+    width: 303px !important;
   }
 }
 
