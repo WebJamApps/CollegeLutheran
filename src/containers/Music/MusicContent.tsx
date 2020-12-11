@@ -1,6 +1,9 @@
 import React from 'react';
+import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 import type { MusicProps } from './index';
+
+const pageName = 'music';
 
 const MusicContent = ({ musicPics }: MusicProps): JSX.Element => (
   <div className="page-content">
@@ -36,6 +39,7 @@ const MusicContent = ({ musicPics }: MusicProps): JSX.Element => (
           sings, a sing-along at the parish picnic, etc.
         </p>
       </div>
+      <ELCALogo pageName={pageName} />
     </div>
   </div>
 );
