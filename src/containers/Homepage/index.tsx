@@ -44,9 +44,11 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   elca(w: number): JSX.Element { // eslint-disable-line class-methods-use-this
     const width = w < 420 ? '300px' : '400px';
     return (
-      <div style={{
-        textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
-      }}
+      <div
+        className="homeELCA"
+        style={{
+          textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
+        }}
       >
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
           <img
