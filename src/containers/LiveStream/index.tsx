@@ -10,7 +10,7 @@ const LiveStream = (): JSX.Element => {
         title="College Lutheran Church Youtube"
         width="100%"
         height="600"
-        src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
+        src="https://player.twitch.tv/?channel=webjammaria&parent=collegelutheran.org"
         frameBorder="0"
         allowFullScreen
       />
