@@ -306,7 +306,7 @@ class AdminController {
           email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }
+    } catch (e) { console.log(e); return false; }// TODO not console log error, but display error no page
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;
