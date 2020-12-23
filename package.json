@@ -100,7 +100,6 @@
     "react-router-dom": "latest",
     "react-router-hash-link": "latest",
     "react-slick": "latest",
-    "react-twitch-embed-video": "^2.0.4",
     "redux": "latest",
     "redux-logger": "latest",
     "redux-persist": "latest",

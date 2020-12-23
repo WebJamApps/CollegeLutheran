@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react';
 import { withResizeDetector } from 'react-resize-detector';
-import ReactTwitchEmbedVideo from 'react-twitch-embed-video';
 import commonUtils from '../../lib/commonUtils';
 
 type LiveStreamProps = {
@@ -25,44 +24,39 @@ export class LiveStream extends React.Component<LiveStreamProps> {
   }
 
   render(): JSX.Element {
-    const { width, targetRef } = this.props;
+    const { targetRef } = this.props;
+    let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
+      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
+    if (process.env.NODE_ENV === 'production') {
+      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
+    }
+    if (process.env.NODE_ENV === 'production') {
+      chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
+    }
     return (
-      <div ref={targetRef}>
-        {width >= 900
-          ? (
-            <div className="page-content">
-              <div style={{ margin: 'auto', width: '98%', textAlign: 'center' }}>
-                <h4>Livestream</h4>
-                <ReactTwitchEmbedVideo channel="collegelutheranchurch" />
-              </div>
-            </div>
-          )
-          : (
-            <div className="page-content">
-              <div className="twitch-video">
-                <iframe
-                  title="twitch-livestream-video"
-                  src="https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost&muted=true"
-                  height="350"
-                  width="auto"
-                  frameBorder="0"
-                  scrolling="no"
-                  allowFullScreen
-                />
-              </div>
-              <div className="twitch-chat">
-                <iframe
-                  title="twitch-livestream-chat"
-                  frameBorder="0"
-                  scrolling="no"
-                  id="chat_embed"
-                  src="https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost"
-                  height="500"
-                  width="350"
-                />
-              </div>
-            </div>
-          )}
+      <div ref={targetRef} className="twitch-container">
+        <div className="twitch-video">
+          <iframe
+            title="twitch-livestream-video"
+            src={twitchUrl}
+            height="80%"
+            width="100%"
+            frameBorder="0"
+            scrolling="no"
+            allowFullScreen
+          />
+        </div>
+        <div className="twitch-chat">
+          <iframe
+            title="twitch-livestream-chat"
+            frameBorder="0"
+            scrolling="yes"
+            id="chat_embed"
+            src={chatUrl}
+            height="80%"
+            width="100%"
+          />
+        </div>
       </div>
     );
   }
