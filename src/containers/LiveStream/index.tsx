@@ -29,8 +29,6 @@ export class LiveStream extends React.Component<LiveStreamProps> {
       chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
     if (process.env.NODE_ENV === 'production') {
       twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-    }
-    if (process.env.NODE_ENV === 'production') {
       chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
     }
     return (
