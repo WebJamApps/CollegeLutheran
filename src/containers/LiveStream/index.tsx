@@ -23,14 +23,8 @@ export class LiveStream extends React.Component<LiveStreamProps> {
     this.commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   }
 
-  twitchLiveStream(): JSX.Element {
+  twitchLiveStream(twitchUrl: string, chatUrl: string): JSX.Element {
     const { targetRef } = this.props;
-    let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
-      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
-    if (process.env.NODE_ENV === 'production') {
-      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-      chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-    }
     return (
       <div ref={targetRef} className="twitch-container">
         <div className="twitch-video">
@@ -60,7 +54,13 @@ export class LiveStream extends React.Component<LiveStreamProps> {
   }
 
   render(): JSX.Element {
-    return this.twitchLiveStream();
+    let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
+      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
+    if (process.env.NODE_ENV === 'production') {
+      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
+      chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
+    }
+    return this.twitchLiveStream(twitchUrl, chatUrl);
   }
 }
 
