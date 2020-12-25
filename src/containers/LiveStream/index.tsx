@@ -23,7 +23,7 @@ export class LiveStream extends React.Component<LiveStreamProps> {
     this.commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   }
 
-  render(): JSX.Element {
+  twitchLiveStream(): JSX.Element {
     const { targetRef } = this.props;
     let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
       chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
@@ -57,6 +57,10 @@ export class LiveStream extends React.Component<LiveStreamProps> {
         </div>
       </div>
     );
+  }
+
+  render(): JSX.Element {
+    return this.twitchLiveStream();
   }
 }
 
