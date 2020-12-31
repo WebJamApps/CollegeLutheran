@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import jwt from 'jwt-simple';
+import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import authUtils from '../../src/App/authUtils';
 
@@ -23,7 +23,7 @@ describe('authUtils', () => {
     const postReturn: any = ({ set: () => ({ send: () => Promise.resolve({ body: '123' }) }) });
     superagent.post = jest.fn(() => postReturn);
     const res = await authUtils.responseGoogleLogin({ code: '' }, vStub);
-    expect(res).toBe('Not enough or too many segments');
+    expect(res).toBe('jwt malformed');
   });
   it('handles google login with authenticate error', async () => {
     const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
@@ -33,27 +33,30 @@ describe('authUtils', () => {
   });
   it('sets the user', async () => {
     jwt.decode = jest.fn(() => ({ sub: '123' }));
-    jwt.encode = jest.fn(() => 'token');
+    jwt.verify = jest.fn(() => 'token');
     const returnBody: Record<string, unknown> = { body: {} };
     const sa: any = superagent;
     sa.get = () => ({ set: () => ({ set: () => Promise.resolve(returnBody) }) });
     const result = await authUtils.setUser(vStub);
     expect(result).toBe('user set');
   });
-  it('sets the user fails to decode the token', async () => {
-    jwt.decode = jest.fn(() => { throw new Error('bad'); });
-    vStub.props.auth = {};
-    const result = await authUtils.setUser(vStub);
-    expect(result).toBe('bad');
-    vStub.props.auth = { token: 'token' };
+  it('fails to set user when token is bad', async () => {
+    jwt.verify = jest.fn(() => { throw new Error('bad'); });
+    const res = await authUtils.setUser(vStub);
+    expect(res).toBe('bad');
   });
   it('sets the user to the already decoded user', async () => {
-    jwt.decode = jest.fn(() => ({ sub: '123', user: {} }));
-    const result = await authUtils.setUser(vStub);
+    jwt.verify = jest.fn(() => ({ sub: '123', user: {} }));
+    Object.defineProperty(window, 'location', { value: { assign: () => { }, reload: () => { } }, writable: true });
+    window.location.reload = jest.fn();
+    const cStub3: any = {
+      props: { auth: { token: 'token' }, dispatch: (obj: any) => { expect(obj.type).toBe('SET_USER'); } },
+    };
+    const result = await authUtils.setUser(cStub3);
     expect(result).toBe('user set');
   });
   it('catches fetch user error when sets the user', async () => {
-    jwt.decode = jest.fn(() => ({ sub: '123' }));
+    jwt.verify = jest.fn(() => ({ sub: '123' }));
     const sa: any = superagent;
     sa.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     const res = await authUtils.setUser(vStub);

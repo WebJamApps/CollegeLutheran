@@ -27,7 +27,7 @@ describe('Youth', () => {
     expect(wrapper.find(DefaultYouthContent).exists()).toBe(true);
     expect(wrapper.find(DefaultYouthContent).dive().find('div.page-content').exists()).toBe(true);
   });
-  it('renders with images', () => new Promise((done) => {
+  it('renders with images', () => new Promise<void>((done) => {
     const data:any[] = [{
       title: '', type: '', _id: '', created_at: '',
     }];
