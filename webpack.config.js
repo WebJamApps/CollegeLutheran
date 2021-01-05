@@ -136,7 +136,7 @@ module.exports = (env) => ({
       ],
     }),
     new webpack.EnvironmentPlugin(['NODE_ENV',
-      'AuthProductionBaseURL', 'BackendUrl', 'GoogleClientId', 'userRoles', 'HashString', 'TINY_KEY']),
+      'BackendUrl', 'GoogleClientId', 'userRoles', 'HashString', 'TINY_KEY']),
     ...when(env.analyze, new BundleAnalyzerPlugin()),
   ],
 });
