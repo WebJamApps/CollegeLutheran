@@ -26,7 +26,7 @@
   "license": "MIT",
   "scripts": {
     "start:dist": "node server.js",
-    "build:prod": "rm -rf dist && yarn start build",
+    "build:prod": "yarn start build",
     "cc": "codeclimate analyze -f html > codeclimate.html",
     "start": "nps",
     "test:lint-fix": "yarn test:stylelint && nps test.lint.fix",
