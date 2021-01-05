@@ -12,7 +12,7 @@ describe('/music', () => {
     expect(wrapper.find(DefaultMusicContent).dive().find('div.page-content').exists()).toBe(true);
   });
 
-  it('renders with images', () => new Promise((done) => {
+  it('renders with images', () => new Promise<void>((done) => {
     const data: any[] = [{
       title: '', type: '', _id: '', created_at: '',
     }];
