@@ -2,7 +2,6 @@
 const {
   series, crossEnv, concurrent, rimraf,
 } = require('nps-utils');
-// const { config: { port: E2E_PORT } } = require('./test/protractor.conf');
 
 module.exports = {
   scripts: {
@@ -18,8 +17,8 @@ module.exports = {
         watch: crossEnv('BABEL_TARGET=node jest --watch'),
       },
       lint: {
-        default: 'eslint . --ext .js,.ts,.tsx',
-        fix: 'eslint . --ext .js,.ts,.tsx --fix',
+        default: 'eslint . --ext .js,.tsx,.ts',
+        fix: 'eslint . --ext .js,.tsx,.ts --fix',
       },
       react: {
         default: crossEnv('BABEL_TARGET=node jest --no-cache --config jest.React.json --notify'),
@@ -41,7 +40,7 @@ module.exports = {
         development: {
           default: series(
             'nps webpack.build.before',
-            'webpack --progress -d',
+            'npx webpack --progress --env development',
           ),
           serve: series.nps(
             'webpack.build.development',
@@ -51,11 +50,11 @@ module.exports = {
         production: {
           inlineCss: series(
             'nps webpack.build.before',
-            crossEnv('NODE_ENV=production webpack --progress -p --env.production'),
+            crossEnv('npx webpack --env NODE_ENV=production --progress --env production'),
           ),
           default: series(
             'nps webpack.build.before',
-            crossEnv('NODE_ENV=production webpack --progress -p --env.production'),
+            crossEnv('npx webpack --env NODE_ENV=production --progress --env production'),
           ),
           serve: series.nps(
             'webpack.build.production',
@@ -64,10 +63,9 @@ module.exports = {
         },
       },
       server: {
-        default: 'webpack-dev-server -d --inline --env.server',
-        hmr: 'webpack-dev-server -d --inline --hot --env.server',
+        default: 'webpack serve --env development --inline',
+        hmr: 'webpack serve --env development --inline --hot',
       },
     },
-    serve: 'pushstate-server dist',
   },
 };
