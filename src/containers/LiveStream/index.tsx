@@ -61,6 +61,7 @@ export class LiveStream extends React.Component<LiveStreamProps> {
       twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=clc-dev.herokuapp.com/livestream';
       chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=clc-dev.herokuapp.com/livestream';
     }
+    /* istanbul ignore if */
     if (process.env.BackendUrl === 'https://web-jam.com') {
       twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.org/livestream';
       chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=collegelutheran.org/livestream';
