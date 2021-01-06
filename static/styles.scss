@@ -397,6 +397,12 @@ div.familyELCA, div.youthELCA, div.givingELCA, div.beliefsELCA, div.newsELCA {
   display: none;
 }
 
+.twitch-container {
+  height: 100vh;
+  display: grid;
+  grid-auto-flow: column;
+}
+
 .horiz-scroll {
     white-space: nowrap;
     position: relative;

@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow } from 'enzyme';
-import LiveStream from '../../src/containers/LiveStream/index';
+import { LiveStream } from '../../src/containers/LiveStream/index';
 
 function setup() {
-  const wrapper = shallow(<LiveStream />);
-  return { wrapper };
+  const props = {};
+  const targetRef: any = {};
+  const wrapper = shallow<LiveStream>(<LiveStream targetRef={targetRef} width={1000} height={1000} />);
+  return { props, wrapper };
 }
 
-describe('Livestream', () => {
-  it('Renders the LiveStream component', () => {
-    const { wrapper } = setup();
-    expect(wrapper.find('div.livestream').exists()).toBe(true);
-  });
+describe('LiveStream', () => {
+  const { wrapper } = setup();
+  it('renders snapshot correctly', () => { expect(wrapper).toMatchSnapshot(); });
 });
