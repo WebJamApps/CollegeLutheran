@@ -1,68 +1,16 @@
-import React, { RefObject } from 'react';
-import { withResizeDetector } from 'react-resize-detector';
+
+import React from 'react';
+import ReactTwitchEmbedVideo from 'react-twitch-embed-video';
+
 import commonUtils from '../../lib/commonUtils';
 
-type LiveStreamProps = {
-  targetRef: RefObject<HTMLDivElement>;
-  width: number;
-  height: number;
+const LiveStream = (): JSX.Element => {
+  commonUtils.setTitleAndScroll('Livestream', window.screen.width);
+  return (
+    <div style={{ margin: 'auto', width: '98%', textAlign: 'center' }}>
+      <h4>Livestream</h4>
+      <ReactTwitchEmbedVideo channel="collegelutheranchurch" />
+    </div>
+  );
 };
-
-export class LiveStream extends React.Component<LiveStreamProps> {
-  commonUtils: typeof commonUtils;
-
-  parentRef: React.RefObject<unknown>;
-
-  constructor(props: LiveStreamProps) {
-    super(props);
-    this.commonUtils = commonUtils;
-    this.parentRef = React.createRef();
-  }
-
-  async componentDidMount(): Promise<void> {
-    this.commonUtils.setTitleAndScroll('Livestream', window.screen.width);
-  }
-
-  twitchLiveStream(twitchUrl: string, chatUrl: string): JSX.Element {
-    const { targetRef } = this.props;
-    return (
-      <div ref={targetRef} className="twitch-container">
-        <div className="twitch-video">
-          <iframe
-            title="twitch-livestream-video"
-            src={twitchUrl}
-            height="80%"
-            width="100%"
-            frameBorder="0"
-            scrolling="no"
-            allowFullScreen
-          />
-        </div>
-        <div className="twitch-chat">
-          <iframe
-            title="twitch-livestream-chat"
-            frameBorder="0"
-            scrolling="yes"
-            id="chat_embed"
-            src={chatUrl}
-            height="80%"
-            width="100%"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  render(): JSX.Element {
-    let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
-      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV === 'production') {
-      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-      chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-    }
-    return this.twitchLiveStream(twitchUrl, chatUrl);
-  }
-}
-
-export default (withResizeDetector(LiveStream));
+export default LiveStream;
