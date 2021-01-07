@@ -296,7 +296,6 @@ class AdminController {
     const { addAdminEmail } = this.view.state;
     const userRoles: string[] = commonUtils.getUserRoles();
     const { auth } = this.view.props;
-
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
@@ -306,7 +305,7 @@ class AdminController {
           email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }// TODO not console log error, but display error no page
+    } catch (e) { console.log(e); return false; }// TODO not console log error, but display error on page
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;

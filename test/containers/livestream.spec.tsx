@@ -1,15 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { LiveStream } from '../../src/containers/LiveStream/index';
-
-function setup() {
-  const props = {};
-  const targetRef: any = {};
-  const wrapper = shallow<LiveStream>(<LiveStream targetRef={targetRef} width={1000} height={1000} />);
-  return { props, wrapper };
-}
+import DefaultLiveStream from '../../src/containers/LiveStream/index';
 
 describe('LiveStream', () => {
-  const { wrapper } = setup();
+  const wrapper = shallow(<DefaultLiveStream />);
   it('renders snapshot correctly', () => { expect(wrapper).toMatchSnapshot(); });
 });
