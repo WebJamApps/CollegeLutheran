@@ -57,9 +57,14 @@ export class LiveStream extends React.Component<LiveStreamProps> {
     let twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=localhost',
       chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=localhost';
     /* istanbul ignore if */
-    if (process.env.NODE_ENV === 'production') {
-      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
-      chatUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.com/livestream';
+    if (process.env.BackendUrl === 'https://web-jam-back-dev.herokuapp.com') {
+      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=clc-dev.herokuapp.com/livestream';
+      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=clc-dev.herokuapp.com/livestream';
+    }
+    /* istanbul ignore if */
+    if (process.env.BackendUrl === 'https://web-jam.com') {
+      twitchUrl = 'https://player.twitch.tv/?channel=collegelutheranchurch&parent=collegelutheran.org/livestream';
+      chatUrl = 'https://www.twitch.tv/embed/collegelutheranchurch/chat?parent=collegelutheran.org/livestream';
     }
     return this.twitchLiveStream(twitchUrl, chatUrl);
   }
