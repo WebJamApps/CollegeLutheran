@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import PicSlider from '../../components/PicSlider';
 import type { YouthProps } from './index';
 
-const YouthContent = ({ youthPics }: YouthProps): JSX.Element => (
+const YouthContent = ({ youthPics, youthContent }: YouthProps): JSX.Element => (
   <div className="page-content">
     <div id="youthSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
       {youthPics && youthPics.length > 0 ? (<PicSlider data={youthPics} />) : null}
@@ -47,7 +48,11 @@ const YouthContent = ({ youthPics }: YouthProps): JSX.Element => (
           <br />
           We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
         </p>
-        <section style={{ textAlign: 'left', marginTop: '0' }} />
+        <hr />
+        <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(youthContent && youthContent.title ? youthContent.title : '')}</h5>
+        <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+          {ReactHtmlParser(youthContent && youthContent.comments ? youthContent.comments : '')}
+        </section>
       </div>
       <div className="youthELCA">
         <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">

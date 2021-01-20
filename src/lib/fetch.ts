@@ -5,19 +5,21 @@ const fetchGet = async (view:
 {
   props: { dispatch: Dispatch<unknown>; };
   superagent: SuperAgentStatic;
-}, route: string, reducer: string): Promise<boolean | string | void> => {
+}, route: string, reducer: string): Promise<boolean> => {
   let res;
   const { dispatch } = view.props;
   try {
     res = await view.superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json');
   } catch (e) {
-    if (route.includes('homePageContent')) {
-      return dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
+    if (route.includes('PageContent')) {
+      dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
-    return `${e.message}`;
+    // eslint-disable-next-line no-console
+    console.log(`${e.message}`);// TODO display error messages on page
+    return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });
-  return Promise.resolve(true);
+  return true;
 };
 
 function fetchPost(superagent: SuperAgentStatic, auth: { token: string; },

@@ -1,5 +1,3 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import superagent from 'superagent';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -48,6 +46,7 @@ export class App extends Component<AppProps> {
 
   componentDidMount(): void { // fetch the books to populate homepage content, youth pics, music pics and children pics
     this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+    this.fetch.fetchGet(this, 'book/one?type=youthPageContent', 'GOT_YOUTHPAGE');
     this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
     this.fetch.fetchGet(this, 'book?type=youthPics', 'GOT_YOUTHPICS');

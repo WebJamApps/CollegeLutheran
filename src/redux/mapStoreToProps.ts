@@ -32,6 +32,7 @@ export interface Ibook {
 
 export interface Store {
   auth: Auth;
+  youthContent: {youthContent: Ibook};
   homeContent: { homeContent: Ibook };
   familyPics: { familyPics: Ibook[] };
   youthPics: { youthPics: Ibook[] };
@@ -44,6 +45,7 @@ export interface Store {
 const mapStoreToProps = (store: Store): Record<string, unknown> => ({
   auth: store.auth,
   homeContent: store.homeContent.homeContent,
+  youthContent: store.youthContent.youthContent,
   familyPics: store.familyPics.familyPics,
   youthPics: store.youthPics.youthPics,
   musicPics: store.musicPics.musicPics,
