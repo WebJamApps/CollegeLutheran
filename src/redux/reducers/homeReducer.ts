@@ -1,19 +1,5 @@
-import { Ibook } from '../mapStoreToProps';
+import commonReducer from './commonReducer';
 
-const initialState = {
-  homeContent: {},
-};
-
-const reducer = (state = initialState, action: { type: string; data: Ibook; }): Record<string, unknown> => {
-  switch (action.type) {
-    case 'GOT_HOMEPAGE':
-      return {
-        ...state,
-        homeContent: action.data,
-      };
-    default:
-      return state;
-  }
-};
+const reducer = commonReducer('homeContent', 'GOT_HOMEPAGE', { homeContent: {} });
 
 export default reducer;
