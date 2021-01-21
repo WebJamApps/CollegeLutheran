@@ -6,11 +6,12 @@ import commonUtils from '../../lib/commonUtils';
 
 export interface YouthProps {
   youthPics?: Ibook[];
+  youthContent: Ibook;
 }
 
-export const Youth = ({ youthPics }: YouthProps): JSX.Element => {
+export const Youth = ({ youthPics, youthContent }: YouthProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Youth Ministry', window.screen.width);
-  return (<DefaultYouthContent youthPics={youthPics} />);
+  return (<DefaultYouthContent youthPics={youthPics} youthContent={youthContent} />);
 };
 
 Youth.defaultProps = { youthPics: [] };
