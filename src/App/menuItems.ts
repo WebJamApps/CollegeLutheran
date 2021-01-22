@@ -31,9 +31,16 @@ const menuItems = [{
 {
   classname: '',
   type: 'link',
-  iconClass: 'fas fa-music',
-  link: '/music',
-  name: 'Music',
+  iconClass: 'far fa-newspaper',
+  link: '/news',
+  name: 'News',
+},
+{
+  classname: '',
+  type: 'link',
+  iconClass: 'fas fa-video',
+  link: '/livestream',
+  name: 'Livestream',
 },
 {
   classname: '',
@@ -41,6 +48,13 @@ const menuItems = [{
   iconClass: 'fas fa-handshake',
   link: '/giving',
   name: 'Giving',
+},
+{
+  classname: '',
+  type: 'link',
+  iconClass: 'fas fa-music',
+  link: '/music',
+  name: 'Music',
 },
 {
   classname: '',
@@ -56,27 +70,13 @@ const menuItems = [{
   link: '/family',
   name: 'Children & Families',
 },
-{
-  classname: '',
-  type: 'link',
-  iconClass: 'far fa-newspaper',
-  link: '/news',
-  name: 'News',
-},
-{
-  classname: '',
-  type: 'link',
-  iconClass: 'fas fa-step-forward',
-  link: '/stewardship',
-  name: 'Stewardship',
-},
-{
-  classname: '',
-  type: 'link',
-  iconClass: 'fas fa-video',
-  link: '/livestream',
-  name: 'Livestream',
-},
+// {
+//   classname: '',
+//   type: 'link',
+//   iconClass: 'fas fa-step-forward',
+//   link: '/stewardship',
+//   name: 'Stewardship',
+// },
 {
   classname: 'home',
   type: 'link',

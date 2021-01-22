@@ -87,10 +87,20 @@ exports[`Youth renders correctly without images 1`] = `
         <br />
         We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
       </p>
+      <hr />
+      <h5
+        style={
+          Object {
+            "fontWeight": "bold",
+            "marginTop": "35px",
+          }
+        }
+      />
       <section
         style={
           Object {
-            "marginTop": "0",
+            "marginBottom": "35px",
+            "marginTop": "20px",
             "textAlign": "left",
           }
         }

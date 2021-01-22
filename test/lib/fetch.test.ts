@@ -9,7 +9,7 @@ describe('fetch', () => {
       props: { dispatch: (fun: any) => fun },
       superagent,
     }, '/', '');
-    expect(r).toBe('bad');
+    expect(r).toBe(false);
   });
   it('catches error when fetching homePageContent', async () => {
     r = await fetch.fetchGet({

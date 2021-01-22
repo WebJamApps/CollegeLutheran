@@ -7,10 +7,12 @@ import musicReducer from './reducers/musicReducer';
 import booksReducer from './reducers/booksReducer';
 import otherReducer from './reducers/otherReducer';
 import tableReducer from './reducers/tableReducer';
+import youthContentReducer from './reducers/youthContentReducer';
 
 const reducer = combineReducers({
   auth: authReducer,
   homeContent: homeReducer,
+  youthContent: youthContentReducer,
   familyPics: familyReducer,
   youthPics: youthReducer,
   books: booksReducer,
