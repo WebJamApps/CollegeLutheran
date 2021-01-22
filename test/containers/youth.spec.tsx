@@ -37,4 +37,10 @@ describe('Youth', () => {
     expect(wrapper2.find(PicSlider).exists()).toBe(true);
     done();
   }));
+  it('renders with custom youth content', () => {
+    const custom:any = { title: 'howdy', comments: 'yo yo' };
+    const wrapper2 = shallow(<Youth youthPics={[]} youthContent={custom} />);
+    expect(wrapper2.find(DefaultYouthContent).exists()).toBe(true);
+    expect(wrapper2.find(DefaultYouthContent).dive().find('div.page-content').exists()).toBe(true);
+  });
 });
