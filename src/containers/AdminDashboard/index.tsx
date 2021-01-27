@@ -295,6 +295,31 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
           />
         ) : null}
         {this.controller.adminUserForm()}
+        <div className="horiz-scroll">
+          <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+            <h5>Change Youthpage Section</h5>
+            <form
+              id="create-homepage"
+              style={{
+                textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+              }}
+            >
+              {this.forms.makeInput({
+                type: 'text', label: 'Title', isRequired: false, onChange: this.onChange, value: 'Youth Update', width: '90%',
+              })}
+              <label htmlFor="content">
+                Content
+                <br />
+                {this.controller.editor('<p>Howdy all!</p>')}
+              </label>
+              <div style={{ marginLeft: '60%', marginTop: '10px' }}>
+                <button type="button" id="update-youthContent" disabled={false} onClick={() => console.log('you clicked me')}>
+                  Update Youthpage
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
