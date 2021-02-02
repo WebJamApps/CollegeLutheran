@@ -21,6 +21,7 @@ export interface DashboardProps extends RouteComponentProps {
   familyPics: Ibook[];
   otherPics: Ibook[];
   musicPics: Ibook[];
+  youthContent: Ibook;
 }
 type DashboardState = {
   type: string;
@@ -35,6 +36,8 @@ type DashboardState = {
   firstEdit: boolean;
   addAdminEmail: string;
   formError: string;
+  youthTitle: string;
+  youthContent: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -60,6 +63,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       firstEdit: true,
       addAdminEmail: '',
       formError: '',
+      youthTitle: props.youthContent.title || '',
+      youthContent: props.youthContent.comments || '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -85,6 +90,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     }
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
     return evt.target.id;
+  }
+
+  onChangeYouthContent(evt: React.ChangeEvent<HTMLInputElement>): string {
+    this.setState({ youthContent: evt.target.value });
+    return evt.target.value;
   }
 
   onChangeAdminEmail(evt: React.ChangeEvent<HTMLInputElement>): string {
@@ -276,6 +286,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const {
       showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
+    const { youthTitle, youthContent } = this.state;
     return (
       <div className="page-content">
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -299,18 +310,23 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
           <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
             <h5>Change Youthpage Section</h5>
             <form
-              id="create-homepage"
+              id="update-youthpage"
               style={{
                 textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
               }}
             >
               {this.forms.makeInput({
-                type: 'text', label: 'Title', isRequired: false, onChange: this.onChange, value: 'Youth Update', width: '90%',
+                type: 'text',
+                label: 'Youth Title',
+                isRequired: false,
+                onChange: (evt) => this.setState({ youthTitle: evt.target.value }),
+                value: youthTitle,
+                width: '90%',
               })}
               <label htmlFor="content">
                 Content
                 <br />
-                {this.controller.editor('<p>Howdy all!</p>')}
+                {this.controller.editor(youthContent, this.onChangeYouthContent)}
               </label>
               <div style={{ marginLeft: '60%', marginTop: '10px' }}>
                 <button type="button" id="update-youthContent" disabled={false} onClick={() => console.log('you clicked me')}>

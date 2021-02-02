@@ -221,15 +221,16 @@ class AdminController {
 
   handleEditorChange(homePageContent: string): boolean { this.view.setState({ homePageContent }); return true; }
 
-  editor(homePageContent: string | undefined): JSX.Element {
+  editor(pageContent: string | undefined, onChange?: (...args:any) => string | boolean): JSX.Element {
+    let changeFunc = onChange;
+    if (!changeFunc) changeFunc = this.handleEditorChange;
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={homePageContent}
+        initialValue={pageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
-          // selector: 'textarea',
           menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
@@ -241,7 +242,7 @@ class AdminController {
             + 'alignleft aligncenter alignright alignjustify |'
             + 'bullist numlist outdent indent | removeformat | help',
         }}
-        onEditorChange={this.handleEditorChange}
+        onEditorChange={changeFunc}
       />
     );
   }
