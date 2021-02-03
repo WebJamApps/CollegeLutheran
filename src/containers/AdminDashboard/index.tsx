@@ -92,11 +92,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return evt.target.id;
   }
 
-  onChangeYouthContent(evt: React.ChangeEvent<HTMLInputElement>): string {
-    this.setState({ youthContent: evt.target.value });
-    return evt.target.value;
-  }
-
   onChangeAdminEmail(evt: React.ChangeEvent<HTMLInputElement>): string {
     evt.persist();
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, formError: '' }));
@@ -326,10 +321,15 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
               <label htmlFor="content">
                 Content
                 <br />
-                {this.controller.editor(youthContent, this.onChangeYouthContent)}
+                {this.controller.editor(youthContent, this.controller.onChangeYouthContent)}
               </label>
               <div style={{ marginLeft: '60%', marginTop: '10px' }}>
-                <button type="button" id="update-youthContent" disabled={false} onClick={() => console.log('you clicked me')}>
+                <button
+                  type="button"
+                  id="update-youthContent"
+                  disabled={false}
+                  onClick={(evt) => this.controller.updateYouthAPI(evt)}
+                >
                   Update Youthpage
                 </button>
               </div>

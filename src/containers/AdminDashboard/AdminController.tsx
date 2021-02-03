@@ -26,6 +26,8 @@ class AdminController {
     this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
+    this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
+    this.updateYouthAPI = this.updateYouthAPI.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -143,7 +145,25 @@ class AdminController {
       window.location.assign(redirect);
       return `${r.status}`;
     }
-    return 'Didnt create book';
+    return 'Did not create book';
+  }
+
+  async updateYouthAPI(evt: { preventDefault: () => void; }): Promise<string> {
+    evt.preventDefault();
+    const { auth } = this.view.props;
+    const { youthTitle, youthContent } = this.view.state;
+    let r;
+    try {
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=youthPageContent`)
+        .set('Authorization', `Bearer ${auth.token}`)
+        .set('Accept', 'application/json')
+        .send({ title: youthTitle, comments: youthContent, type: 'youthPageContent' });
+    } catch (e) { return `${e.message}`; }
+    if (r.status === 200) {
+      window.location.assign('/youth');
+      return `${r.status}`;
+    }
+    return 'Failed to update youth page.';
   }
 
   async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
@@ -219,9 +239,11 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent: string): boolean { this.view.setState({ homePageContent }); return true; }
+  onChangeYouthContent(youthContent: string): string { this.view.setState({ youthContent }); return youthContent; }
 
-  editor(pageContent: string | undefined, onChange?: (...args:any) => string | boolean): JSX.Element {
+  handleEditorChange(homePageContent: string): string { this.view.setState({ homePageContent }); return homePageContent; }
+
+  editor(pageContent: string | undefined, onChange?: (arg0: string) => string): JSX.Element {
     let changeFunc = onChange;
     if (!changeFunc) changeFunc = this.handleEditorChange;
     return (

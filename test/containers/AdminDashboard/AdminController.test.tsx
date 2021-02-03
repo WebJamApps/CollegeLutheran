@@ -74,7 +74,7 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('Didnt create book');
+    expect(res).toBe('Did not create book');
   });
   it('handles 300 res from sending an update homepage request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
@@ -97,7 +97,7 @@ describe('AdminController', () => {
   it('handles 300 res from sending create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-    expect(r).toBe('Didnt create book');
+    expect(r).toBe('Did not create book');
   });
   it('sends an edit pic request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
@@ -137,7 +137,7 @@ describe('AdminController', () => {
   });
   it('handles change within the tinymce editor', () => {
     r = controller.handleEditorChange('howdy');
-    expect(r).toBe(true);
+    expect(r).toBe('howdy');
   });
   it('validates book when not firstEdit', () => {
     const dis = controller.validateBook(' ', ' ', ' ', false);
