@@ -17,7 +17,7 @@ class AdminController {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
-    this.createHomeAPI = this.createHomeAPI.bind(this);
+    // this.createHomeAPI = this.createHomeAPI.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
@@ -27,7 +27,8 @@ class AdminController {
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
-    this.updateYouthAPI = this.updateYouthAPI.bind(this);
+    // this.updateYouthAPI = this.updateYouthAPI.bind(this);
+    this.putAPI = this.putAPI.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -148,45 +149,36 @@ class AdminController {
     return 'Did not create book';
   }
 
-  async updateYouthAPI(evt: { preventDefault: () => void; }): Promise<string> {
-    evt.preventDefault();
+  async putAPI(evt: { preventDefault: () => void; }, body:{title:string;comments:string;type:string}, redirect:string):Promise<string> {
     const { auth } = this.view.props;
-    const { youthTitle, youthContent } = this.view.state;
+    evt.preventDefault();
     let r;
     try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=youthPageContent`)
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
-        .send({ title: youthTitle, comments: youthContent, type: 'youthPageContent' });
+        .send(body);
     } catch (e) { return `${e.message}`; }
     if (r.status === 200) {
-      window.location.assign('/youth');
+      window.location.assign(redirect);
       return `${r.status}`;
     }
-    return 'Failed to update youth page.';
+    return `Failed to update ${redirect} page.`;
   }
 
-  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
-    evt.preventDefault();
-    const { auth } = this.view.props;
-    const { title, homePageContent } = this.view.state;
-    let r;
-    try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
-        .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) {
-      return this.createBook({ title, comments: homePageContent, type: 'homePageContent' }, '/');
-    }
-    if (r.status === 200) {
-      window.location.assign('/');
-      return `${r.status}`;
-    }
-    return 'Failed to create.';
-  }
+  // async updateYouthAPI(evt: { preventDefault: () => void; }): Promise<string> {
+  //   evt.preventDefault();
+  //   const { youthTitle, youthContent } = this.view.state;
+  //   return this.putAPI({ title: youthTitle, comments: youthContent, type: 'youthPageContent' }, '/youth');
+  // }
 
-  createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  // async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
+  //   evt.preventDefault();
+  //   const { title, homePageContent } = this.view.state;
+  //   return this.putAPI({ title, comments: homePageContent, type: 'homePageContent' }, '/');
+  // }
+
+  async createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
@@ -266,38 +258,6 @@ class AdminController {
         }}
         onEditorChange={changeFunc}
       />
-    );
-  }
-
-  adminUserForm(): JSX.Element {
-    const { formError } = this.view.state;
-    return (
-      <div
-        className="material-content elevation3"
-        style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
-      >
-        <h4 className="material-header-h4">
-          Add Admin User
-        </h4>
-        <form
-          id="modify-admins"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          <label htmlFor="addAdminEmail">
-            Admin Email
-            <input
-              id="addAdminEmail"
-              type="email"
-              placeholder="placeholder@gmail.com"
-              onChange={this.view.onChangeAdminEmail}
-            />
-          </label>
-          <input type="submit" disabled={this.validateAdmin()} onClick={this.addAdminUser} />
-          <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
-        </form>
-      </div>
     );
   }
 

@@ -50,37 +50,6 @@ describe('AdminController', () => {
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');
     expect(r).toBe(false);
   });
-  it('sends an update homepage request to the backend', async () => {
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
-    Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
-    window.location.assign = jest.fn();
-    r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe('200');
-    expect(window.location.assign).toHaveBeenCalled();
-  });
-  it('catches error when sends an update homepage request to the backend', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('bad');
-  });
-  it('catches error when sends an update homepage request but successfully create new content', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('201');
-  });
-  it('catches error when sends an update homepage request but unsuccessfully create new content', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('Did not create book');
-  });
-  it('handles 300 res from sending an update homepage request to the backend', async () => {
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-    r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe('Failed to create.');
-  });
   it('sends an create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
