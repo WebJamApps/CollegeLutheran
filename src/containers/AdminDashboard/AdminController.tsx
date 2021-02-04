@@ -17,7 +17,6 @@ class AdminController {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
-    // this.createHomeAPI = this.createHomeAPI.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
@@ -27,7 +26,6 @@ class AdminController {
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
-    // this.updateYouthAPI = this.updateYouthAPI.bind(this);
     this.putAPI = this.putAPI.bind(this);
   }
 
@@ -165,18 +163,6 @@ class AdminController {
     }
     return `Failed to update ${redirect} page.`;
   }
-
-  // async updateYouthAPI(evt: { preventDefault: () => void; }): Promise<string> {
-  //   evt.preventDefault();
-  //   const { youthTitle, youthContent } = this.view.state;
-  //   return this.putAPI({ title: youthTitle, comments: youthContent, type: 'youthPageContent' }, '/youth');
-  // }
-
-  // async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
-  //   evt.preventDefault();
-  //   const { title, homePageContent } = this.view.state;
-  //   return this.putAPI({ title, comments: homePageContent, type: 'homePageContent' }, '/');
-  // }
 
   async createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
     evt.preventDefault();
