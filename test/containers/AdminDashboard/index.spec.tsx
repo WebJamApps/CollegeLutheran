@@ -188,4 +188,12 @@ describe('Dashboard Container', () => {
     const result = wrapper.instance().onChangeAdminEmail({ persist: jest.fn(), target: { id: 'addAdminEmail', value: 'test@gmail.com' } });
     expect(result).toBe('addAdminEmail');
   });
+  it('handles click to update home page', () => {
+    wrapper.instance().controller.putAPI = jest.fn();
+    wrapper.update();
+    const updateHomeButton = wrapper.instance().updateHomeButton({ title: '', homePageContent: '' });
+    const b = shallow(updateHomeButton);
+    b.find('button').simulate('click');
+    expect(wrapper.instance().controller.putAPI).toHaveBeenCalled();
+  });
 });

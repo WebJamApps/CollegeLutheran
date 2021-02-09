@@ -138,4 +138,35 @@ describe('AdminController', () => {
     const res = await controller.addAdminUser({ preventDefault: () => { } });
     expect(res).toBe(false);
   });
+  it('putAPI successfully sends PUT rest call', async () => {
+    const returnBody: Record<string, unknown> = { body: { _id: '1' }, status: 200 };
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '');
+    expect(result).toBe('200');
+  });
+  it('putAPI unsuccessful PUT rest call', async () => {
+    const returnBody: Record<string, unknown> = { body: { _id: '1' }, status: 400 };
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '/');
+    expect(result).toBe('Failed to update / page.');
+  });
+  it('putAPI error when PUT rest call', async () => {
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '/');
+    expect(result).toBe('bad');
+  });
+  it('onChangeYouthContent', () => {
+    expect(controller.onChangeYouthContent('howdy')).toBe('howdy');
+  });
+  it('makes tiny editor with onchange defined', () => {
+    const result = controller.editor('', () => {});
+    expect(typeof result.type).toBe('function');
+  });
+  it('validateAdmin when valid', () => {
+    expect(controller.validateAdmin()).toBe(false);
+  });
+  it('validateAdmin when invalid', () => {
+    controller.view.state.addAdminEmail = 'j@yahoo.com';
+    expect(controller.validateAdmin()).toBe(true);
+  });
 });

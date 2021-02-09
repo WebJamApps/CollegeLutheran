@@ -304,7 +304,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         {showTable ? (
           <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
         ) : null}
-        <YouthPageEditor comp={this} youthContent={youthContent} youthTitle={youthTitle} />
+        <YouthPageEditor comp={this} youthContent={youthContent} youthTitle={youthTitle} makeInput={this.forms.makeInput} />
         <AdminUserForm comp={this} />
       </div>
     );

@@ -1,8 +1,11 @@
 import React from 'react';
+import { InputParams } from '../../lib/forms';
 import type { AdminDashboard } from '../../containers/AdminDashboard';
 
-type PageProps = {comp:AdminDashboard;youthTitle:string;youthContent:string};
-const YouthPageEditor = ({ comp, youthTitle, youthContent }:PageProps): JSX.Element => (
+type PageProps = {comp:AdminDashboard;youthTitle:string;youthContent:string;makeInput:(arg0:InputParams)=>JSX.Element};
+const YouthPageEditor = ({
+  comp, youthTitle, youthContent, makeInput,
+}:PageProps): JSX.Element => (
   <div className="horiz-scroll">
     <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
       <h5>Change Youthpage Section</h5>
@@ -12,11 +15,11 @@ const YouthPageEditor = ({ comp, youthTitle, youthContent }:PageProps): JSX.Elem
           textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
         }}
       >
-        {comp.forms.makeInput({
+        {makeInput({
           type: 'text',
           label: 'Youth Title',
           isRequired: false,
-          onChange: (evt) => comp.setState({ youthTitle: evt.target.value }),
+          onChange: (evt:React.ChangeEvent<HTMLInputElement>) => comp.setState({ youthTitle: evt.target.value }),
           value: youthTitle,
           width: '90%',
         })}
