@@ -17,7 +17,6 @@ class AdminController {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
-    this.createHomeAPI = this.createHomeAPI.bind(this);
     this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
     this.editPicAPI = this.editPicAPI.bind(this);
@@ -26,6 +25,8 @@ class AdminController {
     this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
+    this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
+    this.putAPI = this.putAPI.bind(this);
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -143,30 +144,27 @@ class AdminController {
       window.location.assign(redirect);
       return `${r.status}`;
     }
-    return 'Didnt create book';
+    return 'Did not create book';
   }
 
-  async createHomeAPI(evt: { preventDefault: () => void; }): Promise<string> {
-    evt.preventDefault();
+  async putAPI(evt: { preventDefault: () => void; }, body:{title:string;comments:string;type:string}, redirect:string):Promise<string> {
     const { auth } = this.view.props;
-    const { title, homePageContent } = this.view.state;
+    evt.preventDefault();
     let r;
     try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=homePageContent`)
+      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
-        .send({ title, comments: homePageContent, type: 'homePageContent' });
-    } catch (e) {
-      return this.createBook({ title, comments: homePageContent, type: 'homePageContent' }, '/');
-    }
+        .send(body);
+    } catch (e) { return `${e.message}`; }
     if (r.status === 200) {
-      window.location.assign('/');
+      window.location.assign(redirect);
       return `${r.status}`;
     }
-    return 'Failed to create.';
+    return `Failed to update ${redirect} page.`;
   }
 
-  createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  async createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
@@ -219,17 +217,20 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  handleEditorChange(homePageContent: string): boolean { this.view.setState({ homePageContent }); return true; }
+  onChangeYouthContent(youthContent: string): string { this.view.setState({ youthContent }); return youthContent; }
 
-  editor(homePageContent: string | undefined): JSX.Element {
+  handleEditorChange(homePageContent: string): string { this.view.setState({ homePageContent }); return homePageContent; }
+
+  editor(pageContent: string | undefined, onChange?: (arg0: string) => string): JSX.Element {
+    let changeFunc = onChange;
+    if (!changeFunc) changeFunc = this.handleEditorChange;
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={homePageContent}
+        initialValue={pageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
-          // selector: 'textarea',
           menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
@@ -241,40 +242,8 @@ class AdminController {
             + 'alignleft aligncenter alignright alignjustify |'
             + 'bullist numlist outdent indent | removeformat | help',
         }}
-        onEditorChange={this.handleEditorChange}
+        onEditorChange={changeFunc}
       />
-    );
-  }
-
-  adminUserForm(): JSX.Element {
-    const { formError } = this.view.state;
-    return (
-      <div
-        className="material-content elevation3"
-        style={{ maxWidth: '320px', margin: '30px auto', padding: '10px 10px 20px 10px' }}
-      >
-        <h4 className="material-header-h4">
-          Add Admin User
-        </h4>
-        <form
-          id="modify-admins"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          <label htmlFor="addAdminEmail">
-            Admin Email
-            <input
-              id="addAdminEmail"
-              type="email"
-              placeholder="placeholder@gmail.com"
-              onChange={this.view.onChangeAdminEmail}
-            />
-          </label>
-          <input type="submit" disabled={this.validateAdmin()} onClick={this.addAdminUser} />
-          <p className="form-errors" style={{ color: 'red', marginBottom: '-15px' }}>{formError}</p>
-        </form>
-      </div>
     );
   }
 

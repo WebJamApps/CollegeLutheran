@@ -6,6 +6,8 @@ import forms from '../../lib/forms';
 import AdminController from './AdminController';
 import commonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
+import YouthPageEditor from '../../components/YouthPageEditor';
+import AdminUserForm from '../../components/AdminUserForm';
 
 export interface PicData {
   buttonId: string; buttonClick: (e: React.ChangeEvent<EventTarget>) => Promise<string>; title: string; nameId: string;
@@ -21,6 +23,7 @@ export interface DashboardProps extends RouteComponentProps {
   familyPics: Ibook[];
   otherPics: Ibook[];
   musicPics: Ibook[];
+  youthContent: Ibook;
 }
 type DashboardState = {
   type: string;
@@ -35,6 +38,8 @@ type DashboardState = {
   firstEdit: boolean;
   addAdminEmail: string;
   formError: string;
+  youthTitle: string;
+  youthContent: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -60,6 +65,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       firstEdit: true,
       addAdminEmail: '',
       formError: '',
+      youthTitle: props.youthContent.title || '',
+      youthContent: props.youthContent.comments || '',
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
@@ -221,6 +228,21 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
+  updateHomeButton(title:string, homePageContent:string):JSX.Element {
+    return (
+      <div style={{ marginLeft: '60%', marginTop: '10px' }}>
+        <button
+          type="button"
+          id="c-h"
+          disabled={false}
+          onClick={(evt) => this.controller.putAPI(evt, { title, comments: homePageContent, type: 'homePageContent' }, '/')}
+        >
+          Update Homepage
+        </button>
+      </div>
+    );
+  }
+
   changeHomepage(): JSX.Element {
     const { title, homePageContent } = this.state;
     const inputParams = {
@@ -242,11 +264,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
               <br />
               {this.controller.editor(homePageContent)}
             </label>
-            <div style={{ marginLeft: '60%', marginTop: '10px' }}>
-              <button type="button" id="c-h" disabled={false} onClick={this.controller.createHomeAPI}>
-                Update Homepage
-              </button>
-            </div>
+            {this.updateHomeButton(title, homePageContent)}
           </form>
         </div>
       </div>
@@ -276,25 +294,18 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const {
       showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
     } = this.props;
+    const { youthTitle, youthContent } = this.state;
     return (
       <div className="page-content">
-        <h4 style={{ textAlign: 'center', marginTop: '10px' }}>
-          CLC Admin Dashboard
-        </h4>
+        <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         {this.controller.addForumForm()}
         {this.changeYouthForm()}
         {showTable ? (
-          <PTable
-            auth={auth}
-            dispatch={dispatch}
-            youthPics={youthPics}
-            familyPics={familyPics}
-            otherPics={otherPics}
-            musicPics={musicPics}
-          />
+          <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
         ) : null}
-        {this.controller.adminUserForm()}
+        <YouthPageEditor comp={this} youthContent={youthContent} youthTitle={youthTitle} makeInput={this.forms.makeInput} />
+        <AdminUserForm comp={this} />
       </div>
     );
   }
