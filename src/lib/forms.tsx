@@ -52,8 +52,6 @@ export interface InputParams {
 function makeInput(p: InputParams): JSX.Element {
   let fId = p.label && p.label.toLowerCase();
   fId = fId.replace(/\s/g, '');
-  // fId = fId.split('(');
-  // [fId] = fId;
   return (
     <label className="inquiryLabel" htmlFor={fId}>
       {p.isRequired ? '* ' : ''}

@@ -6,6 +6,7 @@ import { PhotoTable } from '../../../src/components/PhotoTable';
 
 describe('Dashboard Container', () => {
   let props: any, wrapper: any;
+  const youthContent: any = { title: '', comments: '' };
   const history: any = {};
   const location: any = {};
   const match: any = {};
@@ -35,6 +36,7 @@ describe('Dashboard Container', () => {
       familyPics={[]}
       otherPics={[]}
       musicPics={[]}
+      youthContent={youthContent}
     />);
   });
   it('renders correctly', () => { expect(wrapper).toMatchSnapshot(); });
@@ -91,6 +93,7 @@ describe('Dashboard Container', () => {
       history={history}
       location={location}
       match={match}
+      youthContent={youthContent}
     />);
     wrapper2.instance().setState = jest.fn();
     const cpf = wrapper2.instance().changePicForm({
@@ -118,6 +121,7 @@ describe('Dashboard Container', () => {
       history={history}
       location={location}
       match={match}
+      youthContent={youthContent}
     />);
     wrapper2.instance().setState = jest.fn();
     wrapper2.update();
@@ -140,6 +144,7 @@ describe('Dashboard Container', () => {
       history={history}
       location={location}
       match={match}
+      youthContent={youthContent}
     />);
     wrapper2.instance().setState = jest.fn();
     wrapper2.update();
@@ -175,11 +180,20 @@ describe('Dashboard Container', () => {
       history={history}
       location={location}
       match={match}
+      youthContent={youthContent}
     />);
     expect(wrapper2.find(PhotoTable).exists()).toBe(false);
   });
   it('uses the event target id on onChangeAdminEmail', () => {
     const result = wrapper.instance().onChangeAdminEmail({ persist: jest.fn(), target: { id: 'addAdminEmail', value: 'test@gmail.com' } });
     expect(result).toBe('addAdminEmail');
+  });
+  it('handles click to update home page', () => {
+    wrapper.instance().controller.putAPI = jest.fn();
+    wrapper.update();
+    const updateHomeButton = wrapper.instance().updateHomeButton({ title: '', homePageContent: '' });
+    const b = shallow(updateHomeButton);
+    b.find('button').simulate('click');
+    expect(wrapper.instance().controller.putAPI).toHaveBeenCalled();
   });
 });

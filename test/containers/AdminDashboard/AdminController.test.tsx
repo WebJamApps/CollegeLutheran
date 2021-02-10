@@ -50,37 +50,6 @@ describe('AdminController', () => {
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');
     expect(r).toBe(false);
   });
-  it('sends an update homepage request to the backend', async () => {
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
-    Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
-    window.location.assign = jest.fn();
-    r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe('200');
-    expect(window.location.assign).toHaveBeenCalled();
-  });
-  it('catches error when sends an update homepage request to the backend', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('bad');
-  });
-  it('catches error when sends an update homepage request but successfully create new content', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('201');
-  });
-  it('catches error when sends an update homepage request but unsuccessfully create new content', async () => {
-    controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-    const res = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(res).toBe('Didnt create book');
-  });
-  it('handles 300 res from sending an update homepage request to the backend', async () => {
-    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-    r = await controller.createHomeAPI({ preventDefault: () => { } });
-    expect(r).toBe('Failed to create.');
-  });
   it('sends an create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
@@ -97,7 +66,7 @@ describe('AdminController', () => {
   it('handles 300 res from sending create pic request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
     r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-    expect(r).toBe('Didnt create book');
+    expect(r).toBe('Did not create book');
   });
   it('sends an edit pic request to the backend', async () => {
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
@@ -137,7 +106,7 @@ describe('AdminController', () => {
   });
   it('handles change within the tinymce editor', () => {
     r = controller.handleEditorChange('howdy');
-    expect(r).toBe(true);
+    expect(r).toBe('howdy');
   });
   it('validates book when not firstEdit', () => {
     const dis = controller.validateBook(' ', ' ', ' ', false);
@@ -168,5 +137,36 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
     const res = await controller.addAdminUser({ preventDefault: () => { } });
     expect(res).toBe(false);
+  });
+  it('putAPI successfully sends PUT rest call', async () => {
+    const returnBody: Record<string, unknown> = { body: { _id: '1' }, status: 200 };
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '');
+    expect(result).toBe('200');
+  });
+  it('putAPI unsuccessful PUT rest call', async () => {
+    const returnBody: Record<string, unknown> = { body: { _id: '1' }, status: 400 };
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '/');
+    expect(result).toBe('Failed to update / page.');
+  });
+  it('putAPI error when PUT rest call', async () => {
+    controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
+    const result = await controller.putAPI({ preventDefault: () => {} }, { title: '', comments: '' }, '/');
+    expect(result).toBe('bad');
+  });
+  it('onChangeYouthContent', () => {
+    expect(controller.onChangeYouthContent('howdy')).toBe('howdy');
+  });
+  it('makes tiny editor with onchange defined', () => {
+    const result = controller.editor('', () => {});
+    expect(typeof result.type).toBe('function');
+  });
+  it('validateAdmin when valid', () => {
+    expect(controller.validateAdmin()).toBe(false);
+  });
+  it('validateAdmin when invalid', () => {
+    controller.view.state.addAdminEmail = 'j@yahoo.com';
+    expect(controller.validateAdmin()).toBe(true);
   });
 });
