@@ -1,5 +1,12 @@
 {
-  "staff": [{
+  "staff": [
+    {
+      "sectionId": "Katy",
+      "title": "Katherine Gattuso - Coordinator for Children, Youth & Family Ministries",
+      "src": "https://dl.dropboxusercontent.com/s/kayc8lcvn0hpyyh/Katy_Staff.jpg?dl=0",
+      "desc": "<p>Katherine &quot;Katy&quot; Graduated from Roanoke College December of 2021. She graduated with a Bachelor of Arts in Christian Studies and a concentration in Parish Youth Leadership. Katy Grew up in Richmond, VA and was baptized and confirmed at Epiphany Lutheran Church. As a youth she was an active participant in Epiphany's Youth Group and was an avid participant in VA Synod ELCA Youth Events.</p><p>She enjoys spending time with family. Katy is the youngest of 3 older brothers, 2 older stepbrothers, 2 older stepsisters and a half-sister in the Ukraine!</p><p>Katy also enjoys spending time in nature, hiking, and spending time with friends.</p>"
+    },
+    {
       "sectionId": "Sandi",
       "title": "Sandi Roop - Parish Administrator",
       "src": "https://dl.dropboxusercontent.com/s/i1n5ct7wnt2ju0d/Sandi_v01.jpg?dl=0",
