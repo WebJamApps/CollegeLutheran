@@ -45,20 +45,22 @@ class AdminController {
   }
 
   addForumForm(): JSX.Element {
-    const { announcementtitle, announcementurl, forumId } = this.view.state;
+    const {
+      announcementtitle, announcementurl, forumId, isworshipbulletin,
+    } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
       type: 'text',
-      label: 'Announcement Title',
+      label: 'Title',
       isRequired: false,
       onChange: this.view.onChange,
       value: announcementtitle,
       width: '90%',
     };
-    const ip2 = { ...inputParams, label: 'Announcement URL', value: announcementurl };
+    const ip2 = { ...inputParams, label: 'URL', value: announcementurl };
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
-        <h5>Announcements Table</h5>
+        <h5>News Table</h5>
         <form
           id="create-forum"
           style={{
@@ -67,6 +69,16 @@ class AdminController {
         >
           {this.view.forms.makeInput(inputParams)}
           {this.view.forms.makeInput(ip2)}
+          {this.view.forms.makeInput({
+            newLine: false,
+            width: '10%',
+            type: 'checkbox',
+            label: 'Is Worship Bulletin',
+            isRequired: false,
+            onChange: this.view.onChangeCb,
+            value: isworshipbulletin === '' ? 'worshipbulletin' : '',
+
+          })}
           {this.addForumButton(announcementtitle, announcementurl)}
         </form>
         <hr />

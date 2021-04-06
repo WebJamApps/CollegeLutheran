@@ -34,7 +34,7 @@ const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
             {' '}
             <a href="/news">News</a>
             {' '}
-            and subscribe to our emails or view them, including bulletins.
+            to subscribe to our emails or view them, including weekly updates and worship bulletins.
             Scroll below to view our CLC Events Calendar, and follow us on social media.
             <br />
           </p>

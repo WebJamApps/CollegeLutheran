@@ -40,6 +40,7 @@ type DashboardState = {
   formError: string;
   youthTitle: string;
   youthContent: string;
+  isworshipbulletin: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
@@ -53,6 +54,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
+      isworshipbulletin: '',
       type: '',
       title: props.homeContent.title || '',
       homePageContent: props.homeContent.comments || '',
@@ -70,6 +72,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.onChangeCb = this.onChangeCb.bind(this);
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
@@ -91,6 +94,14 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       return stateValue;
     }
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    return evt.target.id;
+  }
+
+  onChangeCb(evt: React.ChangeEvent<HTMLInputElement>): string {
+    evt.persist();
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value }));
+    console.log(evt.target.id);
+    console.log(evt.target.value);
     return evt.target.id;
   }
 
@@ -222,7 +233,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
           type="button"
           disabled={this.controller.validateDeleteBook(forumId)}
         >
-          Delete Announcement
+          Delete
         </button>
       </form>
     );

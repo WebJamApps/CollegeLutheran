@@ -45,18 +45,20 @@ function makeDataDropdown(p: DataDropParams): JSX.Element {
   );
 }
 export interface InputParams {
+  newLine?: boolean,
   type: string | undefined,
   label: string, isRequired: boolean | undefined,
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: string, width: string
 }
 function makeInput(p: InputParams): JSX.Element {
-  let fId = p.label && p.label.toLowerCase();
+  let fId = p.label && p.label.toLowerCase(), newLine = true;
   fId = fId.replace(/\s/g, '');
+  if (p.newLine !== undefined && p.newLine === false) newLine = false;
   return (
     <label className="inquiryLabel" htmlFor={fId}>
       {p.isRequired ? '* ' : ''}
       {p.label}
-      <br />
+      {newLine ? <br /> : null}
       <input
         style={{ paddingLeft: 0, minWidth: 'inherit', width: p.width }}
         id={fId}
