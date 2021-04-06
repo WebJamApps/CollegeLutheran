@@ -1,6 +1,8 @@
 import superagent from 'superagent';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Redirect, Route, Switch,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import commonUtils from '../lib/commonUtils';
 import DefaultMusic from '../containers/Music';
@@ -67,6 +69,7 @@ export class App extends Component<AppProps> {
               <Route path="/belief" component={Beliefs} />
               <Route path="/family" component={DefaultFamily} />
               <Route path="/giving" component={Giving} />
+              <Route exact path="/onlinegiving"><Redirect to="/giving" /></Route>
               <Route exact path="/staff" component={Staff} />
               {auth.isAuthenticated && auth.user.userType && userRoles.indexOf(auth.user.userType) !== -1
                 ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
