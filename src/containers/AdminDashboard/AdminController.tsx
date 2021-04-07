@@ -46,18 +46,18 @@ class AdminController {
 
   addForumForm(): JSX.Element {
     const {
-      announcementtitle, announcementurl, forumId, isworshipbulletin,
+      newstitle, newsurl, forumId, isworshipbulletin,
     } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
       type: 'text',
-      label: 'Title',
+      label: 'News Title',
       isRequired: false,
-      onChange: this.view.onChange,
-      value: announcementtitle,
+      onChange: this.view.onChangeAddForum,
+      value: newstitle,
       width: '90%',
     };
-    const ip2 = { ...inputParams, label: 'URL', value: announcementurl };
+    const ip2 = { ...inputParams, label: 'News URL', value: newsurl };
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>News Table</h5>
@@ -75,11 +75,11 @@ class AdminController {
             type: 'checkbox',
             label: 'Is Worship Bulletin',
             isRequired: false,
-            onChange: this.view.onChangeCb,
+            onChange: this.view.onChangeAddForum,
             value: isworshipbulletin === '' ? 'worshipbulletin' : '',
 
           })}
-          {this.addForumButton(announcementtitle, announcementurl)}
+          {this.addForumButton(newstitle, newsurl)}
         </form>
         <hr />
         {this.view.deleteForumForm(forumId, books)}
@@ -183,15 +183,15 @@ class AdminController {
 
   async addForumAPI(): Promise<boolean> {
     const { auth } = this.view.props;
-    const { announcementtitle, announcementurl } = this.view.state;
+    const { newstitle, newsurl, isworshipbulletin } = this.view.state;
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: announcementtitle,
-          url: announcementurl,
-          comments: '',
+          title: newstitle,
+          url: newsurl,
+          comments: isworshipbulletin,
           type: 'Forum',
           access: 'CLC',
         });

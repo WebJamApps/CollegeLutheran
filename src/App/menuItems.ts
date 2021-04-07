@@ -38,6 +38,13 @@ const menuItems = [{
 {
   classname: '',
   type: 'link',
+  iconClass: 'fas fa-bible',
+  link: '',
+  name: 'Bulletin',
+},
+{
+  classname: '',
+  type: 'link',
   iconClass: 'fas fa-video',
   link: '/livestream',
   name: 'Livestream',

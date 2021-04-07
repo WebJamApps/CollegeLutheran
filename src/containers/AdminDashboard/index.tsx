@@ -29,8 +29,8 @@ type DashboardState = {
   type: string;
   title: string;
   homePageContent: string;
-  announcementtitle: string;
-  announcementurl: string;
+  newstitle: string;
+  newsurl: string;
   youthName: string;
   youthURL: string;
   forumId: string;
@@ -58,8 +58,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       type: '',
       title: props.homeContent.title || '',
       homePageContent: props.homeContent.comments || '',
-      announcementtitle: '',
-      announcementurl: '',
+      newstitle: '',
+      newsurl: '',
       youthName: '',
       youthURL: '',
       forumId: '',
@@ -72,7 +72,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     };
     this.forms = forms;
     this.onChange = this.onChange.bind(this);
-    this.onChangeCb = this.onChangeCb.bind(this);
+    this.onChangeAddForum = this.onChangeAddForum.bind(this);
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
@@ -97,8 +97,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     return evt.target.id;
   }
 
-  onChangeCb(evt: React.ChangeEvent<HTMLInputElement>): string {
-    evt.persist();
+  onChangeAddForum(evt: React.ChangeEvent<HTMLInputElement>): string {
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value }));
     console.log(evt.target.id);
     console.log(evt.target.value);
