@@ -31,13 +31,6 @@ const menuItems = [{
 {
   classname: '',
   type: 'link',
-  iconClass: 'far fa-newspaper',
-  link: '/news',
-  name: 'News',
-},
-{
-  classname: '',
-  type: 'link',
   iconClass: 'fas fa-bible',
   link: '',
   name: 'Bulletin',
@@ -48,6 +41,13 @@ const menuItems = [{
   iconClass: 'fas fa-video',
   link: '/livestream',
   name: 'Livestream',
+},
+{
+  classname: '',
+  type: 'link',
+  iconClass: 'far fa-newspaper',
+  link: '/news',
+  name: 'News',
 },
 {
   classname: '',

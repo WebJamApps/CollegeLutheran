@@ -1,6 +1,7 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
 import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
@@ -44,6 +45,31 @@ class AdminController {
     );
   }
 
+  createNews(inputParams: InputParams, ip2: InputParams, isworshipbulletin: string, newstitle: string, newsurl: string):JSX.Element {
+    return (
+      <form
+        id="create-forum"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        {this.view.forms.makeInput(inputParams)}
+        {this.view.forms.makeInput(ip2)}
+        {this.view.forms.makeInput({
+          newLine: false,
+          width: '10%',
+          type: 'checkbox',
+          label: 'Is Worship Bulletin',
+          isRequired: false,
+          onChange: this.view.onChangeAddForum,
+          value: isworshipbulletin === '' ? 'worshipbulletin' : '',
+
+        })}
+        {this.addForumButton(newstitle, newsurl)}
+      </form>
+    );
+  }
+
   addForumForm(): JSX.Element {
     const {
       newstitle, newsurl, forumId, isworshipbulletin,
@@ -61,26 +87,7 @@ class AdminController {
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
         <h5>News Table</h5>
-        <form
-          id="create-forum"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          {this.view.forms.makeInput(inputParams)}
-          {this.view.forms.makeInput(ip2)}
-          {this.view.forms.makeInput({
-            newLine: false,
-            width: '10%',
-            type: 'checkbox',
-            label: 'Is Worship Bulletin',
-            isRequired: false,
-            onChange: this.view.onChangeAddForum,
-            value: isworshipbulletin === '' ? 'worshipbulletin' : '',
-
-          })}
-          {this.addForumButton(newstitle, newsurl)}
-        </form>
+        {this.createNews(inputParams, ip2, isworshipbulletin, newstitle, newsurl)}
         <hr />
         {this.view.deleteForumForm(forumId, books)}
       </div>

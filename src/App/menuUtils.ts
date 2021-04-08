@@ -14,7 +14,6 @@ const continueMenuItem = (menu: MenuItem,
 
 const setBulletin = (mItem:MenuItem, view:AppTemplate) => {
   const { books } = view.props;
-  console.log(books);
   const m = mItem;
   if (books) {
     const bulletins:any[] = books.filter((b) => b.comments === 'worshipbulletin');
