@@ -188,6 +188,10 @@ describe('Dashboard Container', () => {
     const result = wrapper.instance().onChangeAdminEmail({ persist: jest.fn(), target: { id: 'addAdminEmail', value: 'test@gmail.com' } });
     expect(result).toBe('addAdminEmail');
   });
+  it('uses the event target id on onChangeAddForum', () => {
+    const result = wrapper.instance().onChangeAddForum({ persist: jest.fn(), target: { id: 'isworshipbulletin', value: 'worshipbulletin' } });
+    expect(result).toBe('isworshipbulletin');
+  });
   it('handles click to update home page', () => {
     wrapper.instance().controller.putAPI = jest.fn();
     wrapper.update();

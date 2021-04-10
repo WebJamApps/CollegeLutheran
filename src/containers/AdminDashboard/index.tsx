@@ -2,9 +2,9 @@ import React, { Component, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
-import forms from '../../lib/forms';
+import Forms from '../../lib/forms';
 import AdminController from './AdminController';
-import commonUtils from '../../lib/commonUtils';
+import CommonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 import YouthPageEditor from '../../components/YouthPageEditor';
 import AdminUserForm from '../../components/AdminUserForm';
@@ -29,8 +29,8 @@ type DashboardState = {
   type: string;
   title: string;
   homePageContent: string;
-  announcementtitle: string;
-  announcementurl: string;
+  newstitle: string;
+  newsurl: string;
   youthName: string;
   youthURL: string;
   forumId: string;
@@ -40,24 +40,25 @@ type DashboardState = {
   formError: string;
   youthTitle: string;
   youthContent: string;
+  isworshipbulletin: string;
 };
 export class AdminDashboard extends Component<DashboardProps, DashboardState> {
-  commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
+  commonUtils = CommonUtils;
 
   controller: AdminController;
 
-  forms: typeof forms;
+  forms = Forms;
 
   constructor(props: DashboardProps) {
     super(props);
-    this.commonUtils = commonUtils;
     this.controller = new AdminController(this);
     this.state = {
+      isworshipbulletin: '',
       type: '',
       title: props.homeContent.title || '',
       homePageContent: props.homeContent.comments || '',
-      announcementtitle: '',
-      announcementurl: '',
+      newstitle: '',
+      newsurl: '',
       youthName: '',
       youthURL: '',
       forumId: '',
@@ -68,8 +69,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       youthTitle: props.youthContent.title || '',
       youthContent: props.youthContent.comments || '',
     };
-    this.forms = forms;
     this.onChange = this.onChange.bind(this);
+    this.onChangeAddForum = this.onChangeAddForum.bind(this);
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
@@ -91,6 +92,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       return stateValue;
     }
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value, firstEdit: false }));
+    return evt.target.id;
+  }
+
+  onChangeAddForum(evt: React.ChangeEvent<HTMLInputElement>): string {
+    this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value }));
     return evt.target.id;
   }
 
@@ -116,18 +122,10 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       youthName, youthURL, type, showCaption,
     } = this.state;
     const { editPic } = this.props;
-    if (youthName === '' && editPic.title !== undefined) {
-      youthName = editPic.title;
-    }
-    if (youthURL === '' && editPic.url !== undefined) {
-      youthURL = editPic.url;
-    }
-    if (type === '' && editPic.type !== undefined) {
-      type = editPic.type;
-    }
-    if (showCaption === '' && editPic.comments !== undefined) {
-      showCaption = editPic.comments;
-    }
+    if (youthName === '' && editPic.title !== undefined) youthName = editPic.title;
+    if (youthURL === '' && editPic.url !== undefined) youthURL = editPic.url;
+    if (type === '' && editPic.type !== undefined) type = editPic.type;
+    if (showCaption === '' && editPic.comments !== undefined) showCaption = editPic.comments;
     this.setState({
       youthName, youthURL, type, showCaption,
     });
@@ -189,12 +187,8 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;
     const { editPic } = this.props;
-    if (type === '' && editPic.type !== undefined) {
-      type = editPic.type;
-    }
-    if (showCaption === '' && editPic.comments !== undefined) {
-      showCaption = editPic.comments;
-    }
+    if (type === '' && editPic.type !== undefined) type = editPic.type;
+    if (showCaption === '' && editPic.comments !== undefined) showCaption = editPic.comments;
     return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
@@ -222,7 +216,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
           type="button"
           disabled={this.controller.validateDeleteBook(forumId)}
         >
-          Delete Announcement
+          Delete
         </button>
       </form>
     );

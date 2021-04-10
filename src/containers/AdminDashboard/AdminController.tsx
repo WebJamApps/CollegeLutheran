@@ -1,6 +1,7 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
 import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
@@ -44,31 +45,49 @@ class AdminController {
     );
   }
 
+  createNews(inputParams: InputParams, ip2: InputParams, isworshipbulletin: string, newstitle: string, newsurl: string):JSX.Element {
+    return (
+      <form
+        id="create-forum"
+        style={{
+          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+        }}
+      >
+        {this.view.forms.makeInput(inputParams)}
+        {this.view.forms.makeInput(ip2)}
+        {this.view.forms.makeInput({
+          newLine: false,
+          width: '10%',
+          type: 'checkbox',
+          label: 'Is Worship Bulletin',
+          isRequired: false,
+          onChange: this.view.onChangeAddForum,
+          value: isworshipbulletin === '' ? 'worshipbulletin' : '',
+
+        })}
+        {this.addForumButton(newstitle, newsurl)}
+      </form>
+    );
+  }
+
   addForumForm(): JSX.Element {
-    const { announcementtitle, announcementurl, forumId } = this.view.state;
+    const {
+      newstitle, newsurl, forumId, isworshipbulletin,
+    } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
       type: 'text',
-      label: 'Announcement Title',
+      label: 'News Title',
       isRequired: false,
-      onChange: this.view.onChange,
-      value: announcementtitle,
+      onChange: this.view.onChangeAddForum,
+      value: newstitle,
       width: '90%',
     };
-    const ip2 = { ...inputParams, label: 'Announcement URL', value: announcementurl };
+    const ip2 = { ...inputParams, label: 'News URL', value: newsurl };
     return (
       <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
-        <h5>Announcements Table</h5>
-        <form
-          id="create-forum"
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          {this.view.forms.makeInput(inputParams)}
-          {this.view.forms.makeInput(ip2)}
-          {this.addForumButton(announcementtitle, announcementurl)}
-        </form>
+        <h5>News Table</h5>
+        {this.createNews(inputParams, ip2, isworshipbulletin, newstitle, newsurl)}
         <hr />
         {this.view.deleteForumForm(forumId, books)}
       </div>
@@ -171,15 +190,15 @@ class AdminController {
 
   async addForumAPI(): Promise<boolean> {
     const { auth } = this.view.props;
-    const { announcementtitle, announcementurl } = this.view.state;
+    const { newstitle, newsurl, isworshipbulletin } = this.view.state;
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send({
-          title: announcementtitle,
-          url: announcementurl,
-          comments: '',
+          title: newstitle,
+          url: newsurl,
+          comments: isworshipbulletin,
           type: 'Forum',
           access: 'CLC',
         });
