@@ -34,7 +34,7 @@ const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
             {' '}
             <a href="/news">News</a>
             {' '}
-            and subscribe to our email announcements or view a copy of our monthly forum.
+            to view or subscribe to our emails.
             Scroll below to view our CLC Events Calendar, and follow us on social media.
             <br />
           </p>

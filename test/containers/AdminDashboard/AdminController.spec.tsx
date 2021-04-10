@@ -4,13 +4,13 @@ import AdminController from '../../../src/containers/AdminDashboard/AdminControl
 describe('AdminController', () => {
   let r: any, controller: any,
     vStub: { setState: jest.Mock<any, any>;
-      forms: { makeDropdown: () => any; };
+      forms: { makeDropdown: () => any; makeInput:()=>any};
       state: { title: string; homePageContent: string; youthURL: string; type: string; addAdminEmail: string, formError: string };
       props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
   beforeEach(() => {
     vStub = {
       setState: jest.fn(),
-      forms: { makeDropdown: () => null },
+      forms: { makeDropdown: () => null, makeInput: jest.fn() },
       state: {
         title: 'Exciting News!',
         homePageContent: 'Lots of stuff here!',
@@ -168,5 +168,9 @@ describe('AdminController', () => {
   it('validateAdmin when invalid', () => {
     controller.view.state.addAdminEmail = 'j@yahoo.com';
     expect(controller.validateAdmin()).toBe(true);
+  });
+  it('handles uncheck for isworshipbulletin', () => {
+    const newsForm = controller.createNews({}, {}, 'worshipbulletin', '', '');
+    expect(newsForm.props.id).toBe('create-forum');
   });
 });

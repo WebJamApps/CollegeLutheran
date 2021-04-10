@@ -8,10 +8,21 @@ import { MenuItem } from '../../src/App/menuItems';
 const dFunc = () => { };
 let anyProp: any = {};
 const location: any = { pathname: '/' };
+const books:any = [];
 function setup() {
   const props = { children: '<div></div>' };
   document.body.innerHTML = '<div class="page-content"></div>';
-  const wrapper = shallow<AppTemplate>(<AppTemplate match={anyProp} history={anyProp} dispatch={dFunc} location={location}><div /></AppTemplate>);
+  const wrapper = shallow<AppTemplate>(
+    <AppTemplate
+      books={books}
+      match={anyProp}
+      history={anyProp}
+      dispatch={dFunc}
+      location={location}
+    >
+      <div />
+    </AppTemplate>,
+  );
   return { wrapper, props };
 }
 
@@ -27,13 +38,25 @@ describe('AppTemplate', () => {
   });
   it('handles response from google login', async () => {
     authUtils.responseGoogleLogin = jest.fn(() => Promise.resolve(''));
-    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={anyProp} history={anyProp}><div /></AppTemplate>);
+    const wrapper2 = shallow<AppTemplate>(
+      <AppTemplate
+        books={books}
+        dispatch={dFunc}
+        location={location}
+        match={anyProp}
+        history={anyProp}
+      >
+        <div />
+      </AppTemplate>,
+    );
     const result = await wrapper2.instance().responseGoogleLogin({ code: '' });
     expect(result).toBe('');
   });
   it('handles response from google logout', () => {
     authUtils.responseGoogleLogout = jest.fn(() => '');
-    const wrapper2 = shallow<AppTemplate>(<AppTemplate dispatch={dFunc} location={location} match={anyProp} history={anyProp}><div /></AppTemplate>);
+    const wrapper2 = shallow<AppTemplate>(
+      <AppTemplate books={books} dispatch={dFunc} location={location} match={anyProp} history={anyProp}><div /></AppTemplate>,
+    );
     const result = wrapper2.instance().responseGoogleLogout();
     expect(result).toBe('');
   });
@@ -98,6 +121,15 @@ describe('AppTemplate', () => {
     };
     const index = 1;
     const result = aT.makeMenuLink(menu, index);
-    expect(result).toBeTruthy();
+    expect(result.props.className).toBe('menu-item');
+  });
+  it('calls the makeMenu function for external link', () => {
+    const aT = new AppTemplate(anyProp);
+    const menu: MenuItem = {
+      classname: '', type: '', iconClass: '', link: 'https://google.com', name: '',
+    };
+    const index = 1;
+    const result = aT.makeMenuLink(menu, index);
+    expect(result.props.className).toBe('menu-item');
   });
 });

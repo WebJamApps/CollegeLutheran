@@ -5,7 +5,7 @@ import {
 } from 'react-google-login';
 import { connect } from 'react-redux';
 import authUtils from './authUtils';
-import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
+import mapStoreToProps, { Auth, Ibook } from '../redux/mapStoreToProps';
 import Footer from './Footer';
 import menuUtils from './menuUtils';
 import menuItems, { MenuItem } from './menuItems';
@@ -14,6 +14,7 @@ interface AppMainProps extends RouteComponentProps {
   children: React.ReactNode;
   auth: Auth;
   dispatch: Dispatch<unknown>;
+  books?: Ibook[] | []
 }
 
 interface CurrentStyles {
@@ -113,6 +114,17 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   }
 
   makeMenuLink(menu: MenuItem, index: number): JSX.Element {
+    if (menu.link.includes('http')) {
+      return (
+        <div key={index} className="menu-item">
+          <a href={menu.link} target="_blank" rel="noreferrer" className="nav-link" onClick={this.close}>
+            <i className={`${menu.iconClass}`} />
+            &nbsp;
+            <span className="nav-item">{menu.name}</span>
+          </a>
+        </div>
+      );
+    }
     return (
       <div key={index} className="menu-item">
         <Link to={menu.link} className="nav-link" onClick={this.close}>

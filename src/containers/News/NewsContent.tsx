@@ -21,7 +21,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
                 textAlign: 'center',
               }}
             >
-              Announcements
+              News
             </h3>
             <div className="TableStyle-root">
               <div className="TableContainer-root table-responsive">
