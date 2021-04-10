@@ -34,4 +34,4 @@ function menuItem(menu: MenuItem,
   return continueMenuItem(m, index, auth, view);
 }
 
-export default { continueMenuItem, menuItem };
+export default { continueMenuItem, menuItem, setBulletin };

@@ -11,6 +11,7 @@ describe('menuUtils', () => {
     googleButtons: () => true,
     makeMenuLink: () => true,
     props: {
+      books: [],
       location: { pathname: '/' },
       auth: { token: 'token', isAuthenticated: true, user: { userType: authRole } },
       dispatch: () => Promise.resolve(true),
@@ -59,5 +60,19 @@ describe('menuUtils', () => {
     },
     1, viewStub);
     expect(r).toBe(null);
+  });
+  it('setBulletin', () => {
+    viewStub.props.books = [{ comments: 'worshipbulletin', url: 'external' }, { comments: '', url: 'url' }];
+    const menuItem:any = { link: '' };
+    const newItem = menuUtils.setBulletin(menuItem, viewStub);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    expect(newItem.link).toBe('external');
+  });
+  it('setBulletin when no books', () => {
+    viewStub.props.books = undefined;
+    const menuItem:any = { link: '' };
+    const newItem = menuUtils.setBulletin(menuItem, viewStub);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    expect(newItem.link).toBe('');
   });
 });

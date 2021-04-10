@@ -121,6 +121,15 @@ describe('AppTemplate', () => {
     };
     const index = 1;
     const result = aT.makeMenuLink(menu, index);
-    expect(result).toBeTruthy();
+    expect(result.props.className).toBe('menu-item');
+  });
+  it('calls the makeMenu function for external link', () => {
+    const aT = new AppTemplate(anyProp);
+    const menu: MenuItem = {
+      classname: '', type: '', iconClass: '', link: 'https://google.com', name: '',
+    };
+    const index = 1;
+    const result = aT.makeMenuLink(menu, index);
+    expect(result.props.className).toBe('menu-item');
   });
 });
