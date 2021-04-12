@@ -141,7 +141,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
       <div className="nav-list" style={{ width: '220px' }}>
         <p style={{ fontSize: '1px', marginBottom: '2px' }} />
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
-          <p style={{ color: '#fff', marginBottom: '2px' }}>
+          <p style={{ color: '#fff', marginBottom: '2px', fontSize: '11pt' }}>
             <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={{ color: '#88c1ff' }}>
               <span>210 S. College Ave</span>
             </a>
@@ -150,7 +150,7 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
           </p>
         </div>
         <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
-          <p style={{ color: '#fff', marginBottom: '2px' }}>
+          <p style={{ color: '#fff', marginBottom: '2px', fontSize: '11pt' }}>
             <span>ph: </span>
             <a href="tel:5403894963" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4963</a>
             <br />
