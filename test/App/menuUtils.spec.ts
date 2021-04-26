@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-fs-filename */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import menuUtils from '../../src/App/menuUtils';
 import { Auth } from '../../src/redux/mapStoreToProps';
@@ -65,14 +66,32 @@ describe('menuUtils', () => {
     viewStub.props.books = [{ comments: 'worshipbulletin', url: 'external' }, { comments: '', url: 'url' }];
     const menuItem:any = { link: '' };
     const newItem = menuUtils.setBulletin(menuItem, viewStub);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(newItem.link).toBe('external');
   });
   it('setBulletin when no books', () => {
     viewStub.props.books = undefined;
     const menuItem:any = { link: '' };
     const newItem = menuUtils.setBulletin(menuItem, viewStub);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     expect(newItem.link).toBe('');
+  });
+  it('sets bulletin when no url is defined', () => {
+    viewStub.props.books = [
+      { comments: 'worshipbulletin' }, { comments: '' },
+    ];
+    const menuItem:any = { link: '' };
+    const newItem = menuUtils.setBulletin(menuItem, viewStub);
+    expect(newItem.link).toBe('');
+  });
+  it('setBulletin to correct sorted bulletin', () => {
+    viewStub.props.books = [
+      { comments: 'worshipbulletin', url: 'external', created_at: '2021-04-26T11:04:45.120Z' },
+      { comments: 'worshipbulletin', url: 'external', created_at: '2020-04-26T11:04:45.120Z' },
+      { comments: 'worshipbulletin', url: 'latest', created_at: '2022-04-26T11:04:45.120Z' },
+      { comments: 'worshipbulletin', url: 'external', created_at: '2021-04-26T11:04:45.120Z' },
+      { comments: '', url: 'url' },
+    ];
+    const menuItem:any = { link: '' };
+    const newItem = menuUtils.setBulletin(menuItem, viewStub);
+    expect(newItem.link).toBe('latest');
   });
 });
