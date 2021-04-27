@@ -1,4 +1,4 @@
-import { Auth } from '../redux/mapStoreToProps';
+import { Auth, Ibook } from '../redux/mapStoreToProps';
 import commonUtils from '../lib/commonUtils';
 import { MenuItem } from './menuItems';
 import type { AppTemplate } from './AppTemplate';
@@ -12,12 +12,27 @@ const continueMenuItem = (menu: MenuItem,
   return null;
 };
 
+const sortBulletins = (bulletin:Ibook[]) => {
+  const sortedBulletins = bulletin.sort((a, b) => {
+    const aTime = new Date(a.created_at).getTime();
+    const bTime = new Date(b.created_at).getTime();
+    if (aTime > bTime) return -1;
+    if (aTime < bTime) return 1;
+    return 0;
+  });
+  return sortedBulletins;
+};
+
 const setBulletin = (mItem:MenuItem, view:AppTemplate) => {
   const { books } = view.props;
   const m = mItem;
   if (books) {
     const bulletins:any[] = books.filter((b) => b.comments === 'worshipbulletin');
-    if (bulletins && bulletins.length > 0) m.link = bulletins[0].url;
+    if (bulletins && bulletins.length > 0) {
+      let link = sortBulletins(bulletins)[0].url;
+      if (link === undefined) link = '';
+      m.link = link;
+    }
   }
   return m;
 };
