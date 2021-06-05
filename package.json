@@ -135,7 +135,6 @@
     "@types/expect-puppeteer": "latest",
     "@types/jest-environment-puppeteer": "latest",
     "@types/puppeteer": "latest",
-    "@types/react-resize-detector": "latest",
     "@types/react-test-renderer": "latest",
     "@types/redux-mock-store": "latest",
     "@typescript-eslint/eslint-plugin": "latest",

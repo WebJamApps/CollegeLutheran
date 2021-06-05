@@ -3,7 +3,7 @@ import DefaultCalendarContent from './CalendarContent';
 import commonUtils from '../../lib/commonUtils';
 
 export default class Calendar extends Component {
-  commonUtils: {setTitleAndScroll: (pageTitle: string, width: number) => void;};
+  commonUtils: { setTitleAndScroll: (pageTitle: string, width: number) => void; };
 
   constructor(props: Readonly<Calendar>) {
     super(props);
