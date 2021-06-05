@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": "15.14.0"
+    "node": ">=16.1.0"
   },
   "files": [
     "webpack.config.js",
@@ -60,6 +60,7 @@
     "@types/react-dom": "latest",
     "@types/react-html-parser": "latest",
     "@types/react-redux": "latest",
+    "@types/react-resize-detector": "^4.2.0",
     "@types/react-router-dom": "latest",
     "@types/react-router-hash-link": "latest",
     "@types/react-slick": "latest",
@@ -87,6 +88,7 @@
     "mini-css-extract-plugin": "latest",
     "moment": "latest",
     "mui-datatables": "latest",
+    "node-notifier": "^10.0.0",
     "node-sass": "latest",
     "nps": "latest",
     "nps-utils": "latest",
@@ -160,6 +162,7 @@
     "react-hot-loader": "latest",
     "react-test-renderer": "latest",
     "redux-mock-store": "latest",
+    "resize-observer-polyfill": "latest",
     "stylelint": "latest",
     "stylelint-config-standard": "latest",
     "stylelint-scss": "latest",
