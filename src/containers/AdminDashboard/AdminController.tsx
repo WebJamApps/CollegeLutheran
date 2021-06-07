@@ -155,7 +155,7 @@ class AdminController {
     return true;
   }
 
-  async createBook(data: { title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  async createBook(data: { title: string, comments: string, type: string }, redirect: string): Promise<string> {
     const { auth } = this.view.props;
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
@@ -166,7 +166,7 @@ class AdminController {
     return 'Did not create book';
   }
 
-  async putAPI(evt: { preventDefault: () => void; }, body:{title:string;comments:string;type:string}, redirect:string):Promise<string> {
+  async putAPI(evt: { preventDefault: () => void; }, body:{ title:string;comments:string;type:string }, redirect:string):Promise<string> {
     const { auth } = this.view.props;
     evt.preventDefault();
     let r;
@@ -183,7 +183,8 @@ class AdminController {
     return `Failed to update ${redirect} page.`;
   }
 
-  async createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  async createPicApi(evt: { preventDefault: () => void; }, data: { title: string,
+    comments: string, type: string }, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
