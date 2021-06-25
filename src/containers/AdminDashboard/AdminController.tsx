@@ -238,7 +238,6 @@ class AdminController {
   }
 
   onChangeYouthContent(youthContent: string): string {
-    console.log(youthContent);
     this.view.setState({ youthContent }); return youthContent;
   }
 
