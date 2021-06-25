@@ -247,7 +247,7 @@ class AdminController {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={pageContent}
+        value={pageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
