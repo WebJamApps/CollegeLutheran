@@ -237,7 +237,10 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  onChangeYouthContent(youthContent: string): string { this.view.setState({ youthContent }); return youthContent; }
+  onChangeYouthContent(youthContent: string): string {
+    console.log(youthContent);
+    this.view.setState({ youthContent }); return youthContent;
+  }
 
   handleEditorChange(homePageContent: string): string { this.view.setState({ homePageContent }); return homePageContent; }
 
