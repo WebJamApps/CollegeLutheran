@@ -237,7 +237,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  onChangeYouthContent(youthContent: string): string { this.view.setState({ youthContent }); return youthContent; }
+  onChangeYouthContent(youthContent: string): string {
+    this.view.setState({ youthContent }); return youthContent;
+  }
 
   handleEditorChange(homePageContent: string): string { this.view.setState({ homePageContent }); return homePageContent; }
 
@@ -247,7 +249,7 @@ class AdminController {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={pageContent}
+        value={pageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
