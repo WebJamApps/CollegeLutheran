@@ -1,7 +1,7 @@
 import React from 'react';
 import type { AdminDashboard } from '../../containers/AdminDashboard';
 
-type PageProps = {comp:AdminDashboard};
+type PageProps = { comp:AdminDashboard };
 const AdminUserForm = ({ comp }:PageProps): JSX.Element => {
   const { formError } = comp.state;
   return (

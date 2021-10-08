@@ -5,6 +5,9 @@ import { config } from 'dotenv';
 global.ResizeObserver = require('resize-observer-polyfill');
 
 config();
+
+global.ResizeObserver = require('resize-observer-polyfill');
+
 window.matchMedia = jest.fn().mockImplementation((query) => ({
   matches: false,
   media: query,

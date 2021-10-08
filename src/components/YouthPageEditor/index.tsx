@@ -2,7 +2,7 @@ import React from 'react';
 import { InputParams } from '../../lib/forms';
 import type { AdminDashboard } from '../../containers/AdminDashboard';
 
-type PageProps = {comp:AdminDashboard;youthTitle:string;youthContent:string;makeInput:(arg0:InputParams)=>JSX.Element};
+type PageProps = { comp:AdminDashboard;youthTitle:string;youthContent:string;makeInput:(arg0:InputParams)=>JSX.Element };
 const YouthPageEditor = ({
   comp, youthTitle, youthContent, makeInput,
 }:PageProps): JSX.Element => (

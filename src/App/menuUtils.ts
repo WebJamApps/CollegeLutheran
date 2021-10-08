@@ -23,7 +23,7 @@ const sortBulletins = (bulletin:Ibook[]) => {
   return sortedBulletins;
 };
 
-const setBulletin = (mItem:MenuItem, view:AppTemplate) => {
+const setBulletin = (mItem:MenuItem, view:AppTemplate): MenuItem => {
   const { books } = view.props;
   const m = mItem;
   if (books) {
