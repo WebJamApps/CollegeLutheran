@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AppTemplate } from '../../src/App/AppTemplate';
 import authUtils from '../../src/App/authUtils';
-import { MenuItem } from '../../src/App/menuItems';
+import type { MenuItem } from '../../src/App/menuItems';
 
 const dFunc = () => { };
 let anyProp: any = {};

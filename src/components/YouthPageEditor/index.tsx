@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputParams } from '../../lib/forms';
+import type { InputParams } from '../../lib/forms';
 import type { AdminDashboard } from '../../containers/AdminDashboard';
 
 type PageProps = { comp:AdminDashboard;youthTitle:string;youthContent:string;makeInput:(arg0:InputParams)=>JSX.Element };

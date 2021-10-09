@@ -2,8 +2,6 @@ import React, { Dispatch } from 'react';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
@@ -75,7 +73,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-      } catch (e) { return `${e.message}`; }
+      } catch (e) { return `${(e as Error).message}`; }
       if (res.status === 200) { window.location.reload(); return 'deleted pic'; }
       return `${res.status} ${res.body}`;
     }

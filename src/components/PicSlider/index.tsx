@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Caption from './caption';
-import { Ibook } from '../../redux/mapStoreToProps';
+import type { Ibook } from '../../redux/mapStoreToProps';
 
 type SettingsType = {
   autoplay: boolean;

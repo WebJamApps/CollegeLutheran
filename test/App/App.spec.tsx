@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { App } from '../../src/App';
-import { Auth } from '../../src/redux/mapStoreToProps';
+import type { Auth } from '../../src/redux/mapStoreToProps';
 
 describe('App component', () => {
   const auth: Auth = {

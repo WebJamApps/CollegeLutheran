@@ -1,6 +1,6 @@
 import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
-import { Ibook } from '../../redux/mapStoreToProps';
+import type { Ibook } from '../../redux/mapStoreToProps';
 
 interface NewsContentProps {
   books?: Ibook[];
