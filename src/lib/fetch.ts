@@ -15,7 +15,7 @@ const fetchGet = async (view:
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
     // eslint-disable-next-line no-console
-    console.log(`${(e as Error).message}`);// TODO display error messages on page
+    console.log(`${(e as Error).message}`);// for Logan to do here!
     return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });
