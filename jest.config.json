@@ -1,14 +1,11 @@
 {
   "testEnvironment": "jsdom",
-  "timers": "fake",
   "verbose": true,
+  "timers": "fake",
   "bail": true,
   "resetMocks": true,
-  "notify": true,
+  "notify": false,
   "setupFiles": [
-    "core-js/stable",
-    "regenerator-runtime/runtime",
-    "enzyme-react-16-adapter-setup",
     "<rootDir>/test/jest-pretest.ts"
   ],
   "moduleNameMapper": {
@@ -32,5 +29,8 @@
   "testURL": "http://localhost/",
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
+  },
+  "globals": {
+    "google": {}
   }
 }

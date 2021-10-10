@@ -1,6 +1,6 @@
 import superagent from 'superagent';
-import { Dispatch } from 'react';
-import { AppProps, GoogleBody } from './AppTypes';
+import type { Dispatch } from 'react';
+import type { AppProps, GoogleBody } from './AppTypes';
 
 export const gotToken = (doc: string): unknown => ({
   type: 'GOT_TOKEN',
@@ -22,7 +22,7 @@ async function authFunc(body: GoogleBody, props: AppProps): Promise<string | Err
     data = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
       .set({ Accept: 'application/json' }).send(body);
   } catch (e) {
-    props.dispatch(authError(e));
+    props.dispatch(authError(e as Error));
     return Promise.reject(e);
   }
   if (!data.body) {

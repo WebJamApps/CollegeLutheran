@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-non-literal-fs-filename */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import menuUtils from '../../src/App/menuUtils';
-import { Auth } from '../../src/redux/mapStoreToProps';
+import type { Auth } from '../../src/redux/mapStoreToProps';
 
 describe('menuUtils', () => {
   let r: JSX.Element | null,
