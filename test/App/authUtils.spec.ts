@@ -32,7 +32,8 @@ describe('authUtils', () => {
     expect(res).toBe('bad');
   });
   it('sets the user', async () => {
-    jwt.decode = jest.fn(() => ({ sub: '123' }));
+    const decodeMock:any = jest.fn(() => ({ sub: '123' }));
+    jwt.decode = decodeMock;
     jwt.verify = jest.fn(() => 'token');
     const returnBody: Record<string, unknown> = { body: {} };
     const sa: any = superagent;
@@ -46,7 +47,8 @@ describe('authUtils', () => {
     expect(res).toBe('bad');
   });
   it('sets the user to the already decoded user', async () => {
-    jwt.verify = jest.fn(() => ({ sub: '123', user: {} }));
+    const verifyMock:any = jest.fn(() => ({ sub: '123', user: {} }));
+    jwt.verify = verifyMock;
     Object.defineProperty(window, 'location', { value: { assign: () => { }, reload: () => { } }, writable: true });
     window.location.reload = jest.fn();
     const cStub3: any = {
@@ -56,7 +58,8 @@ describe('authUtils', () => {
     expect(result).toBe('user set');
   });
   it('catches fetch user error when sets the user', async () => {
-    jwt.verify = jest.fn(() => ({ sub: '123' }));
+    const verifyMock:any = jest.fn(() => ({ sub: '123' }));
+    jwt.verify = verifyMock;
     const sa: any = superagent;
     sa.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     const res = await authUtils.setUser(vStub);

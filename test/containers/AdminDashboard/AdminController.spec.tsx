@@ -4,7 +4,7 @@ import AdminController from '../../../src/containers/AdminDashboard/AdminControl
 describe('AdminController', () => {
   let r: any, controller: any,
     vStub: { setState: jest.Mock<any, any>;
-      forms: { makeDropdown: () => any; makeInput:()=>any};
+      forms: { makeDropdown: () => any; makeInput:()=>any };
       state: { title: string; homePageContent: string; youthURL: string; type: string; addAdminEmail: string, formError: string };
       props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
   beforeEach(() => {

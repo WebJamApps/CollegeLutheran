@@ -1,7 +1,7 @@
 import superagent from 'superagent';
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { InputParams } from '../../lib/forms';
+import type { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
 import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
@@ -155,10 +155,10 @@ class AdminController {
     return true;
   }
 
-  async createBook(data: { title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  async createBook(data: { title: string, comments: string, type: string }, redirect: string): Promise<string> {
     const { auth } = this.view.props;
     let r;
-    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
+    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 201) {
       window.location.assign(redirect);
       return `${r.status}`;
@@ -166,7 +166,7 @@ class AdminController {
     return 'Did not create book';
   }
 
-  async putAPI(evt: { preventDefault: () => void; }, body:{title:string;comments:string;type:string}, redirect:string):Promise<string> {
+  async putAPI(evt: { preventDefault: () => void; }, body:{ title:string;comments:string;type:string }, redirect:string):Promise<string> {
     const { auth } = this.view.props;
     evt.preventDefault();
     let r;
@@ -175,7 +175,7 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send(body);
-    } catch (e) { return `${e.message}`; }
+    } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 200) {
       window.location.assign(redirect);
       return `${r.status}`;
@@ -183,7 +183,8 @@ class AdminController {
     return `Failed to update ${redirect} page.`;
   }
 
-  async createPicApi(evt: { preventDefault: () => void; }, data: {title: string, comments: string, type: string}, redirect: string): Promise<string> {
+  async createPicApi(evt: { preventDefault: () => void; }, data: { title: string,
+    comments: string, type: string }, redirect: string): Promise<string> {
     evt.preventDefault();
     return this.createBook(data, redirect);
   }
@@ -236,7 +237,9 @@ class AdminController {
     return Promise.resolve(false);
   }
 
-  onChangeYouthContent(youthContent: string): string { this.view.setState({ youthContent }); return youthContent; }
+  onChangeYouthContent(youthContent: string): string {
+    this.view.setState({ youthContent }); return youthContent;
+  }
 
   handleEditorChange(homePageContent: string): string { this.view.setState({ homePageContent }); return homePageContent; }
 
@@ -246,7 +249,7 @@ class AdminController {
     return (
       <Editor
         apiKey={process.env.TINY_KEY}
-        initialValue={pageContent}
+        value={pageContent}
         init={{
           height: 500,
           menubar: 'insert tools',
@@ -293,7 +296,7 @@ class AdminController {
           email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }// TODO not console log error, but display error on page
+    } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;

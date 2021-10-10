@@ -46,7 +46,7 @@ module.exports = (env) => ({
   performance: { hints: false },
 
   devServer: {
-    contentBase: outDir,
+    static: outDir,
     hot: true,
     historyApiFallback: { // serve index.html for all 404 (required for push-state)
       rewrites: [

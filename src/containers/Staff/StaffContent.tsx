@@ -48,13 +48,6 @@ const StaffContent = (): JSX.Element => (
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Katy">Katherine</Link>
-              {' '}
-              Gattuso, Coordinator for Children, Youth & Family Ministries,
-              {' '}
-              <a href="mailto:youth@collegelutheran.org">youth@collegelutheran.org</a>
-            </li>
-            <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               <Link to="/staff/#Sandi">Sandi</Link>
               {' '}
               Roop, Parish Administrator,

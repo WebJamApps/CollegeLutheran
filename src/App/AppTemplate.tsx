@@ -54,6 +54,16 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
     this.authUtils = authUtils;
   }
 
+  handleKeyPress(e: { key: string; }): (void | null) {
+    if (e.key === 'Escape') return this.setState({ menuOpen: false });
+    return null;
+  }
+
+  handleKeyMenu(e: { key: string; }): (void | null) {
+    if (e.key === 'Enter') return this.toggleMobileMenu();
+    return null;
+  }
+
   get currentStyles(): CurrentStyles { // eslint-disable-line class-methods-use-this
     const result = {
       headerClass: 'home-header',
@@ -78,16 +88,6 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   close(): boolean {
     this.setState({ menuOpen: false });
     return true;
-  }
-
-  handleKeyPress(e: { key: string; }): (void | null) {
-    if (e.key === 'Escape') return this.setState({ menuOpen: false });
-    return null;
-  }
-
-  handleKeyMenu(e: { key: string; }): (void | null) {
-    if (e.key === 'Enter') return this.toggleMobileMenu();
-    return null;
   }
 
   googleButtons(type: string, index: string | number | undefined): JSX.Element {

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import superagent from 'superagent';
 import authenticate, { logout } from '../../src/App/authActions';
-import { Auth } from '../../src/redux/mapStoreToProps';
-import { GoogleBody } from '../../src/App/AppTypes';
+import type { Auth } from '../../src/redux/mapStoreToProps';
+import type { GoogleBody } from '../../src/App/AppTypes';
 
 describe('authActions', () => {
   it('authenticates', async () => {

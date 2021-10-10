@@ -1,6 +1,6 @@
-import { Auth, Ibook } from '../redux/mapStoreToProps';
+import type { Auth, Ibook } from '../redux/mapStoreToProps';
 import commonUtils from '../lib/commonUtils';
-import { MenuItem } from './menuItems';
+import type { MenuItem } from './menuItems';
 import type { AppTemplate } from './AppTemplate';
 
 const continueMenuItem = (menu: MenuItem,
@@ -23,7 +23,7 @@ const sortBulletins = (bulletin:Ibook[]) => {
   return sortedBulletins;
 };
 
-const setBulletin = (mItem:MenuItem, view:AppTemplate) => {
+const setBulletin = (mItem:MenuItem, view:AppTemplate): MenuItem => {
   const { books } = view.props;
   const m = mItem;
   if (books) {

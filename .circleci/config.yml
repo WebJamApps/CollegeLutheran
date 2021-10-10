@@ -1,10 +1,10 @@
-version:  2.0
+version:  2.1
 jobs:
   build:
     environment:
       CC_TEST_REPORTER_ID: c6777338664984c86131bd32be65267a9453bffed3effa06ec1f76a5383c3a73
     docker:
-      - image: circleci/node:stretch
+      - image: cimg/node:current-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -14,35 +14,14 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
       - run:
-          name:        Install Chromedriver latest version
-          command:     |
-            sudo apt-get update
-            sudo apt-get install lsb-release libappindicator3-1 fonts-liberation libasound2 libnspr4 libnss3 libxss1 xdg-utils
-            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome.deb
-            sudo sed -i 's|HERE/chrome"|HERE/chrome" --no-sandbox|g' /opt/google/chrome/google-chrome
-            rm google-chrome.deb
-      - run:
           name:        Test install
-          command:     'yarn install --frozen-lockfile'
+          command:     npm install
       - run:
           name:        run all tests
           command:     |
             ./cc-test-reporter before-build
-            yarn test
+            npm  test
             ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
       - store_artifacts:
           path:        coverage
-          prefix:      coverage
 
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#       # - build
-#       - test
-      #     requires:
-      #       - build
-      # - upload-coverage:
-      #     requires:
-      #        - test

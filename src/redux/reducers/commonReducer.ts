@@ -1,4 +1,4 @@
-import { Ibook } from '../mapStoreToProps';
+import type { Ibook } from '../mapStoreToProps';
 
 const reducer = (key:string, caseString:string, initialState: Record<string, unknown>) => (state = initialState,
   action: { type: string; data: Ibook; }): Record<string, unknown> => {

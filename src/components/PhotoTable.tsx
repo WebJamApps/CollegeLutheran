@@ -2,8 +2,6 @@ import React, { Dispatch } from 'react';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
@@ -35,6 +33,12 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
   }
 
   componentDidMount(): void { this.setColumns(); }
+
+  handleHideTable(): boolean {
+    const { dispatch } = this.props;
+    dispatch({ type: 'SHOW_TABLE', showTable: false });
+    return true;
+  }
 
   setColumns(): void {
     const columns: MUIDataTableColumnDef[] = [];
@@ -69,7 +73,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-      } catch (e) { return `${e.message}`; }
+      } catch (e) { return `${(e as Error).message}`; }
       if (res.status === 200) { window.location.reload(); return 'deleted pic'; }
       return `${res.status} ${res.body}`;
     }
@@ -81,12 +85,6 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     // eslint-disable-next-line no-param-reassign
     delete picData.modify;
     dispatch({ type: 'EDIT_PIC', picData });
-    return true;
-  }
-
-  handleHideTable(): boolean {
-    const { dispatch } = this.props;
-    dispatch({ type: 'SHOW_TABLE', showTable: false });
     return true;
   }
 

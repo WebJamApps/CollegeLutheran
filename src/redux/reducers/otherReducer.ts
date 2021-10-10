@@ -1,4 +1,4 @@
-import { Ibook } from '../mapStoreToProps';
+import type { Ibook } from '../mapStoreToProps';
 
 const initialState = {
   otherPics: [],

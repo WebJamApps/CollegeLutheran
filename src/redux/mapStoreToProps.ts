@@ -32,7 +32,7 @@ export interface Ibook {
 
 export interface Store {
   auth: Auth;
-  youthContent: {youthContent: Ibook};
+  youthContent: { youthContent: Ibook };
   homeContent: { homeContent: Ibook };
   familyPics: { familyPics: Ibook[] };
   youthPics: { youthPics: Ibook[] };

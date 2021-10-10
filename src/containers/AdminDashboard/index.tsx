@@ -84,6 +84,11 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
 
+  handleRadioChange(evt: { target: { value: string } }): void {
+    this.checkEdit();
+    this.setState({ showCaption: evt.target.value });
+  }
+
   onChange(evt: React.ChangeEvent<HTMLInputElement>, stateValue?: string): string {
     evt.persist();
     this.checkEdit();
@@ -170,11 +175,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         </button>
       </div>
     );
-  }
-
-  handleRadioChange(evt: { target: { value: string } }): void {
-    this.checkEdit();
-    this.setState({ showCaption: evt.target.value });
   }
 
   changePicForm(picData: PicData): JSX.Element['props'] {

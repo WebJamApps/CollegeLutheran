@@ -1,5 +1,5 @@
-import { Dispatch } from 'react';
-import { Auth } from '../redux/mapStoreToProps';
+import type { Dispatch } from 'react';
+import type { Auth } from '../redux/mapStoreToProps';
 
 export interface AppProps {
   dispatch: Dispatch<unknown>,

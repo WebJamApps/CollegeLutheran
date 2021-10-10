@@ -1,4 +1,4 @@
-import { Ibook } from '../redux/mapStoreToProps';
+import type { Ibook } from '../redux/mapStoreToProps';
 import type { Homepage } from '../containers/Homepage/index';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {
