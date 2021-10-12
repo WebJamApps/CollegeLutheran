@@ -101,6 +101,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
   }
 
   onChangeAddForum(evt: React.ChangeEvent<HTMLInputElement>): string {
+    evt.persist();
     this.setState((prevState) => ({ ...prevState, [evt.target.id]: evt.target.value }));
     return evt.target.id;
   }
