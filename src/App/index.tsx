@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router, Redirect, Route, Switch,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactNotification from 'react-notifications-component';
 import commonUtils from '../lib/commonUtils';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
@@ -61,6 +62,7 @@ export class App extends Component<AppProps> {
     const userRoles: string[] = commonUtils.getUserRoles();
     return (
       <div id="App" className="App">
+        <ReactNotification />
         <Router>
           <AppTemplateDefault>
             <Switch>

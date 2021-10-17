@@ -1,4 +1,6 @@
 import { Dispatch } from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
 const fetchGet = async (view:
@@ -15,7 +17,20 @@ const fetchGet = async (view:
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
     // eslint-disable-next-line no-console
-    console.log(`${e.message}`);// TODO display error messages on page
+    console.log(`${e as Error}`);// TODO display error messages on page
+    store.addNotification({
+      title: `${reducer}, failed`,
+      message: 'teodosii@react-notifications-component',
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
     return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });
