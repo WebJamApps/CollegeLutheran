@@ -16,8 +16,6 @@ const fetchGet = async (view:
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
-    // eslint-disable-next-line no-console
-    console.log(`${e as Error}`);
     store.addNotification({
       title: `${reducer}, failed`,
       message: 'teodosii@react-notifications-component',
