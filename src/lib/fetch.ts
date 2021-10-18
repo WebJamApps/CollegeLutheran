@@ -17,7 +17,7 @@ const fetchGet = async (view:
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
     store.addNotification({
-      title: `${reducer}, failed`,
+      title: `${(e as Error).message}`,
       message: 'teodosii@react-notifications-component',
       type: 'warning',
       insert: 'top',
@@ -29,6 +29,8 @@ const fetchGet = async (view:
         onScreen: true,
       },
     });
+    // eslint-disable-next-line no-console
+    console.log((e as Error).message);
     return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });
