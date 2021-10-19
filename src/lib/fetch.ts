@@ -16,19 +16,24 @@ const fetchGet = async (view:
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
-    store.addNotification({
-      title: `${(e as Error).message}`,
-      message: 'teodosii@react-notifications-component',
-      type: 'warning',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ['animate__animated animate__fadeIn'],
-      animationOut: ['animate__animated animate__fadeOut'],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
+    try {
+      store.addNotification({
+        title: `${(e as Error).message}`,
+        message: 'teodosii@react-notifications-component',
+        type: 'warning',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated animate__fadeIn'],
+        animationOut: ['animate__animated animate__fadeOut'],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log((error as Error).message);
+    }
     // eslint-disable-next-line no-console
     console.log((e as Error).message);
     return false;
