@@ -141,7 +141,7 @@ describe('AdminController', () => {
     expect(res).toBe(true);
   });
   // eslint-disable-next-line jest/no-commented-out-tests
-  /* it('Returns admin user', async () => {
+  it('Returns admin user', async () => {
     let authRole = '';
     // eslint-disable-next-line prefer-destructuring
     if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[0];
@@ -149,7 +149,7 @@ describe('AdminController', () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
     const res = await controller.addAdminUser({ preventDefault: () => { } });
     expect(res).toBe(false);
-  }); */
+  });
   it('putAPI successfully sends PUT rest call', async () => {
     const returnBody: Record<string, unknown> = { body: { _id: '1' }, status: 200 };
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve(returnBody) }) }) }));
