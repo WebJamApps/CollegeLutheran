@@ -1,5 +1,7 @@
 import superagent from 'superagent';
 import React from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import { Editor } from '@tinymce/tinymce-react';
 import { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
@@ -134,7 +136,22 @@ class AdminController {
       try {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
-      } catch (e) { return Promise.resolve(false); }
+      } catch (e) {
+        store.addNotification({
+          title: id,
+          message: 'Error, cannot dispatch',
+          type: 'warning',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated animate__fadeIn'],
+          animationOut: ['animate__animated animate__fadeOut'],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        });
+        return Promise.resolve(false);
+      }
       if (r.status === 200) {
         window.location.assign(`${redirect}`);
         return Promise.resolve(true);
@@ -158,7 +175,7 @@ class AdminController {
   async createBook(data: { title: string, comments: string, type: string }, redirect: string): Promise<string> {
     const { auth } = this.view.props;
     let r;
-    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${e.message}`; }
+    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 201) {
       window.location.assign(redirect);
       return `${r.status}`;
@@ -175,7 +192,9 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send(body);
-    } catch (e) { return `${e.message}`; }
+    } catch (e) {
+      return `${(e as Error).message}`;
+    }
     if (r.status === 200) {
       window.location.assign(redirect);
       return `${r.status}`;

@@ -1,4 +1,6 @@
 import superagent from 'superagent';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import { Dispatch } from 'react';
 import { AppProps, GoogleBody } from './AppTypes';
 
@@ -22,7 +24,20 @@ async function authFunc(body: GoogleBody, props: AppProps): Promise<string | Err
     data = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
       .set({ Accept: 'application/json' }).send(body);
   } catch (e) {
-    props.dispatch(authError(e));
+    props.dispatch(authError((e as Error)));
+    store.addNotification({
+      title: (e as Error).message,
+      message: 'Error, cannot dispatch',
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
     return Promise.reject(e);
   }
   if (!data.body) {

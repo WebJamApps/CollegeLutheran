@@ -18,8 +18,8 @@ const fetchGet = async (view:
     }
     try {
       store.addNotification({
-        title: `${(e as Error).message}`,
-        message: 'teodosii@react-notifications-component',
+        title: `${reducer}`,
+        message: 'Error, cannot dispatch',
         type: 'warning',
         insert: 'top',
         container: 'top-right',

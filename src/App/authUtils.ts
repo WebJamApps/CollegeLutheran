@@ -1,4 +1,5 @@
 import superagent from 'superagent';
+import 'react-notifications-component/dist/theme.css';
 import jwt from 'jsonwebtoken';
 import { Dispatch } from 'react';
 import { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
@@ -18,7 +19,7 @@ async function setUser(view: AppTemplate): Promise<string> {
   try {
     decoded = jwt.verify(auth.token || /* istanbul ignore next */'',
       process.env.HashString || /* istanbul ignore next */'');
-  } catch (e) { return `${e.message}`; }
+  } catch (e) { return `${(e as Error).message}`; }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
     try {
@@ -27,7 +28,7 @@ async function setUser(view: AppTemplate): Promise<string> {
       dispatch({ type: 'SET_USER', data: user.body });
       //   const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
       // dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
-    } catch (e) { return `${e.message}`; }
+    } catch (e) { return `${(e as Error).message}`; }
   }
   window.location.reload();
   window.location.assign('/admin');
@@ -46,7 +47,7 @@ async function responseGoogleLogin(response: GoogleLoginResponseOffline | Google
     },
   };
   try { await authenticate(body, view.props); } catch (e) {
-    return `${e.message}`;
+    return `${(e as Error).message}`;
   }
   return setUser(view);
 }

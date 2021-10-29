@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jsonwebtoken';
+import { store } from 'react-notifications-component';
 import superagent from 'superagent';
 import authUtils from '../../src/App/authUtils';
 
 describe('authUtils', () => {
   const vStub: any = {
     props: { auth: { token: 'token' }, dispatch: () => Promise.resolve(true) },
+    store,
   };
   it('is defined', () => {
     expect(authUtils).toBeDefined();
