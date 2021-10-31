@@ -193,6 +193,19 @@ class AdminController {
         .set('Accept', 'application/json')
         .send(body);
     } catch (e) {
+      store.addNotification({
+        title: body.title,
+        message: 'Error, cannot dispatch',
+        type: 'warning',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated animate__fadeIn'],
+        animationOut: ['animate__animated animate__fadeOut'],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
       return `${(e as Error).message}`;
     }
     if (r.status === 200) {
@@ -243,7 +256,22 @@ class AdminController {
         .send({
           title: youthName, url: youthURL, type, comments: showCaption,
         });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) {
+      store.addNotification({
+        title: editPic._id,
+        message: 'Error, cannot dispatch',
+        type: 'warning',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated animate__fadeIn'],
+        animationOut: ['animate__animated animate__fadeOut'],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
+      return Promise.resolve(false);
+    }
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
       dispatch({ type: 'SHOW_TABLE', showTable: true });

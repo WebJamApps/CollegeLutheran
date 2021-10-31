@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { store } from 'react-notifications-component';
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
@@ -6,7 +7,7 @@ describe('AdminController', () => {
     vStub: { setState: jest.Mock<any, any>;
       forms: { makeDropdown: () => any; makeInput:()=>any };
       state: { title: string; homePageContent: string; youthURL: string; type: string; addAdminEmail: string, formError: string };
-      props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
+      props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; store: { addNotification:() => any }; }; };
   beforeEach(() => {
     vStub = {
       setState: jest.fn(),
@@ -19,11 +20,17 @@ describe('AdminController', () => {
         addAdminEmail: 'test@gmail.com',
         formError: '',
       },
-      props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
+      props: {
+        auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun, store: { addNotification: jest.fn() },
+      },
     };
     controller = new AdminController(vStub as any);
   });
   it('sends a delete book request to the backend', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
     window.location.assign = jest.fn();

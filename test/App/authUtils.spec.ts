@@ -8,7 +8,7 @@ import authUtils from '../../src/App/authUtils';
 describe('authUtils', () => {
   const vStub: any = {
     props: { auth: { token: 'token' }, dispatch: () => Promise.resolve(true) },
-    store,
+    setState: { addNotification: () => {} },
   };
   it('is defined', () => {
     expect(authUtils).toBeDefined();
@@ -28,6 +28,10 @@ describe('authUtils', () => {
     expect(res).toBe('jwt malformed');
   });
   it('handles google login with authenticate error', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
     superagent.post = jest.fn(() => postReturn);
     const res = await authUtils.responseGoogleLogin({ code: '' }, vStub);
