@@ -8,11 +8,13 @@ import store from './redux/store';
 import '../static/styles.scss';
 
 render(
+<React.StrictMode>
   <Provider store={store.store}>
     <PersistGate loading={null} persistor={store.persistor}>
       <ConnectedApp />
     </PersistGate>
-  </Provider>, document.getElementById('root'),
+  </Provider>
+</React.StrictMode>, document.getElementById('root'),
 );
 /* istanbul ignore next */
 if (process.env.NODE_ENV === 'development' && module.hot) module.hot.accept();

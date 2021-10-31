@@ -4,6 +4,8 @@
     "plugin:node/recommended", "plugin:jest/recommended", "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
+    "import/extensions":0,
+    "import/no-extraneous-dependencies":0,
     "jest/no-conditional-expect": 0,
     "react/jsx-filename-extension": [1, {
       "extensions": ["tsx"]
@@ -42,7 +44,8 @@
     "page": true,
     "browser": true,
     "context": true,
-    "jestPuppeteer": true
+    "jestPuppeteer": true,
+    "google": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

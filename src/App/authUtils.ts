@@ -2,10 +2,10 @@ import superagent from 'superagent';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import jwt from 'jsonwebtoken';
-import { Dispatch } from 'react';
-import { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
+import type { Dispatch } from 'react';
+import type { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
-import { GoogleBody } from './AppTypes';
+import type { GoogleBody } from './AppTypes';
 import type { AppTemplate } from './AppTemplate';
 
 export interface AuthUtils {
@@ -29,6 +29,7 @@ async function setUser(view: AppTemplate): Promise<string> {
       dispatch({ type: 'SET_USER', data: user.body });
       //   const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
       // dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
+<<<<<<< HEAD
     } catch (e) {
       store.addNotification({
         title: (e as Error).message,
@@ -45,6 +46,9 @@ async function setUser(view: AppTemplate): Promise<string> {
       });
       return `${(e as Error).message}`;
     }
+=======
+    } catch (e) { return `${(e as Error).message}`; }
+>>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
   }
   window.location.reload();
   window.location.assign('/admin');

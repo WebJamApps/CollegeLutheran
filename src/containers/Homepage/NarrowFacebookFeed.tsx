@@ -1,6 +1,6 @@
 import React from 'react';
 import PicSlider from '../../components/PicSlider';
-import { Ibook } from '../../redux/mapStoreToProps';
+import type { Ibook } from '../../redux/mapStoreToProps';
 
 interface IallPics {
   allPics?: Ibook[]

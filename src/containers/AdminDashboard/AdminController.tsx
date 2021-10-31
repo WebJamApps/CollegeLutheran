@@ -3,7 +3,7 @@ import React from 'react';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { Editor } from '@tinymce/tinymce-react';
-import { InputParams } from '../../lib/forms';
+import type { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
 import commonUtils from '../../lib/commonUtils';
 import type { AdminDashboard, PicData, DashboardProps } from './index';
@@ -192,6 +192,7 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send(body);
+<<<<<<< HEAD
     } catch (e) {
       store.addNotification({
         title: body.title,
@@ -208,6 +209,9 @@ class AdminController {
       });
       return `${(e as Error).message}`;
     }
+=======
+    } catch (e) { return `${(e as Error).message}`; }
+>>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
     if (r.status === 200) {
       window.location.assign(redirect);
       return `${r.status}`;
@@ -343,7 +347,7 @@ class AdminController {
           email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }// TODO not console log error, but display error on page
+    } catch (e) { console.log(e); return false; }
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;

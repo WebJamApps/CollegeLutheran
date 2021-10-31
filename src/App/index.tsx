@@ -22,7 +22,7 @@ import DefaultHome from '../containers/Homepage';
 import DefaultLiveStream from '../containers/LiveStream';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
-import { AppProps } from './AppTypes';
+import type { AppProps } from './AppTypes';
 
 export class App extends Component<AppProps> {
   fetch: typeof fetch;
