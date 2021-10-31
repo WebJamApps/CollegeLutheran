@@ -192,7 +192,6 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
         .send(body);
-<<<<<<< HEAD
     } catch (e) {
       store.addNotification({
         title: body.title,
@@ -209,9 +208,6 @@ class AdminController {
       });
       return `${(e as Error).message}`;
     }
-=======
-    } catch (e) { return `${(e as Error).message}`; }
->>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
     if (r.status === 200) {
       window.location.assign(redirect);
       return `${r.status}`;

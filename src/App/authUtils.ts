@@ -29,7 +29,6 @@ async function setUser(view: AppTemplate): Promise<string> {
       dispatch({ type: 'SET_USER', data: user.body });
       //   const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
       // dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
-<<<<<<< HEAD
     } catch (e) {
       store.addNotification({
         title: (e as Error).message,
@@ -46,9 +45,6 @@ async function setUser(view: AppTemplate): Promise<string> {
       });
       return `${(e as Error).message}`;
     }
-=======
-    } catch (e) { return `${(e as Error).message}`; }
->>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
   }
   window.location.reload();
   window.location.assign('/admin');

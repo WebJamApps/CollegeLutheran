@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import { Dispatch } from 'react';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
-=======
-import type { Dispatch } from 'react';
->>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
 const fetchGet = async (view:
@@ -39,11 +35,7 @@ const fetchGet = async (view:
       console.log((error as Error).message);
     }
     // eslint-disable-next-line no-console
-<<<<<<< HEAD
     console.log((e as Error).message);
-=======
-    console.log(`${(e as Error).message}`);// for Logan to do here!
->>>>>>> addbef3a0d47293b95d5e37f8ec16732c53a579c
     return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });
