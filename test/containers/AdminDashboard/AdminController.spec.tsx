@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { store } from 'react-notifications-component';
 import AdminController from '../../../src/containers/AdminDashboard/AdminController';
 
 describe('AdminController', () => {
@@ -7,7 +6,7 @@ describe('AdminController', () => {
     vStub: { setState: jest.Mock<any, any>;
       forms: { makeDropdown: () => any; makeInput:()=>any };
       state: { title: string; homePageContent: string; youthURL: string; type: string; addAdminEmail: string, formError: string };
-      props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; store: { addNotification:() => any }; }; };
+      props: { auth: { token: string; }; editPic: any; dispatch: (fun: any) => any; }; };
   beforeEach(() => {
     vStub = {
       setState: jest.fn(),
@@ -21,16 +20,12 @@ describe('AdminController', () => {
         formError: '',
       },
       props: {
-        auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun, store: { addNotification: jest.fn() },
+        auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun,
       },
     };
     controller = new AdminController(vStub as any);
   });
   it('sends a delete book request to the backend', async () => {
-    Object.defineProperty(store, 'addNotification', {
-      writable: true,
-      value: jest.fn(),
-    });
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.resolve({ status: 200 }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
     window.location.assign = jest.fn();
@@ -40,6 +35,15 @@ describe('AdminController', () => {
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error on delete book request to the backend', async () => {
+    jest.mock('react-notifications-component');
+    const { store } = jest.requireActual('react-notifications-component');
+    expect(store.addNotification).toBeDefined();
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        addNotification: jest.fn(),
+      })),
+    });
     global.confirm = jest.fn(() => true);
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');

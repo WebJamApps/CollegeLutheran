@@ -30,6 +30,23 @@ class AdminController {
     this.addAdminUser = this.addAdminUser.bind(this);
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
     this.putAPI = this.putAPI.bind(this);
+    this.warnNotif = this.warnNotif.bind(this);
+  }
+  
+  warnNotif(id: string): void{
+    store.addNotification({
+      title: id,
+      message: 'Error, cannot dispatch',
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
@@ -137,19 +154,7 @@ class AdminController {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
       } catch (e) {
-        store.addNotification({
-          title: id,
-          message: 'Error, cannot dispatch',
-          type: 'warning',
-          insert: 'top',
-          container: 'top-right',
-          animationIn: ['animate__animated animate__fadeIn'],
-          animationOut: ['animate__animated animate__fadeOut'],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
+        this.warnNotif(id);
         return Promise.resolve(false);
       }
       if (r.status === 200) {
@@ -193,19 +198,7 @@ class AdminController {
         .set('Accept', 'application/json')
         .send(body);
     } catch (e) {
-      store.addNotification({
-        title: body.title,
-        message: 'Error, cannot dispatch',
-        type: 'warning',
-        insert: 'top',
-        container: 'top-right',
-        animationIn: ['animate__animated animate__fadeIn'],
-        animationOut: ['animate__animated animate__fadeOut'],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      this.warnNotif(body.title);
       return `${(e as Error).message}`;
     }
     if (r.status === 200) {
@@ -235,7 +228,10 @@ class AdminController {
           type: 'Forum',
           access: 'CLC',
         });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) { 
+      this.warnNotif(newstitle);
+      return Promise.resolve(false); 
+    }
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
@@ -257,19 +253,7 @@ class AdminController {
           title: youthName, url: youthURL, type, comments: showCaption,
         });
     } catch (e) {
-      store.addNotification({
-        title: editPic._id,
-        message: 'Error, cannot dispatch',
-        type: 'warning',
-        insert: 'top',
-        container: 'top-right',
-        animationIn: ['animate__animated animate__fadeIn'],
-        animationOut: ['animate__animated animate__fadeOut'],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      this.warnNotif(editPic._id);
       return Promise.resolve(false);
     }
     if (r.status === 200) {

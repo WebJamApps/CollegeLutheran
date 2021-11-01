@@ -1,8 +1,8 @@
 import superagent from 'superagent';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
-import { Dispatch } from 'react';
-import { AppProps, GoogleBody } from './AppTypes';
+import type { Dispatch } from 'react';
+import type { AppProps, GoogleBody } from './AppTypes';
 
 export const gotToken = (doc: string): unknown => ({
   type: 'GOT_TOKEN',
