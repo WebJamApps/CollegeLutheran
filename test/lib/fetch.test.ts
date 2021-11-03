@@ -1,10 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { store } from 'react-notifications-component';
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {
   let r: any;
   const superagent:any = { get: () => ({ set: () => Promise.reject(new Error('bad')) }) };
   it('catches error', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
+    expect(store.addNotification).toBeDefined();
     r = await fetch.fetchGet({
       props: { dispatch: (fun: any) => fun },
       superagent,
