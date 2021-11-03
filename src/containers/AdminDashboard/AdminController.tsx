@@ -30,6 +30,7 @@ class AdminController {
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
     this.putAPI = this.putAPI.bind(this);
     this.warnNotif = this.warnNotif.bind(this);
+    this.addForumButton = this.addForumButton.bind(this);
   }
   
   warnNotif(id: string): void{
@@ -46,6 +47,21 @@ class AdminController {
         onScreen: true,
       },
     });
+  }
+
+  addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
+    return (
+      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
+        <button
+          type="button"
+          id="addForum"
+          disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
+          onClick={this.addForumAPI}
+        >
+          Add
+        </button>
+      </div>
+    );
   }
 
   createNews(inputParams: InputParams, ip2: InputParams, isworshipbulletin: string, newstitle: string, newsurl: string):JSX.Element {
@@ -68,7 +84,7 @@ class AdminController {
           value: isworshipbulletin === '' ? 'worshipbulletin' : '',
 
         })}
-        {this.view.addForumButton(newstitle, newsurl)}
+        {this.addForumButton(newstitle, newsurl)}
       </form>
     );
   }

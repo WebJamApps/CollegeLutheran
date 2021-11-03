@@ -80,7 +80,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.resetEditForm = this.resetEditForm.bind(this);
     this.onChangeAdminEmail = this.onChangeAdminEmail.bind(this);
-    this.addForumButton = this.addForumButton.bind(this);
   }
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
@@ -174,21 +173,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         >
           {editPic._id ? 'Edit ' : 'Add '}
           Pic
-        </button>
-      </div>
-    );
-  }
-
-  addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
-    return (
-      <div style={{ marginLeft: '70%', marginTop: '10px' }}>
-        <button
-          type="button"
-          id="addForum"
-          disabled={this.controller.validateBook(announcementtitle, announcementurl, 'Forum', null)}
-          onClick={this.controller.addForumAPI}
-        >
-          Add
         </button>
       </div>
     );
