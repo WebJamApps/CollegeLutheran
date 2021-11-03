@@ -184,8 +184,7 @@ class AdminController {
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send(body);
     } catch (e) {
       this.warnNotif(body.title);
@@ -235,8 +234,7 @@ class AdminController {
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send({ title: youthName, url: youthURL, type, comments: showCaption,
         });
     } catch (e) {
@@ -307,8 +305,7 @@ class AdminController {
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send({ email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
