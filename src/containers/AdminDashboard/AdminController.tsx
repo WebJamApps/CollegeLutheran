@@ -238,9 +238,8 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send({ title: youthName, url: youthURL, type, comments: showCaption,
         });
-    } catch (e) {
-      this.warnNotif(editPic.title, 'Failed to edit Pic');
-      return Promise.resolve(false);
+    } catch (e) { 
+      this.warnNotif(editPic.title, 'Failed to edit Pic'); return Promise.resolve(false);
     }
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
