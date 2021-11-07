@@ -78,7 +78,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       } catch (e) { 
         store.addNotification({
           title: id,
-          message: 'Error, cannot dispatch',
+          message: 'Failed to Delete Photo',
           type: 'warning',
           insert: 'top',
           container: 'top-right',

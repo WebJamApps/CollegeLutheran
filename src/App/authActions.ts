@@ -27,7 +27,7 @@ async function authFunc(body: GoogleBody, props: AppProps): Promise<string | Err
     props.dispatch(authError((e as Error)));
     store.addNotification({
       title: (e as Error).message,
-      message: 'Error, cannot dispatch',
+      message: 'Failed to Authenticate',
       type: 'warning',
       insert: 'top',
       container: 'top-right',
@@ -43,6 +43,19 @@ async function authFunc(body: GoogleBody, props: AppProps): Promise<string | Err
   }
   if (!data.body) {
     props.dispatch(authError(new Error('authentication failed')));
+    store.addNotification({
+      title: 'Authentication Failure',
+      message: 'Failed to Authenticate',
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
     return 'authentication failed';
   }
   props.dispatch(gotToken(data.body));

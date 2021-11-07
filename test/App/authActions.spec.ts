@@ -41,6 +41,10 @@ describe('authActions', () => {
     expect(result).toBe('authenticated');
   });
   it('returns false when nothing is returned from Google', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     const postReturn: any = ({
       set: () => ({ send: async () => ({ body: undefined }) }),
     });

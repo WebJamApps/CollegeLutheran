@@ -63,14 +63,6 @@ describe('authUtils', () => {
     const result = await authUtils.setUser(cStub3);
     expect(result).toBe('user set');
   });
-  it('catches fetch user error when sets the user', async () => {
-    const verifyMock:any = jest.fn(() => ({ sub: '123' }));
-    jwt.verify = verifyMock;
-    const sa: any = superagent;
-    sa.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
-    const res = await authUtils.setUser(vStub);
-    expect(res).toBe('bad');
-  });
   it('logs out when /admin', () => {
     Object.defineProperty(window, 'location', { value: { reload: jest.fn(), assign: jest.fn(), href: '/admin' }, writable: true });
     const r = authUtils.responseGoogleLogout(() => { });

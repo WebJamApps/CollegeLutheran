@@ -33,10 +33,10 @@ class AdminController {
     this.addForumButton = this.addForumButton.bind(this);
   }
   
-  warnNotif(id: string): void{
+  warnNotif(id: string, message: string): void{
     store.addNotification({
       title: id,
-      message: 'Error, cannot dispatch',
+      message: message,
       type: 'warning',
       insert: 'top',
       container: 'top-right',
@@ -144,7 +144,7 @@ class AdminController {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
       } catch (e) {
-        this.warnNotif(id);
+        this.warnNotif(id, 'error could not delete book');
         return Promise.resolve(false);
       }
       if (r.status === 200) {
@@ -172,6 +172,7 @@ class AdminController {
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 201) {
+      this.warnNotif(data.title, 'error could not update');
       window.location.assign(redirect);
       return `${r.status}`;
     }
@@ -187,7 +188,7 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send(body);
     } catch (e) {
-      this.warnNotif(body.title);
+      this.warnNotif(body.title, 'error could not ');
       return `${(e as Error).message}`;
     }
     if (r.status === 200) {
@@ -217,7 +218,7 @@ class AdminController {
           access: 'CLC',
         });
     } catch (e) { 
-      this.warnNotif(newstitle);
+      this.warnNotif(newstitle, 'failed to update news');
       return Promise.resolve(false); 
     }
     if (r.status === 201) {
@@ -238,7 +239,7 @@ class AdminController {
         .send({ title: youthName, url: youthURL, type, comments: showCaption,
         });
     } catch (e) {
-      this.warnNotif(editPic._id);
+      this.warnNotif(editPic.title, 'Failed to edit Pic');
       return Promise.resolve(false);
     }
     if (r.status === 200) {
@@ -309,7 +310,7 @@ class AdminController {
         .send({ email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }
+    } catch (e) { this.warnNotif(addAdminEmail, 'Failed to Create the Admin User'); console.log(e); return false; }
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;

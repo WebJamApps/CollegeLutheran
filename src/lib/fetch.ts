@@ -18,7 +18,7 @@ const fetchGet = async (view:
     }
     store.addNotification({
       title: `${reducer}`,
-      message: 'Error, cannot dispatch',
+      message: 'Message Failed to Get the Information',
       type: 'warning',
       insert: 'top',
       container: 'top-right',
