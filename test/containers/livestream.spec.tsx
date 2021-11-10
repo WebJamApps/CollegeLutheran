@@ -16,7 +16,7 @@ describe('LiveStream', () => {
   it('handles middle screen width', () => {
     const result = LiveStream({ width: 700, height: 400 });
     console.log(result.props.children[3]);
-    expect(result.props.children[3].props.style.marginTop).toBe('34vh');
+    expect(result.props.children[3].props.style.marginTop).toBe('38vh');
   });
   it('handles cellphone screen width', () => {
     const result = LiveStream({ width: 600, height: 400 });
