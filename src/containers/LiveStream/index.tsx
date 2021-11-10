@@ -26,7 +26,7 @@ export const LiveStream = ({ width, height }:LiveStreamProps): JSX.Element => {
       </iframe>
         : null 
       }
-      <div style={{ marginTop:width < 900 && width > 768 ? '38vh' :
+      <div style={{ marginTop:width < 900 && width > 768 ? '34vh' :
         width < 769 ? '38vh' : '0px' }}>&nbsp;</div>
     </div>
   );
