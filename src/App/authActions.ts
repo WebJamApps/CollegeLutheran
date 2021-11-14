@@ -14,10 +14,10 @@ export const authError = (e: Error): unknown => ({
   error: e,
 });
 
-function warningNotif(id: string, message: string) {
+function warningNotif(title: string, message: string) {
   store.addNotification({
-    title: id,
-    message: message,
+    title,
+    message,
     type: 'warning',
     insert: 'top',
     container: 'top-right',
@@ -45,7 +45,7 @@ async function authFunc(body: GoogleBody, props: AppProps): Promise<string | Err
     return Promise.reject(e);
   }
   if (!data.body) {
-    props.dispatch(authError(new Error('authentication failed'))); warningNotif('email ID not valid', 'Failed to Authenticate');  
+    props.dispatch(authError(new Error('authentication failed'))); warningNotif('Email ID Not Valid', 'Failed To Authenticate');  
     return 'authentication failed';
   }
   props.dispatch(gotToken(data.body));

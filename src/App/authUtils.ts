@@ -24,8 +24,6 @@ async function setUser(view: AppTemplate): Promise<string> {
     user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
       .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
     dispatch({ type: 'SET_USER', data: user.body });
-    //   const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
-    // dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
   }
   window.location.reload();
   window.location.assign('/admin');

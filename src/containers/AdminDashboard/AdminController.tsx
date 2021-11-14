@@ -144,7 +144,7 @@ class AdminController {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
       } catch (e) {
-        this.warnNotif(id, 'error could not delete book');
+        this.warnNotif(id, 'Error Could Not Delete Book');
         return Promise.resolve(false);
       }
       if (r.status === 200) {
@@ -172,7 +172,7 @@ class AdminController {
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 201) {
-      this.warnNotif(data.title, 'error could not update');
+      this.warnNotif(data.title, 'Error Could Not Update');
       window.location.assign(redirect);
       return `${r.status}`;
     }
@@ -188,7 +188,7 @@ class AdminController {
         .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send(body);
     } catch (e) {
-      this.warnNotif(body.title, 'error could not ');
+      this.warnNotif(body.title, 'Error Could Not Update');
       return `${(e as Error).message}`;
     }
     if (r.status === 200) {
@@ -218,7 +218,7 @@ class AdminController {
           access: 'CLC',
         });
     } catch (e) { 
-      this.warnNotif(newstitle, 'failed to update news');
+      this.warnNotif(newstitle, 'Failed To Update News');
       return Promise.resolve(false); 
     }
     if (r.status === 201) {
