@@ -1,5 +1,7 @@
 import superagent from 'superagent';
 import React from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import { Editor } from '@tinymce/tinymce-react';
 import type { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
@@ -23,18 +25,32 @@ class AdminController {
     this.editPicAPI = this.editPicAPI.bind(this);
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.addForumButton = this.addForumButton.bind(this);
     this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
     this.putAPI = this.putAPI.bind(this);
+    this.warnNotif = this.warnNotif.bind(this);
+    this.addForumButton = this.addForumButton.bind(this);
+  }
+  
+  warnNotif(id: string, message: string): void{
+    store.addNotification({
+      title: id,
+      message: message,
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: { duration: 5000, onScreen: true, 
+      }, 
+    });
   }
 
   addForumButton(announcementtitle: string, announcementurl: string): JSX.Element {
     return (
       <div style={{ marginLeft: '70%', marginTop: '10px' }}>
-        <button
-          type="button"
+        <button type="button"
           id="addForum"
           disabled={this.validateBook(announcementtitle, announcementurl, 'Forum', null)}
           onClick={this.addForumAPI}
@@ -47,11 +63,8 @@ class AdminController {
 
   createNews(inputParams: InputParams, ip2: InputParams, isworshipbulletin: string, newstitle: string, newsurl: string):JSX.Element {
     return (
-      <form
-        id="create-forum"
-        style={{
-          textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-        }}
+      <form id="create-forum" style={{ textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%', 
+      }}
       >
         {this.view.forms.makeInput(inputParams)}
         {this.view.forms.makeInput(ip2)}
@@ -63,7 +76,6 @@ class AdminController {
           isRequired: false,
           onChange: this.view.onChangeAddForum,
           value: isworshipbulletin === '' ? 'worshipbulletin' : '',
-
         })}
         {this.addForumButton(newstitle, newsurl)}
       </form>
@@ -71,8 +83,7 @@ class AdminController {
   }
 
   addForumForm(): JSX.Element {
-    const {
-      newstitle, newsurl, forumId, isworshipbulletin,
+    const { newstitle, newsurl, forumId, isworshipbulletin, 
     } = this.view.state;
     const { books } = this.view.props;
     const inputParams = {
@@ -100,9 +111,7 @@ class AdminController {
     showCaption: string,
     picData: PicData): JSX.Element {
     return (
-      <div
-        className="material-content elevation3"
-        style={{ maxWidth: '320px', margin: '30px auto' }}
+      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}
       >
         <h4 className="material-header-h4">
           {editPic._id ? 'Edit ' : 'Add '}
@@ -134,7 +143,10 @@ class AdminController {
       try {
         r = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`).set('Authorization', `Bearer ${auth.token}`)
           .set('Accept', 'application/json');
-      } catch (e) { return Promise.resolve(false); }
+      } catch (e) {
+        this.warnNotif(id, 'Error Could Not Delete Book');
+        return Promise.resolve(false);
+      }
       if (r.status === 200) {
         window.location.assign(`${redirect}`);
         return Promise.resolve(true);
@@ -160,6 +172,7 @@ class AdminController {
     let r;
     try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
     if (r.status === 201) {
+      this.warnNotif(data.title, 'Error Could Not Update');
       window.location.assign(redirect);
       return `${r.status}`;
     }
@@ -172,10 +185,12 @@ class AdminController {
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send(body);
-    } catch (e) { return `${(e as Error).message}`; }
+    } catch (e) {
+      this.warnNotif(body.title, 'Error Could Not Update');
+      return `${(e as Error).message}`;
+    }
     if (r.status === 200) {
       window.location.assign(redirect);
       return `${r.status}`;
@@ -196,14 +211,16 @@ class AdminController {
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
         .set('Accept', 'application/json')
-        .send({
-          title: newstitle,
+        .send({ title: newstitle,
           url: newsurl,
           comments: isworshipbulletin,
           type: 'Forum',
           access: 'CLC',
         });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) { 
+      this.warnNotif(newstitle, 'Failed To Update News');
+      return Promise.resolve(false); 
+    }
     if (r.status === 201) {
       window.location.assign('/news');
       return Promise.resolve(true);
@@ -213,23 +230,21 @@ class AdminController {
   async editPicAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
     evt.preventDefault();
     const { auth, editPic, dispatch } = this.view.props;
-    const {
-      youthName, youthURL, type, showCaption,
+    const { youthName, youthURL, type, showCaption,
     } = this.view.state;
     let r;
     try {
       r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
-        .send({
-          title: youthName, url: youthURL, type, comments: showCaption,
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
+        .send({ title: youthName, url: youthURL, type, comments: showCaption,
         });
-    } catch (e) { return Promise.resolve(false); }
+    } catch (e) { 
+      this.warnNotif(editPic.title, 'Failed to edit Pic'); return Promise.resolve(false);
+    }
     if (r.status === 200) {
       dispatch({ type: 'EDIT_PIC', picData: {} });
       dispatch({ type: 'SHOW_TABLE', showTable: true });
-      this.view.setState({
-        youthName: '', youthURL: '', type: '',
+      this.view.setState({ youthName: '', youthURL: '', type: '',
       });
       window.location.reload();
       return Promise.resolve(true);
@@ -290,13 +305,11 @@ class AdminController {
     let r;
     try {
       r = await this.superagent.post(`${process.env.BackendUrl}/user`)
-        .set('Authorization', `Bearer ${auth.token}`)
-        .set('Accept', 'application/json')
-        .send({
-          email: addAdminEmail,
+        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
+        .send({ email: addAdminEmail,
         });
     // eslint-disable-next-line no-console
-    } catch (e) { console.log(e); return false; }
+    } catch (e) { this.warnNotif(addAdminEmail, 'Failed to Create the Admin User'); console.log(e); return false; }
     if (r.status === 400) {
       this.view.setState({ formError: '' });
       return true;

@@ -1,4 +1,6 @@
 import React, { Dispatch } from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import ReactHtmlParser from 'react-html-parser';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -73,7 +75,20 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-      } catch (e) { return `${(e as Error).message}`; }
+      } catch (e) { 
+        store.addNotification({
+          title: id,
+          message: 'Failed to Delete Photo',
+          type: 'warning',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated animate__fadeIn'],
+          animationOut: ['animate__animated animate__fadeOut'],
+          dismiss: { duration: 5000, onScreen: true, 
+          }, 
+        });
+        return `${(e as Error).message}`; 
+      }
       if (res.status === 200) { window.location.reload(); return 'deleted pic'; }
       return `${res.status} ${res.body}`;
     }

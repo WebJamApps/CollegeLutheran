@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import superagent from 'superagent';
+import { store } from 'react-notifications-component';
 import authenticate, { logout } from '../../src/App/authActions';
 import type { Auth } from '../../src/redux/mapStoreToProps';
 import type { GoogleBody } from '../../src/App/AppTypes';
@@ -40,6 +41,10 @@ describe('authActions', () => {
     expect(result).toBe('authenticated');
   });
   it('returns false when nothing is returned from Google', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     const postReturn: any = ({
       set: () => ({ send: async () => ({ body: undefined }) }),
     });
@@ -60,6 +65,10 @@ describe('authActions', () => {
     expect(result).toBe('authentication failed');
   });
   it('returns error when fetch error', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
     superagent.post = jest.fn(() => postReturn);
     const gBody: GoogleBody = {

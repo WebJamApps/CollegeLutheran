@@ -21,13 +21,9 @@ async function setUser(view: AppTemplate): Promise<string> {
   } catch (e) { return `${(e as Error).message}`; }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
-    try {
-      user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
-        .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
-      dispatch({ type: 'SET_USER', data: user.body });
-      //   const newToken = jwt.encode(decoded, process.env.HashString || /* istanbul ignore next */'');
-      // dispatch({ type: 'GOT_TOKEN', data: { token: newToken, email: auth.email } });
-    } catch (e) { return `${(e as Error).message}`; }
+    user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
+      .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
+    dispatch({ type: 'SET_USER', data: user.body });
   }
   window.location.reload();
   window.location.assign('/admin');

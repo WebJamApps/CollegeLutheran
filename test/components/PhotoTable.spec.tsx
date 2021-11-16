@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
+import { store } from 'react-notifications-component';
 import { PhotoTable } from '../../src/components/PhotoTable';
 
 describe('PhotoTable', () => {
@@ -82,6 +83,10 @@ describe('PhotoTable', () => {
     expect(r).toBe('304 undefined');
   });
   it('runs the deletePic api but catches error', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     wrapper.instance().superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     wrapper.update();
     global.confirm = jest.fn(() => true);
