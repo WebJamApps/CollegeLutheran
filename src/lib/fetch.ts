@@ -1,4 +1,6 @@
 import type { Dispatch } from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
 const fetchGet = async (view:
@@ -14,8 +16,21 @@ const fetchGet = async (view:
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
+    store.addNotification({
+      title: `${reducer}`,
+      message: 'Message Failed to Get the Information',
+      type: 'warning',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated animate__fadeIn'],
+      animationOut: ['animate__animated animate__fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
     // eslint-disable-next-line no-console
-    console.log(`${(e as Error).message}`);// for Logan to do here!
+    console.log((e as Error).message);
     return false;
   }
   dispatch({ type: `${reducer}`, data: res.body });

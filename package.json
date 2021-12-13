@@ -1,6 +1,6 @@
 {
   "name": "collegelutheran",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -9,8 +9,8 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=16.13.0 <17",
-    "npm": ">=8.1.0 <9"
+    "node": ">=16.13.1 <17",
+    "npm": ">=8.2.0 <9"
   },
   "files": [
     "webpack.config.js",
@@ -95,6 +95,7 @@
     "react-dom": "latest",
     "react-google-login": "latest",
     "react-html-parser": "latest",
+    "react-notifications-component": "^3.1.0",
     "react-redux": "latest",
     "react-resize-detector": "^5.2.0",
     "react-router-dom": "latest",
@@ -135,6 +136,7 @@
     "@types/expect-puppeteer": "latest",
     "@types/jest-environment-puppeteer": "latest",
     "@types/puppeteer": "latest",
+    "@types/react-notifications-component": "^3.1.1",
     "@types/react-test-renderer": "latest",
     "@types/redux-mock-store": "latest",
     "@typescript-eslint/eslint-plugin": "latest",

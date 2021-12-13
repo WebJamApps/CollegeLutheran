@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jsonwebtoken';
+import { store } from 'react-notifications-component';
 import superagent from 'superagent';
 import authUtils from '../../src/App/authUtils';
 
 describe('authUtils', () => {
   const vStub: any = {
     props: { auth: { token: 'token' }, dispatch: () => Promise.resolve(true) },
+    setState: { addNotification: () => {} },
   };
   it('is defined', () => {
     expect(authUtils).toBeDefined();
@@ -26,6 +28,10 @@ describe('authUtils', () => {
     expect(res).toBe('jwt malformed');
   });
   it('handles google login with authenticate error', async () => {
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn(),
+    });
     const postReturn: any = ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) });
     superagent.post = jest.fn(() => postReturn);
     const res = await authUtils.responseGoogleLogin({ code: '' }, vStub);
@@ -56,14 +62,6 @@ describe('authUtils', () => {
     };
     const result = await authUtils.setUser(cStub3);
     expect(result).toBe('user set');
-  });
-  it('catches fetch user error when sets the user', async () => {
-    const verifyMock:any = jest.fn(() => ({ sub: '123' }));
-    jwt.verify = verifyMock;
-    const sa: any = superagent;
-    sa.get = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
-    const res = await authUtils.setUser(vStub);
-    expect(res).toBe('bad');
   });
   it('logs out when /admin', () => {
     Object.defineProperty(window, 'location', { value: { reload: jest.fn(), assign: jest.fn(), href: '/admin' }, writable: true });

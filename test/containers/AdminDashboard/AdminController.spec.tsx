@@ -19,7 +19,9 @@ describe('AdminController', () => {
         addAdminEmail: 'test@gmail.com',
         formError: '',
       },
-      props: { auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun },
+      props: {
+        auth: { token: 'token' }, editPic: {}, dispatch: (fun) => fun,
+      },
     };
     controller = new AdminController(vStub as any);
   });
@@ -33,6 +35,15 @@ describe('AdminController', () => {
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error on delete book request to the backend', async () => {
+    jest.mock('react-notifications-component');
+    const { store } = jest.requireActual('react-notifications-component');
+    expect(store.addNotification).toBeDefined();
+    Object.defineProperty(store, 'addNotification', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        addNotification: jest.fn(),
+      })),
+    });
     global.confirm = jest.fn(() => true);
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');
@@ -129,6 +140,7 @@ describe('AdminController', () => {
     const res = await controller.addAdminUser({ preventDefault: () => { } });
     expect(res).toBe(true);
   });
+  // eslint-disable-next-line jest/no-commented-out-tests
   it('Returns admin user', async () => {
     let authRole = '';
     // eslint-disable-next-line prefer-destructuring
