@@ -12,7 +12,7 @@ const makeThermo = (classString:string, style: React.CSSProperties | undefined) 
         <i>
           <a
             style={{ fontSize: '15pt' }}
-            href="https://docs.google.com/forms/d/e/1FAIpQLSffntpB3lGbSpqzerLvtnaL1zDZVxOH92HbOAL2CPrFCs8eUQ/viewform"
+            href="https://forms.gle/5oLTJPPw5eysuyF5A"
             rel="noreferrer"
             target="_blank"
           >
@@ -25,14 +25,7 @@ const makeThermo = (classString:string, style: React.CSSProperties | undefined) 
         </i>
       </strong>
     </p>
-    <img
-      src="https://dl.dropboxusercontent.com/s/owq01nt0eul3dph/thermo.png?dl=0"
-      style={{ border: 'solid 1px black' }}
-      alt="Pledges+as+of+Nov+11"
-      title="Pledges+as+of+Nov+11"
-      width="220"
-      height="400"
-    />
+    <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=305000&VT=1&T=As of Jan 8th&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="" title="" width="240" height="425"/>
   </div>
 );
 const pageName = 'giving';
@@ -44,28 +37,19 @@ const StewardshipContent = (): JSX.Element => (
         <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Stewardship</h3>
         {makeThermo('wide-thermo', { float: 'right', textAlign: 'center' })}
         <p>
-          I hope you enjoy the approach we&apos;re taking with our stewardship campaign this year. How we give thanks for what God has given us, and how we share the gifts we&apos;ve been given, are yet another thing that&apos;s been complicated by this pandemic. I&apos;ve noticed ways that I&apos;ve had to step back from service I used to offer to God and my neighbor. And yet, there are other ways I&apos;ve been called to step up and serve that I never imagined before!
-          That&apos;s why we&apos;ll be considering the theme of &quot;stepping back and stepping up,&quot; remembering all the while that
-          <br />
-          {' '}
-          <strong>
-            <i>
-              &quot;our steps are made firm by the LORD, when he delights in our way; though we stumble, we shall not fall headlong, for the LORD holds us by the hand&quot;
-              <br />
-              (Psalm 37:23-24).
-            </i>
-          </strong>
-          <br />
-          For this promise, let us give thanks!
-          <br />
-          <br />
-          Pastor David C. Drebes
-          <br />
-          <br />
+        Happy New Year CLC Stewards!<br/><br/>
+We are kicking off our annual investment in ministry program for 2022 titled<br/><strong>"Of One Heart and Soul"</strong> (Acts 4:32).<br/><br/>For the next four Sundays you will be hearing about several ministries of CLC and how they impacted our church and community last year. This year's financial commitment goal is $305,000 and we will be setting up a web page and making available commitment cards soon.
+<br/><br/><br/>
+Thank you all for your support.
+<br/><br/>
+Emerson Harvey , Stewardship Chair<br/>
+Pastor David Drebes<br/>
+Josh Sherman<br/>
+Maria Sherman<br/><br/><br/>
         </p>
-        <hr />
-        <p>
-          <br />
+        {/* <hr />
+        <p> */}
+          {/* <br />
           Greetings to you during this most remarkable time. It has been an inspiration to see the efforts of our church to continue worship and support activities using a variety of methods. I have felt very much in touch with the church while enjoying the Bible studies, videos and regular online updates. In order to continue the great things that CLC does we are introducing our 2021 investment in ministry plan and theme: &quot;our steps are made firm by the Lord&quot; (Psalm 37:23).
           <br />
           <br />
@@ -77,8 +61,8 @@ const StewardshipContent = (): JSX.Element => (
           <br />
           Emerson Harvey III,
           <br />
-          Stewardship Chair
-        </p>
+          Stewardship Chair */}
+        {/* </p> */}
         {makeThermo('cell-thermo', { margin: 'auto', textAlign: 'center' })}
       </div>
       <p>&nbsp;</p>
