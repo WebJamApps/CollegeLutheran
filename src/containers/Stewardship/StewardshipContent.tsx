@@ -25,7 +25,7 @@ const makeThermo = (classString:string, style: React.CSSProperties | undefined) 
         </i>
       </strong>
     </p>
-    <img src="http://www.jlion.com:80//tools/Thermometer.aspx?MIN=0&MAX=305000&VT=1&T=As of Jan 8th&IV=0&M=1&SC=0&CS=6&CI=en-US&TH=1" style={{ border: 'solid 1px black' }} alt="" title="" width="240" height="425"/>
+    <img src="https://dl.dropboxusercontent.com/s/owq01nt0eul3dph/thermo.png?dl=0" style={{ border: 'solid 1px black' }} alt="" title="" width="240" height="425"/>
   </div>
 );
 const pageName = 'giving';
