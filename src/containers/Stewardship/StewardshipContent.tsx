@@ -38,31 +38,16 @@ const StewardshipContent = (): JSX.Element => (
         {makeThermo('wide-thermo', { float: 'right', textAlign: 'center' })}
         <p>
         Happy New Year CLC Stewards!<br/><br/>
-We are kicking off our annual investment in ministry program for 2022 titled<br/><strong>"Of One Heart and Soul"</strong> (Acts 4:32).<br/><br/>For the next four Sundays you will be hearing about several ministries of CLC and how they impacted our church and community last year. This year's financial commitment goal is $305,000 and we will be setting up a web page and making available commitment cards soon.
+This year, our Stewardship Campaign is celebrating how God's Church is <br/>
+<strong>"Of One Heart and Soul!"</strong> (Acts 4:32.)<br/><br/>
+On upcoming Sundays, you will hear about several ministries of CLC and how they impacted our church and community last year. You are also invited to pledge your support towards our ministries in 2022. This year's financial commitment goal is $305,000.
 <br/><br/><br/>
-Thank you all for your support.
-<br/><br/>
+Thank you all for your support.<br/><br/>
 Emerson Harvey , Stewardship Chair<br/>
-Pastor David Drebes<br/>
+Pastor David Drebes<br/>  
 Josh Sherman<br/>
-Maria Sherman<br/><br/><br/>
+Maria Sherman<br/><br/><br/><br/>
         </p>
-        {/* <hr />
-        <p> */}
-          {/* <br />
-          Greetings to you during this most remarkable time. It has been an inspiration to see the efforts of our church to continue worship and support activities using a variety of methods. I have felt very much in touch with the church while enjoying the Bible studies, videos and regular online updates. In order to continue the great things that CLC does we are introducing our 2021 investment in ministry plan and theme: &quot;our steps are made firm by the Lord&quot; (Psalm 37:23).
-          <br />
-          <br />
-          Due to the pandemic we have been asked to step back in a manner to protect ourselves and others. At the same time God asks us to step up and continue the work of his church. It&apos;s with this spirit in mind that we present to you our commitment goal of $300,000 for 2021!
-          <br />
-          <br />
-          Thank you for your support and prayers!
-          <br />
-          <br />
-          Emerson Harvey III,
-          <br />
-          Stewardship Chair */}
-        {/* </p> */}
         {makeThermo('cell-thermo', { margin: 'auto', textAlign: 'center' })}
       </div>
       <p>&nbsp;</p>
