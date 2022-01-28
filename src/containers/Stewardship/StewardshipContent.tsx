@@ -25,7 +25,7 @@ const makeThermo = (classString:string, style: React.CSSProperties | undefined) 
         </i>
       </strong>
     </p>
-    <img src="https://dl.dropboxusercontent.com/s/owq01nt0eul3dph/thermo.png?dl=0" style={{ border: 'solid 1px black' }} alt="" title="" width="240" height="425"/>
+    <img src="https://dl.dropboxusercontent.com/s/mgky2ohmijidad5/thermo.png?dl=0" style={{ border: 'solid 1px black' }} alt="" title="" width="240" height="425"/>
   </div>
 );
 const pageName = 'giving';
