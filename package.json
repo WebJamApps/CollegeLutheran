@@ -9,14 +9,13 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=16.13.1 <17",
-    "npm": ">=8.2.0 <9"
+    "node": ">=16.13.2 <17",
+    "npm": ">=8.3.0 <9"
   },
   "files": [
     "webpack.config.js",
     "src/",
-    "static/",
-    "server.js"
+    "static/"
   ],
   "keywords": [
     "React",
@@ -26,18 +25,17 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start:dist": "node server.js",
-    "build:prod": "npm run start build",
+    "build:prod": "rm -rf dist && npx webpack --node-env=production --progress --env production",
     "cc": "codeclimate analyze -f html > codeclimate.html",
-    "start": "nps",
-    "test:lint-fix": "npm run test:stylelint && nps test.lint.fix",
-    "test:lint": "npm run test:stylelint && nps test.lint",
+    "start": "webpack serve --node-env=development --env --inline",
+    "test:stylelint": "stylelint \"static/**/*.scss\"",
+    "test:lint-fix": "npm run test:stylelint && eslint . --ext .js,.ts,.tsx --fix",
+    "test:lint": "npm run test:stylelint && eslint . --ext .js,.ts,.tsx",
     "test": "npm run test:lint && npm run test:jest",
     "test:local": "npm run test:lint-fix && npm run test:jest && npm run cc",
     "test:jest": "jest --config jest.config.json --no-cache --runInBand",
-    "cleaninstall": "rm -rf yarn.lock && rm -rf node_modules rm -rf package-lock.json && npm cache clean --force && npm install",
-    "postinstall": "npm run build:prod",
-    "test:stylelint": "stylelint \"static/**/*.scss\""
+    "cleaninstall": "rm -rf yarn.lock && rm -rf package-lock.json && rm -rf node_modules && npm cache clean --force && npm install",
+    "postinstall": "npm run build:prod"
   },
   "dependencies": {
     "@material-ui/core": "latest",
@@ -66,7 +64,6 @@
     "@types/sanitize-html": "latest",
     "@types/socketcluster-client": "latest",
     "@types/superagent": "latest",
-    "@types/terser-webpack-plugin": "latest",
     "@types/webpack-bundle-analyzer": "latest",
     "@types/webpack-env": "latest",
     "bootstrap": "latest",
@@ -87,8 +84,6 @@
     "moment": "latest",
     "mui-datatables": "latest",
     "node-notifier": "^10.0.0",
-    "nps": "^5.9.8",
-    "nps-utils": "^1.0.2",
     "popper.js": "latest",
     "process": "^0.11.10",
     "prop-types": "latest",
