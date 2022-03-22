@@ -8,7 +8,7 @@ const GivingContent = (): JSX.Element => (
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
-        <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Giving</h3>
+        <h3>Giving</h3>
         <p>
           Thank you for supporting the ministries of College Lutheran Church through your online giving.
           We now use
@@ -19,11 +19,7 @@ const GivingContent = (): JSX.Element => (
           Just complete the form below to support the ministries of CLC with your offering.
         </p>
         <i>
-          Due to technical difficulties, we are transitioning away from our previous online giving processor.
-          If you require access to Vanco, click
-          {' '}
-          <a href="https://gp.vancopayments.com/gpo/#/donateNow/195e5d99-170c-4f3a-b5eb-e61ff13" target="_blank" rel="noreferrer">here</a>
-          . For further assistance, email us at
+        If you have any questions about online giving, please contact us at (540) 389-4963 or
           {' '}
           <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
         </i>
