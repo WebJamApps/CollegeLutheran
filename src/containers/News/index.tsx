@@ -8,10 +8,12 @@ export function News(props: { books: Ibook[] }): JSX.Element {
   const { books } = props;
   commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
-    const dataA = a.created_at.split('T')[0];
-    const dateB = b.created_at.split('T')[0];
-    if (dataA < dateB) return 1;
-    if (dataA > dateB) return -1;
+    if(a.created_at && b.created_at){
+      const dataA = a.created_at.split('T')[0];
+      const dateB = b.created_at.split('T')[0];
+      if (dataA < dateB) return 1;
+      if (dataA > dateB) return -1;
+    }
     return 0;
   });
   return <DefaultNewsContent books={books} />;

@@ -59,6 +59,13 @@ const menuItems = [{
 {
   classname: '',
   type: 'link',
+  iconClass: 'fas fa-hammer',
+  link: '/habitatproject',
+  name: 'Habitat Project'
+},
+{
+  classname: '',
+  type: 'link',
   iconClass: 'fas fa-music',
   link: '/music',
   name: 'Music',
@@ -105,6 +112,6 @@ const menuItems = [{
   link: '',
   name: 'Logout',
   auth: true,
-},
+}
 ];
 export default menuItems;

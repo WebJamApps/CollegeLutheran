@@ -9,6 +9,12 @@ interface IAbout {
   allPics?: Ibook[];
 }
 
+const images= [{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'},
+{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'},
+{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'}]
+
+
+
 const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
   <div className="aboutPage">
     <div className="container-fluid" style={{ paddingRight: 0 }}>

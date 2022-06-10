@@ -9,14 +9,14 @@ export interface Auth {
 }
 
 export interface Ibook {
-  link: string | undefined,
-  caption: string | undefined,
-  modify: JSX.Element | undefined,
-  thumbnail: string | undefined,
+  link?: string,
+  caption?: string,
+  modify?: JSX.Element,
+  thumbnail?: string,
   title: string,
   _id: string,
   type: string,
-  created_at: string,
+  created_at?: string,
   author?: string,
   numberPages?: number,
   dateOfPub?: number,
