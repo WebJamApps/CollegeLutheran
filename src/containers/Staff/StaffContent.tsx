@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parser from 'html-react-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
@@ -13,7 +13,7 @@ const makeStaff = () => {
     // eslint-disable-next-line security/detect-object-injection
     moreStaff += `<div class="staffDescription">${staffItems.staff[i].desc}</div></section>`;
   }
-  return ReactHtmlParser(moreStaff);
+  return parser(moreStaff);
 };
 
 const pageName = 'staff';

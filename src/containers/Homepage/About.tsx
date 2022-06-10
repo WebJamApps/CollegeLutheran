@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parser from 'html-react-parser';
 import PicSlider from '../../components/PicSlider';
 import type { Ibook } from '../../redux/mapStoreToProps';
 
@@ -8,12 +8,6 @@ interface IAbout {
   width?: number;
   allPics?: Ibook[];
 }
-
-const images= [{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'},
-{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'},
-{_id:'5e7273f7349ad8000410f761', title:'Devotional-for-Sunday--March-15--2020' , url:'https://myemail.constantcontact.com/Devotional-for-Sunday--March-15--2020.html?soid=1101234706842&aid=Dpkb61Zlueo'}]
-
-
 
 const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
   <div className="aboutPage">
@@ -25,9 +19,9 @@ const About = ({ homeContent, width, allPics }: IAbout): JSX.Element => (
             The church is situated on College Avenue, within easy walking distance of Roanoke College.
             College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(homeContent && homeContent.title ? homeContent.title : '')}</h5>
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(homeContent && homeContent.title ? homeContent.title : '')}</h5>
           <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-            {ReactHtmlParser(homeContent && homeContent.comments ? homeContent.comments : '')}
+            {parser(homeContent && homeContent.comments ? homeContent.comments : '')}
           </section>
           <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
             <span style={{ fontSize: '18px' }}>
