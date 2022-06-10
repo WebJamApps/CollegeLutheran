@@ -5,14 +5,14 @@ type ElcaProps = {
 };
 
 const ELCALogo = ({ pageName }: ElcaProps): JSX.Element => (
-  <div className={`${pageName}ELCA`} style={{ textAlign: 'center' }}>
+  <div className={`${pageName}ELCA`} style={{ textAlign: 'center', paddingInline:'20px' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
         id="elcaLogo"
         alt="ELCA LOGO"
         src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
         style={{
-          width: '310px', paddingTop: '30px', margin: 'auto', marginLeft: '-12px',
+          width: '310px', paddingTop: '30px', margin: 'auto', marginLeft: '',
         }}
       />
     </a>
