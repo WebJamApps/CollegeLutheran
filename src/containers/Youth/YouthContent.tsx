@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parser from 'html-react-parser';
 import PicSlider from '../../components/PicSlider';
 import type { YouthProps } from './index';
 
@@ -49,9 +49,9 @@ const YouthContent = ({ youthPics, youthContent }: YouthProps): JSX.Element => (
           We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
         </p>
         <hr />
-        <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{ReactHtmlParser(youthContent && youthContent.title ? youthContent.title : '')}</h5>
+        <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(youthContent && youthContent.title ? youthContent.title : '')}</h5>
         <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-          {ReactHtmlParser(youthContent && youthContent.comments ? youthContent.comments : '')}
+          {parser(youthContent && youthContent.comments ? youthContent.comments : '')}
         </section>
       </div>
       <div className="youthELCA">
