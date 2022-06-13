@@ -5,7 +5,7 @@ import ELCALogo from '../../src/components/elcaLogo';
 function setup() {
   const props = {};
   const pageName = 'sample';
-  const wrapper = shallow(<ELCALogo pageName={pageName} />);
+  const wrapper = shallow(<ELCALogo/>);
   return { wrapper, props, pageName };
 }
 

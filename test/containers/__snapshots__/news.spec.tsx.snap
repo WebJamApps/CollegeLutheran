@@ -61,9 +61,9 @@ exports[`News Renders the News component correctly 1`] = `
     </div>
   </div>
   <div
-    className="newsELCA"
     style={
       Object {
+        "marginLeft": "-9px",
         "textAlign": "center",
       }
     }
@@ -80,9 +80,9 @@ exports[`News Renders the News component correctly 1`] = `
         style={
           Object {
             "margin": "auto",
-            "marginLeft": "-12px",
+            "marginLeft": "",
             "paddingTop": "30px",
-            "width": "310px",
+            "width": "308px",
           }
         }
       />
