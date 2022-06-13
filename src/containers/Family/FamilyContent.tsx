@@ -52,7 +52,7 @@ const FamilyContent = ({ familyPics }: FamilyProps): JSX.Element => (
           {parser(additionalContent)}
         </section>
       </div>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
     </div>
   </div>
 );

@@ -148,7 +148,7 @@ const StaffContent = (): JSX.Element => (
           </section>
           {makeStaff()}
         </div>
-        <ELCALogo pageName={pageName} />
+        <ELCALogo/>
       </div>
     </div>
   </div>

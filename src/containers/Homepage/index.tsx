@@ -6,6 +6,7 @@ import WideFacebookFeed from './WideFacebookFeed';
 import NarrowFacebookFeed from './NarrowFacebookFeed';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
+import ELCALogo from '../../components/elcaLogo';
 
 type HomepageProps = {
   targetRef: RefObject<HTMLDivElement>;
@@ -41,28 +42,6 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
     return this.commonUtils.randomizePics(this, delay);
   }
 
-  elca(w: number): JSX.Element { // eslint-disable-line class-methods-use-this
-    const width = w < 420 ? '300px' : '400px';
-    return (
-      <div
-        className="homeELCA"
-        style={{
-          textAlign: 'center', margin: 'auto', paddingTop: 0, paddingBottom: 0,
-        }}
-      >
-        <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
-          <img
-            id="elcaLogo"
-            alt="ELCA LOGO"
-            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-            style={{ width, margin: 'auto auto auto -2px', paddingTop: '30px' }}
-          />
-        </a>
-        <p>{' '}</p>
-      </div>
-    );
-  }
-
   render(): JSX.Element {
     const { picsState } = this.state;
     const { width, targetRef } = this.props;
@@ -87,7 +66,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
-        {this.elca(width)}
+        <ELCALogo/>
       </div>
     );
   }

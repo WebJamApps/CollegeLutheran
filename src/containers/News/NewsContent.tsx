@@ -81,7 +81,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
         </iframe>
       </div>
     </div>
-    <ELCALogo pageName={pageName} />
+    <ELCALogo/>
   </div>
 );
 

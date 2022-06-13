@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@material-ui/core';
+import { Box, Grid, Paper } from '@material-ui/core';
 import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
@@ -8,7 +8,7 @@ const images= [{_id:'5e7273f7349ad8000410f761', title:'CLC Fellowship' , url:'ht
 
 const HabitatProjectContent = (): JSX.Element => (
   <div className="page-content">
-    <Grid container>
+    <Box>
       <Grid item xs={12} sm={6} md={4} style={{marginInline:'0', paddingInline:'20px'}}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>College Lutheran Habitat Project</h3>
           <p style={{textAlign: 'left'}}>
@@ -162,8 +162,8 @@ const HabitatProjectContent = (): JSX.Element => (
             </div>
           </Grid>
       </Grid>
-    </Grid>
-    <ELCALogo pageName={pageName} />
+    </Box>
+    <ELCALogo/>
   </div>
 );
 export default HabitatProjectContent;
