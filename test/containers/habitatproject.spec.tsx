@@ -1,21 +1,19 @@
-import React from 'react';
+
 import HabitatProject from '../../src/containers/HabitatProject/index';
 import DefaultHabitatContent from '../../src/containers/HabitatProject/HabitatProjectContent';
-import { shallow } from 'enzyme';
-
-function setup() {
-    const props = {};
-    const wrapper = shallow(<HabitatProject />);
-    return {  props, wrapper };
-  }
+import React from 'react';
+import renderer from 'react-test-renderer';
   
-  describe('Habitat Project', () => {
-    it('Renders the Habitat Project component', () => {
-      const { wrapper } = setup();
-      expect(wrapper.find(DefaultHabitatContent)
-        .dive()
-        .find('div.page-content')
-        .exists()).toBe(true);
-    });
-  });
+describe('Habitat Project', () => {
+    it('Renders the Habitat Project page', () => {
+        const page = renderer.create(<HabitatProject/>).toJSON()
+        expect(page).toMatchSnapshot();
+    })
+})
 
+describe('Habitat Project', () => {
+    it('Renders the Habitat Project page', () => {
+        const page = renderer.create(<DefaultHabitatContent/>).toJSON()
+        expect(page).toMatchSnapshot();
+    })
+})
