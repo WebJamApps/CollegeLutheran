@@ -41,7 +41,7 @@ const GivingContent = (): JSX.Element => (
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
       <p>&nbsp;</p>
     </div>
   </div>

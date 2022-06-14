@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parser from 'html-react-parser';
 import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 import type { FamilyProps } from './index';
@@ -49,10 +49,10 @@ const FamilyContent = ({ familyPics }: FamilyProps): JSX.Element => (
         </section>
         <section style={{ textAlign: 'left', marginTop: '0' }}>
           {' '}
-          {ReactHtmlParser(additionalContent)}
+          {parser(additionalContent)}
         </section>
       </div>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
     </div>
   </div>
 );

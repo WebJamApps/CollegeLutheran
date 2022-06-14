@@ -39,7 +39,7 @@ const MusicContent = ({ musicPics }: MusicProps): JSX.Element => (
           sings, a sing-along at the parish picnic, etc.
         </p>
       </div>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
     </div>
   </div>
 );

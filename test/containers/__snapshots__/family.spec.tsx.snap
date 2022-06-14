@@ -134,9 +134,9 @@ exports[`Family renders correctly without images 1`] = `
       </section>
     </div>
     <div
-      className="familyELCA"
       style={
         Object {
+          "marginLeft": "-9px",
           "textAlign": "center",
         }
       }
@@ -153,9 +153,9 @@ exports[`Family renders correctly without images 1`] = `
           style={
             Object {
               "margin": "auto",
-              "marginLeft": "-12px",
+              "marginLeft": "",
               "paddingTop": "30px",
-              "width": "310px",
+              "width": "308px",
             }
           }
         />

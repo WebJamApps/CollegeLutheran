@@ -14,10 +14,12 @@ const continueMenuItem = (menu: MenuItem,
 
 const sortBulletins = (bulletin:Ibook[]) => {
   const sortedBulletins = bulletin.sort((a, b) => {
-    const aTime = new Date(a.created_at).getTime();
-    const bTime = new Date(b.created_at).getTime();
-    if (aTime > bTime) return -1;
-    if (aTime < bTime) return 1;
+    if(a.created_at && b.created_at){
+      const aTime = new Date(a.created_at).getTime();
+      const bTime = new Date(b.created_at).getTime();
+      if (aTime > bTime) return -1;
+      if (aTime < bTime) return 1;
+    }
     return 0;
   });
   return sortedBulletins;

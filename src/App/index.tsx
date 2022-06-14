@@ -23,6 +23,7 @@ import DefaultLiveStream from '../containers/LiveStream';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
 import type { AppProps } from './AppTypes';
+import HabitatProject from '../containers/HabitatProject';
 
 export class App extends Component<AppProps> {
   fetch: typeof fetch;
@@ -80,6 +81,7 @@ export class App extends Component<AppProps> {
               <Route path="/calendar" component={Calendar} />
               <Route path="/stewardship" component={Stewardship} />
               <Route path="/livestream" component={DefaultLiveStream} />
+              <Route path="/habitatproject" component={HabitatProject} />
               <Route component={AppFourOhFour} />
             </Switch>
           </AppTemplateDefault>

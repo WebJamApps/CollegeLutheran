@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
-import ReactHtmlParser from 'react-html-parser';
+import parser from 'html-react-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
@@ -58,7 +58,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
               margin: 0, fontSize: '12pt', maxWidth: '200px',
             }}
             >
-              {label !== 'Modify' ? ReactHtmlParser(value) : value}
+              {label !== 'Modify' ? parser(value) : value}
             </div>
           ),
         },
