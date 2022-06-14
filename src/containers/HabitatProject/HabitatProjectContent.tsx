@@ -8,7 +8,7 @@ const images= [{_id:'5e7273f7349ad8000410f761', title:'CLC Fellowship' , url:'ht
 
 const HabitatProjectContent = (): JSX.Element => (
   <div className="page-content">
-    <Box>
+    <Grid container>
       <Grid item xs={12} sm={6} md={4} style={{marginInline:'0', paddingInline:'20px'}}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>College Lutheran Habitat Project</h3>
           <p style={{textAlign: 'left'}}>
@@ -162,7 +162,7 @@ const HabitatProjectContent = (): JSX.Element => (
             </div>
           </Grid>
       </Grid>
-    </Box>
+    </Grid>
     <ELCALogo/>
   </div>
 );
