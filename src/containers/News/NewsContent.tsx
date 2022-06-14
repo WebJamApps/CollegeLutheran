@@ -34,12 +34,12 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
                   </thead>
                   <tbody className="TableBody-root">
                     {books && books.map(
-                      (d: { _id: string | number | undefined; url?: string | undefined; title: React.ReactNode; created_at: string; }) => (
+                      (d: Ibook) => (
                         <tr className="TableRow-root" key={d._id}>
                           <td className="TableCell-root TableCell-body newsUrl">
                             <a rel="noopener noreferrer" target="_blank" href={d.url}>{d.title}</a>
                           </td>
-                          <td className="TableCell-root TableCell-body">{d.created_at.split('T')[0]}</td>
+                          <td className="TableCell-root TableCell-body">{d.created_at ? d.created_at.split('T')[0] : ''}</td>
                         </tr>
                       ),
                     )}
@@ -81,7 +81,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
         </iframe>
       </div>
     </div>
-    <ELCALogo pageName={pageName} />
+    <ELCALogo/>
   </div>
 );
 

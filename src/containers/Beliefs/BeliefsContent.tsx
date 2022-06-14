@@ -75,7 +75,7 @@ const BeliefsContent = (): JSX.Element => (
         <p>&nbsp;</p>
         <p>&nbsp;</p>
       </div>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
     </div>
   </div>
 );

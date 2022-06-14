@@ -51,7 +51,7 @@ Maria Sherman<br/><br/><br/><br/>
         {makeThermo('cell-thermo', { margin: 'auto', textAlign: 'center' })}
       </div>
       <p>&nbsp;</p>
-      <ELCALogo pageName={pageName} />
+      <ELCALogo/>
       <p>&nbsp;</p>
     </div>
   </div>
