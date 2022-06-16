@@ -6,7 +6,7 @@ import DefaultBeliefsContent from '../../src/containers/Beliefs/BeliefsContent';
 function setup() {
   const props = {};
   const wrapper = shallow(<Beliefs />);
-  return { props, wrapper };
+  return {  props, wrapper };
 }
 
 describe('Beliefs', () => {
