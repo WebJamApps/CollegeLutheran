@@ -94,7 +94,6 @@ const HabitatProjectContent = (): JSX.Element => (
       <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px'}}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Construction Team</h3>
           <Paper elevation={0}>
-            <div style={{}}>
               <p style={{marginBottom:'0'}}>
                 <strong>TEAM LEADERS:</strong>
                 <br/><br/>
@@ -115,7 +114,6 @@ const HabitatProjectContent = (): JSX.Element => (
                   </li>
                 </ul>
               </div>
-            </div>
           </Paper>
       </Grid>
       <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px'}}>
@@ -166,7 +164,6 @@ const HabitatProjectContent = (): JSX.Element => (
       <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px'}}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Family Team</h3>
           <Paper elevation={0}>
-            <div style={{}}>
               <p style={{marginBottom:'0'}}>
                 <strong>TEAM LEADERS:</strong>
                 <br/><br/>
@@ -187,7 +184,6 @@ const HabitatProjectContent = (): JSX.Element => (
                   </li>
                 </ul>
               </div>
-            </div>
           </Paper>
         </Grid>
     </Grid>
