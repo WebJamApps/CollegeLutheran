@@ -10,51 +10,50 @@ const HabitatProjectContent = (): JSX.Element => (
   <div className="page-content">
     <Grid container>
       <Grid item xs={12} sm={6} md={4} style={{marginInline:'0', paddingInline:'20px'}}>
-        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>College Lutheran Habitat Project</h3>
-        <Paper elevation={0} style={{verticalAlign:'middle'}}>
+        <Paper elevation={0}>
+          <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>College Lutheran Habitat Project</h3>
           <p style={{textAlign: 'left'}}>
-            College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
-            Roanoke Valley. This is the largest service project undertaken by the members of College
-            Lutheran and we are delighted to be underway.
-            <br></br>
-            Here are some details:
-            <ul>
-              <li>
-                This will be a rebuild project at 1004 Stewart Avenue, SE Roanoke.
-              </li>
-              <li>
-                The existing structure will be gutted with hazardous material being mitigated before
-                volunteers are on site.
-              </li>
-              <li>
-                New construction will be added to the rear of the building.
-              </li>
-              <li>
-                A family has yet to be confirmed for this home, but we expect a family will be
-                designated in the coming weeks
-              </li>
-              <li>
-                All level of construction skills will be needed. Workdays will probably be Wednesday
-                and Saturday, but that may change. We typically work 8:00 – 2:00, but half-time
-                participation is welcome.
-              </li>
-              <li>
-                Lunch, water, tools are all provided.
-              </li>
-              <li>
-                We plan to have workers on this site 2 days each week until it is completed
-              </li>
-              <li>
-                We plan to have workers on this site 2 days each week until it is completed
-              </li>
-              <li>
-                On each workday we will need 6-10 workers, plus a lunch crew and perhaps some
-                videographers.
-              </li>
-            </ul>
-            </p>
+          College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
+          Roanoke Valley. This is the largest service project undertaken by the members of College
+          Lutheran and we are delighted to be underway.
+          <br></br>
+          Here are some details:
+          <ul>
+            <li>
+              This will be a rebuild project at 1004 Stewart Avenue, SE Roanoke.
+            </li>
+            <li>
+              The existing structure will be gutted with hazardous material being mitigated before
+              volunteers are on site.
+            </li>
+            <li>
+              New construction will be added to the rear of the building.
+            </li>
+            <li>
+              A family has yet to be confirmed for this home, but we expect a family will be
+              designated in the coming weeks
+            </li>
+            <li>
+              All level of construction skills will be needed. Workdays will probably be Wednesday
+              and Saturday, but that may change. We typically work 8:00 – 2:00, but half-time
+              participation is welcome.
+            </li>
+            <li>
+              Lunch, water, tools are all provided.
+            </li>
+            <li>
+              We plan to have workers on this site 2 days each week until it is completed
+            </li>
+            <li>
+              We plan to have workers on this site 2 days each week until it is completed
+            </li>
+            <li>
+              On each workday we will need 6-10 workers, plus a lunch crew and perhaps some
+              videographers.
+            </li>
+          </ul>
+          </p>
         </Paper>
-          
       </Grid>
       {/* <Grid item xs={12} sm={6} md={4}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Announcements</h3>
@@ -86,19 +85,23 @@ const HabitatProjectContent = (): JSX.Element => (
           </Paper>
       </Grid>
       <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px'}}>
-        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Progression Slideshow</h3>
-          <Paper elevation={0}>
-            <PicSlider data={images}/>
-            <p style={{textAlign:'center'}}>For progression videos, please checkout our <a href='https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos' target='_blank' rel="noopener noreferrer">YouTube channel</a>.</p>
-          </Paper>
+        <Paper elevation={0}>
+          <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Progression Slideshow</h3>
+          <PicSlider data={images}/>
+          <p style={{textAlign:'center'}}>For progression videos, please checkout our <a href='https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos' target='_blank' rel="noopener noreferrer">YouTube channel</a>.</p>
+        </Paper>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px', alignItems:'center'}}>
+      <Grid item xs={12} sm={6} md={4} style={{paddingInline:'20px'}}>
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Construction Team</h3>
           <Paper elevation={0}>
-            <div>
-              <p><strong>TEAM LEADERS:</strong></p>
-              <p>Matt Gart, Mike Preston, and Skip Zubrod</p>
-              <div>
+            <div style={{}}>
+              <p style={{marginBottom:'0'}}>
+                <strong>TEAM LEADERS:</strong>
+                <br/><br/>
+                Matt Gart, Mike Preston, and Skip Zubrod
+              </p>
+              <br/>
+              <div style={{marginTop:'0'}}>
                 <strong>RESPONSIBILITIES:</strong>
                 <ul style={{}}>
                   <li>
@@ -119,14 +122,30 @@ const HabitatProjectContent = (): JSX.Element => (
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Support Team</h3>
           <Paper elevation={0}>
             <div>
-              <p><strong>TEAM LEADERS:</strong></p>
-              <p>Lisa Yagle, Kay Westermann, and Karen Zubrod</p>
-              <p><strong>Sunday Updaters:</strong></p>
-              <p>Roger Holtman, Anita Ungs, and Paul Brummer</p>
-              <p><strong>Publicity:</strong></p>
-              <p>Gary Lautenschlager</p>
-              <p><strong>Web Page:</strong></p>
-              <p>Josh Sherman</p>
+              <p>
+                <strong>TEAM LEADERS:</strong>
+                <br/>
+                <br/>
+                Lisa Yagle, Kay Westermann, and Karen Zubrod
+                <br/>
+                <br/>
+                <strong>Sunday Updaters:</strong>
+                <br/>
+                <br/>
+                Roger Holtman, Anita Ungs, and Paul Brummer
+                <br/>
+                <br/>
+                <strong>Publicity:</strong>
+                <br/>
+                <br/>
+                Gary Lautenschlager
+                <br/>
+                <br/>
+                <strong>Web Page:</strong>
+                <br/>
+                <br/>
+                Josh Sherman
+              </p>
               <div>
                 <p><strong>RESPONSIBILITIES:</strong></p>
                 <ul>
@@ -148,9 +167,13 @@ const HabitatProjectContent = (): JSX.Element => (
           <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign:'center'}}>Family Team</h3>
           <Paper elevation={0}>
             <div style={{}}>
-              <p><strong>TEAM LEADERS:</strong></p>
-              <p>Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin</p>
-              <div>
+              <p style={{marginBottom:'0'}}>
+                <strong>TEAM LEADERS:</strong>
+                <br/><br/>
+                Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+              </p>
+              <br/> 
+              <div style={{marginTop:'0'}}>
                 <strong>RESPONSIBILITIES:</strong>
                 <ul style={{}}>
                   <li>
@@ -166,7 +189,7 @@ const HabitatProjectContent = (): JSX.Element => (
               </div>
             </div>
           </Paper>
-      </Grid>
+        </Grid>
     </Grid>
     <ELCALogo/>
   </div>
