@@ -56,13 +56,13 @@ const menuItems = [{
   link: '/giving',
   name: 'Giving',
 },
-// {
-//   classname: '',
-//   type: 'link',
-//   iconClass: 'fas fa-hammer',
-//   link: '/habitatproject',
-//   name: 'Habitat Project'
-// },
+{
+  classname: '',
+  type: 'link',
+  iconClass: 'fas fa-hammer',
+  link: '/habitatproject',
+  name: 'Habitat Project',
+},
 {
   classname: '',
   type: 'link',

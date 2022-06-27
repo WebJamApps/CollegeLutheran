@@ -71,7 +71,7 @@ const HabitatProjectContent = (): JSX.Element => (
               videographers.
             </li>
           </ul>
-          </p>
+        </p>
       </Grid>
 
       {/* Volunteer Sign Ups Section */}
@@ -183,7 +183,7 @@ const HabitatProjectContent = (): JSX.Element => (
        </TeamLeaders>
 
     </Grid>
-    <ELCALogo/>
+    <ELCALogo />
   </div>
 );
 export default HabitatProjectContent;
