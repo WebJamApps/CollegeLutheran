@@ -1,6 +1,6 @@
 
 import HabitatProject from '../../src/containers/HabitatProject/index';
-import DefaultHabitatContent from '../../src/containers/HabitatProject/HabitatProjectContent';
+import HabitatProjectContent from '../../src/containers/HabitatProject/HabitatProjectContent';
 import React from 'react';
 import renderer from 'react-test-renderer';
   

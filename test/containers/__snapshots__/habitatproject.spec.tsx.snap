@@ -812,10 +812,10 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-          </p>
           <div>
+            <p>
+              Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+            </p>
             <strong>
               RESPONSIBILITIES:
             </strong>
@@ -868,7 +868,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
 </div>
 `;
 
-exports[`Habitat Project Renders the Habitat Project page 2`] = `
+exports[`Habitat Project Renders the HabitatProjectContent 1`] = `
 <div
   className="page-content"
 >
@@ -1249,10 +1249,10 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-          </p>
           <div>
+            <p>
+              Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+            </p>
             <strong>
               RESPONSIBILITIES:
             </strong>
