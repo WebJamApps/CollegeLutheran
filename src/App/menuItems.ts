@@ -112,6 +112,6 @@ const menuItems = [{
   link: '',
   name: 'Logout',
   auth: true,
-}
+},
 ];
 export default menuItems;

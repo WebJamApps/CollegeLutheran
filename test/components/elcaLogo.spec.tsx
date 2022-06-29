@@ -16,6 +16,6 @@ function setup() {
 //   });
 // });
 
-it('is true',()=>{
+it('is true', ()=>{
   expect(true).toBe(true);
-})
+});
