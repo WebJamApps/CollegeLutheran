@@ -11,18 +11,36 @@ const images = [{
   type: 'habitat', comments: '',
 }]; //'showCaption' displays captions if needed'
 
-const TeamLeaders = (props: { children: any; }) => {
+const HabitatGridItem = (props: { children: any; }) => {
   const { children } = props;
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
-      <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h3>
-      <Grid item container direction='row' justifyContent='center' alignItems='center'>
-        <div>
-          <p><strong>TEAM LEADERS:</strong></p>
-          {children}
-        </div>
-      </Grid>
+      {children}
     </Grid>
+  );
+};
+
+{/* <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h3> */ }
+
+const TeamLeaders = (props: { children: any; }) => {
+  const { children } = props;
+  return (
+    < Grid item container direction='row' >
+      <div>
+        <p><strong>TEAM LEADERS:</strong></p>
+        {children}
+      </div>
+    </Grid >
+  );
+};
+
+const Responsibilities = (props: { children: any; }) => {
+  const { children } = props;
+  return (
+    <div>
+      {children}
+      <strong> RESPONSIBILITIES </strong>
+    </div>
   );
 };
 
@@ -127,8 +145,9 @@ const SlideShow = () => {
 const ConstructionInfo = () => {
   return (
     <div>
-      <p>Matt Gart, Mike Preston, and Skip Zubrod</p>
-      <strong>RESPONSIBILITIES:</strong>
+      <Responsibilities>
+        <p>Matt Gart, Mike Preston, and Skip Zubrod</p>
+      </Responsibilities>
       <ul>
         <li>
           Schedule workdays
@@ -147,27 +166,27 @@ const ConstructionInfo = () => {
 const SupportInfo = () => {
   return (
     <div>
-      <p>Lisa Yagle, Kay Westermann, and Karen Zubrod</p>
-      <p><strong>Sunday Updaters:</strong></p>
-      <p>Roger Holtman, Anita Ungs, and Paul Brummer</p>
-      <p><strong>Publicity:</strong></p>
-      <p>Gary Lautenschlager</p>
-      <p><strong>Web Page:</strong></p>
-      <p>Josh Sherman</p>
-      <div>
-        <p><strong>RESPONSIBILITIES:</strong></p>
-        <ul>
-          <li>
-            Make lunches
-          </li>
-          <li>
-            Provide water
-          </li>
-          <li>
-            Provide safety
-          </li>
-        </ul>
-      </div>
+      <Responsibilities>
+        <p>Lisa Yagle, Kay Westermann, and Karen Zubrod</p>
+        <p><strong>Sunday Updaters:</strong></p>
+        <p>Roger Holtman, Anita Ungs, and Paul Brummer</p>
+        <p><strong>Publicity:</strong></p>
+        <p>Gary Lautenschlager</p>
+        <p><strong>Web Page:</strong></p>
+        <p>Josh Sherman</p>
+      </Responsibilities>
+      <ul>
+        <li>
+          Make lunches
+        </li>
+        <li>
+          Provide water
+        </li>
+        <li>
+          Provide safety
+        </li>
+      </ul>
+
     </div>
   );
 };
@@ -175,8 +194,9 @@ const SupportInfo = () => {
 const FamilyInfo = () => {
   return (
     <div>
-      <p>Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin</p>
-      <strong>RESPONSIBILITIES:</strong>
+      <Responsibilities>
+        <p>Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin</p>
+      </Responsibilities>
       <ul>
         <li>
           Connect with the family
@@ -206,19 +226,28 @@ const HabitatProjectContent = (): JSX.Element => (
       <SlideShow />
 
       {/* Construction Team Section */}
-      <TeamLeaders>
-        <ConstructionInfo />
-      </TeamLeaders>
+      <HabitatGridItem>
+        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Construction Team</h3>
+        <TeamLeaders>
+          <ConstructionInfo />
+        </TeamLeaders>
+      </HabitatGridItem>
 
       {/* Support Team Section */}
-      <TeamLeaders>
-        <SupportInfo />
-      </TeamLeaders>
+      <HabitatGridItem>
+        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Support Team</h3>
+        <TeamLeaders>
+          <SupportInfo />
+        </TeamLeaders>
+      </HabitatGridItem>
 
       {/* Family Team Section */}
-      <TeamLeaders>
-        <FamilyInfo />
-      </TeamLeaders>
+      <HabitatGridItem>
+        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h3>
+        <TeamLeaders>
+          <FamilyInfo />
+        </TeamLeaders>
+      </HabitatGridItem>
 
     </Grid>
     <ELCALogo />
