@@ -116,9 +116,11 @@ const VolunteerSignUp = () => {
           </ul>
           <p>
             Please use the following
+            {' '}
             <a href='https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing' target='_blank'>
               spreadsheet
             </a>
+            {' '}
             to sign up for a 3 or 6 hour time block.
           </p>
         </div>
@@ -134,6 +136,7 @@ const SlideShow = () => {
       <PicSlider data={images} />
       <p style={{ textAlign: 'center' }}>
         For progression videos, please checkout our
+        {' '}
         <a href='https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos' target='_blank' rel="noopener noreferrer">
           YouTube channel
         </a>.
@@ -194,19 +197,11 @@ const SupportInfo = () => {
 const FamilyInfo = () => {
   return (
     <div>
-      <Responsibilities>
-        <p>Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin</p>
-      </Responsibilities>
+      <Responsibilities><p>Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin</p></Responsibilities>
       <ul>
-        <li>
-          Connect with the family
-        </li>
-        <li>
-          Provide move-in needs
-        </li>
-        <li>
-          Introduce family to CLC
-        </li>
+        <li>Connect with the family</li>
+        <li>Provide move-in needs</li>
+        <li>Introduce family to CLC</li>
       </ul>
     </div>
   );

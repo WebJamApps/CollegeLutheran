@@ -238,10 +238,17 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           }
         }
       >
+<<<<<<< HEAD
         Family Team
       </h3>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+=======
+        Construction Team
+      </h3>
+      <div
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+>>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -250,12 +257,23 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
+<<<<<<< HEAD
             <p>
               Matt Gart, Mike Preston, and Skip Zubrod
             </p>
             <strong>
               RESPONSIBILITIES:
             </strong>
+=======
+            <div>
+              <p>
+                Matt Gart, Mike Preston, and Skip Zubrod
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+>>>>>>> f29a637 (finishes fixes for codeclimate)
             <ul>
               <li>
                 Schedule workdays
@@ -288,10 +306,17 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           }
         }
       >
+<<<<<<< HEAD
         Family Team
       </h3>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+=======
+        Support Team
+      </h3>
+      <div
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+>>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -300,6 +325,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
+<<<<<<< HEAD
             <p>
               Lisa Yagle, Kay Westermann, and Karen Zubrod
             </p>
@@ -345,6 +371,51 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
                 </li>
               </ul>
             </div>
+=======
+            <div>
+              <p>
+                Lisa Yagle, Kay Westermann, and Karen Zubrod
+              </p>
+              <p>
+                <strong>
+                  Sunday Updaters:
+                </strong>
+              </p>
+              <p>
+                Roger Holtman, Anita Ungs, and Paul Brummer
+              </p>
+              <p>
+                <strong>
+                  Publicity:
+                </strong>
+              </p>
+              <p>
+                Gary Lautenschlager
+              </p>
+              <p>
+                <strong>
+                  Web Page:
+                </strong>
+              </p>
+              <p>
+                Josh Sherman
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
+              <li>
+                Make lunches
+              </li>
+              <li>
+                Provide water
+              </li>
+              <li>
+                Provide safety
+              </li>
+            </ul>
+>>>>>>> f29a637 (finishes fixes for codeclimate)
           </div>
         </div>
       </div>
@@ -369,7 +440,11 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         Family Team
       </h3>
       <div
+<<<<<<< HEAD
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+=======
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+>>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -378,12 +453,23 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
+<<<<<<< HEAD
             <p>
               Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
             </p>
             <strong>
               RESPONSIBILITIES:
             </strong>
+=======
+            <div>
+              <p>
+                Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+>>>>>>> f29a637 (finishes fixes for codeclimate)
             <ul>
               <li>
                 Connect with the family
@@ -543,14 +629,14 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
             </li>
           </ul>
           <p>
-            Please use the following 
+            Please use the following
             <a
               href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
               target="_blank"
             >
               spreadsheet
             </a>
-             to sign up for a 3 or 6 hour time block.
+            to sign up for a 3 or 6 hour time block.
           </p>
         </div>
       </div>
@@ -641,7 +727,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           }
         }
       >
-        For progression videos, please checkout our 
+        For progression videos, please checkout our
         <a
           href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
           rel="noopener noreferrer"
@@ -672,61 +758,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         Construction Team
       </h3>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-      >
-        <div
-          style={Object {}}
-        >
-          <p>
-            <strong>
-              TEAM LEADERS:
-            </strong>
-          </p>
-          <p>
-            Matt Gart, Mike Preston, and Skip Zubrod
-          </p>
-          <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
-              <li>
-                Schedule workdays
-              </li>
-              <li>
-                Schedule workers
-              </li>
-              <li>
-                Coordinate with site supervisor
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        Support Team
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
         <div>
           <p>
@@ -734,401 +766,16 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Lisa Yagle, Kay Westermann, and Karen Zubrod
-          </p>
-          <p>
-            <strong>
-              Sunday Updaters:
-            </strong>
-          </p>
-          <p>
-            Roger Holtman, Anita Ungs, and Paul Brummer
-          </p>
-          <p>
-            <strong>
-              Publicity:
-            </strong>
-          </p>
-          <p>
-            Gary Lautenschlager
-          </p>
-          <p>
-            <strong>
-              Web Page:
-            </strong>
-          </p>
-          <p>
-            Josh Sherman
-          </p>
           <div>
-            <p>
+            <div>
+              <p>
+                Matt Gart, Mike Preston, and Skip Zubrod
+              </p>
               <strong>
-                RESPONSIBILITIES:
+                 RESPONSIBILITIES 
               </strong>
-            </p>
-            <ul>
-              <li>
-                Make lunches
-              </li>
-              <li>
-                Provide water
-              </li>
-              <li>
-                Provide safety
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        Family Team
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-      >
-        <div
-          style={Object {}}
-        >
-          <p>
-            <strong>
-              TEAM LEADERS:
-            </strong>
-          </p>
-          <div>
-            <p>
-              Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-            </p>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
-              <li>
-                Connect with the family
-              </li>
-              <li>
-                Provide move-in needs
-              </li>
-              <li>
-                Introduce family to CLC
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    style={
-      Object {
-        "marginLeft": "-9px",
-        "textAlign": "center",
-      }
-    }
-  >
-    <a
-      href="http://www.elca.org/"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <img
-        alt="ELCA LOGO"
-        id="elcaLogo"
-        src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-        style={
-          Object {
-            "margin": "auto",
-            "marginLeft": "",
-            "paddingTop": "30px",
-            "width": "308px",
-          }
-        }
-      />
-    </a>
-  </div>
-</div>
-`;
-
-exports[`Habitat Project Renders the HabitatProjectContent 1`] = `
-<div
-  className="page-content"
->
-  <div
-    className="MuiGrid-root MuiGrid-container"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "marginInline": "0",
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        College Lutheran Habitat Project
-      </h3>
-      <p
-        style={
-          Object {
-            "textAlign": "left",
-          }
-        }
-      >
-        College Lutheran Church has made a commitment of $50,000 to sponsor a home in the Roanoke Valley. This is the largest service project undertaken by the members of College Lutheran and we are delighted to be underway.
-        <br />
-        Here are some details:
-        <ul>
-          <li>
-            This will be a rebuild project at 1004 Stewart Avenue, SE Roanoke.
-          </li>
-          <li>
-            The existing structure will be gutted with hazardous material being mitigated before volunteers are on site.
-          </li>
-          <li>
-            New construction will be added to the rear of the building.
-          </li>
-          <li>
-            A family has yet to be confirmed for this home, but we expect a family will be designated in the coming weeks
-          </li>
-          <li>
-            All level of construction skills will be needed. Workdays will probably be Wednesday and Saturday, but that may change. We typically work 8:00 – 2:00, but half-time participation is welcome.
-          </li>
-          <li>
-            Lunch, water, tools are all provided.
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some videographers.
-          </li>
-        </ul>
-      </p>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        Volunteer Sign Ups
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-      >
-        <div
-          style={
-            Object {
-              "maxWidth": "500px",
-            }
-          }
-        >
-          <p>
-            There will be a total of 42 days for volunteering to support the habitat build. For each workday we need to have the following volunteers:
-          </p>
-          <ul>
-            <li>
-              10 people for construction work
-            </li>
-            <li>
-              4 people to supply lunch/water
-            </li>
-            <li>
-              1-2 videographers
-            </li>
-          </ul>
-          <p>
-            Please use the following 
-            <a
-              href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
-              target="_blank"
-            >
-              spreadsheet
-            </a>
-             to sign up for a 3 or 6 hour time block.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        Progression Slideshow
-      </h3>
-      <div>
-        <div
-          className="slick-slider slick-initialized"
-        >
-          
-          <div
-            className="slick-list"
-          >
-            <div
-              className="slick-track"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              onMouseOver={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-            >
-              <div
-                aria-hidden={false}
-                className="slick-slide slick-active slick-current"
-                data-index={0}
-                onClick={[Function]}
-                style={
-                  Object {
-                    "left": -0,
-                    "opacity": 1,
-                    "outline": "none",
-                    "position": "relative",
-                    "transition": "opacity 5000ms ease, visibility 5000ms ease",
-                    "width": 0,
-                  }
-                }
-                tabIndex="-1"
-              >
-                <div>
-                  <div
-                    style={
-                      Object {
-                        "display": "inline-block",
-                        "width": "100%",
-                      }
-                    }
-                    tabIndex={-1}
-                  >
-                    <img
-                      alt="CLC Fellowship"
-                      className="slide-show"
-                      src="https://dl.dropboxusercontent.com/s/s1n4nxwc4pz3bml/CLC_Fellowship.png?dl=0"
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          
-          
-        </div>
-      </div>
-      <p
-        style={
-          Object {
-            "textAlign": "center",
-          }
-        }
-      >
-        For progression videos, please checkout our 
-        <a
-          href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          YouTube channel
-        </a>
-        .
-      </p>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
-      style={
-        Object {
-          "paddingInline": "20px",
-        }
-      }
-    >
-      <h3
-        style={
-          Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
-            "textAlign": "center",
-          }
-        }
-      >
-        Construction Team
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-      >
-        <div
-          style={Object {}}
-        >
-          <p>
-            <strong>
-              TEAM LEADERS:
-            </strong>
-          </p>
-          <p>
-            Matt Gart, Mike Preston, and Skip Zubrod
-          </p>
-          <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <ul>
               <li>
                 Schedule workdays
               </li>
@@ -1163,7 +810,7 @@ exports[`Habitat Project Renders the HabitatProjectContent 1`] = `
         Support Team
       </h3>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
         <div>
           <p>
@@ -1171,39 +818,39 @@ exports[`Habitat Project Renders the HabitatProjectContent 1`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Lisa Yagle, Kay Westermann, and Karen Zubrod
-          </p>
-          <p>
-            <strong>
-              Sunday Updaters:
-            </strong>
-          </p>
-          <p>
-            Roger Holtman, Anita Ungs, and Paul Brummer
-          </p>
-          <p>
-            <strong>
-              Publicity:
-            </strong>
-          </p>
-          <p>
-            Gary Lautenschlager
-          </p>
-          <p>
-            <strong>
-              Web Page:
-            </strong>
-          </p>
-          <p>
-            Josh Sherman
-          </p>
           <div>
-            <p>
+            <div>
+              <p>
+                Lisa Yagle, Kay Westermann, and Karen Zubrod
+              </p>
+              <p>
+                <strong>
+                  Sunday Updaters:
+                </strong>
+              </p>
+              <p>
+                Roger Holtman, Anita Ungs, and Paul Brummer
+              </p>
+              <p>
+                <strong>
+                  Publicity:
+                </strong>
+              </p>
+              <p>
+                Gary Lautenschlager
+              </p>
+              <p>
+                <strong>
+                  Web Page:
+                </strong>
+              </p>
+              <p>
+                Josh Sherman
+              </p>
               <strong>
-                RESPONSIBILITIES:
+                 RESPONSIBILITIES 
               </strong>
-            </p>
+            </div>
             <ul>
               <li>
                 Make lunches
@@ -1239,26 +886,24 @@ exports[`Habitat Project Renders the HabitatProjectContent 1`] = `
         Family Team
       </h3>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
-        <div
-          style={Object {}}
-        >
+        <div>
           <p>
             <strong>
               TEAM LEADERS:
             </strong>
           </p>
           <div>
-            <p>
-              Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-            </p>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <div>
+              <p>
+                Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
               <li>
                 Connect with the family
               </li>
