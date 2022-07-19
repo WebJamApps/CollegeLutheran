@@ -28,37 +28,9 @@ exports[`News Renders the News component correctly 1`] = `
       }
     />
     <div
-      className="news-div"
-      style={
-        Object {
-          "margin": "0px 0px auto -8px",
-          "overflow": "hidden",
-          "padding": "0",
-          "textAlign": "center",
-          "width": "108%",
-        }
-      }
-    >
-      <iframe
-        className="newsIFrame"
-        src="https://visitor.r20.constantcontact.com/d.jsp?
-            llr=9mgiltbab&p=oi&m=1101234706842&sit=ah8uvihbb&f=f26b8fbd-329c-49ba-b2c2-68eee26dbef1"
-        style={
-          Object {
-            "border": "none",
-            "height": "540px",
-            "overflow": "hidden",
-            "padding": 0,
-            "width": "100%",
-          }
-        }
-        title="News Content"
-      >
-        <p>
-          Your browser does not support iframe.
-        </p>
-      </iframe>
-    </div>
+      className="ctct-inline-form"
+      data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"
+    />
   </div>
   <div
     style={
