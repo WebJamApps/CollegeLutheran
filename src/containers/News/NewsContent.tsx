@@ -6,8 +6,6 @@ interface NewsContentProps {
   books?: Ibook[];
 }
 
-const pageName = 'news';
-
 const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
   <div className="page-content">
     <div>
@@ -54,7 +52,8 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
       </div>
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <hr style={{ margin: '0px' }} />
-      <div
+<div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"></div>
+      {/* <div
         className="news-div"
         style={{
           margin: '0px 0px auto -8px',
@@ -63,8 +62,8 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
           width: '108%',
           overflow: 'hidden',
         }}
-      >
-        <iframe
+      > */}
+        {/* <iframe
           className="newsIFrame"
           style={{
             overflow: 'hidden',
@@ -78,8 +77,8 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
           title="News Content"
         >
           <p>Your browser does not support iframe.</p>
-        </iframe>
-      </div>
+        </iframe> */}
+      {/* </div> */}
     </div>
     <ELCALogo/>
   </div>
