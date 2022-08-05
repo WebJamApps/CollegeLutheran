@@ -1,5 +1,11 @@
 @import 'config';
 @import 'menu';
+@import 'footer';
+@import 'tables';
+@import 'home';
+@import 'materialui';
+@import 'mobile';
+@import 'slideshow';
 
 /* General */
 * {
@@ -409,10 +415,3 @@ div.familyELCA, div.youthELCA, div.givingELCA, div.beliefsELCA, div.newsELCA {
     overflow-x: scroll;
     overflow-y: hidden;
 }
-
-@import 'footer';
-@import 'tables';
-@import 'home';
-@import 'materialui';
-@import 'mobile';
-@import 'slideshow';
