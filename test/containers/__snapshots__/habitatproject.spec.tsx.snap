@@ -113,12 +113,14 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           </ul>
           <p>
             Please use the following
+             
             <a
               href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
               target="_blank"
             >
               spreadsheet
             </a>
+             
             to sign up for a 3 or 6 hour time block.
           </p>
         </div>
@@ -211,6 +213,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         For progression videos, please checkout our
+         
         <a
           href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
           rel="noopener noreferrer"
@@ -238,17 +241,10 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           }
         }
       >
-<<<<<<< HEAD
-        Family Team
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-=======
         Construction Team
       </h3>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
->>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -257,14 +253,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
-<<<<<<< HEAD
-            <p>
-              Matt Gart, Mike Preston, and Skip Zubrod
-            </p>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-=======
             <div>
               <p>
                 Matt Gart, Mike Preston, and Skip Zubrod
@@ -273,7 +261,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
                  RESPONSIBILITIES 
               </strong>
             </div>
->>>>>>> f29a637 (finishes fixes for codeclimate)
             <ul>
               <li>
                 Schedule workdays
@@ -306,17 +293,10 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           }
         }
       >
-<<<<<<< HEAD
-        Family Team
-      </h3>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-=======
         Support Team
       </h3>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
->>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -325,53 +305,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
-<<<<<<< HEAD
-            <p>
-              Lisa Yagle, Kay Westermann, and Karen Zubrod
-            </p>
-            <p>
-              <strong>
-                Sunday Updaters:
-              </strong>
-            </p>
-            <p>
-              Roger Holtman, Anita Ungs, and Paul Brummer
-            </p>
-            <p>
-              <strong>
-                Publicity:
-              </strong>
-            </p>
-            <p>
-              Gary Lautenschlager
-            </p>
-            <p>
-              <strong>
-                Web Page:
-              </strong>
-            </p>
-            <p>
-              Josh Sherman
-            </p>
-            <div>
-              <p>
-                <strong>
-                  RESPONSIBILITIES:
-                </strong>
-              </p>
-              <ul>
-                <li>
-                  Make lunches
-                </li>
-                <li>
-                  Provide water
-                </li>
-                <li>
-                  Provide safety
-                </li>
-              </ul>
-            </div>
-=======
             <div>
               <p>
                 Lisa Yagle, Kay Westermann, and Karen Zubrod
@@ -415,7 +348,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
                 Provide safety
               </li>
             </ul>
->>>>>>> f29a637 (finishes fixes for codeclimate)
           </div>
         </div>
       </div>
@@ -440,11 +372,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         Family Team
       </h3>
       <div
-<<<<<<< HEAD
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
-=======
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
->>>>>>> f29a637 (finishes fixes for codeclimate)
       >
         <div>
           <p>
@@ -453,14 +381,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
             </strong>
           </p>
           <div>
-<<<<<<< HEAD
-            <p>
-              Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-            </p>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-=======
             <div>
               <p>
                 Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
@@ -469,7 +389,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
                  RESPONSIBILITIES 
               </strong>
             </div>
->>>>>>> f29a637 (finishes fixes for codeclimate)
             <ul>
               <li>
                 Connect with the family
@@ -630,12 +549,14 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           </ul>
           <p>
             Please use the following
+             
             <a
               href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
               target="_blank"
             >
               spreadsheet
             </a>
+             
             to sign up for a 3 or 6 hour time block.
           </p>
         </div>
@@ -728,6 +649,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         For progression videos, please checkout our
+         
         <a
           href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
           rel="noopener noreferrer"
