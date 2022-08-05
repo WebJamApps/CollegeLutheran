@@ -3,7 +3,6 @@ import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 
-const pageName = 'habitatproject';
 const images = [{
   _id: '5e7273f7349ad8000410f761',
   title: 'CLC Fellowship',
@@ -19,8 +18,6 @@ const HabitatGridItem = (props: { children: any; }) => {
     </Grid>
   );
 };
-
-{/* <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h3> */ }
 
 const TeamLeaders = (props: { children: any; }) => {
   const { children } = props;
