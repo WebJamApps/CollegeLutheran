@@ -112,13 +112,13 @@ const VolunteerSignUp = () => {
             </li>
           </ul>
           <p>
-            Please use the following
+            Please
             {' '}
-            <a href='https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing' target='_blank'>
-              spreadsheet
+            <a href='https://signup.com/client/invitation2/secure/444699447581390086/false#/invitation' target='_blank'>
+            <b>click here</b>
             </a>
             {' '}
-            to sign up for a 3 or 6 hour time block.
+            to sign up to voluneer!
           </p>
         </div>
       </Grid>
