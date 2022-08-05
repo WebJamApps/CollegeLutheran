@@ -64,11 +64,6 @@ const StaffContent = (): JSX.Element => (
               {' '}
               Hoffman, Financial Administrator
             </li>
-            <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Valerie">Valerie</Link>
-              {' Pohlsen, Children, Family & Youth Coordinator, '}
-              <a href="mailto:youth@collegelutheran.org">youth@collegelutheran.org</a>
-            </li>
           </ul>
         </div>
         <hr />

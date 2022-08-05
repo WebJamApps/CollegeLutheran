@@ -79,7 +79,7 @@ export class App extends Component<AppProps> {
               <Route path="/youth" component={DefaultYouth} />
               <Route path="/news" component={DefaultNews} />
               <Route path="/calendar" component={Calendar} />
-              <Route path="/stewardship" component={Stewardship} />
+              {/*<Route path="/stewardship" component={Stewardship} />*/}
               <Route path="/livestream" component={DefaultLiveStream} />
               {/* <Route path="/habitatproject" component={HabitatProject} /> */}
               <Route component={AppFourOhFour} />
