@@ -44,7 +44,9 @@ const Responsibilities = (props: { children: any; }) => {
 const AboutProject = () => {
   return (
     <Grid item xs={12} sm={6} md={4} style={{ marginInline: '0', paddingInline: '20px' }}>
-      <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>College Lutheran Habitat Project</h3>
+      <h3 style={{ marginBottom: '0px', paddingBottom: '16px', paddingTop: '16px', textAlign: 'center' }}>
+        CLC Habitat Project
+      </h3>
       <p style={{ textAlign: 'left' }}>
         College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
         Roanoke Valley. This is the largest service project undertaken by the members of College
@@ -74,16 +76,6 @@ const AboutProject = () => {
           <li>
             Lunch, water, tools are all provided.
           </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some
-            videographers.
-          </li>
         </ul>
       </p>
     </Grid>
@@ -93,7 +85,7 @@ const AboutProject = () => {
 const VolunteerSignUp = () => {
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
-      <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Volunteer Sign Ups</h3>
+      <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Volunteer Sign Ups</h4>
       <Grid item container direction='row' justifyContent='center' alignItems='center'>
         <div style={{ maxWidth: '500px' }}>
           <p>
@@ -129,7 +121,7 @@ const VolunteerSignUp = () => {
 const SlideShow = () => {
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
-      <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h3>
+      <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h4>
       <PicSlider data={images} />
       <p style={{ textAlign: 'center' }}>
         For progression videos, please checkout our
@@ -219,7 +211,7 @@ const HabitatProjectContent = (): JSX.Element => (
 
       {/* Construction Team Section */}
       <HabitatGridItem>
-        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Construction Team</h3>
+        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Construction Team</h4>
         <TeamLeaders>
           <ConstructionInfo />
         </TeamLeaders>
@@ -227,7 +219,7 @@ const HabitatProjectContent = (): JSX.Element => (
 
       {/* Support Team Section */}
       <HabitatGridItem>
-        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Support Team</h3>
+        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Support Team</h4>
         <TeamLeaders>
           <SupportInfo />
         </TeamLeaders>
@@ -235,7 +227,7 @@ const HabitatProjectContent = (): JSX.Element => (
 
       {/* Family Team Section */}
       <HabitatGridItem>
-        <h3 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h3>
+        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h4>
         <TeamLeaders>
           <FamilyInfo />
         </TeamLeaders>
