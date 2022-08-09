@@ -8,7 +8,14 @@ const images = [{
   title: 'CLC Fellowship',
   url: 'https://dl.dropboxusercontent.com/s/s1n4nxwc4pz3bml/CLC_Fellowship.png?dl=0',
   type: 'habitat', comments: '',
-}]; //'showCaption' displays captions if needed'
+},
+{
+  _id: '5e7273f7349ad8000410f762',
+  title: 'Psalm 127',
+  url: 'https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0',
+  type: 'habitat', comments: '',
+},
+]; //'showCaption' displays captions if needed'
 
 const HabitatGridItem = (props: { children: any; }) => {
   const { children } = props;
