@@ -19,13 +19,14 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
       <h3
         style={
           Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
+            "marginBottom": "0px",
+            "paddingBottom": "16px",
+            "paddingTop": "16px",
             "textAlign": "center",
           }
         }
       >
-        College Lutheran Habitat Project
+        CLC Habitat Project
       </h3>
       <p
         style={
@@ -56,15 +57,6 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           <li>
             Lunch, water, tools are all provided.
           </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some videographers.
-          </li>
         </ul>
       </p>
     </div>
@@ -76,7 +68,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -86,7 +78,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         Volunteer Sign Ups
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
       >
@@ -136,7 +128,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -146,14 +138,25 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         Progression Slideshow
-      </h3>
+      </h4>
       <div>
         <div
           className="slick-slider slick-initialized"
+          dir="ltr"
         >
-          
           <div
             className="slick-list"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={null}
+            onMouseMove={null}
+            onMouseUp={[Function]}
+            onTouchCancel={null}
+            onTouchEnd={[Function]}
+            onTouchMove={null}
+            onTouchStart={[Function]}
+            style={Object {}}
           >
             <div
               className="slick-track"
@@ -201,10 +204,43 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
                   </div>
                 </div>
               </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "left": -0,
+                    "opacity": 0,
+                    "outline": "none",
+                    "position": "relative",
+                    "transition": "opacity 5000ms ease, visibility 5000ms ease",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <img
+                      alt="Psalm 127"
+                      className="slide-show"
+                      src="https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          
         </div>
       </div>
       <p
@@ -234,7 +270,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -244,7 +280,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         Construction Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
@@ -286,7 +322,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -296,7 +332,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         Support Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
@@ -362,7 +398,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -372,7 +408,7 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
         }
       >
         Family Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
@@ -457,13 +493,14 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       <h3
         style={
           Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
+            "marginBottom": "0px",
+            "paddingBottom": "16px",
+            "paddingTop": "16px",
             "textAlign": "center",
           }
         }
       >
-        College Lutheran Habitat Project
+        CLC Habitat Project
       </h3>
       <p
         style={
@@ -494,15 +531,6 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           <li>
             Lunch, water, tools are all provided.
           </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some videographers.
-          </li>
         </ul>
       </p>
     </div>
@@ -514,7 +542,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -524,7 +552,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Volunteer Sign Ups
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
       >
@@ -574,7 +602,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -584,14 +612,25 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Progression Slideshow
-      </h3>
+      </h4>
       <div>
         <div
           className="slick-slider slick-initialized"
+          dir="ltr"
         >
-          
           <div
             className="slick-list"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={null}
+            onMouseMove={null}
+            onMouseUp={[Function]}
+            onTouchCancel={null}
+            onTouchEnd={[Function]}
+            onTouchMove={null}
+            onTouchStart={[Function]}
+            style={Object {}}
           >
             <div
               className="slick-track"
@@ -639,10 +678,43 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
                   </div>
                 </div>
               </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "left": -0,
+                    "opacity": 0,
+                    "outline": "none",
+                    "position": "relative",
+                    "transition": "opacity 5000ms ease, visibility 5000ms ease",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <img
+                      alt="Psalm 127"
+                      className="slide-show"
+                      src="https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          
         </div>
       </div>
       <p
@@ -672,7 +744,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -682,7 +754,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Construction Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
@@ -724,7 +796,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -734,7 +806,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Support Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
@@ -800,7 +872,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -810,7 +882,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Family Team
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
