@@ -81,7 +81,7 @@ export class App extends Component<AppProps> {
               <Route path="/calendar" component={Calendar} />
               {/*<Route path="/stewardship" component={Stewardship} />*/}
               <Route path="/livestream" component={DefaultLiveStream} />
-              {/* <Route path="/habitatproject" component={HabitatProject} /> */}
+              <Route path="/habitatproject" component={HabitatProject} />
               <Route component={AppFourOhFour} />
             </Switch>
           </AppTemplateDefault>

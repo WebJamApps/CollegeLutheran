@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Habitat Project Renders the Habitat Project page 1`] = `
+exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
 <div
   className="page-content"
 >
@@ -19,13 +19,14 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       <h3
         style={
           Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
+            "marginBottom": "0px",
+            "paddingBottom": "16px",
+            "paddingTop": "16px",
             "textAlign": "center",
           }
         }
       >
-        College Lutheran Habitat Project
+        CLC Habitat Project
       </h3>
       <p
         style={
@@ -56,15 +57,6 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           <li>
             Lunch, water, tools are all provided.
           </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some videographers.
-          </li>
         </ul>
       </p>
     </div>
@@ -76,7 +68,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -86,7 +78,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Volunteer Sign Ups
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
       >
@@ -112,14 +104,18 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
             </li>
           </ul>
           <p>
-            Please use the following 
+            Please
+             
             <a
-              href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
+              href="https://signup.com/client/invitation2/secure/444699447581390086/false#/invitation"
               target="_blank"
             >
-              spreadsheet
+              <b>
+                click here
+              </b>
             </a>
-             to sign up for a 3 or 6 hour time block.
+             
+            to sign up to voluneer!
           </p>
         </div>
       </div>
@@ -132,7 +128,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -142,14 +138,25 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Progression Slideshow
-      </h3>
+      </h4>
       <div>
         <div
           className="slick-slider slick-initialized"
+          dir="ltr"
         >
-          
           <div
             className="slick-list"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={null}
+            onMouseMove={null}
+            onMouseUp={[Function]}
+            onTouchCancel={null}
+            onTouchEnd={[Function]}
+            onTouchMove={null}
+            onTouchStart={[Function]}
+            style={Object {}}
           >
             <div
               className="slick-track"
@@ -197,10 +204,43 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
                   </div>
                 </div>
               </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "left": -0,
+                    "opacity": 0,
+                    "outline": "none",
+                    "position": "relative",
+                    "transition": "opacity 5000ms ease, visibility 5000ms ease",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <img
+                      alt="Psalm 127"
+                      className="slide-show"
+                      src="https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          
         </div>
       </div>
       <p
@@ -210,7 +250,8 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           }
         }
       >
-        For progression videos, please checkout our 
+        For progression videos, please checkout our
+         
         <a
           href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
           rel="noopener noreferrer"
@@ -229,7 +270,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -239,28 +280,26 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Construction Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
-        <div
-          style={Object {}}
-        >
+        <div>
           <p>
             <strong>
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Matt Gart, Mike Preston, and Skip Zubrod
-          </p>
           <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <div>
+              <p>
+                Matt Gart, Mike Preston, and Skip Zubrod
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
               <li>
                 Schedule workdays
               </li>
@@ -283,7 +322,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -293,9 +332,9 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Support Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
         <div>
           <p>
@@ -303,39 +342,39 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Lisa Yagle, Kay Westermann, and Karen Zubrod
-          </p>
-          <p>
-            <strong>
-              Sunday Updaters:
-            </strong>
-          </p>
-          <p>
-            Roger Holtman, Anita Ungs, and Paul Brummer
-          </p>
-          <p>
-            <strong>
-              Publicity:
-            </strong>
-          </p>
-          <p>
-            Gary Lautenschlager
-          </p>
-          <p>
-            <strong>
-              Web Page:
-            </strong>
-          </p>
-          <p>
-            Josh Sherman
-          </p>
           <div>
-            <p>
+            <div>
+              <p>
+                Lisa Yagle, Kay Westermann, and Karen Zubrod
+              </p>
+              <p>
+                <strong>
+                  Sunday Updaters:
+                </strong>
+              </p>
+              <p>
+                Roger Holtman, Anita Ungs, and Paul Brummer
+              </p>
+              <p>
+                <strong>
+                  Publicity:
+                </strong>
+              </p>
+              <p>
+                Gary Lautenschlager
+              </p>
+              <p>
+                <strong>
+                  Web Page:
+                </strong>
+              </p>
+              <p>
+                Josh Sherman
+              </p>
               <strong>
-                RESPONSIBILITIES:
+                 RESPONSIBILITIES 
               </strong>
-            </p>
+            </div>
             <ul>
               <li>
                 Make lunches
@@ -359,7 +398,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -369,28 +408,26 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         }
       >
         Family Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
-        <div
-          style={Object {}}
-        >
+        <div>
           <p>
             <strong>
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-          </p>
           <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <div>
+              <p>
+                Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
               <li>
                 Connect with the family
               </li>
@@ -437,7 +474,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
 </div>
 `;
 
-exports[`Habitat Project Renders the Habitat Project page 2`] = `
+exports[`Habitat Project Renders the Habitat Project page 1`] = `
 <div
   className="page-content"
 >
@@ -456,13 +493,14 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
       <h3
         style={
           Object {
-            "paddingBottom": "15px",
-            "paddingTop": "22px",
+            "marginBottom": "0px",
+            "paddingBottom": "16px",
+            "paddingTop": "16px",
             "textAlign": "center",
           }
         }
       >
-        College Lutheran Habitat Project
+        CLC Habitat Project
       </h3>
       <p
         style={
@@ -493,15 +531,6 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
           <li>
             Lunch, water, tools are all provided.
           </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            We plan to have workers on this site 2 days each week until it is completed
-          </li>
-          <li>
-            On each workday we will need 6-10 workers, plus a lunch crew and perhaps some videographers.
-          </li>
         </ul>
       </p>
     </div>
@@ -513,7 +542,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -523,7 +552,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       >
         Volunteer Sign Ups
-      </h3>
+      </h4>
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
       >
@@ -549,14 +578,18 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
             </li>
           </ul>
           <p>
-            Please use the following 
+            Please
+             
             <a
-              href="https://docs.google.com/spreadsheets/d/1XBMf5NN7Mo5z6I7F24nmNwbBW1jOH0fJE3Ij-jqcEPk/edit?usp=sharing"
+              href="https://signup.com/client/invitation2/secure/444699447581390086/false#/invitation"
               target="_blank"
             >
-              spreadsheet
+              <b>
+                click here
+              </b>
             </a>
-             to sign up for a 3 or 6 hour time block.
+             
+            to sign up to voluneer!
           </p>
         </div>
       </div>
@@ -569,7 +602,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -579,14 +612,25 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       >
         Progression Slideshow
-      </h3>
+      </h4>
       <div>
         <div
           className="slick-slider slick-initialized"
+          dir="ltr"
         >
-          
           <div
             className="slick-list"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={null}
+            onMouseMove={null}
+            onMouseUp={[Function]}
+            onTouchCancel={null}
+            onTouchEnd={[Function]}
+            onTouchMove={null}
+            onTouchStart={[Function]}
+            style={Object {}}
           >
             <div
               className="slick-track"
@@ -634,10 +678,43 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
                   </div>
                 </div>
               </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "left": -0,
+                    "opacity": 0,
+                    "outline": "none",
+                    "position": "relative",
+                    "transition": "opacity 5000ms ease, visibility 5000ms ease",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <img
+                      alt="Psalm 127"
+                      className="slide-show"
+                      src="https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          
         </div>
       </div>
       <p
@@ -647,7 +724,8 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
           }
         }
       >
-        For progression videos, please checkout our 
+        For progression videos, please checkout our
+         
         <a
           href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
           rel="noopener noreferrer"
@@ -666,7 +744,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -676,28 +754,26 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       >
         Construction Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
-        <div
-          style={Object {}}
-        >
+        <div>
           <p>
             <strong>
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Matt Gart, Mike Preston, and Skip Zubrod
-          </p>
           <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <div>
+              <p>
+                Matt Gart, Mike Preston, and Skip Zubrod
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
               <li>
                 Schedule workdays
               </li>
@@ -720,7 +796,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -730,9 +806,9 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       >
         Support Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
         <div>
           <p>
@@ -740,39 +816,39 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Lisa Yagle, Kay Westermann, and Karen Zubrod
-          </p>
-          <p>
-            <strong>
-              Sunday Updaters:
-            </strong>
-          </p>
-          <p>
-            Roger Holtman, Anita Ungs, and Paul Brummer
-          </p>
-          <p>
-            <strong>
-              Publicity:
-            </strong>
-          </p>
-          <p>
-            Gary Lautenschlager
-          </p>
-          <p>
-            <strong>
-              Web Page:
-            </strong>
-          </p>
-          <p>
-            Josh Sherman
-          </p>
           <div>
-            <p>
+            <div>
+              <p>
+                Lisa Yagle, Kay Westermann, and Karen Zubrod
+              </p>
+              <p>
+                <strong>
+                  Sunday Updaters:
+                </strong>
+              </p>
+              <p>
+                Roger Holtman, Anita Ungs, and Paul Brummer
+              </p>
+              <p>
+                <strong>
+                  Publicity:
+                </strong>
+              </p>
+              <p>
+                Gary Lautenschlager
+              </p>
+              <p>
+                <strong>
+                  Web Page:
+                </strong>
+              </p>
+              <p>
+                Josh Sherman
+              </p>
               <strong>
-                RESPONSIBILITIES:
+                 RESPONSIBILITIES 
               </strong>
-            </p>
+            </div>
             <ul>
               <li>
                 Make lunches
@@ -796,7 +872,7 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       }
     >
-      <h3
+      <h4
         style={
           Object {
             "paddingBottom": "15px",
@@ -806,28 +882,26 @@ exports[`Habitat Project Renders the Habitat Project page 2`] = `
         }
       >
         Family Team
-      </h3>
+      </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item"
       >
-        <div
-          style={Object {}}
-        >
+        <div>
           <p>
             <strong>
               TEAM LEADERS:
             </strong>
           </p>
-          <p>
-            Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
-          </p>
           <div>
-            <strong>
-              RESPONSIBILITIES:
-            </strong>
-            <ul
-              style={Object {}}
-            >
+            <div>
+              <p>
+                Bob and Lu Ann Yates, Ellen Holtman, and Debi Talin
+              </p>
+              <strong>
+                 RESPONSIBILITIES 
+              </strong>
+            </div>
+            <ul>
               <li>
                 Connect with the family
               </li>
