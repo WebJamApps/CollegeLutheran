@@ -13,23 +13,26 @@ export interface AuthUtils {
   responseGoogleLogout: (dispatch: Dispatch<unknown>) => boolean,
 }
 async function setUser(view: AppTemplate): Promise<string> {
-  const { auth, dispatch } = view.props;
+  const { auth: { token }, dispatch } = view.props;
   let decoded: any, user;
   try {
-    decoded = jwt.verify(auth.token || /* istanbul ignore next */'',
+    decoded = jwt.verify(token || /* istanbul ignore next */'',
       process.env.HashString || /* istanbul ignore next */'');
   } catch (e) { return `${(e as Error).message}`; }
   if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
   else {
     user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
-      .set('Accept', 'application/json').set('Authorization', `Bearer ${auth.token}`);
+      .set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
     dispatch({ type: 'SET_USER', data: user.body });
   }
   window.location.reload();
   window.location.assign('/admin');
   return 'user set';
 }
-async function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse, view: AppTemplate): Promise<string> {
+async function responseGoogleLogin(
+  response: GoogleLoginResponseOffline | GoogleLoginResponse, 
+  view: AppTemplate
+): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
   const body: GoogleBody = {
@@ -41,10 +44,13 @@ async function responseGoogleLogin(response: GoogleLoginResponseOffline | Google
       return encodeURIComponent(rand);
     },
   };
-  try { await authenticate(body, view.props); } catch (e) {
+  try { 
+    await authenticate(body, view.props); 
+    return await setUser(view);
+  } catch (e) {
     return `${(e as Error).message}`;
   }
-  return setUser(view);
+  
 }
 
 function responseGoogleFailLogin(response: unknown): string {
