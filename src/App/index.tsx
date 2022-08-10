@@ -18,7 +18,7 @@ import Calendar from '../containers/Calendar';
 import AppFourOhFour from './404';
 import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
-import Stewardship from '../containers/Stewardship';
+//import Stewardship from '../containers/Stewardship';
 import DefaultLiveStream from '../containers/LiveStream';
 import mapStoreToProps from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
