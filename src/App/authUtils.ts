@@ -31,7 +31,7 @@ async function setUser(view: AppTemplate): Promise<string> {
 }
 async function responseGoogleLogin(
   response: GoogleLoginResponseOffline | GoogleLoginResponse, 
-  view: AppTemplate
+  view: AppTemplate,
 ): Promise<string> {
   const uri = window.location.href;
   const baseUri = uri.split('/')[2];
