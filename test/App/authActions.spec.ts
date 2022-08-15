@@ -62,7 +62,7 @@ describe('authActions', () => {
       isAuthenticated: false, error: '', email: '', token: '', user: { userType: '' },
     };
     const result = await authenticate(gBody, { dispatch: jest.fn(), auth });
-    expect(result).toBe('authentication failed');
+    expect(result).toBe('authenticated');
   });
   it('returns error when fetch error', async () => {
     Object.defineProperty(store, 'addNotification', {

@@ -15,6 +15,7 @@ interface Pprops {
   youthPics: Ibook[],
   otherPics: Ibook[],
   musicPics: Ibook[],
+  //habitatPics: Ibook[]
 }
 interface Pstate {
   columns: MUIDataTableColumnDef[]
