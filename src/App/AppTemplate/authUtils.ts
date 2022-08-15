@@ -2,9 +2,9 @@ import superagent from 'superagent';
 import jwt from 'jsonwebtoken';
 import type { Dispatch } from 'react';
 import type { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
-import authenticate, { logout } from './authActions';
-import type { GoogleBody } from './AppTypes';
-import type { AppTemplate } from './AppTemplate';
+import { logout, authenticate } from './authActions';
+import type { GoogleBody } from '../AppTypes';
+import type { AppTemplate } from '../AppTemplate';
 
 export interface AuthUtils {
   setUser: (view: AppTemplate) => Promise<string>,

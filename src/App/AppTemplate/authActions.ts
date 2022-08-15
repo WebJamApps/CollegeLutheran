@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import type { Dispatch } from 'react';
-import type { AppProps, GoogleBody } from './AppTypes';
+import type { AppProps, GoogleBody } from '../AppTypes';
 
 export const gotToken = (doc: string): unknown => ({
   type: 'GOT_TOKEN',
@@ -33,7 +33,7 @@ function warningNotif(title: string, message: string) {
 
 export const logout = (dispatch: Dispatch<unknown>): void => dispatch({ type: 'LOGOUT' });
 
-async function authFunc(googleBody: GoogleBody, props: AppProps): Promise<string> {
+export async function authenticate(googleBody: GoogleBody, props: AppProps): Promise<string | Error> {
   const { auth } = props;
   if (auth.isAuthenticated) return 'authenticated';
   const { body } = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
@@ -42,5 +42,3 @@ async function authFunc(googleBody: GoogleBody, props: AppProps): Promise<string
   return body.email;
   
 }
-
-export default authFunc;

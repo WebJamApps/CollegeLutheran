@@ -35,6 +35,8 @@ function getUserRoles(): string[] {
   return userRoles;
 }
 
+const delay = (seconds:number) => new Promise(resolve => setTimeout(resolve, seconds * 1000)); 
+
 export default {
-  getUserRoles, setTitleAndScroll, randomizePics,
+  getUserRoles, setTitleAndScroll, randomizePics, delay,
 };
