@@ -3,14 +3,20 @@ import type { Auth, Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 import { MakeMenuLink } from './MakeMenuLink';
 import type { MenuItem } from './menuItems';
+import { GoogleButtons } from './GoogleButtons';
 
 const continueMenuItem = (mI:MenuItem,
-  index: number, auth: Auth, location:any, setMenuOpen:any): JSX.Element | null => {
+  index: number, auth: Auth, location:any, setMenuOpen:any, dispatch:any): JSX.Element | null => {
   const { link, type } = mI;
   if (link !== '') return <MakeMenuLink menuItem={ mI } index = { index } setMenuOpen = { setMenuOpen }/>;
-  if (type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) return view.googleButtons('login', index);
-  if (type === 'googleLogout' && auth.isAuthenticated) return view.googleButtons('logout', index);
+  if (type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')){ 
+    return <GoogleButtons type='login' index={index} dispatch={ dispatch } auth={ auth } />; 
+  }
+  if (type === 'googleLogout' && auth.isAuthenticated){
+    return <GoogleButtons type='logout' index={index} dispatch={ dispatch } auth={ auth } />;
+  } 
   return null;
+  
 };
 
 const sortBulletins = (bulletin:Ibook[]) => {
@@ -29,7 +35,7 @@ const sortBulletins = (bulletin:Ibook[]) => {
 const setBulletin = (mItem:MenuItem, books:any): MenuItem => {
   const m = mItem;
   if (books) {
-    const bulletins:any[] = books.filter((b) => b.comments === 'worshipbulletin');
+    const bulletins:any[] = books.filter((b:any) => b.comments === 'worshipbulletin');
     if (bulletins && bulletins.length > 0) {
       let link = sortBulletins(bulletins)[0].url;
       if (link === undefined) link = '';
@@ -40,7 +46,7 @@ const setBulletin = (mItem:MenuItem, books:any): MenuItem => {
 };
 
 function menuItem(menu: MenuItem,
-  index: number, location:any, auth:any, books:any, setMenuOpen:any): JSX.Element | null {
+  index: number, location:any, auth:any, books:any, setMenuOpen:any, dispatch:any): JSX.Element | null {
   const userRoles: string[] = commonUtils.getUserRoles();
   // const { location, auth } = view.props;
   let m = menu;
@@ -48,7 +54,7 @@ function menuItem(menu: MenuItem,
   if (location.pathname === '/staff' && m.link === '/staff') return null;
   if ((m.link === '/staff' || m.link === '/belief') && auth.isAuthenticated) return null;
   if (m.name === 'Admin Dashboard' && (!auth.isAuthenticated || !auth.user.userType || userRoles.indexOf(auth.user.userType) === -1)) return null;
-  return continueMenuItem(m, index, auth, location, setMenuOpen);
+  return continueMenuItem(m, index, auth, location, setMenuOpen, dispatch);
 }
 
 export default { continueMenuItem, menuItem, setBulletin };

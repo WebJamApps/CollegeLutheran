@@ -13,7 +13,7 @@ function handleKeyPress(evt: { key: string; }, setMenuOpen:(arg0:boolean) => voi
   return null;
 }
 
-function NavLinks({ location, auth, books }:any): JSX.Element {
+function NavLinks({ location, auth, books, setMenuOpen, dispatch }:any): JSX.Element {
   return (
       <div className="nav-list" style={{ width: '220px' }}>
         <p style={{ fontSize: '1px', marginBottom: '2px' }} />
@@ -39,7 +39,7 @@ function NavLinks({ location, auth, books }:any): JSX.Element {
             </a>
           </p>
         </div>
-        {menuItems.map((menu, index) => (menuUtils.menuItem(menu, index, location, auth, books)))}
+        {menuItems.map((menu, index) => (menuUtils.menuItem(menu, index, location, auth, books, setMenuOpen, dispatch)))}
       </div>
   );
 }
@@ -53,7 +53,7 @@ const currentStyles = ():CurrentStyles => { // eslint-disable-line class-methods
   return result;
 };
 
-export const DrawerContainer = ({ location, auth, books }:any) => {
+export const DrawerContainer = ({ location, auth, books, dispatch }:any) => {
   const [menuOpen, setMenuOpen] = useState(false); //Look up hooks in react (This is a useState hook)
   const style = `${currentStyles().sidebarClass} ${menuOpen ? 'open' : 'close'}`;
   return (
@@ -75,7 +75,7 @@ export const DrawerContainer = ({ location, auth, books }:any) => {
                 style={{ width: '86px', marginRight: 0, marginLeft: 0 }}
               />
             </div>
-            <NavLinks location={ location } auth= { auth } books= { books }/>
+            <NavLinks location={ location } auth= { auth } books= { books } setMenuOpen = { setMenuOpen } dispatch = { dispatch }/>
           </div>
         </div>
   );

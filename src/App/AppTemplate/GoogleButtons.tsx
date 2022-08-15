@@ -2,13 +2,15 @@ import React from 'react';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline, GoogleLogout } from 'react-google-login';
 import authUtils from './authUtils';
 
-function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<string> {
-  return authUtils.responseGoogleLogin(response);
-}
+// function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<string> {
+//   return authUtils.responseGoogleLogin(response);
+// }
 
-function responseGoogleLogout(): string { const { dispatch } = this.props; return authUtils.responseGoogleLogout(dispatch); }
+// function responseGoogleLogout(): string { const { dispatch } = this.props; return authUtils.responseGoogleLogout(dispatch); }
 
-export const GoogleButtons = ({ type, index }: { type:string, index:string | number | undefined }): JSX.Element => {
+interface IgoogleButtonProps { type:'login' | 'logout', index:string | number | undefined, dispatch:any, auth:any }
+export const GoogleButtons = (props: IgoogleButtonProps): JSX.Element => {
+  const { type, index, auth, dispatch } = props;
   const cId = process.env.GoogleClientId || /* istanbul ignore next */'';
   if (type === 'login') {
     return (
@@ -18,7 +20,7 @@ export const GoogleButtons = ({ type, index }: { type:string, index:string | num
             clientId={cId}
             buttonText="Login"
             accessType="offline"
-            onSuccess={responseGoogleLogin}
+            onSuccess={(response) => authUtils.responseGoogleLogin(response, auth, dispatch)}
             onFailure={authUtils.responseGoogleFailLogin}
             cookiePolicy="single_host_origin"
           />
@@ -26,7 +28,7 @@ export const GoogleButtons = ({ type, index }: { type:string, index:string | num
     );
   } return (
       <div key={index} className="menu-item googleLogout">
-        <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={responseGoogleLogout} />
+        <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={() => authUtils.responseGoogleLogout(dispatch)} />
       </div>
   );
 };

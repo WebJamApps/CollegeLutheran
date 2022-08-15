@@ -212,10 +212,10 @@ export class AppTemplate extends React.Component<AppMainProps, AppMainState> {
   // }
 
   render(): JSX.Element {
-    const { children, location, auth, books } = this.props;
+    const { children, location, auth, books, dispatch } = this.props;
     return (
       <div className="page-host">
-        <DrawerContainer location={ location } auth={ auth } books={ books }/>
+        <DrawerContainer location={ location } auth={ auth } books={ books } dispatch={ dispatch }/>
         <div className="main-panel">
           <span onClick={this.toggleMobileMenu} onKeyPress={this.handleKeyMenu} id="mobilemenutoggle" tabIndex={0} role="button">
             <i className="fas fa-bars" />
