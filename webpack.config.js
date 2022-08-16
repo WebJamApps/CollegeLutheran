@@ -26,7 +26,8 @@ module.exports = (env) => ({
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
       util: require.resolve('util/'),
-    }, // needed for jwt-simple
+      'buffer': require.resolve('buffer'),
+    }, // needed for dedoding jwt
   },
 
   entry: {
@@ -120,6 +121,12 @@ module.exports = (env) => ({
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
+      process: 'process/browser',
+    }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
+    new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
     new HtmlWebpackPlugin({

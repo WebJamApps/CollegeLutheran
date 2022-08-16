@@ -33,19 +33,13 @@ function warningNotif(title: string, message: string) {
 
 export const logout = (dispatch: Dispatch<unknown>): void => dispatch({ type: 'LOGOUT' });
 
-async function authFunc(googleBody: GoogleBody, props: AppProps): Promise<string | Error> {
+async function authFunc(googleBody: GoogleBody, props: AppProps): Promise<string> {
   const { auth } = props;
   if (auth.isAuthenticated) return 'authenticated';
-   
-  try {
-    const { body } = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
-      .set({ Accept: 'application/json' }).send(googleBody);
-    props.dispatch(gotToken(body));
-    return 'authenticated';
-  } catch (e) {
-    props.dispatch(authError((e as Error))); warningNotif((e as Error).message, 'Failed to Authenticate');  
-    return Promise.reject(e);
-  }
+  const { body } = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
+    .set({ Accept: 'application/json' }).send(googleBody);
+  props.dispatch(gotToken(body));
+  return body.email;
   
 }
 
