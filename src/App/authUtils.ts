@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import jwt from 'jsonwebtoken';
+import jwt from 'jwt-simple';
 import type { Dispatch } from 'react';
 import type { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
@@ -12,23 +12,29 @@ export interface AuthUtils {
   responseGoogleFailLogin: (response: unknown) => string,
   responseGoogleLogout: (dispatch: Dispatch<unknown>) => boolean,
 }
-async function setUser(view: AppTemplate): Promise<string> {
+async function setUser(view: AppTemplate, email:string): Promise<string> {
+  console.log('trying to set the user now');
   const { auth: { token }, dispatch } = view.props;
-  let decoded: any, user;
+  console.log(token);
+  let decoded: any;
   try {
-    decoded = jwt.verify(token || /* istanbul ignore next */'',
+    decoded = jwt.decode(token || /* istanbul ignore next */'',
       process.env.HashString || /* istanbul ignore next */'');
-  } catch (e) { return `${(e as Error).message}`; }
-  if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user });
-  else {
-    user = await superagent.get(`${process.env.BackendUrl}/user/${decoded.sub}`)
-      .set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
-    dispatch({ type: 'SET_USER', data: user.body });
+    console.log(decoded);
+    if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user }); return 'user set';
+  } catch (e) { 
+    console.log(e);
   }
+  
+  const user = await superagent.post(`${process.env.BackendUrl}/user`)
+    .send({ email })
+    .set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
+  dispatch({ type: 'SET_USER', data: user.body });
   window.location.reload();
   window.location.assign('/admin');
   return 'user set';
 }
+
 async function responseGoogleLogin(
   response: GoogleLoginResponseOffline | GoogleLoginResponse, 
   view: AppTemplate,
@@ -45,8 +51,9 @@ async function responseGoogleLogin(
     },
   };
   try { 
-    await authenticate(body, view.props); 
-    return await setUser(view);
+    const email = await authenticate(body, view.props); 
+    if (email !== 'authenticated') return await setUser(view, email);
+    return email;
   } catch (e) {
     return `${(e as Error).message}`;
   }
