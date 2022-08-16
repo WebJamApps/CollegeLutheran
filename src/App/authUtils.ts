@@ -13,23 +13,15 @@ export interface AuthUtils {
   responseGoogleLogout: (dispatch: Dispatch<unknown>) => boolean,
 }
 async function setUser(view: AppTemplate, email:string): Promise<string> {
-  console.log('trying to set the user now');
   const { auth: { token }, dispatch } = view.props;
-  console.log(token);
-  let decoded: any;
   try {
-    decoded = jwt.verify(token || /* istanbul ignore next */'',
-      process.env.HashString || /* istanbul ignore next */'');
-    console.log(decoded);
-    if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user }); return 'user set';
-  } catch (e) { 
-    console.log(e);
-  }
-  
-  const user = await superagent.post(`${process.env.BackendUrl}/user`)
-    .send({ email })
-    .set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
-  dispatch({ type: 'SET_USER', data: user.body });
+    const { user } = jwt.verify(token || /* istanbul ignore next */'',
+      process.env.HashString || /* istanbul ignore next */'') as any;
+    if (user) dispatch({ type: 'SET_USER', data: user }); return 'user set';
+  } catch (e) { console.log(e); } 
+  const { body } = await superagent.post(`${process.env.BackendUrl}/user`)
+    .send({ email }).set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
+  dispatch({ type: 'SET_USER', data: body });
   window.location.reload();
   window.location.assign('/admin');
   return 'user set';
