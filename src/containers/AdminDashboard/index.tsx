@@ -23,6 +23,7 @@ export interface DashboardProps extends RouteComponentProps {
   familyPics: Ibook[];
   otherPics: Ibook[];
   musicPics: Ibook[];
+  //habitatPics: Ibook[]
   youthContent: Ibook;
 }
 type DashboardState = {
@@ -184,6 +185,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
       { type: 'familyPics', Category: 'Family Pics' },
       { type: 'otherPics', Category: 'Other Pics' },
       { type: 'musicPics', Category: 'Music Pics' },
+      { type: 'habitat', Category: 'Habitat' },
     ];
     const { youthURL, youthName } = this.state;
     let { type, showCaption } = this.state;
