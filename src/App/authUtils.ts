@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import jwt from 'jwt-simple';
+import jwt from 'jsonwebtoken';
 import type { Dispatch } from 'react';
 import type { GoogleLoginResponseOffline, GoogleLoginResponse } from 'react-google-login';
 import authenticate, { logout } from './authActions';
@@ -18,7 +18,7 @@ async function setUser(view: AppTemplate, email:string): Promise<string> {
   console.log(token);
   let decoded: any;
   try {
-    decoded = jwt.decode(token || /* istanbul ignore next */'',
+    decoded = jwt.verify(token || /* istanbul ignore next */'',
       process.env.HashString || /* istanbul ignore next */'');
     console.log(decoded);
     if (decoded.user) dispatch({ type: 'SET_USER', data: decoded.user }); return 'user set';
