@@ -24,7 +24,7 @@ const footerLinks = () => {
   );
 };
 
-const Footer = (): JSX.Element => (
+export const Footer = (): JSX.Element => (
   <div
     id="wjfooter"
     className="footer"
@@ -36,4 +36,3 @@ const Footer = (): JSX.Element => (
   </div>
 );
 
-export default Footer;
