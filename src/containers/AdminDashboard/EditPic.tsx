@@ -171,37 +171,3 @@ export function EditPic(props: IeditPicProps): JSX.Element {
   );
 }
 
-// export function EditPicture(props:any) {
-//   const { editPic } = props;
-//   const options = [
-//     { type: 'youthPics', Category: 'Youth Pics' },
-//     { type: 'familyPics', Category: 'Family Pics' },
-//     { type: 'otherPics', Category: 'Other Pics' },
-//     { type: 'musicPics', Category: 'Music Pics' },
-//     { type: 'habitat', Category: 'Habitat' },
-//   ];
-//   // const { youthURL, youthName } = this.state;
-//   // let { type, showCaption } = this.state;
-//   // const { editPic } = this.props;
-//   // if (type === '' && editPic.type !== undefined) type = editPic.type;
-//   // if (showCaption === '' && editPic.comments !== undefined) showCaption = editPic.comments;
-//   return <ChangePicDiv/>;
-// }
-
-// interface IeditPicProps {
-//   title:string, url:string, type:string, comments:string, editPic:any
-// }
-// export function EditPicture(props:IeditPicProps) {
-// //   const {
-// //     youthName, youthURL, type, showCaption,
-// //   } = this.state;
-//   const { title, url, type, comments, editPic } = props;
-//   // const postBody = {
-//   //   title,
-//   //   url,
-//   //   comments,
-//   //   type,
-//   //   access: 'CLC',
-//   // };
-//   return <ChangePicForm editPic={editPic}/>;
-// }
