@@ -53,8 +53,7 @@ const currentStyles = ():CurrentStyles => { // eslint-disable-line class-methods
   return result;
 };
 
-export const DrawerContainer = ({ location, auth, books, dispatch }:any) => {
-  const [menuOpen, setMenuOpen] = useState(false); //Look up hooks in react (This is a useState hook)
+export const DrawerContainer = ({ location, auth, books, dispatch, menuOpen, setMenuOpen }:any) => {
   const style = `${currentStyles().sidebarClass} ${menuOpen ? 'open' : 'close'}`;
   return (
         <div tabIndex={0} role="button" 

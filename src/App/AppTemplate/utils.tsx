@@ -19,12 +19,12 @@ export interface GoogleBody {
 const continueMakeMenuItem = (mI: MenuItem,
   index: number, auth: Auth, location: any, setMenuOpen: (arg0: boolean) => void, dispatch: Dispatch<unknown>): JSX.Element | null => {
   const { link, type } = mI;
-  if (link !== '') return <MakeMenuLink menuItem={mI} index={index} setMenuOpen={setMenuOpen} />;
+  if (link !== '') return <MakeMenuLink key={index} menuItem={mI} index={index} setMenuOpen={setMenuOpen} />;
   if (type === 'googleLogin' && !auth.isAuthenticated && location.pathname.includes('/staff')) {
-    return <GoogleButtons type='login' index={index} dispatch={dispatch} />;
+    return <GoogleButtons key={index} type='login' index={index} dispatch={dispatch} />;
   }
   if (type === 'googleLogout' && auth.isAuthenticated) {
-    return <GoogleButtons type='logout' index={index} dispatch={dispatch} />;
+    return <GoogleButtons key={index} type='logout' index={index} dispatch={dispatch} />;
   }
   return null;
 
