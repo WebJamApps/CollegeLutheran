@@ -1,6 +1,15 @@
 import React, { Dispatch } from 'react';
-import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import utils from './utils';
+import commonUtils from '../../lib/commonUtils';
+import { Button } from '@mui/material';
+
+const responseGoogleLogout = async (dispatch: Dispatch<unknown>): Promise<void> => {
+  dispatch({ type: 'LOGOUT' });
+  googleLogout();
+  await commonUtils.delay(1);
+  window.location.assign('/');
+};
 
 interface IgoogleButtonProps {
   type: 'login' | 'logout', index: string | number | undefined,
@@ -8,24 +17,24 @@ interface IgoogleButtonProps {
 }
 export const GoogleButtons = (props: IgoogleButtonProps): JSX.Element => {
   const { type, index, dispatch } = props;
-  const cId = process.env.GoogleClientId || /* istanbul ignore next */'';
+  const login = useGoogleLogin({
+    onSuccess: codeResponse => utils.responseGoogleLogin(codeResponse, dispatch),
+    onError: () => console.log('Google login failed'),
+    flow: 'auth-code',
+  });
   if (type === 'login') {
     return (
       <div key={index} className="menu-item googleLogin">
-        <GoogleLogin
-          responseType="code"
-          clientId={cId}
-          buttonText="Login"
-          accessType="offline"
-          onSuccess={(response) => utils.responseGoogleLogin(response, dispatch)}
-          onFailure={(res)=>console.log(`login failed, ${res}`)}
-          cookiePolicy="single_host_origin"
-        />
+        <Button variant="contained" className="loginButton" size="small" onClick={() => login()}>
+          Login
+        </Button>
       </div>
     );
   } return (
     <div key={index} className="menu-item googleLogout">
-      <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={() => utils.responseGoogleLogout(dispatch)} />
-    </div>
+      <Button className="logoutButton" variant="contained" size="small" onClick={() => responseGoogleLogout(dispatch)}>
+        Logout
+      </Button>
+      </div>
   );
 };

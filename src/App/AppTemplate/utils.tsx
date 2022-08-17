@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
-import type { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { authenticate } from './authenticate';
 import superagent from 'superagent';
 import type { Dispatch } from 'react';
+import type { CodeResponse } from '@react-oauth/google';
 
 export interface GoogleBody {
   clientId: string,
@@ -31,7 +31,7 @@ async function setUser(res:{ token: string, email: string }, dispatch: Dispatch<
 }
 
 async function responseGoogleLogin(
-  response: GoogleLoginResponseOffline | GoogleLoginResponse,
+  response: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>,
   dispatch: Dispatch<unknown>,
 ): Promise<void> {
   const uri = window.location.href;
@@ -53,13 +53,4 @@ async function responseGoogleLogin(
   }
 }
 
-function responseGoogleLogout(dispatch: Dispatch<unknown>): string {
-  dispatch({ type: 'LOGOUT' });
-  if (window.location.href.includes('/admin')) {
-    window.location.assign('/staff');
-    return 'assign';
-  }
-  window.location.reload(); return 'reload';
-}
-
-export default { responseGoogleLogin, setUser, responseGoogleLogout };
+export default { responseGoogleLogin, setUser };
