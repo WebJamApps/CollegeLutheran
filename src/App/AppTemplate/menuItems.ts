@@ -1,4 +1,4 @@
-export interface MenuItem {
+export interface ImenuItem {
   classname: string,
   type: string,
   iconClass: string,
@@ -6,7 +6,8 @@ export interface MenuItem {
   name: string,
   auth?: boolean,
 }
-const menuItems = [{
+
+export const menuItems = [{
   classname: 'dashboard',
   type: 'link',
   iconClass: 'fas fa-user-secret',
@@ -114,4 +115,4 @@ const menuItems = [{
   auth: true,
 },
 ];
-export default menuItems;
+
