@@ -1,34 +1,31 @@
-import React from 'react';
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline, GoogleLogout } from 'react-google-login';
-import authUtils from './authUtils';
+import React, { Dispatch } from 'react';
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
+import utils from './utils';
 
-// function responseGoogleLogin(response: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<string> {
-//   return authUtils.responseGoogleLogin(response);
-// }
-
-// function responseGoogleLogout(): string { const { dispatch } = this.props; return authUtils.responseGoogleLogout(dispatch); }
-
-interface IgoogleButtonProps { type:'login' | 'logout', index:string | number | undefined, dispatch:any, auth:any }
+interface IgoogleButtonProps {
+  type: 'login' | 'logout', index: string | number | undefined,
+  dispatch: Dispatch<unknown>
+}
 export const GoogleButtons = (props: IgoogleButtonProps): JSX.Element => {
-  const { type, index, auth, dispatch } = props;
+  const { type, index, dispatch } = props;
   const cId = process.env.GoogleClientId || /* istanbul ignore next */'';
   if (type === 'login') {
     return (
-        <div key={index} className="menu-item googleLogin">
-          <GoogleLogin
-            responseType="code"
-            clientId={cId}
-            buttonText="Login"
-            accessType="offline"
-            onSuccess={(response) => authUtils.responseGoogleLogin(response, auth, dispatch)}
-            onFailure={authUtils.responseGoogleFailLogin}
-            cookiePolicy="single_host_origin"
-          />
-        </div>
+      <div key={index} className="menu-item googleLogin">
+        <GoogleLogin
+          responseType="code"
+          clientId={cId}
+          buttonText="Login"
+          accessType="offline"
+          onSuccess={(response) => utils.responseGoogleLogin(response, dispatch)}
+          onFailure={(res)=>console.log(`login failed, ${res}`)}
+          cookiePolicy="single_host_origin"
+        />
+      </div>
     );
   } return (
-      <div key={index} className="menu-item googleLogout">
-        <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={() => authUtils.responseGoogleLogout(dispatch)} />
-      </div>
+    <div key={index} className="menu-item googleLogout">
+      <GoogleLogout clientId={cId} buttonText="Logout" onLogoutSuccess={() => utils.responseGoogleLogout(dispatch)} />
+    </div>
   );
 };
