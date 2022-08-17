@@ -27,15 +27,15 @@ function setup() {
 }
 
 describe('AppTemplate', () => {
-  it('renders the component', () => {
-    const { wrapper } = setup();
-    expect(wrapper.find('div.page-host').exists()).toBe(true);
-  });
-  it('rerenders the component when menuOpen state changes', () => {
-    const { wrapper } = setup();
-    wrapper.setState({ menuOpen: true });
-    expect(wrapper.find('div.open').length).toBe(1);
-  });
+  // it('renders the component', () => {
+  //   const { wrapper } = setup();
+  //   expect(wrapper.find('div.page-host').exists()).toBe(true);
+  // });
+  // it('rerenders the component when menuOpen state changes', () => {
+  //   const { wrapper } = setup();
+  //   wrapper.setState({ menuOpen: true });
+  //   expect(wrapper.find('div.open').length).toBe(1);
+  // });
   // it('handles response from google login', async () => {
   //   authUtils.responseGoogleLogin = jest.fn(() => Promise.resolve(''));
   //   const wrapper2 = shallow<AppTemplate>(
