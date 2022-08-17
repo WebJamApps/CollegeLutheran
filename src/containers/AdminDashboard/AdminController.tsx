@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import type { InputParams } from '../../lib/forms';
 import fetch from '../../lib/fetch';
 import commonUtils from '../../lib/commonUtils';
-import type { AdminDashboard, PicData, DashboardProps } from './index';
+import type { AdminDashboard } from './index';
 
 class AdminController {
   view: AdminDashboard;
@@ -20,12 +20,9 @@ class AdminController {
     this.view = view;
     this.superagent = superagent;
     this.deleteBookApi = this.deleteBookApi.bind(this);
-    this.createPicApi = this.createPicApi.bind(this);
     this.addForumAPI = this.addForumAPI.bind(this);
-    this.editPicAPI = this.editPicAPI.bind(this);
     this.editor = this.editor.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.createBook = this.createBook.bind(this);
     this.addAdminUser = this.addAdminUser.bind(this);
     this.onChangeYouthContent = this.onChangeYouthContent.bind(this);
     this.putAPI = this.putAPI.bind(this);
@@ -105,35 +102,6 @@ class AdminController {
     );
   }
 
-  changePicDiv(editPic: DashboardProps['editPic'],
-    youthName: string, youthURL: string,
-    type: string, options: { type: string; Category: string; }[],
-    showCaption: string,
-    picData: PicData): JSX.Element {
-    return (
-      <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}
-      >
-        <h4 className="material-header-h4">
-          {editPic._id ? 'Edit ' : 'Add '}
-          Pictures
-        </h4>
-        <form id="picsForm">
-          <label htmlFor="youthName">
-            Picture Title
-            <input id="youthName" placeholder={editPic.title} value={youthName} onChange={this.view.onChange} />
-          </label>
-          <label htmlFor="youthURL">
-            Image Address
-            <input id="youthURL" placeholder={editPic.url} value={youthURL} onChange={this.view.onChange} />
-          </label>
-          {this.view.forms.makeDropdown('type', 'Category', type, this.view.onChangeSelect, options)}
-          {this.view.forms.radioButtons(showCaption, this.view.handleRadioChange)}
-          {this.view.picButton(picData, editPic, youthName, youthURL, type)}
-        </form>
-      </div>
-    );
-  }
-
   async deleteBookApi(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string, redirect: string): Promise<boolean> {
     evt.preventDefault();// eslint-disable-next-line no-restricted-globals
     const result = confirm('Deleting Announcment, are you sure?');// eslint-disable-line no-alert
@@ -167,41 +135,30 @@ class AdminController {
     return true;
   }
 
-  async createBook(data: { title: string, comments: string, type: string }, redirect: string): Promise<string> {
-    const { auth } = this.view.props;
-    let r;
-    try { r = await this.fetch.fetchPost(this.superagent, auth, data); } catch (e) { return `${(e as Error).message}`; }
-    if (r.status === 201) {
-      this.warnNotif(data.title, 'Error Could Not Update');
-      window.location.assign(redirect);
-      return `${r.status}`;
-    }
-    return 'Did not create book';
-  }
-
-  async putAPI(evt: { preventDefault: () => void; }, body:{ title:string;comments:string;type:string }, redirect:string):Promise<string> {
+  async putAPI(
+    evt: { preventDefault: () => void; }, 
+    body:{ title:string;comments:string;type:string }, redirect:string,
+  ):Promise<void> {
     const { auth } = this.view.props;
     evt.preventDefault();
-    let r;
     try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
+      const res = await this.superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
         .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
         .send(body);
+      if (res.status === 200) {
+        window.location.assign(redirect);
+      }
     } catch (e) {
-      this.warnNotif(body.title, 'Error Could Not Update');
-      return `${(e as Error).message}`;
+      console.log((e as any).response.status);
+      if ((e as any).response.status === 400) {
+        try {
+          await this.superagent.post(`${process.env.BackendUrl}/book`)
+            .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
+            .send(body);
+          window.location.assign('/');
+        } catch (err){console.log((err as Error).message);}
+      }
     }
-    if (r.status === 200) {
-      window.location.assign(redirect);
-      return `${r.status}`;
-    }
-    return `Failed to update ${redirect} page.`;
-  }
-
-  async createPicApi(evt: { preventDefault: () => void; }, data: { title: string,
-    comments: string, type: string }, redirect: string): Promise<string> {
-    evt.preventDefault();
-    return this.createBook(data, redirect);
   }
 
   async addForumAPI(): Promise<boolean> {
@@ -225,31 +182,6 @@ class AdminController {
       window.location.assign('/news');
       return Promise.resolve(true);
     } return Promise.resolve(false);
-  }
-
-  async editPicAPI(evt: { preventDefault: () => void; }): Promise<boolean> {
-    evt.preventDefault();
-    const { auth, editPic, dispatch } = this.view.props;
-    const { youthName, youthURL, type, showCaption,
-    } = this.view.state;
-    let r;
-    try {
-      r = await this.superagent.put(`${process.env.BackendUrl}/book/${editPic._id}`)
-        .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
-        .send({ title: youthName, url: youthURL, type, comments: showCaption,
-        });
-    } catch (e) { 
-      this.warnNotif(editPic.title, 'Failed to edit Pic'); return Promise.resolve(false);
-    }
-    if (r.status === 200) {
-      dispatch({ type: 'EDIT_PIC', picData: {} });
-      dispatch({ type: 'SHOW_TABLE', showTable: true });
-      this.view.setState({ youthName: '', youthURL: '', type: '',
-      });
-      window.location.reload();
-      return Promise.resolve(true);
-    }
-    return Promise.resolve(false);
   }
 
   onChangeYouthContent(youthContent: string): string {
