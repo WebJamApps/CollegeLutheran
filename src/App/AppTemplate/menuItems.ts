@@ -1,4 +1,4 @@
-export interface MenuItem {
+export interface ImenuItem {
   classname: string,
   type: string,
   iconClass: string,

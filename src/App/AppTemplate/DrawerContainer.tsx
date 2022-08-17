@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { MenuItem } from './MenuItem';
 import { menuItems } from './menuItems';
-import utils from './utils';
 
 interface CurrentStyles {
   headerClass: string,
@@ -39,7 +39,11 @@ function NavLinks({ location, auth, books, setMenuOpen, dispatch }:any): JSX.Ele
             </a>
           </p>
         </div>
-        {menuItems.map((menu, index) => (utils.makeMenuItem(menu, index, location, auth, books, setMenuOpen, dispatch)))}
+        {menuItems.map(
+          (menu, index) => {
+            return <MenuItem 
+            key={index} menu={menu} index={index} location={location} auth={auth} books={books} setMenuOpen={setMenuOpen} dispatch={dispatch}/>;
+          })}
       </div>
   );
 }
