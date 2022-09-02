@@ -17,4 +17,5 @@ describe('Giving', () => {
       .find('div.page-content')
       .exists()).toBe(true);
   });
+  
 });
