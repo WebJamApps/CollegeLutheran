@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Giving Renders the Giving component 1`] = `
+<div
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="MuiBox-root css-1mx15d0"
+  >
+    <div
+      className="MuiBox-root css-6pmvto"
+    >
+      <div
+        className="material-content elevation3"
+      >
+        <h3>
+          Giving
+        </h3>
+        <p>
+          Thank you for supporting the ministries of College Lutheran Church through your online giving. We now use
+           
+          <i>
+            BreezeChMS
+          </i>
+           
+          to process online gifts. Giving electronically from your bank account or credit card is easy! Just complete the form below to support the ministries of CLC with your offering.
+        </p>
+        <i>
+          If you have any questions about online giving, please contact us at (540) 389-4963 or
+           
+          <a
+            href="mailto:office1@collegelutheran.org"
+          >
+            office1@collegelutheran.org
+          </a>
+        </i>
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-1v9pxvv"
+    >
+      <iframe
+        className="giving-iframe"
+        height="100%"
+        overflow-x:scroll={true}
+        src="https://collegelutheranchurch.breezechms.com/give/online"
+        title="Just Giving"
+        width="100%"
+      >
+        <p>
+          Your browser does not support iframe.
+        </p>
+      </iframe>
+    </div>
+    <div
+      className="MuiBox-root css-t0sx0o"
+    >
+      <div
+        style={
+          Object {
+            "marginLeft": "-9px",
+            "textAlign": "center",
+          }
+        }
+      >
+        <a
+          href="http://www.elca.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="ELCA LOGO"
+            id="elcaLogo"
+            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+            style={
+              Object {
+                "margin": "auto",
+                "marginLeft": "",
+                "paddingTop": "30px",
+                "width": "308px",
+              }
+            }
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

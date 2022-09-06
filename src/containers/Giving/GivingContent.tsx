@@ -3,8 +3,6 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import ELCALogo from '../../components/elcaLogo';
 
-//const pageName = 'giving';
-
 const GivingInfo = ():JSX.Element => {
   return (
     <div className = "material-content elevation3">
@@ -85,5 +83,3 @@ export function GivingContent():JSX.Element {
   );
 }
 
-{/* <div id="breeze_giving_embed" data-subdomain="collegelutheranchurch" /> */}
-export default GivingContent;
