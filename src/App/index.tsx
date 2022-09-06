@@ -9,7 +9,7 @@ import commonUtils from '../lib/commonUtils';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
-import Giving from '../containers/Giving';
+import { Giving } from '../containers/Giving';
 import Staff from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';

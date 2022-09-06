@@ -8,6 +8,7 @@ import CommonUtils from '../../lib/commonUtils';
 import PTable from '../../components/PhotoTable';
 import YouthPageEditor from '../../components/YouthPageEditor';
 import AdminUserForm from '../../components/AdminUserForm';
+import { EditPic } from './EditPic';
 
 export interface PicData {
   buttonId: string; buttonClick: (e: React.ChangeEvent<EventTarget>) => Promise<string>; title: string; nameId: string;
@@ -23,7 +24,6 @@ export interface DashboardProps extends RouteComponentProps {
   familyPics: Ibook[];
   otherPics: Ibook[];
   musicPics: Ibook[];
-  //habitatPics: Ibook[]
   youthContent: Ibook;
 }
 type DashboardState = {
@@ -75,20 +75,12 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.checkEdit = this.checkEdit.bind(this);
     this.changeHomepage = this.changeHomepage.bind(this);
-    this.changePicForm = this.changePicForm.bind(this);
     this.deleteForumForm = this.deleteForumForm.bind(this);
-    this.picButton = this.picButton.bind(this);
-    this.handleRadioChange = this.handleRadioChange.bind(this);
     this.resetEditForm = this.resetEditForm.bind(this);
     this.onChangeAdminEmail = this.onChangeAdminEmail.bind(this);
   }
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Admin Dashboard', window.screen.width); }
-
-  handleRadioChange(evt: { target: { value: string } }): void {
-    this.checkEdit();
-    this.setState({ showCaption: evt.target.value });
-  }
 
   onChange(evt: React.ChangeEvent<HTMLInputElement>, stateValue?: string): string {
     evt.persist();
@@ -146,53 +138,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     this.setState({
       youthName: '', youthURL: '', type: '', showCaption: '', firstEdit: true,
     });
-  }
-
-  picButton(picData: PicData,
-    editPic: { _id: string }, youthName: string, youthURL: string, type: string): JSX.Element {
-    const { firstEdit } = this.state;
-    return (
-      <div style={{ marginLeft: '50%', marginTop: '10px' }}>
-        {editPic._id ? (
-          <button
-            style={{ display: 'relative', marginRight: '20px' }}
-            type="button"
-            id="cancel-edit-pic"
-            onClick={this.resetEditForm}
-          >
-            Cancel
-          </button>
-        ) : null}
-        <button
-          style={{ display: 'relative' }}
-          disabled={this.controller.validateBook(youthName, youthURL, type, firstEdit)}
-          type="button"
-          id={picData.buttonId}
-          onClick={
-            editPic._id ? this.controller.editPicAPI : picData.buttonClick
-          }
-        >
-          {editPic._id ? 'Edit ' : 'Add '}
-          Pic
-        </button>
-      </div>
-    );
-  }
-
-  changePicForm(picData: PicData): JSX.Element['props'] {
-    const options = [
-      { type: 'youthPics', Category: 'Youth Pics' },
-      { type: 'familyPics', Category: 'Family Pics' },
-      { type: 'otherPics', Category: 'Other Pics' },
-      { type: 'musicPics', Category: 'Music Pics' },
-      { type: 'habitat', Category: 'Habitat' },
-    ];
-    const { youthURL, youthName } = this.state;
-    let { type, showCaption } = this.state;
-    const { editPic } = this.props;
-    if (type === '' && editPic.type !== undefined) type = editPic.type;
-    if (showCaption === '' && editPic.comments !== undefined) showCaption = editPic.comments;
-    return this.controller.changePicDiv(editPic, youthName, youthURL, type, options, showCaption, picData);
   }
 
   deleteForumForm(forumId: string, options: Record<string, string>[]): JSX.Element {
@@ -268,28 +213,9 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 
-  changeYouthForm(): string {
-    const {
-      youthName, youthURL, type, showCaption,
-    } = this.state;
-    const postBody = {
-      title: youthName,
-      url: youthURL,
-      comments: showCaption,
-      type,
-      access: 'CLC',
-    };
-    return this.changePicForm({
-      buttonId: 'addYouthPic',
-      buttonClick: (e: React.ChangeEvent<EventTarget>) => this.controller.createPicApi(e, postBody, '/admin'),
-      title: '',
-      nameId: 'youthName',
-    });
-  }
-
   render(): JSX.Element {
     const {
-      showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics,
+      showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics, editPic,
     } = this.props;
     const { youthTitle, youthContent } = this.state;
     return (
@@ -297,7 +223,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         {this.controller.addForumForm()}
-        {this.changeYouthForm()}
+        <EditPic editPic={editPic} auth={auth} dispatch={dispatch}/>
         {showTable ? (
           <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
         ) : null}
