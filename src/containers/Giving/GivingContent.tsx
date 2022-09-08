@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import PropTypes from 'prop-types';
 import ELCALogo from '../../components/elcaLogo';
 
 const GivingInfo = ():JSX.Element => {
@@ -58,15 +57,15 @@ function Item(props: { [x: string]: any; sx: any; }) {
   );
 }
 
-Item.propTypes = {
-  sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool]),
-    ),
-    PropTypes.func,
-    PropTypes.object,
-  ]),
-};
+// Item.propTypes = {
+//   sx: PropTypes.oneOfType([
+//     PropTypes.arrayOf(
+//       PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool]),
+//     ),
+//     PropTypes.func,
+//     PropTypes.object,
+//   ]),
+// };
 
 export function GivingContent():JSX.Element {
   return (

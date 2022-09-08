@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-import React from 'react';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { Editor } from '@tinymce/tinymce-react';

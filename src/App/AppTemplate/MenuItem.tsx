@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 import type { Auth, Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 import { MakeMenuLink } from './MakeMenuLink';

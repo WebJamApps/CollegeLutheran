@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import utils from './utils';
 import commonUtils from '../../lib/commonUtils';

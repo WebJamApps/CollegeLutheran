@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 
 const makeThermo = (classString:string, style: React.CSSProperties | undefined) => (
