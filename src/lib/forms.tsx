@@ -2,11 +2,13 @@ interface IMkDropDownCv {
   [key: string]: string;
 }
 
-function makeDropdown(htmlFor: string,
+function makeDropdown(
+  htmlFor: string,
   labelText: string,
   value: string,
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void,
-  options: { type: string, Category: string }[]): JSX.Element {
+  options: { type: string, Category: string }[],
+): JSX.Element {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>

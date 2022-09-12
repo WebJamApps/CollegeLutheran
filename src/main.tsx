@@ -7,6 +7,7 @@ import ConnectedApp from './App';
 import store from './redux/store';
 import '../static/styles.scss';
 
+// eslint-disable-next-line function-paren-newline
 render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={process.env.GoogleClientId || ''}>
@@ -16,7 +17,6 @@ render(
         </PersistGate>
       </Provider>
     </GoogleOAuthProvider>
-  </React.StrictMode>, document.getElementById('root'),
-);
+  </React.StrictMode>, document.getElementById('root'));
 /* istanbul ignore next */
 if (process.env.NODE_ENV === 'development' && module.hot) module.hot.accept();

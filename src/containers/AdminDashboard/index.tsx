@@ -223,7 +223,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         {this.controller.addForumForm()}
-        <EditPic editPic={editPic} auth={auth} dispatch={dispatch}/>
+        <EditPic editPic={editPic} auth={auth} dispatch={dispatch} />
         {showTable ? (
           <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
         ) : null}
