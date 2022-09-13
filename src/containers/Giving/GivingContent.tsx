@@ -55,16 +55,6 @@ function Item(props: { [x: string]: any; sx: any; }) {
   );
 }
 
-// Item.propTypes = {
-//   sx: PropTypes.oneOfType([
-//     PropTypes.arrayOf(
-//       PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool]),
-//     ),
-//     PropTypes.func,
-//     PropTypes.object,
-//   ]),
-// };
-
 export function GivingContent():JSX.Element {
   return (
     <div style={{ width: '100%' }}>
