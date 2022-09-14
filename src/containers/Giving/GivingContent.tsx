@@ -5,8 +5,10 @@ import ELCALogo from '../../components/elcaLogo';
 
 const GivingInfo = ():JSX.Element => {
   return (
-    <div className = "material-content elevation3">
-      <h3>Giving</h3>
+    <div className = "material-content elevation3"  style={{ textAlign: 'left', margin: 'auto', marginLeft: '45px', marginRight: '45px' }}>
+      <h3>
+        Giving
+        </h3>
       <p>
         Thank you for supporting the ministries of College Lutheran Church through your online giving.
         We now use
@@ -27,7 +29,8 @@ const GivingInfo = ():JSX.Element => {
 
 const GivingDonation = ():JSX.Element => {
   return (
-    <iframe width="100%" height="100%"
+    <iframe 
+      width="100%" height="100%"
       overflow-x:scroll
       className="giving-iframe"
       src="https://collegelutheranchurch.breezechms.com/give/online"
@@ -75,7 +78,7 @@ export function GivingContent():JSX.Element {
         sx={{ display: 'grid', gridAutoColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
         }}
       >
-        <Item sx={{ gridRow: '25%', gridColumn: '2' }}><GivingInfo/></Item>
+        <Item sx={{ gridRow: '25%', gridColumn: '3' }}><GivingInfo/></Item>
         <Item sx={{ gridRow: '50%', gridColumn: 'span 3' }}><GivingDonation/></Item>
         <Item sx={{ gridRow: '25%', gridColumn: 'span 3' }}><ELCALogo/></Item>
       </Box>
