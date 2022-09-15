@@ -19,8 +19,8 @@ exports[`Giving Renders the Giving component 1`] = `
         style={
           Object {
             "margin": "auto",
-            "marginLeft": "45px",
-            "marginRight": "45px",
+            "marginLeft": "20px",
+            "marginRight": "20px",
             "textAlign": "left",
           }
         }

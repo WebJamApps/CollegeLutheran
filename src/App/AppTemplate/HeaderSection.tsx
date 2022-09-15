@@ -6,7 +6,7 @@ export const HeaderSection = (): JSX.Element => {
         <div id="header" className={'material-header home-header'} style={{ backgroundColor: '#244a8bff' }}>
             <div className="headercontent" />
             <div>
-                <div className="flex-header" style={{ marginLeft: '5px', marginTop: '-18px' }}>
+                <div className="flex-header" style={{ marginLeft: '15px', marginTop: '-18px' }}>
                     <h2 className="header-text" style={{ marginBottom: '0px', marginTop: '1px', fontSize: '34px' }}>
                         <a className="header-text" href="/" style={{ textAlign: 'left', textDecoration: 'none' }}>College Lutheran Church</a>
                     </h2>

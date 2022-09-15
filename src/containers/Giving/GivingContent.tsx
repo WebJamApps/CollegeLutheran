@@ -5,7 +5,7 @@ import ELCALogo from '../../components/elcaLogo';
 
 const GivingInfo = ():JSX.Element => {
   return (
-    <div className = "material-content elevation3"  style={{ textAlign: 'left', margin: 'auto', marginLeft: '45px', marginRight: '45px' }}>
+    <div className = "material-content elevation3"  style={{ textAlign: 'left', margin: 'auto', marginLeft: '20px', marginRight: '20px' }}>
       <h3>
         Giving
         </h3>
