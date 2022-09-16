@@ -15,7 +15,7 @@ interface Pprops {
   youthPics: Ibook[],
   otherPics: Ibook[],
   musicPics: Ibook[],
-  //habitatPics: Ibook[]
+  // habitatPics: Ibook[]
 }
 interface Pstate {
   columns: MUIDataTableColumnDef[]
@@ -76,7 +76,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       try {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
-      } catch (e) { 
+      } catch (e) {
         store.addNotification({
           title: id,
           message: 'Failed to Delete Photo',
@@ -85,10 +85,9 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
           container: 'top-right',
           animationIn: ['animate__animated animate__fadeIn'],
           animationOut: ['animate__animated animate__fadeOut'],
-          dismiss: { duration: 5000, onScreen: true, 
-          }, 
+          dismiss: { duration: 5000, onScreen: true },
         });
-        return `${(e as Error).message}`; 
+        return `${(e as Error).message}`;
       }
       if (res.status === 200) { window.location.reload(); return 'deleted pic'; }
       return `${res.status} ${res.body}`;

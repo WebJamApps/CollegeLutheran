@@ -26,7 +26,7 @@ module.exports = (env) => ({
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
       util: require.resolve('util/'),
-      'buffer': require.resolve('buffer'),
+      buffer: require.resolve('buffer'),
     }, // needed for dedoding jwt
   },
 

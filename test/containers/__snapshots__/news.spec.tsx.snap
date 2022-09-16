@@ -12,7 +12,7 @@ exports[`News Renders the News component correctly 1`] = `
     </div>
     <p
       style={
-        Object {
+        {
           "fontSize": "4pt",
           "margin": "0",
         }
@@ -22,7 +22,7 @@ exports[`News Renders the News component correctly 1`] = `
     </p>
     <hr
       style={
-        Object {
+        {
           "margin": "0px",
         }
       }
@@ -34,7 +34,7 @@ exports[`News Renders the News component correctly 1`] = `
   </div>
   <div
     style={
-      Object {
+      {
         "marginLeft": "-9px",
         "textAlign": "center",
       }
@@ -50,7 +50,7 @@ exports[`News Renders the News component correctly 1`] = `
         id="elcaLogo"
         src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
         style={
-          Object {
+          {
             "margin": "auto",
             "marginLeft": "",
             "paddingTop": "30px",

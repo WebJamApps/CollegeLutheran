@@ -143,7 +143,7 @@ const StaffContent = (): JSX.Element => (
           </section>
           {makeStaff()}
         </div>
-        <ELCALogo/>
+        <ELCALogo />
       </div>
     </div>
   </div>

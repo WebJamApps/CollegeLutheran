@@ -66,7 +66,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
-        <ELCALogo/>
+        <ELCALogo />
       </div>
     );
   }

@@ -5,7 +5,7 @@ import ELCALogo from '../../src/components/elcaLogo';
 function setup() {
   const props = {};
   const pageName = 'sample';
-  const wrapper = shallow(<ELCALogo/>);
+  const wrapper = shallow(<ELCALogo />);
   return { wrapper, props, pageName };
 }
 
@@ -16,6 +16,6 @@ function setup() {
 //   });
 // });
 
-it('is true', ()=>{
+it('is true', () => {
   expect(true).toBe(true);
 });

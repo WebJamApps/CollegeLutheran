@@ -42,12 +42,18 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
   }
 
   render(): JSX.Element {
-    const { children, location, auth, books, dispatch } = this.props;
+    const {
+      children, location, auth, books, dispatch,
+    } = this.props;
     return (
       <div className="page-host">
         <DrawerContainer
-          location={location} auth={auth} books={books} dispatch={dispatch}
-          menuOpen={this.state.menuOpen} setMenuOpen={(bool: boolean) => this.setState({ menuOpen: bool })}
+          location={location}
+          auth={auth}
+          books={books}
+          dispatch={dispatch}
+          menuOpen={this.state.menuOpen}
+          setMenuOpen={(bool: boolean) => this.setState({ menuOpen: bool })}
         />
         <MainPanel children={children} toggleMobileMenu={this.toggleMobileMenu} handleKeyMenu={this.handleKeyMenu} />
       </div>
