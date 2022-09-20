@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
 import { store } from 'react-notifications-component';
 import { PhotoTable } from '../../src/components/PhotoTable';
