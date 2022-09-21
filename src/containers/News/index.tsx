@@ -8,7 +8,7 @@ export function News(props: { books: Ibook[] }): JSX.Element {
   const { books } = props;
   commonUtils.setTitleAndScroll('News', window.screen.width);
   books.sort((a, b) => {
-    if (a.created_at && b.created_at){
+    if (a.created_at && b.created_at) {
       const dataA = a.created_at.split('T')[0];
       const dateB = b.created_at.split('T')[0];
       if (dataA < dateB) return 1;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { store } from 'react-notifications-component';
 import { App } from '../../src/App';
 import type { Auth } from '../../src/redux/mapStoreToProps';
-import { store } from 'react-notifications-component';
 
 describe('App component', () => {
   const auth: Auth = {

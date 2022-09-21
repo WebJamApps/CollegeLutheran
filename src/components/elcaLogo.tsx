@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ELCALogo = (): JSX.Element => (
-  <div  style={{ textAlign: 'center', marginLeft:'-9px' }}>
+  <div style={{ textAlign: 'center', marginLeft: '-9px' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
         id="elcaLogo"

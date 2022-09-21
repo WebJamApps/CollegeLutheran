@@ -5,7 +5,7 @@ import { authenticate } from '../../../src/App/AppTemplate/authenticate';
 import type { Auth } from '../../../src/redux/mapStoreToProps';
 
 describe('authActions', () => {
-  it('is defined', ()=>{
+  it('is defined', () => {
     expect(authenticate).toBeDefined();
   });
   // TODO update when new google package is implemented

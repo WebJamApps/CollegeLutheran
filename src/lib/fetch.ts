@@ -37,8 +37,11 @@ const fetchGet = async (view:
   return true;
 };
 
-function fetchPost(superagent: SuperAgentStatic, auth: { token: string; },
-  data: { title: string, comments: string, type: string }): SuperAgentRequest {
+function fetchPost(
+  superagent: SuperAgentStatic,
+  auth: { token: string; },
+  data: { title: string, comments: string, type: string },
+): SuperAgentRequest {
   return superagent.post(`${process.env.BackendUrl}/book`)
     .set('Authorization', `Bearer ${auth.token}`)
     .set('Content-Type', 'application/json')

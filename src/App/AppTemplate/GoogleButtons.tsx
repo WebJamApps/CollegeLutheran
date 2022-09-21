@@ -1,8 +1,8 @@
-import React, { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import { Button } from '@mui/material';
 import utils from './utils';
 import commonUtils from '../../lib/commonUtils';
-import { Button } from '@mui/material';
 
 const responseGoogleLogout = async (dispatch: Dispatch<unknown>): Promise<void> => {
   dispatch({ type: 'LOGOUT' });
@@ -18,7 +18,7 @@ interface IgoogleButtonProps {
 export const GoogleButtons = (props: IgoogleButtonProps): JSX.Element => {
   const { type, index, dispatch } = props;
   const login = useGoogleLogin({
-    onSuccess: codeResponse => utils.responseGoogleLogin(codeResponse, dispatch),
+    onSuccess: (codeResponse) => utils.responseGoogleLogin(codeResponse, dispatch),
     onError: () => console.log('Google login failed'),
     flow: 'auth-code',
   });
@@ -35,6 +35,6 @@ export const GoogleButtons = (props: IgoogleButtonProps): JSX.Element => {
       <Button className="logoutButton" variant="contained" size="small" onClick={() => responseGoogleLogout(dispatch)}>
         Logout
       </Button>
-      </div>
+    </div>
   );
 };

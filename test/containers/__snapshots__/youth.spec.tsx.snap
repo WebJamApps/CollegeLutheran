@@ -7,7 +7,7 @@ exports[`Youth renders correctly without images 1`] = `
   <div
     id="youthSlideshowWide"
     style={
-      Object {
+      {
         "display": "flex",
         "flexDirection": "column",
       }
@@ -18,7 +18,7 @@ exports[`Youth renders correctly without images 1`] = `
   >
     <p
       style={
-        Object {
+        {
           "fontSize": "4pt",
           "margin": "0",
         }
@@ -29,7 +29,7 @@ exports[`Youth renders correctly without images 1`] = `
     <div
       className="material-content elevation3"
       style={
-        Object {
+        {
           "margin": "auto",
           "maxWidth": "998px",
           "paddingBottom": "-80px",
@@ -38,7 +38,7 @@ exports[`Youth renders correctly without images 1`] = `
     >
       <h3
         style={
-          Object {
+          {
             "paddingBottom": "15px",
             "paddingTop": "22px",
           }
@@ -49,7 +49,7 @@ exports[`Youth renders correctly without images 1`] = `
       <p>
         <span
           style={
-            Object {
+            {
               "color": "rgb(0, 51, 102)",
             }
           }
@@ -68,7 +68,7 @@ exports[`Youth renders correctly without images 1`] = `
       <p>
         <span
           style={
-            Object {
+            {
               "color": "rgb(0, 51, 102)",
             }
           }
@@ -90,7 +90,7 @@ exports[`Youth renders correctly without images 1`] = `
       <hr />
       <h5
         style={
-          Object {
+          {
             "fontWeight": "bold",
             "marginTop": "35px",
           }
@@ -98,7 +98,7 @@ exports[`Youth renders correctly without images 1`] = `
       />
       <section
         style={
-          Object {
+          {
             "marginBottom": "35px",
             "marginTop": "20px",
             "textAlign": "left",
@@ -119,7 +119,7 @@ exports[`Youth renders correctly without images 1`] = `
           id="elcaLogo"
           src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
           style={
-            Object {
+            {
               "margin": "auto",
               "paddingTop": "30px",
               "width": "350px",
