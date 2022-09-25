@@ -119,7 +119,7 @@ const VolunteerSignUp = () => (
             <b>click here</b>
           </a>
           {' '}
-          to sign up to voluneer!
+          to sign up to volunteer!
         </p>
       </div>
     </Grid>

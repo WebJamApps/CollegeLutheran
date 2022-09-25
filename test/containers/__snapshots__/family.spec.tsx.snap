@@ -7,7 +7,7 @@ exports[`Family renders correctly without images 1`] = `
   <div
     id="familySlideshowWide"
     style={
-      {
+      Object {
         "display": "flex",
         "flexDirection": "column",
       }
@@ -18,7 +18,7 @@ exports[`Family renders correctly without images 1`] = `
   >
     <p
       style={
-        {
+        Object {
           "fontSize": "4pt",
           "margin": "0",
         }
@@ -29,7 +29,7 @@ exports[`Family renders correctly without images 1`] = `
     <div
       className="material-content elevation3"
       style={
-        {
+        Object {
           "margin": "auto",
           "maxWidth": "998px",
           "paddingBottom": "-80px",
@@ -38,7 +38,7 @@ exports[`Family renders correctly without images 1`] = `
     >
       <h3
         style={
-          {
+          Object {
             "paddingBottom": "15px",
           }
         }
@@ -48,7 +48,7 @@ exports[`Family renders correctly without images 1`] = `
       <p>
         <span
           style={
-            {
+            Object {
               "color": "rgb(0, 51, 102)",
             }
           }
@@ -82,7 +82,7 @@ exports[`Family renders correctly without images 1`] = `
       </section>
       <section
         style={
-          {
+          Object {
             "marginTop": "0",
             "textAlign": "left",
           }
@@ -135,7 +135,7 @@ exports[`Family renders correctly without images 1`] = `
     </div>
     <div
       style={
-        {
+        Object {
           "marginLeft": "-9px",
           "textAlign": "center",
         }
@@ -151,7 +151,7 @@ exports[`Family renders correctly without images 1`] = `
           id="elcaLogo"
           src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
           style={
-            {
+            Object {
               "margin": "auto",
               "marginLeft": "",
               "paddingTop": "30px",
