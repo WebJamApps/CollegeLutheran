@@ -35,7 +35,7 @@ function GivingDonation():JSX.Element {
     <iframe
       width="100%"
       height="100%"
-      overflow-x:scroll
+      style={{ overflowX: 'scroll' }}
       className="giving-iframe"
       src="https://collegelutheranchurch.breezechms.com/give/online"
       title="Just Giving"

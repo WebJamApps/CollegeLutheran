@@ -54,8 +54,12 @@ exports[`Giving Renders the Giving component 1`] = `
       <iframe
         className="giving-iframe"
         height="100%"
-        overflow-x:scroll={true}
         src="https://collegelutheranchurch.breezechms.com/give/online"
+        style={
+          Object {
+            "overflowX": "scroll",
+          }
+        }
         title="Just Giving"
         width="100%"
       >
