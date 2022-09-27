@@ -12,10 +12,18 @@ exports[`Giving Renders the Giving component 1`] = `
     className="MuiBox-root css-1mx15d0"
   >
     <div
-      className="MuiBox-root css-6pmvto"
+      className="MuiBox-root css-ezkpjx"
     >
       <div
         className="material-content elevation3"
+        style={
+          {
+            "margin": "auto",
+            "marginLeft": "20px",
+            "marginRight": "20px",
+            "textAlign": "left",
+          }
+        }
       >
         <h3>
           Giving

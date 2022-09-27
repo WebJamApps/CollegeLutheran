@@ -1,4 +1,3 @@
-import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 import type { Ibook } from '../../redux/mapStoreToProps';
 

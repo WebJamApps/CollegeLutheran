@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { News } from '../../src/containers/News/index';
