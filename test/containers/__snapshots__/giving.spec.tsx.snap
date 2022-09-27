@@ -3,7 +3,7 @@
 exports[`Giving Renders the Giving component 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
@@ -17,7 +17,7 @@ exports[`Giving Renders the Giving component 1`] = `
       <div
         className="material-content elevation3"
         style={
-          Object {
+          {
             "margin": "auto",
             "marginLeft": "20px",
             "marginRight": "20px",
@@ -56,7 +56,7 @@ exports[`Giving Renders the Giving component 1`] = `
         height="100%"
         src="https://collegelutheranchurch.breezechms.com/give/online"
         style={
-          Object {
+          {
             "overflowX": "scroll",
           }
         }
@@ -73,7 +73,7 @@ exports[`Giving Renders the Giving component 1`] = `
     >
       <div
         style={
-          Object {
+          {
             "marginLeft": "-9px",
             "textAlign": "center",
           }
@@ -89,7 +89,7 @@ exports[`Giving Renders the Giving component 1`] = `
             id="elcaLogo"
             src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
             style={
-              Object {
+              {
                 "margin": "auto",
                 "marginLeft": "",
                 "paddingTop": "30px",
