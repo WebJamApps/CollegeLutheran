@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import DefaultNewsContent from './NewsContent';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';

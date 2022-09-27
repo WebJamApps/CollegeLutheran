@@ -17,7 +17,7 @@ exports[`Giving Renders the Giving component 1`] = `
       <div
         className="material-content elevation3"
         style={
-          Object {
+          {
             "margin": "auto",
             "marginLeft": "20px",
             "marginRight": "20px",

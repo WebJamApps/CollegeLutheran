@@ -1,5 +1,4 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 
@@ -119,7 +118,7 @@ const VolunteerSignUp = () => (
             <b>click here</b>
           </a>
           {' '}
-          to sign up to voluneer!
+          to sign up to volunteer!
         </p>
       </div>
     </Grid>
