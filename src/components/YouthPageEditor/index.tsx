@@ -1,4 +1,3 @@
-import React from 'react';
 import type { InputParams } from '../../lib/forms';
 import type { AdminDashboard } from '../../containers/AdminDashboard';
 

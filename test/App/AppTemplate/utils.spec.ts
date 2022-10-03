@@ -3,7 +3,7 @@
 import utils from '../../../src/App/AppTemplate/utils';
 
 describe('AppTemplate/utils', () => {
-  it('is defined', ()=>{
+  it('is defined', () => {
     expect(utils).toBeDefined();
   });
   // let r: JSX.Element | null,

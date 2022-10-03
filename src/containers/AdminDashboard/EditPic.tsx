@@ -1,13 +1,13 @@
 
 import React, { Dispatch, useEffect, useState } from 'react';
-import type { Ibook } from '../../redux/mapStoreToProps';
 import superagent from 'superagent';
+import {
+  FormControl, InputLabel, Select, MenuItem,
+} from '@material-ui/core';
+import type { Ibook } from '../../redux/mapStoreToProps';
 import utils from './utils';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
-async function editPicAPI(
-  body: any, editPic: any, auth: any, dispatch: Dispatch<unknown>, setPicBody: any,
-): Promise<boolean> {
+async function editPicAPI(body: any, editPic: any, auth: any, dispatch: Dispatch<unknown>, setPicBody: any): Promise<boolean> {
   if (body.title === '') delete body.title;
   if (body.type === '') body.type = 'otherPics';
   if (body.url === '') delete body.url;
@@ -21,7 +21,9 @@ async function editPicAPI(
   if (r.status === 200) {
     dispatch({ type: 'EDIT_PIC', picData: {} });
     dispatch({ type: 'SHOW_TABLE', showTable: true });
-    setPicBody({ youthName: '', youthURL: '', type: '', comments: '' });
+    setPicBody({
+      youthName: '', youthURL: '', type: '', comments: '',
+    });
     window.location.reload();
     return Promise.resolve(true);
   }
@@ -31,14 +33,18 @@ async function editPicAPI(
 function handleCancel(dispatch: Dispatch<unknown>, setPicBody: (arg0: any) => void) {
   dispatch({ type: 'EDIT_PIC', picData: {} });
   dispatch({ type: 'SHOW_TABLE', showTable: true });
-  setPicBody({ title: '', url: '', type: '', comments: '' });
+  setPicBody({
+    title: '', url: '', type: '', comments: '',
+  });
 }
 
 interface IpicButtonProps {
   editPic: any, setPicBody: (arg0: any) => void, picBody: any, auth: any, dispatch: Dispatch<unknown>
 }
 const PicButton = (props: IpicButtonProps) => {
-  const { editPic, setPicBody, picBody, auth, dispatch } = props;
+  const {
+    editPic, setPicBody, picBody, auth, dispatch,
+  } = props;
   return (
     <div style={{ marginLeft: '50%', marginTop: '10px' }}>
       {editPic._id ? (
@@ -138,11 +144,15 @@ interface IeditPicProps {
 }
 export function EditPic(props: IeditPicProps): JSX.Element {
   const { editPic, auth, dispatch } = props;
-  const [picBody, setPicBody] = useState({ title: '', url: '', type: '', comments: '' });
+  const [picBody, setPicBody] = useState({
+    title: '', url: '', type: '', comments: '',
+  });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(()=>handleCancel(dispatch, setPicBody), []);
+  useEffect(() => handleCancel(dispatch, setPicBody), []);
   return (
-    <div className="material-content elevation3" style={{ maxWidth: '320px', margin: '30px auto' }}
+    <div
+      className="material-content elevation3"
+      style={{ maxWidth: '320px', margin: '30px auto' }}
     >
       <h4 className="material-header-h4">
         {editPic._id ? 'Edit ' : 'Add '}
@@ -151,18 +161,24 @@ export function EditPic(props: IeditPicProps): JSX.Element {
       <form id="picsForm">
         <label htmlFor="Title">
           Picture Title
-          <input id="Title"
-            placeholder={editPic.title} value={picBody.title}
+          <input
+            id="Title"
+            placeholder={editPic.title}
+            value={picBody.title}
             onChange={(evt) => setPicBody({ ...picBody, title: evt.target.value })}
           />
         </label>
         <label htmlFor="URL">
           Image Address
-          <input style={{ marginBottom: '20px' }} id="URL" placeholder={editPic.url} value={picBody.url}
+          <input
+            style={{ marginBottom: '20px' }}
+            id="URL"
+            placeholder={editPic.url}
+            value={picBody.url}
             onChange={(evt) => setPicBody({ ...picBody, url: evt.target.value })}
           />
         </label>
-        <MakeDropdown editPic={editPic} picBody={picBody} onChange={(evt:any) => setPicBody({ ...picBody, type: evt.target.value })}/>
+        <MakeDropdown editPic={editPic} picBody={picBody} onChange={(evt:any) => setPicBody({ ...picBody, type: evt.target.value })} />
         {/* {Forms.makeDropdown('type', 'Category', categoryValue, (evt) => setPicBody({ ...picBody, type: evt.target.value }), options)} */}
         <RadioButtons editPic={editPic} comments={picBody.comments} onChange={(evt: any) => setPicBody({ ...picBody, comments: evt.target.value })} />
         <PicButton editPic={editPic} setPicBody={setPicBody} picBody={picBody} auth={auth} dispatch={dispatch} />

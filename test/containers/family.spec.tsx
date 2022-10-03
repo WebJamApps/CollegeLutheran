@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { Family } from '../../src/containers/Family/index';

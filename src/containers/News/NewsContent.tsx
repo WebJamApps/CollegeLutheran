@@ -1,4 +1,3 @@
-import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
 import type { Ibook } from '../../redux/mapStoreToProps';
 
@@ -52,7 +51,7 @@ const NewsContent = ({ books }: NewsContentProps): JSX.Element => (
       </div>
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
       <hr style={{ margin: '0px' }} />
-      <div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"></div>
+      <div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
     </div>
     <ELCALogo />
   </div>

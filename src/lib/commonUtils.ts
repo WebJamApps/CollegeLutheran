@@ -10,7 +10,7 @@ const setTitleAndScroll = (pageTitle: string, width?: number): void => {
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
 
-async function randomizePics(view: Homepage, delay: () => void): Promise<void> {
+async function randomizePics(view: Homepage, delay: () => Promise<void>): Promise<void> {
   await delay();
   const {
     familyPics, youthPics, otherPics, musicPics,
@@ -35,7 +35,7 @@ function getUserRoles(): string[] {
   return userRoles;
 }
 
-const delay = (seconds:number) => new Promise(resolve => setTimeout(resolve, seconds * 1000)); 
+const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 
 export default {
   getUserRoles, setTitleAndScroll, randomizePics, delay,
