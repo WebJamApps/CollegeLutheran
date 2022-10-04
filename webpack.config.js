@@ -21,6 +21,7 @@ const baseUrl = '/';
 
 module.exports = (env) => ({
   resolve: {
+    alias: { src: srcDir, 'react-dom': '@hot-loader/react-dom' },
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
@@ -75,8 +76,13 @@ module.exports = (env) => ({
     rules: [
       {
         test: /\.(t|j)sx?$/,
-        use: { loader: 'ts-loader' },
-        exclude: [/node_modules/],
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            configFile: 'tsconfig.webpack.json',
+          },
+        }],
+        exclude: /node_modules/,
       },
       {
         enforce: 'pre',
