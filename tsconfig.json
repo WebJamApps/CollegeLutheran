@@ -21,7 +21,6 @@
     "lib": ["es2018", "dom", "dom.iterable", "esnext"],
     /* Specify library files to be included in the compilation. */
     "resolveJsonModule": true,
-    "skipLibCheck": true,
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -84,8 +83,10 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
 
     /* Advanced Options */
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "importsNotUsedAsValues": "error"
   },
+  "include":["src","test"],
   "exclude": ["dist", "node_modules", "webpack.config.js"]
 }

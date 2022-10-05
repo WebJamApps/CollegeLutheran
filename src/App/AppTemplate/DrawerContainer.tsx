@@ -34,7 +34,7 @@ function NavLinks({
           <a href="tel:5403894963" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4963</a>
           <br />
           <span>fax: </span>
-          <a href="tel:5403894980" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4980</a>
+          (540) 389-4980
           <br />
           <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org">
             <span className="menu-hover">office1@collegelutheran.org</span>
