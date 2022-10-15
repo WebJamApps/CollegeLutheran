@@ -1,6 +1,6 @@
 {
   "name": "collegelutheran",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -9,8 +9,8 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=16.17.0 <17",
-    "npm": ">=8.15.0 <9"
+    "node": ">=16.18.0 <17",
+    "npm": ">=8.19.2 <9"
   },
   "files": [
     "webpack.config.js",

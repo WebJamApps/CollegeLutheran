@@ -1,7 +1,6 @@
-import React from 'react';
 import { shallow } from 'enzyme';
-import Stewardship from '../../src/containers/Stewardship/index';
-import DefaultContent from '../../src/containers/Stewardship/StewardshipContent';
+import Stewardship from 'src/containers/Stewardship/index';
+import DefaultContent from 'src/containers/Stewardship/StewardshipContent';
 
 function setup() {
   const props = {};

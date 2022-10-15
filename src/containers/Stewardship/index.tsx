@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultContent from './StewardshipContent';
 import commonUtils from '../../lib/commonUtils';
 
