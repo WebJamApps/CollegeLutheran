@@ -46,6 +46,13 @@ export const menuItems = [{
 {
   classname: '',
   type: 'link',
+  iconClass: 'fas fa-step-forward',
+  link: '/stewardship',
+  name: 'Stewardship',
+},
+{
+  classname: '',
+  type: 'link',
   iconClass: 'far fa-newspaper',
   link: '/news',
   name: 'News',
@@ -85,13 +92,6 @@ export const menuItems = [{
   link: '/family',
   name: 'Children & Families',
 },
-// {
-// classname: '',
-// type: 'link',
-// iconClass: 'fas fa-step-forward',
-// link: '/stewardship',
-// name: 'Stewardship',
-// },
 {
   classname: 'home',
   type: 'link',
