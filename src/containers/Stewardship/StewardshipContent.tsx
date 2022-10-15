@@ -19,7 +19,7 @@ const makeThermo = (classString:string, style: React.CSSProperties | undefined) 
             {' '}
             Here
             {' '}
-            to Make Your Commitment
+            to Make Your Statement of Intent
           </a>
         </i>
       </strong>
