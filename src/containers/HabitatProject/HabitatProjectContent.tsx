@@ -1,23 +1,8 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import { useEffect, useState } from 'react';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
-
-const images = [{
-  _id: '5e7273f7349ad8000410f761',
-  title: 'CLC Fellowship',
-  url: 'https://dl.dropboxusercontent.com/s/s1n4nxwc4pz3bml/CLC_Fellowship.png?dl=0',
-  type: 'habitat',
-  comments: '',
-},
-{
-  _id: '5e7273f7349ad8000410f762',
-  title: 'Psalm 127',
-  url: 'https://dl.dropboxusercontent.com/s/w4drwppxa9jrcmo/psalm127.jpg?dl=0',
-  type: 'habitat',
-  comments: '',
-},
-]; // 'showCaption' displays captions if needed'
 
 const HabitatGridItem = (props: { children: any; }) => {
   const { children } = props;
@@ -58,7 +43,7 @@ const AboutProject = () => (
     >
       CLC Habitat Project
     </h3>
-    <p style={{ textAlign: 'left' }}>
+    <div style={{ textAlign: 'left' }}>
       College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
       Roanoke Valley. This is the largest service project undertaken by the members of College
       Lutheran and we are delighted to be underway.
@@ -88,7 +73,7 @@ const AboutProject = () => (
           Lunch, water, tools are all provided.
         </li>
       </ul>
-    </p>
+    </div>
   </Grid>
 );
 
@@ -126,20 +111,23 @@ const VolunteerSignUp = () => (
   </Grid>
 );
 
-const SlideShow = () => (
-  <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
-    <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h4>
-    <PicSlider data={images} />
-    <p style={{ textAlign: 'center' }}>
-      For progression videos, please checkout our
-      {' '}
-      <a href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos" target="_blank" rel="noopener noreferrer">
-        YouTube channel
-      </a>
-      .
-    </p>
-  </Grid>
-);
+const SlideShow = ({ images }: { images:Ibook[] | null }) => {
+  if (!images) return null;
+  return (
+    <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
+      <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h4>
+      <PicSlider data={images} />
+      <p style={{ textAlign: 'center' }}>
+        For progression videos, please checkout our
+        {' '}
+        <a href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos" target="_blank" rel="noopener noreferrer">
+          YouTube channel
+        </a>
+        .
+      </p>
+    </Grid>
+  );
+};
 
 const ConstructionInfo = () => (
   <div>
@@ -197,45 +185,62 @@ const FamilyInfo = () => (
   </div>
 );
 
-const HabitatProjectContent = (): JSX.Element => (
-  <div className="page-content">
-    <Grid container>
+function getImagesFromStorage(setHabitatImages:(arg0: Ibook[] | null) => void) {
+  try {
+    const data = sessionStorage.getItem('persist:root');
+    const json = JSON.parse(data || '');
+    const { otherPics } = json;
+    const pics = JSON.parse(otherPics);
+    const images = pics.otherPics.filter((d:Ibook) => d.type === 'habitat');
+    setHabitatImages(images);
+  } catch (error) { console.log((error as Error).message); }
+}
 
-      {/* About the Habitat Project Section */}
-      <AboutProject />
+function HabitatProjectContent():JSX.Element {
+  const [habitatImages, setHabitatImages] = useState(null as Ibook[] | null);
+  useEffect(() => {
+    getImagesFromStorage(setHabitatImages);
+  }, []);
+  return (
+    <div className="page-content">
+      <Grid container>
 
-      {/* Volunteer Sign Ups Section */}
-      <VolunteerSignUp />
+        {/* About the Habitat Project Section */}
+        <AboutProject />
 
-      {/* Slideshow Section */}
-      <SlideShow />
+        {/* Volunteer Sign Ups Section */}
+        <VolunteerSignUp />
 
-      {/* Construction Team Section */}
-      <HabitatGridItem>
-        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Construction Team</h4>
-        <TeamLeaders>
-          <ConstructionInfo />
-        </TeamLeaders>
-      </HabitatGridItem>
+        {/* Slideshow Section */}
+        <SlideShow images={habitatImages} />
 
-      {/* Support Team Section */}
-      <HabitatGridItem>
-        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Support Team</h4>
-        <TeamLeaders>
-          <SupportInfo />
-        </TeamLeaders>
-      </HabitatGridItem>
+        {/* Construction Team Section */}
+        <HabitatGridItem>
+          <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Construction Team</h4>
+          <TeamLeaders>
+            <ConstructionInfo />
+          </TeamLeaders>
+        </HabitatGridItem>
 
-      {/* Family Team Section */}
-      <HabitatGridItem>
-        <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h4>
-        <TeamLeaders>
-          <FamilyInfo />
-        </TeamLeaders>
-      </HabitatGridItem>
+        {/* Support Team Section */}
+        <HabitatGridItem>
+          <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Support Team</h4>
+          <TeamLeaders>
+            <SupportInfo />
+          </TeamLeaders>
+        </HabitatGridItem>
 
-    </Grid>
-    <ELCALogo />
-  </div>
-);
+        {/* Family Team Section */}
+        <HabitatGridItem>
+          <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Family Team</h4>
+          <TeamLeaders>
+            <FamilyInfo />
+          </TeamLeaders>
+        </HabitatGridItem>
+
+      </Grid>
+      <ELCALogo />
+    </div>
+  );
+}
 export default HabitatProjectContent;
