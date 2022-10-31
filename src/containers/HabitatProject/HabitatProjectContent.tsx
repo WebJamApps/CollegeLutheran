@@ -1,25 +1,8 @@
 import { Grid } from '@material-ui/core';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Ibook } from 'src/redux/mapStoreToProps';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
-
-// const images = [{
-//   _id: '5e7273f7349ad8000410f761',
-//   title: 'CLC Fellowship',
-//   url: 'https://dl.dropboxusercontent.com/s/s1n4nxwc4pz3bml/CLC_Fellowship.png?dl=0',
-//   type: 'habitat',
-//   comments: '',
-// },
-// ];
-
-// const data = sessionStorage.getItem('otherPics');
-// const json = JSON.parse(data || '');
-// const { otherPics } = json;
-// const images = otherPics.filter(data);
-// if (otherPics) {
-//   otherPics.filter((b: any) => b.comments === 'habitat');
-// }
 
 const HabitatGridItem = (props: { children: any; }) => {
   const { children } = props;
@@ -209,7 +192,6 @@ function getImagesFromStorage(setHabitatImages:(arg0: Ibook[] | null) => void) {
     const { otherPics } = json;
     const pics = JSON.parse(otherPics);
     const images = pics.otherPics.filter((d:Ibook) => d.type === 'habitat');
-    console.log(images);
     setHabitatImages(images);
   } catch (error) { console.log((error as Error).message); }
 }
