@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { store } from 'react-notifications-component';
-import { act } from 'react-dom/test-utils';
-import { render } from 'react-dom';
+import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {
@@ -25,16 +24,8 @@ describe('fetch', () => {
       superagent,
     }, '/homePageContent', '');
   });
-  it('successfully runs fetchPost', () => {
-    Object.defineProperty(superagent, 'post', {
-      value: jest.fn(),
-    });
-    // const fakeData = [{
-    //   title: 'any',
-    //   comments: 'any',
-    //   type: 'any',
-    // }];
-
-    expect(superagent.post).toBeDefined();
+  it('successfully runs fetchPost', async () => {
+    r = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
+    expect(r).toBe('');
   });
 });
