@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { store } from 'react-notifications-component';
-import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
+import superagent from 'superagent';
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {
@@ -25,7 +25,7 @@ describe('fetch', () => {
     }, '/homePageContent', '');
   });
   it('successfully runs fetchPost', async () => {
-    r = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
-    expect(r).toBe('');
+    const { status } = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
+    expect(typeof status).toBe('number');
   });
 });
