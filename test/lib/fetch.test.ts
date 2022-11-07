@@ -6,7 +6,7 @@ import fetch from '../../src/lib/fetch';
 describe('fetch', () => {
   let r: any;
   it('catches error', async () => {
-    const myMock:any = jest.fn({ set: () => Promise.reject(new Error('bad')) });
+    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
     superagent.get = myMock;
     Object.defineProperty(store, 'addNotification', {
       writable: true,
@@ -20,7 +20,8 @@ describe('fetch', () => {
     expect(r).toBe(false);
   });
   it('catches error when fetching homePageContent', async () => {
-    superagent.get = jest.fn({ set: () => Promise.reject(new Error('bad')) });
+    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
+    superagent.get = myMock;
     r = await fetch.fetchGet({
       props: { dispatch: (fun: any) => expect(fun.data.title).toBe('') },
       superagent,
