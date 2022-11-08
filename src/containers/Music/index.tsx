@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import DefaultMusicContent from './MusicContent';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
@@ -14,5 +13,5 @@ export const Music = ({ musicPics }: MusicProps): JSX.Element => {
 };
 
 Music.defaultProps = { musicPics: [] };
-
-export default connect(mapStoreToProps, null)(Music);
+// TODO remove usage of connect here
+export default connect(mapStoreToProps, null)(Music as any);

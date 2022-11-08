@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import superagent from 'superagent';
 import fetch from '../../src/lib/fetch';
 
@@ -8,11 +8,11 @@ describe('fetch', () => {
   it('catches error', async () => {
     const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
     superagent.get = myMock;
-    Object.defineProperty(store, 'addNotification', {
+    Object.defineProperty(Store, 'addNotification', {
       writable: true,
       value: jest.fn(),
     });
-    expect(store.addNotification).toBeDefined();
+    expect(Store.addNotification).toHaveBeenCalled();
     r = await fetch.fetchGet({
       props: { dispatch: (fun: any) => fun },
       superagent,
