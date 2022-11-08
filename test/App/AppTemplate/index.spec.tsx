@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { shallow } from 'enzyme';
-import { AppTemplate } from '../../../src/App/AppTemplate';
+import { AppTemplate } from 'src/App/AppTemplate';
 // import authUtils from '../../src/App/authUtils';
 // import type { MenuItem } from '../../src/App/menuItems';
 
@@ -9,22 +7,6 @@ const dFunc = () => { };
 let anyProp: any = {};
 const location: any = { pathname: '/' };
 const books:any = [];
-function setup() {
-  const props = { children: '<div></div>' };
-  document.body.innerHTML = '<div class="page-content"></div>';
-  const wrapper = shallow<AppTemplate>(
-    <AppTemplate
-      books={books}
-      match={anyProp}
-      history={anyProp}
-      dispatch={dFunc}
-      location={location}
-    >
-      <div />
-    </AppTemplate>,
-  );
-  return { wrapper, props };
-}
 
 describe('AppTemplate', () => {
   // it('renders the component', () => {
@@ -80,20 +62,7 @@ describe('AppTemplate', () => {
   //   const result = aT.close();
   //   expect(result).toBe(true);
   // });
-  it('toggles the mobile menu', () => {
-    const { wrapper } = setup();
-    wrapper.instance().setState = jest.fn();
-    wrapper.update();
-    wrapper.instance().toggleMobileMenu();
-    expect(wrapper.instance().setState).toHaveBeenCalled();
-  });
-  // it('closes the mobile menu on clicking escape key', () => {
-  //   anyProp = { dispatch: () => Promise.resolve(true) };
-  //   const aT = new AppTemplate(anyProp);
-  //   aT.setState = jest.fn(() => true);
-  //   const result = aT.handleKeyPress({ key: 'Escape' });
-  //   expect(result).toBe(true);
-  // });
+
   // it('does not closes the mobile menu on clicking Enter key', () => {
   //   anyProp = { dispatch: () => Promise.resolve(true) };
   //   const aT = new AppTemplate(anyProp);
