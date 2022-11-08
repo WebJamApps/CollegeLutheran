@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import parser from 'html-react-parser';
@@ -15,7 +15,6 @@ interface Pprops {
   youthPics: Ibook[],
   otherPics: Ibook[],
   musicPics: Ibook[],
-  // habitatPics: Ibook[]
 }
 interface Pstate {
   columns: MUIDataTableColumnDef[]
@@ -77,7 +76,7 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
         res = await this.superagent.delete(`${process.env.BackendUrl}/book/${id}`)
           .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json');
       } catch (e) {
-        store.addNotification({
+        Store.addNotification({
           title: id,
           message: 'Failed to Delete Photo',
           type: 'warning',
@@ -158,5 +157,5 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
     );
   }
 }
-
-export default connect(mapStoreToProps, null)(PhotoTable);
+// TODO remove usage of connect here
+export default connect(mapStoreToProps, null)(PhotoTable as any);

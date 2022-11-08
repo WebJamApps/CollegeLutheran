@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { Editor } from '@tinymce/tinymce-react';
 import type { InputParams } from '../../lib/forms';
@@ -30,7 +30,7 @@ class AdminController {
   }
 
   warnNotif(id: string, message: string): void {
-    store.addNotification({
+    Store.addNotification({
       title: id,
       message,
       type: 'warning',
