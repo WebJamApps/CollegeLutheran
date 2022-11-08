@@ -8,11 +8,7 @@ describe('fetch', () => {
   it('catches error', async () => {
     const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
     superagent.get = myMock;
-    Object.defineProperty(Store, 'addNotification', {
-      writable: true,
-      value: jest.fn(),
-    });
-    expect(Store.addNotification).toHaveBeenCalled();
+    Store.addNotification = jest.fn();
     r = await fetch.fetchGet({
       props: { dispatch: (fun: any) => fun },
       superagent,
@@ -28,6 +24,10 @@ describe('fetch', () => {
     }, '/homePageContent', '');
   });
   it('successfully runs fetchPost', async () => {
+    const myMock:any = jest.fn(() => (
+      { set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }
+    ));
+    superagent.post = myMock;
     const { status } = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
     expect(typeof status).toBe('number');
   });
