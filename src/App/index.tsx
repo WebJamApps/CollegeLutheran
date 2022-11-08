@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import { Component } from 'react';
+import { Component, Dispatch } from 'react';
 import {
   BrowserRouter as Router, Redirect, Route, Switch,
 } from 'react-router-dom';
@@ -20,11 +20,14 @@ import AppTemplateDefault from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import Stewardship from '../containers/Stewardship';
 import DefaultLiveStream from '../containers/LiveStream';
-import mapStoreToProps from '../redux/mapStoreToProps';
+import mapStoreToProps, { Auth } from '../redux/mapStoreToProps';
 import fetch from '../lib/fetch';
-import type { AppProps } from './AppTypes';
 import HabitatProject from '../containers/HabitatProject';
 
+interface AppProps {
+  dispatch: Dispatch<unknown>,
+  auth: Auth
+}
 export class App extends Component<AppProps> {
   fetch: typeof fetch;
 
