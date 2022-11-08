@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component, Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
-import Forms from '../../lib/forms';
+import Forms from 'src/lib/forms';
+import CommonUtils from 'src/lib/commonUtils';
+import PTable from 'src/components/PhotoTable';
+import YouthPageEditor from 'src/components/YouthPageEditor';
+import AdminUserForm from 'src/components/AdminUserForm';
 import AdminController from './AdminController';
-import CommonUtils from '../../lib/commonUtils';
-import PTable from '../../components/PhotoTable';
-import YouthPageEditor from '../../components/YouthPageEditor';
-import AdminUserForm from '../../components/AdminUserForm';
+import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import { EditPic } from './EditPic';
 
 export interface PicData {
@@ -225,6 +226,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         {this.controller.addForumForm()}
         <EditPic editPic={editPic} auth={auth} dispatch={dispatch} />
         {showTable ? (
+          // @ts-ignore
           <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
         ) : null}
         <YouthPageEditor comp={this} youthContent={youthContent} youthTitle={youthTitle} makeInput={this.forms.makeInput} />
@@ -233,5 +235,6 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
     );
   }
 }
-
+// TODO remove usage of connect here
+// @ts-ignore
 export default withRouter(connect(mapStoreToProps, null)(AdminDashboard));

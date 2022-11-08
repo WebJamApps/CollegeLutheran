@@ -1,5 +1,5 @@
 import type { Dispatch } from 'react';
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
@@ -16,7 +16,7 @@ const fetchGet = async (view:
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
-    store.addNotification({
+    Store.addNotification({
       title: `${reducer}`,
       message: 'Message Failed to Get the Information',
       type: 'warning',

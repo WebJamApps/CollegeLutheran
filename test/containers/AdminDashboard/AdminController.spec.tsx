@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AdminController from '../../../src/containers/AdminDashboard/AdminController';
+import AdminController from 'src/containers/AdminDashboard/AdminController';
+import { Store } from 'react-notifications-component';
 
 describe('AdminController', () => {
   let r: any, controller: any,
@@ -35,15 +36,7 @@ describe('AdminController', () => {
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error on delete book request to the backend', async () => {
-    jest.mock('react-notifications-component');
-    const { store } = jest.requireActual('react-notifications-component');
-    expect(store.addNotification).toBeDefined();
-    Object.defineProperty(store, 'addNotification', {
-      writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        addNotification: jest.fn(),
-      })),
-    });
+    Store.addNotification = jest.fn();
     global.confirm = jest.fn(() => true);
     controller.superagent.delete = jest.fn(() => ({ set: () => ({ set: () => Promise.reject(new Error('bad')) }) }));
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');
@@ -61,42 +54,6 @@ describe('AdminController', () => {
     r = await controller.deleteBookApi({ preventDefault: () => { } }, '123', '/news');
     expect(r).toBe(false);
   });
-  // it('sends an create pic request to the backend', async () => {
-  //   controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
-  //   Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
-  //   window.location.assign = jest.fn();
-  //   r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-  //   expect(r).toBe('201');
-  //   expect(window.location.assign).toHaveBeenCalled();
-  // });
-  // it('catches error when sends create pic request to the backend', async () => {
-  //   controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-  //   const res = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-  //   expect(res).toBe('bad');
-  // });
-  // it('handles 300 res from sending create pic request to the backend', async () => {
-  //   controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-  //   r = await controller.createPicApi({ preventDefault: () => { } }, {}, '/youth');
-  //   expect(r).toBe('Did not create book');
-  // });
-  // it('sends an edit pic request to the backend', async () => {
-  //   controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }));
-  //   Object.defineProperty(window, 'location', { value: { reload: () => { } }, writable: true });
-  //   window.location.reload = jest.fn();
-  //   r = await controller.editPicAPI({ preventDefault: () => { } });
-  //   expect(r).toBe(true);
-  //   expect(window.location.reload).toHaveBeenCalled();
-  // });
-  // it('catches error when sends edit pic request to the backend', async () => {
-  //   controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
-  //   r = await controller.editPicAPI({ preventDefault: () => { } });
-  //   expect(r).toBe(false);
-  // });
-  // it('handles 300 res from sending edit pic request to the backend', async () => {
-  //   controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 300 }) }) }) }));
-  //   r = await controller.editPicAPI({ preventDefault: () => { } });
-  //   expect(r).toBe(false);
-  // });
   it('sends an add forum request to the backend', async () => {
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 201 }) }) }) }));
     Object.defineProperty(window, 'location', { value: { assign: () => { } }, writable: true });
@@ -106,6 +63,7 @@ describe('AdminController', () => {
     expect(window.location.assign).toHaveBeenCalled();
   });
   it('catches error when sends add forum request to the backend', async () => {
+    Store.addNotification = jest.fn();
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     r = await controller.addForumAPI({ preventDefault: () => { } }, {}, '/youth');
     expect(r).toBe(false);
@@ -124,6 +82,7 @@ describe('AdminController', () => {
     expect(dis).toBe(false);
   });
   it('catches error when sends an add admin request to the backend', async () => {
+    Store.addNotification = jest.fn();
     controller.superagent.post = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     controller.superagent.put = jest.fn(() => ({ set: () => ({ set: () => ({ send: () => Promise.reject(new Error('bad')) }) }) }));
     const res = await controller.addAdminUser({ preventDefault: () => { } });

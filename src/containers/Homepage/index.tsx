@@ -71,5 +71,5 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
     );
   }
 }
-
-export default connect(mapStoreToProps, null)(withResizeDetector(Homepage));
+// TODO remove usage of connect here
+export default connect(mapStoreToProps, null)(withResizeDetector(Homepage) as any);

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 import Caption from './caption';
-import type { Ibook } from '../../redux/mapStoreToProps';
 
 type SettingsType = {
   autoplay: boolean;
