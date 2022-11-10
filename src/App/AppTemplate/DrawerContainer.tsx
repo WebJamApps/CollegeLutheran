@@ -1,4 +1,3 @@
-import React from 'react';
 import { MenuItem } from './MenuItem';
 import { menuItems } from './menuItems';
 
@@ -8,7 +7,7 @@ interface CurrentStyles {
   sidebarImagePath: string
 }
 
-function handleKeyPress(evt: { key: string; }, setMenuOpen:(arg0:boolean) => void): (void | null) {
+export function handleKeyPress(evt: { key: string; }, setMenuOpen:(arg0:boolean) => void): (void | null) {
   if (evt.key === 'Escape') return setMenuOpen(false);
   return null;
 }

@@ -17,5 +17,5 @@ export function News(props: { books: Ibook[] }): JSX.Element {
   });
   return <DefaultNewsContent books={books} />;
 }
-
-export default connect(mapStoreToProps, null)(News);
+// TODO remove usage of connect here
+export default connect(mapStoreToProps, null)(News as any);

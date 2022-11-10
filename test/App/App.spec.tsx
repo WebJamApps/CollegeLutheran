@@ -1,6 +1,5 @@
-import React from 'react';
 import { shallow } from 'enzyme';
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import { App } from '../../src/App';
 import type { Auth } from '../../src/redux/mapStoreToProps';
 
@@ -10,11 +9,11 @@ describe('App component', () => {
   };
   const wrapper = shallow<App>(<App dispatch={jest.fn()} auth={auth} />);
   it('renders the component', () => {
-    Object.defineProperty(store, 'addNotification', {
+    Object.defineProperty(Store, 'addNotification', {
       writable: true,
       value: jest.fn(),
     });
-    expect(store.addNotification).toBeDefined();
+    expect(Store.addNotification).toBeDefined();
     expect(wrapper.find('div#App').exists()).toBe(true);
   });
   it('does not fetch the images or songs if they already exist', () => {

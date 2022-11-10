@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { shallow, ShallowWrapper, HTMLAttributes } from 'enzyme';
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 import { PhotoTable } from '../../src/components/PhotoTable';
 
 describe('PhotoTable', () => {
@@ -82,7 +81,7 @@ describe('PhotoTable', () => {
     expect(r).toBe('304 undefined');
   });
   it('runs the deletePic api but catches error', async () => {
-    Object.defineProperty(store, 'addNotification', {
+    Object.defineProperty(Store, 'addNotification', {
       writable: true,
       value: jest.fn(),
     });

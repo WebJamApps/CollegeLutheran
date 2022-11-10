@@ -14,5 +14,5 @@ export const Family = ({ familyPics }: FamilyProps): JSX.Element => {
 };
 
 Family.defaultProps = { familyPics: [] };
-
-export default connect(mapStoreToProps, null)(Family);
+// TODO remove usage of connect here
+export default connect(mapStoreToProps, null)(Family as any);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -35,7 +36,6 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
   }
 
   toggleMobileMenu(): void {
-    console.log('toggleMobileMenu');
     const { menuOpen } = this.state;
     const mO = !menuOpen;
     this.setState({ menuOpen: mO });
@@ -60,5 +60,6 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
     );
   }
 }
-
+// TODO remove usage of connect here
+// @ts-ignore
 export default withRouter(connect(mapStoreToProps, null)(AppTemplate));

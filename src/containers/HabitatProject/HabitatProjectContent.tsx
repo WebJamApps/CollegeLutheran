@@ -111,7 +111,7 @@ const VolunteerSignUp = () => (
   </Grid>
 );
 
-const SlideShow = ({ images }: { images:Ibook[] | null }) => {
+export const SlideShow = ({ images }: { images:Ibook[] | null }) => {
   if (!images) return null;
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
