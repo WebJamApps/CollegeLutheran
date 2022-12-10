@@ -1,6 +1,5 @@
 import { createContext, ReactChild, useEffect } from 'react';
 import createPersistedState from 'use-persisted-state';
-// import fetch from 'src/lib/fetch';
 import axios from 'axios';
 
 export interface Ipicture {
@@ -27,8 +26,12 @@ export interface Ipicture {
 
 const populatePictures = async (setPictures: any) => {
   const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
-  const pictures = { musicPics };
-  // console.log(pictures);
+  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+  const { data: youthPics } = await axios.get(`${process.env.BackendURL}/book?type=youthPics`);
+  const { data: habitatPics } = await axios.get(`${process.env.BackendURL}/book?type=habitatPics`);
+  const { data: otherPics } = await axios.get(`${process.env.BackendURL}/book?type=otherPics`);
+  const pictures = [{ musicPics }, { familyPics }, { youthPics }, { habitatPics }, { otherPics }];
+  console.log(pictures);
   setPictures(pictures);
 };
 
