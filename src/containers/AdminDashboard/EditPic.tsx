@@ -4,7 +4,8 @@ import superagent from 'superagent';
 import {
   FormControl, InputLabel, Select, MenuItem,
 } from '@material-ui/core';
-import type { Ibook } from '../../redux/mapStoreToProps';
+import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+// import type { Ibook } from '../../redux/mapStoreToProps';
 import utils from './utils';
 
 async function editPicAPI(body: any, editPic: any, auth: any, dispatch: Dispatch<unknown>, setPicBody: any): Promise<boolean> {
@@ -73,7 +74,7 @@ const PicButton = (props: IpicButtonProps) => {
 };
 
 interface ImakeDropdownProps {
-  editPic: Ibook,
+  editPic: Ipicture,
   picBody: any,
   onChange: (arg0: any) => void,
 }
@@ -93,7 +94,7 @@ function MakeDropdown(props: ImakeDropdownProps): JSX.Element {
         <MenuItem value="youthPics">Youth Pics</MenuItem>
         <MenuItem value="familyPics">Family Pics</MenuItem>
         <MenuItem value="musicPics">Music Pics</MenuItem>
-        <MenuItem value="habitat">Habitat</MenuItem>
+        <MenuItem value="habitatPics">Habitat</MenuItem>
         <MenuItem value="otherPics">Other Pics</MenuItem>
       </Select>
     </FormControl>
@@ -101,7 +102,7 @@ function MakeDropdown(props: ImakeDropdownProps): JSX.Element {
 }
 
 interface IradioButtonsProps {
-  editPic: Ibook, comments: string, onChange: (...args: any) => void
+  editPic: Ipicture, comments: string, onChange: (...args: any) => void
 }
 const RadioButtons = (props: IradioButtonsProps) => {
   const { comments, onChange, editPic } = props;
@@ -139,7 +140,7 @@ const RadioButtons = (props: IradioButtonsProps) => {
 };
 
 interface IeditPicProps {
-  editPic: Ibook,
+  editPic: Ipicture,
   auth: any, dispatch: Dispatch<unknown>
 }
 export function EditPic(props: IeditPicProps): JSX.Element {
