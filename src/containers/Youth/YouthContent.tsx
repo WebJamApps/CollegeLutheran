@@ -1,8 +1,12 @@
+import { useContext } from 'react';
+import { PictureContext } from 'src/Providers/PicsProvider';
 import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
 import type { YouthProps } from './index';
 
-export function YouthContent({ youthPics, youthContent }: YouthProps) {
+export const YouthContent = ({ youthContent }: YouthProps): JSX.Element => {
+  const { pictures } = useContext(PictureContext);
+  const { youthPics = [] } = pictures;
   return (
     <div className="page-content">
       <div id="youthSlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -68,4 +72,4 @@ export function YouthContent({ youthPics, youthContent }: YouthProps) {
       </div>
     </div>
   );
-}
+};

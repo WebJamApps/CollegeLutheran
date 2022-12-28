@@ -1,15 +1,16 @@
-import type { Ibook } from '../mapStoreToProps';
+// import type { Ibook } from '../mapStoreToProps';
+import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
 
 interface IMusicReducer {
   type: string;
-  data?: Ibook[];
+  data?: Ipicture[];
 }
 
 const initialState = {
   musicPics: [],
 };
 
-const reducer = (state = initialState, action: IMusicReducer): { musicPics: Ibook[] } => {
+const reducer = (state = initialState, action: IMusicReducer): { musicPics: Ipicture[] } => {
   const musicArray = Array.isArray(action.data) ? action.data.reverse() : [];
   switch (action.type) {
     case 'GOT_MUSICPICS':

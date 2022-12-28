@@ -23,22 +23,21 @@ export interface Ipicture {
   checkedOutBy?: string,
   checkedOutByName?: string,
 }
-
-const populatePictures = async (setPictures: any) => {
-  const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
-  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
-  const { data: youthPics } = await axios.get(`${process.env.BackendURL}/book?type=youthPics`);
-  const { data: habitatPics } = await axios.get(`${process.env.BackendURL}/book?type=habitatPics`);
-  const { data: otherPics } = await axios.get(`${process.env.BackendURL}/book?type=otherPics`);
-  const pictures = [{ musicPics }, { familyPics }, { youthPics }, { habitatPics }, { otherPics }];
-  console.log(pictures);
-  setPictures(pictures);
-};
-
 export interface IpictureTypes {
   musicPics: Ipicture[], familyPics: Ipicture[], youthPics: Ipicture[],
   habitatPics: Ipicture[], otherPics: Ipicture[],
 }
+const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+  const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
+  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+  const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
+  const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
+  const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+  const pictures = {
+    musicPics, familyPics, youthPics, habitatPics, otherPics,
+  };
+  setPictures(pictures);
+};
 
 const usePictureState: (arg0: IpictureTypes) =>
 [IpictureTypes, (arg0: IpictureTypes) => void] = createPersistedState('pictures', sessionStorage);

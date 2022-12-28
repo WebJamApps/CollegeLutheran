@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminDashboard } from '../../../src/containers/AdminDashboard';
 import { PhotoTable } from '../../../src/components/PhotoTable';
@@ -36,6 +35,7 @@ describe('Dashboard Container', () => {
       familyPics={[]}
       otherPics={[]}
       musicPics={[]}
+      habitatPics={[]}
       youthContent={youthContent}
     />);
   });
@@ -116,6 +116,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       musicPics={props.musicPics}
+      habitatPics={props.habitatPics}
       homeContent={props.homeContent}
       editPic={editPic2}
       history={history}
@@ -139,6 +140,7 @@ describe('Dashboard Container', () => {
       familyPics={props.familyPics}
       otherPics={props.otherPics}
       musicPics={props.musicPics}
+      habitatPics={props.habitatPics}
       homeContent={props.homeContent}
       editPic={editPic2}
       history={history}
@@ -173,6 +175,7 @@ describe('Dashboard Container', () => {
       youthPics={props.youthPics}
       familyPics={props.familyPics}
       musicPics={props.musicPics}
+      habitatPics={props.habitatPics}
       otherPics={props.otherPics}
       homeContent={props.homeContent || ''}
       editPic={editPic2}

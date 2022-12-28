@@ -6,25 +6,23 @@ import parser from 'html-react-parser';
 import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
-import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
-// import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
+import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
 
-interface IpictureTypes {
+interface Pprops {
   dispatch: Dispatch<unknown>,
   auth: { token: string },
-  familyPics: Ipicture[],
-  youthPics: Ipicture[],
-  otherPics: Ipicture[],
-  musicPics: Ipicture[],
-  habitatPics: Ipicture[],
+  familyPics: Ibook[],
+  youthPics: Ibook[],
+  otherPics: Ibook[],
+  musicPics: Ibook[],
 }
 interface Pstate {
   columns: MUIDataTableColumnDef[]
 }
-export class PhotoTable extends React.Component<IpictureTypes, Pstate> {
+export class PhotoTable extends React.Component<Pprops, Pstate> {
   superagent: superagent.SuperAgentStatic;
 
-  constructor(props: Readonly<IpictureTypes>) {
+  constructor(props: Readonly<Pprops>) {
     super(props);
     this.superagent = superagent;
     this.setColumns = this.setColumns.bind(this);
@@ -96,7 +94,7 @@ export class PhotoTable extends React.Component<IpictureTypes, Pstate> {
     return 'no delete';
   }
 
-  editPic(picData: Ipicture): boolean {
+  editPic(picData: Ibook): boolean {
     const { dispatch } = this.props;
     // eslint-disable-next-line no-param-reassign
     delete picData.modify;
@@ -104,7 +102,7 @@ export class PhotoTable extends React.Component<IpictureTypes, Pstate> {
     return true;
   }
 
-  addThumbs(arr: Ipicture[]): Ipicture[] {
+  addThumbs(arr: Ibook[]): Ibook[] {
     const newArr = arr;/* eslint-disable security/detect-object-injection */
     for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
       newArr[i].thumbnail = `<img src=${arr[i].url} width="200px"/>`;
@@ -130,9 +128,9 @@ export class PhotoTable extends React.Component<IpictureTypes, Pstate> {
   render(): JSX.Element {
     const { columns } = this.state;
     const {
-      familyPics, youthPics, otherPics, musicPics, habitatPics,
+      familyPics, youthPics, otherPics, musicPics,
     } = this.props;
-    let arr: Ipicture[] = familyPics.concat(youthPics).concat(musicPics).concat(habitatPics);
+    let arr: Ibook[] = familyPics.concat(youthPics).concat(musicPics);
     arr = arr.concat(otherPics); arr = this.addThumbs(arr);
     return (
       <div className="photoTable">
