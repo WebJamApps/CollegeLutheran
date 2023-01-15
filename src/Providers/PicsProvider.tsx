@@ -43,7 +43,13 @@ const usePictureState: (arg0: IpictureTypes) =>
 [IpictureTypes, (arg0: IpictureTypes) => void] = createPersistedState('pictures', sessionStorage);
 
 export const PictureContext = createContext({
-  pictures: {} as IpictureTypes,
+  pictures: {
+    musicPics: [],
+    familyPics: [],
+    youthPics: [],
+    habitatPics: [],
+    otherPics: [],
+  } as IpictureTypes,
   setPictures: (_arg0: IpictureTypes) => { },
   getPictures: () => Promise.resolve(),
 });

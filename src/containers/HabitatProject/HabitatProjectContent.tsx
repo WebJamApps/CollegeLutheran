@@ -114,7 +114,7 @@ const VolunteerSignUp = () => (
 
 export const SlideShow = (): JSX.Element => {
   const { pictures } = useContext(PictureContext);
-  const { habitatPics } = pictures;
+  const { habitatPics = [] } = pictures;
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
       <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h4>
@@ -199,10 +199,6 @@ const FamilyInfo = () => (
 // }
 
 function HabitatProjectContent():JSX.Element {
-  // const [habitatImages, setHabitatImages] = useState(null as Ibook[] | null);
-  // useEffect(() => {
-  //   getImagesFromStorage(setHabitatImages);
-  // }, []);
   return (
     <div className="page-content">
       <Grid container>
