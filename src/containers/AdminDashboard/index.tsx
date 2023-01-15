@@ -9,7 +9,7 @@ import YouthPageEditor from 'src/components/YouthPageEditor';
 import AdminUserForm from 'src/components/AdminUserForm';
 import AdminController from './AdminController';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
-import { EditPic } from './EditPic';
+// import { EditPic } from './EditPic';
 
 export interface PicData {
   buttonId: string; buttonClick: (e: React.ChangeEvent<EventTarget>) => Promise<string>; title: string; nameId: string;
@@ -225,7 +225,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         {this.controller.addForumForm()}
-        <EditPic editPic={editPic} auth={auth} dispatch={dispatch} />
+        {/* <EditPic editPic={editPic} auth={auth} dispatch={dispatch} /> */}
         {/* {showTable ? (
           // @ts-ignore
           // eslint-disable-next-line max-len
