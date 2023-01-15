@@ -50,7 +50,7 @@ export const PictureContext = createContext({
     habitatPics: [],
     otherPics: [],
   } as IpictureTypes,
-  setPictures: (_arg0: IpictureTypes) => { },
+  setPictures: (_arg0: IpictureTypes) => {},
   getPictures: () => Promise.resolve(),
 });
 
