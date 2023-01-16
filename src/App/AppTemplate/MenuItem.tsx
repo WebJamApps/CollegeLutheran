@@ -6,7 +6,7 @@ import { MakeMenuLink } from './MakeMenuLink';
 import type { ImenuItem } from './menuItems';
 import { GoogleButtons } from './GoogleButtons';
 
-const sortBulletins = (bulletin: Ibook[]) => {
+export const sortBulletins = (bulletin: Ibook[]) => {
   const sortedBulletins = bulletin.sort((a, b) => {
     if (a.created_at && b.created_at) {
       const aTime = new Date(a.created_at).getTime();
