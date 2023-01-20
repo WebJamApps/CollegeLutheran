@@ -1,4 +1,4 @@
-import type { Ibook } from '../redux/mapStoreToProps';
+import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
 import type { Homepage } from '../containers/Homepage/index';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {
@@ -13,12 +13,13 @@ const setTitleAndScroll = (pageTitle: string, width?: number): void => {
 async function randomizePics(view: Homepage, delay: () => Promise<void>): Promise<void> {
   await delay();
   const {
-    familyPics, youthPics, otherPics, musicPics,
+    familyPics, youthPics, otherPics, musicPics, habitatPics,
   } = view.props;
-  let arr: Ibook[] | never[] = familyPics || [];
-  const arr2: Ibook[] = youthPics || [];
-  const arr3: Ibook[] = musicPics || [];
-  arr = arr.concat(otherPics || []).concat(arr2).concat(arr3);
+  let arr: Ipicture[] | never[] = familyPics || [];
+  const arr2: Ipicture[] = youthPics || [];
+  const arr3: Ipicture[] = musicPics || [];
+  const arr4: Ipicture[] = habitatPics || [];
+  arr = arr.concat(otherPics || []).concat(arr2).concat(arr3).concat(arr4);
 
   for (let i = arr.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));

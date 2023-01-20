@@ -1,9 +1,10 @@
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
-import About from './About';
+import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
-import NarrowFacebookFeed from './NarrowFacebookFeed';
+import { FacebookFeed } from './NarrowFacebookFeed';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 import ELCALogo from '../../components/elcaLogo';
@@ -13,14 +14,15 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
-  familyPics?: Ibook[];
-  youthPics?: Ibook[];
-  otherPics?: Ibook[];
-  musicPics?: Ibook[];
+  familyPics?: Ipicture[];
+  youthPics?: Ipicture[];
+  otherPics?: Ipicture[];
+  musicPics?: Ipicture[];
+  habitatPics?: Ipicture[];
 };
 
 interface HomepageState {
-  picsState: Ibook[];
+  picsState: Ipicture[];
   homeContent?: Ibook;
 }
 
@@ -51,7 +53,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
         {width >= 900
           ? (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -59,10 +61,10 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
           )
           : (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <NarrowFacebookFeed allPics={picsState} />
+              <FacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}

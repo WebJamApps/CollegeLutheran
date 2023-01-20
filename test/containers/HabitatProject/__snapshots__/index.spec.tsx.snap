@@ -138,6 +138,68 @@ exports[`Habitat Project Renders DefaultHabitatContent 1`] = `
           }
         }
       >
+        Progression Slideshow
+      </h4>
+      <div>
+        <div
+          className="slick-slider slick-initialized"
+        >
+          
+          <div
+            className="slick-list"
+          >
+            <div
+              className="slick-track"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          
+          
+        </div>
+      </div>
+      <p
+        style={
+          {
+            "textAlign": "center",
+          }
+        }
+      >
+        For progression videos, please checkout our
+         
+        <a
+          href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YouTube channel
+        </a>
+        .
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      style={
+        {
+          "paddingInline": "20px",
+        }
+      }
+    >
+      <h4
+        style={
+          {
+            "paddingBottom": "15px",
+            "paddingTop": "22px",
+            "textAlign": "center",
+          }
+        }
+      >
         Construction Team
       </h4>
       <div
@@ -453,6 +515,68 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
           </p>
         </div>
       </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      style={
+        {
+          "paddingInline": "20px",
+        }
+      }
+    >
+      <h4
+        style={
+          {
+            "paddingBottom": "15px",
+            "paddingTop": "22px",
+            "textAlign": "center",
+          }
+        }
+      >
+        Progression Slideshow
+      </h4>
+      <div>
+        <div
+          className="slick-slider slick-initialized"
+        >
+          
+          <div
+            className="slick-list"
+          >
+            <div
+              className="slick-track"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          
+          
+        </div>
+      </div>
+      <p
+        style={
+          {
+            "textAlign": "center",
+          }
+        }
+      >
+        For progression videos, please checkout our
+         
+        <a
+          href="https://www.youtube.com/channel/UCOra1rXiO-BHzMDNlLd9hFQ/videos"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YouTube channel
+        </a>
+        .
+      </p>
     </div>
     <div
       className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"

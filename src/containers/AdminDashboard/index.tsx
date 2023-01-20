@@ -4,12 +4,12 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Forms from 'src/lib/forms';
 import CommonUtils from 'src/lib/commonUtils';
-import PTable from 'src/components/PhotoTable';
+// import PTable from 'src/components/PhotoTable';
 import YouthPageEditor from 'src/components/YouthPageEditor';
 import AdminUserForm from 'src/components/AdminUserForm';
 import AdminController from './AdminController';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
-import { EditPic } from './EditPic';
+// import { EditPic } from './EditPic';
 
 export interface PicData {
   buttonId: string; buttonClick: (e: React.ChangeEvent<EventTarget>) => Promise<string>; title: string; nameId: string;
@@ -25,6 +25,7 @@ export interface DashboardProps extends RouteComponentProps {
   familyPics: Ibook[];
   otherPics: Ibook[];
   musicPics: Ibook[];
+  habitatPics: Ibook[];
   youthContent: Ibook;
 }
 type DashboardState = {
@@ -216,7 +217,7 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
 
   render(): JSX.Element {
     const {
-      showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics, editPic,
+      showTable, auth, dispatch, youthPics, familyPics, otherPics, musicPics, habitatPics, editPic,
     } = this.props;
     const { youthTitle, youthContent } = this.state;
     return (
@@ -224,11 +225,13 @@ export class AdminDashboard extends Component<DashboardProps, DashboardState> {
         <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
         {this.changeHomepage()}
         {this.controller.addForumForm()}
-        <EditPic editPic={editPic} auth={auth} dispatch={dispatch} />
-        {showTable ? (
+        {/* <EditPic editPic={editPic} auth={auth} dispatch={dispatch} /> */}
+        {/* {showTable ? (
           // @ts-ignore
-          <PTable auth={auth} dispatch={dispatch} youthPics={youthPics} familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} />
-        ) : null}
+          // eslint-disable-next-line max-len
+          // <PTable auth={auth} dispatch={dispatch} youthPics={youthPics}
+          familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} habitatPics={habitatPics} />
+        ) : null} */}
         <YouthPageEditor comp={this} youthContent={youthContent} youthTitle={youthTitle} makeInput={this.forms.makeInput} />
         <AdminUserForm comp={this} />
       </div>

@@ -57,7 +57,8 @@ export class App extends Component<AppProps> {
     this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
     this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
     this.fetch.fetchGet(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
-    this.fetch.fetchGet(this, 'book?type=otherPics&type=habitat', 'GOT_OTHERPICS');
+    this.fetch.fetchGet(this, 'book?type=habitat', 'GOT_HABITATPICS');
+    this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
     this.fetch.fetchGet(this, 'book?type=musicPics', 'GOT_MUSICPICS');
   }
 

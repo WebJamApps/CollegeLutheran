@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import {
   FormControl, InputLabel, Select, MenuItem,
 } from '@material-ui/core';
+// import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
 import type { Ibook } from '../../redux/mapStoreToProps';
 import utils from './utils';
 

@@ -1,5 +1,6 @@
 import { Grid } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { PictureContext } from 'src/Providers/PicsProvider';
 import type { Ibook } from 'src/redux/mapStoreToProps';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
@@ -111,12 +112,13 @@ const VolunteerSignUp = () => (
   </Grid>
 );
 
-export const SlideShow = ({ images }: { images:Ibook[] | null }) => {
-  if (!images) return null;
+export const SlideShow = (): JSX.Element => {
+  const { pictures } = useContext(PictureContext);
+  const { habitatPics = [] } = pictures;
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
       <h4 style={{ paddingBottom: '15px', paddingTop: '22px', textAlign: 'center' }}>Progression Slideshow</h4>
-      <PicSlider data={images} />
+      <PicSlider data={habitatPics} />
       <p style={{ textAlign: 'center' }}>
         For progression videos, please checkout our
         {' '}
@@ -185,22 +187,18 @@ const FamilyInfo = () => (
   </div>
 );
 
-function getImagesFromStorage(setHabitatImages:(arg0: Ibook[] | null) => void) {
-  try {
-    const data = sessionStorage.getItem('persist:root');
-    const json = JSON.parse(data || '');
-    const { otherPics } = json;
-    const pics = JSON.parse(otherPics);
-    const images = pics.otherPics.filter((d:Ibook) => d.type === 'habitat');
-    setHabitatImages(images);
-  } catch (error) { console.log((error as Error).message); }
-}
+// function getImagesFromStorage(setHabitatImages:(arg0: Ibook[] | null) => void) {
+//   try {
+//     const data = sessionStorage.getItem('persist:root');
+//     const json = JSON.parse(data || '');
+//     const { otherPics } = json;
+//     const pics = JSON.parse(otherPics);
+//     const images = pics.otherPics.filter((d:Ibook) => d.type === 'habitat');
+//     setHabitatImages(images);
+//   } catch (error) { console.log((error as Error).message); }
+// }
 
 function HabitatProjectContent():JSX.Element {
-  const [habitatImages, setHabitatImages] = useState(null as Ibook[] | null);
-  useEffect(() => {
-    getImagesFromStorage(setHabitatImages);
-  }, []);
   return (
     <div className="page-content">
       <Grid container>
@@ -212,7 +210,7 @@ function HabitatProjectContent():JSX.Element {
         <VolunteerSignUp />
 
         {/* Slideshow Section */}
-        <SlideShow images={habitatImages} />
+        <SlideShow />
 
         {/* Construction Team Section */}
         <HabitatGridItem>

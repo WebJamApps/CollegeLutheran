@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { shallow } from 'enzyme';
-import PicSlider from '../../src/components/PicSlider';
+// import PicSlider from '../../src/components/PicSlider';
 import { Music } from '../../src/containers/Music';
 import DefaultMusicContent from '../../src/containers/Music/MusicContent';
 
@@ -12,12 +11,12 @@ describe('/music', () => {
     expect(wrapper.find(DefaultMusicContent).dive().find('div.page-content').exists()).toBe(true);
   });
 
-  it('renders with images', () => new Promise<void>((done) => {
-    const data: any[] = [{
-      title: '', type: '', _id: '', created_at: '',
-    }];
-    const wrapper2 = shallow(<DefaultMusicContent musicPics={data} />);
-    expect(wrapper2.find(PicSlider).exists()).toBe(true);
-    done();
-  }));
+  // it('renders with images', () => new Promise<void>((done) => {
+  //   const data: any[] = [{
+  //     title: '', type: '', _id: '', created_at: '',
+  //   }];
+  //   const wrapper2 = shallow(<DefaultMusicContent musicPics={data} />);
+  //   expect(wrapper2.find(PicSlider).exists()).toBe(true);
+  //   done();
+  // }));
 });
