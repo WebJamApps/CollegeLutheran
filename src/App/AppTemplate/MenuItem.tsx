@@ -19,7 +19,7 @@ export const sortBulletins = (bulletin: Ibook[]) => {
   return sortedBulletins;
 };
 
-const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
+export const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
   const m = mItem;
   if (books) {
     const bulletins: any[] = books.filter((b: any) => b.comments === 'worshipbulletin');
