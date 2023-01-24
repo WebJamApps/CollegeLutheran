@@ -2,13 +2,13 @@
 import React, { Dispatch } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import mapStoreToProps, { Auth, Ibook } from '../../redux/mapStoreToProps';
+import mapStoreToProps, { Iauth, Ibook } from '../../redux/mapStoreToProps';
 import { DrawerContainer } from './DrawerContainer';
 import { MainPanel } from './MainPanel';
 
 export interface IappTemplateProps extends RouteComponentProps {
   children: React.ReactNode;
-  auth: Auth;
+  auth: Iauth;
   dispatch: Dispatch<unknown>;
   books?: Ibook[] | []
 }
