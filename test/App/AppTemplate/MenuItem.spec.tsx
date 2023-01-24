@@ -6,6 +6,9 @@ describe('MenuItem', () => {
       _id: 'a', type: '', created_at: '1972-01-03T00:00:00Z', title: 'bulletin1',
     },
     {
+      _id: 'b', type: '', created_at: '1971-01-03T00:00:00Z', title: 'bulletin2',
+    },
+    {
       _id: 'b', type: '', created_at: '1973-01-03T00:00:00Z', title: 'bulletin2',
     },
     {

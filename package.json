@@ -9,8 +9,8 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=18.12.1 <19",
-    "npm": ">=8.19.2 <9"
+    "node": ">=18.13.0 <19",
+    "npm": ">=9.2.0 <10"
   },
   "files": [
     "webpack.config.js",
