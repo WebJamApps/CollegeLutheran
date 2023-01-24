@@ -1,4 +1,4 @@
-import { sortBulletins } from 'src/App/AppTemplate/MenuItem';
+import { sortBulletins, setBulletin } from 'src/App/AppTemplate/MenuItem';
 
 describe('MenuItem', () => {
   it('sorts the bulletins by date', () => {
@@ -21,5 +21,13 @@ describe('MenuItem', () => {
     expect(results[1]._id).toBe('b' || 'c');
     expect(results[2]._id).toBe('c' || 'b');
     expect(results[3]._id).toBe('a');
+  });
+  it('sets link to first bulletin listed', () => {
+    let b: any;
+    const item = {
+      classname: '', type: 'link', iconClass: '', link: '', name: '',
+    };
+    const results = setBulletin(item, b);
+    expect().toBe();
   });
 });
