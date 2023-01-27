@@ -1,5 +1,9 @@
 import renderer from 'react-test-renderer';
-import { sortBulletins, setBulletin, MenuItem } from 'src/App/AppTemplate/MenuItem';
+import { GoogleButtons } from 'src/App/AppTemplate/GoogleButtons';
+import { MakeMenuLink } from 'src/App/AppTemplate/MakeMenuLink';
+import {
+  sortBulletins, setBulletin, MenuItem, ContMakeMenuItem,
+} from 'src/App/AppTemplate/MenuItem';
 import type { ImenuItem } from 'src/App/AppTemplate/menuItems';
 import type { Iauth, Ibook } from 'src/redux/mapStoreToProps';
 
@@ -60,5 +64,20 @@ describe('MenuItem', () => {
       .create(<MenuItem {...props} />)
       .toJSON();
     expect(menuItem).toBeNull();
+  });
+  it('ContMakeMenuItem renders a login button when on the staff page and not already logged in', () => {
+    const props = {
+      menuItem: { type: 'googleLogin' } as ImenuItem,
+      index: 1,
+      auth: { isAuthenticated: false } as Iauth,
+      location: { pathname: '/staff' },
+      setMenuOpen: jest.fn(),
+      dispatch: jest.fn(),
+    };
+    const button = <GoogleButtons type="login" key={1} index={1} dispatch={jest.fn()} />;
+    const contMakeMenuItem = renderer
+      .create(<ContMakeMenuItem {...props} />)
+      .toJSON();
+    expect(contMakeMenuItem).toHaveReturnedWith(button);
   });
 });
