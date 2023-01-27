@@ -1,6 +1,5 @@
 import renderer from 'react-test-renderer';
 import { GoogleButtons } from 'src/App/AppTemplate/GoogleButtons';
-import { MakeMenuLink } from 'src/App/AppTemplate/MakeMenuLink';
 import {
   sortBulletins, setBulletin, MenuItem, ContMakeMenuItem,
 } from 'src/App/AppTemplate/MenuItem';
@@ -74,7 +73,7 @@ describe('MenuItem', () => {
       setMenuOpen: jest.fn(),
       dispatch: jest.fn(),
     };
-    const button = <GoogleButtons type="login" key={1} index={1} dispatch={jest.fn()} />;
+    const button = (<GoogleButtons type="login" index={1} dispatch={props.dispatch} />);
     const contMakeMenuItem = renderer
       .create(<ContMakeMenuItem {...props} />)
       .toJSON();
