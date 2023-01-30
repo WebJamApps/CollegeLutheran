@@ -1,10 +1,12 @@
+import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import { GoogleButtons } from 'src/App/AppTemplate/GoogleButtons';
 import {
   sortBulletins, setBulletin, MenuItem, ContMakeMenuItem,
 } from 'src/App/AppTemplate/MenuItem';
 import type { ImenuItem } from 'src/App/AppTemplate/menuItems';
+import commonUtils from 'src/lib/commonUtils';
 import type { Iauth, Ibook } from 'src/redux/mapStoreToProps';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 describe('MenuItem', () => {
   it('sorts the bulletins by date', () => {
@@ -65,18 +67,40 @@ describe('MenuItem', () => {
     expect(menuItem).toBeNull();
   });
   it('ContMakeMenuItem renders a login button when on the staff page and not already logged in', () => {
+    commonUtils.getUserRoles = jest.fn(() => ['fake']);
     const props = {
-      menuItem: { type: 'googleLogin' } as ImenuItem,
+      menuItem: { type: 'googleLogin', link: '' } as ImenuItem,
       index: 1,
       auth: { isAuthenticated: false } as Iauth,
       location: { pathname: '/staff' },
       setMenuOpen: jest.fn(),
       dispatch: jest.fn(),
     };
-    const button = (<GoogleButtons type="login" index={1} dispatch={props.dispatch} />);
-    const contMakeMenuItem = renderer
-      .create(<ContMakeMenuItem {...props} />)
-      .toJSON();
-    expect(contMakeMenuItem).toHaveReturnedWith(button);
+    const cmmi: any = renderer
+      .create(
+        <GoogleOAuthProvider clientId="">
+          <BrowserRouter>
+            <ContMakeMenuItem {...props} />
+          </BrowserRouter>
+        </GoogleOAuthProvider>).toJSON();
+    expect(cmmi.props.className.includes('googleLogin')).toBe(true);
+  });
+  it('renders a logout button', () => {
+    const props = {
+      menuItem: { type: 'googleLogout', link: '' } as ImenuItem,
+      index: 1,
+      auth: { isAuthenticated: true } as Iauth,
+      location: '',
+      setMenuOpen: jest.fn(),
+      dispatch: jest.fn(),
+    };
+    const cmmi: any = renderer
+      .create(
+        <GoogleOAuthProvider clientId="">
+          <BrowserRouter>
+            <ContMakeMenuItem {...props} />
+          </BrowserRouter>
+        </GoogleOAuthProvider>).toJSON();
+    expect(cmmi.props.className.includes('googleLogout')).toBe(true);
   });
 });
