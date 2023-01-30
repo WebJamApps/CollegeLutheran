@@ -31,7 +31,7 @@ export const setBulletin = (mItem: ImenuItem, books: Ibook[]): ImenuItem => {
   }
   return m;
 };
-export interface IcontMakeMenuItem {
+interface IcontMakeMenuItem {
   menuItem: ImenuItem,
   index: number,
   auth: Iauth,

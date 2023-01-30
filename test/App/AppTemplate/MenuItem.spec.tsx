@@ -103,4 +103,19 @@ describe('MenuItem', () => {
         </GoogleOAuthProvider>).toJSON();
     expect(cmmi.props.className.includes('googleLogout')).toBe(true);
   });
+  it('returns empty menu item for beliefs page when logged in', () => {
+    const props = {
+      menu: { link: '/belief' } as ImenuItem,
+      index: 1,
+      auth: { isAuthenticated: true } as Iauth,
+      location: { pathname: '/belief' },
+      books: [] as Ibook[],
+      setMenuOpen: jest.fn(),
+      dispatch: jest.fn(),
+    };
+    const menuItem = renderer
+      .create(<MenuItem {...props} />)
+      .toJSON();
+    expect(menuItem).toBeNull();
+  });
 });
