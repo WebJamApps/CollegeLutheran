@@ -11,7 +11,7 @@ const responseGoogleLogout = async (dispatch: Dispatch<unknown>): Promise<void> 
   window.location.assign('/');
 };
 
-interface IgoogleButtonProps {
+export interface IgoogleButtonProps {
   type: 'login' | 'logout', index: string | number | undefined,
   dispatch: Dispatch<unknown>
 }

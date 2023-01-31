@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import { Store } from 'react-notifications-component';
 import { App } from '../../src/App';
-import type { Auth } from '../../src/redux/mapStoreToProps';
+import type { Iauth } from '../../src/redux/mapStoreToProps';
 
 describe('App component', () => {
-  const auth: Auth = {
+  const auth: Iauth = {
     isAuthenticated: true, error: '', email: '', token: '', user: { userType: '' },
   };
   const wrapper = shallow<App>(<App dispatch={jest.fn()} auth={auth} />);
@@ -24,7 +24,7 @@ describe('App component', () => {
     let authRole = '';
     // eslint-disable-next-line prefer-destructuring
     if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[1];
-    const auth2: Auth = {
+    const auth2: Iauth = {
       isAuthenticated: true, error: 'none', email: 'devemail@cool.com', token: '', user: { userType: authRole },
     };
     const wrapper2 = shallow(<App dispatch={jest.fn()} auth={auth2} />);

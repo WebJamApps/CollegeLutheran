@@ -1,6 +1,6 @@
 import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
 
-export interface Auth {
+export interface Iauth {
   isAuthenticated: boolean,
   error: string,
   email: string,
@@ -33,7 +33,7 @@ export interface Ibook {
 }
 
 export interface Store {
-  auth: Auth;
+  auth: Iauth;
   youthContent: { youthContent: Ibook };
   homeContent: { homeContent: Ibook };
   books: { books: Ibook[] };
