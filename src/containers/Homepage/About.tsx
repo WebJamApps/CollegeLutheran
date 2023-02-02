@@ -20,10 +20,12 @@ export function shuffle(array: Ipicture[]) {
 
   return array;
 }
-interface IAbout {
+export interface IAbout {
   homeContent?: Ibook;
   width?: number;
 }
+
+export function Col1();
 
 export const About = ({ homeContent, width }: IAbout): JSX.Element => {
   const { pictures } = useContext(PictureContext);
