@@ -25,7 +25,20 @@ export interface IAbout {
   width?: number;
 }
 
-export function Col1();
+export function Col({ data }: { data: Ipicture[] }, { width }: IAbout) {
+  return (
+    <div className="col">
+      <div
+        id="familySlideshowWide"
+        style={{
+          width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0, paddingRight: 0,
+        }}
+      >
+        { width && width >= 900 && data && data.length > 0 ? (<PicSlider data={data} />) : null}
+      </div>
+    </div>
+  );
+}
 
 export const About = ({ homeContent, width }: IAbout): JSX.Element => {
   const { pictures } = useContext(PictureContext);
@@ -65,7 +78,7 @@ export const About = ({ homeContent, width }: IAbout): JSX.Element => {
               <br />
             </p>
           </div>
-          {width && width >= 900 && data && data.length > 0 ? (
+          {/* {width && width >= 900 && data && data.length > 0 ? (
             <div
               className="col"
               id="familySlideshowWide"
@@ -76,7 +89,7 @@ export const About = ({ homeContent, width }: IAbout): JSX.Element => {
 
               <PicSlider data={data} />
             </div>
-          ) : null}
+          ) : null} */}
           {width && width >= 900 && data && data.length === 0 ? (
             <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
               <div
@@ -95,6 +108,7 @@ export const About = ({ homeContent, width }: IAbout): JSX.Element => {
           ) : null}
         </div>
       </div>
+      <Col data={data} />
     </div>
   );
 };
