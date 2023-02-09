@@ -10,7 +10,7 @@ describe('NarrowFacebookFeed', () => {
     };
     const result: any = renderer.create(<FamilySlideContainer data={[data]} />).toJSON();
     expect(result.props.className).toBe('familySlideContainer');
-    console.log(result.children[0].children[0].children[0]);
+    console.log(result.children[0].children[0]);
     expect(result.children[0].children[0].children[0].props.className.includes('slick-slider')).toBe(true);
   });
 });
