@@ -43,7 +43,7 @@ class PicSlider extends Component<PicSliderProps> {
   render(): JSX.Element {
     const { data } = this.props;
     return (
-      <div>
+      <div id="pic-slider">
         <Slider {...this.settings}>
           {
             data.map((d: Ibook) => (

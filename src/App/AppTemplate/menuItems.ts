@@ -43,13 +43,13 @@ export const menuItems = [{
   link: '/livestream',
   name: 'Livestream',
 },
-{
-  classname: '',
-  type: 'link',
-  iconClass: 'fas fa-step-forward',
-  link: '/stewardship',
-  name: 'Stewardship',
-},
+// {
+//   classname: '',
+//   type: 'link',
+//   iconClass: 'fas fa-step-forward',
+//   link: '/stewardship',
+//   name: 'Stewardship',
+// },
 {
   classname: '',
   type: 'link',
