@@ -29,7 +29,20 @@ const FacebookIframe = () => (
     </div>
   </>
 );
-
+export function FamilySlideContainer({ data }: { data: Ipicture[] }) {
+  return (
+    <div className="familySlideContainer">
+      <div
+        id="familySlideshowWide"
+        style={{
+          display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
+        }}
+      >
+        {data && data.length > 0 ? (<PicSlider data={data} />) : null}
+      </div>
+    </div>
+  );
+}
 export const FacebookFeed = (): JSX.Element => {
   const { pictures } = useContext(PictureContext);
   const {
@@ -67,16 +80,7 @@ export const FacebookFeed = (): JSX.Element => {
       >
         {' '}
       </p>
-      <div className="familySlideContainer">
-        <div
-          id="familySlideshowWide"
-          style={{
-            display: 'flex', flexDirection: 'column', marginTop: '1px', marginRight: 0,
-          }}
-        >
-          {data && data.length > 0 ? (<PicSlider data={data} />) : null}
-        </div>
-      </div>
+      <FamilySlideContainer data={data} />
     </div>
   );
 };

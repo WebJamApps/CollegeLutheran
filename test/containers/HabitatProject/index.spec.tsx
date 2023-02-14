@@ -1,15 +1,10 @@
 import renderer from 'react-test-renderer';
 import HabitatProject from 'src/containers/HabitatProject/index';
-import DefaultHabitatContent from 'src/containers/HabitatProject/HabitatProjectContent';
 
 describe('Habitat Project', () => {
   it('Renders the Habitat Project page', () => {
-    const page = renderer.create(<HabitatProject />).toJSON();
-    expect(page).toMatchSnapshot();
-  });
-
-  it('Renders DefaultHabitatContent', () => {
-    const page = renderer.create(<DefaultHabitatContent />).toJSON();
+    const page: any = renderer.create(<HabitatProject />).toJSON();
+    expect(page.children[0].children[0].children[0].children[0]).toBe('CLC Habitat Project');
     expect(page).toMatchSnapshot();
   });
 });

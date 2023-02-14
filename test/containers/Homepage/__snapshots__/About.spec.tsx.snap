@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About renders the about page 1`] = `
+<div
+  className="aboutPage"
+>
+  <div
+    className="container-fluid"
+    style={
+      {
+        "paddingRight": 0,
+      }
+    }
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+        style={
+          {
+            "maxWidth": "7.35in",
+            "paddingRight": "4px",
+            "top": "0",
+          }
+        }
+      >
+        <p
+          style={
+            {
+              "fontSize": "18px",
+              "marginBottom": "40px",
+              "marginTop": "40px",
+            }
+          }
+        >
+          College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA. The church is situated on College Avenue, within easy walking distance of Roanoke College. College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
+        </p>
+        <h5
+          style={
+            {
+              "fontWeight": "bold",
+              "marginTop": "35px",
+            }
+          }
+        />
+        <section
+          style={
+            {
+              "marginBottom": "35px",
+              "marginTop": "20px",
+              "textAlign": "left",
+            }
+          }
+        />
+        <p
+          style={
+            {
+              "marginBottom": "16px",
+              "paddingBottom": 0,
+              "paddingRight": "15px",
+            }
+          }
+        >
+          <span
+            style={
+              {
+                "fontSize": "18px",
+              }
+            }
+          >
+             
+            <strong>
+              What Else is Happening at CLC?
+            </strong>
+          </span>
+        </p>
+        <p>
+          Click
+           
+          <a
+            href="/news"
+          >
+            News
+          </a>
+           
+          to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
+          <br />
+        </p>
+      </div>
+      <div
+        className="col"
+        style={
+          {
+            "padding": "1px",
+            "paddingRight": "0",
+          }
+        }
+      >
+        <div
+          id="slideshow1"
+          style={
+            {
+              "margin": "auto",
+              "marginTop": "40px",
+              "textAlign": "center",
+            }
+          }
+        >
+          <img
+            alt="churchBuilding"
+            src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+            style={
+              {
+                "borderRadius": "50%",
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

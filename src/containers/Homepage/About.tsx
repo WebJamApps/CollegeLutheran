@@ -20,7 +20,44 @@ export function shuffle(array: Ipicture[]) {
 
   return array;
 }
-interface IAbout {
+
+export function PictureSection({ data, width }: { data: Ipicture[], width?:number }) {
+  if (width && width >= 900 && data && data.length > 0) {
+    return (
+      <div className="col">
+        <div
+          id="familySlideshowWide"
+          style={{
+            width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0, paddingRight: 0,
+          }}
+        >
+          <PicSlider data={data} />
+        </div>
+      </div>
+    );
+  }
+  if (width && width >= 900 && data && data.length === 0) {
+    return (
+      <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
+        <div
+          id="slideshow1"
+          style={{
+            margin: 'auto', marginTop: '40px', textAlign: 'center',
+          }}
+        >
+          <img
+            style={{ borderRadius: '50%', width: '100%' }}
+            alt="churchBuilding"
+            src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+          />
+        </div>
+      </div>
+    );
+  }
+  return <> </>;
+}
+
+export interface IAbout {
   homeContent?: Ibook;
   width?: number;
 }
@@ -32,7 +69,6 @@ export const About = ({ homeContent, width }: IAbout): JSX.Element => {
   } = pictures;
   const allPics = familyPics.concat(youthPics).concat(habitatPics).concat(otherPics).concat(musicPics);
   const data = shuffle(allPics);
-  console.log(data);
   return (
     <div className="aboutPage">
       <div className="container-fluid" style={{ paddingRight: 0 }}>
@@ -63,34 +99,7 @@ export const About = ({ homeContent, width }: IAbout): JSX.Element => {
               <br />
             </p>
           </div>
-          {width && width >= 900 && data && data.length > 0 ? (
-            <div
-              className="col"
-              id="familySlideshowWide"
-              style={{
-                width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0, paddingRight: 0,
-              }}
-            >
-
-              <PicSlider data={data} />
-            </div>
-          ) : null}
-          {width && width >= 900 && data && data.length === 0 ? (
-            <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
-              <div
-                id="slideshow1"
-                style={{
-                  margin: 'auto', marginTop: '40px', textAlign: 'center',
-                }}
-              >
-                <img
-                  style={{ borderRadius: '50%', width: '100%' }}
-                  alt="churchBuilding"
-                  src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
-                />
-              </div>
-            </div>
-          ) : null}
+          <PictureSection data={data} width={width} />
         </div>
       </div>
     </div>
