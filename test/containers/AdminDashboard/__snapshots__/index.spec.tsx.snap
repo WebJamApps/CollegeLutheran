@@ -1,3 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Dashboard Container renders AdminDashboard 1`] = `
+<div
+  className="page-content"
+>
+  <h4
+    style={
+      {
+        "marginTop": "10px",
+        "textAlign": "center",
+      }
+    }
+  >
+    CLC Admin Dashboard
+  </h4>
+  <div
+    className="horiz-scroll"
+  >
+    <div
+      className="material-content elevation3"
+      style={
+        {
+          "margin": "30px auto",
+          "width": "850px",
+        }
+      }
+    >
+      <h5>
+        Change Homepage Section
+      </h5>
+      <form
+        id="create-homepage"
+        style={
+          {
+            "marginLeft": "4px",
+            "maxWidth": "100%",
+            "textAlign": "left",
+            "width": "100%",
+          }
+        }
+      >
+        <label
+          className="inquiryLabel"
+          htmlFor="title"
+        >
+          
+          Title
+          <br />
+          <input
+            id="title"
+            name="title"
+            onChange={[Function]}
+            required={false}
+            style={
+              {
+                "minWidth": "inherit",
+                "paddingLeft": 0,
+                "width": "90%",
+              }
+            }
+            type="text"
+            value=""
+          />
+        </label>
+        <p>
+          Content
+        </p>
+        <textarea
+          id="tiny-react_75586932311483228800000"
+          style={
+            {
+              "visibility": "hidden",
+            }
+          }
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Dashboard Container renders correctly 1`] = `ShallowWrapper {}`;

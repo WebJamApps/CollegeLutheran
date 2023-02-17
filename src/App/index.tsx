@@ -65,6 +65,7 @@ export class App extends Component<AppProps> {
   render(): JSX.Element {
     const { auth } = this.props;
     const userRoles: string[] = commonUtils.getUserRoles();
+    console.log(auth);
     return (
       <div id="App" className="App">
         <ReactNotifications />
