@@ -3,7 +3,7 @@ import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import parser from 'html-react-parser';
-import { HashLink as Link } from 'react-router-hash-link';
+// import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
 import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
@@ -113,12 +113,12 @@ export class PhotoTable extends React.Component<Pprops, Pstate> {
       newArr[i].modify = (// eslint-disable-line security/detect-object-injection
         <div>
           <button type="button" id={deletePicId} onClick={() => this.deletePic(newArr[i]._id)}>Delete Pic</button>
-          <p>{' '}</p>
+          {/* <p>{' '}</p>
           <Link to="/admin/#picsForm">
             <button type="button" id={editPicId} onClick={() => { this.editPic(newArr[i]); this.handleHideTable(); }}>
               Edit Pic
             </button>
-          </Link>
+          </Link> */}
         </div>
       );
     }

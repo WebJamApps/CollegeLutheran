@@ -1,21 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Dispatch } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
-import mapStoreToProps, { Iauth, Ibook } from '../../redux/mapStoreToProps';
+// import { withRouter, RouteComponentProps } from 'react-router-dom';
+// import { connect } from 'react-redux';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 import { DrawerContainer } from './DrawerContainer';
 import { MainPanel } from './MainPanel';
 
-export interface IappTemplateProps extends RouteComponentProps {
-  children: React.ReactNode;
-  auth: Iauth;
-  dispatch: Dispatch<unknown>;
-  books?: Ibook[] | []
-}
-
 interface IappTemplateState { menuOpen: boolean }
 
-export class AppTemplate extends React.Component<IappTemplateProps, IappTemplateState> {
+export class AppTemplate extends React.Component<any, IappTemplateState> {
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
     auth: {
@@ -23,7 +16,7 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
     },
   };
 
-  constructor(props: IappTemplateProps) {
+  constructor(props:any) {
     super(props);
     this.state = { menuOpen: false };
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
@@ -43,8 +36,12 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
 
   render(): JSX.Element {
     const {
-      children, location, auth, books, dispatch,
+      children,
+      // location,
+      books, dispatch,
     } = this.props;
+    const auth = { isAuthenticated: false };// TODO make this a react functional component with useContext hook
+    const location = { pathname: '/' };// TODO make this a react functional component with useLocation hook
     return (
       <div className="page-host">
         <DrawerContainer
@@ -60,6 +57,5 @@ export class AppTemplate extends React.Component<IappTemplateProps, IappTemplate
     );
   }
 }
-// TODO remove usage of connect here
-// @ts-ignore
-export default withRouter(connect(mapStoreToProps, null)(AppTemplate));
+
+// export default connect(mapStoreToProps, null)(AppTemplate as any);

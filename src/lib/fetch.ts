@@ -3,11 +3,13 @@ import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
-const fetchGet = async (view:
-{
-  props: { dispatch: Dispatch<unknown>; };
-  superagent: SuperAgentStatic;
-}, route: string, reducer: string): Promise<boolean> => {
+const fetchGet = async (view:any,
+// {
+//   props: { dispatch: Dispatch<unknown>; };
+//   superagent: SuperAgentStatic;
+// }
+  route: string, reducer: string,
+): Promise<boolean> => {
   let res;
   const { dispatch } = view.props;
   try {

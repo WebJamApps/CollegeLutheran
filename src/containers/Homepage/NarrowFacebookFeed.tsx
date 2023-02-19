@@ -1,4 +1,4 @@
-import { PictureContext, Ipicture } from 'src/Providers/PicsProvider';
+import { PictureContext, Ipicture } from 'src/providers/Pics.provider';
 import { useContext } from 'react';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';

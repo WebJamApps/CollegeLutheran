@@ -1,7 +1,7 @@
 import {
   About, shuffle, PictureSection,
 } from 'src/containers/Homepage/About';
-import type { Ipicture } from 'src/Providers/PicsProvider';
+import type { Ipicture } from 'src/providers/Pics.provider';
 import renderer from 'react-test-renderer';
 
 describe('About', () => {

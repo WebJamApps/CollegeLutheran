@@ -1,7 +1,7 @@
 import superagent from 'superagent';
-import { Component, Dispatch } from 'react';
+import { Component, Dispatch, ReactElement } from 'react';
 import {
-  BrowserRouter as Router, Redirect, Route, Switch,
+  BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ReactNotifications } from 'react-notifications-component';
@@ -15,8 +15,8 @@ import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';
 import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
-import AppFourOhFour from './404';
-import AppTemplateDefault from './AppTemplate';
+// import AppFourOhFour from './404';
+import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 // import Stewardship from '../containers/Stewardship';
 import DefaultLiveStream from '../containers/LiveStream';
@@ -25,8 +25,7 @@ import fetch from '../lib/fetch';
 import HabitatProject from '../containers/HabitatProject';
 
 interface AppProps {
-  dispatch: Dispatch<unknown>,
-  auth: Iauth
+  dispatch?: Dispatch<unknown>,
 }
 export class App extends Component<AppProps> {
   fetch: typeof fetch;
@@ -35,13 +34,13 @@ export class App extends Component<AppProps> {
 
   static defaultProps = {
     dispatch: /* istanbul ignore next */(): void => { },
-    auth: {
-      isAuthenticated: false,
-      user: { userType: '' },
-      error: '',
-      email: '',
-      token: '',
-    },
+    // auth: {
+    //   isAuthenticated: false,
+    //   user: { userType: '' },
+    //   error: '',
+    //   email: '',
+    //   token: '',
+    // },
   };
 
   constructor(props: AppProps) {
@@ -54,43 +53,47 @@ export class App extends Component<AppProps> {
   componentDidMount(): void { // fetch the books to populate homepage content, youth pics, music pics and children pics
     this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
     this.fetch.fetchGet(this, 'book/one?type=youthPageContent', 'GOT_YOUTHPAGE');
-    this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
-    this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');
-    this.fetch.fetchGet(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
-    this.fetch.fetchGet(this, 'book?type=habitat', 'GOT_HABITATPICS');
-    this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
-    this.fetch.fetchGet(this, 'book?type=musicPics', 'GOT_MUSICPICS');
+    // this.fetch.fetchGet(this, 'book?type=familyPics', 'GOT_FAMILYPICS');
+    this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');// news page
+    // this.fetch.fetchGet(this, 'book?type=youthPics', 'GOT_YOUTHPICS');
+    // this.fetch.fetchGet(this, 'book?type=habitat', 'GOT_HABITATPICS');
+    // this.fetch.fetchGet(this, 'book?type=otherPics', 'GOT_OTHERPICS');
+    // this.fetch.fetchGet(this, 'book?type=musicPics', 'GOT_MUSICPICS');
   }
 
   render(): JSX.Element {
-    const { auth } = this.props;
+    const auth = { isAuthenticated: false, user: { userType: 'Developer' } };
+    // const { auth } = this.props;
     const userRoles: string[] = commonUtils.getUserRoles();
-    console.log(auth);
+    // console.log(auth);
     return (
       <div id="App" className="App">
         <ReactNotifications />
-        <Router>
-          <AppTemplateDefault>
-            <Switch>
-              <Route exact path="/" component={DefaultHome} />
-              <Route path="/music" component={DefaultMusic} />
-              <Route path="/belief" component={Beliefs} />
-              <Route path="/family" component={DefaultFamily} />
-              <Route path="/giving" component={Giving} />
-              <Route exact path="/onlinegiving"><Redirect to="/giving" /></Route>
-              <Route exact path="/staff" component={Staff} />
+        <BrowserRouter>
+          <AppTemplate>
+            <Routes>
+              <Route path="/" element={<DefaultHome />} />
+              <Route path="/music" element={<DefaultMusic />} />
+              <Route path="/belief" element={<Beliefs />} />
+              <Route path="/family" element={<DefaultFamily />} />
+              <Route path="/giving" element={<Giving />} />
+              <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
+              {/* {return redirect("/giving")} */}
+              {/* <Redirect to="/giving" /> */}
+              {/* </Route> */}
+              <Route path="/staff" element={<Staff />} />
               {auth.isAuthenticated && auth.user.userType && userRoles.indexOf(auth.user.userType) !== -1
-                ? <Route path="/admin" component={AdminDashboardDefault} /> : null}
-              <Route path="/youth" component={DefaultYouth} />
-              <Route path="/news" component={DefaultNews} />
-              <Route path="/calendar" component={Calendar} />
+                ? <Route path="/admin" element={<AdminDashboardDefault />} /> : null}
+              <Route path="/youth" element={<DefaultYouth />} />
+              <Route path="/news" element={<DefaultNews />} />
+              <Route path="/calendar" element={<Calendar />} />
               {/* <Route path="/stewardship" component={Stewardship} /> */}
-              <Route path="/livestream" component={DefaultLiveStream} />
-              <Route path="/habitatproject" component={HabitatProject} />
-              <Route component={AppFourOhFour} />
-            </Switch>
-          </AppTemplateDefault>
-        </Router>
+              <Route path="/livestream" element={<DefaultLiveStream />} />
+              <Route path="/habitatproject" element={<HabitatProject />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AppTemplate>
+        </BrowserRouter>
       </div>
 
     );

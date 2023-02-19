@@ -67,7 +67,7 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
           Content
         </p>
         <textarea
-          id="tiny-react_75586932311483228800000"
+          id="tiny-react_95361480511483228800000"
           style={
             {
               "visibility": "hidden",
@@ -79,5 +79,3 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
   </div>
 </div>
 `;
-
-exports[`Dashboard Container renders correctly 1`] = `ShallowWrapper {}`;

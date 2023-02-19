@@ -1,5 +1,6 @@
-import { createContext, ReactChild, useEffect } from 'react';
-import createPersistedState from 'use-persisted-state';
+import {
+  createContext, ReactNode, useEffect, useState,
+} from 'react';
 import axios from 'axios';
 
 export interface Ipicture {
@@ -39,9 +40,6 @@ const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   setPictures(pictures);
 };
 
-const usePictureState: (arg0: IpictureTypes) =>
-[IpictureTypes, (arg0: IpictureTypes) => void] = createPersistedState('pictures', sessionStorage);
-
 export const PictureContext = createContext({
   pictures: {
     musicPics: [],
@@ -54,10 +52,10 @@ export const PictureContext = createContext({
   getPictures: () => Promise.resolve(),
 });
 
-type Props = { children: ReactChild };
+type Props = { children: ReactNode };
 export function PictureProvider({ children }: Props): JSX.Element {
   const { Provider } = PictureContext;
-  const [pictures, setPictures] = usePictureState({} as IpictureTypes);
+  const [pictures, setPictures] = useState({} as IpictureTypes);
 
   const getPictures = async () => populatePictures(setPictures);
 

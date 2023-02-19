@@ -1,5 +1,5 @@
 // import type { Ibook } from '../mapStoreToProps';
-import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
 
 interface IMusicReducer {
   type: string;

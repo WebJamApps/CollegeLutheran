@@ -1,4 +1,4 @@
-import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
 
 export interface Iauth {
   isAuthenticated: boolean,

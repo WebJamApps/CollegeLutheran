@@ -1,4 +1,4 @@
-import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
 import type { Homepage } from '../containers/Homepage/index';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {

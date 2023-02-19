@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import parser from 'html-react-parser';
-import { PictureContext, Ipicture } from 'src/Providers/PicsProvider';
+import { PictureContext, Ipicture } from 'src/providers/Pics.provider';
 import PicSlider from '../../components/PicSlider';
 import type { Ibook } from '../../redux/mapStoreToProps';
 

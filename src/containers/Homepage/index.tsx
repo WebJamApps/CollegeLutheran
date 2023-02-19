@@ -1,7 +1,7 @@
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
-import type { Ipicture, PictureContext } from 'src/Providers/PicsProvider';
+import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';

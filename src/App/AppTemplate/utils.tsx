@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import type { Dispatch } from 'react';
 import type { CodeResponse } from '@react-oauth/google';
@@ -14,10 +14,11 @@ export interface GoogleBody {
 async function setUser(res:{ token: string, email: string }, dispatch: Dispatch<unknown>): Promise<void> {
   console.log(res);
   try {
-    const { sub } = jwt.verify(
-      res.token || /* istanbul ignore next */'',
-      process.env.HashString || /* istanbul ignore next */'',
-    ) as any;
+    const sub = ''; // TODO Need to fix
+    // const { sub } = jwt.verify(
+    //   res.token || /* istanbul ignore next */'',
+    //   process.env.HashString || /* istanbul ignore next */'',
+    // ) as any;
     const { body } = await superagent.get(`${process.env.BackendUrl}/user/${sub}`)
       .set('Accept', 'application/json').set('Authorization', `Bearer ${res.token}`);
     dispatch({ type: 'SET_USER', data: body });
