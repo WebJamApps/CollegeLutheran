@@ -44,7 +44,6 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
           className="inquiryLabel"
           htmlFor="title"
         >
-          
           Title
           <br />
           <input
@@ -67,7 +66,7 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
           Content
         </p>
         <textarea
-          id="tiny-react_95361480511483228800000"
+          id="tiny-react_57868939611483228800000"
           style={
             {
               "visibility": "hidden",

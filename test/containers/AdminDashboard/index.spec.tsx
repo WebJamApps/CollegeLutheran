@@ -13,6 +13,7 @@ describe('Dashboard Container', () => {
       books: [] as Ibook[],
       youthContent: {} as Ibook,
     };
+    window.location.href = 'http://localhost:7878';
     const ad = renderer.create(<AdminDashboard {...props} />).toJSON();
     expect(ad).toMatchSnapshot();
   });
