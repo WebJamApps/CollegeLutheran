@@ -1,11 +1,9 @@
-// import superagent from 'superagent';
-// import { Component } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { useContext, useEffect, useState } from 'react';
 import { ReactNotifications } from 'react-notifications-component';
-import commonUtils from '../lib/commonUtils';
+import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
 import DefaultFamily from '../containers/Family';
@@ -15,42 +13,27 @@ import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';
 import DefaultNews from '../containers/News';
 import Calendar from '../containers/Calendar';
-// import AppFourOhFour from './404';
 import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 // import Stewardship from '../containers/Stewardship';
 import DefaultLiveStream from '../containers/LiveStream';
-// import mapStoreToProps, { Iauth } from '../redux/mapStoreToProps';
-// import fetch from '../lib/fetch';
 import HabitatProject from '../containers/HabitatProject';
 
-// export class App extends Component<AppProps> {
-//   fetch: typeof fetch;
-
-//   superagent: superagent.SuperAgentStatic;
-
-//   static defaultProps = {
-//     dispatch: /* istanbul ignore next */(): void => { },
-//   };
-
-// constructor(props: AppProps) {
-//   super(props);
-//   this.fetch = fetch;
-//   this.state = {};
-//   this.superagent = superagent;
-// }
-
-// componentDidMount(): void { // fetch the books to populate homepage content, youth pics, music pics and children pics
-//   this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
-//   this.fetch.fetchGet(this, 'book/one?type=youthPageContent', 'GOT_YOUTHPAGE');
-//   this.fetch.fetchGet(this, 'book?type=Forum', 'GOT_BOOKS');// news page
-// }
+export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
+  let isAdmin = false;
+  if (auth && auth.isAuthenticated && process.env.userRoles) {
+    const { user: { userType } } = auth;
+    const rolesJSON = JSON.parse(process.env.userRoles);
+    const { roles } = rolesJSON;
+    if (userType && roles.includes(userType)) isAdmin = true;
+  }
+  setIsAdmin(isAdmin);
+}
 
 export function App(): JSX.Element {
-  const auth = { isAuthenticated: false, user: { userType: 'Developer' } };
-  // const { auth } = this.props;
-  const userRoles: string[] = commonUtils.getUserRoles();
-  // console.log(auth);
+  const { auth } = useContext(AuthContext);
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => checkIsAdmin(auth, setIsAdmin), [auth]);
   return (
     <div id="App" className="App">
       <ReactNotifications />
@@ -64,7 +47,7 @@ export function App(): JSX.Element {
             <Route path="/giving" element={<Giving />} />
             <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
             <Route path="/staff" element={<Staff />} />
-            {auth.isAuthenticated && auth.user.userType && userRoles.indexOf(auth.user.userType) !== -1
+            {isAdmin
               ? <Route path="/admin" element={<AdminDashboardDefault />} /> : null}
             <Route path="/youth" element={<DefaultYouth />} />
             <Route path="/news" element={<DefaultNews />} />
@@ -79,5 +62,3 @@ export function App(): JSX.Element {
     </div>
   );
 }
-
-// export default connect(mapStoreToProps, null)(App as any);

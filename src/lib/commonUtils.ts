@@ -1,5 +1,7 @@
-import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
+import type { Ipicture } from 'src/providers/Pics.provider';
+import { Store } from 'react-notifications-component';
 import type { Homepage } from '../containers/Homepage/index';
+import 'react-notifications-component/dist/theme.css';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {
   if (pageTitle !== '') pageTitle += ' | ';// eslint-disable-line no-param-reassign
@@ -37,7 +39,23 @@ function getUserRoles(): string[] {
 }
 
 const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+type NotificationType = 'success' | 'danger' | 'info' | 'default' | 'warning';
+function notify(title: string, message: string, type: NotificationType) {
+  Store.addNotification({
+    title,
+    message,
+    type,
+    insert: 'top',
+    container: 'top-right',
+    animationIn: ['animate__animated animate__fadeIn'],
+    animationOut: ['animate__animated animate__fadeOut'],
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  });
+}
 
 export default {
-  getUserRoles, setTitleAndScroll, randomizePics, delay,
+  getUserRoles, setTitleAndScroll, randomizePics, delay, notify,
 };

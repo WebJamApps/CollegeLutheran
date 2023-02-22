@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {
   sortBulletins, setBulletin, MenuItem, ContMakeMenuItem,
 } from 'src/App/AppTemplate/MenuItem';
-import type { ImenuItem } from 'src/App/AppTemplate/menuItems';
+import type { ImenuItem } from 'src/App/AppTemplate/menuConfig';
 import commonUtils from 'src/lib/commonUtils';
 import type { Iauth, Ibook } from 'src/redux/mapStoreToProps';
 import { GoogleOAuthProvider } from '@react-oauth/google';

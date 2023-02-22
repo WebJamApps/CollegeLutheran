@@ -181,7 +181,8 @@
 //         </label>
 //         <MakeDropdown editPic={editPic} picBody={picBody} onChange={(evt:any) => setPicBody({ ...picBody, type: evt.target.value })} />
 //         {/* {Forms.makeDropdown('type', 'Category', categoryValue, (evt) => setPicBody({ ...picBody, type: evt.target.value }), options)} */}
-//         <RadioButtons editPic={editPic} comments={picBody.comments} onChange={(evt: any) => setPicBody({ ...picBody, comments: evt.target.value })} />
+//         <RadioButtons
+// editPic={editPic} comments={picBody.comments} onChange={(evt: any) => setPicBody({ ...picBody, comments: evt.target.value })} />
 //         <PicButton editPic={editPic} setPicBody={setPicBody} picBody={picBody} auth={auth} dispatch={dispatch} />
 //       </form>
 //     </div>
