@@ -9,7 +9,7 @@ export function NavLinks(props: InavLinksProps) {
     handleClose,
   } = props;
   return (
-    <div className="nav-list" style={{ width: '180px' }}>
+    <div className="nav-list" style={{ width: '210px' }}>
       {menuItems.map(
         (menu, index) => (
           <SideMenuItem

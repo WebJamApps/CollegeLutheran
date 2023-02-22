@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { ReactNode, SetStateAction, useState } from 'react';
 import { DrawerContainer } from './DrawerContainer';
 import { MainPanel } from './MainPanel';
 
@@ -40,15 +40,7 @@ export const makeHandleKeyPress = (
   setMenuOpen: (value: SetStateAction<boolean>) => void,
 ) => (evt: { key: string; }) => handleEscapePress(evt, setMenuOpen);
 
-interface IpageHostProps {
-  userCount?: number, heartBeat?: string,
-  children: React.ReactNode,
-}
-export function AppTemplate(props: IpageHostProps) {
-  const {
-    // userCount, heartBeat,
-    children,
-  } = props;
+export function AppTemplate({ children }:{ children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleClose = makeHandleClose(setMenuOpen);
   const onClick = makeOnClick(menuOpen, setMenuOpen);
@@ -59,8 +51,6 @@ export function AppTemplate(props: IpageHostProps) {
       <DrawerContainer
         handleKeyPress={handleKeyPress}
         className={makeDrawerClass(menuOpen)}
-        // userCount={userCount}
-        // heartBeat={heartBeat}
         handleClose={handleClose}
       />
       <MainPanel children={children} onClick={onClick} onKeyPress={onKeyPress} />

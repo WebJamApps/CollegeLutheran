@@ -48,12 +48,6 @@ export const ContinueMenuItem = (props:IcontinueMenuItemProps): JSX.Element | nu
   const {
     menu, index, auth, pathname, handleClose,
   } = props;
-  if (pathname.includes('/music') && (menu.link.includes('/music'))) {
-    return <MakeLink menu={menu} index={index} type="Link" handleClose={handleClose} />;
-  }
-  if (menu.type === 'link' && !menu.link.includes('/music/') && !pathname.includes('/music')) {
-    return <MakeLink menu={menu} index={index} type="Link" handleClose={handleClose} />;
-  }
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/') {
     return <GoogleButtons key="googleLogin" type="login" index={index} />;
   }
@@ -82,7 +76,7 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
   const userRoles: string[] = commonUtils.getUserRoles();
   const isAllowed = checkIsAllowed(menu, auth, userRoles);
   if (!isAllowed) return null;
-  if (menu.name === 'Web Jam LLC' || menu.nav === 'jam') {
+  if (menu.link) {
     return (
       <MakeLink
         menu={menu}
