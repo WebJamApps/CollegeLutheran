@@ -51,10 +51,10 @@ button.nav-link:hover {
 
 #mobilemenutoggle {
   cursor          : pointer;
-  position        : relative;
+  position        : absolute;
   left           : 90vw;
   top             : 34px;
-  z-index: 50;
+  z-index: 1;
   color           : #f4c00eff;
   background-color: #244a8bff;
   padding         : 1px 6px 0;

@@ -1,6 +1,6 @@
 export function HeaderSection(): JSX.Element {
   return (
-    <div id="header" className="material-header home-header" style={{ backgroundColor: '#244a8bff', position: 'absolute', top: '0px' }}>
+    <div id="header" className="material-header home-header" style={{ backgroundColor: '#244a8bff' }}>
       <div className="headercontent" />
       <div>
         <div
