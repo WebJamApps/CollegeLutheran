@@ -23,12 +23,12 @@ describe('fetch', () => {
       superagent,
     }, '/homePageContent', '');
   });
-  it('successfully runs fetchPost', async () => {
-    const myMock:any = jest.fn(() => (
-      { set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }
-    ));
-    superagent.post = myMock;
-    const { status } = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
-    expect(typeof status).toBe('number');
-  });
+  // it('successfully runs fetchPost', async () => {
+  //   const myMock:any = jest.fn(() => (
+  //     { set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }
+  //   ));
+  //   superagent.post = myMock;
+  //   const { status } = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
+  //   expect(typeof status).toBe('number');
+  // });
 });

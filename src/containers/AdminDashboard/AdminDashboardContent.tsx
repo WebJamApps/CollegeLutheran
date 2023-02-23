@@ -1,13 +1,35 @@
+import { Button } from '@mui/material';
 import { Editor } from '@tinymce/tinymce-react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  Dispatch, SetStateAction, useContext, useState,
+} from 'react';
 import forms from 'src/lib/forms';
+import { AuthContext } from 'src/providers/Auth.provider';
 import type { Ibook } from 'src/redux/mapStoreToProps';
+import utils from './utils';
+
+function UpdateHomeButton(
+  { title, comments = '' }: { title: string, comments?: string },
+): JSX.Element {
+  const { auth } = useContext(AuthContext);
+  return (
+    <div style={{ marginLeft: '60%', marginTop: '10px' }}>
+      <Button
+        type="button"
+        id="c-h"
+        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth)}
+      >
+        Update Homepage
+      </Button>
+    </div>
+  );
+}
 
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
 }
 function CommentsEditor(
-  props:IcommentsEditorProps,
+  props: IcommentsEditorProps,
 ): JSX.Element {
   const { setComments, comments } = props;
   return (
@@ -24,9 +46,9 @@ function CommentsEditor(
           'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
         ],
         toolbar:
-            'undo redo | formatselect | bold italic backcolor forecolor |'
-            + 'alignleft aligncenter alignright alignjustify |'
-            + 'bullist numlist outdent indent | removeformat | help',
+          'undo redo | formatselect | bold italic backcolor forecolor |'
+          + 'alignleft aligncenter alignright alignjustify |'
+          + 'bullist numlist outdent indent | removeformat | help',
       }}
       onEditorChange={(newComments) => setComments(newComments)}
     />
@@ -34,13 +56,12 @@ function CommentsEditor(
 }
 
 interface IchangeHomepageProps {
-  homeContent:Ibook, dispatch:Dispatch<unknown>
+  homeContent: Ibook, dispatch: Dispatch<unknown>
 }
-function ChangeHomepage(props:IchangeHomepageProps): JSX.Element {
+function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
   const { homeContent, dispatch } = props;
   const [title, setTitle] = useState(homeContent.title);
   const [comments, setComments] = useState(homeContent.comments);
-  // const { title, homePageContent } = this.state;
   const inputParams = {
     type: 'text',
     label: 'Title',
@@ -62,7 +83,7 @@ function ChangeHomepage(props:IchangeHomepageProps): JSX.Element {
           {forms.makeInput(inputParams)}
           <p>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          {/* {this.updateHomeButton(title, homePageContent)} */}
+          <UpdateHomeButton title={title} comments={comments} />
         </form>
       </div>
     </div>
@@ -70,9 +91,9 @@ function ChangeHomepage(props:IchangeHomepageProps): JSX.Element {
 }
 
 interface IadminDashboardContentProps {
-  dispatch: Dispatch<unknown>, homeContent:Ibook, youthContent:Ibook, books:Ibook[]
+  dispatch: Dispatch<unknown>, homeContent: Ibook, youthContent: Ibook, books: Ibook[]
 }
-export function AdminDashboardContent(props:IadminDashboardContentProps) {
+export function AdminDashboardContent(props: IadminDashboardContentProps) {
   const {
     dispatch, homeContent, youthContent, books,
   } = props;

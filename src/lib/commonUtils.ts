@@ -12,24 +12,6 @@ const setTitleAndScroll = (pageTitle: string, width?: number): void => {
   if (top !== undefined && typeof top.scrollIntoView === 'function') top.scrollIntoView();
 };
 
-async function randomizePics(view: Homepage, delay: () => Promise<void>): Promise<void> {
-  await delay();
-  const {
-    familyPics, youthPics, otherPics, musicPics, habitatPics,
-  } = view.props;
-  let arr: Ibook[] | never[] = familyPics || [];
-  const arr2: Ibook[] = youthPics || [];
-  const arr3: Ibook[] = musicPics || [];
-  const arr4: Ibook[] = habitatPics || [];
-  arr = arr.concat(otherPics || []).concat(arr2).concat(arr3).concat(arr4);
-
-  for (let i = arr.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];// eslint-disable-line security/detect-object-injection
-  }
-  view.setState({ picsState: arr });
-}
-
 function getUserRoles(): string[] {
   let userRoles: string[] = [];
   try {
@@ -57,5 +39,5 @@ function notify(title: string, message: string, type: NotificationType) {
 }
 
 export default {
-  getUserRoles, setTitleAndScroll, randomizePics, delay, notify,
+  getUserRoles, setTitleAndScroll, delay, notify,
 };

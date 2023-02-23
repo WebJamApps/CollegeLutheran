@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
+import fetch from 'src/lib/fetch';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
@@ -13,11 +14,6 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
-  familyPics?: Ibook[];
-  youthPics?: Ibook[];
-  otherPics?: Ibook[];
-  musicPics?: Ibook[];
-  habitatPics?: Ibook[];
 };
 
 interface HomepageState {
@@ -30,16 +26,18 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
 
   parentRef: React.RefObject<unknown>;
 
+  fetch: typeof fetch;
+
   constructor(props: HomepageProps) {
     super(props);
     this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
+    this.fetch = fetch;
   }
 
   async componentDidMount(): Promise<void> {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    const delay = (): Promise<void> => new Promise((res) => setTimeout(res, 4000));
-    return this.commonUtils.randomizePics(this, delay);
+    this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
   }
 
   render(): JSX.Element {

@@ -1,19 +1,15 @@
-import type { Dispatch } from 'react';
 import { Store } from 'react-notifications-component';
+import superagent from 'superagent';
 import 'react-notifications-component/dist/theme.css';
 import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
 
 const fetchGet = async (view:any,
-// {
-//   props: { dispatch: Dispatch<unknown>; };
-//   superagent: SuperAgentStatic;
-// }
   route: string, reducer: string,
 ): Promise<boolean> => {
   let res;
   const { dispatch } = view.props;
   try {
-    res = await view.superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json');
+    res = await superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json');
   } catch (e) {
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
@@ -39,15 +35,18 @@ const fetchGet = async (view:any,
   return true;
 };
 
-function fetchPost(
-  superagent: SuperAgentStatic,
-  auth: { token: string; },
-  data: { title: string, comments: string, type: string },
-): SuperAgentRequest {
-  return superagent.post(`${process.env.BackendUrl}/book`)
-    .set('Authorization', `Bearer ${auth.token}`)
-    .set('Content-Type', 'application/json')
-    .send(data);
-}
+// function fetchPost(
+//   superagent: SuperAgentStatic,
+//   auth: { token: string; },
+//   data: { title: string, comments: string, type: string },
+// ): SuperAgentRequest {
+//   return superagent.post(`${process.env.BackendUrl}/book`)
+//     .set('Authorization', `Bearer ${auth.token}`)
+//     .set('Content-Type', 'application/json')
+//     .send(data);
+// }
 
-export default { fetchGet, fetchPost };
+export default {
+  fetchGet,
+  // fetchPost
+};
