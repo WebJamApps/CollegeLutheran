@@ -7,7 +7,7 @@ import ELCALogo from '../../components/elcaLogo';
 const pageName = 'family';// eslint-disable-next-line max-len
 const additionalContent = '<hr><h5>Resources for Families</h5><p><strong><em>Roots and Wings</em></strong>, a monthly publication of the Virginia Synod that provides suggestions of daily family time activities:<a target="_blank" href="https://www.vasynod.org/ministries/roots-and-wings/">https://www.vasynod.org/ministries/roots-and-wings/</a></p><p><strong>Ideas to bring worship to the home:</strong>&nbsp;<a target="_blank" href="https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf">https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf</a></p><p><strong>Hand Prayer:</strong>&nbsp;<a target="_blank" href="http://www.vibrantfaithathome.org/item/hand-prayers">http://www.vibrantfaithathome.org/item/hand-prayers</a></p>';
 const FamilySection = () => (
-  <section>
+  <section style={{ textAlign: 'left' }}>
     <p>
       Children are indispensable at College Lutheran Church. The Children and Family Ministry at College Lutheran Church supports kids in
       preschool through 5th grade and their families. Age appropriate Sunday School, monthly meet-ups, and
@@ -27,7 +27,8 @@ const FamilySection = () => (
       would like your child to be baptized or receive First communion, please contact Pastor David at
       {' '}
       <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
-      <br />
+    </p>
+    <p>
       We invite you and your family to come experience a fun, embracing Christian community at any or all of our upcoming events.
     </p>
   </section>

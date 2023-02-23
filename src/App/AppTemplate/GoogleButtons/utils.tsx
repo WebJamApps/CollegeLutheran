@@ -50,6 +50,7 @@ const responseGoogleLogin = async (
   try {
     const uri = window.location.href;
     const baseUri = uri.split('/')[2];
+    console.log(baseUri);
     const body = {
       clientId: process.env.GoogleClientId,
       redirectUri: !baseUri.includes('localhost')

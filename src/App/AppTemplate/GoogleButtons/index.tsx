@@ -25,7 +25,7 @@ export function GoogleButtons(props: IgoogleButtonsProps): JSX.Element {
           className="loginButton"
           size="small"
           onClick={() => {
-            login(); return 'loginClicked';
+            login();
           }}
         >
           Login

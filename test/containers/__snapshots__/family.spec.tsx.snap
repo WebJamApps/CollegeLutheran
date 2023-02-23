@@ -61,7 +61,13 @@ exports[`Family renders correctly without images 1`] = `
           </strong>
         </span>
       </p>
-      <section>
+      <section
+        style={
+          {
+            "textAlign": "left",
+          }
+        }
+      >
         <p>
           Children are indispensable at College Lutheran Church. The Children and Family Ministry at College Lutheran Church supports kids in preschool through 5th grade and their families. Age appropriate Sunday School, monthly meet-ups, and seasonal events such as Trunk or Treating, Christmas Programs, Easter Parties, and Vacation Bible School are a few of the ways that we familiarize our children with Biblical stories and the power of living in Christian community.
         </p>
@@ -76,7 +82,8 @@ exports[`Family renders correctly without images 1`] = `
           >
             pastordrebes@collegelutheran.org
           </a>
-          <br />
+        </p>
+        <p>
           We invite you and your family to come experience a fun, embracing Christian community at any or all of our upcoming events.
         </p>
       </section>

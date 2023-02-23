@@ -48,7 +48,7 @@ export const ContinueMenuItem = (props:IcontinueMenuItemProps): JSX.Element | nu
   const {
     menu, index, auth, pathname, handleClose,
   } = props;
-  if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/') {
+  if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/staff') {
     return <GoogleButtons key="googleLogin" type="login" index={index} />;
   }
   if (menu.type === 'googleLogout' && auth.isAuthenticated) {
