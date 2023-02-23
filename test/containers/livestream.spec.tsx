@@ -1,4 +1,4 @@
-import { LiveStream } from '../../src/containers/LiveStream/index';
+import { LiveStream } from 'src/containers/LiveStream/index';
 
 describe('LiveStream', () => {
   it('handles widescreen width', () => {

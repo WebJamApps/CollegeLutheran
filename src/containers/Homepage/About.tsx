@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import parser from 'html-react-parser';
-import { PictureContext, Ipicture } from 'src/providers/Pics.provider';
+import { PictureContext } from 'src/providers/Pics.provider';
 import PicSlider from '../../components/PicSlider';
 import type { Ibook } from '../../redux/mapStoreToProps';
 
-export function shuffle(array: Ipicture[]) {
+export function shuffle(array: Ibook[]) {
   let currentIndex = array.length, randomIndex;
 
   // While there remain elements to shuffle.
@@ -21,7 +21,7 @@ export function shuffle(array: Ipicture[]) {
   return array;
 }
 
-export function PictureSection({ data, width }: { data: Ipicture[], width?:number }) {
+export function PictureSection({ data, width }: { data: Ibook[], width?:number }) {
   if (width && width >= 900 && data && data.length > 0) {
     return (
       <div className="col">

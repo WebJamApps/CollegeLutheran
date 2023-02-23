@@ -6,12 +6,12 @@ import { ReactNotifications } from 'react-notifications-component';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import DefaultMusic from '../containers/Music';
 import Beliefs from '../containers/Beliefs';
-import DefaultFamily from '../containers/Family';
 import { Giving } from '../containers/Giving';
 import Staff from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import AdminDashboardDefault from '../containers/AdminDashboard';
 import DefaultNews from '../containers/News';
+import { Family } from '../containers/Family';
 import Calendar from '../containers/Calendar';
 import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
@@ -43,7 +43,7 @@ export function App(): JSX.Element {
             <Route path="/" element={<DefaultHome />} />
             <Route path="/music" element={<DefaultMusic />} />
             <Route path="/belief" element={<Beliefs />} />
-            <Route path="/family" element={<DefaultFamily />} />
+            <Route path="/family" element={<Family />} />
             <Route path="/giving" element={<Giving />} />
             <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
             <Route path="/staff" element={<Staff />} />

@@ -1,5 +1,6 @@
-import { PictureContext, Ipicture } from 'src/providers/Pics.provider';
+import { PictureContext } from 'src/providers/Pics.provider';
 import { useContext } from 'react';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';
 
@@ -29,7 +30,7 @@ const FacebookIframe = () => (
     </div>
   </>
 );
-export function FamilySlideContainer({ data }: { data: Ipicture[] }) {
+export function FamilySlideContainer({ data }: { data: Ibook[] }) {
   return (
     <div className="familySlideContainer">
       <div

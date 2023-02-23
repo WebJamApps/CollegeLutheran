@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
-import type { Ipicture } from 'src/providers/Pics.provider';
 import { YouthContent } from './YouthContent';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
 export interface YouthProps {
-  youthPics: Ipicture[];
+  youthPics: Ibook[];
   youthContent: Ibook;
 }
 

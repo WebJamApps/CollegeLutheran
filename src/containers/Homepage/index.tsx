@@ -1,7 +1,6 @@
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
-import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
@@ -14,15 +13,15 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
-  familyPics?: Ipicture[];
-  youthPics?: Ipicture[];
-  otherPics?: Ipicture[];
-  musicPics?: Ipicture[];
-  habitatPics?: Ipicture[];
+  familyPics?: Ibook[];
+  youthPics?: Ibook[];
+  otherPics?: Ibook[];
+  musicPics?: Ibook[];
+  habitatPics?: Ibook[];
 };
 
 interface HomepageState {
-  picsState: Ipicture[];
+  picsState: Ibook[];
   homeContent?: Ibook;
 }
 
@@ -35,7 +34,6 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
     super(props);
     this.commonUtils = commonUtils;
     this.parentRef = React.createRef();
-    this.state = { picsState: [] };
   }
 
   async componentDidMount(): Promise<void> {
@@ -45,7 +43,6 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   }
 
   render(): JSX.Element {
-    const { picsState } = this.state;
     const { width, targetRef } = this.props;
     const { homeContent } = this.props;
     return (

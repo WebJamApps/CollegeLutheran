@@ -1,14 +1,3 @@
-import type { Ipicture, PictureContext } from 'src/providers/Pics.provider';
-
-export interface Iauth {
-  isAuthenticated: boolean,
-  error: string,
-  email: string,
-  token: string,
-  user: {
-    userType?: string;
-  };
-}
 
 export interface Ibook {
   link?: string,
@@ -33,7 +22,6 @@ export interface Ibook {
 }
 
 export interface Store {
-  auth: Iauth;
   youthContent: { youthContent: Ibook };
   homeContent: { homeContent: Ibook };
   books: { books: Ibook[] };
@@ -41,7 +29,6 @@ export interface Store {
 }
 
 const mapStoreToProps = (store: Store): Record<string, unknown> => ({
-  auth: store.auth,
   homeContent: store.homeContent.homeContent,
   youthContent: store.youthContent.youthContent,
   books: store.books.books,

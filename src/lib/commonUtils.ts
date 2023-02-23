@@ -1,5 +1,5 @@
-import type { Ipicture } from 'src/providers/Pics.provider';
 import { Store } from 'react-notifications-component';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 import type { Homepage } from '../containers/Homepage/index';
 import 'react-notifications-component/dist/theme.css';
 
@@ -17,10 +17,10 @@ async function randomizePics(view: Homepage, delay: () => Promise<void>): Promis
   const {
     familyPics, youthPics, otherPics, musicPics, habitatPics,
   } = view.props;
-  let arr: Ipicture[] | never[] = familyPics || [];
-  const arr2: Ipicture[] = youthPics || [];
-  const arr3: Ipicture[] = musicPics || [];
-  const arr4: Ipicture[] = habitatPics || [];
+  let arr: Ibook[] | never[] = familyPics || [];
+  const arr2: Ibook[] = youthPics || [];
+  const arr3: Ibook[] = musicPics || [];
+  const arr4: Ibook[] = habitatPics || [];
   arr = arr.concat(otherPics || []).concat(arr2).concat(arr3).concat(arr4);
 
   for (let i = arr.length - 1; i > 0; i -= 1) {

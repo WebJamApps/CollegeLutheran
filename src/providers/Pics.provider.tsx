@@ -2,31 +2,11 @@ import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
 import axios from 'axios';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 
-export interface Ipicture {
-  link?: string,
-  caption?: string,
-  modify?: JSX.Element,
-  thumbnail?: string,
-  title: string,
-  _id: string,
-  type: string,
-  created_at?: string,
-  author?: string,
-  numberPages?: number,
-  dateOfPub?: number,
-  url?: string,
-  isbn?: string,
-  siteLocation?: string,
-  numberOfCopies?: number,
-  access?: string,
-  comments?: string,
-  checkedOutBy?: string,
-  checkedOutByName?: string,
-}
 export interface IpictureTypes {
-  musicPics: Ipicture[], familyPics: Ipicture[], youthPics: Ipicture[],
-  habitatPics: Ipicture[], otherPics: Ipicture[],
+  musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
+  habitatPics: Ibook[], otherPics: Ibook[],
 }
 const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
