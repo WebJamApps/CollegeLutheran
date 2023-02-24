@@ -1,6 +1,4 @@
 import { Store } from 'react-notifications-component';
-import type { Ibook } from 'src/redux/mapStoreToProps';
-import type { Homepage } from '../containers/Homepage/index';
 import 'react-notifications-component/dist/theme.css';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {
@@ -21,6 +19,7 @@ function getUserRoles(): string[] {
 }
 
 const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+
 type NotificationType = 'success' | 'danger' | 'info' | 'default' | 'warning';
 function notify(title: string, message: string, type: NotificationType) {
   Store.addNotification({

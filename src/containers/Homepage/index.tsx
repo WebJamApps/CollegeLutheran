@@ -1,4 +1,6 @@
-import React, { RefObject } from 'react';
+import {
+  RefObject, Dispatch, Component, createRef,
+} from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
 import fetch from 'src/lib/fetch';
@@ -14,6 +16,7 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
+  dispatch:Dispatch<unknown>
 };
 
 interface HomepageState {
@@ -21,7 +24,7 @@ interface HomepageState {
   homeContent?: Ibook;
 }
 
-export class Homepage extends React.Component<HomepageProps, HomepageState> {
+export class Homepage extends Component<HomepageProps, HomepageState> {
   commonUtils: typeof commonUtils;
 
   parentRef: React.RefObject<unknown>;
@@ -31,13 +34,13 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   constructor(props: HomepageProps) {
     super(props);
     this.commonUtils = commonUtils;
-    this.parentRef = React.createRef();
+    this.parentRef = createRef();
     this.fetch = fetch;
   }
 
   async componentDidMount(): Promise<void> {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    this.fetch.fetchGet(this, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+    this.fetch.fetchGet(this.props.dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
   }
 
   render(): JSX.Element {

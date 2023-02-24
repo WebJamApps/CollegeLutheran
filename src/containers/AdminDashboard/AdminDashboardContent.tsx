@@ -9,15 +9,17 @@ import type { Ibook } from 'src/redux/mapStoreToProps';
 import utils from './utils';
 
 function UpdateHomeButton(
-  { title, comments = '' }: { title: string, comments?: string },
+  { title, dispatch, comments = '' }: { title: string, dispatch:Dispatch<unknown>, comments?: string },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
-    <div style={{ marginLeft: '60%', marginTop: '10px' }}>
+    <div style={{ marginTop: '10px' }}>
       <Button
+        size="small"
+        variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth)}
+        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth, dispatch)}
       >
         Update Homepage
       </Button>
@@ -81,9 +83,9 @@ function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
           }}
         >
           {forms.makeInput(inputParams)}
-          <p>Content</p>
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateHomeButton title={title} comments={comments} />
+          <UpdateHomeButton title={title} comments={comments} dispatch={dispatch} />
         </form>
       </div>
     </div>

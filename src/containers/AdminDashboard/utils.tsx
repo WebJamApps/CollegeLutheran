@@ -1,6 +1,8 @@
+import type { Dispatch } from 'react';
 import type { Iauth } from 'src/providers/Auth.provider';
 import superagent from 'superagent';
-// import Fetch from '../../lib/fetch';
+import Fetch from 'src/lib/fetch';
+import commonUtils from 'src/lib/commonUtils';
 
 // async function createBook(data: any, auth:any): Promise<string> {
 //   if (data.type === '') data.type = 'otherPics';
@@ -16,7 +18,7 @@ import superagent from 'superagent';
 
 async function putAPI(
   body:{ title:string;comments:string;type:string },
-  auth:Iauth,
+  auth:Iauth, dispatch:Dispatch<unknown>,
 ):Promise<void> {
   try {
     // TODO use Axios not superagent
@@ -24,10 +26,9 @@ async function putAPI(
     const res = await superagent.put(`${process.env.BackendUrl}/book/one?type=${body.type}`)
       .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
       .send(body);
-    if (res.status === 200) {
-      console.log('good job');
-      // TODO use react notification to display a success toast message
-      // TODO call getHomePageContent from new provider
+    if (res.status === 200) { // TODO call getHomePageContent from new provider
+      await Fetch.fetchGet(dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+      commonUtils.notify('Homepage', 'sucessfully updated', 'success');
     }
   } catch (e) {
     console.log((e as any).response.status);

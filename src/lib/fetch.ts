@@ -1,13 +1,12 @@
 import { Store } from 'react-notifications-component';
 import superagent from 'superagent';
 import 'react-notifications-component/dist/theme.css';
-import type { SuperAgentStatic, SuperAgentRequest } from 'superagent';
+import type { Dispatch } from 'react';
 
-const fetchGet = async (view:any,
+const fetchGet = async (dispatch:Dispatch<unknown>,
   route: string, reducer: string,
 ): Promise<boolean> => {
   let res;
-  const { dispatch } = view.props;
   try {
     res = await superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json');
   } catch (e) {
