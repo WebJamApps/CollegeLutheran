@@ -48,7 +48,26 @@ async function putAPI(
   }
 }
 
+async function addNewsAPI(
+  auth: Iauth, title: string, url: string, comments: string,
+): Promise<void> {
+  try {
+    await superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
+      .set('Accept', 'application/json')
+      .send({
+        title,
+        url,
+        comments,
+        type: 'Forum',
+        access: 'CLC',
+      });
+    commonUtils.notify(title, 'Successfully updated news', 'success');
+  } catch (e) {
+    commonUtils.notify(title, `Failed to update news, ${(e as Error).message}`, 'warning');
+  }
+}
+
 export default {
-  // createBook,
+  addNewsAPI,
   putAPI,
 };

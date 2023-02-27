@@ -1,4 +1,6 @@
-import { Button } from '@mui/material';
+import {
+  Button, TextField, Checkbox, FormControlLabel, FormGroup,
+} from '@mui/material';
 import { Editor } from '@tinymce/tinymce-react';
 import {
   Dispatch, SetStateAction, useContext, useState,
@@ -9,7 +11,7 @@ import type { Ibook } from 'src/redux/mapStoreToProps';
 import utils from './utils';
 
 function UpdateHomeButton(
-  { title, dispatch, comments = '' }: { title: string, dispatch:Dispatch<unknown>, comments?: string },
+  { title, dispatch, comments = '' }: { title: string, dispatch: Dispatch<unknown>, comments?: string },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -92,6 +94,38 @@ function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
   );
 }
 
+function ChangeNewsPage(): JSX.Element {
+  const { auth } = useContext(AuthContext);
+  const [title, setTitle] = useState('');
+  const [url, setUrl] = useState('');
+  const [comments, setComments] = useState('');
+  return (
+    <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
+      <h5>Change News Page</h5>
+      <FormGroup>
+        <TextField label="Title" onChange={(evt) => setTitle(evt.target.value)} sx={{ marginBottom: '10px' }} />
+        <TextField label="Url" onChange={(evt) => setUrl(evt.target.value)} />
+        <FormControlLabel
+          label="Is Worship Bulletin?"
+          control={(
+            <Checkbox onChange={
+            (evt) => {
+              if (evt.target.checked) setComments('worshipbulletin');
+              else setComments('');
+            }
+          }
+            />
+        )}
+        />
+      </FormGroup>
+      <hr />
+      <Button size="small" variant="contained" onClick={() => utils.addNewsAPI(auth, title, url, comments)}>
+        Add News
+      </Button>
+    </div>
+  );
+}
+
 interface IadminDashboardContentProps {
   dispatch: Dispatch<unknown>, homeContent: Ibook, youthContent: Ibook, books: Ibook[]
 }
@@ -103,21 +137,7 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
       <ChangeHomepage homeContent={homeContent} dispatch={dispatch} />
-      {/* {this.controller.addForumForm()} */}
-      {/* <EditPic editPic={editPic} auth={auth} dispatch={dispatch} /> */}
-      {/* {showTable ? (
-          // @ts-ignore
-          // eslint-disable-next-line max-len
-          // <PTable auth={auth} dispatch={dispatch} youthPics={youthPics}
-          familyPics={familyPics} otherPics={otherPics} musicPics={musicPics} habitatPics={habitatPics} />
-        ) : null} */}
-      {/* <YouthPageEditor
-        comp={this}
-        youthContent={youthContent}
-        youthTitle={youthTitle}
-        makeInput={this.forms.makeInput}
-      /> */}
-      {/* <AdminUserForm comp={this} /> */}
+      <ChangeNewsPage />
     </div>
   );
 }
