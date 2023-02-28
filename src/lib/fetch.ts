@@ -1,9 +1,9 @@
 import { Store } from 'react-notifications-component';
 import superagent from 'superagent';
 import 'react-notifications-component/dist/theme.css';
-import type { Dispatch } from 'react';
+import type { Dispatch, AnyAction } from 'redux';
 
-const fetchGet = async (dispatch:Dispatch<unknown>,
+const fetchGet = async (dispatch:Dispatch<AnyAction>,
   route: string, reducer: string,
 ): Promise<boolean> => {
   let res;

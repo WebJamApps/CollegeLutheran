@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Component, Dispatch } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
+import type { AnyAction, Dispatch } from 'redux';
 import CommonUtils from 'src/lib/commonUtils';
 import type { Ibook } from 'src/redux/mapStoreToProps';
 import mapStoreToProps from 'src/redux/mapStoreToProps';
 import { AdminDashboardContent } from './AdminDashboardContent';
 
 export interface IadminDashboardProps {
-  dispatch: Dispatch<unknown>;
+  dispatch: Dispatch<AnyAction>;
   homeContent: Ibook;// homepage text
   books: Ibook[];// news table
   youthContent: Ibook;// youth page text

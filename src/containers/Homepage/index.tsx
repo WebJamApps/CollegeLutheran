@@ -1,9 +1,10 @@
 import {
-  RefObject, Dispatch, Component, createRef,
+  RefObject, Component, createRef,
 } from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
 import fetch from 'src/lib/fetch';
+import type { Dispatch, AnyAction } from 'redux';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
@@ -16,7 +17,7 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
-  dispatch:Dispatch<unknown>
+  dispatch:Dispatch<AnyAction>
 };
 
 interface HomepageState {

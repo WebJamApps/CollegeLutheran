@@ -1,25 +1,13 @@
-import type { Dispatch } from 'react';
 import type { Iauth } from 'src/providers/Auth.provider';
 import superagent from 'superagent';
 import Fetch from 'src/lib/fetch';
 import commonUtils from 'src/lib/commonUtils';
-
-// async function createBook(data: any, auth:any): Promise<string> {
-//   if (data.type === '') data.type = 'otherPics';
-//   try {
-//     const res = await Fetch.fetchPost(superagent, auth, data);
-//     if (res.status === 201) {
-//       window.location.reload();
-//       return `${res.status}`;
-//     }
-//   } catch (e) { return `${(e as Error).message}`; }
-//   return 'Did not create book';
-// }
+import type { AnyAction, Dispatch } from 'redux';
 
 async function putAPI(
-  body:{ title:string;comments:string;type:string },
-  auth:Iauth, dispatch:Dispatch<unknown>,
-):Promise<void> {
+  body: { title: string; comments: string; type: string },
+  auth: Iauth, dispatch: Dispatch<AnyAction>,
+): Promise<void> {
   try {
     // TODO use Axios not superagent
     // TODO use provider for homePageContent not redux
@@ -49,10 +37,14 @@ async function putAPI(
 }
 
 async function addNewsAPI(
-  auth: Iauth, title: string, url: string, comments: string,
+  auth: Iauth,
+  dispatch: Dispatch<AnyAction>, clearForm: () => void,
+  title: string, url: string, comments: string,
 ): Promise<void> {
   try {
-    await superagent.post(`${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`)
+    await superagent.post(
+      `${process.env.BackendUrl}/book`).set('Authorization', `Bearer ${auth.token}`,
+    )
       .set('Accept', 'application/json')
       .send({
         title,
@@ -61,9 +53,11 @@ async function addNewsAPI(
         type: 'Forum',
         access: 'CLC',
       });
-    commonUtils.notify(title, 'Successfully updated news', 'success');
+    await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
+    clearForm();
+    commonUtils.notify(title, 'Successfully added news', 'success');
   } catch (e) {
-    commonUtils.notify(title, `Failed to update news, ${(e as Error).message}`, 'warning');
+    commonUtils.notify(title, `Failed to add news, ${(e as Error).message}`, 'warning');
   }
 }
 

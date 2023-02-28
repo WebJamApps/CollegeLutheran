@@ -1,8 +1,13 @@
 
 import { Link, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
+import {
+  useContext, useEffect,
+} from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
-import commonUtils from '../../lib/commonUtils';
+import type { Ibook, Store } from 'src/redux/mapStoreToProps';
+import { useDispatch, useSelector } from 'react-redux';
+import commonUtils from 'src/lib/commonUtils';
+import Fetch from 'src/lib/fetch';
 import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
 
@@ -37,6 +42,32 @@ export function MakeLink(props: ImakeLinkProps): JSX.Element {
   );
 }
 
+const sortBulletins = (bulletin: Ibook[]) => {
+  const sortedBulletins = bulletin.sort((a, b) => {
+    if (a.created_at && b.created_at) {
+      const aTime = new Date(a.created_at).getTime();
+      const bTime = new Date(b.created_at).getTime();
+      if (aTime > bTime) return -1;
+      if (aTime < bTime) return 1;
+    }
+    return 0;
+  });
+  return sortedBulletins;
+};
+
+const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
+  const m = mItem;
+  if (books) {
+    const bulletins: any[] = books.filter((b: any) => b.comments === 'worshipbulletin');
+    if (bulletins && bulletins.length > 0) {
+      let link = sortBulletins(bulletins)[0].url;
+      if (link === undefined) link = '';
+      m.link = link;
+    }
+  }
+  return m;
+};
+
 interface IcontinueMenuItemProps {
   menu: ImenuItem,
   index: number,
@@ -70,16 +101,27 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
   const {
     menu, index, handleClose,
   } = props;
+  const books = useSelector((store:Store) => store.books.books);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
+    })();
+  }, [dispatch]);
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const { pathname } = location;
   const userRoles: string[] = commonUtils.getUserRoles();
   const isAllowed = checkIsAllowed(menu, auth, userRoles);
-  if (!isAllowed) return null;
-  if (menu.link) {
+  if (!isAllowed) return <> </>;
+  let m = menu;
+  if (m.name === 'Bulletin') m = setBulletin(m, books);
+  if (location.pathname === '/staff' && m.link === '/staff') return <> </>;
+  if ((m.link === '/staff' || m.link === '/belief') && auth.isAuthenticated) return <> </>;
+  if (m.link) {
     return (
       <MakeLink
-        menu={menu}
+        menu={m}
         index={index}
         type="Link"
         handleClose={handleClose}
@@ -87,7 +129,7 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
     );
   }
   const cmiProps = {
-    menu, index, auth, pathname, handleClose,
+    menu: m, index, auth, pathname, handleClose,
   };
   return <ContinueMenuItem {...cmiProps} />;
 }

@@ -3,15 +3,16 @@ import {
 } from '@mui/material';
 import { Editor } from '@tinymce/tinymce-react';
 import {
-  Dispatch, SetStateAction, useContext, useState,
+  SetStateAction, useContext, useState,
 } from 'react';
+import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import type { Ibook } from 'src/redux/mapStoreToProps';
 import utils from './utils';
 
 function UpdateHomeButton(
-  { title, dispatch, comments = '' }: { title: string, dispatch: Dispatch<unknown>, comments?: string },
+  { title, dispatch, comments = '' }: { title: string, dispatch: Dispatch<AnyAction>, comments?: string },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -60,7 +61,7 @@ function CommentsEditor(
 }
 
 interface IchangeHomepageProps {
-  homeContent: Ibook, dispatch: Dispatch<unknown>
+  homeContent: Ibook, dispatch: Dispatch<AnyAction>
 }
 function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
   const { homeContent, dispatch } = props;
@@ -94,32 +95,43 @@ function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
   );
 }
 
-function ChangeNewsPage(): JSX.Element {
+function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [comments, setComments] = useState('');
+  const clearForm = () => {
+    setTitle(''); setUrl(''); setComments('');
+  };
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
-      <h5>Change News Page</h5>
+      <h5>Add to News Page</h5>
       <FormGroup>
-        <TextField label="Title" onChange={(evt) => setTitle(evt.target.value)} sx={{ marginBottom: '10px' }} />
-        <TextField label="Url" onChange={(evt) => setUrl(evt.target.value)} />
+        <TextField label="Title" value={title} onChange={(evt) => setTitle(evt.target.value)} sx={{ marginBottom: '10px' }} />
+        <TextField label="Url" value={url} onChange={(evt) => setUrl(evt.target.value)} />
         <FormControlLabel
           label="Is Worship Bulletin?"
           control={(
-            <Checkbox onChange={
-            (evt) => {
-              if (evt.target.checked) setComments('worshipbulletin');
-              else setComments('');
+            <Checkbox
+              checked={comments === 'worshipbulletin'}
+              onChange={
+              (evt) => {
+                if (evt.target.checked) setComments('worshipbulletin');
+                else setComments('');
+              }
             }
-          }
             />
-        )}
+          )}
         />
       </FormGroup>
       <hr />
-      <Button size="small" variant="contained" onClick={() => utils.addNewsAPI(auth, title, url, comments)}>
+      <Button
+        size="small"
+        variant="contained"
+        onClick={() => utils.addNewsAPI(
+          auth, dispatch, clearForm, title, url, comments,
+        )}
+      >
         Add News
       </Button>
     </div>
@@ -127,7 +139,7 @@ function ChangeNewsPage(): JSX.Element {
 }
 
 interface IadminDashboardContentProps {
-  dispatch: Dispatch<unknown>, homeContent: Ibook, youthContent: Ibook, books: Ibook[]
+  dispatch: Dispatch<AnyAction>, homeContent: Ibook, youthContent: Ibook, books: Ibook[]
 }
 export function AdminDashboardContent(props: IadminDashboardContentProps) {
   const {
@@ -137,7 +149,7 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
       <ChangeHomepage homeContent={homeContent} dispatch={dispatch} />
-      <ChangeNewsPage />
+      <ChangeNewsPage dispatch={dispatch} />
     </div>
   );
 }

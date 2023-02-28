@@ -1,15 +1,15 @@
-import React, { Dispatch } from 'react';
+import { Component } from 'react';
 import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables';
 import parser from 'html-react-parser';
-// import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
+import type { AnyAction, Dispatch } from 'redux';
 import mapStoreToProps, { Ibook } from '../redux/mapStoreToProps';
 
 interface Pprops {
-  dispatch: Dispatch<unknown>,
+  dispatch: Dispatch<AnyAction>,
   auth: { token: string },
   familyPics: Ibook[],
   youthPics: Ibook[],
@@ -19,7 +19,7 @@ interface Pprops {
 interface Pstate {
   columns: MUIDataTableColumnDef[]
 }
-export class PhotoTable extends React.Component<Pprops, Pstate> {
+export class PhotoTable extends Component<Pprops, Pstate> {
   superagent: superagent.SuperAgentStatic;
 
   constructor(props: Readonly<Pprops>) {
