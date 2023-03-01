@@ -22,25 +22,26 @@ export const makeShowHideCaption = (setPic: (arg0: typeof defaultCreatePic) => v
 
 interface IpicTextFieldProps {
   pic: typeof defaultCreatePic,
-  label: string,
-  key: 'url' | 'title',
+  label: string, url?:boolean, title?:boolean
   setPic: (arg0: typeof defaultCreatePic) => void
 }
 export function PicTextField(props: IpicTextFieldProps) {
   const {
-    pic, label, key, setPic,
+    pic, label, url, title, setPic,
   } = props;
+  const field: 'url' | 'title' = url ? 'url' : 'title';
   return (
     <TextField
+      id={`${field}-textfield`}
       sx={{ marginTop: '20px' }}
       label={label}
       type="text"
       fullWidth
       // eslint-disable-next-line security/detect-object-injection
-      value={pic[key]}
+      value={pic[field]}
       onChange={(evt) => {
         const { target: { value } } = evt;
-        setPic({ ...pic, [key]: value });
+        setPic({ ...pic, [field]: value });
         return value;
       }}
     />
@@ -71,9 +72,9 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
         <DialogContentText sx={{ marginBottom: '10px' }}>
           Enter all *required fields to create a new picture.
         </DialogContentText>
-        <PicTextField key="url" pic={pic} label="* Url" setPic={setPic} />
-        <PicTextField key="title" pic={pic} label="* Title" setPic={setPic} />
-        <Box sx={{ minWidth: 120, marginTop: '18px' }}>
+        <PicTextField url pic={pic} label="* Url" setPic={setPic} />
+        <PicTextField title pic={pic} label="* Title" setPic={setPic} />
+        <Box sx={{ minWidth: 120, marginTop: '20px' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
