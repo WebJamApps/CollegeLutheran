@@ -77,7 +77,7 @@ module.exports = (env) => ({
       {
         test: /\.(ts|tsx)?$/,
         loader: "ts-loader",
-        exclude: /node_modules/
+        exclude: env.production ? [/node_modules/,/test/] : /node_modules/
       },
       {
         enforce: 'pre',
