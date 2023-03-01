@@ -1,9 +1,13 @@
-import React, { RefObject } from 'react';
+import {
+  RefObject, Component, createRef,
+} from 'react';
 import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
-import About from './About';
+import fetch from 'src/lib/fetch';
+import type { Dispatch, AnyAction } from 'redux';
+import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
-import NarrowFacebookFeed from './NarrowFacebookFeed';
+import { FacebookFeed } from './NarrowFacebookFeed';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 import ELCALogo from '../../components/elcaLogo';
@@ -13,10 +17,7 @@ type HomepageProps = {
   width: number;
   height: number;
   homeContent?: Ibook;
-  familyPics?: Ibook[];
-  youthPics?: Ibook[];
-  otherPics?: Ibook[];
-  musicPics?: Ibook[];
+  dispatch:Dispatch<AnyAction>
 };
 
 interface HomepageState {
@@ -24,26 +25,26 @@ interface HomepageState {
   homeContent?: Ibook;
 }
 
-export class Homepage extends React.Component<HomepageProps, HomepageState> {
+export class Homepage extends Component<HomepageProps, HomepageState> {
   commonUtils: typeof commonUtils;
 
   parentRef: React.RefObject<unknown>;
 
+  fetch: typeof fetch;
+
   constructor(props: HomepageProps) {
     super(props);
     this.commonUtils = commonUtils;
-    this.parentRef = React.createRef();
-    this.state = { picsState: [] };
+    this.parentRef = createRef();
+    this.fetch = fetch;
   }
 
   async componentDidMount(): Promise<void> {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    const delay = (): Promise<void> => new Promise((res) => setTimeout(res, 4000));
-    return this.commonUtils.randomizePics(this, delay);
+    this.fetch.fetchGet(this.props.dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
   }
 
   render(): JSX.Element {
-    const { picsState } = this.state;
     const { width, targetRef } = this.props;
     const { homeContent } = this.props;
     return (
@@ -51,7 +52,7 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
         {width >= 900
           ? (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -59,10 +60,10 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
           )
           : (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} allPics={picsState} />
+              <About homeContent={homeContent} width={width} />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
-              <NarrowFacebookFeed allPics={picsState} />
+              <FacebookFeed />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             </div>
           )}
@@ -72,4 +73,4 @@ export class Homepage extends React.Component<HomepageProps, HomepageState> {
   }
 }
 
-export default connect(mapStoreToProps, null)(withResizeDetector(Homepage));
+export default connect(mapStoreToProps, null)(withResizeDetector(Homepage) as any);

@@ -21,7 +21,7 @@ const baseUrl = '/';
 
 module.exports = (env) => ({
   resolve: {
-    alias: { src: srcDir, 'react-dom': '@hot-loader/react-dom' },
+    alias: { src: srcDir},
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
@@ -32,7 +32,7 @@ module.exports = (env) => ({
   },
 
   entry: {
-    app: [`${srcDir}/main.tsx`],
+    app: [`${srcDir}/Main.tsx`],
     vendor: ['jquery', 'bootstrap'],
   },
 
@@ -75,14 +75,9 @@ module.exports = (env) => ({
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
-        use: [{
-          loader: 'ts-loader',
-          options: {
-            configFile: 'tsconfig.webpack.json',
-          },
-        }],
-        exclude: /node_modules/,
+        test: /\.(ts|tsx)?$/,
+        loader: "ts-loader",
+        exclude: /node_modules/
       },
       {
         enforce: 'pre',
@@ -106,12 +101,6 @@ module.exports = (env) => ({
         // issuer: [{ not: [{ test: /\.html$/i }] }],
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-      // {
-      //   test: /\.scss$/i,
-      //   issuer: [{ test: /\.html$/i }],
-      //   // SCSS required in templates cannot be extracted safely
-      //   use: scssRules,
-      // },
       { test: /\.html$/i, loader: 'html-loader' },
       { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
@@ -128,12 +117,7 @@ module.exports = (env) => ({
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
       process: 'process/browser',
-    }),
-    new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
-    }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
     }),
     new HtmlWebpackPlugin({
       template: `${srcDir}/index.ejs`,

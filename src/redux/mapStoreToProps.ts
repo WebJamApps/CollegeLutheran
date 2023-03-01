@@ -1,12 +1,3 @@
-export interface Auth {
-  isAuthenticated: boolean,
-  error: string,
-  email: string,
-  token: string,
-  user: {
-    userType?: string;
-  };
-}
 
 export interface Ibook {
   link?: string,
@@ -31,27 +22,16 @@ export interface Ibook {
 }
 
 export interface Store {
-  auth: Auth;
   youthContent: { youthContent: Ibook };
   homeContent: { homeContent: Ibook };
-  familyPics: { familyPics: Ibook[] };
-  youthPics: { youthPics: Ibook[] };
-  musicPics: { musicPics: Ibook[] };
   books: { books: Ibook[] };
-  otherPics: { otherPics: Ibook[], editPic: Ibook };
   showTable: { showTable: boolean };
 }
 
 const mapStoreToProps = (store: Store): Record<string, unknown> => ({
-  auth: store.auth,
   homeContent: store.homeContent.homeContent,
   youthContent: store.youthContent.youthContent,
-  familyPics: store.familyPics.familyPics,
-  youthPics: store.youthPics.youthPics,
-  musicPics: store.musicPics.musicPics,
   books: store.books.books,
-  otherPics: store.otherPics.otherPics,
-  editPic: store.otherPics.editPic,
   showTable: store.showTable.showTable,
 });
 export default mapStoreToProps;

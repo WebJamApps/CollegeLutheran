@@ -1,64 +1,59 @@
-import React, { Dispatch } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
-import mapStoreToProps, { Auth, Ibook } from '../../redux/mapStoreToProps';
+import { ReactNode, SetStateAction, useState } from 'react';
 import { DrawerContainer } from './DrawerContainer';
 import { MainPanel } from './MainPanel';
 
-export interface IappTemplateProps extends RouteComponentProps {
-  children: React.ReactNode;
-  auth: Auth;
-  dispatch: Dispatch<unknown>;
-  books?: Ibook[] | []
+export const makeDrawerClass = (menuOpen: boolean) => {
+  const className = `home-sidebar ${menuOpen ? 'open' : 'close'} drawer-container`;
+  return className;
+};
+
+export const makeHandleClose = (setMenuOpen: (value: SetStateAction<boolean>) => void) => () => setMenuOpen(false);
+
+export function toggleMobileMenu(menuOpen: boolean, setMenuOpen: (arg0: boolean) => void): void {
+  const mO = !menuOpen;
+  setMenuOpen(mO);
 }
 
-interface IappTemplateState { menuOpen: boolean }
+export const makeOnClick = (
+  menuOpen: boolean,
+  setMenuOpen: (value: SetStateAction<boolean>) => void,
+) => () => toggleMobileMenu(menuOpen, setMenuOpen);
 
-export class AppTemplate extends React.Component<IappTemplateProps, IappTemplateState> {
-  static defaultProps = {
-    dispatch: /* istanbul ignore next */(): void => { },
-    auth: {
-      isAuthenticated: false, user: { userType: '' }, email: '', error: '', token: '',
-    },
-  };
-
-  constructor(props: IappTemplateProps) {
-    super(props);
-    this.state = { menuOpen: false };
-    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
-    this.handleKeyMenu = this.handleKeyMenu.bind(this);
-  }
-
-  handleKeyMenu(e: { key: string; }): (void | null) {
-    if (e.key === 'Enter') return this.toggleMobileMenu();
-    return null;
-  }
-
-  toggleMobileMenu(): void {
-    console.log('toggleMobileMenu');
-    const { menuOpen } = this.state;
-    const mO = !menuOpen;
-    this.setState({ menuOpen: mO });
-  }
-
-  render(): JSX.Element {
-    const {
-      children, location, auth, books, dispatch,
-    } = this.props;
-    return (
-      <div className="page-host">
-        <DrawerContainer
-          location={location}
-          auth={auth}
-          books={books}
-          dispatch={dispatch}
-          menuOpen={this.state.menuOpen}
-          setMenuOpen={(bool: boolean) => this.setState({ menuOpen: bool })}
-        />
-        <MainPanel children={children} toggleMobileMenu={this.toggleMobileMenu} handleKeyMenu={this.handleKeyMenu} />
-      </div>
-    );
-  }
+export function handleKeyMenu(
+  e: { key: string; },
+  menuOpen: boolean,
+  setMenuOpen: (arg0: boolean) => void,
+): void {
+  if (e.key === 'Enter') toggleMobileMenu(menuOpen, setMenuOpen);
 }
 
-export default withRouter(connect(mapStoreToProps, null)(AppTemplate));
+export const makeOnKeyPress = (
+  menuOpen: boolean,
+  setMenuOpen: (value: SetStateAction<boolean>) => void,
+) => (evt: { key: string; }) => handleKeyMenu(evt, menuOpen, setMenuOpen);
+
+export function handleEscapePress(e: { key: string; }, setMenuOpen: (arg0: boolean) => void): (void) {
+  if (e.key === 'Escape') setMenuOpen(false);
+}
+
+export const makeHandleKeyPress = (
+  setMenuOpen: (value: SetStateAction<boolean>) => void,
+) => (evt: { key: string; }) => handleEscapePress(evt, setMenuOpen);
+
+export function AppTemplate({ children }:{ children: ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleClose = makeHandleClose(setMenuOpen);
+  const onClick = makeOnClick(menuOpen, setMenuOpen);
+  const onKeyPress = makeOnKeyPress(menuOpen, setMenuOpen);
+  const handleKeyPress = makeHandleKeyPress(setMenuOpen);
+  return (
+    <div className="page-host">
+      <DrawerContainer
+        handleKeyPress={handleKeyPress}
+        className={makeDrawerClass(menuOpen)}
+        handleClose={handleClose}
+      />
+      <MainPanel children={children} onClick={onClick} onKeyPress={onKeyPress} />
+    </div>
+  );
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import parser from 'html-react-parser';
-import { HashLink as Link } from 'react-router-hash-link';
+// import { HashLink as Link } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
@@ -34,33 +34,33 @@ const StaffContent = (): JSX.Element => (
             <li style={{ paddingTop: '5px', marginLeft: '-15px' }}>
               Reverend
               {' '}
-              <Link to="/staff/#David">David</Link>
+              {/* <Link to="/staff/#David">David</Link> */}
               {' '}
               C. Drebes,
               <b> Pastor, </b>
               <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Susan">Susan</Link>
+              {/* <Link to="/staff/#Susan">Susan</Link> */}
               {' '}
               Short, Director of Music,
               {' '}
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Sandi">Sandi</Link>
+              {/* <Link to="/staff/#Sandi">Sandi</Link> */}
               {' '}
               Roop, Parish Administrator,
               {' '}
               <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Lawrence">Lawrence</Link>
+              {/* <Link to="/staff/#Lawrence">Lawrence</Link> */}
               {' '}
               Keffer, Sexton
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <Link to="/staff/#Richard">Richard</Link>
+              {/* <Link to="/staff/#Richard">Richard</Link> */}
               {' '}
               Hoffman, Financial Administrator
             </li>

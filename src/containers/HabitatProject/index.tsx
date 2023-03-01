@@ -1,4 +1,3 @@
-import React from 'react';
 import HabitatProjectContent from './HabitatProjectContent';
 import commonUtils from '../../lib/commonUtils';
 

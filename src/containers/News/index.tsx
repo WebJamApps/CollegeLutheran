@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
+import commonUtils from 'src/lib/commonUtils';
 import DefaultNewsContent from './NewsContent';
 import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
-import commonUtils from '../../lib/commonUtils';
 
 export function News(props: { books: Ibook[] }): JSX.Element {
   const { books } = props;
@@ -18,4 +18,4 @@ export function News(props: { books: Ibook[] }): JSX.Element {
   return <DefaultNewsContent books={books} />;
 }
 
-export default connect(mapStoreToProps, null)(News);
+export default connect(mapStoreToProps, null)(News as any);
