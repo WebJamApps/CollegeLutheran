@@ -23,12 +23,12 @@ export const makeShowHideCaption = (setPic: (arg0: typeof defaultCreatePic) => v
 interface IpicTextFieldProps {
   pic: typeof defaultCreatePic,
   label: string,
-  value:string,
-  onChange: (arg0: any) => any
+  key: 'url' | 'title',
+  setPic: (arg0: typeof defaultCreatePic) => void
 }
 export function PicTextField(props: IpicTextFieldProps) {
   const {
-    pic, onChange, label, value,
+    pic, label, key, setPic,
   } = props;
   return (
     <TextField
@@ -36,8 +36,13 @@ export function PicTextField(props: IpicTextFieldProps) {
       label={label}
       type="text"
       fullWidth
-      value={value}
-      onChange={onChange}
+      // eslint-disable-next-line security/detect-object-injection
+      value={pic[key]}
+      onChange={(evt) => {
+        const { target: { value } } = evt;
+        setPic({ ...pic, [key]: value });
+        return value;
+      }}
     />
   );
 }
@@ -66,26 +71,8 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
         <DialogContentText sx={{ marginBottom: '10px' }}>
           Enter all *required fields to create a new picture.
         </DialogContentText>
-        <PicTextField
-          value={pic.url}
-          pic={pic}
-          label="* Url"
-          onChange={(evt) => {
-            const { target: { value } } = evt;
-            setPic({ ...pic, url: value });
-            return value;
-          }}
-        />
-        <PicTextField
-          value={pic.title}
-          pic={pic}
-          label="* Title"
-          onChange={(evt) => {
-            const { target: { value } } = evt;
-            setPic({ ...pic, title: value });
-            return value;
-          }}
-        />
+        <PicTextField key="url" pic={pic} label="* Url" setPic={setPic} />
+        <PicTextField key="title" pic={pic} label="* Title" setPic={setPic} />
         <Box sx={{ minWidth: 120, marginTop: '18px' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
