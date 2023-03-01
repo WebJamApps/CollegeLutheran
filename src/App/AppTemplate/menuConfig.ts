@@ -5,13 +5,14 @@ export interface ImenuItem {
   link: string,
   name: string,
   auth?: boolean,
+  nav?: string,
 }
 
-export const menuItems = [{
+export const menuItems:ImenuItem[] = [{
   classname: 'dashboard',
   type: 'link',
   iconClass: 'fas fa-user-secret',
-  link: 'admin',
+  link: '/admin',
   name: 'Admin Dashboard',
   auth: true,
 },

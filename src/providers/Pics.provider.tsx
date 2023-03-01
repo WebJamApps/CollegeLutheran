@@ -1,31 +1,12 @@
-import { createContext, ReactChild, useEffect } from 'react';
-import createPersistedState from 'use-persisted-state';
+import {
+  createContext, ReactNode, useEffect, useState,
+} from 'react';
 import axios from 'axios';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 
-export interface Ipicture {
-  link?: string,
-  caption?: string,
-  modify?: JSX.Element,
-  thumbnail?: string,
-  title: string,
-  _id: string,
-  type: string,
-  created_at?: string,
-  author?: string,
-  numberPages?: number,
-  dateOfPub?: number,
-  url?: string,
-  isbn?: string,
-  siteLocation?: string,
-  numberOfCopies?: number,
-  access?: string,
-  comments?: string,
-  checkedOutBy?: string,
-  checkedOutByName?: string,
-}
 export interface IpictureTypes {
-  musicPics: Ipicture[], familyPics: Ipicture[], youthPics: Ipicture[],
-  habitatPics: Ipicture[], otherPics: Ipicture[],
+  musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
+  habitatPics: Ibook[], otherPics: Ibook[],
 }
 const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
@@ -39,9 +20,6 @@ const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   setPictures(pictures);
 };
 
-const usePictureState: (arg0: IpictureTypes) =>
-[IpictureTypes, (arg0: IpictureTypes) => void] = createPersistedState('pictures', sessionStorage);
-
 export const PictureContext = createContext({
   pictures: {
     musicPics: [],
@@ -54,10 +32,10 @@ export const PictureContext = createContext({
   getPictures: () => Promise.resolve(),
 });
 
-type Props = { children: ReactChild };
+type Props = { children: ReactNode };
 export function PictureProvider({ children }: Props): JSX.Element {
   const { Provider } = PictureContext;
-  const [pictures, setPictures] = usePictureState({} as IpictureTypes);
+  const [pictures, setPictures] = useState({} as IpictureTypes);
 
   const getPictures = async () => populatePictures(setPictures);
 

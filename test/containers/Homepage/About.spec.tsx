@@ -1,15 +1,15 @@
 import {
   About, shuffle, PictureSection,
 } from 'src/containers/Homepage/About';
-import type { Ipicture } from 'src/Providers/PicsProvider';
 import renderer from 'react-test-renderer';
+import type { Ibook } from 'src/redux/mapStoreToProps';
 
 describe('About', () => {
   it('shuffles pictures randomly', () => {
     const arr = [{ title: '', _id: 'a', type: '' },
       { title: '', _id: 'b', type: '' },
       { title: '', _id: 'c', type: '' },
-      { title: '', _id: 'd', type: '' }] as Ipicture[];
+      { title: '', _id: 'd', type: '' }] as Ibook[];
     const result = shuffle(arr);
     expect(result[0]._id === 'a' || result[0]._id === 'b' || result[0]._id === 'c' || result[0]._id === 'd').toBe(true);
     expect(result[1]._id === 'a' || result[1]._id === 'b' || result[1]._id === 'c' || result[1]._id === 'd').toBe(true);

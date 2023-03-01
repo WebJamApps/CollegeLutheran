@@ -21,7 +21,7 @@ const baseUrl = '/';
 
 module.exports = (env) => ({
   resolve: {
-    alias: { src: srcDir, 'react-dom': '@hot-loader/react-dom' },
+    alias: { src: srcDir},
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
@@ -32,7 +32,7 @@ module.exports = (env) => ({
   },
 
   entry: {
-    app: [`${srcDir}/main.tsx`],
+    app: [`${srcDir}/Main.tsx`],
     vendor: ['jquery', 'bootstrap'],
   },
 

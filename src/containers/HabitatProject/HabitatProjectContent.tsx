@@ -1,9 +1,8 @@
-import { Grid } from '@material-ui/core';
-import { useContext, useEffect, useState } from 'react';
-import { PictureContext } from 'src/Providers/PicsProvider';
-import type { Ibook } from 'src/redux/mapStoreToProps';
-import ELCALogo from '../../components/elcaLogo';
-import PicSlider from '../../components/PicSlider';
+import { Grid } from '@mui/material';
+import { useContext } from 'react';
+import { PictureContext } from 'src/providers/Pics.provider';
+import ELCALogo from 'src/components/elcaLogo';
+import PicSlider from 'src/components/PicSlider';
 
 const HabitatGridItem = (props: { children: any; }) => {
   const { children } = props;

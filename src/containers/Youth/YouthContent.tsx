@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PictureContext } from 'src/Providers/PicsProvider';
+import { PictureContext } from 'src/providers/Pics.provider';
 import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
 import type { YouthProps } from './index';

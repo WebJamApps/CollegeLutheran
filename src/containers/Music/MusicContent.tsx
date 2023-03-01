@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PictureContext } from 'src/Providers/PicsProvider';
+import { PictureContext } from 'src/providers/Pics.provider';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 

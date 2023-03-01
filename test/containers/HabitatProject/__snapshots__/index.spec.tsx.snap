@@ -5,10 +5,10 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
   className="page-content"
 >
   <div
-    className="MuiGrid-root MuiGrid-container"
+    className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "marginInline": "0",
@@ -61,7 +61,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "paddingInline": "20px",
@@ -80,7 +80,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         Volunteer Sign Ups
       </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item css-capmjd-MuiGrid-root"
       >
         <div
           style={
@@ -122,7 +122,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "paddingInline": "20px",
@@ -146,7 +146,6 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         <div
           className="slick-slider slick-initialized"
         >
-          
           <div
             className="slick-list"
           >
@@ -162,8 +161,6 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
               }
             />
           </div>
-          
-          
         </div>
       </div>
       <p
@@ -186,7 +183,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       </p>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "paddingInline": "20px",
@@ -205,7 +202,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         Construction Team
       </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
       >
         <div>
           <p>
@@ -238,7 +235,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "paddingInline": "20px",
@@ -257,7 +254,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         Support Team
       </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
       >
         <div>
           <p>
@@ -314,7 +311,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 css-11l5t4l-MuiGrid-root"
       style={
         {
           "paddingInline": "20px",
@@ -333,7 +330,7 @@ exports[`Habitat Project Renders the Habitat Project page 1`] = `
         Family Team
       </h4>
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-item"
+        className="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
       >
         <div>
           <p>
