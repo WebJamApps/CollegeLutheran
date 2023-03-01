@@ -77,7 +77,10 @@ module.exports = (env) => ({
       {
         test: /\.(ts|tsx)?$/,
         loader: "ts-loader",
-        exclude: env.production ? [/node_modules/,/test/] : /node_modules/
+        exclude: env.production ? [/node_modules/,/test/] : /node_modules/,
+        options: {
+          configFile: env.production ? "tsconfig.build.json" : "tsconfig.json"
+      }
       },
       {
         enforce: 'pre',

@@ -113,6 +113,6 @@
   "parserOptions": {
     "ecmaVersion": 13,
     "sourceType": "module",
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   }
 }
