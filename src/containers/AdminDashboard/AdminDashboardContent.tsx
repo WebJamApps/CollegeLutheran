@@ -9,6 +9,7 @@ import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import type { Ibook } from 'src/redux/mapStoreToProps';
+import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
 function UpdateHomeButton(
@@ -145,11 +146,23 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
   const {
     dispatch, homeContent, youthContent, books,
   } = props;
+  const [showCreatePic, setShowCreatePic] = useState(false);
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
       <ChangeHomepage homeContent={homeContent} dispatch={dispatch} />
+      <div style={{ margin: 'auto', maxWidth: '400px' }}>
+        <Button
+          sx={{ textAlign: 'center' }}
+          variant="contained"
+          size="large"
+          onClick={() => setShowCreatePic(true)}
+        >
+          Add New Picture
+        </Button>
+      </div>
       <ChangeNewsPage dispatch={dispatch} />
+      <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
     </div>
   );
 }

@@ -52,7 +52,21 @@ async function addNewsAPI(
   }
 }
 
+async function createPicAPI(
+  getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
+  pic: Record<string, unknown>, auth: Iauth,
+): Promise<void> {
+  try {
+    await superagent.post(`${process.env.BackendUrl}/book`)
+      .set('Authorization', `Bearer ${auth.token}`).set('Accept', 'application/json')
+      .send(pic);
+    await getPictures();
+    setShowDialog(false);
+  } catch (e) { console.log((e as Error).message); }
+}
+
 export default {
   addNewsAPI,
   putAPI,
+  createPicAPI,
 };
