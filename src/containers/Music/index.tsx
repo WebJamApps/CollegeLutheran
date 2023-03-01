@@ -9,5 +9,5 @@ export const Music = (): JSX.Element => {
 };
 
 Music.defaultProps = { musicPics: [] };
-// TODO remove usage of connect here
+
 export default connect(mapStoreToProps, null)(Music as any);

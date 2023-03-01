@@ -12,5 +12,5 @@ export const Youth = ({ youthPics, youthContent }: YouthProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Youth Ministry', window.screen.width);
   return (<YouthContent youthPics={youthPics} youthContent={youthContent} />);
 };
-// TODO remove usage of connect here
+
 export default connect(mapStoreToProps, null)(Youth as any);

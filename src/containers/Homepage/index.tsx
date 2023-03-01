@@ -72,5 +72,5 @@ export class Homepage extends Component<HomepageProps, HomepageState> {
     );
   }
 }
-// TODO remove usage of connect here
+
 export default connect(mapStoreToProps, null)(withResizeDetector(Homepage) as any);

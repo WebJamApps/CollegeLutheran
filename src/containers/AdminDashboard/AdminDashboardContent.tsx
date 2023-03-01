@@ -129,7 +129,7 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
         size="small"
         variant="contained"
         onClick={() => utils.addNewsAPI(
-          auth, dispatch, clearForm, title, url, comments,
+          auth, dispatch, clearForm, { title, url, comments },
         )}
       >
         Add News
