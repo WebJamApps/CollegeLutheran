@@ -40,7 +40,36 @@ async function putAPI(// used to update the text the homepage or on the youthpag
 async function addNewsAPI(
   auth: Iauth,
   dispatch: Dispatch<AnyAction>, clearForm: () => void,
-  data: { title: string, url: string, comments: string },
+  dialogData: { title: string, url: string, comments: string },
+): Promise<void> {
+  try {
+    const data = {
+      ...dialogData,
+      type: 'Forum',
+      access: 'CLC',
+    };
+    const config = {
+      url: `${process.env.BackendUrl}/book`,
+      method: 'post',
+      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+      data,
+
+    };
+    const { status } = await axios.request(config);
+    console.log(status);
+    if (status === 201) {
+      await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
+      clearForm();
+      commonUtils.notify(data.title, 'Successfully added news', 'success');
+    }
+  } catch (e) {
+    commonUtils.notify(dialogData.title, `Failed to add news, ${(e as Error).message}`, 'warning');
+  }
+}
+
+async function createPicAPI(
+  getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
+  data: Record<string, unknown>, auth: Iauth,
 ): Promise<void> {
   try {
     const config = {
@@ -48,32 +77,13 @@ async function addNewsAPI(
       method: 'post',
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
       data,
-      type: 'Forum',
-      access: 'CLC',
     };
-    await axios.request(config);
-    await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
-    clearForm();
-    commonUtils.notify(data.title, 'Successfully added news', 'success');
-  } catch (e) {
-    commonUtils.notify(data.title, `Failed to add news, ${(e as Error).message}`, 'warning');
-  }
-}
-
-async function createPicAPI(
-  getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
-  pic: Record<string, unknown>, auth: Iauth,
-): Promise<void> {
-  try {
-    const config = {
-      url: `${process.env.BackendUrl}/book`,
-      method: 'post',
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      pic,
-    };
-    await axios.request(config);
-    await getPictures();
-    setShowDialog(false);
+    const { status } = await axios.request(config);
+    console.log(status);
+    if (status === 201) {
+      await getPictures();
+      setShowDialog(false);
+    }
   } catch (e) { console.log((e as Error).message); }
 }
 
