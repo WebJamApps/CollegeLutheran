@@ -18,7 +18,7 @@ async function putAPI(// used to update the text the homepage or on the youthpag
     const { status } = await axios.request(config);
     if (status === 200) {
       await Fetch.fetchGet(dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
-      commonUtils.notify('Homepage', 'sucessfully updated', 'success');
+      commonUtils.notify('Homepage', 'successfully updated', 'success');
     }
   } catch (e) {
     if ((e as any).status === 400) {
@@ -31,6 +31,7 @@ async function putAPI(// used to update the text the homepage or on the youthpag
         };
         await axios.request(config);
       } catch (err) {
+        commonUtils.notify('Homepage', `Failed to update homepage, ${(e as Error).message}`, 'warning');
         console.log((err as Error).message);
       }
     }
@@ -81,10 +82,13 @@ async function createPicAPI(
     const { status } = await axios.request(config);
     console.log(status);
     if (status === 201) {
+      commonUtils.notify(`${data.title}`, 'Successfully added picture', 'success');
       await getPictures();
       setShowDialog(false);
     }
-  } catch (e) { console.log((e as Error).message); }
+  } catch (e) {
+    commonUtils.notify(`${data.title}`, `Failed to add picture, ${(e as Error).message}`, 'warning');
+  }
 }
 
 export default {
