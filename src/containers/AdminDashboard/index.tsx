@@ -13,6 +13,13 @@ export interface IadminDashboardProps {
   books: Ibook[];// news table
   youthContent: Ibook;// youth page text
 }
+// export interface IadminDashboardProps {
+//   getContent: Promise<void>;
+//   homePage: Ibook;// homepage text
+//   books: Ibook[];// news table
+//   youthPage: Ibook;// youth page text
+//   dispatch: Dispatch<AnyAction>;
+// }
 export class AdminDashboard extends Component<IadminDashboardProps> {
   commonUtils = CommonUtils;
 
@@ -29,6 +36,12 @@ export class AdminDashboard extends Component<IadminDashboardProps> {
     } = this.props;
     return <AdminDashboardContent dispatch={dispatch} books={books} homeContent={homeContent} youthContent={youthContent} />;
   }
+  // render(): JSX.Element {
+  //   const {
+  //     getContent, books, homePage, youthPage, dispatch,
+  //   } = this.props;
+  //   return <AdminDashboardContent dispatch={dispatch} getContent={getContent} books={books} homePage={homePage} youthPage={youthPage} />;
+  // }
 }
 
 export default connect(mapStoreToProps, null)(AdminDashboard as any);

@@ -38,6 +38,40 @@ async function putAPI(// used to update the text the homepage or on the youthpag
   }
 }
 
+// async function putAPI(// used to update the text the homepage or on the youthpage
+//   getContent: () => Promise<void>, data: Record<string, unknown>,
+//   auth: Iauth,
+// ): Promise<void> {
+//   try {
+//     const config = {
+//       url: `${process.env.BackendUrl}/book/one?type=${data.type}`,
+//       method: 'put',
+//       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//       data,
+//     };
+//     const { status } = await axios.request(config);
+//     if (status === 200) {
+//       commonUtils.notify('Homepage', 'successfully updated', 'success');
+//       await getContent();
+//     }
+//   } catch (e) {
+//     if ((e as any).status === 400) {
+//       try {
+//         const config = {
+//           url: `${process.env.BackendUrl}/book`,
+//           method: 'post',
+//           headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//           data,
+//         };
+//         await axios.request(config);
+//       } catch (err) {
+//         commonUtils.notify('Homepage', `Failed to update homepage, ${(e as Error).message}`, 'warning');
+//         console.log((err as Error).message);
+//       }
+//     }
+//   }
+// }
+
 async function addNewsAPI(
   auth: Iauth,
   dispatch: Dispatch<AnyAction>, clearForm: () => void,

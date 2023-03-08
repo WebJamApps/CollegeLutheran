@@ -16,13 +16,13 @@ type HomepageProps = {
   targetRef: RefObject<HTMLDivElement>;
   width: number;
   height: number;
-  homeContent?: Ibook;
+  // homeContent?: Ibook;
   dispatch:Dispatch<AnyAction>
 };
 
 interface HomepageState {
   picsState: Ibook[];
-  homeContent?: Ibook;
+  // homeContent?: Ibook;
 }
 
 export class Homepage extends Component<HomepageProps, HomepageState> {
@@ -41,18 +41,18 @@ export class Homepage extends Component<HomepageProps, HomepageState> {
 
   async componentDidMount(): Promise<void> {
     this.commonUtils.setTitleAndScroll('', window.screen.width);
-    this.fetch.fetchGet(this.props.dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+  //   this.fetch.fetchGet(this.props.dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
   }
 
   render(): JSX.Element {
     const { width, targetRef } = this.props;
-    const { homeContent } = this.props;
+    // const { homeContent } = this.props;
     return (
       <div ref={targetRef}>
         {width >= 900
           ? (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} />
+              <About width={width} />
               <hr />
               <WideFacebookFeed width={width} />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
@@ -60,7 +60,10 @@ export class Homepage extends Component<HomepageProps, HomepageState> {
           )
           : (
             <div className="page-content">
-              <About homeContent={homeContent} width={width} />
+              <About
+              // homeContent={homeContent}
+                width={width}
+              />
               <hr />
               <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
               <FacebookFeed />

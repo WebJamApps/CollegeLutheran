@@ -2,10 +2,14 @@ import { useContext } from 'react';
 import { PictureContext } from 'src/providers/Pics.provider';
 import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
-import type { YouthProps } from './index';
+import { ContentContext } from 'src/providers/Content.provider';
+// import type { YouthProps } from './index';
 
-export const YouthContent = ({ youthContent }: YouthProps): JSX.Element => {
+export const YouthContent = (
+  // { youthContent }: YouthProps
+): JSX.Element => {
   const { pictures } = useContext(PictureContext);
+  const { content: { youthPage } } = useContext(ContentContext);
   const { youthPics = [] } = pictures;
   return (
     <div className="page-content">
@@ -53,9 +57,9 @@ export const YouthContent = ({ youthContent }: YouthProps): JSX.Element => {
             We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
           </p>
           <hr />
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(youthContent && youthContent.title ? youthContent.title : '')}</h5>
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(youthPage && youthPage.title ? youthPage.title : '')}</h5>
           <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-            {parser(youthContent && youthContent.comments ? youthContent.comments : '')}
+            {parser(youthPage && youthPage.comments ? youthPage.comments : '')}
           </section>
         </div>
         <div className="youthELCA">
@@ -73,3 +77,10 @@ export const YouthContent = ({ youthContent }: YouthProps): JSX.Element => {
     </div>
   );
 };
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error('Function not implemented.');
+}
+YouthContent.defaultProps = { youthPics: [] };
+
+export default YouthContent;
+
