@@ -9,7 +9,7 @@ import { AdminDashboardContent } from './AdminDashboardContent';
 
 export interface IadminDashboardProps {
   dispatch: Dispatch<AnyAction>;
-  homeContent: Ibook;// homepage text
+  // homeContent: Ibook;// homepage text
   books: Ibook[];// news table
   youthContent: Ibook;// youth page text
 }
@@ -32,9 +32,18 @@ export class AdminDashboard extends Component<IadminDashboardProps> {
 
   render(): JSX.Element {
     const {
-      dispatch, books, homeContent, youthContent,
+      dispatch, books,
+      // homeContent,
+      youthContent,
     } = this.props;
-    return <AdminDashboardContent dispatch={dispatch} books={books} homeContent={homeContent} youthContent={youthContent} />;
+    return (
+      <AdminDashboardContent
+        dispatch={dispatch}
+        books={books}
+    //  homeContent={homeContent}
+        youthContent={youthContent}
+      />
+    );
   }
   // render(): JSX.Element {
   //   const {

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 async function putAPI(// used to update the text the homepage or on the youthpage
   data: { title: string; comments: string; type: string },
-  auth: Iauth, dispatch: Dispatch<AnyAction>,
+  auth: Iauth, getContent: () => Promise<void>,
 ): Promise<void> {
   try {
     const config = {
@@ -17,7 +17,8 @@ async function putAPI(// used to update the text the homepage or on the youthpag
     };
     const { status } = await axios.request(config);
     if (status === 200) {
-      await Fetch.fetchGet(dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
+      await getContent();
+      // Fetch.fetchGet(dispatch, 'book/one?type=homePageContent', 'GOT_HOMEPAGE');
       commonUtils.notify('Homepage', 'successfully updated', 'success');
     }
   } catch (e) {
@@ -39,7 +40,7 @@ async function putAPI(// used to update the text the homepage or on the youthpag
 }
 
 // async function putAPI(// used to update the text the homepage or on the youthpage
-//   getContent: () => Promise<void>, data: Record<string, unknown>,
+//   getContent: () => Promise<void>, data: { title: string, comments: string, type: string },
 //   auth: Iauth,
 // ): Promise<void> {
 //   try {

@@ -8,12 +8,21 @@ import {
 import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import type { Ibook } from 'src/redux/mapStoreToProps';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
 function UpdateHomeButton(
-  { title, dispatch, comments = '' }: { title: string, dispatch: Dispatch<AnyAction>, comments?: string },
+  {
+    title,
+    // dispatch,
+    getContent,
+    comments = '',
+  }: { title: string,
+    // dispatch: Dispatch<AnyAction>,
+    getContent: () => Promise<void>,
+    comments?: string },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -23,14 +32,13 @@ function UpdateHomeButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth, dispatch)}
+        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth, getContent)}
       >
         Update Homepage
       </Button>
     </div>
   );
 }
-
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
 }
@@ -61,13 +69,16 @@ function CommentsEditor(
   );
 }
 
-interface IchangeHomepageProps {
-  homeContent: Ibook, dispatch: Dispatch<AnyAction>
-}
-function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
-  const { homeContent, dispatch } = props;
-  const [title, setTitle] = useState(homeContent.title);
-  const [comments, setComments] = useState(homeContent.comments);
+// interface IchangeHomepageProps {
+//   // homeContent: Ibook, dispatch: Dispatch<AnyAction>
+// }
+function ChangeHomepage(
+// props: IchangeHomepageProps
+): JSX.Element {
+  const { content: { homePage }, getContent } = useContext(ContentContext);
+  // const { homeContent, dispatch } = props;
+  const [title, setTitle] = useState(homePage.title);
+  const [comments, setComments] = useState(homePage.comments);
   const inputParams = {
     type: 'text',
     label: 'Title',
@@ -89,7 +100,11 @@ function ChangeHomepage(props: IchangeHomepageProps): JSX.Element {
           {forms.makeInput(inputParams)}
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateHomeButton title={title} comments={comments} dispatch={dispatch} />
+          <UpdateHomeButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+          />
         </form>
       </div>
     </div>
@@ -140,17 +155,21 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
 }
 
 interface IadminDashboardContentProps {
-  dispatch: Dispatch<AnyAction>, homeContent: Ibook, youthContent: Ibook, books: Ibook[]
+  dispatch: Dispatch<AnyAction>,
+  // homeContent: Ibook,
+  youthContent: Ibook, books: Ibook[]
 }
 export function AdminDashboardContent(props: IadminDashboardContentProps) {
   const {
-    dispatch, homeContent, youthContent, books,
+    dispatch,
+    // homeContent,
+    youthContent, books,
   } = props;
   const [showCreatePic, setShowCreatePic] = useState(false);
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-      <ChangeHomepage homeContent={homeContent} dispatch={dispatch} />
+      <ChangeHomepage />
       <div style={{ margin: 'auto', maxWidth: '400px' }}>
         <Button
           sx={{ textAlign: 'center' }}
