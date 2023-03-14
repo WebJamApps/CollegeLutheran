@@ -1,20 +1,41 @@
-import React from 'react';
 import parser from 'html-react-parser';
-// import { HashLink as Link } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
-const makeStaff = () => {
-  let moreStaff = '';
-  for (let i = 0; i < staffItems.staff.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
-    moreStaff += `<hr /><section id="${staffItems.staff[i].sectionId}"><h4>${staffItems.staff[i].title}</h4>`;
-    // eslint-disable-next-line security/detect-object-injection
-    moreStaff += `<img class="staffPicture" alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
-    // eslint-disable-next-line security/detect-object-injection
-    moreStaff += `<div class="staffDescription">${staffItems.staff[i].desc}</div></section>`;
-  }
-  return parser(moreStaff);
-};
+// const makeStaff = () => {
+//   let moreStaff = '';
+//   for (let i = 0; i < staffItems.staff.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
+//     moreStaff += `<hr /><section id="${staffItems.staff[i].sectionId}"><h4>${staffItems.staff[i].title}</h4>`;
+//     // eslint-disable-next-line security/detect-object-injection
+//     moreStaff += `<img class="staffPicture" width="${staffItems.staff[i].width}"`
+//     + `alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
+//     // eslint-disable-next-line security/detect-object-injection
+//     moreStaff += `<div class="staffDescription">${staffItems.staff[i].desc}</div></section>`;
+//   }
+//   return parser(moreStaff);
+// };
+
+function MoreStaff() {
+  return (
+    <>
+      {staffItems.staff.map((s: any) => (
+        <section key={s.sectionId} id={s.sectionId}>
+          <hr />
+          <h4>
+            {s.title}
+          </h4>
+          <img
+            className="staffPicture"
+            style={{ width: s.width }}
+            alt={s.sectionId}
+            src={s.src}
+          />
+          <div className="staffDescription">{parser(s.desc)}</div>
+        </section>
+      ))}
+    </>
+  );
+}
 
 const pageName = 'staff';
 
@@ -34,35 +55,42 @@ const StaffContent = (): JSX.Element => (
             <li style={{ paddingTop: '5px', marginLeft: '-15px' }}>
               Reverend
               {' '}
-              {/* <Link to="/staff/#David">David</Link> */}
+              <a href="/staff/#David">David</a>
               {' '}
               C. Drebes,
               <b> Pastor, </b>
               <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              {/* <Link to="/staff/#Susan">Susan</Link> */}
+              <a href="/staff/#Susan">Susan</a>
               {' '}
               Short, Director of Music,
               {' '}
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              {/* <Link to="/staff/#Sandi">Sandi</Link> */}
+              <a href="/staff/#Kellie">Kellie</a>
+              {' '}
+              Rice, Faith Formation Ministries Coordinator
+              {' '}
+              <a href="mailto:kellierice@collegelutheran.org">kellierice@collegelutheran.org</a>
+            </li>
+            <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
+              <a href="/staff/#Sandi">Sandi</a>
               {' '}
               Roop, Parish Administrator,
               {' '}
               <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              {/* <Link to="/staff/#Lawrence">Lawrence</Link> */}
+              <a href="/staff/#Lawrence">Lawrence</a>
               {' '}
               Keffer, Sexton
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              {/* <Link to="/staff/#Richard">Richard</Link> */}
+              <a href="/staff/#Richard">Richard</a>
               {' '}
-              Hoffman, Financial Administrator
+              Richard Hoffman, Financial Administrator
             </li>
           </ul>
         </div>
@@ -141,7 +169,8 @@ const StaffContent = (): JSX.Element => (
               </p>
             </div>
           </section>
-          {makeStaff()}
+          {/* {makeStaff()} */}
+          <MoreStaff />
         </div>
         <ELCALogo />
       </div>
