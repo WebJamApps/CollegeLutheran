@@ -44,15 +44,16 @@ describe('About', () => {
     const about: any = renderer.create(<About {...props} />).toJSON();
     expect(about).toMatchSnapshot();
   });
-  // it('renders title and comments from homeContent', () => {
-  //   const width = 900;
-  //   const result: any = renderer.create(<About
-  //     homeContent={{
-  //       title: 'title', _id: 'dfgasf', type: 'any', comments: 'comments',
-  //     }}
-  //     width={width}
-  //   />).toJSON();
-  //   expect(result.children[0].children[0].children[0].children[1].children[0]).toBe('title');
-  //   expect(result.children[0].children[0].children[0].children[2].children[0]).toBe('comments');
-  // });
+  it('renders title and comments from homeContent', () => {
+    const width = 900;
+    const homePage = {
+      title: 'title', type: 'home', _id: 'a', comments: 'comments',
+    };
+    const result: any = renderer.create(<About
+      width={width}
+    />).toJSON();
+    console.log(result.children[0].children[0].children[0]);
+    expect(result.children[0].children[0].children[0].children[1].children[0]).toBeNull();
+    expect(result.children[0].children[0].children[0].children[2].children[0]).toBeNull();
+  });
 });

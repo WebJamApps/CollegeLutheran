@@ -36,33 +36,38 @@ const StaffContent = (): JSX.Element => (
               {' '}
               {/* <Link to="/staff/#David">David</Link> */}
               {' '}
-              C. Drebes,
+              David C. Drebes,
               <b> Pastor, </b>
               <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               {/* <Link to="/staff/#Susan">Susan</Link> */}
               {' '}
-              Short, Director of Music,
+              Susan Short, Director of Music,
               {' '}
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               {/* <Link to="/staff/#Sandi">Sandi</Link> */}
               {' '}
-              Roop, Parish Administrator,
+              Sandi Roop, Parish Administrator,
               {' '}
               <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               {/* <Link to="/staff/#Lawrence">Lawrence</Link> */}
               {' '}
-              Keffer, Sexton
+              Lawrence Keffer, Sexton
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
               {/* <Link to="/staff/#Richard">Richard</Link> */}
               {' '}
-              Hoffman, Financial Administrator
+              Richard Hoffman, Financial Administrator
+            </li>
+            <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
+              {/* <Link to="/staff/#Kellie">Kellie</Link> */}
+              {' '}
+              Kellie Rice, Youth Coordinator
             </li>
           </ul>
         </div>

@@ -3,11 +3,8 @@ import { PictureContext } from 'src/providers/Pics.provider';
 import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
 import { ContentContext } from 'src/providers/Content.provider';
-// import type { YouthProps } from './index';
 
-export const YouthContent = (
-  // { youthContent }: YouthProps
-): JSX.Element => {
+export const YouthContent = (): JSX.Element => {
   const { pictures } = useContext(PictureContext);
   const { content: { youthPage } } = useContext(ContentContext);
   const { youthPics = [] } = pictures;
@@ -77,9 +74,7 @@ export const YouthContent = (
     </div>
   );
 };
-function useEffect(arg0: () => void, arg1: never[]) {
-  throw new Error('Function not implemented.');
-}
+
 YouthContent.defaultProps = { youthPics: [] };
 
 export default YouthContent;
