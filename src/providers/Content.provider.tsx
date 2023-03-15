@@ -8,50 +8,14 @@ export interface Icontent {
   homePage: Ibook,
   youthPage: Ibook
 }
-const populateContent = async (setContent: (arg0:Icontent)=> void) => {
-  const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
-  const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
-  console.log(homePage);
-  setContent({ homePage, youthPage });
-};
-
-export const ContentContext = createContext({
-  content: {
-    homePage: {} as Ibook,
-    youthPage: {} as Ibook,
-  },
-  setContent: (_arg0: Icontent) => {},
-  getContent: () => Promise.resolve(),
-});
-
-  type ContentProps = { children: ReactNode };
-export function ContentProvider({ children }: ContentProps): JSX.Element {
-  const { Provider } = ContentContext;
-  const [content, setContent] = useState({} as Icontent);
-
-  const getContent = async () => populateContent(setContent);
-
-  useEffect(() => {
-    (async () => {
-      await populateContent(setContent);
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <Provider value={{
-      setContent, content, getContent,
-    }}
-    >
-      {children}
-    </Provider>
-  );
-}
 export interface IpictureTypes {
   musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
   habitatPics: Ibook[], otherPics: Ibook[],
 }
-const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+
+const populateContent = async (setContent: (arg0:Icontent)=> void, setPictures: (arg0:IpictureTypes)=> void) => {
+  const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
+  const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
   const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
   const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
   const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
@@ -61,9 +25,14 @@ const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
     musicPics, familyPics, youthPics, habitatPics, otherPics,
   };
   setPictures(pictures);
+  setContent({ homePage, youthPage });
 };
 
-export const PictureContext = createContext({
+export const ContentContext = createContext({
+  content: {
+    homePage: {} as Ibook,
+    youthPage: {} as Ibook,
+  },
   pictures: {
     musicPics: [],
     familyPics: [],
@@ -72,26 +41,29 @@ export const PictureContext = createContext({
     otherPics: [],
   } as IpictureTypes,
   setPictures: (_arg0: IpictureTypes) => {},
-  getPictures: () => Promise.resolve(),
+  // getPictures: () => Promise.resolve(),
+  setContent: (_arg0: Icontent) => {},
+  getContent: () => Promise.resolve(),
 });
 
-type PictureProps = { children: ReactNode };
-export function PictureProvider({ children }: PictureProps): JSX.Element {
-  const { Provider } = PictureContext;
+  type ContentProps = { children: ReactNode };
+export function ContentProvider({ children }: ContentProps): JSX.Element {
+  const { Provider } = ContentContext;
+  const [content, setContent] = useState({} as Icontent);
   const [pictures, setPictures] = useState({} as IpictureTypes);
 
-  const getPictures = async () => populatePictures(setPictures);
+  const getContent = async () => populateContent(setContent, setPictures);
 
   useEffect(() => {
     (async () => {
-      await populatePictures(setPictures);
+      await populateContent(setContent, setPictures);
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Provider value={{
-      setPictures, pictures, getPictures,
+      setContent, content, getContent, setPictures, pictures,
     }}
     >
       {children}
