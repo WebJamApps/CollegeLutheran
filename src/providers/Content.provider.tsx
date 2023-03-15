@@ -24,8 +24,8 @@ export const ContentContext = createContext({
   getContent: () => Promise.resolve(),
 });
 
-  type Props = { children: ReactNode };
-export function ContentProvider({ children }: Props): JSX.Element {
+  type ContentProps = { children: ReactNode };
+export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
 
@@ -41,6 +41,57 @@ export function ContentProvider({ children }: Props): JSX.Element {
   return (
     <Provider value={{
       setContent, content, getContent,
+    }}
+    >
+      {children}
+    </Provider>
+  );
+}
+export interface IpictureTypes {
+  musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
+  habitatPics: Ibook[], otherPics: Ibook[],
+}
+const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+  const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
+  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+  const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
+  const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
+  const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+  const pictures = {
+    musicPics, familyPics, youthPics, habitatPics, otherPics,
+  };
+  setPictures(pictures);
+};
+
+export const PictureContext = createContext({
+  pictures: {
+    musicPics: [],
+    familyPics: [],
+    youthPics: [],
+    habitatPics: [],
+    otherPics: [],
+  } as IpictureTypes,
+  setPictures: (_arg0: IpictureTypes) => {},
+  getPictures: () => Promise.resolve(),
+});
+
+type PictureProps = { children: ReactNode };
+export function PictureProvider({ children }: PictureProps): JSX.Element {
+  const { Provider } = PictureContext;
+  const [pictures, setPictures] = useState({} as IpictureTypes);
+
+  const getPictures = async () => populatePictures(setPictures);
+
+  useEffect(() => {
+    (async () => {
+      await populatePictures(setPictures);
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <Provider value={{
+      setPictures, pictures, getPictures,
     }}
     >
       {children}
