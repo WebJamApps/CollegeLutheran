@@ -2,19 +2,6 @@ import parser from 'html-react-parser';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
-// const makeStaff = () => {
-//   let moreStaff = '';
-//   for (let i = 0; i < staffItems.staff.length; i += 1) { // eslint-disable-next-line security/detect-object-injection
-//     moreStaff += `<hr /><section id="${staffItems.staff[i].sectionId}"><h4>${staffItems.staff[i].title}</h4>`;
-//     // eslint-disable-next-line security/detect-object-injection
-//     moreStaff += `<img class="staffPicture" width="${staffItems.staff[i].width}"`
-//     + `alt="${staffItems.staff[i].sectionId}" src="${staffItems.staff[i].src}"/>`;
-//     // eslint-disable-next-line security/detect-object-injection
-//     moreStaff += `<div class="staffDescription">${staffItems.staff[i].desc}</div></section>`;
-//   }
-//   return parser(moreStaff);
-// };
-
 function MoreStaff() {
   return (
     <>
@@ -169,7 +156,6 @@ const StaffContent = (): JSX.Element => (
               </p>
             </div>
           </section>
-          {/* {makeStaff()} */}
           <MoreStaff />
         </div>
         <ELCALogo />
