@@ -1,23 +1,34 @@
 {
   "staff": [
     {
+      "sectionId": "Kellie",
+      "width": "180px",
+      "title": "Kellie Rice - Faith Formation Ministries Coordinator",
+      "src": "https://dl.dropboxusercontent.com/s/j0dqco7yhg5n0d2/2023.01.29.2914.Z7ii%20Kellie%20Rice%20Headshot.jpg?dl=0",
+      "desc": "<p>Kellie Rice is a life long Lutheran and a long time member of College Lutheran Church. She attended CLC as a child until 5th grade when her family moved to Roanoke County. She was confirmed at St. John's Lutheran. Kellie came back to CLC when she was married by Pastor Bob Ward. Kellie has three grown sons and a grandson. She has volunteered in many of the children and youth activities since her children were young, and is both excited and honored to be serving on the staff.</p><p>In her spare time, Kellie volunteers with The Railyard Dawgs hockey team as an off-ice official supporting Valley Youth Hockey. Kellie enjoys time with family and friends, cooking, and her many, many pets.</p>"
+    },
+    {
       "sectionId": "Sandi",
+      "width": "288px",
       "title": "Sandi Roop - Parish Administrator",
       "src": "https://dl.dropboxusercontent.com/s/i1n5ct7wnt2ju0d/Sandi_v01.jpg?dl=0",
       "desc": "<p>Sandi Roop is our Parish Administrator for College Lutheran. Sandi joined the staff of CLC in 2012. She lives in Roanoke County with her husband, Michael and her children, Ashley and Joshua.</p><p>She enjoys spending time with her family, music, cooking and college basketball.</p>"
     },
     {
       "sectionId": "Lawrence",
+      "width": "288px",
       "title": "Lawrence Keffer - Sexton",
       "src": "https://dl.dropboxusercontent.com/s/ewvlw65y1zwp0bc/Lawrence_v01.jpg?dl=0",
       "desc": "<p>Lawrence Keffer has been our sexton for College Lutheran Church since 1997. He resides in Salem with his wife Laurie.</p><p>Lawrence has been with the Salem Fire and EMS Department since 1989. He enjoys the outdoors, golfing, hiking and gardening.</p>"
     },
     {
       "sectionId": "Richard",
+      "width": "288px",
       "title": "Richard Hoffman - Financial Administrator",
       "src": "https://dl.dropboxusercontent.com/s/c0xsjx22rklxxwo/Richard_Hoffman.jpg?dl=0",
-      "desc": "<p>Richard Hoffman was born and raised in the New York/ New Jersey metropolitan area which explains his life long loyalty for the NY Yankees. After a brief stint with US Army as a sentry dog hander, Richard worked for Citibank for 3 years. Upon graduation from Montclair State College (now a University) he worked for a small chemical trading company in NYC before landing a job with RCA which was eventually was bought by GE. Richard worked primarily with GE’s energy business in California and Virginia before retiring in July 2013.</p><p>Richard has a lovely wife Deneille (Dene) who is a personal chef and has been married for the last 34 years. Richard and Dene have 2 grown children (Stephen and Kacie) who live in the Arlington, Virginia area.</p>"
+      "desc": "<p>Richard Hoffman was born and raised in the New York/ New Jersey metropolitan area which explains his life long loyalty for the NY Yankees. After a brief stint with US Army as a sentry dog handler, Richard worked for Citibank for 3 years. Upon graduation from Montclair State College (now a University) he worked for a small chemical trading company in NYC before landing a job with RCA which was eventually was bought by GE. Richard worked primarily with GE’s energy business in California and Virginia before retiring in July 2013.</p><p>Richard has a lovely wife Deneille (Dene) who is a personal chef and has been married for the last 34 years. Richard and Dene have 2 grown children (Stephen and Kacie) who live in the Arlington, Virginia area.</p>"
     }
+    
     
   ]
 }
