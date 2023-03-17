@@ -4,6 +4,32 @@ import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
 import { ContentContext } from 'src/providers/Content.provider';
 
+function FaithWithoutWorks() {
+  return (
+    <>
+      <p>
+        <span style={{ color: 'rgb(0, 51, 102)' }}>
+          <strong>
+            <i>&quot;Faith without works is dead.&quot;</i>
+              &nbsp;&nbsp;&nbsp;James 2:17
+          </strong>
+        </span>
+      </p>
+      <p>
+        Not only do our youth have faith, but they show it at every opportunity! Youth at CLC are lifted up and celebrated as essential members
+        in the worship, service, and recreational life of
+        the congregation. They assist in worship as acolytes, crucifers, communion assistants, assisting ministers, ushers, greeters,
+        coffee hour hosts, and children’s sermon speakers. They serve the community through events such as the CROP
+        walk for hunger, Trick or Treat So Others May Eat, Trunk or Treating, Souper Bowl Sunday,
+        and environmental initiatives. And, they are always excited about fun youth group events like snowtubing, bowling, and hiking!
+        <br />
+        <br />
+        We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
+      </p>
+    </>
+  );
+}
+
 export const YouthContent = (
 ): JSX.Element => {
   const { pictures } = useContext(PictureContext);
@@ -35,25 +61,7 @@ export const YouthContent = (
             questions, they develop a stronger faith that can withstand the complexities of the teen years and
             adulthood.
           </p>
-          <p>
-            <span style={{ color: 'rgb(0, 51, 102)' }}>
-              <strong>
-                <i>&quot;Faith without works is dead.&quot;</i>
-              &nbsp;&nbsp;&nbsp;James 2:17
-              </strong>
-            </span>
-          </p>
-          <p>
-            Not only do our youth have faith, but they show it at every opportunity! Youth at CLC are lifted up and celebrated as essential members
-            in the worship, service, and recreational life of
-            the congregation. They assist in worship as acolytes, crucifers, communion assistants, assisting ministers, ushers, greeters,
-            coffee hour hosts, and children’s sermon speakers. They serve the community through events such as the CROP
-            walk for hunger, Trick or Treat So Others May Eat, Trunk or Treating, Souper Bowl Sunday,
-            and environmental initiatives. And, they are always excited about fun youth group events like snowtubing, bowling, and hiking!
-            <br />
-            <br />
-            We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
-          </p>
+          <FaithWithoutWorks />
           <hr />
           <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(youthPage && youthPage.title ? youthPage.title : '')}</h5>
           <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
