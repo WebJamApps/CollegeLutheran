@@ -186,17 +186,6 @@ const FamilyInfo = () => (
   </div>
 );
 
-// function getImagesFromStorage(setHabitatImages:(arg0: Ibook[] | null) => void) {
-//   try {
-//     const data = sessionStorage.getItem('persist:root');
-//     const json = JSON.parse(data || '');
-//     const { otherPics } = json;
-//     const pics = JSON.parse(otherPics);
-//     const images = pics.otherPics.filter((d:Ibook) => d.type === 'habitat');
-//     setHabitatImages(images);
-//   } catch (error) { console.log((error as Error).message); }
-// }
-
 function HabitatProjectContent():JSX.Element {
   return (
     <div className="page-content">

@@ -35,7 +35,6 @@ export function ContentProvider({ children }: ContentProps): JSX.Element {
     (async () => {
       await populateContent(setContent);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

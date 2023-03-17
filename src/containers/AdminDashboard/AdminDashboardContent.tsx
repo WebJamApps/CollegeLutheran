@@ -16,11 +16,9 @@ import utils from './utils';
 function UpdateHomeButton(
   {
     title,
-    // dispatch,
     getContent,
     comments = '',
   }: { title: string,
-    // dispatch: Dispatch<AnyAction>,
     getContent: () => Promise<void>,
     comments?: string },
 ): JSX.Element {
@@ -69,14 +67,9 @@ function CommentsEditor(
   );
 }
 
-// interface IchangeHomepageProps {
-//   // homeContent: Ibook, dispatch: Dispatch<AnyAction>
-// }
 function ChangeHomepage(
-// props: IchangeHomepageProps
 ): JSX.Element {
   const { content: { homePage }, getContent } = useContext(ContentContext);
-  // const { homeContent, dispatch } = props;
   const [title, setTitle] = useState(homePage.title);
   const [comments, setComments] = useState(homePage.comments);
   const inputParams = {
@@ -156,13 +149,11 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
 
 interface IadminDashboardContentProps {
   dispatch: Dispatch<AnyAction>,
-  // homeContent: Ibook,
   youthContent: Ibook, books: Ibook[]
 }
 export function AdminDashboardContent(props: IadminDashboardContentProps) {
   const {
     dispatch,
-    // homeContent,
     youthContent, books,
   } = props;
   const [showCreatePic, setShowCreatePic] = useState(false);

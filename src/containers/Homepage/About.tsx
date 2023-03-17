@@ -8,13 +8,10 @@ import type { Ibook } from '../../redux/mapStoreToProps';
 export function shuffle(array: Ibook[]) {
   let currentIndex = array.length, randomIndex;
 
-  // While there remain elements to shuffle.
   while (currentIndex !== 0) {
-    // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
-    // And swap it with the current element.
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex], array[currentIndex]];
   }
@@ -59,12 +56,10 @@ export function PictureSection({ data, width }: { data: Ibook[], width?:number }
 }
 
 export interface IAbout {
-  // homeContent?: Ibook;
   width?: number;
 }
 
 export const About = ({
-  // homeContent,
   width,
 }: IAbout): JSX.Element => {
   const { pictures } = useContext(PictureContext);
