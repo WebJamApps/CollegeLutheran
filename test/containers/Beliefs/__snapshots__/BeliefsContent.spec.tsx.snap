@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeliefsContent renders the beliefs page 1`] = `
+<div
+  className="page-content"
+>
+  <div
+    className="container-fluid"
+  >
+    <p
+      style={
+        {
+          "fontSize": "4pt",
+          "margin": "0",
+        }
+      }
+    >
+       
+    </p>
+    <div
+      className="material-content elevation3"
+      style={
+        {
+          "margin": "auto",
+          "maxWidth": "998px",
+          "paddingBottom": "-80px",
+        }
+      }
+    >
+      <h3
+        style={
+          {
+            "paddingBottom": "15px",
+            "paddingTop": "22px",
+          }
+        }
+      >
+        Our Lutheran Beliefs
+      </h3>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe that the Holy Bible is God’s inspired Word.
+          </strong>
+        </span>
+        <strong>
+           
+        </strong>
+        It is our source of authority for living and for understanding God’s plan for our lives and our world as we interpret his Word in light of the revelation of Jesus Christ.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe that God created us and all that exists.
+          </strong>
+           
+        </span>
+        He has given us all that we have and need. We, therefore, are called by him to care for all that he has made, especially one another.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe that Jesus Christ is the Son of God.
+          </strong>
+        </span>
+         He is our Savior, who was born into our world, lived among us, was crucified for our sins, and rose again from the dead. We believe he is present with us even now. We especially know his presence in the proclamation of the Word through preaching and Holy Communion.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe that the Holy Spirit has been given to us.
+          </strong>
+        </span>
+         The Spirit enlightens and sustains us as Christ’s Church on earth. It is through the gift of the Holy Spirit received in Baptism that we are born again, able to have faith and remain in a loving relationship with God.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe we are saved by grace through faith.
+          </strong>
+        </span>
+         Our salvation depends solely on God’s grace and not on our merit or works. At the same time, God’s free gift of grace leads us to respond with lives and works that are pleasing to him.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe we are called to mission.
+          </strong>
+        </span>
+         We take seriously God’s expectation that we are to reach out with the good news of God’s saving grace to all people, and that we are to care for those in need.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe Christ is truly present in Holy Communion. 
+          </strong>
+        </span>
+        The Sacrament of the Altar is far more than a memorial meal; it is that appointed time and place when Christ has promised to be present and the forgiveness of sins is assured.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We accept the Apostles’ and Nicene Creeds.
+          </strong>
+           
+        </span>
+        These are true and accurate statements of what we believe.
+      </p>
+      <p>
+        <span
+          style={
+            {
+              "color": "rgb(0, 51, 102)",
+            }
+          }
+        >
+          <strong>
+            We believe in the power of prayer.
+          </strong>
+        </span>
+         Through prayer we may be in conversation with the God who loves us, hears us in our need and responds to us.
+      </p>
+      <p>
+         
+      </p>
+      <p>
+         
+      </p>
+    </div>
+    <div
+      style={
+        {
+          "marginLeft": "-9px",
+          "textAlign": "center",
+        }
+      }
+    >
+      <a
+        href="http://www.elca.org/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <img
+          alt="ELCA LOGO"
+          id="elcaLogo"
+          src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+          style={
+            {
+              "margin": "auto",
+              "marginLeft": "",
+              "paddingTop": "30px",
+              "width": "308px",
+            }
+          }
+        />
+      </a>
+    </div>
+  </div>
+</div>
+`;

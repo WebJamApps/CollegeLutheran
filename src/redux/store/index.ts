@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import storageSession from 'redux-persist/lib/storage/session';
 import allReducers from '../allReducers';
@@ -10,12 +9,7 @@ const persistConfig = {
   storage: storageSession,
   blacklist: ['sc', 'familyPics', 'youthPics', 'musicPics', 'habitatPics'],
 };
-let mWares = applyMiddleware(thunk);
-/* istanbul ignore if */
-if (process.env.NODE_ENV === 'development') {
-  const logger = createLogger({ predicate: (_getState, action) => action.type !== 'SC_HEARTBEAT' });
-  mWares = applyMiddleware(thunk, logger);
-}
+const mWares = applyMiddleware(thunk);
 const persistedReducer = persistReducer(persistConfig, allReducers);
 const store = createStore(persistedReducer, mWares);
 const persistor = persistStore(store);
