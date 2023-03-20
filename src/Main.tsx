@@ -8,6 +8,7 @@ import { App } from './App';
 import store from './redux/store';
 import { AuthProvider } from './providers/Auth.provider';
 import '../static/styles.scss';
+import { ContentProvider } from './providers/Content.provider';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 function Main() {
@@ -17,7 +18,9 @@ function Main() {
         <Provider store={store.store}>
           <PersistGate loading={null} persistor={store.persistor}>
             <PictureProvider>
-              <App />
+              <ContentProvider>
+                <App />
+              </ContentProvider>
             </PictureProvider>
           </PersistGate>
         </Provider>

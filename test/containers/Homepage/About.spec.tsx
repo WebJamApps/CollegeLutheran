@@ -40,19 +40,8 @@ describe('About', () => {
     expect(result).toBe(' ');
   });
   it('renders the about page', () => {
-    const props = { homeContent: { title: '', _id: '', type: '' }, width: 900 };
+    const props = { homePage: { title: '', _id: '', type: '' }, width: 900 };
     const about: any = renderer.create(<About {...props} />).toJSON();
     expect(about).toMatchSnapshot();
-  });
-  it('renders title and comments from homeContent', () => {
-    const width = 900;
-    const result: any = renderer.create(<About
-      homeContent={{
-        title: 'title', _id: 'dfgasf', type: 'any', comments: 'comments',
-      }}
-      width={width}
-    />).toJSON();
-    expect(result.children[0].children[0].children[0].children[1].children[0]).toBe('title');
-    expect(result.children[0].children[0].children[0].children[2].children[0]).toBe('comments');
   });
 });

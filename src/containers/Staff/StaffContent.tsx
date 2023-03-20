@@ -2,7 +2,7 @@ import parser from 'html-react-parser';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
-function MoreStaff() {
+export function MoreStaff() {
   return (
     <>
       {staffItems.staff.map((s: any) => (

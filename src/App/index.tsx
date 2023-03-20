@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ReactNotifications } from 'react-notifications-component';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import DefaultMusic from '../containers/Music';
-import Beliefs from '../containers/Beliefs';
+import { Beliefs } from '../containers/Beliefs';
 import { Giving } from '../containers/Giving';
 import Staff from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsContent renders the news page 1`] = `
+<div
+  className="page-content"
+>
+  <div>
+    <div>
+      <p>
+        There are currently no pdfs links to display
+      </p>
+    </div>
+    <p
+      style={
+        {
+          "fontSize": "4pt",
+          "margin": "0",
+        }
+      }
+    >
+       
+    </p>
+    <hr
+      style={
+        {
+          "margin": "0px",
+        }
+      }
+    />
+    <div
+      className="ctct-inline-form"
+      data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"
+    />
+  </div>
+  <div
+    style={
+      {
+        "marginLeft": "-9px",
+        "textAlign": "center",
+      }
+    }
+  >
+    <a
+      href="http://www.elca.org/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="ELCA LOGO"
+        id="elcaLogo"
+        src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+        style={
+          {
+            "margin": "auto",
+            "marginLeft": "",
+            "paddingTop": "30px",
+            "width": "308px",
+          }
+        }
+      />
+    </a>
+  </div>
+</div>
+`;
