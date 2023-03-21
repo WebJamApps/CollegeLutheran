@@ -1,5 +1,5 @@
 import parser from 'html-react-parser';
-import { NavHashLink } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
@@ -43,40 +43,40 @@ const StaffContent = (): JSX.Element => (
             <li style={{ paddingTop: '5px', marginLeft: '-15px' }}>
               Reverend
               {' '}
-              <NavHashLink to="/staff/#David">David</NavHashLink>
+              <HashLink to="/staff/#David">David</HashLink>
               {' '}
               C. Drebes,
               <b> Pastor, </b>
               <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <NavHashLink to="/staff/#Susan">Susan</NavHashLink>
+              <HashLink to="/staff/#Susan">Susan</HashLink>
               {' '}
               Short, Director of Music,
               {' '}
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <NavHashLink to="/staff/#Kellie">Kellie</NavHashLink>
+              <HashLink to="/staff/#Kellie">Kellie</HashLink>
               {' '}
               Rice, Faith Formation Ministries Coordinator
               {' '}
               <a href="mailto:kellierice@collegelutheran.org">kellierice@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <NavHashLink to="/staff/#Sandi">Sandi</NavHashLink>
+              <HashLink to="/staff/#Sandi">Sandi</HashLink>
               {' '}
               Roop, Parish Administrator,
               {' '}
               <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <NavHashLink to="/staff/#Lawrence">Lawrence</NavHashLink>
+              <HashLink to="/staff/#Lawrence">Lawrence</HashLink>
               {' '}
               Keffer, Sexton
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <NavHashLink to="/staff/#Richard">Richard</NavHashLink>
+              <HashLink to="/staff/#Richard">Richard</HashLink>
               {' '}
               Richard Hoffman, Financial Administrator
             </li>

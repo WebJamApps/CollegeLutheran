@@ -160,6 +160,7 @@ exports[`Staff renders StaffContent 1`] = `
              
             <a
               href="/staff/#David"
+              onClick={[Function]}
             >
               David
             </a>
@@ -184,6 +185,7 @@ exports[`Staff renders StaffContent 1`] = `
           >
             <a
               href="/staff/#Susan"
+              onClick={[Function]}
             >
               Susan
             </a>
@@ -206,6 +208,7 @@ exports[`Staff renders StaffContent 1`] = `
           >
             <a
               href="/staff/#Kellie"
+              onClick={[Function]}
             >
               Kellie
             </a>
@@ -228,6 +231,7 @@ exports[`Staff renders StaffContent 1`] = `
           >
             <a
               href="/staff/#Sandi"
+              onClick={[Function]}
             >
               Sandi
             </a>
@@ -250,6 +254,7 @@ exports[`Staff renders StaffContent 1`] = `
           >
             <a
               href="/staff/#Lawrence"
+              onClick={[Function]}
             >
               Lawrence
             </a>
@@ -266,6 +271,7 @@ exports[`Staff renders StaffContent 1`] = `
           >
             <a
               href="/staff/#Richard"
+              onClick={[Function]}
             >
               Richard
             </a>
@@ -279,6 +285,7 @@ exports[`Staff renders StaffContent 1`] = `
         <section
           id="David"
         >
+           
           <h4>
             Rev. David C. Drebes - Pastor
           </h4>
