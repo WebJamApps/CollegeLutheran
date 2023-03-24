@@ -1,4 +1,5 @@
 import parser from 'html-react-parser';
+import { HashLink } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
@@ -42,40 +43,40 @@ const StaffContent = (): JSX.Element => (
             <li style={{ paddingTop: '5px', marginLeft: '-15px' }}>
               Reverend
               {' '}
-              <a href="/staff/#David">David</a>
+              <HashLink to="/staff/#David">David</HashLink>
               {' '}
               C. Drebes,
               <b> Pastor, </b>
               <a href="mailto:pastordrebes@collegelutheran.org">pastordrebes@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <a href="/staff/#Susan">Susan</a>
+              <HashLink to="/staff/#Susan">Susan</HashLink>
               {' '}
               Short, Director of Music,
               {' '}
               <a href="mailto:susanshort@collegelutheran.org">susanshort@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <a href="/staff/#Kellie">Kellie</a>
+              <HashLink to="/staff/#Kellie">Kellie</HashLink>
               {' '}
               Rice, Faith Formation Ministries Coordinator
               {' '}
               <a href="mailto:kellierice@collegelutheran.org">kellierice@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <a href="/staff/#Sandi">Sandi</a>
+              <HashLink to="/staff/#Sandi">Sandi</HashLink>
               {' '}
               Roop, Parish Administrator,
               {' '}
               <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <a href="/staff/#Lawrence">Lawrence</a>
+              <HashLink to="/staff/#Lawrence">Lawrence</HashLink>
               {' '}
               Keffer, Sexton
             </li>
             <li style={{ paddingTop: '20px', marginLeft: '-15px' }}>
-              <a href="/staff/#Richard">Richard</a>
+              <HashLink to="/staff/#Richard">Richard</HashLink>
               {' '}
               Richard Hoffman, Financial Administrator
             </li>
@@ -84,6 +85,7 @@ const StaffContent = (): JSX.Element => (
         <hr />
         <div>
           <section id="David">
+            {' '}
             <h4>Rev. David C. Drebes - Pastor</h4>
             <img
               alt="pastor"
