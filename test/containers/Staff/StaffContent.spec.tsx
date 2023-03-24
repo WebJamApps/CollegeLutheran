@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import StaffContent, { MoreStaff } from 'src/containers/Staff/StaffContent';
 
@@ -7,7 +8,7 @@ describe('Staff', () => {
     expect(result).toMatchSnapshot();
   });
   it('renders StaffContent', () => {
-    const result: any = renderer.create(<StaffContent />).toJSON();
+    const result: any = renderer.create(<MemoryRouter><StaffContent /></MemoryRouter>).toJSON();
     expect(result).toMatchSnapshot();
   });
 });
