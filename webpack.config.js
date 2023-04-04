@@ -120,7 +120,6 @@ module.exports = (env) => ({
       // $: 'jquery',
       // jQuery: 'jquery',
       // 'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
     }),
