@@ -6,19 +6,22 @@ import type { Ibook } from 'src/redux/mapStoreToProps';
 
 export interface Icontent {
   homePage: Ibook,
-  youthPage: Ibook
+  youthPage: Ibook,
+  habitatPage: Ibook
 }
 
 const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
   const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
-  setContent({ homePage, youthPage });
+  const { data: habitatPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
+  setContent({ homePage, youthPage, habitatPage });
 };
 
 export const ContentContext = createContext({
   content: {
     homePage: {} as Ibook,
     youthPage: {} as Ibook,
+    habitatPage: {} as Ibook,
   },
   setContent: (_arg0: Icontent) => {},
   getContent: () => Promise.resolve(),

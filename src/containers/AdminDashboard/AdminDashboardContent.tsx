@@ -149,6 +149,66 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
   );
 }
 
+// UPDATE HABITAT PAGE
+// Need an update habitat function ChangeHabitatPage
+// Need an update habitat button in the function
+// Need to use the comments editor in the function
+
+// button
+function UpdateHabitatButton(
+  {
+    title,
+    getContent,
+    comments = '',
+  }: { title: string,
+    getContent: () => Promise<void>,
+    comments?: string },
+): JSX.Element {
+  const { auth } = useContext(AuthContext);
+  return (
+    <div style={{ marginTop: '10px' }}>
+      <Button
+        size="small"
+        variant="contained"
+        type="button"
+        id="c-h"
+        onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatContent' }, auth, getContent)}
+      >
+        Update Habitat Page
+      </Button>
+    </div>
+  );
+}
+
+// function
+function ChangeHabitatPage(
+): JSX.Element {
+  const { content: { habitatPage }, getContent } = useContext(ContentContext);
+  const [title] = useState(habitatPage.title);
+  const [comments, setComments] = useState(habitatPage.comments);
+  return (
+    <div className="horiz-scroll">
+      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <h5>Change Habitat Section</h5>
+        <form
+          id="create-habitatpage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
+          <CommentsEditor comments={comments} setComments={setComments} />
+          <UpdateHabitatButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
 interface IadminDashboardContentProps {
   dispatch: Dispatch<AnyAction>,
   youthContent: Ibook, books: Ibook[]
@@ -175,6 +235,8 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
       </div>
       <ChangeNewsPage dispatch={dispatch} />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
+      <ChangeHabitatPage />
     </div>
   );
 }
+
