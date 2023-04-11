@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { Editor } from '@tinymce/tinymce-react';
 import {
-  SetStateAction, useContext, useState,
+  SetStateAction, useContext, useEffect, useState,
 } from 'react';
 import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
@@ -80,6 +80,8 @@ function ChangeHomepage(
     value: title,
     width: '90%',
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { (async () => { await getContent(); })(); }, []);
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
