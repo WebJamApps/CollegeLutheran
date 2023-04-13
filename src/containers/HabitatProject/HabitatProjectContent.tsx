@@ -1,6 +1,8 @@
 import { Grid } from '@mui/material';
 import { useContext } from 'react';
+import parser from 'html-react-parser';
 import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import ELCALogo from 'src/components/elcaLogo';
 import PicSlider from 'src/components/PicSlider';
 
@@ -35,22 +37,24 @@ const Responsibilities = (props: { children: any; }) => {
   );
 };
 
-const AboutProject = () => (
-  <Grid item xs={12} sm={6} md={4} style={{ marginInline: '0', paddingInline: '20px' }}>
-    <h3 style={{
-      marginBottom: '0px', paddingBottom: '16px', paddingTop: '16px', textAlign: 'center',
-    }}
-    >
-      CLC Habitat Project
-    </h3>
-    <div style={{ textAlign: 'left' }}>
-      College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
-      Roanoke Valley. This is the largest service project undertaken by the members of College
-      Lutheran and we are delighted to be underway.
-      <br />
-      Here are some details:
-      <ul>
-        <li>
+const AboutProject = () => {
+  const { content: { habitatPage } } = useContext(ContentContext);
+  return (
+    <Grid item xs={12} sm={6} md={4} style={{ marginInline: '0', paddingInline: '20px' }}>
+      <h3 style={{
+        marginBottom: '0px', paddingBottom: '16px', paddingTop: '16px', textAlign: 'center',
+      }}
+      >
+        CLC Habitat Project
+      </h3>
+      <div style={{ textAlign: 'left' }}>
+        College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
+        Roanoke Valley. This is the largest service project undertaken by the members of College
+        Lutheran and we are delighted to be underway.
+        <br />
+        Here are some details:
+        <ul>
+          {/* <li>
           The address is 1212 Dale Avenue, SE Roanoke
         </li>
         <li>
@@ -71,20 +75,25 @@ const AboutProject = () => (
           On Sunday April 2, after our Palm Sunday worship service we will have a meeting in the Fellowship Hall to review our plans.
           {' '}
           Snacks and drinks provided.
-        </li>
-        <li>
-          Questions??? Contact
-          {' '}
-          <a href="mailto:rcrevpaul@gmail.com">rcrevpaul@gmail.com</a>
-          {' '}
-          or
-          {' '}
-          <a href="mailto:clchabitatsalem@gmail.com">clchabitatsalem@gmail.com</a>
-        </li>
-      </ul>
-    </div>
-  </Grid>
-);
+        </li> */}
+          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(habitatPage && habitatPage.title ? habitatPage.title : '')}</h5>
+          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+            {parser(habitatPage && habitatPage.comments ? habitatPage.comments : '')}
+          </section>
+          <li>
+            Questions??? Contact
+            {' '}
+            <a href="mailto:rcrevpaul@gmail.com">rcrevpaul@gmail.com</a>
+            {' '}
+            or
+            {' '}
+            <a href="mailto:clchabitatsalem@gmail.com">clchabitatsalem@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+    </Grid>
+  );
+};
 
 const VolunteerSignUp = () => (
   <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>

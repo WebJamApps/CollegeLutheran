@@ -4,7 +4,8 @@ import {
   useContext, useEffect,
 } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
-import type { Ibook, Store } from 'src/redux/mapStoreToProps';
+import type { Store } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 import { useDispatch, useSelector } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
 import Fetch from 'src/lib/fetch';

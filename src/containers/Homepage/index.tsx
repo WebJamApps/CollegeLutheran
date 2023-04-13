@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
 import fetch from 'src/lib/fetch';
 import type { Dispatch, AnyAction } from 'redux';
+import type { Ibook } from 'src/providers/Content.provider';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
-import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 import ELCALogo from '../../components/elcaLogo';
 

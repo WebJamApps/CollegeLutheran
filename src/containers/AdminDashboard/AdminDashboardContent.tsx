@@ -9,7 +9,7 @@ import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
@@ -172,7 +172,7 @@ function UpdateHabitatButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatContent' }, auth, getContent)}
+        onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatPageContent' }, auth, getContent)}
       >
         Update Habitat Page
       </Button>

@@ -2,7 +2,7 @@ import {
   About, shuffle, PictureSection,
 } from 'src/containers/Homepage/About';
 import renderer from 'react-test-renderer';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 
 describe('About', () => {
   it('shuffles pictures randomly', () => {

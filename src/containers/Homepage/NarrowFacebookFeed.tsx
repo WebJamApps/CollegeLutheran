@@ -1,6 +1,6 @@
 import { PictureContext } from 'src/providers/Pics.provider';
 import { useContext } from 'react';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';
 

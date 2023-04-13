@@ -1,4 +1,4 @@
-import type { Ibook } from '../mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 
 const initialState = {
   books: [],

@@ -2,7 +2,7 @@ import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
 import axios from 'axios';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/Content.provider';
 
 export interface IpictureTypes {
   musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],

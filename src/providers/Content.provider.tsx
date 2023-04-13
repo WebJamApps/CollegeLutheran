@@ -2,7 +2,28 @@ import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
 import axios from 'axios';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+
+export interface Ibook {
+  link?: string,
+  caption?: string,
+  modify?: JSX.Element,
+  thumbnail?: string,
+  title: string,
+  _id: string,
+  type: string,
+  created_at?: string,
+  author?: string,
+  numberPages?: number,
+  dateOfPub?: number,
+  url?: string,
+  isbn?: string,
+  siteLocation?: string,
+  numberOfCopies?: number,
+  access?: string,
+  comments?: string,
+  checkedOutBy?: string,
+  checkedOutByName?: string,
+}
 
 export interface Icontent {
   homePage: Ibook,
@@ -13,8 +34,24 @@ export interface Icontent {
 const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
   const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
-  const { data: habitatPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
-  setContent({ homePage, youthPage, habitatPage });
+  let habitatPage:Ibook = {} as Ibook;
+  try {
+    const { data } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
+    habitatPage = data;
+  } catch (err) {
+    console.log((err as Error).message);
+    habitatPage = {
+      title: '',
+      _id: '',
+      type: 'habitatPageContent',
+      comments: '',
+    };
+  }
+  setContent({
+    homePage,
+    youthPage,
+    habitatPage,
+  });
 };
 
 export const ContentContext = createContext({

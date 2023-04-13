@@ -2,8 +2,8 @@ import { useContext, useEffect } from 'react';
 import parser from 'html-react-parser';
 import { PictureContext } from 'src/providers/Pics.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/Content.provider';
 import PicSlider from '../../components/PicSlider';
-import type { Ibook } from '../../redux/mapStoreToProps';
 
 export function shuffle(array: Ibook[]) {
   let currentIndex = array.length, randomIndex;
