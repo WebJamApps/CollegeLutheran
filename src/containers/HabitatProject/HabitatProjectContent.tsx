@@ -53,43 +53,18 @@ const AboutProject = () => {
         Lutheran and we are delighted to be underway.
         <br />
         Here are some details:
-        <ul>
-          {/* <li>
-          The address is 1212 Dale Avenue, SE Roanoke
-        </li>
-        <li>
-          The street is rather crowded so park gently.
-        </li>
-        <li>
-          The foundation is nearly complete.
-        </li>
-        <li>
-          Check out the progress board in the All Saints Hallway.
-        </li>
-        <li>
-          We will have couple of preliminary workdays leading up to our
+        <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+          {parser(habitatPage && habitatPage.comments ? habitatPage.comments : '')}
+        </section>
+        <p>
+          Questions??? Contact
           {' '}
-          <strong>Kickoff Workday on April 22:  8:00 am - 2:00 pm</strong>
-        </li>
-        <li>
-          On Sunday April 2, after our Palm Sunday worship service we will have a meeting in the Fellowship Hall to review our plans.
+          <a href="mailto:rcrevpaul@gmail.com">rcrevpaul@gmail.com</a>
           {' '}
-          Snacks and drinks provided.
-        </li> */}
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(habitatPage && habitatPage.title ? habitatPage.title : '')}</h5>
-          <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-            {parser(habitatPage && habitatPage.comments ? habitatPage.comments : '')}
-          </section>
-          <li>
-            Questions??? Contact
-            {' '}
-            <a href="mailto:rcrevpaul@gmail.com">rcrevpaul@gmail.com</a>
-            {' '}
-            or
-            {' '}
-            <a href="mailto:clchabitatsalem@gmail.com">clchabitatsalem@gmail.com</a>
-          </li>
-        </ul>
+          or
+          {' '}
+          <a href="mailto:clchabitatsalem@gmail.com">clchabitatsalem@gmail.com</a>
+        </p>
       </div>
     </Grid>
   );
