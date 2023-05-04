@@ -155,33 +155,6 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
   );
 }
 
-// button
-// function UpdateHabitatButton(
-//   {
-//     title,
-//     getContent,
-//     comments = '',
-//   }: { title: string,
-//     getContent: () => Promise<void>,
-//     comments?: string },
-// ): JSX.Element {
-//   const { auth } = useContext(AuthContext);
-//   return (
-//     <div style={{ marginTop: '10px' }}>
-//       <Button
-//         size="small"
-//         variant="contained"
-//         type="button"
-//         id="c-h"
-//         onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatPageContent' }, auth, getContent)}
-//       >
-//         Update Habitat Page
-//       </Button>
-//     </div>
-//   );
-// }
-
-// function
 function ChangeHabitatPage(
 ): JSX.Element {
   const { content: { habitatPage }, getContent } = useContext(ContentContext);
