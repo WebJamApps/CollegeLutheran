@@ -13,14 +13,18 @@ import type { Ibook } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
-function UpdateHomeButton(
+function UpdateButton(
   {
-    title,
+    title = '',
     getContent,
     comments = '',
+    buttonName,
+    type,
   }: { title: string,
     getContent: () => Promise<void>,
-    comments?: string },
+    comments?: string,
+    buttonName: string,
+    type: 'habitatPageContent' | 'homePageContent' },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -30,9 +34,9 @@ function UpdateHomeButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth, getContent)}
+        onClick={(evt) => utils.putAPI({ title, comments, type }, auth, getContent)}
       >
-        Update Homepage
+        {buttonName}
       </Button>
     </div>
   );
@@ -95,10 +99,12 @@ function ChangeHomepage(
           {forms.makeInput(inputParams)}
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateHomeButton
+          <UpdateButton
             getContent={getContent}
             title={title}
             comments={comments}
+            type="homePageContent"
+            buttonName="Update Homepage"
           />
         </form>
       </div>
@@ -149,36 +155,31 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
   );
 }
 
-// UPDATE HABITAT PAGE
-// Need an update habitat function ChangeHabitatPage
-// Need an update habitat button in the function
-// Need to use the comments editor in the function
-
 // button
-function UpdateHabitatButton(
-  {
-    title,
-    getContent,
-    comments = '',
-  }: { title: string,
-    getContent: () => Promise<void>,
-    comments?: string },
-): JSX.Element {
-  const { auth } = useContext(AuthContext);
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <Button
-        size="small"
-        variant="contained"
-        type="button"
-        id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatPageContent' }, auth, getContent)}
-      >
-        Update Habitat Page
-      </Button>
-    </div>
-  );
-}
+// function UpdateHabitatButton(
+//   {
+//     title,
+//     getContent,
+//     comments = '',
+//   }: { title: string,
+//     getContent: () => Promise<void>,
+//     comments?: string },
+// ): JSX.Element {
+//   const { auth } = useContext(AuthContext);
+//   return (
+//     <div style={{ marginTop: '10px' }}>
+//       <Button
+//         size="small"
+//         variant="contained"
+//         type="button"
+//         id="c-h"
+//         onClick={(evt) => utils.putAPI({ title, comments, type: 'habitatPageContent' }, auth, getContent)}
+//       >
+//         Update Habitat Page
+//       </Button>
+//     </div>
+//   );
+// }
 
 // function
 function ChangeHabitatPage(
@@ -198,10 +199,12 @@ function ChangeHabitatPage(
         >
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateHabitatButton
+          <UpdateButton
             getContent={getContent}
             title={title}
             comments={comments}
+            type="habitatPageContent"
+            buttonName="Update Habitat Page"
           />
         </form>
       </div>
