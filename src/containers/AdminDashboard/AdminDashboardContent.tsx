@@ -13,7 +13,7 @@ import type { Ibook } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
-function UpdateButton(
+export function UpdateButton(
   {
     title = '',
     getContent,
@@ -34,7 +34,7 @@ function UpdateButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type }, auth, getContent)}
+        onClick={() => utils.putAPI({ title, comments, type }, auth, getContent)}
       >
         {buttonName}
       </Button>
@@ -44,7 +44,7 @@ function UpdateButton(
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
 }
-function CommentsEditor(
+export function CommentsEditor(
   props: IcommentsEditorProps,
 ): JSX.Element {
   const { setComments, comments } = props;
@@ -71,7 +71,7 @@ function CommentsEditor(
   );
 }
 
-function ChangeHomepage(
+export function ChangeHomepage(
 ): JSX.Element {
   const { content: { homePage }, getContent } = useContext(ContentContext);
   const [title, setTitle] = useState(homePage.title);
@@ -80,7 +80,11 @@ function ChangeHomepage(
     type: 'text',
     label: 'Title',
     isRequired: false,
-    onChange: (evt: { target: { value: SetStateAction<string>; }; }) => setTitle(evt.target.value),
+    onChange: (evt: { target: { value: SetStateAction<string>; }; }) => {
+      const { target: { value } } = evt;
+      setTitle(value);
+      return value;
+    },
     value: title,
     width: '90%',
   };
