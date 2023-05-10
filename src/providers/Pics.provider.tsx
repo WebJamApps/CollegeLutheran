@@ -36,7 +36,7 @@ export const PictureContext = createContext({
   getPictures: () => Promise.resolve(),
 });
 
-export function makeGetPictures(setPictures: { (value: SetStateAction<IpictureTypes>): void; }) {
+export function makePictures(setPictures: { (value: SetStateAction<IpictureTypes>): void; }) {
   return async () => populatePictures(setPictures);
 }
 
@@ -44,8 +44,7 @@ type Props = { children: ReactNode };
 export function PictureProvider({ children }: Props): JSX.Element {
   const { Provider } = PictureContext;
   const [pictures, setPictures] = useState({} as IpictureTypes);
-
-  const getPictures = makeGetPictures(setPictures);
+  const getPictures = makePictures(setPictures);
 
   useEffect(() => {
     // eslint-disable-next-line no-void
