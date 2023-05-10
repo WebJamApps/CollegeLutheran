@@ -17,7 +17,7 @@ describe('Content provider', () => {
     render(<ContentProvider><div id="test-div">Test Div Here</div></ContentProvider>);
     expect(screen.getByText('Test Div Here')).toBeInTheDocument();
   });
-  it('sets setContentDef', () => {
+  it('setContentDef', () => {
     const Icontent: any = {};
     expect(setContentDef(Icontent)).toBeUndefined();
   });
