@@ -105,10 +105,9 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
   const books = useSelector((store:Store) => store.books.books);
   const dispatch = useDispatch();
   useEffect(() => {
-    (async () => {
-      await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
-    })();
-  }, [dispatch]);
+    // eslint-disable-next-line no-void
+    void Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
+  }, [dispatch]);// This should be removed from redux and use a provider!
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const { pathname } = location;

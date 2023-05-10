@@ -1,7 +1,7 @@
 import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import type { Ibook } from 'src/providers/Content.provider';
 
 export interface IpictureTypes {
@@ -9,15 +9,17 @@ export interface IpictureTypes {
   habitatPics: Ibook[], otherPics: Ibook[],
 }
 const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
-  const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
-  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
-  const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
-  const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
-  const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
-  const pictures = {
-    musicPics, familyPics, youthPics, habitatPics, otherPics,
-  };
-  setPictures(pictures);
+  try {
+    const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
+    const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+    const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
+    const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
+    const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+    const pictures = {
+      musicPics, familyPics, youthPics, habitatPics, otherPics,
+    };
+    setPictures(pictures);
+  } catch (err) { console.log((err as AxiosError).message); }
 };
 
 export const PictureContext = createContext({
@@ -40,10 +42,8 @@ export function PictureProvider({ children }: Props): JSX.Element {
   const getPictures = async () => populatePictures(setPictures);
 
   useEffect(() => {
-    (async () => {
-      await populatePictures(setPictures);
-    })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line no-void
+    void populatePictures(setPictures);
   }, []);
 
   return (

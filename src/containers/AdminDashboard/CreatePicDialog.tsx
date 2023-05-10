@@ -109,7 +109,7 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
           size="small"
           variant="contained"
           className="createPicButton"
-          onClick={() => { utils.createPicAPI(getPictures, setShowDialog, pic, auth); }}
+          onClick={async () => { await utils.createPicAPI(getPictures, setShowDialog, pic, auth); }}
         >
           Create
         </Button>

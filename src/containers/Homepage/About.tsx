@@ -69,8 +69,8 @@ export const About = ({
   } = pictures;
   const allPics = familyPics.concat(youthPics).concat(habitatPics).concat(otherPics).concat(musicPics);
   const data = shuffle(allPics);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { (async () => { await getContent(); })(); }, []);
+  // eslint-disable-next-line  no-void, react-hooks/exhaustive-deps
+  useEffect(() => { void getContent(); }, []);// do not repeatedly call getContent!
   return (
     <div className="aboutPage">
       <div className="container-fluid" style={{ paddingRight: 0 }}>

@@ -1,5 +1,5 @@
 import {
-  createContext, ReactNode, useEffect, useState,
+  createContext, ReactNode, SetStateAction, useEffect, useState,
 } from 'react';
 import axios from 'axios';
 
@@ -31,28 +31,33 @@ export interface Icontent {
   habitatPage: Ibook
 }
 
-const populateContent = async (setContent: (arg0:Icontent)=> void) => {
-  const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
-  const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
-  let habitatPage:Ibook = {} as Ibook;
+export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   try {
-    const { data } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
-    habitatPage = data;
+    const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
+    const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
+    const { data: habitatPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
+    setContent({
+      homePage,
+      youthPage,
+      habitatPage,
+    });
   } catch (err) {
     console.log((err as Error).message);
-    habitatPage = {
+    const habitatPage = {
       title: '',
       _id: '',
       type: 'habitatPageContent',
       comments: '',
     };
+    setContent({
+      homePage: {} as Ibook,
+      youthPage: {} as Ibook,
+      habitatPage,
+    });
   }
-  setContent({
-    homePage,
-    youthPage,
-    habitatPage,
-  });
 };
+
+export function setContentDef(_arg0: Icontent) {}
 
 export const ContentContext = createContext({
   content: {
@@ -60,21 +65,24 @@ export const ContentContext = createContext({
     youthPage: {} as Ibook,
     habitatPage: {} as Ibook,
   },
-  setContent: (_arg0: Icontent) => {},
+  setContent: setContentDef,
   getContent: () => Promise.resolve(),
 });
+
+export function makeGetContent(setContent: { (value: SetStateAction<Icontent>): void; }) {
+  return async () => populateContent(setContent);
+}
 
   type ContentProps = { children: ReactNode };
 export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
 
-  const getContent = async () => populateContent(setContent);
+  const getContent = makeGetContent(setContent);
 
   useEffect(() => {
-    (async () => {
-      await populateContent(setContent);
-    })();
+    // eslint-disable-next-line no-void
+    void populateContent(setContent);
   }, []);
 
   return (

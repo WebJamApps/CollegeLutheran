@@ -5,8 +5,8 @@ import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import utils from './utils';
 
 export const loginConfig = (auth:Iauth, setAuth: (args0:Iauth)=>void) => ({
-  onSuccess: (codeResponse: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {
-    utils.responseGoogleLogin(codeResponse, auth, setAuth);
+  onSuccess: async (codeResponse: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {
+    await utils.responseGoogleLogin(codeResponse, auth, setAuth);
   },
   onError: () => { console.log('Google login failed'); return false; },
   flow: 'auth-code',
@@ -38,7 +38,7 @@ export function GoogleButtons(props: IgoogleButtonsProps): JSX.Element {
         className="logoutButton"
         variant="contained"
         size="small"
-        onClick={() => { utils.responseGoogleLogout(setAuth); }}
+        onClick={async () => { await utils.responseGoogleLogout(setAuth); }}
       >
         Logout
       </Button>

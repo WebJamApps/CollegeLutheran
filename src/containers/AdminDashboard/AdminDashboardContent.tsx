@@ -88,8 +88,8 @@ export function ChangeHomepage(
     value: title,
     width: '90%',
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { (async () => { await getContent(); })(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps, no-void
+  useEffect(() => { void getContent(); }, []);
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
