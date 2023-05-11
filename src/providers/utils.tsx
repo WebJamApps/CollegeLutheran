@@ -1,3 +1,4 @@
+import { SetStateAction } from 'react';
 
 export interface IpictureTypes {
   musicPics: Ibook[];
@@ -37,9 +38,10 @@ export interface Icontent {
 
 export function makeGetter(
   setter: (arg0: any) => void,
-  populate: (arg: {
+  populate: (args: {
     (value: any): void;
-  }) => void,
+  },
+  ) => void,
 ) {
   return async () => populate(setter);
 }

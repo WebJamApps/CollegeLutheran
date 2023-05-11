@@ -1,8 +1,10 @@
 import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
-import axios from 'axios';
-import { Ibook, Icontent, makeGetter } from './utils';
+import axios, { AxiosError } from 'axios';
+import {
+  Ibook, Icontent, IpictureTypes, makeGetter,
+} from './utils';
 
 export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   try {
@@ -30,7 +32,22 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   }
 };
 
+export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+  try {
+    const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
+    const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+    const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
+    const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
+    const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+    const pictures = {
+      musicPics, familyPics, youthPics, habitatPics, otherPics,
+    };
+    setPictures(pictures);
+  } catch (err) { console.log((err as AxiosError).message); }
+};
+
 export function setContentDef(_arg0: Icontent) {}
+export function setPicturesDef(_arg0: IpictureTypes) {}
 
 export const ContentContext = createContext({
   content: {
@@ -38,23 +55,37 @@ export const ContentContext = createContext({
     youthPage: {} as Ibook,
     habitatPage: {} as Ibook,
   },
+  pictures: {
+    musicPics: [],
+    familyPics: [],
+    youthPics: [],
+    habitatPics: [],
+    otherPics: [],
+  } as IpictureTypes,
   setContent: setContentDef,
   getContent: () => Promise.resolve(),
+  setPictures: setPicturesDef,
+  getPictures: () => Promise.resolve(),
 });
 
   type ContentProps = { children: ReactNode };
 export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
+  const [pictures, setPictures] = useState({} as IpictureTypes);
+
   const getContent = makeGetter(setContent, populateContent);
+  const getPictures = makeGetter(setPictures, populatePictures);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
+    // eslint-disable-next-line no-void
+    void populatePictures(setPictures);
   }, []);
 
   return (
     <Provider value={{
-      setContent, content, getContent,
+      setContent, content, getContent, pictures, setPictures, getPictures,
     }}
     >
       {children}
