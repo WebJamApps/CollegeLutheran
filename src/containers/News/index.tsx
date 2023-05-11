@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
+import type { Ibook } from 'src/providers/utils';
 import DefaultNewsContent from './NewsContent';
-import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 export function News(props: { books: Ibook[] }): JSX.Element {
   const { books } = props;

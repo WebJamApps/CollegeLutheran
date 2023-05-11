@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import type { AnyAction, Dispatch } from 'redux';
 import CommonUtils from 'src/lib/commonUtils';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/utils';
 import mapStoreToProps from 'src/redux/mapStoreToProps';
 import { AdminDashboardContent } from './AdminDashboardContent';
 

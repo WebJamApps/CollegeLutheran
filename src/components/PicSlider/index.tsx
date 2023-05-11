@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/utils';
 import Caption from './caption';
 
 type SettingsType = {

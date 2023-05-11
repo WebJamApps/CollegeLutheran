@@ -2,8 +2,8 @@ import { useContext, useEffect } from 'react';
 import parser from 'html-react-parser';
 import { PictureContext } from 'src/providers/Pics.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
-import type { Ibook } from '../../redux/mapStoreToProps';
 
 export function shuffle(array: Ibook[]) {
   let currentIndex = array.length, randomIndex;
@@ -69,8 +69,8 @@ export const About = ({
   } = pictures;
   const allPics = familyPics.concat(youthPics).concat(habitatPics).concat(otherPics).concat(musicPics);
   const data = shuffle(allPics);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { (async () => { await getContent(); })(); }, []);
+  // eslint-disable-next-line  no-void, react-hooks/exhaustive-deps
+  useEffect(() => { void getContent(); }, []);// do not repeatedly call getContent!
   return (
     <div className="aboutPage">
       <div className="container-fluid" style={{ paddingRight: 0 }}>

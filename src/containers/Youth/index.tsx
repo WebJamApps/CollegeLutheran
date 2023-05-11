@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { YouthContent } from './YouthContent';
-import mapStoreToProps, { Ibook } from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
 export const Youth = (

@@ -1,5 +1,5 @@
+import type { Ibook } from 'src/providers/utils';
 import ELCALogo from '../../components/elcaLogo';
-import type { Ibook } from '../../redux/mapStoreToProps';
 
 interface NewsContentProps {
   books?: Ibook[];

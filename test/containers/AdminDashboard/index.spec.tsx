@@ -2,8 +2,7 @@
 
 import renderer from 'react-test-renderer';
 import { AdminDashboard } from 'src/containers/AdminDashboard';
-import type { Ibook } from 'src/redux/mapStoreToProps';
-// import { PhotoTable } from '../../../src/components/PhotoTable';
+import type { Ibook } from 'src/providers/utils';
 
 describe('Dashboard Container', () => {
   it('renders AdminDashboard', () => {

@@ -1,6 +1,8 @@
 import { Grid } from '@mui/material';
 import { useContext } from 'react';
+import parser from 'html-react-parser';
 import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import ELCALogo from 'src/components/elcaLogo';
 import PicSlider from 'src/components/PicSlider';
 
@@ -35,44 +37,26 @@ const Responsibilities = (props: { children: any; }) => {
   );
 };
 
-const AboutProject = () => (
-  <Grid item xs={12} sm={6} md={4} style={{ marginInline: '0', paddingInline: '20px' }}>
-    <h3 style={{
-      marginBottom: '0px', paddingBottom: '16px', paddingTop: '16px', textAlign: 'center',
-    }}
-    >
-      CLC Habitat Project
-    </h3>
-    <div style={{ textAlign: 'left' }}>
-      College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
-      Roanoke Valley. This is the largest service project undertaken by the members of College
-      Lutheran and we are delighted to be underway.
-      <br />
-      Here are some details:
-      <ul>
-        <li>
-          The address is 1212 Dale Avenue, SE Roanoke
-        </li>
-        <li>
-          The street is rather crowded so park gently.
-        </li>
-        <li>
-          The foundation is nearly complete.
-        </li>
-        <li>
-          Check out the progress board in the All Saints Hallway.
-        </li>
-        <li>
-          We will have couple of preliminary workdays leading up to our
-          {' '}
-          <strong>Kickoff Workday on April 22:  8:00 am - 2:00 pm</strong>
-        </li>
-        <li>
-          On Sunday April 2, after our Palm Sunday worship service we will have a meeting in the Fellowship Hall to review our plans.
-          {' '}
-          Snacks and drinks provided.
-        </li>
-        <li>
+const AboutProject = () => {
+  const { content: { habitatPage } } = useContext(ContentContext);
+  return (
+    <Grid item xs={12} sm={6} md={4} style={{ marginInline: '0', paddingInline: '20px' }}>
+      <h3 style={{
+        marginBottom: '0px', paddingBottom: '16px', paddingTop: '16px', textAlign: 'center',
+      }}
+      >
+        CLC Habitat Project
+      </h3>
+      <div style={{ textAlign: 'left' }}>
+        College Lutheran Church has made a commitment of $50,000 to sponsor a home in the
+        Roanoke Valley. This is the largest service project undertaken by the members of College
+        Lutheran and we are delighted to be underway.
+        <br />
+        Here are some details:
+        <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+          {parser(habitatPage && habitatPage.comments ? habitatPage.comments : '')}
+        </section>
+        <p>
           Questions??? Contact
           {' '}
           <a href="mailto:rcrevpaul@gmail.com">rcrevpaul@gmail.com</a>
@@ -80,11 +64,11 @@ const AboutProject = () => (
           or
           {' '}
           <a href="mailto:clchabitatsalem@gmail.com">clchabitatsalem@gmail.com</a>
-        </li>
-      </ul>
-    </div>
-  </Grid>
-);
+        </p>
+      </div>
+    </Grid>
+  );
+};
 
 const VolunteerSignUp = () => (
   <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>

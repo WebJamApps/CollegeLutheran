@@ -9,18 +9,22 @@ import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import type { Ibook } from 'src/providers/utils';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
-function UpdateHomeButton(
+export function UpdateButton(
   {
-    title,
+    title = '',
     getContent,
     comments = '',
+    buttonName,
+    type,
   }: { title: string,
     getContent: () => Promise<void>,
-    comments?: string },
+    comments?: string,
+    buttonName: string,
+    type: 'habitatPageContent' | 'homePageContent' },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -30,9 +34,9 @@ function UpdateHomeButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={(evt) => utils.putAPI({ title, comments, type: 'homePageContent' }, auth, getContent)}
+        onClick={() => utils.putAPI({ title, comments, type }, auth, getContent)}
       >
-        Update Homepage
+        {buttonName}
       </Button>
     </div>
   );
@@ -40,7 +44,7 @@ function UpdateHomeButton(
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
 }
-function CommentsEditor(
+export function CommentsEditor(
   props: IcommentsEditorProps,
 ): JSX.Element {
   const { setComments, comments } = props;
@@ -67,7 +71,7 @@ function CommentsEditor(
   );
 }
 
-function ChangeHomepage(
+export function ChangeHomepage(
 ): JSX.Element {
   const { content: { homePage }, getContent } = useContext(ContentContext);
   const [title, setTitle] = useState(homePage.title);
@@ -76,12 +80,16 @@ function ChangeHomepage(
     type: 'text',
     label: 'Title',
     isRequired: false,
-    onChange: (evt: { target: { value: SetStateAction<string>; }; }) => setTitle(evt.target.value),
+    onChange: (evt: { target: { value: SetStateAction<string>; }; }) => {
+      const { target: { value } } = evt;
+      setTitle(value);
+      return value;
+    },
     value: title,
     width: '90%',
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { (async () => { await getContent(); })(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps, no-void
+  useEffect(() => { void getContent(); }, []);
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
@@ -95,10 +103,12 @@ function ChangeHomepage(
           {forms.makeInput(inputParams)}
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateHomeButton
+          <UpdateButton
             getContent={getContent}
             title={title}
             comments={comments}
+            type="homePageContent"
+            buttonName="Update Homepage"
           />
         </form>
       </div>
@@ -149,6 +159,36 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
   );
 }
 
+function ChangeHabitatPage(
+): JSX.Element {
+  const { content: { habitatPage }, getContent } = useContext(ContentContext);
+  const [title] = useState(habitatPage.title);
+  const [comments, setComments] = useState(habitatPage.comments);
+  return (
+    <div className="horiz-scroll">
+      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <h5>Change Habitat Section</h5>
+        <form
+          id="create-habitatpage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
+          <CommentsEditor comments={comments} setComments={setComments} />
+          <UpdateButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+            type="habitatPageContent"
+            buttonName="Update Habitat Page"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
 interface IadminDashboardContentProps {
   dispatch: Dispatch<AnyAction>,
   youthContent: Ibook, books: Ibook[]
@@ -175,6 +215,8 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
       </div>
       <ChangeNewsPage dispatch={dispatch} />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
+      <ChangeHabitatPage />
     </div>
   );
 }
+
