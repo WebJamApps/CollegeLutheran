@@ -1,25 +1,4 @@
-
-export interface Ibook {
-  link?: string,
-  caption?: string,
-  modify?: JSX.Element,
-  thumbnail?: string,
-  title: string,
-  _id: string,
-  type: string,
-  created_at?: string,
-  author?: string,
-  numberPages?: number,
-  dateOfPub?: number,
-  url?: string,
-  isbn?: string,
-  siteLocation?: string,
-  numberOfCopies?: number,
-  access?: string,
-  comments?: string,
-  checkedOutBy?: string,
-  checkedOutByName?: string,
-}
+import type { Ibook } from 'src/providers/utils';
 
 export interface Store {
   youthContent: { youthContent: Ibook };

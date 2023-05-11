@@ -18,7 +18,7 @@ async function putAPI(
     const { status } = await axios.request(config);
     if (status === 200) {
       await getContent();
-      commonUtils.notify('Homepage', 'successfully updated', 'success');
+      commonUtils.notify(data.type, 'successfully updated', 'success');
     }
   } catch (e) {
     if ((e as any).status === 400) {

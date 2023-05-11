@@ -1,24 +1,24 @@
 import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
-import axios from 'axios';
-import type { Ibook } from 'src/redux/mapStoreToProps';
+import axios, { AxiosError } from 'axios';
+import { makeGetter, IpictureTypes } from './utils';
 
-export interface IpictureTypes {
-  musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
-  habitatPics: Ibook[], otherPics: Ibook[],
-}
-const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
-  const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
-  const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
-  const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
-  const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
-  const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
-  const pictures = {
-    musicPics, familyPics, youthPics, habitatPics, otherPics,
-  };
-  setPictures(pictures);
+export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+  try {
+    const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
+    const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
+    const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
+    const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
+    const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+    const pictures = {
+      musicPics, familyPics, youthPics, habitatPics, otherPics,
+    };
+    setPictures(pictures);
+  } catch (err) { console.log((err as AxiosError).message); }
 };
+
+export function setPicturesDef(_arg0: IpictureTypes) {}
 
 export const PictureContext = createContext({
   pictures: {
@@ -28,7 +28,7 @@ export const PictureContext = createContext({
     habitatPics: [],
     otherPics: [],
   } as IpictureTypes,
-  setPictures: (_arg0: IpictureTypes) => {},
+  setPictures: setPicturesDef,
   getPictures: () => Promise.resolve(),
 });
 
@@ -36,14 +36,10 @@ type Props = { children: ReactNode };
 export function PictureProvider({ children }: Props): JSX.Element {
   const { Provider } = PictureContext;
   const [pictures, setPictures] = useState({} as IpictureTypes);
-
-  const getPictures = async () => populatePictures(setPictures);
-
+  const getPictures = makeGetter(setPictures, populatePictures);
   useEffect(() => {
-    (async () => {
-      await populatePictures(setPictures);
-    })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line no-void
+    void populatePictures(setPictures);
   }, []);
 
   return (
