@@ -3,7 +3,6 @@ import type { Ibook } from 'src/providers/utils';
 export interface Store {
   youthContent: { youthContent: Ibook };
   homeContent: { homeContent: Ibook };
-  // habitatContent: { habitatContent: Ibook };
   books: { books: Ibook[] };
   showTable: { showTable: boolean };
 }
@@ -11,7 +10,6 @@ export interface Store {
 const mapStoreToProps = (store: Store): Record<string, unknown> => ({
   homeContent: store.homeContent.homeContent,
   youthContent: store.youthContent.youthContent,
-  // habitatContent: store.habitatContent.habitatContent,
   books: store.books.books,
   showTable: store.showTable.showTable,
 });
