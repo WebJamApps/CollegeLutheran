@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar renders correctly 1`] = `
+<div
+  className="page-content"
+>
+  <div
+    className="container-fluid"
+  >
+    <p
+      style={
+        {
+          "fontSize": "4pt",
+          "margin": "0",
+        }
+      }
+    >
+       
+    </p>
+    <div
+      className="material-content elevation3"
+      style={
+        {
+          "margin": "auto",
+          "maxWidth": "998px",
+          "paddingBottom": "-80px",
+        }
+      }
+    >
+      <iframe
+        frameBorder="0"
+        height="900"
+        scrolling="no"
+        src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showTabs=0&showCalendars=0&
+          height=900&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&
+          color=%23060D5E&ctz=America%2FNew_York"
+        style={
+          {
+            "borderWidth": "0",
+          }
+        }
+        title="Church Calendar"
+        width="900"
+      />
+    </div>
+  </div>
+</div>
+`;
