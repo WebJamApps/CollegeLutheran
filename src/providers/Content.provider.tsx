@@ -46,7 +46,6 @@ export const ContentContext = createContext({
 export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
-
   const getContent = makeGetter(setContent, populateContent);
   useEffect(() => {
     // eslint-disable-next-line no-void
