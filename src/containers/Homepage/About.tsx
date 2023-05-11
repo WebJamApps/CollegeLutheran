@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react';
 import parser from 'html-react-parser';
-import { PictureContext } from 'src/providers/Pics.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
@@ -62,7 +61,7 @@ export interface IAbout {
 export const About = ({
   width,
 }: IAbout): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const { content: { homePage }, getContent } = useContext(ContentContext);
   const {
     familyPics = [], musicPics = [], youthPics = [], otherPics = [], habitatPics = [],

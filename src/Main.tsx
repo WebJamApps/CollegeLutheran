@@ -4,7 +4,6 @@ import { ReactNotifications } from 'react-notifications-component';
 import { createRoot } from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from 'redux-persist/integration/react';
-import { PictureProvider } from './providers/Pics.provider';
 import { App } from './App';
 import store from './redux/store';
 import { AuthProvider } from './providers/Auth.provider';
@@ -18,12 +17,10 @@ function Main() {
       <AuthProvider>
         <Provider store={store.store}>
           <PersistGate loading={null} persistor={store.persistor}>
-            <PictureProvider>
-              <ContentProvider>
-                <ReactNotifications />
-                <App />
-              </ContentProvider>
-            </PictureProvider>
+            <ContentProvider>
+              <ReactNotifications />
+              <App />
+            </ContentProvider>
           </PersistGate>
         </Provider>
       </AuthProvider>

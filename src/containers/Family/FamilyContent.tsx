@@ -1,6 +1,6 @@
 import parser from 'html-react-parser';
 import { useContext } from 'react';
-import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 
@@ -34,7 +34,7 @@ const FamilySection = () => (
   </section>
 );
 const FamilyContent = (): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const { familyPics = [] } = pictures;
   return (
     <div className="page-content family-content">

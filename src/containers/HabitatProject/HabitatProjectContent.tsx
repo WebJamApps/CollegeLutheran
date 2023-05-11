@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
 import { useContext } from 'react';
 import parser from 'html-react-parser';
-import { PictureContext } from 'src/providers/Pics.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import ELCALogo from 'src/components/elcaLogo';
 import PicSlider from 'src/components/PicSlider';
@@ -105,7 +104,7 @@ const VolunteerSignUp = () => (
 );
 
 export const SlideShow = (): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const { habitatPics = [] } = pictures;
   return (
     <Grid item xs={12} sm={6} md={4} style={{ paddingInline: '20px' }}>
