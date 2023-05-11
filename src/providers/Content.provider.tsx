@@ -1,35 +1,8 @@
 import {
-  createContext, ReactNode, SetStateAction, useEffect, useState,
+  createContext, ReactNode, useEffect, useState,
 } from 'react';
 import axios from 'axios';
-
-export interface Ibook {
-  link?: string,
-  caption?: string,
-  modify?: JSX.Element,
-  thumbnail?: string,
-  title: string,
-  _id: string,
-  type: string,
-  created_at?: string,
-  author?: string,
-  numberPages?: number,
-  dateOfPub?: number,
-  url?: string,
-  isbn?: string,
-  siteLocation?: string,
-  numberOfCopies?: number,
-  access?: string,
-  comments?: string,
-  checkedOutBy?: string,
-  checkedOutByName?: string,
-}
-
-export interface Icontent {
-  homePage: Ibook,
-  youthPage: Ibook,
-  habitatPage: Ibook
-}
+import { Ibook, Icontent, makeGetter } from './utils';
 
 export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   try {
@@ -69,17 +42,12 @@ export const ContentContext = createContext({
   getContent: () => Promise.resolve(),
 });
 
-export function makeGetContent(setContent: { (value: SetStateAction<Icontent>): void; }) {
-  return async () => populateContent(setContent);
-}
-
   type ContentProps = { children: ReactNode };
 export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
 
-  const getContent = makeGetContent(setContent);
-
+  const getContent = makeGetter(setContent, populateContent);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);

@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import parser from 'html-react-parser';
 import { PictureContext } from 'src/providers/Pics.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
 
 export function shuffle(array: Ibook[]) {

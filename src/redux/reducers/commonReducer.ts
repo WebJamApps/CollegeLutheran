@@ -1,4 +1,4 @@
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 
 const reducer = (key:string, caseString:string, initialState: Record<string, unknown>) => (
   state = initialState,

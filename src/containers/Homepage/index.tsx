@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withResizeDetector } from 'react-resize-detector';
 import fetch from 'src/lib/fetch';
 import type { Dispatch, AnyAction } from 'redux';
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import { About } from './About';
 import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';

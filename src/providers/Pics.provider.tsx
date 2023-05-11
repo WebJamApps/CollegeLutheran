@@ -1,13 +1,9 @@
 import {
-  createContext, ReactNode, SetStateAction, useEffect, useState,
+  createContext, ReactNode, useEffect, useState,
 } from 'react';
 import axios, { AxiosError } from 'axios';
-import type { Ibook } from 'src/providers/Content.provider';
+import { makeGetter, IpictureTypes } from './utils';
 
-export interface IpictureTypes {
-  musicPics: Ibook[], familyPics: Ibook[], youthPics: Ibook[],
-  habitatPics: Ibook[], otherPics: Ibook[],
-}
 export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   try {
     const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
@@ -36,16 +32,11 @@ export const PictureContext = createContext({
   getPictures: () => Promise.resolve(),
 });
 
-export function makePictures(setPictures: { (value: SetStateAction<IpictureTypes>): void; }) {
-  return async () => populatePictures(setPictures);
-}
-
 type Props = { children: ReactNode };
 export function PictureProvider({ children }: Props): JSX.Element {
   const { Provider } = PictureContext;
   const [pictures, setPictures] = useState({} as IpictureTypes);
-  const getPictures = makePictures(setPictures);
-
+  const getPictures = makeGetter(setPictures, populatePictures);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populatePictures(setPictures);

@@ -9,7 +9,7 @@ import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 

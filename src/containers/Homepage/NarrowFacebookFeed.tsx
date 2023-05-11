@@ -1,6 +1,6 @@
 import { PictureContext } from 'src/providers/Pics.provider';
 import { useContext } from 'react';
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';
 

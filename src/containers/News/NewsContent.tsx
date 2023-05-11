@@ -1,4 +1,4 @@
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import ELCALogo from '../../components/elcaLogo';
 
 interface NewsContentProps {

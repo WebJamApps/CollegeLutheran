@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
-import type { Ibook } from 'src/providers/Content.provider';
+import type { Ibook } from 'src/providers/utils';
 import DefaultNewsContent from './NewsContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
