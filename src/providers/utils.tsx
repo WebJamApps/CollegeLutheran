@@ -33,8 +33,6 @@ export interface Icontent {
   homePage: Ibook;
   youthPage: Ibook;
   habitatPage: Ibook;
-  newsPage: Ibook;
-
 }
 
 export function makeGetter(
