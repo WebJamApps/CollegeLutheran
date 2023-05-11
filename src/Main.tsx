@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { Provider } from 'react-redux';
+import { ReactNotifications } from 'react-notifications-component';
 import { createRoot } from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -19,6 +20,7 @@ function Main() {
           <PersistGate loading={null} persistor={store.persistor}>
             <PictureProvider>
               <ContentProvider>
+                <ReactNotifications />
                 <App />
               </ContentProvider>
             </PictureProvider>

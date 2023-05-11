@@ -1,37 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { Store } from 'react-notifications-component';
-// import superagent from 'superagent';
+import superagent from 'superagent';
+import { Store } from 'react-notifications-component';
 import fetch from '../../src/lib/fetch';
 
 describe('fetch', () => {
   it('is defined', () => {
     expect(fetch).toBeDefined();
   });
-  // let r: any;
-  // it('catches error', async () => {
-  //   const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
-  //   superagent.get = myMock;
-  //   Store.addNotification = jest.fn();
-  //   r = await fetch.fetchGet({
-  //     props: { dispatch: (fun: any) => fun },
-  //     superagent,
-  //   }, '/', '');
-  //   expect(r).toBe(false);
-  // });
-  // it('catches error when fetching homePageContent', async () => {
-  //   const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
-  //   superagent.get = myMock;
-  //   r = await fetch.fetchGet({
-  //     props: { dispatch: (fun: any) => expect(fun.data.title).toBe('') },
-  //     superagent,
-  //   }, '/homePageContent', '');
-  // });
-  // it('successfully runs fetchPost', async () => {
-  //   const myMock:any = jest.fn(() => (
-  //     { set: () => ({ set: () => ({ send: () => Promise.resolve({ status: 200 }) }) }) }
-  //   ));
-  //   superagent.post = myMock;
-  //   const { status } = await fetch.fetchPost(superagent, { token: '' }, { title: '', comments: '', type: '' });
-  //   expect(typeof status).toBe('number');
-  // });
+  it('GET catches error', async () => {
+    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
+    superagent.get = myMock;
+    Store.addNotification = jest.fn();
+    const r = await fetch.fetchGet(
+      jest.fn(),
+      '/',
+      '');
+    expect(r).toBe(false);
+  });
+  it('GET catches error when PageContent', async () => {
+    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
+    superagent.get = myMock;
+    const dispatch = jest.fn();
+    Store.addNotification = jest.fn();
+    const r = await fetch.fetchGet(
+      dispatch,
+      '/?type=PageContent',
+      '');
+    expect(r).toBe(false);
+    expect(dispatch).toHaveBeenCalled();
+  });
+  it('GET is successful', async () => {
+    const myMock:any = jest.fn(() => ({ set: () => Promise.resolve({ body: {} }) }));
+    superagent.get = myMock;
+    Store.addNotification = jest.fn();
+    const r = await fetch.fetchGet(
+      jest.fn(),
+      '/',
+      '');
+    expect(r).toBe(true);
+  });
 });
