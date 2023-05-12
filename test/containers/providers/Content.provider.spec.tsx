@@ -1,5 +1,5 @@
 import {
-  populateContent, ContentProvider, setContentDef,
+  populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef,
 } from 'src/providers/Content.provider';
 import renderer from 'react-test-renderer';
 import { render, screen } from '@testing-library/react';
@@ -40,5 +40,25 @@ describe('Content provider', () => {
     (axios.get as jest.Mock).mockImplementation(() => Promise.resolve(resp));
     await populateContent(setContent);
     expect(setContent).toHaveBeenCalled();
+  });
+  it('populates pictures', async () => {
+    const setPictures = jest.fn();
+    const resp = {
+      data: {
+        musicPics:
+           { title: '', type: '', _id: '' },
+        familyPics: { title: '', type: '', _id: '' },
+        habitatPics: { title: '', type: '', _id: '' },
+        youthPics: { title: '', type: '', _id: '' },
+        otherPics: { title: '', type: '', _id: '' },
+      },
+    };
+    (axios.get as jest.Mock).mockImplementation(() => Promise.resolve(resp));
+    await populatePictures(setPictures);
+    expect(setPictures).toHaveBeenCalled();
+  });
+  it('setPicturesDef', () => {
+    const IpictureTypes: any = {};
+    expect(setPicturesDef(IpictureTypes)).toBeUndefined();
   });
 });

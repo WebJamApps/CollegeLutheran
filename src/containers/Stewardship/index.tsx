@@ -1,8 +1,7 @@
 import DefaultContent from './StewardshipContent';
 import commonUtils from '../../lib/commonUtils';
 
-const Stewardship = (): JSX.Element => {
+export function Stewardship(): JSX.Element {
   commonUtils.setTitleAndScroll('Stewardship', window.screen.width);
   return (<DefaultContent />);
-};
-export default Stewardship;
+}

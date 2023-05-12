@@ -1,38 +1,36 @@
-// ;
-// import renderer from 'react-test-renderer';
-// import { Store } from 'react-notifications-component';
-import { App } from 'src/App';
-// import type { Iauth } from '../../src/redux/mapStoreToProps';
+import renderer from 'react-test-renderer';
+import store from 'src/redux/store';
+import { App, showAdminDashboard, checkIsAdmin } from 'src/App';
+import { Provider } from 'react-redux';
+import commonUtils from 'src/lib/commonUtils';
 
 describe('App component', () => {
   it('is defined', () => {
     expect(App).toBeDefined();
   });
-  // const auth: Iauth = {
-  //   dispatch
-  //   isAuthenticated: true, error: '', email: '', token: '', user: { userType: '' },
-  // };
-  // const wrapper = shallow<App>(<App dispatch={jest.fn()} auth={auth} />);
-  // it('renders the component', () => {
-  //   Object.defineProperty(Store, 'addNotification', {
-  //     writable: true,
-  //     value: jest.fn(),
-  //   });
-  //   expect(Store.addNotification).toBeDefined();
-  //   expect(wrapper.find('div#App').exists()).toBe(true);
-  // });
-  // it('does not fetch the images or songs if they already exist', () => {
-  //   const wrapper2 = shallow(<App auth={auth} dispatch={jest.fn()} />);
-  //   expect(wrapper2.find('div#App').exists()).toBe(true);
-  // });
-  // it('renders the routes when authenticated', () => {
-  //   let authRole = '';
-  //   // eslint-disable-next-line prefer-destructuring
-  //   if (process.env.userRoles) authRole = JSON.parse(process.env.userRoles).roles[1];
-  //   const auth2: Iauth = {
-  //     isAuthenticated: true, error: 'none', email: 'devemail@cool.com', token: '', user: { userType: authRole },
-  //   };
-  //   const wrapper2 = shallow(<App dispatch={jest.fn()} auth={auth2} />);
-  //   expect(wrapper2.find('div#App').exists()).toBe(true);
-  // });
+  it('renders the component', () => {
+    commonUtils.setTitleAndScroll = jest.fn();
+    const href = 'http://localhost:7777';
+    const reload = jest.fn();
+    Object.defineProperty(window, 'location', {
+      value: {
+        href, assign: () => { }, reload, origin: href,
+      },
+      writable: true,
+    });
+    const app = renderer.create(<Provider store={store.store}><App /></Provider>).toJSON();
+    expect(app).toMatchSnapshot();
+  });
+  it('showAdminDashboard when isAdmin', () => {
+    const result = showAdminDashboard(true);
+    expect(result).not.toBe(null);
+  });
+  it('checkIsAdmin', () => {
+    const setIsAdmin = jest.fn();
+    process.env.userRoles = JSON.stringify({ roles: ['tester'] });
+    checkIsAdmin({
+      error: '', token: 'token', isAuthenticated: true, user: { userType: 'tester', email: 'tester@tesing.com' },
+    }, setIsAdmin);
+    expect(setIsAdmin).toHaveBeenCalledWith(true);
+  });
 });

@@ -1,0 +1,899 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders the component 1`] = `
+<div
+  className="App"
+  id="App"
+>
+  <div
+    className="page-host"
+  >
+    <div
+      className="home-sidebar close drawer-container"
+      id="sidebar"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <div
+        className="drawer"
+        style={
+          {
+            "backgroundColor": "#c0c0c0",
+            "position": "relative",
+            "zIndex": -1,
+          }
+        }
+      >
+        <div
+          className="navImage"
+        >
+          <img
+            alt="Luther Rose"
+            id="webjamwidelogo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png"
+            style={
+              {
+                "marginLeft": 0,
+                "marginRight": 0,
+                "width": "86px",
+              }
+            }
+          />
+        </div>
+        <div
+          className="nav-list"
+          style={
+            {
+              "width": "220px",
+            }
+          }
+        >
+          <p
+            style={
+              {
+                "fontSize": "1px",
+                "marginBottom": "2px",
+              }
+            }
+          />
+          <div
+            className="menu-item"
+            style={
+              {
+                "backgroundColor": "#244a8bff",
+              }
+            }
+          >
+            <p
+              style={
+                {
+                  "color": "#fff",
+                  "fontSize": "11pt",
+                  "marginBottom": "2px",
+                }
+              }
+            >
+              <a
+                className="menu-hover"
+                href="http://bit.ly/CollegeLutheranDirections"
+                style={
+                  {
+                    "color": "#88c1ff",
+                  }
+                }
+              >
+                <span>
+                  210 S. College Ave
+                </span>
+              </a>
+              <br />
+              Salem, VA 24153
+            </p>
+          </div>
+          <div
+            className="menu-item"
+            style={
+              {
+                "backgroundColor": "#244a8bff",
+                "marginLeft": "0px",
+              }
+            }
+          >
+            <p
+              style={
+                {
+                  "color": "#fff",
+                  "fontSize": "11pt",
+                  "marginBottom": "2px",
+                }
+              }
+            >
+              <span>
+                ph: 
+              </span>
+              <a
+                className="menu-hover"
+                href="tel:5403894963"
+                style={
+                  {
+                    "color": "#88c1ff",
+                  }
+                }
+              >
+                (540) 389-4963
+              </a>
+              <br />
+              <span>
+                fax: 
+              </span>
+              (540) 389-4980
+              <br />
+              <a
+                href="mailto:office1@collegelutheran.org"
+                style={
+                  {
+                    "color": "#88c1ff",
+                    "wordWrap": "break-word",
+                  }
+                }
+              >
+                <span
+                  className="menu-hover"
+                >
+                  office1@collegelutheran.org
+                </span>
+              </a>
+            </p>
+          </div>
+           
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/belief"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-arrows-alt"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Our Lutheran Beliefs
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/staff"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-users"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Church Staff
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/livestream"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-video"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Livestream
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/news"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="far fa-newspaper"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  News
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/giving"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-handshake"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Giving
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/habitatproject"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-hammer"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Habitat Project
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/music"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-music"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Music
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/youth"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-futbol"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Youth Ministry
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/family"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-child"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Children & Families
+                </span>
+              </div>
+            </a>
+          </div>
+          <div
+            className="menu-item"
+          >
+            <a
+              className="nav-link"
+              href="/"
+              onClick={[Function]}
+            >
+              <div
+                style={
+                  {
+                    "display": "inline",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-heart"
+                />
+                 
+                <span
+                  className="nav-item"
+                >
+                  Home
+                </span>
+              </div>
+            </a>
+          </div>
+           
+          <p
+            style={
+              {
+                "fontSize": "6pt",
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          >
+             
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="main-panel"
+    >
+      <span
+        id="mobilemenutoggle"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <i
+          className="fas fa-bars"
+        />
+      </span>
+      <div
+        className="mainPanel"
+      >
+        <div
+          className="swipe-area"
+        />
+        <div
+          className="material-header home-header"
+          id="header"
+          style={
+            {
+              "backgroundColor": "#244a8bff",
+            }
+          }
+        >
+          <div
+            className="headercontent"
+          />
+          <div>
+            <div
+              className="flex-header"
+              style={
+                {
+                  "marginLeft": "15px",
+                  "marginTop": "-18px",
+                  "paddingLeft": "10px",
+                  "paddingRight": "10px",
+                }
+              }
+            >
+              <h2
+                className="header-text"
+                style={
+                  {
+                    "fontSize": "25px",
+                    "marginBottom": "-1px",
+                    "marginTop": "1px",
+                  }
+                }
+              >
+                <a
+                  className="header-text"
+                  href="/"
+                  style={
+                    {
+                      "textAlign": "left",
+                      "textDecoration": "none",
+                    }
+                  }
+                >
+                  College Lutheran Church
+                </a>
+              </h2>
+              <p
+                className="subTitle"
+                style={
+                  {
+                    "color": "#f4c00eff",
+                    "maxWidth": "100%",
+                  }
+                }
+              >
+                We celebrate God's grace and share His love in Christ!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="content-block"
+          id="contentBlock"
+          style={
+            {
+              "width": "auto",
+            }
+          }
+        >
+          <div>
+            <div
+              className="page-content"
+            >
+              <div
+                className="aboutPage"
+              >
+                <div
+                  className="container-fluid"
+                  style={
+                    {
+                      "paddingRight": 0,
+                    }
+                  }
+                >
+                  <div
+                    className="row"
+                  >
+                    <div
+                      className="col"
+                      style={
+                        {
+                          "maxWidth": "7.35in",
+                          "paddingRight": "4px",
+                          "top": "0",
+                        }
+                      }
+                    >
+                      <p
+                        style={
+                          {
+                            "fontSize": "18px",
+                            "marginBottom": "40px",
+                            "marginTop": "40px",
+                          }
+                        }
+                      >
+                        College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA. The church is situated on College Avenue, within easy walking distance of Roanoke College. College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
+                      </p>
+                      <h5
+                        style={
+                          {
+                            "fontWeight": "bold",
+                            "marginTop": "35px",
+                          }
+                        }
+                      />
+                      <section
+                        style={
+                          {
+                            "marginBottom": "35px",
+                            "marginTop": "20px",
+                            "textAlign": "left",
+                          }
+                        }
+                      />
+                      <p
+                        style={
+                          {
+                            "marginBottom": "16px",
+                            "paddingBottom": 0,
+                            "paddingRight": "15px",
+                          }
+                        }
+                      >
+                        <span
+                          style={
+                            {
+                              "fontSize": "18px",
+                            }
+                          }
+                        >
+                           
+                          <strong>
+                            What Else is Happening at CLC?
+                          </strong>
+                        </span>
+                      </p>
+                      <p>
+                        Click
+                         
+                        <a
+                          href="/news"
+                        >
+                          News
+                        </a>
+                         
+                        to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
+                        <br />
+                      </p>
+                    </div>
+                     
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <p
+                style={
+                  {
+                    "fontSize": "6pt",
+                    "marginBottom": "0",
+                  }
+                }
+              >
+                 
+              </p>
+              <div
+                className="notWidescreen"
+                style={
+                  {
+                    "margin": "auto",
+                    "maxWidth": "320px",
+                  }
+                }
+              >
+                <p
+                  style={
+                    {
+                      "fontSize": "10pt",
+                      "marginBottom": 0,
+                      "marginTop": 0,
+                      "paddingBottom": "2px",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  <a
+                    href="/calendar"
+                    style={
+                      {
+                        "fontSize": "10pt",
+                      }
+                    }
+                  >
+                    <i>
+                      View Full Calendar
+                    </i>
+                  </a>
+                </p>
+                <div
+                  style={
+                    {
+                      "margin": "auto",
+                      "marginBottom": 0,
+                      "maxWidth": "300px",
+                    }
+                  }
+                >
+                  <iframe
+                    frameBorder="0"
+                    height="300"
+                    scrolling="no"
+                    src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&height=500&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&color=%23060D5E&ctz=America%2FNew_York"
+                    style={
+                      {
+                        "borderWidth": 0,
+                      }
+                    }
+                    title="clc-calendar"
+                    width="300"
+                  />
+                </div>
+                <hr />
+                <p
+                  style={
+                    {
+                      "fontSize": "10pt",
+                      "marginBottom": 0,
+                      "marginTop": "10px",
+                      "paddingBottom": "4px",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  <i>
+                    Like Us On
+                     
+                    <a
+                      href="https://www.facebook.com/CollegeLutheranChurch/"
+                      style={
+                        {
+                          "fontSize": "10pt",
+                        }
+                      }
+                    >
+                      Facebook
+                    </a>
+                  </i>
+                </p>
+                <div
+                  style={
+                    {
+                      "margin": "auto",
+                      "marginBottom": 0,
+                      "maxWidth": "300px",
+                    }
+                  }
+                >
+                  <iframe
+                    allow="encrypted-media"
+                    frameBorder="0"
+                    height="300"
+                    scrolling="no"
+                    src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=300&height=500&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
+                    style={
+                      {
+                        "border": "none",
+                        "overflow": "hidden",
+                      }
+                    }
+                    title="clc-facebook"
+                    width="300"
+                  />
+                </div>
+                <hr />
+                <p
+                  style={
+                    {
+                      "fontSize": "10pt",
+                      "marginBottom": 0,
+                      "marginTop": "10px",
+                      "paddingBottom": "4px",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                   
+                </p>
+                <div
+                  className="familySlideContainer"
+                >
+                  <div
+                    id="familySlideshowWide"
+                    style={
+                      {
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "marginRight": 0,
+                        "marginTop": "1px",
+                      }
+                    }
+                  />
+                </div>
+              </div>
+              <p
+                style={
+                  {
+                    "fontSize": "6pt",
+                    "marginBottom": "0",
+                  }
+                }
+              >
+                 
+              </p>
+            </div>
+            <div
+              style={
+                {
+                  "marginLeft": "-9px",
+                  "textAlign": "center",
+                }
+              }
+            >
+              <a
+                href="http://www.elca.org/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img
+                  alt="ELCA LOGO"
+                  id="elcaLogo"
+                  src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+                  style={
+                    {
+                      "margin": "auto",
+                      "marginLeft": "",
+                      "paddingTop": "30px",
+                      "width": "308px",
+                    }
+                  }
+                />
+              </a>
+            </div>
+          </div>
+          <div
+            className="footer"
+            id="wjfooter"
+            style={
+              {
+                "bottom": "0",
+                "marginTop": "20px",
+                "paddingBottom": "20px",
+                "paddingTop": "20px",
+              }
+            }
+          >
+            <div
+              className="footer-links"
+              style={
+                {
+                  "padding": "6px",
+                  "textAlign": "center",
+                }
+              }
+            >
+              <a
+                href="href="https://twitter.com/CollegeLutheran""
+                rel="noopener noreferrer"
+                style={
+                  {
+                    "paddingRight": "5px",
+                  }
+                }
+                target="_blank"
+              >
+                <span>
+                  <i
+                    className="fab fa-twitter"
+                  />
+                </span>
+              </a>
+              <a
+                href="https://www.facebook.com/CollegeLutheranChurch/"
+                rel="noopener noreferrer"
+                style={
+                  {
+                    "paddingRight": "5px",
+                  }
+                }
+                target="_blank"
+              >
+                <span>
+                  <i
+                    className="fab fa-facebook"
+                  />
+                </span>
+              </a>
+              <a
+                href="https://www.instagram.com/collegelutheranchurch/"
+                rel="noopener noreferrer"
+                style={
+                  {
+                    "paddingRight": "5px",
+                  }
+                }
+                target="_blank"
+              >
+                <span>
+                  <i
+                    className="fab fa-instagram"
+                  />
+                </span>
+              </a>
+              <span
+                className="nohover"
+              >
+                Powered by  
+              </span>
+              <a
+                className="wjllc"
+                href="https://www.web-jam.com"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Web Jam LLC
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
