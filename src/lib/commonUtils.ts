@@ -18,10 +18,10 @@ function getUserRoles(): string[] {
   return userRoles;
 }
 
-const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+export const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 
 type NotificationType = 'success' | 'danger' | 'info' | 'default' | 'warning';
-function notify(title: string, message: string, type: NotificationType) {
+export function notify(title: string, message: string, type: NotificationType) {
   Store.addNotification({
     title,
     message,

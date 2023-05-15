@@ -18,6 +18,7 @@ function Main() {
         <Provider store={store.store}>
           <PersistGate loading={null} persistor={store.persistor}>
             <ContentProvider>
+              <ReactNotifications />
               <App />
             </ContentProvider>
           </PersistGate>
