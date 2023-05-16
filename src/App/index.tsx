@@ -2,7 +2,6 @@ import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { ReactNotifications } from 'react-notifications-component';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import DefaultMusic from '../containers/Music';
 import { Beliefs } from '../containers/Beliefs';
@@ -30,13 +29,17 @@ export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
   setIsAdmin(isAdmin);
 }
 
+export function showAdminDashboard(isAdmin:boolean) {
+  if (isAdmin) return <Route path="/admin" element={<AdminDashboardDefault />} />;
+  return null;
+}
+
 export function App(): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => checkIsAdmin(auth, setIsAdmin), [auth]);
   return (
     <div id="App" className="App">
-      <ReactNotifications />
       <BrowserRouter>
         <AppTemplate>
           <Routes>
@@ -47,8 +50,7 @@ export function App(): JSX.Element {
             <Route path="/giving" element={<Giving />} />
             <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
             <Route path="/staff" element={<Staff />} />
-            {isAdmin
-              ? <Route path="/admin" element={<AdminDashboardDefault />} /> : null}
+            {showAdminDashboard(isAdmin)}
             <Route path="/youth" element={<DefaultYouth />} />
             <Route path="/news" element={<DefaultNews />} />
             <Route path="/calendar" element={<Calendar />} />

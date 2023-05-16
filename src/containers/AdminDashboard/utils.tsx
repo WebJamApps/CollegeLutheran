@@ -57,7 +57,6 @@ async function addNewsAPI(
 
     };
     const { status } = await axios.request(config);
-    console.log(status);
     if (status === 201) {
       await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
       clearForm();

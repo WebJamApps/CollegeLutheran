@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { PictureContext } from 'src/providers/Pics.provider';
 import parser from 'html-react-parser';
 import PicSlider from 'src/components/PicSlider';
 import { ContentContext } from 'src/providers/Content.provider';
@@ -32,7 +31,7 @@ function FaithWithoutWorks() {
 
 export const YouthContent = (
 ): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const { content: { youthPage } } = useContext(ContentContext);
   const { youthPics = [] } = pictures;
   return (

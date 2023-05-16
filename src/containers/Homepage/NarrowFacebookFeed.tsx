@@ -1,4 +1,4 @@
-import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import { useContext } from 'react';
 import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
@@ -45,7 +45,7 @@ export function FamilySlideContainer({ data }: { data: Ibook[] }) {
   );
 }
 export const FacebookFeed = (): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const {
     familyPics = [], musicPics = [], youthPics = [], otherPics = [], habitatPics = [],
   } = pictures;

@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { useState, useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
-import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import utils from './utils';
 
 const defaultCreatePic = {
@@ -54,7 +54,7 @@ interface IcreatePicDialogProps {
 export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogProps) {
   const [pic, setPic] = useState(defaultCreatePic);
   const { auth } = useContext(AuthContext);
-  const { getPictures } = useContext(PictureContext);
+  const { getPictures } = useContext(ContentContext);
   const showHideCaption = makeShowHideCaption(setPic, pic);
   const handleChange = (event: SelectChangeEvent) => {
     setPic({ ...pic, type: event.target.value });

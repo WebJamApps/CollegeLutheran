@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import { PictureContext } from 'src/providers/Pics.provider';
+import { ContentContext } from 'src/providers/Content.provider';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 
 const pageName = 'music';
 
 export const MusicContent = (): JSX.Element => {
-  const { pictures } = useContext(PictureContext);
+  const { pictures } = useContext(ContentContext);
   const { musicPics = [] } = pictures;
   return (
     <div className="page-content">

@@ -34,18 +34,6 @@ const fetchGet = async (dispatch:Dispatch<AnyAction>,
   return true;
 };
 
-// function fetchPost(
-//   superagent: SuperAgentStatic,
-//   auth: { token: string; },
-//   data: { title: string, comments: string, type: string },
-// ): SuperAgentRequest {
-//   return superagent.post(`${process.env.BackendUrl}/book`)
-//     .set('Authorization', `Bearer ${auth.token}`)
-//     .set('Content-Type', 'application/json')
-//     .send(data);
-// }
-
 export default {
   fetchGet,
-  // fetchPost
 };

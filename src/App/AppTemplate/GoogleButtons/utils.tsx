@@ -46,15 +46,15 @@ const responseGoogleLogin = async (
   response: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>,
   auth: Iauth,
   setAuth: (arg0: Iauth) => void,
+  nodeEnv:string,
 ): Promise<void> => {
   try {
     const uri = window.location.href;
     const baseUri = uri.split('/')[2];
-    console.log(baseUri);
     const body = {
       clientId: process.env.GoogleClientId,
       redirectUri: !baseUri.includes('localhost')
-        && process.env.NODE_ENV === 'production' ? `https://${baseUri}`
+        && nodeEnv === 'production' ? `https://${baseUri}`
         : `http://${baseUri}`,
       code: `${response.code}`,
       state: makeState(),
