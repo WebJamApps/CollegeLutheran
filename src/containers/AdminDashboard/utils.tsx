@@ -4,7 +4,7 @@ import commonUtils from 'src/lib/commonUtils';
 import type { AnyAction, Dispatch } from 'redux';
 import axios from 'axios';
 
-async function putAPI(
+export async function putAPI(
   data: { title: string; comments: string; type: string },
   auth: Iauth, getContent: () => Promise<void>,
 ): Promise<void> {
@@ -38,7 +38,7 @@ async function putAPI(
   }
 }
 
-async function addNewsAPI(
+export async function addNewsAPI(
   auth: Iauth,
   dispatch: Dispatch<AnyAction>, clearForm: () => void,
   dialogData: { title: string, url: string, comments: string },
@@ -67,7 +67,7 @@ async function addNewsAPI(
   }
 }
 
-async function createPicAPI(
+export async function createPicAPI(
   getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
   data: Record<string, unknown>, auth: Iauth,
 ): Promise<void> {
