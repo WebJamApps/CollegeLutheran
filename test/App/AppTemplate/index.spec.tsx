@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AppTemplate } from 'src/App/AppTemplate';
+import {
+  handleEscapePress, handleKeyMenu, toggleMobileMenu, AppTemplate,
+} from 'src/App/AppTemplate';
+
 // import authUtils from '../../src/App/authUtils';
 // import type { MenuItem } from '../../src/App/menuItems';
 
@@ -103,5 +106,23 @@ describe('AppTemplate', () => {
   //   const index = 1;
   //   const result = aT.makeMenuLink(menu, index);
   //   expect(result.props.className).toBe('menu-item');
+  // });
+  it('toggleMobileMenu', () => {
+    const setMenuOpen = jest.fn();
+    const menuOpen = true;
+    toggleMobileMenu(menuOpen, setMenuOpen);
+    expect(setMenuOpen).toHaveBeenCalledWith(false);
+  });
+  // it('handleKeyMenu', () => {
+  //   const setMenuOpen = jest.fn();
+  //   const e = { key: 'Enter' };
+
+  //   handleKeyMenu(e, menuOpen, setMenuOpen);
+  // });
+  // it('handleEscapePress', () => {
+  //   const e = { key: '' };
+  //   const setMenuOpen = jest.fn();
+  //   handleEscapePress(e, setMenuOpen);
+  //   expect(setMenuOpen).toHaveBeenCalledWith(false);
   // });
 });
