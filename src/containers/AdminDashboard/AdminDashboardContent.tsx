@@ -5,11 +5,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import {
   SetStateAction, useContext, useEffect, useState,
 } from 'react';
-import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/providers/utils';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
@@ -116,7 +114,7 @@ export function ChangeHomepage(
   );
 }
 
-function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Element {
+function ChangeNewsPage(): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -150,7 +148,7 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
         size="small"
         variant="contained"
         onClick={() => utils.addNewsAPI(
-          auth, dispatch, clearForm, { title, url, comments },
+          auth, clearForm, { title, url, comments },
         )}
       >
         Add News
@@ -189,15 +187,7 @@ function ChangeHabitatPage(
   );
 }
 
-interface IadminDashboardContentProps {
-  dispatch: Dispatch<AnyAction>,
-  youthContent: Ibook, books: Ibook[]
-}
-export function AdminDashboardContent(props: IadminDashboardContentProps) {
-  const {
-    dispatch,
-    youthContent, books,
-  } = props;
+export function AdminDashboardContent() {
   const [showCreatePic, setShowCreatePic] = useState(false);
   return (
     <div className="page-content">
@@ -213,7 +203,7 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
           Add New Picture
         </Button>
       </div>
-      <ChangeNewsPage dispatch={dispatch} />
+      <ChangeNewsPage />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
       <ChangeHabitatPage />
     </div>
