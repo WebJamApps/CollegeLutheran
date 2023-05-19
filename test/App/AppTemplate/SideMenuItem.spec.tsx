@@ -1,8 +1,15 @@
 import {
-  ContinueMenuItem, checkIsAllowed, setBulletin, sortBulletins,
+  ContinueMenuItem, MakeLink, SideMenuItem, checkIsAllowed, setBulletin, sortBulletins,
 } from 'src/App/AppTemplate/SideMenuItem';
 import renderer from 'react-test-renderer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { useDispatch, Provider } from 'react-redux';
+import store from 'src/redux/store';
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useDispatch: jest.fn(),
+}));
 
 describe('SideMenuItem', () => {
   it('sorts bulletins in order', () => {
@@ -30,6 +37,14 @@ describe('SideMenuItem', () => {
     ];
     const newMItem = setBulletin(mItem, books);
     expect(newMItem.link).toBe('https://example.com/bulletin1');
+  });
+  it('sets link to empty string when no bulletins', () => {
+    const mItem = {
+      classname: '', type: '', iconClass: '', link: '', name: '',
+    };
+    const books: any = [];
+    const result = setBulletin(mItem, books);
+    expect(result.link).toBe('');
   });
   it('shows login button when on staff page and not already authenticated', () => {
     const props = {
@@ -75,9 +90,25 @@ describe('SideMenuItem', () => {
     console.log(result);
     expect(result.type).toBe('div');
   });
-  it('should call handleClose when link is clicked', () => {
-    const props = {
-      menu: { link: '/example' }, index: 1, type: '', handleClose: jest.fn(),
+  it('renders anchor when type is not link', () => {
+    const menu = {
+      classname: '', type: '', iconClass: '', link: '/some-url', name: '', text: 'nav-link',
     };
+    const index = 0;
+    const type = '';
+    const handleClose = jest.fn();
+    const result = renderer.create(<MakeLink menu={menu} index={index} type={type} handleClose={handleClose} />).toJSON();
+    expect(result).toMatchSnapshot();
+  });
+  it('returns null when path and menu link are staff', () => {
+    const menu = {
+      auth: true, classname: '', type: '', iconClass: '', link: '', name: '',
+    };
+    const auth = {
+      isAuthenticated: true, user: { userType: 'admin', email: '' }, error: '', token: '',
+    };
+    const userRoles = ['', ''];
+    const result = checkIsAllowed(menu, auth, userRoles);
+    expect(result).toBe(false);
   });
 });

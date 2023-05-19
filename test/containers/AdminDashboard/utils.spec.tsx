@@ -70,6 +70,24 @@ describe('Admin Dash utils', () => {
     });
     expect(getContent).not.toHaveBeenCalled();
   });
+  it('putAPI catches error and notifies', async () => {
+    const data = { title: '', comments: '', type: '' };
+    const auth = {
+      isAuthenticated: true,
+      error: 'string',
+      token: 'string',
+      user: {
+        userType: 'string',
+        email: 'string',
+      },
+    };
+    const getContent = jest.fn();
+    commonUtils.notify = jest.fn();
+    (axios.request as jest.Mock).mockRejectedValueOnce(new Error('test'));
+    const notifyMock = commonUtils.notify;
+    await putAPI(data, auth, getContent);
+    expect(getContent).not.toHaveBeenCalled();
+  });
   it('successfully adds news', async () => {
     commonUtils.notify = jest.fn();
     const auth = {
