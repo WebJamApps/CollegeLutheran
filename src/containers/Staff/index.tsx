@@ -5,4 +5,4 @@ export const Staff = (): JSX.Element => {
   commonUtils.setTitleAndScroll('Church Staff', window.screen.width);
   return (<DefaultStaffContent />);
 };
-export default Staff;
+

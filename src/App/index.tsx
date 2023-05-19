@@ -6,7 +6,7 @@ import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import DefaultMusic from '../containers/Music';
 import { Beliefs } from '../containers/Beliefs';
 import { Giving } from '../containers/Giving';
-import Staff from '../containers/Staff';
+import { Staff } from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import { AdminDashboard } from '../containers/AdminDashboard';
 import DefaultNews from '../containers/News';
