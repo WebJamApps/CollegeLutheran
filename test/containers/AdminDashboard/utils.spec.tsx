@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { putAPI, addNewsAPI, createPicAPI } from 'src/containers/AdminDashboard/utils';
+import commonUtils from 'src/lib/commonUtils';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Admin Dash utils', () => {
   afterEach(() => {
@@ -71,6 +71,7 @@ describe('Admin Dash utils', () => {
     expect(getContent).not.toHaveBeenCalled();
   });
   it('successfully adds news', async () => {
+    commonUtils.notify = jest.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -81,18 +82,9 @@ describe('Admin Dash utils', () => {
       },
     };
     const dialogData = { title: '', url: '', comments: '' };
-    const dispatch = jest.fn();
     const clearForm = jest.fn();
-    const notifyMock = jest.fn();
-
-    notifyMock.mockReturnValueOnce(undefined);
     (axios.request as jest.Mock).mockResolvedValueOnce({ status: 201 });
-    jest.mock('src/lib/commonUtils', () => ({
-      ...jest.requireActual('src/lib/commonUtils'),
-      notify: notifyMock,
-    }));
-    await addNewsAPI(auth, dispatch, clearForm, dialogData);
-
+    await addNewsAPI(auth, clearForm, dialogData);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
       url: `${process.env.BackendUrl}/book`,
@@ -104,10 +96,11 @@ describe('Admin Dash utils', () => {
         access: 'CLC',
       },
     });
-    expect(dispatch).toHaveBeenCalledTimes(1);
     expect(clearForm).toHaveBeenCalled();
+    expect(commonUtils.notify).toHaveBeenCalled();
   });
   it('successfully adds a pic', async () => {
+    commonUtils.notify = jest.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -117,17 +110,10 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
-
     const data = { title: '' };
     const getPictures = jest.fn();
     const setShowDialog = jest.fn();
-    const notifyMock = jest.fn();
-
     (axios.request as jest.Mock).mockResolvedValueOnce({ status: 201 });
-    jest.mock('src/lib/commonUtils', () => ({
-      ...jest.requireActual('src/lib/commonUtils'),
-      notify: notifyMock,
-    }));
     await createPicAPI(getPictures, setShowDialog, data, auth);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
@@ -136,5 +122,7 @@ describe('Admin Dash utils', () => {
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
       data,
     });
+    expect(commonUtils.notify).toHaveBeenCalled();
+    expect(setShowDialog).toHaveBeenCalledWith(false);
   });
 });
