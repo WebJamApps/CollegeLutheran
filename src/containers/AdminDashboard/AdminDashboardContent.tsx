@@ -113,8 +113,13 @@ export function ChangeHomepage(
     </div>
   );
 }
-
-function ChangeNewsPage(): JSX.Element {
+export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
+  return (evt: { target: { checked: any; }; }) => {
+    if (evt.target.checked) setComments('worshipbulletin');
+    else setComments('');
+  };
+}
+export function ChangeNewsPage(): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -122,6 +127,7 @@ function ChangeNewsPage(): JSX.Element {
   const clearForm = () => {
     setTitle(''); setUrl(''); setComments('');
   };
+  const handleChange = makeHandleChange(setComments);
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
       <h5>Add to News Page</h5>
@@ -134,10 +140,7 @@ function ChangeNewsPage(): JSX.Element {
             <Checkbox
               checked={comments === 'worshipbulletin'}
               onChange={
-              (evt) => {
-                if (evt.target.checked) setComments('worshipbulletin');
-                else setComments('');
-              }
+              handleChange
             }
             />
           )}
@@ -187,8 +190,13 @@ function ChangeHabitatPage(
   );
 }
 
+export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
+  return () => setShowCreatePic(true);
+}
+
 export function AdminDashboardContent() {
   const [showCreatePic, setShowCreatePic] = useState(false);
+  const handleClick = makeHandleClick(setShowCreatePic);
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -198,7 +206,8 @@ export function AdminDashboardContent() {
           sx={{ textAlign: 'center' }}
           variant="contained"
           size="large"
-          onClick={() => setShowCreatePic(true)}
+          id="a-d"
+          onClick={handleClick}
         >
           Add New Picture
         </Button>

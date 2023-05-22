@@ -2,11 +2,34 @@ import type { Iauth } from 'src/providers/Auth.provider';
 import Fetch from 'src/lib/fetch';
 import commonUtils from 'src/lib/commonUtils';
 import type { AnyAction, Dispatch } from 'redux';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-export async function putAPI(
+async function handlePutError(e: AxiosError,
   data: { title: string; comments: string; type: string },
-  auth: Iauth, getContent: () => Promise<void>,
+  auth: Iauth,
+) {
+  if ((e).status === 400) {
+    try {
+      const config = { // creating a new book here
+        url: `${process.env.BackendUrl}/book`,
+        method: 'post',
+        headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+        data,
+      };
+      await axios.request(config);
+      commonUtils.notify(data.type, 'Successfully created', 'success');
+    } catch (err) {
+      commonUtils.notify(data.type, `Failed to create ${data.type}, ${(e as Error).message}`, 'warning');
+    }
+  } else {
+    commonUtils.notify(data.type, `Failed to update ${data.type}, ${(e as Error).message}`, 'warning');
+  }
+}
+
+async function putAPI(
+  data: { title: string; comments: string; type: string },
+  auth: Iauth,
+  getContent: () => Promise<void>,
 ): Promise<void> {
   try {
     const config = {
@@ -21,24 +44,11 @@ export async function putAPI(
       commonUtils.notify(data.type, 'successfully updated', 'success');
     }
   } catch (e) {
-    if ((e as any).status === 400) {
-      try {
-        const config = {
-          url: `${process.env.BackendUrl}/book`,
-          method: 'post',
-          headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-          data,
-        };
-        await axios.request(config);
-      } catch (err) {
-        commonUtils.notify('Homepage', `Failed to update homepage, ${(e as Error).message}`, 'warning');
-        console.log((err as Error).message);
-      }
-    }
+    await handlePutError(e as AxiosError, data, auth);
   }
 }
 
-export async function addNewsAPI(
+async function addNewsAPI(
   auth: Iauth,
   // dispatch: Dispatch<AnyAction>,
   clearForm: () => void,
@@ -68,7 +78,7 @@ export async function addNewsAPI(
   }
 }
 
-export async function createPicAPI(
+async function createPicAPI(
   getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
   data: Record<string, unknown>, auth: Iauth,
 ): Promise<void> {
@@ -80,7 +90,6 @@ export async function createPicAPI(
       data,
     };
     const { status } = await axios.request(config);
-    console.log(status);
     if (status === 201) {
       commonUtils.notify(`${data.title}`, 'Successfully added picture', 'success');
       await getPictures();
@@ -95,4 +104,5 @@ export default {
   addNewsAPI,
   putAPI,
   createPicAPI,
+  handlePutError,
 };

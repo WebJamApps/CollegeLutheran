@@ -1,4 +1,4 @@
-import { CreatePicDialog, PicTextField } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { CreatePicDialog, PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
 import utils from 'src/containers/AdminDashboard/utils';
 
@@ -17,7 +17,7 @@ describe('CreatePicDialog', () => {
     console.log(result.children[0].children[0].type);
     expect(result.children[0].children[0].type).toBe('input');
   });
-  it('handles onChange', () => {
+  it('handles onChange for PicTextField', () => {
     const props = {
       label: '',
       url: true,
@@ -33,20 +33,25 @@ describe('CreatePicDialog', () => {
     const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
     expect(tree).toBe(value);
   });
-  //   it('handles onClick for createPicAPI', async () => {
-  //     utils.createPicAPI = jest.fn();
-  //     const showDialog = true;
-  //     const setShowDialog = jest.fn();
-  //     const result = renderer.create(<CreatePicDialog showDialog={showDialog} setShowDialog={setShowDialog} />).root;
-  //     result.findByProps({ className: 'createPicButton' }).props.onClick();
-  //     expect(utils.createPicAPI).toHaveBeenCalled();
-  //   });
   it('handles event for makeShowHideCaption', () => {
     let checked: any;
     const evt = { target: { checked } };
+    const setPic = jest.fn();
     const pic = {
       title: '', type: '', url: '', comments: '',
     };
+    const handler = makeShowHideCaption(setPic, pic);
+    handler(evt);
+    expect(setPic).toHaveBeenCalled();
   });
+  // it('handles onClick for createPicAPI', () => {
+  //   utils.createPicAPI = jest.fn();
+  //   const props = {
+  //     showDialog: true, setShowDialog: jest.fn(),
+  //   };
+  //   const result = renderer.create(<CreatePicDialog {...props} />).root;
+  //   result.findByProps({ className: 'createPicButton' }).props.onClick();
+  //   expect(utils.createPicAPI).toHaveBeenCalled();
+  // });
 });
 

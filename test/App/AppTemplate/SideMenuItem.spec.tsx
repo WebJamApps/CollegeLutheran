@@ -5,10 +5,15 @@ import renderer from 'react-test-renderer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useDispatch, Provider } from 'react-redux';
 import store from 'src/redux/store';
+import { render } from '@testing-library/react';
 
 jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn(),
   useDispatch: jest.fn(),
+}));
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn().mockReturnValue({ pathname: '/staff' }),
 }));
 
 describe('SideMenuItem', () => {
@@ -42,7 +47,10 @@ describe('SideMenuItem', () => {
     const mItem = {
       classname: '', type: '', iconClass: '', link: '', name: '',
     };
-    const books: any = [];
+    const books = [
+      { comments: 'worshipbulletin' },
+      { comments: 'worshipbulletin' },
+    ];
     const result = setBulletin(mItem, books);
     expect(result.link).toBe('');
   });
