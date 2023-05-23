@@ -43,7 +43,7 @@ export function MakeLink(props: ImakeLinkProps): JSX.Element {
   );
 }
 
-const sortBulletins = (bulletin: Ibook[]) => {
+export const sortBulletins = (bulletin: Ibook[]) => {
   const sortedBulletins = bulletin.sort((a, b) => {
     if (a.created_at && b.created_at) {
       const aTime = new Date(a.created_at).getTime();
@@ -56,7 +56,7 @@ const sortBulletins = (bulletin: Ibook[]) => {
   return sortedBulletins;
 };
 
-const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
+export const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
   const m = mItem;
   if (books) {
     const bulletins: any[] = books.filter((b: any) => b.comments === 'worshipbulletin');
