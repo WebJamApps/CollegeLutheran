@@ -44,14 +44,5 @@ describe('CreatePicDialog', () => {
     handler(evt);
     expect(setPic).toHaveBeenCalled();
   });
-  // it('handles onClick for createPicAPI', () => {
-  //   utils.createPicAPI = jest.fn();
-  //   const props = {
-  //     showDialog: true, setShowDialog: jest.fn(),
-  //   };
-  //   const result = renderer.create(<CreatePicDialog {...props} />).root;
-  //   result.findByProps({ className: 'createPicButton' }).props.onClick();
-  //   expect(utils.createPicAPI).toHaveBeenCalled();
-  // });
 });
 
