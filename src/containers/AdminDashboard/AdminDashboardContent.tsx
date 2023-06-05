@@ -192,9 +192,9 @@ function ChangeHabitatPage(
 
 function ChangeStewardshipPage(
 ): JSX.Element {
-  const { content: { habitatPage }, getContent } = useContext(ContentContext);
-  const [title] = useState(habitatPage.title);
-  const [comments, setComments] = useState(habitatPage.comments);
+  const { content: { stewardshipPage }, getContent } = useContext(ContentContext);
+  const [title] = useState(stewardshipPage.title);
+  const [comments, setComments] = useState(stewardshipPage.comments);
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
