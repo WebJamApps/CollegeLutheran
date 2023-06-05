@@ -34,6 +34,7 @@ export interface Icontent {
   homePage: Ibook;
   youthPage: Ibook;
   habitatPage: Ibook;
+  stewardshipPage: Ibook;
 }
 
 export function makeGetter(

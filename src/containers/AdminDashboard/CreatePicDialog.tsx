@@ -60,7 +60,9 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
   const { getPictures } = useContext(ContentContext);
   const showHideCaption = makeShowHideCaption(setPic, pic);
   const handleChange = (event: SelectChangeEvent) => {
+    const { target: { value } } = event;
     setPic({ ...pic, type: event.target.value });
+    return value;
   };
   const handle = makeHandle(setShowDialog);
   return (

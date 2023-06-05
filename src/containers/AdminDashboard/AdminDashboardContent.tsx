@@ -22,7 +22,7 @@ export function UpdateButton(
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' },
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -190,6 +190,36 @@ function ChangeHabitatPage(
   );
 }
 
+function ChangeStewardshipPage(
+): JSX.Element {
+  const { content: { habitatPage }, getContent } = useContext(ContentContext);
+  const [title] = useState(habitatPage.title);
+  const [comments, setComments] = useState(habitatPage.comments);
+  return (
+    <div className="horiz-scroll">
+      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <h5>Change Stewardship Section</h5>
+        <form
+          id="create-stewardshippage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
+          <CommentsEditor comments={comments} setComments={setComments} />
+          <UpdateButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+            type="stewardshipPageContent"
+            buttonName="Update Stewardship Page"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowCreatePic(true);
 }
@@ -215,6 +245,7 @@ export function AdminDashboardContent() {
       <ChangeNewsPage />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
       <ChangeHabitatPage />
+      <ChangeStewardshipPage />
     </div>
   );
 }

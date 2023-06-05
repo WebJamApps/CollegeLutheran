@@ -1,6 +1,5 @@
-import { CreatePicDialog, PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
-import utils from 'src/containers/AdminDashboard/utils';
 
 describe('CreatePicDialog', () => {
   it('renders PicTextField', () => {

@@ -11,10 +11,12 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
     const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
     const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
     const { data: habitatPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
+    const { data: stewardshipPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=stewardshipPageContent`);
     setContent({
       homePage,
       youthPage,
       habitatPage,
+      stewardshipPage,
     });
   } catch (err) {
     console.log((err as Error).message);
@@ -28,6 +30,7 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
       homePage: {} as Ibook,
       youthPage: {} as Ibook,
       habitatPage,
+      stewardshipPage: {} as Ibook,
     });
   }
 };
@@ -54,6 +57,7 @@ export const ContentContext = createContext({
     homePage: {} as Ibook,
     youthPage: {} as Ibook,
     habitatPage: {} as Ibook,
+    stewardshipPage: {} as Ibook,
   },
   pictures: {
     musicPics: [],
