@@ -14,7 +14,7 @@ import { Family } from '../containers/Family';
 import Calendar from '../containers/Calendar';
 import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
-// import Stewardship from '../containers/Stewardship';
+import { Stewardship } from '../containers/Stewardship';
 import DefaultLiveStream from '../containers/LiveStream';
 import HabitatProject from '../containers/HabitatProject';
 
@@ -54,7 +54,7 @@ export function App(): JSX.Element {
             <Route path="/youth" element={<DefaultYouth />} />
             <Route path="/news" element={<DefaultNews />} />
             <Route path="/calendar" element={<Calendar />} />
-            {/* <Route path="/stewardship" component={Stewardship} /> */}
+            <Route path="/stewardship" element={<Stewardship />} />
             <Route path="/livestream" element={<DefaultLiveStream />} />
             <Route path="/habitatproject" element={<HabitatProject />} />
             <Route path="*" element={<Navigate to="/" replace />} />
