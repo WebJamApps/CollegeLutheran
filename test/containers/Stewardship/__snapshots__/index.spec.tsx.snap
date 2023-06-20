@@ -23,7 +23,7 @@ exports[`Stewardship renders correctly 1`] = `
         {
           "margin": "auto",
           "maxWidth": "998px",
-          "paddingBottom": "-80px",
+          "minHeight": "74vh",
         }
       }
     >
@@ -37,60 +37,6 @@ exports[`Stewardship renders correctly 1`] = `
       >
         Stewardship
       </h3>
-      <div
-        className="wide-thermo"
-        style={
-          {
-            "float": "right",
-            "textAlign": "center",
-          }
-        }
-      >
-        <p
-          style={
-            {
-              "fontSize": "14pt",
-              "marginBottom": "5px",
-              "marginLeft": "12px",
-              "paddingRight": "6px",
-              "textAlign": "center",
-            }
-          }
-        >
-          <strong>
-            <i>
-              <a
-                href="https://forms.gle/U4DV9SqwKtg4gPQr5"
-                rel="noreferrer"
-                style={
-                  {
-                    "fontSize": "15pt",
-                  }
-                }
-                target="_blank"
-              >
-                Click
-                 
-                Here
-                 
-                to Make Your Statement of Intent
-              </a>
-            </i>
-          </strong>
-        </p>
-        <img
-          alt=""
-          height="425"
-          src="https://dl.dropboxusercontent.com/s/hz9i4zkwclpsnv5/fallStewardship.jpg?dl=0"
-          style={
-            {
-              "border": "solid 1px black",
-            }
-          }
-          title=""
-          width="240"
-        />
-      </div>
       <section
         style={
           {
@@ -100,64 +46,7 @@ exports[`Stewardship renders correctly 1`] = `
           }
         }
       />
-      <div
-        className="cell-thermo"
-        style={
-          {
-            "margin": "auto",
-            "textAlign": "center",
-          }
-        }
-      >
-        <p
-          style={
-            {
-              "fontSize": "14pt",
-              "marginBottom": "5px",
-              "marginLeft": "12px",
-              "paddingRight": "6px",
-              "textAlign": "center",
-            }
-          }
-        >
-          <strong>
-            <i>
-              <a
-                href="https://forms.gle/U4DV9SqwKtg4gPQr5"
-                rel="noreferrer"
-                style={
-                  {
-                    "fontSize": "15pt",
-                  }
-                }
-                target="_blank"
-              >
-                Click
-                 
-                Here
-                 
-                to Make Your Statement of Intent
-              </a>
-            </i>
-          </strong>
-        </p>
-        <img
-          alt=""
-          height="425"
-          src="https://dl.dropboxusercontent.com/s/hz9i4zkwclpsnv5/fallStewardship.jpg?dl=0"
-          style={
-            {
-              "border": "solid 1px black",
-            }
-          }
-          title=""
-          width="240"
-        />
-      </div>
     </div>
-    <p>
-       
-    </p>
     <div
       style={
         {
@@ -186,9 +75,6 @@ exports[`Stewardship renders correctly 1`] = `
         />
       </a>
     </div>
-    <p>
-       
-    </p>
   </div>
 </div>
 `;
