@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WideFacebookFeed renders WideFacebookFeed 1`] = `
+<div
+  className="row"
+  style={
+    {
+      "marginLeft": "10px",
+    }
+  }
+>
+  <div
+    className="col"
+    style={
+      {
+        "margin": "auto",
+        "maxWidth": "600px",
+        "paddingRight": "10px",
+      }
+    }
+  >
+    <p
+      style={
+        {
+          "fontSize": "10pt",
+          "marginTop": "0px",
+          "textAlign": "center",
+        }
+      }
+    >
+      <a
+        href="/calendar"
+        style={
+          {
+            "fontSize": "10pt",
+          }
+        }
+      >
+        <i>
+          View Full Calendar
+        </i>
+      </a>
+    </p>
+    <iframe
+      frameBorder="0"
+      height="500"
+      scrolling="no"
+      src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&height=500&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&color=%23060D5E&ctz=America%2FNew_York"
+      style={
+        {
+          "borderWidth": 0,
+        }
+      }
+      title="google-calendar"
+      width="550"
+    />
+  </div>
+  <div
+    className="col"
+    style={
+      {
+        "margin": "auto",
+        "paddingLeft": "10px",
+        "paddingRight": "10px",
+        "textAlign": "center",
+        "width": "600px",
+      }
+    }
+  >
+    <p
+      id="wideFacebook"
+      style={
+        {
+          "fontSize": "10pt",
+          "marginBottom": "0px",
+          "marginTop": "32px",
+          "textAlign": "center",
+        }
+      }
+    >
+      <i>
+        Like Us On
+         
+        <a
+          href="https://www.facebook.com/CollegeLutheranChurch/"
+          style={
+            {
+              "fontSize": "10pt",
+            }
+          }
+        >
+          Facebook
+        </a>
+      </i>
+    </p>
+    <iframe
+      allow="encrypted-media"
+      className="widescreenHomepage"
+      height="485"
+      scrolling="none"
+      src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=500&height=485&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
+      style={
+        {
+          "border": "none",
+          "marginLeft": "-14px",
+          "overflow": "hidden",
+        }
+      }
+      title="facebook ticker"
+      width="500"
+    />
+  </div>
+</div>
+`;

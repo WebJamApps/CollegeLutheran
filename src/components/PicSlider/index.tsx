@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import type { Ibook } from 'src/providers/utils';
-import Caption from './caption';
+import { Caption } from './caption';
 
 type SettingsType = {
   autoplay: boolean;

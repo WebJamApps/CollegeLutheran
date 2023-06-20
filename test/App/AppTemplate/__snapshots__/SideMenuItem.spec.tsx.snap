@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideMenuItem renders anchor when type is not link 1`] = `
+<div
+  className="menu-item"
+>
+  <a
+    className="nav-link"
+    href="/some-url"
+    onClick={[MockFunction]}
+  >
+    <div
+      style={
+        {
+          "display": "inline",
+        }
+      }
+    >
+      <i
+        className=""
+      />
+       
+      <span
+        className="nav-item"
+      />
+    </div>
+  </a>
+</div>
+`;

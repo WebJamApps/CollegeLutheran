@@ -5,11 +5,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import {
   SetStateAction, useContext, useEffect, useState,
 } from 'react';
-import type { AnyAction, Dispatch } from 'redux';
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import type { Ibook } from 'src/providers/utils';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 
@@ -24,7 +22,7 @@ export function UpdateButton(
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' },
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -115,8 +113,13 @@ export function ChangeHomepage(
     </div>
   );
 }
-
-function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Element {
+export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
+  return (evt: { target: { checked: any; }; }) => {
+    if (evt.target.checked) setComments('worshipbulletin');
+    else setComments('');
+  };
+}
+export function ChangeNewsPage(): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -124,6 +127,7 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
   const clearForm = () => {
     setTitle(''); setUrl(''); setComments('');
   };
+  const handleChange = makeHandleChange(setComments);
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
       <h5>Add to News Page</h5>
@@ -136,10 +140,7 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
             <Checkbox
               checked={comments === 'worshipbulletin'}
               onChange={
-              (evt) => {
-                if (evt.target.checked) setComments('worshipbulletin');
-                else setComments('');
-              }
+              handleChange
             }
             />
           )}
@@ -150,7 +151,7 @@ function ChangeNewsPage({ dispatch }:{ dispatch:Dispatch<AnyAction> }): JSX.Elem
         size="small"
         variant="contained"
         onClick={() => utils.addNewsAPI(
-          auth, dispatch, clearForm, { title, url, comments },
+          auth, clearForm, { title, url, comments },
         )}
       >
         Add News
@@ -189,16 +190,43 @@ function ChangeHabitatPage(
   );
 }
 
-interface IadminDashboardContentProps {
-  dispatch: Dispatch<AnyAction>,
-  youthContent: Ibook, books: Ibook[]
+function ChangeStewardshipPage(
+): JSX.Element {
+  const { content: { stewardshipPage }, getContent } = useContext(ContentContext);
+  const [title] = useState(stewardshipPage.title);
+  const [comments, setComments] = useState(stewardshipPage.comments);
+  return (
+    <div className="horiz-scroll">
+      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <h5>Change Stewardship Section</h5>
+        <form
+          id="create-stewardshippage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
+          <CommentsEditor comments={comments} setComments={setComments} />
+          <UpdateButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+            type="stewardshipPageContent"
+            buttonName="Update Stewardship Page"
+          />
+        </form>
+      </div>
+    </div>
+  );
 }
-export function AdminDashboardContent(props: IadminDashboardContentProps) {
-  const {
-    dispatch,
-    youthContent, books,
-  } = props;
+
+export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
+  return () => setShowCreatePic(true);
+}
+
+export function AdminDashboardContent() {
   const [showCreatePic, setShowCreatePic] = useState(false);
+  const handleClick = makeHandleClick(setShowCreatePic);
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -208,14 +236,16 @@ export function AdminDashboardContent(props: IadminDashboardContentProps) {
           sx={{ textAlign: 'center' }}
           variant="contained"
           size="large"
-          onClick={() => setShowCreatePic(true)}
+          id="a-d"
+          onClick={handleClick}
         >
           Add New Picture
         </Button>
       </div>
-      <ChangeNewsPage dispatch={dispatch} />
+      <ChangeNewsPage />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
       <ChangeHabitatPage />
+      <ChangeStewardshipPage />
     </div>
   );
 }

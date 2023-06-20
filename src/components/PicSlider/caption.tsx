@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Caption = (props: { caption?: (JSX.Element | string); }):JSX.Element => {
+export const Caption = (props: { caption?: (JSX.Element | string); }):JSX.Element => {
   const { caption } = props;
   return (
     <div
@@ -20,9 +18,3 @@ const Caption = (props: { caption?: (JSX.Element | string); }):JSX.Element => {
     </div>
   );
 };
-
-Caption.defaultProps = {
-  caption: '',
-};
-
-export default Caption;

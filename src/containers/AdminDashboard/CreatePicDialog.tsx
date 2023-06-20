@@ -6,7 +6,7 @@ import {
   Box, FormControl, InputLabel, SelectChangeEvent, MenuItem,
 } from '@mui/material';
 import { useState, useContext } from 'react';
-import { AuthContext } from 'src/providers/Auth.provider';
+import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import utils from './utils';
 
@@ -51,21 +51,27 @@ export function PicTextField(props: IpicTextFieldProps) {
 interface IcreatePicDialogProps {
   showDialog: boolean, setShowDialog: (arg0: boolean) => void,
 }
+export function makeHandle(setShowDialog: (arg0: boolean) => void) {
+  return () => setShowDialog(false);
+}
 export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogProps) {
   const [pic, setPic] = useState(defaultCreatePic);
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
   const showHideCaption = makeShowHideCaption(setPic, pic);
   const handleChange = (event: SelectChangeEvent) => {
+    const { target: { value } } = event;
     setPic({ ...pic, type: event.target.value });
+    return value;
   };
+  const handle = makeHandle(setShowDialog);
   return (
     <Dialog
       disableEnforceFocus
       disableAutoFocus
       className="createNewPicDialog"
       open={showDialog}
-      onClose={() => setShowDialog(false)}
+      onClose={handle}
     >
       <DialogTitle>Create New Picture</DialogTitle>
       <DialogContent sx={{ padding: '10px 10px' }}>
@@ -116,7 +122,7 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
         <Button
           size="small"
           className="cancelPicButton"
-          onClick={() => setShowDialog(false)}
+          onClick={handle}
         >
           Cancel
         </Button>
