@@ -113,13 +113,14 @@ export function ChangeHomepage(
     </div>
   );
 }
-export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
+export function makeHandleChange(setComments: (arg0: string) => void) {
   return (evt: { target: { checked: any; }; }) => {
     if (evt.target.checked) setComments('worshipbulletin');
     else setComments('');
   };
 }
 export function ChangeNewsPage(): JSX.Element {
+  const { getNews } = useContext(ContentContext);
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -151,7 +152,7 @@ export function ChangeNewsPage(): JSX.Element {
         size="small"
         variant="contained"
         onClick={() => utils.addNewsAPI(
-          auth, clearForm, { title, url, comments },
+          auth, getNews, clearForm, { title, url, comments },
         )}
       >
         Add News

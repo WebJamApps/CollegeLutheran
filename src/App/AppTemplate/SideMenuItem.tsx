@@ -9,6 +9,7 @@ import type { Ibook } from 'src/providers/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
 import Fetch from 'src/lib/fetch';
+import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
 
@@ -103,11 +104,18 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
     menu, index, handleClose,
   } = props;
   const books = useSelector((store:Store) => store.books.books);
-  const dispatch = useDispatch();
+  const { getNews } = useContext(ContentContext);
+
+  // const dispatch = useDispatch();
   useEffect(() => {
     // eslint-disable-next-line no-void
-    void Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
-  }, [dispatch]);// This should be removed from redux and use a provider!
+  //   void Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
+  //
+    // eslint-disable-next-line no-void
+    void getNews();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [],
+  );// This should be removed from redux and use a provider!
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const { pathname } = location;
