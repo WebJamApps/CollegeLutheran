@@ -52,8 +52,19 @@ export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void)
 
 export const populateNews = async (setNews: (arg0:Inews)=> void) => {
   try {
-    const { data: newsContent } = await axios.get(`${process.env.BackendUrl}/book?type=Forum`);
-    setNews(newsContent);
+    const { data } = await axios.get(`${process.env.BackendUrl}/book?type=Forum`);
+    if (Array.isArray(data)) {
+      data.sort((a, b) => {
+        if (a.created_at && b.created_at) {
+          const dataA = a.created_at.split('T')[0];
+          const dateB = b.created_at.split('T')[0];
+          if (dataA < dateB) return 1;
+          if (dataA > dateB) return -1;
+        }
+        return 0;
+      });
+    }
+    setNews({ newsContent: data });
   } catch (err) { console.log((err as AxiosError).message); }
 };
 
