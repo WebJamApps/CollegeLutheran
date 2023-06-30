@@ -113,7 +113,7 @@ export function ChangeHomepage(
     </div>
   );
 }
-export function makeHandleChange(setComments: (arg0: string) => void) {
+export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
   return (evt: { target: { checked: any; }; }) => {
     if (evt.target.checked) setComments('worshipbulletin');
     else setComments('');

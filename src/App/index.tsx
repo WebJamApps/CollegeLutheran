@@ -9,7 +9,6 @@ import { Giving } from '../containers/Giving';
 import { Staff } from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import { AdminDashboard } from '../containers/AdminDashboard';
-// import DefaultNews from '../containers/News';
 import { News } from '../containers/News';
 import { Family } from '../containers/Family';
 import Calendar from '../containers/Calendar';
