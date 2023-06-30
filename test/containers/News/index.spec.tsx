@@ -1,6 +1,9 @@
+import { News } from 'src/containers/News/index';
+import renderer from 'react-test-renderer';
 
 describe('News', () => {
   it('renders correctly', () => {
-    expect(true).toBe(true);
+    const result: any = renderer.create(<News />).toJSON();
+    expect(result.type).toBe('div');
   });
 });

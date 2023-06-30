@@ -1,5 +1,5 @@
 import {
-  populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef,
+  populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef, setNewsDef,
 } from 'src/providers/Content.provider';
 import renderer from 'react-test-renderer';
 import { render, screen } from '@testing-library/react';
@@ -60,5 +60,9 @@ describe('Content provider', () => {
   it('setPicturesDef', () => {
     const IpictureTypes: any = {};
     expect(setPicturesDef(IpictureTypes)).toBeUndefined();
+  });
+  it('setNewsDef', () => {
+    const Inews: any = {};
+    expect(setNewsDef(Inews)).toBeUndefined();
   });
 });

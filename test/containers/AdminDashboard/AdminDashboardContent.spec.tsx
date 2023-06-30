@@ -4,6 +4,7 @@ import {
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import renderer from 'react-test-renderer';
 import utils from 'src/containers/AdminDashboard/utils';
+import { render } from 'react-dom';
 
 describe('AdminDashboard Content', () => {
   it('renders the update button', () => {
