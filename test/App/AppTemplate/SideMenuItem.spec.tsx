@@ -1,11 +1,8 @@
 import {
-  ContinueMenuItem, MakeLink, SideMenuItem, checkIsAllowed, setBulletin, sortBulletins,
+  ContinueMenuItem, MakeLink, checkIsAllowed, setBulletin, sortBulletins,
 } from 'src/App/AppTemplate/SideMenuItem';
 import renderer from 'react-test-renderer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useDispatch, Provider } from 'react-redux';
-import store from 'src/redux/store';
-import { render } from '@testing-library/react';
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
