@@ -39,6 +39,31 @@ export function UpdateButton(
     </div>
   );
 }
+
+export function DeleteButton(
+  {
+    getNews,
+    dialogData,
+  }: {
+    getNews: () => Promise<void>,
+    dialogData: { title: string, url: string | undefined, comments: string | undefined },
+  },
+): JSX.Element {
+  const { auth } = useContext(AuthContext);
+  return (
+    <div style={{ marginBottom: '10px', float: 'right' }}>
+      <Button
+        size="small"
+        variant="contained"
+        type="button"
+        onClick={() => utils.deleteAPI(auth, getNews, dialogData)}
+      >
+        Delete
+      </Button>
+    </div>
+  );
+}
+
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
 }
@@ -129,6 +154,7 @@ export function ChangeNewsPage(): JSX.Element {
     setTitle(''); setUrl(''); setComments('');
   };
   const handleChange = makeHandleChange(setComments);
+  const dialogData = { title, url, comments };
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
       <h5>Add to News Page</h5>
@@ -157,6 +183,10 @@ export function ChangeNewsPage(): JSX.Element {
       >
         Add News
       </Button>
+      <DeleteButton
+        getNews={getNews}
+        dialogData={dialogData}
+      />
     </div>
   );
 }
