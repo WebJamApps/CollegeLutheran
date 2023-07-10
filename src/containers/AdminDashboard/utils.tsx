@@ -78,32 +78,58 @@ async function addNewsAPI(
   }
 }
 
-async function deleteAPI(
-  auth: Iauth,
-  getNews: () => Promise<void>,
-  dialogData: { title: string, url: string | undefined, comments: string | undefined },
-): Promise<void> {
-  try {
-    const data = {
-      ...dialogData,
-      type: 'Forum',
-      access: 'CLC',
-    };
-    const config = {
-      url: `${process.env.BackendUrl}/book`,
-      method: 'delete',
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data,
-    };
-    const { status } = await axios(config);
-    if (status === 200) {
-      await getNews();
-      commonUtils.notify(data.title, 'Successfully deleted news', 'success');
-    }
-  } catch (e) {
-    commonUtils.notify(dialogData.title, `Failed to delete news, ${(e as Error).message}`, 'warning');
-  }
-}
+// async function deleteAPI(
+//   auth: Iauth,
+//   getNews: () => Promise<void>,
+//   dialogData: { title: string, url: string | undefined, comments: string | undefined },
+// ): Promise<void> {
+//   try {
+//     const data = {
+//       ...dialogData,
+//       type: 'Forum',
+//       access: 'CLC',
+//     };
+//     const config = {
+//       url: `${process.env.BackendUrl}/book`,
+//       method: 'delete',
+//       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//       data,
+//     };
+//     const { status } = await axios(config);
+//     if (status === 200) {
+//       await getNews();
+//       commonUtils.notify(data.title, 'Successfully deleted news', 'success');
+//     }
+//   } catch (e) {
+//     commonUtils.notify(dialogData.title, `Failed to delete news, ${(e as Error).message}`, 'warning');
+//   }
+// }
+
+// async function editAPI(
+//   auth: Iauth,
+//   getNews: () => Promise<void>,
+//   dialogData: { title: string, url: string | undefined, comments: string | undefined },
+// ): Promise<void> {
+//   try {
+//     const data = {
+//       ...dialogData,
+//       type: 'Forum',
+//       access: 'CLC',
+//     };
+//     const config = {
+//       url: `${process.env.BackendUrl}/book`,
+//       method: 'put',
+//       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//       data,
+//     };
+//     const { status } = await axios(config);
+//     if (status === 200) {
+//       await getNews();
+//     }
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
 
 async function createPicAPI(
   getPictures: () => Promise<void>, setShowDialog: (arg0: boolean) => void,
@@ -132,5 +158,6 @@ export default {
   putAPI,
   createPicAPI,
   handlePutError,
-  deleteAPI,
+  // deleteAPI,
+  // editAPI,
 };

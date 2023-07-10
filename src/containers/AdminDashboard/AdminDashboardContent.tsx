@@ -10,6 +10,7 @@ import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
+// import { EditButton } from '../News/utils';
 
 export function UpdateButton(
   {
@@ -40,29 +41,53 @@ export function UpdateButton(
   );
 }
 
-export function DeleteButton(
-  {
-    getNews,
-    dialogData,
-  }: {
-    getNews: () => Promise<void>,
-    dialogData: { title: string, url: string | undefined, comments: string | undefined },
-  },
-): JSX.Element {
-  const { auth } = useContext(AuthContext);
-  return (
-    <div style={{ marginBottom: '10px', float: 'right' }}>
-      <Button
-        size="small"
-        variant="contained"
-        type="button"
-        onClick={() => utils.deleteAPI(auth, getNews, dialogData)}
-      >
-        Delete
-      </Button>
-    </div>
-  );
-}
+// export function DeleteButton(
+//   {
+//     getNews,
+//     dialogData,
+//   }: {
+//     getNews: () => Promise<void>,
+//     dialogData: { title: string, url: string | undefined, comments: string | undefined },
+//   },
+// ): JSX.Element {
+//   const { auth } = useContext(AuthContext);
+//   return (
+//     <div style={{ marginBottom: '10px', float: 'right' }}>
+//       <Button
+//         size="small"
+//         variant="contained"
+//         type="button"
+//         onClick={() => utils.deleteAPI(auth, getNews, dialogData)}
+//       >
+//         Delete
+//       </Button>
+//     </div>
+//   );
+// }
+
+// export function EditButton(
+//   {
+//     getNews,
+//     dialogData,
+//   }: {
+//     getNews: () => Promise<void>,
+//     dialogData: { title: string, url: string | undefined, comments: string | undefined },
+//   },
+// ): JSX.Element {
+//   const { auth } = useContext(AuthContext);
+//   return (
+//     <div style={{ marginBottom: '10px', float: 'right' }}>
+//       <Button
+//         size="small"
+//         variant="contained"
+//         type="button"
+//         onClick={() => utils.editAPI(auth, getNews, dialogData)}
+//       >
+//         Edit
+//       </Button>
+//     </div>
+//   );
+// }
 
 interface IcommentsEditorProps {
   comments: string | undefined, setComments: (arg0: string) => void
@@ -183,10 +208,10 @@ export function ChangeNewsPage(): JSX.Element {
       >
         Add News
       </Button>
-      <DeleteButton
+      {/* <EditButton
         getNews={getNews}
         dialogData={dialogData}
-      />
+      /> */}
     </div>
   );
 }
