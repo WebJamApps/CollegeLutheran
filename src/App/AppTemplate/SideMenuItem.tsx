@@ -4,11 +4,9 @@ import {
   useContext, useEffect,
 } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
-import type { Store } from 'src/redux/mapStoreToProps';
 import type { Ibook } from 'src/providers/utils';
-import { useDispatch, useSelector } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
-import Fetch from 'src/lib/fetch';
+import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
 
@@ -22,7 +20,9 @@ export function IconAndText({ menu }: { menu: ImenuItem }): JSX.Element {
   );
 }
 
-interface ImakeLinkProps { menu: ImenuItem, index: number, type: string, handleClose: () => void }
+interface ImakeLinkProps {
+  menu: ImenuItem, index: number, type: string, handleClose: () => void
+}
 export function MakeLink(props: ImakeLinkProps): JSX.Element {
   const {
     menu, index, type, handleClose,
@@ -102,12 +102,9 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
   const {
     menu, index, handleClose,
   } = props;
-  const books = useSelector((store:Store) => store.books.books);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    // eslint-disable-next-line no-void
-    void Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');
-  }, [dispatch]);// This should be removed from redux and use a provider!
+  const { news: { newsContent }, getNews } = useContext(ContentContext);
+  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
+  useEffect(() => { void getNews(); }, []);
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const { pathname } = location;
@@ -115,7 +112,9 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
   const isAllowed = checkIsAllowed(menu, auth, userRoles);
   if (!isAllowed) return <> </>;
   let m = menu;
-  if (m.name === 'Bulletin') m = setBulletin(m, books);
+  if (m.name === 'Bulletin') {
+    m = setBulletin(m, newsContent);
+  }
   if (location.pathname === '/staff' && m.link === '/staff') return <> </>;
   if ((m.link === '/staff' || m.link === '/belief') && auth.isAuthenticated) return <> </>;
   if (m.link) {

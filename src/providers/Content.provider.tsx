@@ -3,7 +3,7 @@ import {
 } from 'react';
 import axios, { AxiosError } from 'axios';
 import {
-  Ibook, Icontent, IpictureTypes, makeGetter,
+  Ibook, Icontent, Inews, IpictureTypes, makeGetter,
 } from './utils';
 
 export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
@@ -26,6 +26,7 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
       type: 'habitatPageContent',
       comments: '',
     };
+
     setContent({
       homePage: {} as Ibook,
       youthPage: {} as Ibook,
@@ -49,8 +50,27 @@ export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void)
   } catch (err) { console.log((err as AxiosError).message); }
 };
 
+export const populateNews = async (setNews: (arg0:Inews)=> void) => {
+  try {
+    const { data } = await axios.get(`${process.env.BackendUrl}/book?type=Forum`);
+    if (Array.isArray(data)) {
+      data.sort((a, b) => {
+        if (a.created_at && b.created_at) {
+          const dataA = a.created_at.split('T')[0];
+          const dateB = b.created_at.split('T')[0];
+          if (dataA < dateB) return 1;
+          if (dataA > dateB) return -1;
+        }
+        return 0;
+      });
+    }
+    setNews({ newsContent: data });
+  } catch (err) { console.log((err as AxiosError).message); }
+};
+
 export function setContentDef(_arg0: Icontent) {}
 export function setPicturesDef(_arg0: IpictureTypes) {}
+export function setNewsDef(_arg0: Inews) {}
 
 export const ContentContext = createContext({
   content: {
@@ -66,10 +86,15 @@ export const ContentContext = createContext({
     habitatPics: [],
     otherPics: [],
   } as IpictureTypes,
+  news: {
+    newsContent: [],
+  } as Inews,
   setContent: setContentDef,
   getContent: () => Promise.resolve(),
   setPictures: setPicturesDef,
   getPictures: () => Promise.resolve(),
+  setNews: setNewsDef,
+  getNews: () => Promise.resolve(),
 });
 
   type ContentProps = { children: ReactNode };
@@ -77,19 +102,23 @@ export function ContentProvider({ children }: ContentProps): JSX.Element {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
   const [pictures, setPictures] = useState({} as IpictureTypes);
+  const [news, setNews] = useState({} as Inews);
 
   const getContent = makeGetter(setContent, populateContent);
   const getPictures = makeGetter(setPictures, populatePictures);
+  const getNews = makeGetter(setNews, populateNews);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
     // eslint-disable-next-line no-void
     void populatePictures(setPictures);
+    // eslint-disable-next-line no-void
+    void populateNews(setNews);
   }, []);
 
   return (
     <Provider value={{
-      setContent, content, getContent, pictures, setPictures, getPictures,
+      setContent, content, getContent, pictures, setPictures, getPictures, news, setNews, getNews,
     }}
     >
       {children}

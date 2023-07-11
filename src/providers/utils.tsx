@@ -1,5 +1,3 @@
-import { SetStateAction } from 'react';
-
 export interface IpictureTypes {
   musicPics: Ibook[];
   familyPics: Ibook[];
@@ -35,6 +33,10 @@ export interface Icontent {
   youthPage: Ibook;
   habitatPage: Ibook;
   stewardshipPage: Ibook;
+}
+
+export interface Inews {
+  newsContent: Ibook[];
 }
 
 export function makeGetter(
