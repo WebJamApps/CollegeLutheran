@@ -9,7 +9,7 @@ import { Giving } from '../containers/Giving';
 import { Staff } from '../containers/Staff';
 import DefaultYouth from '../containers/Youth';
 import { AdminDashboard } from '../containers/AdminDashboard';
-import DefaultNews from '../containers/News';
+import { News } from '../containers/News';
 import { Family } from '../containers/Family';
 import Calendar from '../containers/Calendar';
 import { AppTemplate } from './AppTemplate';
@@ -52,7 +52,7 @@ export function App(): JSX.Element {
             <Route path="/staff" element={<Staff />} />
             {showAdminDashboard(isAdmin)}
             <Route path="/youth" element={<DefaultYouth />} />
-            <Route path="/news" element={<DefaultNews />} />
+            <Route path="/news" element={<News />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/stewardship" element={<Stewardship />} />
             <Route path="/livestream" element={<DefaultLiveStream />} />

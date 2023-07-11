@@ -114,10 +114,11 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
+    const getContent = jest.fn();
     const dialogData = { title: '', url: '', comments: '' };
     const clearForm = jest.fn();
     (axios.request as jest.Mock).mockResolvedValueOnce({ status: 201 });
-    await utils.addNewsAPI(auth, clearForm, dialogData);
+    await utils.addNewsAPI(auth, getContent, clearForm, dialogData);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
       url: `${process.env.BackendUrl}/book`,
@@ -143,11 +144,12 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
+    const getContent = jest.fn();
     const dialogData = { title: '', url: '', comments: '' };
     const clearForm = jest.fn();
     const err = new Error('error');
     (axios.request as jest.Mock).mockRejectedValueOnce(err);
-    await utils.addNewsAPI(auth, clearForm, dialogData);
+    await utils.addNewsAPI(auth, getContent, clearForm, dialogData);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
       url: `${process.env.BackendUrl}/book`,
