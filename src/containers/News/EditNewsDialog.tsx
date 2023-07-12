@@ -7,7 +7,7 @@ import {
 import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import utils, { defaultNews } from './utils';
+import utils, { defaultNews } from './utilsN';
 
 interface InewsTextFieldProps {
   value: string,

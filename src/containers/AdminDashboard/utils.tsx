@@ -158,6 +158,4 @@ export default {
   putAPI,
   createPicAPI,
   handlePutError,
-  // deleteAPI,
-  // editAPI,
 };

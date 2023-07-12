@@ -118,6 +118,5 @@ const makeShowHideCaption = (setNews: (arg0: typeof defaultNews) => void, news: 
 };
 
 export default {
-//   EditButton, DeleteButton,
-  makeShowHideCaption, updateNews, deleteNews,
+  updateNews, deleteNews, makeShowHideCaption,
 };
