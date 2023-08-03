@@ -10,7 +10,6 @@ import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
-import utilsN, { defaultNews } from '../News/utilsN';
 
 export function UpdateButton(
   {
@@ -127,13 +126,10 @@ export function ChangeNewsPage(): JSX.Element {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [comments, setComments] = useState('');
-  const [news, setNews] = useState(defaultNews);
-  const showHideCaption = utilsN.makeShowHideCaption(setNews, news);
   const clearForm = () => {
     setTitle(''); setUrl(''); setComments('');
   };
   const handleChange = makeHandleChange(setComments);
-  const dialogData = { title, url, comments };
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
       <h5>Add to News Page</h5>

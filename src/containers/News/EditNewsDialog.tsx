@@ -7,7 +7,12 @@ import {
 import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import utils, { defaultNews } from './utilsN';
+import utils, { defaultNews } from './news.utils';
+
+export interface IeditNewsDialogProps {
+  setShowTable: (arg0: boolean) => void,
+  editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void,
+}
 
 interface InewsTextFieldProps {
   value: string,
@@ -29,14 +34,10 @@ export function NewsTextField(props: InewsTextFieldProps) {
   );
 }
 
-function checkDisabled(editNews: typeof defaultNews):boolean {
+function checkDisabled(editNews: typeof defaultNews): boolean {
   return !!(editNews.title && editNews.url);
 }
 
-interface IeditNewsDialogProps {
-  setShowTable: (arg0: boolean) => void,
-  editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void,
-}
 export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNewsDialogProps) {
   const { auth } = useContext(AuthContext);
   const { getNews } = useContext(ContentContext);
@@ -91,7 +92,7 @@ export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNew
               variant="contained"
               className="createNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews, setShowTable, setIsSubmitting); }}
+              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews, setIsSubmitting, setShowTable); }}
             >
               Update
             </Button>
@@ -100,7 +101,7 @@ export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNew
               size="small"
               className="createNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.deleteNews(getNews, setEditNews, setShowTable, setIsSubmitting); }}
+              onClick={() => { utils.deleteNews(getNews, setEditNews, setIsSubmitting, setShowTable); }}
             >
               Delete
             </Button>
@@ -117,3 +118,4 @@ export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNew
     </Dialog>
   );
 }
+
