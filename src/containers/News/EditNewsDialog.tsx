@@ -7,12 +7,8 @@ import {
 import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import { Ibook } from 'src/providers/utils';
 import utils, { defaultNews } from './news.utils';
-
-export interface IeditNewsDialogProps {
-  setShowTable: (arg0: boolean) => void,
-  editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void,
-}
 
 interface InewsTextFieldProps {
   value: string,
@@ -38,7 +34,15 @@ function checkDisabled(editNews: typeof defaultNews): boolean {
   return !!(editNews.title && editNews.url);
 }
 
-export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNewsDialogProps) {
+export function onClose(setShowDialog: (arg0: boolean) => void) {
+  return () => setShowDialog(false);
+}
+
+export interface IeditNewsDialogProps {
+  editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void,
+}
+
+export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) {
   const { auth } = useContext(AuthContext);
   const { getNews } = useContext(ContentContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,13 +52,13 @@ export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNew
       disableEnforceFocus
       disableAutoFocus
       className="editNewsDialog"
-      open={!!editNews._id}
-      onClose={() => setEditNews(defaultNews)}
+      open={editNews._id !== undefined}
+      onClose={() => setEditNews({} as Ibook)}
     >
       <DialogTitle>Edit News</DialogTitle>
       <DialogContent sx={{ padding: '10px 10px' }}>
         <NewsTextField
-          value={editNews.url}
+          value={editNews.url as string}
           label="* URL"
           onChange={(evt) => {
             const { target: { value } } = evt;
@@ -90,25 +94,27 @@ export function EditNewsDialog({ editNews, setEditNews, setShowTable }: IeditNew
               disabled={!checkDisabled(editNews)}
               size="small"
               variant="contained"
-              className="createNewsButton"
+              className="updateNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews, setIsSubmitting, setShowTable); }}
+              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews, setIsSubmitting); }}
             >
               Update
             </Button>
             <Button
-              style={{ color: 'red' }}
+              style={{ backgroundColor: 'red', color: 'white' }}
               size="small"
-              className="createNewsButton"
+              className="deleteNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.deleteNews(getNews, setEditNews, setIsSubmitting, setShowTable); }}
+              onClick={() => { utils.deleteNews(getNews, auth, setEditNews, setIsSubmitting); }}
             >
               Delete
             </Button>
             <Button
               size="small"
-              className="cancelNewsButton"
-              onClick={() => { setEditNews(defaultNews); }}
+              className="cancelPicButton"
+              // onClick={() => setEditNews(defaultNews)}
+              onClick={() => setEditNews({} as Ibook)}
+
             >
               Cancel
             </Button>
