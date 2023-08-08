@@ -1,23 +1,13 @@
 import type { Ibook } from 'src/providers/utils';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext, Iauth } from 'src/providers/Auth.provider';
+import { AuthContext } from 'src/providers/Auth.provider';
+import { checkIsAdmin } from 'src/App';
 import ELCALogo from '../../components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
-import { defaultNews } from './news.utils';
+import { defaultNews } from './utilsN';
 
 interface NewsContentProps {
   books?: Ibook[];
-}
-
-export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
-  let isAdmin = false;
-  if (auth && auth.isAuthenticated && process.env.userRoles) {
-    const { user: { userType } } = auth;
-    const rolesJSON = JSON.parse(process.env.userRoles);
-    const { roles } = rolesJSON;
-    if (userType && roles.includes(userType)) isAdmin = true;
-  }
-  setIsAdmin(isAdmin);
 }
 
 export function NewsContent({ books }: NewsContentProps) {

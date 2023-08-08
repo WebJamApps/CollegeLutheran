@@ -48,10 +48,11 @@ async function deleteNews(
   } catch (err) { console.log((err as Error).message); }
 }
 
-const makeShowHideCaption = (setNews: (arg0: typeof defaultNews) => void, news: typeof defaultNews) => (evt: any) => {
+const makeShowHideBulletin = (setNews: (arg0:typeof defaultNews) => void,
+  news: typeof defaultNews,
+) => (evt: any) => {
   const { target: { checked } } = evt;
   const comments = checked ? 'worshipbulletin' : '';
   setNews({ ...news, comments });
 };
-
-export default { updateNews, deleteNews, makeShowHideCaption };
+export default { updateNews, deleteNews, makeShowHideBulletin };

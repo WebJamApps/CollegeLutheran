@@ -8,7 +8,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import { Ibook } from 'src/providers/utils';
-import utils, { defaultNews } from './news.utils';
+import utils, { defaultNews } from './utilsN';
 
 interface InewsTextFieldProps {
   value: string,
@@ -34,10 +34,6 @@ function checkDisabled(editNews: typeof defaultNews): boolean {
   return !!(editNews.title && editNews.url);
 }
 
-export function onClose(setShowDialog: (arg0: boolean) => void) {
-  return () => setShowDialog(false);
-}
-
 export interface IeditNewsDialogProps {
   editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void,
 }
@@ -46,7 +42,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
   const { auth } = useContext(AuthContext);
   const { getNews } = useContext(ContentContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const showHideCaption = utils.makeShowHideCaption(setEditNews, editNews);
+  const showHideCaption = utils.makeShowHideBulletin(setEditNews, editNews);
   return (
     <Dialog
       disableEnforceFocus
