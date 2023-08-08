@@ -52,7 +52,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
       disableEnforceFocus
       disableAutoFocus
       className="editNewsDialog"
-      open={editNews._id !== undefined}
+      open={editNews._id !== ''}
       onClose={() => setEditNews({} as Ibook)}
     >
       <DialogTitle>Edit News</DialogTitle>
@@ -96,7 +96,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
               variant="contained"
               className="updateNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews, setIsSubmitting); }}
+              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews); }}
             >
               Update
             </Button>
@@ -105,7 +105,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
               size="small"
               className="deleteNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.deleteNews(getNews, auth, setEditNews, setIsSubmitting); }}
+              onClick={() => { utils.deleteNews(editNews, getNews, auth, setEditNews); }}
             >
               Delete
             </Button>
@@ -113,7 +113,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
               size="small"
               className="cancelPicButton"
               // onClick={() => setEditNews(defaultNews)}
-              onClick={() => setEditNews({} as Ibook)}
+              onClick={() => setEditNews(defaultNews)}
 
             >
               Cancel

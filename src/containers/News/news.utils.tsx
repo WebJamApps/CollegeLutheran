@@ -1,5 +1,4 @@
 import axios from 'axios';
-import commonUtils from 'src/lib/commonUtils';
 import { Iauth } from 'src/providers/Auth.provider';
 import { Ibook } from 'src/providers/utils';
 
@@ -12,22 +11,16 @@ async function updateNews(
   auth: Iauth,
   getNews: () => Promise<void>,
   setEditNews: (arg0:typeof defaultNews) => void,
-  setIsSubmitting: (arg0:boolean) => void,
 ): Promise<void> {
   try {
-    setIsSubmitting(true);
-    const { token } = auth;
     const config = {
-      url: `${process.env.BackendUrl}/book`,
+      url: `${process.env.BackendUrl}/book/${editNews._id}`,
       method: 'put',
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
       data: editNews,
     };
-    // const { status } = await axios.put(config.url, { editNews, token });
     const { status } = await axios.request(config);
     if (status === 200) {
-      await commonUtils.delay(2);
-      setIsSubmitting(false);
       setEditNews(defaultNews);
       await getNews();
     }
@@ -35,22 +28,20 @@ async function updateNews(
 }
 
 async function deleteNews(
+  editNews: typeof defaultNews,
   getNews: () => Promise<void>,
   auth: Iauth,
   setEditNews: (arg0: typeof defaultNews) => void,
-  setIsSubmitting: (arg0: boolean) => void,
 ): Promise<void> {
   try {
-    setIsSubmitting(true);
     const config = {
-      url: `${process.env.BackendUrl}/book`,
-      method: 'put',
+      url: `${process.env.BackendUrl}/book/${editNews._id}`,
+      method: 'delete',
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+      data: editNews,
     };
-    const { status } = await axios.delete(config.url);
+    const { status } = await axios.request(config);
     if (status === 200) {
-      await commonUtils.delay(2);
-      setIsSubmitting(false);
       setEditNews(defaultNews);
       await getNews();
     }

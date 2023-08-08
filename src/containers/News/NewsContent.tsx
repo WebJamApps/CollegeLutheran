@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import ELCALogo from '../../components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
+import { defaultNews } from './news.utils';
 
 interface NewsContentProps {
   books?: Ibook[];
@@ -22,7 +23,7 @@ export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
 export function NewsContent({ books }: NewsContentProps) {
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [editNews, setEditNews] = useState({} as Ibook);
+  const [editNews, setEditNews] = useState(defaultNews);
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
   return (
     <div className="page-content">
