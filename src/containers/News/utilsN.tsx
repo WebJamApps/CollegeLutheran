@@ -6,7 +6,7 @@ export const defaultNews = {
   url: '', comments: '', title: '', _id: '', type: 'Forum',
 } as Ibook;
 
-async function performAxiosRequest(
+export async function performAxiosRequest(
   method: 'put' | 'delete',
   url: string,
   editNews: typeof defaultNews,
@@ -41,7 +41,7 @@ async function updateNews(
   await performAxiosRequest('put', url, editNews, auth, getNews, setEditNews);
 }
 
-async function deleteNews(
+export async function deleteNews(
   editNews: typeof defaultNews,
   getNews: () => Promise<void>,
   auth: Iauth,

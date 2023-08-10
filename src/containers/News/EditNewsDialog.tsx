@@ -1,29 +1,31 @@
 import {
   Button,
   Checkbox,
-  CircularProgress,
   Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup, TextField,
 } from '@mui/material';
 import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import { Ibook } from 'src/providers/utils';
 import utils, { defaultNews } from './utilsN';
 
 interface InewsTextFieldProps {
   value: string,
   label: string,
+  className: string
   onChange: (arg0: any) => any
 }
 
 export function NewsTextField(props: InewsTextFieldProps) {
-  const { value, label, onChange } = props;
+  const {
+    value, label, onChange, className,
+  } = props;
   return (
     <TextField
       sx={{ marginTop: '20px' }}
       label={label}
       type="text"
       fullWidth
+      className={className}
       value={value}
       onChange={onChange}
     />
@@ -41,7 +43,6 @@ export interface IeditNewsDialogProps {
 export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) {
   const { auth } = useContext(AuthContext);
   const { getNews } = useContext(ContentContext);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const showHideCaption = utils.makeShowHideBulletin(setEditNews, editNews);
   return (
     <Dialog
@@ -49,13 +50,14 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
       disableAutoFocus
       className="editNewsDialog"
       open={editNews._id !== ''}
-      onClose={() => setEditNews({} as Ibook)}
+      onClose={() => setEditNews(defaultNews)}
     >
       <DialogTitle>Edit News</DialogTitle>
       <DialogContent sx={{ padding: '10px 10px' }}>
         <NewsTextField
           value={editNews.url as string}
           label="* URL"
+          className="url"
           onChange={(evt) => {
             const { target: { value } } = evt;
             setEditNews({ ...editNews, url: value });
@@ -65,6 +67,7 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
         <NewsTextField
           value={editNews.title}
           label="* Title"
+          className="title"
           onChange={(evt) => {
             const { target: { value } } = evt;
             setEditNews({ ...editNews, title: value });
@@ -84,38 +87,35 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
         </FormGroup>
       </DialogContent>
       <DialogActions>
-        {isSubmitting ? <CircularProgress /> : (
-          <>
-            <Button
-              disabled={!checkDisabled(editNews)}
-              size="small"
-              variant="contained"
-              className="updateNewsButton"
+        <>
+          <Button
+            disabled={!checkDisabled(editNews)}
+            size="small"
+            variant="contained"
+            className="updateNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews); }}
-            >
-              Update
-            </Button>
-            <Button
-              style={{ backgroundColor: 'red', color: 'white' }}
-              size="small"
-              className="deleteNewsButton"
+            onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews); }}
+          >
+            Update
+          </Button>
+          <Button
+            style={{ backgroundColor: 'red', color: 'white' }}
+            size="small"
+            className="deleteNewsButton"
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              onClick={() => { utils.deleteNews(editNews, getNews, auth, setEditNews); }}
-            >
-              Delete
-            </Button>
-            <Button
-              size="small"
-              className="cancelPicButton"
+            onClick={() => { utils.deleteNews(editNews, getNews, auth, setEditNews); }}
+          >
+            Delete
+          </Button>
+          <Button
+            size="small"
+            className="cancelPicButton"
               // onClick={() => setEditNews(defaultNews)}
-              onClick={() => setEditNews(defaultNews)}
-
-            >
-              Cancel
-            </Button>
-          </>
-        )}
+            onClick={() => setEditNews(defaultNews)}
+          >
+            Cancel
+          </Button>
+        </>
       </DialogActions>
     </Dialog>
   );

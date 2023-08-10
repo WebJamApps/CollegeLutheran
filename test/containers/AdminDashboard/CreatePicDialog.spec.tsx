@@ -1,5 +1,9 @@
-import { PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { CreatePicDialog, PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
+import utils from 'src/containers/AdminDashboard/utils';
+import { AuthProvider } from 'src/providers/Auth.provider';
+import { ContentProvider } from 'src/providers/Content.provider';
+import { render } from 'react-dom';
 
 describe('CreatePicDialog', () => {
   it('renders PicTextField', () => {
@@ -42,6 +46,16 @@ describe('CreatePicDialog', () => {
     const handler = makeShowHideCaption(setPic, pic);
     handler(evt);
     expect(setPic).toHaveBeenCalled();
+  });
+  it('handles event for makeShowHideCaption when checked is true', () => {
+    const evt = { target: { checked: true } };
+    const setPic = jest.fn();
+    const pic = {
+      title: '', type: '', url: '', comments: 'showCaption',
+    };
+    const handler = makeShowHideCaption(setPic, pic);
+    handler(evt);
+    expect(pic.comments).toBe('showCaption');
   });
 });
 
