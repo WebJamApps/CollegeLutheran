@@ -43,7 +43,7 @@ export function NewsContent({ books }: NewsContentProps) {
                       {books && books.map(
                         (d: Ibook) => (
                           <tr
-                            className="TableRow-root"
+                            className="TableRow-root news"
                             key={d._id}
                             style={{ cursor: 'pointer' }}
                             onClick={() => { if (isAdmin) setEditNews(d); }}

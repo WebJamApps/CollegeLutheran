@@ -11,4 +11,12 @@ describe('NewsContent', () => {
     const result: any = renderer.create(<NewsContent books={[props]} />).toJSON();
     expect(result.children[0].children[0].children[0].props.className).toBe('forumsTable');
   });
+  it('handles event for NewsContent', () => {
+    const props = { title: 'title', type: 'type', _id: 'a' };
+    const setEditNews = jest.fn();
+    const result = renderer.create(<NewsContent books={[props]} />).root;
+    result.findByProps({ className: 'TableRow-root news' }).props.onClick();
+    setEditNews();
+    expect(setEditNews).toHaveBeenCalled();
+  });
 });
