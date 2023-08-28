@@ -22,7 +22,7 @@ export function UpdateButton(
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' },
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent' },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -222,6 +222,50 @@ function ChangeStewardshipPage(
   );
 }
 
+export function ChangeYouthPage(): JSX.Element {
+  const { content: { youthPage }, getContent } = useContext(ContentContext);
+  const [title, setTitle] = useState(youthPage.title);
+  const [comments, setComments] = useState(youthPage.comments);
+  const inputParams = {
+    type: 'text',
+    label: 'Title',
+    isRequired: false,
+    onChange: (evt: { target: { value:SetStateAction<string>; }; }) => {
+      const { target: { value } } = evt;
+      setTitle(value);
+      return value;
+    },
+    value: title,
+    width: '90%',
+  };
+  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
+  useEffect(() => { void getContent(); }, []);
+  return (
+    <div className="horiz-scroll">
+      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
+        <h5>Change Youthpage Section</h5>
+        <form
+          id="create-youthpage"
+          style={{
+            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
+          }}
+        >
+          {forms.makeInput(inputParams)}
+          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
+          <CommentsEditor comments={comments} setComments={setComments} />
+          <UpdateButton
+            getContent={getContent}
+            title={title}
+            comments={comments}
+            type="youthPageContent"
+            buttonName="Update Youthpage"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowCreatePic(true);
 }
@@ -248,6 +292,7 @@ export function AdminDashboardContent() {
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
       <ChangeHabitatPage />
       <ChangeStewardshipPage />
+      <ChangeYouthPage />
     </div>
   );
 }
