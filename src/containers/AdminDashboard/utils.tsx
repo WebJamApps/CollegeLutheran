@@ -100,6 +100,13 @@ async function createPicAPI(
   }
 }
 
+export interface FormParams {
+  title: string;
+  comments: string;
+  type: string;
+  name: string;
+}
+
 export default {
   addNewsAPI,
   putAPI,
