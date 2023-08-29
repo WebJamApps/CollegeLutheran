@@ -1,7 +1,5 @@
 import type { Iauth } from 'src/providers/Auth.provider';
-// import Fetch from 'src/lib/fetch';
 import commonUtils from 'src/lib/commonUtils';
-// import type { AnyAction, Dispatch } from 'redux';
 import axios, { AxiosError } from 'axios';
 
 async function handlePutError(e: AxiosError,
