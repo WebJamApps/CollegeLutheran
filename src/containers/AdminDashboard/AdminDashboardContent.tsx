@@ -185,50 +185,6 @@ export function ChangeHabitatPageSect() {
     />
   );
 }
-// export function ChangeHomepage(
-// ): JSX.Element {
-//   const { content: { homePage }, getContent } = useContext(ContentContext);
-//   const [title, setTitle] = useState(homePage.title);
-//   const [comments, setComments] = useState(homePage.comments);
-//   const inputParams = {
-//     type: 'text',
-//     label: 'Title',
-//     isRequired: false,
-//     onChange: (evt: { target: { value: SetStateAction<string>; }; }) => {
-//       const { target: { value } } = evt;
-//       setTitle(value);
-//       return value;
-//     },
-//     value: title,
-//     width: '90%',
-//   };
-//   // eslint-disable-next-line react-hooks/exhaustive-deps, no-void
-//   useEffect(() => { void getContent(); }, []);
-//   return (
-//     <div className="horiz-scroll">
-//       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-//         <h5>Change Homepage Section</h5>
-//         <form
-//           id="create-homepage"
-//           style={{
-//             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-//           }}
-//         >
-//           {forms.makeInput(inputParams)}
-//           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-//           <CommentsEditor comments={comments} setComments={setComments} />
-//           <UpdateButton
-//             getContent={getContent}
-//             title={title}
-//             comments={comments}
-//             type="homePageContent"
-//             buttonName="Update Homepage"
-//           />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
 
 export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
   return (evt: { target: { checked: any; }; }) => {
@@ -278,110 +234,6 @@ export function ChangeNewsPage(): JSX.Element {
   );
 }
 
-// function ChangeHabitatPage(
-// ): JSX.Element {
-//   const { content: { habitatPage }, getContent } = useContext(ContentContext);
-//   const [title] = useState(habitatPage.title);
-//   const [comments, setComments] = useState(habitatPage.comments);
-//   return (
-//     <div className="horiz-scroll">
-//       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-//         <h5>Change Habitat Section</h5>
-//         <form
-//           id="create-habitatpage"
-//           style={{
-//             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-//           }}
-//         >
-//           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-//           <CommentsEditor comments={comments} setComments={setComments} />
-//           <UpdateButton
-//             getContent={getContent}
-//             title={title}
-//             comments={comments}
-//             type="habitatPageContent"
-//             buttonName="Update Habitat Page"
-//           />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// function ChangeStewardshipPage(
-// ): JSX.Element {
-//   const { content: { stewardshipPage }, getContent } = useContext(ContentContext);
-//   const [title] = useState(stewardshipPage.title);
-//   const [comments, setComments] = useState(stewardshipPage.comments);
-//   return (
-//     <div className="horiz-scroll">
-//       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-//         <h5>Change Stewardship Section</h5>
-//         <form
-//           id="create-stewardshippage"
-//           style={{
-//             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-//           }}
-//         >
-//           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-//           <CommentsEditor comments={comments} setComments={setComments} />
-//           <UpdateButton
-//             getContent={getContent}
-//             title={title}
-//             comments={comments}
-//             type="stewardshipPageContent"
-//             buttonName="Update Stewardship Page"
-//           />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export function ChangeYouthPage(): JSX.Element {
-//   const { content: { youthPage }, getContent } = useContext(ContentContext);
-//   const [title, setTitle] = useState(youthPage.title);
-//   const [comments, setComments] = useState(youthPage.comments);
-//   const inputParams = {
-//     type: 'text',
-//     label: 'Title',
-//     isRequired: false,
-//     onChange: (evt: { target: { value:SetStateAction<string>; }; }) => {
-//       const { target: { value } } = evt;
-//       setTitle(value);
-//       return value;
-//     },
-//     value: title,
-//     width: '90%',
-//   };
-//   // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
-//   useEffect(() => { void getContent(); }, []);
-//   return (
-//     <div className="horiz-scroll">
-//       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-//         <h5>Change Youthpage Section</h5>
-//         <form
-//           id="create-youthpage"
-//           style={{
-//             textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-//           }}
-//         >
-//           {forms.makeInput(inputParams)}
-//           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-//           <CommentsEditor comments={comments} setComments={setComments} />
-//           <UpdateButton
-//             getContent={getContent}
-//             title={title}
-//             comments={comments}
-//             type="youthPageContent"
-//             buttonName="Update Youthpage"
-//           />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
 export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowCreatePic(true);
 }
@@ -392,7 +244,6 @@ export function AdminDashboardContent() {
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-      {/* <ChangeHomepage /> */}
       <ChangeHomePageSect />
       <div style={{ margin: 'auto', maxWidth: '400px' }}>
         <Button
@@ -407,11 +258,8 @@ export function AdminDashboardContent() {
       </div>
       <ChangeNewsPage />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
-      {/* <ChangeHabitatPage /> */}
       <ChangeHabitatPageSect />
-      {/* <ChangeStewardshipPage /> */}
       <ChangeStewardshipPageSect />
-      {/* <ChangeYouthPage /> */}
       <ChangeYouthPageSect />
     </div>
   );
