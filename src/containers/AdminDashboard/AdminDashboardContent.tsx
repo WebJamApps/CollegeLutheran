@@ -10,6 +10,7 @@ import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
+import { EditPicTable, EditPicture } from './EditPicTable';
 
 export function UpdateButton(
   {
@@ -237,10 +238,14 @@ export function ChangeNewsPage(): JSX.Element {
 export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowCreatePic(true);
 }
-
+export function makeEditHandleClick(setShowEditPic: React.Dispatch<SetStateAction<boolean>>) {
+  return () => setShowEditPic(true);
+}
 export function AdminDashboardContent() {
   const [showCreatePic, setShowCreatePic] = useState(false);
+  const [showEditPic, setShowEditPic] = useState(false);
   const handleClick = makeHandleClick(setShowCreatePic);
+  const editHandleClick = makeEditHandleClick(setShowEditPic);
   return (
     <div className="page-content">
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
@@ -256,8 +261,24 @@ export function AdminDashboardContent() {
           Add New Picture
         </Button>
       </div>
+      <div style={{
+        margin: 'auto', maxWidth: '400px', paddingTop: '30px',
+      }}
+      >
+        <Button
+          sx={{ textAlign: 'center' }}
+          variant="contained"
+          size="large"
+          id="a-d"
+          onClick={editHandleClick}
+        >
+          Edit Pictures
+        </Button>
+      </div>
       <ChangeNewsPage />
       <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
+      <EditPicTable setShowTable={setShowEditPic} />
+      {/* <EditPicture showEditPicTable={showEditPic} setShowEditPicTable={setShowEditPic} /> */}
       <ChangeHabitatPageSect />
       <ChangeStewardshipPageSect />
       <ChangeYouthPageSect />
