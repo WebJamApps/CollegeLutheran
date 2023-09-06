@@ -10,7 +10,7 @@ import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
-import { EditPicTable, EditPicture } from './EditPicTable';
+import { EditPicTable } from './EditPicTable';
 
 export function UpdateButton(
   {

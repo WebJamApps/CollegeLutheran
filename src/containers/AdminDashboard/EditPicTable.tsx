@@ -59,25 +59,37 @@ export function EditPicTable(props:IeditPicTableProps) {
         onRowClick={(rowParams) => {
           setEditPic(rowParams.row);
         }}
-        rows={[]}
-        // rows={[...familyPics, ...otherPics, ...youthPics, ...habitatPics, ...musicPics]}
+        rows={[...familyPics, ...otherPics, ...youthPics, ...habitatPics, ...musicPics]}
         columns={columns}
+        getRowId={(row) => row._id}
       />
       <EditPicDialog editPic={editPic} setEditPic={setEditPic} setShowTable={setShowTable} />
     </div>
   );
 }
 
-interface IeditPictureProps {
-  showEditPicTable: boolean, setShowEditPicTable: (arg0:boolean) => void
-}
-export function EditPicture(props:IeditPictureProps) {
-  const {
-    showEditPicTable, setShowEditPicTable,
-  } = props;
-  return (
-    <div>
-      {!showEditPicTable ? <EditPicTable setShowTable={setShowEditPicTable} /> : null}
-    </div>
-  );
-}
+// interface IeditPictureProps {
+//   setShowEditPicTable: (arg0:boolean) => void
+// }
+// export function EditPicture(props:IeditPictureProps) {
+//   const { setShowEditPicTable } = props;
+//   const [isButtonClicked, setIsButtonClicked] = useState(false);
+//   const handleButtonClick = () => {
+//     setIsButtonClicked(true);
+//   };
+//   return (
+//     <div>
+//       <Button
+//         sx={{ textAlign: 'center' }}
+//         variant="contained"
+//         size="large"
+//         id="a-d"
+//         onClick={handleButtonClick}
+//       >
+//         Edit Pictures
+//       </Button>
+//       ;
+//       {isButtonClicked ? <EditPicTable setShowTable={setShowEditPicTable} /> : null}
+//     </div>
+//   );
+// }
