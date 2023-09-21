@@ -8,12 +8,12 @@ import {
 import { useState, useContext } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import utilsN from 'src/containers/News/utilsN';
 import utils from './utils';
 
-const defaultCreatePic = {
+export const defaultCreatePic = {
   url: '', comments: '', title: '', type: '',
 };
-
 export const makeShowHideCaption = (setPic: (arg0: typeof defaultCreatePic) => void, pic: typeof defaultCreatePic) => (evt: any) => {
   const { target: { checked } } = evt;
   const comments = checked ? 'showCaption' : '';

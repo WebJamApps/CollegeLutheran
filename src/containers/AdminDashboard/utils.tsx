@@ -50,7 +50,6 @@ async function putAPI(
 
 async function addNewsAPI(
   auth: Iauth,
-  // dispatch: Dispatch<AnyAction>,
   getNews: () => Promise<void>,
   clearForm: () => void,
   dialogData: { title: string, url: string | undefined, comments: string | undefined },
@@ -70,7 +69,6 @@ async function addNewsAPI(
     };
     const { status } = await axios.request(config);
     if (status === 201) {
-      // await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');// this should be calling the function from ContentContext here
       await getNews();
       clearForm();
       commonUtils.notify(data.title, 'Successfully added news', 'success');
