@@ -1,6 +1,6 @@
 import {
   AdminDashboardContent,
-  ChangeHomepage, ChangeNewsPage, CommentsEditor, UpdateButton, makeHandleChange,
+  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, CommentsEditor, UpdateButton, makeHandleChange,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import renderer from 'react-test-renderer';
 import utils from 'src/containers/AdminDashboard/utils';
@@ -26,7 +26,7 @@ describe('AdminDashboard Content', () => {
   it('handles setTitle for ChangeHomepage', () => {
     const value = 'title';
     const evt = { target: { value } };
-    const result = renderer.create(<ChangeHomepage />).root;
+    const result = renderer.create(<ChangeHomePageSect />).root;
     const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
     expect(tree).toBe(value);
   });
@@ -67,5 +67,12 @@ describe('AdminDashboard Content', () => {
     const result = renderer.create(<ChangeNewsPage />).root;
     result.findByProps({ variant: 'contained' }).props.onClick();
     expect(utils.addNewsAPI).toHaveBeenCalled();
+  });
+  it('handles onChange for ChangeyouthPage', () => {
+    const value = 'title';
+    const evt = { target: { value } };
+    const result = renderer.create(<ChangeYouthPageSect />).root;
+    const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
+    expect(tree).toBe(value);
   });
 });
