@@ -243,6 +243,7 @@ export function makeEditHandleClick(setShowEditPic: React.Dispatch<SetStateActio
 }
 export function AdminDashboardContent() {
   const [showCreatePic, setShowCreatePic] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showEditPic, setShowEditPic] = useState(false);
   const handleClick = makeHandleClick(setShowCreatePic);
   const editHandleClick = makeEditHandleClick(setShowEditPic);
