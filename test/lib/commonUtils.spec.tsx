@@ -3,7 +3,6 @@ import { Store } from 'react-notifications-component';
 import commonUtils, { NotificationType } from '../../src/lib/commonUtils';
 
 describe('commonUtils', () => {
-  let addNotificationMock: jest.Mock;
   it('calls scrollIntoView', () => {
     const scrollIntoViewMock = jest.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;

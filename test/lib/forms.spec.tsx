@@ -9,7 +9,6 @@ describe('forms', () => {
     expect(onChangeMock).toHaveBeenCalled();
   });
   it('makeDataDropDown', () => {
-    const onChangeMock = jest.fn();
     const props = {
       htmlFor: 'test', labelText: 'test', value: 'test', onChange: jest.fn(), options: [],
     };

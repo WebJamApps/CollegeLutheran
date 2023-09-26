@@ -1,4 +1,3 @@
-import React from 'react';
 import { GivingContent } from './GivingContent';
 import commonUtils from '../../lib/commonUtils';
 

@@ -25,9 +25,6 @@ describe('About', () => {
     expect(result.children[0].children[0].props.id.includes('pic-slider')).toBe(true);
   });
   it('renders PicSlider on bottom of page', () => {
-    const data = {
-      title: 'pic', _id: '1', type: 'any',
-    };
     const width = 900;
     const result: any = renderer.create(<PictureSection data={[]} width={width} />).toJSON();
     expect(result.children[0].props.id.includes('slideshow1')).toBe(true);

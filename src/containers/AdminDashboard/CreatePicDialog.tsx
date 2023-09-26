@@ -6,9 +6,8 @@ import {
   Box, FormControl, InputLabel, SelectChangeEvent, MenuItem,
 } from '@mui/material';
 import { useState, useContext } from 'react';
-import { AuthContext, Iauth } from 'src/providers/Auth.provider';
+import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import utilsN from 'src/containers/News/utilsN';
 import utils from './utils';
 
 export const defaultCreatePic = {
@@ -22,12 +21,12 @@ export const makeShowHideCaption = (setPic: (arg0: typeof defaultCreatePic) => v
 
 interface IpicTextFieldProps {
   pic: typeof defaultCreatePic,
-  label: string, url?:boolean, title?:boolean
+  label: string, url?:boolean,
   setPic: (arg0: typeof defaultCreatePic) => void
 }
 export function PicTextField(props: IpicTextFieldProps) {
   const {
-    pic, label, url, title, setPic,
+    pic, label, url, setPic,
   } = props;
   const field: 'url' | 'title' = url ? 'url' : 'title';
   return (
@@ -79,7 +78,7 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
           Enter all *required fields to create a new picture.
         </DialogContentText>
         <PicTextField url pic={pic} label="* Url" setPic={setPic} />
-        <PicTextField title pic={pic} label="* Title" setPic={setPic} />
+        <PicTextField pic={pic} label="* Title" setPic={setPic} />
         <Box sx={{ minWidth: 120, marginTop: '20px' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>

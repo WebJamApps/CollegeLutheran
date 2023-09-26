@@ -1,9 +1,5 @@
-import { CreatePicDialog, PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
-import utils from 'src/containers/AdminDashboard/utils';
-import { AuthProvider } from 'src/providers/Auth.provider';
-import { ContentProvider } from 'src/providers/Content.provider';
-import { render } from 'react-dom';
 
 describe('CreatePicDialog', () => {
   it('renders PicTextField', () => {
@@ -17,7 +13,6 @@ describe('CreatePicDialog', () => {
       },
     };
     const result: any = renderer.create(<PicTextField {...props} />).toJSON();
-    console.log(result.children[0].children[0].type);
     expect(result.children[0].children[0].type).toBe('input');
   });
   it('handles onChange for PicTextField', () => {

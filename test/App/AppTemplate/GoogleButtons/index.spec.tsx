@@ -14,7 +14,7 @@ describe('GoogleButtons', () => {
     utils.responseGoogleLogout = jest.fn();
     const gb = renderer.create(
       <GoogleOAuthProvider clientId=""><GoogleButtons type="logout" index={0} /></GoogleOAuthProvider>).root;
-    const result = gb.findByProps({ className: 'logoutButton' }).props.onClick();
+    gb.findByProps({ className: 'logoutButton' }).props.onClick();
     expect(utils.responseGoogleLogout).toHaveBeenCalled();
   });
   it('uses loginConfig', async () => {
