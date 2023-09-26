@@ -3,7 +3,7 @@ import {
   Checkbox,
   Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup, TextField,
 } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import utils, { defaultNews } from './utilsN';

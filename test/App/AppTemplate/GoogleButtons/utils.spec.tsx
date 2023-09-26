@@ -12,7 +12,7 @@ describe('GoogleButtons/utils', () => {
   });
   it('responseGoogleLogin fails', async () => {
     let eMessage = '';
-    commonUtils.notify = jest.fn((m, e, t) => { eMessage = m; });
+    commonUtils.notify = jest.fn((m) => { eMessage = m; });
     await utils.responseGoogleLogin({ code: '' } as any, {} as any, jest.fn(), 'test');
     expect(eMessage).toBe('Failed to authenticate');
   });

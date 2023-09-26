@@ -25,8 +25,6 @@ export function MoreStaff() {
   );
 }
 
-const pageName = 'staff';
-
 const StaffContent = (): JSX.Element => (
   <div className="page-content">
     <div className="container-fluid">

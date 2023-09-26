@@ -68,8 +68,11 @@ export const populateNews = async (setNews: (arg0:Inews)=> void) => {
   } catch (err) { console.log((err as AxiosError).message); }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function setContentDef(_arg0: Icontent) {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function setPicturesDef(_arg0: IpictureTypes) {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function setNewsDef(_arg0: Inews) {}
 
 export const ContentContext = createContext({

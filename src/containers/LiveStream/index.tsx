@@ -11,7 +11,7 @@ const makeSpace = (width: number) => {
 export interface LiveStreamProps {
   width: number, height: number
 }
-export const LiveStream = ({ width, height }: LiveStreamProps): JSX.Element => {
+export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>

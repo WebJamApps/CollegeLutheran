@@ -1,7 +1,4 @@
-import React from 'react';
 import ELCALogo from '../../components/elcaLogo';
-
-const pageName = 'beliefs';
 
 const BeliefsContent = (): JSX.Element => (
   <div className="page-content">
