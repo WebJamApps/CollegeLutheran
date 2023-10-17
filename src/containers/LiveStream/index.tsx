@@ -11,7 +11,7 @@ const makeSpace = (width: number) => {
 export interface LiveStreamProps {
   width: number, height: number
 }
-export const LiveStream = ({ width, height }: LiveStreamProps): JSX.Element => {
+export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
@@ -19,7 +19,7 @@ export const LiveStream = ({ width, height }: LiveStreamProps): JSX.Element => {
       {width > 931 ? (
         <iframe
           title="Live Stream Wide"
-          src="https://vimeo.com/event/595402/embed"
+          src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
           width="930"
           height="620"
           frameBorder="0"
@@ -32,7 +32,7 @@ export const LiveStream = ({ width, height }: LiveStreamProps): JSX.Element => {
         ? (
           <iframe
             title="Live Stream Small"
-            src="https://vimeo.com/event/595402/embed"
+            src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
             width="100%"
             height="360"
             frameBorder="0"

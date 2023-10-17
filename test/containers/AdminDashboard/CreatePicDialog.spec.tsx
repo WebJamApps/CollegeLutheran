@@ -13,7 +13,6 @@ describe('CreatePicDialog', () => {
       },
     };
     const result: any = renderer.create(<PicTextField {...props} />).toJSON();
-    console.log(result.children[0].children[0].type);
     expect(result.children[0].children[0].type).toBe('input');
   });
   it('handles onChange for PicTextField', () => {
@@ -42,6 +41,16 @@ describe('CreatePicDialog', () => {
     const handler = makeShowHideCaption(setPic, pic);
     handler(evt);
     expect(setPic).toHaveBeenCalled();
+  });
+  it('handles event for makeShowHideCaption when checked is true', () => {
+    const evt = { target: { checked: true } };
+    const setPic = jest.fn();
+    const pic = {
+      title: '', type: '', url: '', comments: 'showCaption',
+    };
+    const handler = makeShowHideCaption(setPic, pic);
+    handler(evt);
+    expect(pic.comments).toBe('showCaption');
   });
 });
 

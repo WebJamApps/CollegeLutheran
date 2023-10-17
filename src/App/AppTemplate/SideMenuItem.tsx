@@ -74,11 +74,10 @@ interface IcontinueMenuItemProps {
   index: number,
   auth: Iauth,
   pathname: string,
-  handleClose: () => void,
 }
 export const ContinueMenuItem = (props:IcontinueMenuItemProps): JSX.Element | null => {
   const {
-    menu, index, auth, pathname, handleClose,
+    menu, index, auth, pathname,
   } = props;
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/staff') {
     return <GoogleButtons key="googleLogin" type="login" index={index} />;

@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultBeliefsContent from './BeliefsContent';
 import commonUtils from '../../lib/commonUtils';
 

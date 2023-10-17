@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import { FamilySlideContainer } from 'src/containers/Homepage/NarrowFacebookFeed';
+import { FacebookFeed, FamilySlideContainer } from 'src/containers/Homepage/NarrowFacebookFeed';
 
 describe('NarrowFacebookFeed', () => {
   it('renders PicSlider', () => {
@@ -12,5 +12,10 @@ describe('NarrowFacebookFeed', () => {
     expect(result.props.className).toBe('familySlideContainer');
     console.log(result.children[0].children[0]);
     expect(result.children[0].children[0].children[0].props.className.includes('slick-slider')).toBe(true);
+  });
+  it('renders FacebookFeed', () => {
+    const result: any = renderer.create(<FacebookFeed />).toJSON();
+    console.log(result);
+    expect(result.type).toBe('div');
   });
 });

@@ -641,66 +641,84 @@ exports[`App component renders the component 1`] = `
                         <br />
                       </p>
                     </div>
-                     
+                    <div
+                      className="col"
+                      style={
+                        {
+                          "padding": "1px",
+                          "paddingRight": "0",
+                        }
+                      }
+                    >
+                      <div
+                        id="slideshow1"
+                        style={
+                          {
+                            "margin": "auto",
+                            "marginTop": "40px",
+                            "textAlign": "center",
+                          }
+                        }
+                      >
+                        <img
+                          alt="churchBuilding"
+                          src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+                          style={
+                            {
+                              "borderRadius": "50%",
+                              "width": "100%",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <hr />
-              <p
-                style={
-                  {
-                    "fontSize": "6pt",
-                    "marginBottom": "0",
-                  }
-                }
-              >
-                 
-              </p>
               <div
-                className="notWidescreen"
+                className="row"
                 style={
                   {
-                    "margin": "auto",
-                    "maxWidth": "320px",
+                    "marginLeft": "10px",
                   }
                 }
               >
-                <p
-                  style={
-                    {
-                      "fontSize": "10pt",
-                      "marginBottom": 0,
-                      "marginTop": 0,
-                      "paddingBottom": "2px",
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  <a
-                    href="/calendar"
-                    style={
-                      {
-                        "fontSize": "10pt",
-                      }
-                    }
-                  >
-                    <i>
-                      View Full Calendar
-                    </i>
-                  </a>
-                </p>
                 <div
+                  className="col"
                   style={
                     {
                       "margin": "auto",
-                      "marginBottom": 0,
-                      "maxWidth": "300px",
+                      "maxWidth": "600px",
+                      "paddingRight": "10px",
                     }
                   }
                 >
+                  <p
+                    style={
+                      {
+                        "fontSize": "10pt",
+                        "marginTop": "0px",
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <a
+                      href="/calendar"
+                      style={
+                        {
+                          "fontSize": "10pt",
+                        }
+                      }
+                    >
+                      <i>
+                        View Full Calendar
+                      </i>
+                    </a>
+                  </p>
                   <iframe
                     frameBorder="0"
-                    height="300"
+                    height="500"
                     scrolling="no"
                     src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&height=500&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&color=%23060D5E&ctz=America%2FNew_York"
                     style={
@@ -708,89 +726,63 @@ exports[`App component renders the component 1`] = `
                         "borderWidth": 0,
                       }
                     }
-                    title="clc-calendar"
-                    width="300"
+                    title="google-calendar"
+                    width="550"
                   />
                 </div>
-                <hr />
-                <p
-                  style={
-                    {
-                      "fontSize": "10pt",
-                      "marginBottom": 0,
-                      "marginTop": "10px",
-                      "paddingBottom": "4px",
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  <i>
-                    Like Us On
-                     
-                    <a
-                      href="https://www.facebook.com/CollegeLutheranChurch/"
-                      style={
-                        {
-                          "fontSize": "10pt",
-                        }
-                      }
-                    >
-                      Facebook
-                    </a>
-                  </i>
-                </p>
                 <div
+                  className="col"
                   style={
                     {
                       "margin": "auto",
-                      "marginBottom": 0,
-                      "maxWidth": "300px",
+                      "paddingLeft": "10px",
+                      "paddingRight": "10px",
+                      "textAlign": "center",
+                      "width": "600px",
                     }
                   }
                 >
+                  <p
+                    id="wideFacebook"
+                    style={
+                      {
+                        "fontSize": "10pt",
+                        "marginBottom": "0px",
+                        "marginTop": "32px",
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <i>
+                      Like Us On
+                       
+                      <a
+                        href="https://www.facebook.com/CollegeLutheranChurch/"
+                        style={
+                          {
+                            "fontSize": "10pt",
+                          }
+                        }
+                      >
+                        Facebook
+                      </a>
+                    </i>
+                  </p>
                   <iframe
                     allow="encrypted-media"
-                    frameBorder="0"
-                    height="300"
-                    scrolling="no"
-                    src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=300&height=500&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
+                    className="widescreenHomepage"
+                    height="485"
+                    scrolling="none"
+                    src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=500&height=485&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
                     style={
                       {
                         "border": "none",
+                        "marginLeft": "-14px",
                         "overflow": "hidden",
                       }
                     }
-                    title="clc-facebook"
-                    width="300"
-                  />
-                </div>
-                <hr />
-                <p
-                  style={
-                    {
-                      "fontSize": "10pt",
-                      "marginBottom": 0,
-                      "marginTop": "10px",
-                      "paddingBottom": "4px",
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                   
-                </p>
-                <div
-                  className="familySlideContainer"
-                >
-                  <div
-                    id="familySlideshowWide"
-                    style={
-                      {
-                        "display": "flex",
-                        "flexDirection": "column",
-                        "marginRight": 0,
-                        "marginTop": "1px",
-                      }
-                    }
+                    title="facebook ticker"
+                    width="500"
                   />
                 </div>
               </div>

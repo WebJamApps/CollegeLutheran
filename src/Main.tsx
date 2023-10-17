@@ -28,7 +28,11 @@ function Main() {
   );
 }
 const renderMain = (): void => {
-  root.render(<StrictMode><Main /></StrictMode>);
+  root.render(
+    <StrictMode>
+      <Main />
+    </StrictMode>,
+  );
 };
 
 renderMain();

@@ -1,7 +1,5 @@
 import type { Iauth } from 'src/providers/Auth.provider';
-// import Fetch from 'src/lib/fetch';
 import commonUtils from 'src/lib/commonUtils';
-// import type { AnyAction, Dispatch } from 'redux';
 import axios, { AxiosError } from 'axios';
 
 async function handlePutError(e: AxiosError,
@@ -50,7 +48,6 @@ async function putAPI(
 
 async function addNewsAPI(
   auth: Iauth,
-  // dispatch: Dispatch<AnyAction>,
   getNews: () => Promise<void>,
   clearForm: () => void,
   dialogData: { title: string, url: string | undefined, comments: string | undefined },
@@ -70,7 +67,6 @@ async function addNewsAPI(
     };
     const { status } = await axios.request(config);
     if (status === 201) {
-      // await Fetch.fetchGet(dispatch, 'book?type=Forum', 'GOT_BOOKS');// this should be calling the function from ContentContext here
       await getNews();
       clearForm();
       commonUtils.notify(data.title, 'Successfully added news', 'success');
@@ -100,6 +96,13 @@ async function createPicAPI(
   } catch (e) {
     commonUtils.notify(`${data.title}`, `Failed to add picture, ${(e as Error).message}`, 'warning');
   }
+}
+
+export interface FormParams {
+  title: string;
+  comments: string;
+  type: string;
+  name: string;
 }
 
 export default {

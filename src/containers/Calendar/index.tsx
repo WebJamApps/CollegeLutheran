@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import DefaultCalendarContent from './CalendarContent';
 import commonUtils from '../../lib/commonUtils';
 

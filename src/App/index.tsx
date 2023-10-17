@@ -43,7 +43,7 @@ export function App(): JSX.Element {
       <BrowserRouter>
         <AppTemplate>
           <Routes>
-            <Route path="/" element={<DefaultHome />} />
+            <Route path="/" element={<DefaultHome width={900} />} />
             <Route path="/music" element={<DefaultMusic />} />
             <Route path="/belief" element={<Beliefs />} />
             <Route path="/family" element={<Family />} />

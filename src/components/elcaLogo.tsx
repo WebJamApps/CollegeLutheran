@@ -1,4 +1,3 @@
-import React from 'react';
 
 const ELCALogo = (): JSX.Element => (
   <div style={{ textAlign: 'center', marginLeft: '-9px' }}>

@@ -1,4 +1,3 @@
-import React from 'react';
 
 const CalendarContent = (): JSX.Element => (
   <div className="page-content">
