@@ -15,7 +15,18 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
-      {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Livestream</h5> : null}
+      {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Welcome to Our Livestream Page</h5> : null}
+      <p>
+        The video below will only play during an actual livestream event. To view past services, click to visit our
+        {' '}
+        <a target="_blank" href="https://www.youtube.com/@collegelutheranchurch2611/streams" rel="noreferrer">YouTube</a>
+        {' '}
+        or
+        {' '}
+        <a target="_blank" href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal" rel="noreferrer">Facebook</a>
+        {' '}
+        pages.
+      </p>
       {width > 931 ? (
         <iframe
           title="Live Stream Wide"
