@@ -1,5 +1,5 @@
 import {
-  Button, TextField, Checkbox, FormControlLabel, FormGroup,
+  Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack,
 } from '@mui/material';
 import { Editor } from '@tinymce/tinymce-react';
 import {
@@ -8,9 +8,10 @@ import {
 import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import './adminDashboard.scss';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
-import { EditPicTable } from './EditPicTable';
+// import { EditPicTable } from './EditPicTable';
 
 export function UpdateButton(
   {
@@ -19,11 +20,13 @@ export function UpdateButton(
     comments = '',
     buttonName,
     type,
-  }: { title: string,
+  }: {
+    title: string,
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent' },
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent'
+  },
 ): JSX.Element {
   const { auth } = useContext(AuthContext);
   return (
@@ -120,6 +123,7 @@ export function ChangePageSectionWithTitle(props: IchangePageSectionWithTitlePro
     </div>
   );
 }
+
 export function ChangeHomePageSect() {
   return (
     <ChangePageSectionWithTitle
@@ -128,6 +132,7 @@ export function ChangeHomePageSect() {
     />
   );
 }
+
 export function ChangeYouthPageSect() {
   return (
     <ChangePageSectionWithTitle
@@ -136,6 +141,7 @@ export function ChangeYouthPageSect() {
     />
   );
 }
+
 export interface IchangePageSectionProps {
   pageType: 'habitatPage' | 'stewardshipPage',
   formTitle: string,
@@ -170,6 +176,7 @@ export function ChangePageSection(props: IchangePageSectionProps) {
     </div>
   );
 }
+
 export function ChangeStewardshipPageSect() {
   return (
     <ChangePageSection
@@ -178,6 +185,7 @@ export function ChangeStewardshipPageSect() {
     />
   );
 }
+
 export function ChangeHabitatPageSect() {
   return (
     <ChangePageSection
@@ -193,6 +201,7 @@ export function makeHandleChange(setComments: React.Dispatch<SetStateAction<stri
     else setComments('');
   };
 }
+
 export function ChangeNewsPage(): JSX.Element {
   const { getNews } = useContext(ContentContext);
   const { auth } = useContext(AuthContext);
@@ -215,8 +224,8 @@ export function ChangeNewsPage(): JSX.Element {
             <Checkbox
               checked={comments === 'worshipbulletin'}
               onChange={
-              handleChange
-            }
+                handleChange
+              }
             />
           )}
         />
@@ -238,51 +247,72 @@ export function ChangeNewsPage(): JSX.Element {
 export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowCreatePic(true);
 }
+
 export function makeEditHandleClick(setShowEditPic: React.Dispatch<SetStateAction<boolean>>) {
   return () => setShowEditPic(true);
 }
+
 export function AdminDashboardContent() {
-  const [showCreatePic, setShowCreatePic] = useState(false);
+  // const [showCreatePic, setShowCreatePic] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [showEditPic, setShowEditPic] = useState(false);
-  const handleClick = makeHandleClick(setShowCreatePic);
-  const editHandleClick = makeEditHandleClick(setShowEditPic);
+  // const [showEditPic, setShowEditPic] = useState(false);
+  // const [showCreatePic, setShowCreatePic] = useState(false);
+  const [showEditor, setShowEditor] = useState('');
+  // const handleClick = makeHandleClick(setShowCreatePic);
+  // const editHandleClick = makeEditHandleClick(setShowEditPic);
   return (
-    <div className="page-content">
+    <div style={{ minHeight: showEditor !== 'editContent' ? '80vh' : 'inherit' }}>
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-      <ChangeHomePageSect />
-      <div style={{ margin: 'auto', maxWidth: '400px' }}>
+      <Stack direction="row" spacing={2} style={{ textAlign: 'center', marginLeft: '1%' }}>
         <Button
+          size="small"
           sx={{ textAlign: 'center' }}
           variant="contained"
-          size="large"
           id="a-d"
-          onClick={handleClick}
+          onClick={() => setShowEditor('createPic')}
         >
-          Add New Picture
+          Add Picture
         </Button>
-      </div>
-      <div style={{
-        margin: 'auto', maxWidth: '400px', paddingTop: '30px',
-      }}
-      >
         <Button
+          size="small"
           sx={{ textAlign: 'center' }}
           variant="contained"
-          size="large"
           id="a-d"
-          onClick={editHandleClick}
+          onClick={() => setShowEditor('editPic')}
         >
-          Edit Pictures
+          Edit Picture
         </Button>
-      </div>
-      <ChangeNewsPage />
-      <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
-      <EditPicTable setShowTable={setShowEditPic} />
+        <Button
+          size="small"
+          sx={{ textAlign: 'center' }}
+          variant="contained"
+          id="a-d"
+          onClick={() => setShowEditor('editContent')}
+        >
+          Edit Page Content
+        </Button>
+        <Button
+          size="small"
+          sx={{ textAlign: 'center' }}
+          id="a-d"
+          variant="outlined"
+          onClick={() => window.location.assign('/')}
+        >
+          Cancel
+        </Button>
+      </Stack>
+      {showEditor === '' ? <ChangeNewsPage /> : null}
+      { showEditor === 'createPic' && <CreatePicDialog showDialog setShowDialog={() => {}} /> }
+      {/* <EditPicTable setShowTable={setShowEditPic} /> */}
       {/* <EditPicture showEditPicTable={showEditPic} setShowEditPicTable={setShowEditPic} /> */}
-      <ChangeHabitatPageSect />
-      <ChangeStewardshipPageSect />
-      <ChangeYouthPageSect />
+      { showEditor === 'editContent' ? (
+        <>
+          <ChangeHomePageSect />
+          <ChangeHabitatPageSect />
+          <ChangeStewardshipPageSect />
+          <ChangeYouthPageSect />
+        </>
+      ) : null}
     </div>
   );
 }
