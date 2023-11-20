@@ -11,6 +11,7 @@ import { ContentContext } from 'src/providers/Content.provider';
 import './adminDashboard.scss';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
+import { EditPicTable } from './EditPicTable';
 // import { EditPicTable } from './EditPicTable';
 
 export function UpdateButton(
@@ -291,20 +292,19 @@ export function AdminDashboardContent() {
         >
           Edit Page Content
         </Button>
-        <Button
+        {showEditor !== 'editPic' && <Button
           size="small"
           sx={{ textAlign: 'center' }}
           id="a-d"
           variant="outlined"
-          onClick={() => window.location.assign('/')}
+          onClick={() => showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/')}
         >
           Cancel
-        </Button>
+        </Button>}
       </Stack>
       {showEditor === '' ? <ChangeNewsPage /> : null}
-      { showEditor === 'createPic' && <CreatePicDialog showDialog setShowDialog={() => {}} /> }
-      {/* <EditPicTable setShowTable={setShowEditPic} /> */}
-      {/* <EditPicture showEditPicTable={showEditPic} setShowEditPicTable={setShowEditPic} /> */}
+      { showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} /> }
+      { showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
       { showEditor === 'editContent' ? (
         <>
           <ChangeHomePageSect />

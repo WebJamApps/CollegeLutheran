@@ -27,10 +27,10 @@ export const columns: GridColDef[] = [
   },
 ];
 interface IeditPicTableProps {
-  setShowTable:(arg0:boolean)=>void
+  onClose:()=>void
 }
 export function EditPicTable(props:IeditPicTableProps) {
-  const { setShowTable } = props;
+  const { onClose } = props;
   const { pictures } = useContext(ContentContext);
   const {
     familyPics, habitatPics, otherPics, musicPics, youthPics,
@@ -50,7 +50,7 @@ export function EditPicTable(props:IeditPicTableProps) {
         size="small"
         variant="outlined"
         className="cancelEditPicButton"
-        onClick={() => setShowTable(false)}
+        onClick={onClose}
       >
         Cancel
       </Button>
@@ -63,7 +63,7 @@ export function EditPicTable(props:IeditPicTableProps) {
         columns={columns}
         getRowId={(row) => row._id}
       />
-      <EditPicDialog editPic={editPic} setEditPic={setEditPic} setShowTable={setShowTable} />
+      <EditPicDialog editPic={editPic} setEditPic={setEditPic} onClose={onClose} />
     </div>
   );
 }

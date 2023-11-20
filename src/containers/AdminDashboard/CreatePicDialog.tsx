@@ -48,12 +48,12 @@ export function PicTextField(props: IpicTextFieldProps) {
 }
 
 interface IcreatePicDialogProps {
-  showDialog: boolean, setShowDialog: (arg0: boolean) => void,
+  showEditor: string, onClose: () => void,
 }
-export function makeHandle(setShowDialog: (arg0: boolean) => void) {
-  return () => setShowDialog(false);
-}
-export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogProps) {
+// export function makeHandle(setShowDialog: (arg0: boolean) => void) {
+//   return () => setShowDialog(false);
+// }
+export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) {
   const [pic, setPic] = useState(defaultCreatePic);
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
@@ -63,14 +63,14 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
     setPic({ ...pic, type: event.target.value });
     return value;
   };
-  const handle = makeHandle(setShowDialog);
+  // const handle = makeHandle(setShowDialog);
   return (
     <Dialog
       disableEnforceFocus
       disableAutoFocus
       className="createNewPicDialog"
-      open={showDialog}
-      onClose={handle}
+      open={showEditor === 'createPic'}
+      onClose={onClose}
     >
       <DialogTitle>Create New Picture</DialogTitle>
       <DialogContent sx={{ padding: '10px 10px' }}>
@@ -114,14 +114,14 @@ export function CreatePicDialog({ showDialog, setShowDialog }: IcreatePicDialogP
           size="small"
           variant="contained"
           className="createPicButton"
-          onClick={async () => { await utils.createPicAPI(getPictures, setShowDialog, pic, auth); }}
+          onClick={async () => { await utils.createPicAPI(getPictures, onClose, pic, auth); }}
         >
           Create
         </Button>
         <Button
           size="small"
           className="cancelPicButton"
-          onClick={handle}
+          onClick={onClose}
         >
           Cancel
         </Button>

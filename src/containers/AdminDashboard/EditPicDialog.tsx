@@ -13,10 +13,10 @@ function checkDisabled(editPic: typeof defaultPic):boolean {
 }
 
 interface IeditPicDialogProps {
-  setShowTable:(arg0:boolean) => void,
+  onClose:() => void,
   editPic: typeof defaultPic, setEditPic: (arg0:typeof defaultPic) => void,
 }
-export function EditPicDialog({ editPic, setEditPic, setShowTable }: IeditPicDialogProps) {
+export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogProps) {
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
   const showHideCaption = utils.makeShowHideCaption(setEditPic, editPic);
@@ -25,7 +25,7 @@ export function EditPicDialog({ editPic, setEditPic, setShowTable }: IeditPicDia
       disableEnforceFocus
       disableAutoFocus
       className="editPicDialog"
-      open={editPic._id !== ''}
+      open={!editPic._id ? false : true}
       onClose={() => setEditPic(defaultPic)}
     >
       <DialogTitle>Edit Picture</DialogTitle>
@@ -67,18 +67,20 @@ export function EditPicDialog({ editPic, setEditPic, setShowTable }: IeditPicDia
             size="small"
             variant="contained"
             className="updatePicButton"
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            onClick={() => { utils.updatePic(editPic, auth, getPictures, setEditPic, setShowTable); }}
+            onClick={() => {
+              (async () => {
+                await utils.updatePic(editPic, auth, getPictures, setEditPic, onClose);
+              })();
+            }}
           >
             Update
-
           </Button>
           <Button
             style={{ color: 'red' }}
             size="small"
             className="deletePicButton"
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            onClick={() => { utils.deletePic(editPic, getPictures, auth, setEditPic, setShowTable); }}
+            onClick={() => { utils.deletePic(editPic, getPictures, auth, setEditPic, onClose); }}
           >
             Delete
           </Button>
