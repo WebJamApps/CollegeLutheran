@@ -12,7 +12,6 @@ import './adminDashboard.scss';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
 import { EditPicTable } from './EditPicTable';
-// import { EditPicTable } from './EditPicTable';
 
 export function UpdateButton(
   {
@@ -97,7 +96,6 @@ export function ChangePageSectionWithTitle(props: IchangePageSectionWithTitlePro
     value: title,
     width: '90%',
   };
-  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
   useEffect(() => { void getContent(); }, []);
   return (
     <div className="horiz-scroll">
@@ -152,7 +150,6 @@ export function ChangePageSection(props: IchangePageSectionProps) {
   const { content, getContent } = useContext(ContentContext);
   const [title] = useState(content[pageType].title);
   const [comments, setComments] = useState(content[pageType].comments);
-  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
@@ -245,22 +242,9 @@ export function ChangeNewsPage(): JSX.Element {
   );
 }
 
-export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
-  return () => setShowCreatePic(true);
-}
-
-export function makeEditHandleClick(setShowEditPic: React.Dispatch<SetStateAction<boolean>>) {
-  return () => setShowEditPic(true);
-}
 
 export function AdminDashboardContent() {
-  // const [showCreatePic, setShowCreatePic] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [showEditPic, setShowEditPic] = useState(false);
-  // const [showCreatePic, setShowCreatePic] = useState(false);
   const [showEditor, setShowEditor] = useState('');
-  // const handleClick = makeHandleClick(setShowCreatePic);
-  // const editHandleClick = makeEditHandleClick(setShowEditPic);
   return (
     <div style={{ minHeight: showEditor !== 'editContent' ? '80vh' : 'inherit' }}>
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
