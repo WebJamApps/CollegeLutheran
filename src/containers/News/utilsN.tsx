@@ -7,20 +7,21 @@ export const defaultNews = {
 } as Ibook;
 
 export async function performAxiosRequest(
-  method: 'put' | 'delete',
-  url: string,
-  editNews: typeof defaultNews,
-  auth: Iauth,
+  //method: 'put' | 'delete',
+  //url: string,
+  //editNews: typeof defaultNews,
+  //auth: Iauth,
+  config:any,
   getNews: () => Promise<void>,
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
   try {
-    const config = {
-      url,
-      method,
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data: editNews,
-    };
+    // const config = {
+    //   url,
+    //   method,
+    //   headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+    //   data: editNews,
+    // };
     const { status } = await axios.request(config);
     if (status === 200) {
       setEditNews(defaultNews);
@@ -38,7 +39,13 @@ async function updateNews(
   setEditNews: (arg0:typeof defaultNews) => void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  await performAxiosRequest('put', url, editNews, auth, getNews, setEditNews);
+  const config = {
+    url,
+    method:'put',
+    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+    data: editNews,
+  };
+  await performAxiosRequest(config, getNews, setEditNews);
 }
 
 export async function deleteNews(
@@ -48,7 +55,13 @@ export async function deleteNews(
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  await performAxiosRequest('delete', url, editNews, auth, getNews, setEditNews);
+  const config = {
+    url,
+    method:'delete',
+    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+    data: editNews,
+  };
+  await performAxiosRequest(config, getNews, setEditNews);
 }
 
 const makeShowHideBulletin = (setNews: (arg0:typeof defaultNews) => void,

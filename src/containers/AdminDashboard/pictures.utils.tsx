@@ -12,21 +12,16 @@ const makeShowHideCaption = (setPic: (arg0:typeof defaultPic) => void, pic: type
 };
 
 export async function performAxiosRequest(
-  method: 'put' | 'delete',
-  url: string,
-  editPic: typeof defaultPic,
-  auth: Iauth,
+  config:any,
+  // method: 'put' | 'delete',
+  // url: string,
+  // editPic: typeof defaultPic,
+  // auth: Iauth,
   getPictures: () => Promise<void>,
   setEditPic: (arg0: typeof defaultPic) => void,
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   try {
-    const config = {
-      url,
-      method,
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data: editPic,
-    };
     const { status } = await axios.request(config);
     if (status === 200) {
       setEditPic(defaultPic);
@@ -46,7 +41,13 @@ async function updatePic(
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
-  await performAxiosRequest('put', url, editPic, auth, getPictures, setEditPic, setShowTable);
+  const config = {
+    url,
+    method:'put',
+    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+    data: editPic,
+  };
+  await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
 }
 
 async function deletePic(
@@ -57,7 +58,12 @@ async function deletePic(
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
-  await performAxiosRequest('delete', url, editPic, auth, getPictures, setEditPic, setShowTable);
+  const config = {
+    url,
+    method:'delete',
+    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+  };
+  await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
 }
 
 export default { makeShowHideCaption, updatePic, deletePic };
