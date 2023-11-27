@@ -72,14 +72,15 @@ describe('news utils', () => {
     const setEditNews = jest.fn();
     const err = new Error('error');
     (axios.request as jest.Mock).mockRejectedValue(err);
-    await performAxiosRequest(method, url, editNews, auth, getNews, setEditNews);
-    expect(axios.request).toHaveBeenCalledTimes(1);
-    expect(axios.request).toHaveBeenCalledWith({
+    const config = {
       url: `${process.env.BackendUrl}/book/${editNews._id}`,
       method: 'put',
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
       data: editNews,
-    });
+    }
+    await performAxiosRequest(config, getNews, setEditNews);
+    expect(axios.request).toHaveBeenCalledTimes(1);
+    expect(axios.request).toHaveBeenCalledWith(config);
   });
   it('handles event for makeShowHideBulletin', () => {
     let checked: any;
