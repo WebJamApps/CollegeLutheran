@@ -7,21 +7,11 @@ export const defaultNews = {
 } as Ibook;
 
 export async function performAxiosRequest(
-  //method: 'put' | 'delete',
-  //url: string,
-  //editNews: typeof defaultNews,
-  //auth: Iauth,
   config:any,
   getNews: () => Promise<void>,
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
   try {
-    // const config = {
-    //   url,
-    //   method,
-    //   headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-    //   data: editNews,
-    // };
     const { status } = await axios.request(config);
     if (status === 200) {
       setEditNews(defaultNews);
@@ -64,11 +54,4 @@ export async function deleteNews(
   await performAxiosRequest(config, getNews, setEditNews);
 }
 
-const makeShowHideBulletin = (setNews: (arg0:typeof defaultNews) => void,
-  news: typeof defaultNews,
-) => (evt: any) => {
-  const { target: { checked } } = evt;
-  const comments = checked ? 'worshipbulletin' : '';
-  setNews({ ...news, comments });
-};
-export default { updateNews, deleteNews, makeShowHideBulletin };
+export default { updateNews, deleteNews };

@@ -1,4 +1,4 @@
-import { PicTextField, makeShowHideCaption } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { PicTextField } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
 
 describe('CreatePicDialog', () => {
@@ -9,7 +9,7 @@ describe('CreatePicDialog', () => {
       title: true,
       setPic: jest.fn(),
       pic: {
-        title: '', type: '', url: '', comments: '',
+        title: '', type: '', url: '', comments: '', _id:''
       },
     };
     const result: any = renderer.create(<PicTextField {...props} />).toJSON();
@@ -22,7 +22,7 @@ describe('CreatePicDialog', () => {
       title: true,
       setPic: jest.fn(),
       pic: {
-        title: '', type: '', url: '', comments: '',
+        title: '', type: '', url: '', comments: '',_id:''
       },
     };
     const value = 'title';
@@ -31,26 +31,26 @@ describe('CreatePicDialog', () => {
     const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
     expect(tree).toBe(value);
   });
-  it('handles event for makeShowHideCaption', () => {
-    let checked: any;
-    const evt = { target: { checked } };
-    const setPic = jest.fn();
-    const pic = {
-      title: '', type: '', url: '', comments: '',
-    };
-    const handler = makeShowHideCaption(setPic, pic);
-    handler(evt);
-    expect(setPic).toHaveBeenCalled();
-  });
-  it('handles event for makeShowHideCaption when checked is true', () => {
-    const evt = { target: { checked: true } };
-    const setPic = jest.fn();
-    const pic = {
-      title: '', type: '', url: '', comments: 'showCaption',
-    };
-    const handler = makeShowHideCaption(setPic, pic);
-    handler(evt);
-    expect(pic.comments).toBe('showCaption');
-  });
+  // it('handles event for makeShowHideCaption', () => {
+  //   let checked: any;
+  //   const evt = { target: { checked } };
+  //   const setPic = jest.fn();
+  //   const pic = {
+  //     title: '', type: '', url: '', comments: '',
+  //   };
+  //   const handler = makeShowHideCaption(setPic, pic);
+  //   handler(evt);
+  //   expect(setPic).toHaveBeenCalled();
+  // });
+  // it('handles event for makeShowHideCaption when checked is true', () => {
+  //   const evt = { target: { checked: true } };
+  //   const setPic = jest.fn();
+  //   const pic = {
+  //     title: '', type: '', url: '', comments: 'showCaption',
+  //   };
+  //   const handler = makeShowHideCaption(setPic, pic);
+  //   handler(evt);
+  //   expect(pic.comments).toBe('showCaption');
+  // });
 });
 

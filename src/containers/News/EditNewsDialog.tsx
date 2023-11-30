@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import utils, { defaultNews } from './utilsN';
+import libUtils from 'src/lib/commonUtils';
 
 interface InewsTextFieldProps {
   value: string,
@@ -122,7 +123,7 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
 }
 
 export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) {
-  const showHideCaption = utils.makeShowHideBulletin(setEditNews, editNews);
+  const showHideCaption = libUtils.makeShowHideChecked(setEditNews, editNews, 'worshipbulletin');
   return (
     <Dialog
       disableEnforceFocus

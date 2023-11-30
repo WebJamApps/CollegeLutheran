@@ -5,9 +5,10 @@ import {
   Button,
   Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup,
 } from '@mui/material';
-import utils, { defaultPic } from './pictures.utils';
+import { defaultPic } from './utils';
 import { EditPicTextField } from './EditPicTextField';
-
+import picUtils from './pictures.utils';
+import libUtils from 'src/lib/commonUtils';
 function checkDisabled(editPic: typeof defaultPic):boolean {
   return !!(editPic.title && editPic.url);
 }
@@ -19,7 +20,7 @@ interface IeditPicDialogProps {
 export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogProps) {
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
-  const showHideCaption = utils.makeShowHideCaption(setEditPic, editPic);
+  const showHideCaption = libUtils.makeShowHideChecked(setEditPic, editPic, 'showCaption');
   return (
     <Dialog
       disableEnforceFocus
@@ -69,7 +70,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             className="updatePicButton"
             onClick={() => {
               (async () => {
-                await utils.updatePic(editPic, auth, getPictures, setEditPic, onClose);
+                await picUtils.updatePic(editPic, auth, getPictures, setEditPic, onClose);
               })();
             }}
           >
@@ -80,7 +81,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             size="small"
             className="deletePicButton"
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            onClick={() => { utils.deletePic(editPic, getPictures, auth, setEditPic, onClose); }}
+            onClick={() => { picUtils.deletePic(editPic, getPictures, auth, setEditPic, onClose); }}
           >
             Delete
           </Button>

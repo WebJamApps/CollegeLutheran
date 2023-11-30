@@ -82,25 +82,25 @@ describe('news utils', () => {
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith(config);
   });
-  it('handles event for makeShowHideBulletin', () => {
-    let checked: any;
-    const evt = { target: { checked } };
-    const news = {
-      title: '', type: 'Forum', comments: '', url: '', _id: '',
-    };
-    const setNews = jest.fn();
-    const handler = utilsN.makeShowHideBulletin(setNews, news);
-    handler(evt);
-    expect(setNews).toHaveBeenCalled();
-  });
-  it('handles event for makeShowHideBulletin when checked is true', () => {
-    const evt = { target: { checked: true } };
-    const setNews = jest.fn();
-    const news = {
-      title: '', type: 'Forum', url: '', comments: 'worshipbulletin', _id: '',
-    };
-    const handler = utilsN.makeShowHideBulletin(setNews, news);
-    handler(evt);
-    expect(news.comments).toBe('worshipbulletin');
-  });
+  // it('handles event for makeShowHideBulletin', () => {
+  //   let checked: any;
+  //   const evt = { target: { checked } };
+  //   const news = {
+  //     title: '', type: 'Forum', comments: '', url: '', _id: '',
+  //   };
+  //   const setNews = jest.fn();
+  //   const handler = utilsN.makeShowHideBulletin(setNews, news);
+  //   handler(evt);
+  //   expect(setNews).toHaveBeenCalled();
+  // });
+  // it('handles event for makeShowHideBulletin when checked is true', () => {
+  //   const evt = { target: { checked: true } };
+  //   const setNews = jest.fn();
+  //   const news = {
+  //     title: '', type: 'Forum', url: '', comments: 'worshipbulletin', _id: '',
+  //   };
+  //   const handler = utilsN.makeShowHideBulletin(setNews, news);
+  //   handler(evt);
+  //   expect(news.comments).toBe('worshipbulletin');
+  // });
 });

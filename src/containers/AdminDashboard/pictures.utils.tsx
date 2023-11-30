@@ -1,22 +1,9 @@
 import axios from 'axios';
 import { Iauth } from 'src/providers/Auth.provider';
-
-export const defaultPic = {
-  url: '', title: '', comments: '', _id: undefined as string | undefined, type: 'pics',
-};
-
-const makeShowHideCaption = (setPic: (arg0:typeof defaultPic) => void, pic: typeof defaultPic) => (evt:any) => {
-  const { target: { checked } } = evt;
-  const comments = checked ? 'showCaption' : '';
-  setPic({ ...pic, comments });
-};
+import { defaultPic } from './utils';
 
 export async function performAxiosRequest(
   config:any,
-  // method: 'put' | 'delete',
-  // url: string,
-  // editPic: typeof defaultPic,
-  // auth: Iauth,
   getPictures: () => Promise<void>,
   setEditPic: (arg0: typeof defaultPic) => void,
   setShowTable: (arg0:boolean)=>void,
@@ -66,4 +53,4 @@ async function deletePic(
   await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
 }
 
-export default { makeShowHideCaption, updatePic, deletePic };
+export default { updatePic, deletePic };

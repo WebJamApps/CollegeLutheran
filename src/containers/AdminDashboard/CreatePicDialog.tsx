@@ -8,21 +8,13 @@ import {
 import { useState, useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import utils from './utils';
-
-export const defaultCreatePic = {
-  url: '', comments: '', title: '', type: '',
-};
-export const makeShowHideCaption = (setPic: (arg0: typeof defaultCreatePic) => void, pic: typeof defaultCreatePic) => (evt: any) => {
-  const { target: { checked } } = evt;
-  const comments = checked ? 'showCaption' : '';
-  setPic({ ...pic, comments });
-};
+import utils, { defaultPic } from './utils';
+import libUtils from 'src/lib/commonUtils';
 
 interface IpicTextFieldProps {
-  pic: typeof defaultCreatePic,
+  pic: typeof defaultPic,
   label: string, url?:boolean,
-  setPic: (arg0: typeof defaultCreatePic) => void
+  setPic: (arg0: typeof defaultPic) => void
 }
 export function PicTextField(props: IpicTextFieldProps) {
   const {
@@ -50,20 +42,16 @@ export function PicTextField(props: IpicTextFieldProps) {
 interface IcreatePicDialogProps {
   showEditor: string, onClose: () => void,
 }
-// export function makeHandle(setShowDialog: (arg0: boolean) => void) {
-//   return () => setShowDialog(false);
-// }
 export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) {
-  const [pic, setPic] = useState(defaultCreatePic);
+  const [pic, setPic] = useState(defaultPic);
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
-  const showHideCaption = makeShowHideCaption(setPic, pic);
+  const showHideCaption = libUtils.makeShowHideChecked(setPic, pic, 'showCaption');
   const handleChange = (event: SelectChangeEvent) => {
     const { target: { value } } = event;
     setPic({ ...pic, type: event.target.value });
     return value;
   };
-  // const handle = makeHandle(setShowDialog);
   return (
     <Dialog
       disableEnforceFocus

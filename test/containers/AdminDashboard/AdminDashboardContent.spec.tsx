@@ -1,8 +1,9 @@
 import {
-  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, CommentsEditor, UpdateButton, makeHandleChange,
+  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import renderer from 'react-test-renderer';
 import utils from 'src/containers/AdminDashboard/utils';
+import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
 
 describe('AdminDashboard Content', () => {
   it('renders the update button', () => {
