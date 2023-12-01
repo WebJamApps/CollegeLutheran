@@ -22,36 +22,52 @@ export async function performAxiosRequest(
   }
 }
 
-async function updateNews(
-  editNews: typeof defaultNews,
+// async function updateNews(
+//   editNews: typeof defaultNews,
+//   auth: Iauth,
+//   getNews: () => Promise<void>,
+//   setEditNews: (arg0:typeof defaultNews) => void,
+// ): Promise<void> {
+//   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
+//   const config = {
+//     url,
+//     method: 'put',
+//     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//     data: editNews,
+//   };
+//   await performAxiosRequest(config, getNews, setEditNews);
+// }
+
+// export async function deleteNews(
+//   editNews: typeof defaultNews,
+//   getNews: () => Promise<void>,
+//   auth: Iauth,
+//   setEditNews: (arg0: typeof defaultNews) => void,
+// ): Promise<void> {
+//   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
+//   const config = {
+//     url,
+//     method: 'delete',
+//     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+//     data: editNews,
+//   };
+//   await performAxiosRequest(config, getNews, setEditNews);
+// }
+async function newsApi(
+  method:string,
+  editNewsState: { editNews: typeof defaultNews, setEditNews: (arg0:typeof defaultNews) => void },
   auth: Iauth,
   getNews: () => Promise<void>,
-  setEditNews: (arg0:typeof defaultNews) => void,
 ): Promise<void> {
+  const { editNews, setEditNews } = editNewsState;
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
   const config = {
     url,
-    method: 'put',
+    method,
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
     data: editNews,
   };
   await performAxiosRequest(config, getNews, setEditNews);
 }
 
-export async function deleteNews(
-  editNews: typeof defaultNews,
-  getNews: () => Promise<void>,
-  auth: Iauth,
-  setEditNews: (arg0: typeof defaultNews) => void,
-): Promise<void> {
-  const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  const config = {
-    url,
-    method: 'delete',
-    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-    data: editNews,
-  };
-  await performAxiosRequest(config, getNews, setEditNews);
-}
-
-export default { updateNews, deleteNews };
+export default { newsApi, performAxiosRequest };
