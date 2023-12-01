@@ -147,7 +147,6 @@ exports[`App component renders the component 1`] = `
               </a>
             </p>
           </div>
-           
           <div
             className="menu-item"
           >
@@ -445,7 +444,6 @@ exports[`App component renders the component 1`] = `
               </div>
             </a>
           </div>
-           
           <p
             style={
               {
