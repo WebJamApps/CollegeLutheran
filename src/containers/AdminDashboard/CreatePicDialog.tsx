@@ -8,8 +8,8 @@ import {
 import { useState, useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import utils, { defaultPic } from './utils';
 import libUtils from 'src/lib/commonUtils';
+import utils, { defaultPic } from './utils';
 
 interface IpicTextFieldProps {
   pic: typeof defaultPic,

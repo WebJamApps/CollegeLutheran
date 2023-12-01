@@ -39,13 +39,13 @@ function notify(title: string, message: string, type: NotificationType) {
 
 function makeShowHideChecked<Type>(setter: (arg0: Type) => void,
   obj: Type, comment: string) {
-    return (evt: any) => {
-      const { target: { checked } } = evt;
-      const comments = checked ? comment : '';
-      setter({ ...obj, comments });
-    };
+  return (evt: any) => {
+    const { target: { checked } } = evt;
+    const comments = checked ? comment : '';
+    setter({ ...obj, comments });
+  };
 }
 
 export default {
-  getUserRoles, setTitleAndScroll, delay, notify, makeShowHideChecked
+  getUserRoles, setTitleAndScroll, delay, notify, makeShowHideChecked,
 };

@@ -30,7 +30,7 @@ async function updatePic(
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
   const config = {
     url,
-    method:'put',
+    method: 'put',
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
     data: editPic,
   };
@@ -47,7 +47,7 @@ async function deletePic(
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
   const config = {
     url,
-    method:'delete',
+    method: 'delete',
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
   };
   await performAxiosRequest(config, getPictures, setEditPic, setShowTable);

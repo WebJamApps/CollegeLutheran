@@ -2,7 +2,7 @@ import {
   Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack,
 } from '@mui/material';
 import {
-  SetStateAction, useContext, useEffect, useState,
+  SetStateAction, useContext, useState,
 } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
@@ -98,60 +98,61 @@ export function ChangeNewsPage(): JSX.Element {
     </div>
   );
 }
-interface IbuttonsNavProps{
+interface IbuttonsNavProps {
   setShowEditor:(arg0:string)=>void;showEditor:string;
 }
-export function ButtonsNav(props:IbuttonsNavProps){
-  const {setShowEditor, showEditor} = props;
+export function ButtonsNav(props:IbuttonsNavProps) {
+  const { setShowEditor, showEditor } = props;
   return (
     <Stack direction="row" spacing={2} style={{ textAlign: 'center', marginLeft: '1%' }}>
-    <Button
-      size="small"
-      sx={{ textAlign: 'center' }}
-      variant="contained"
-      id="a-d"
-      onClick={() => setShowEditor('createPic')}
-    >
-      Add Picture
-    </Button>
-    <Button
-      size="small"
-      sx={{ textAlign: 'center' }}
-      variant="contained"
-      id="a-d"
-      onClick={() => setShowEditor('editPic')}
-    >
-      Edit Picture
-    </Button>
-    <Button
-      size="small"
-      sx={{ textAlign: 'center' }}
-      variant="contained"
-      id="a-d"
-      onClick={() => setShowEditor('editContent')}
-    >
-      Edit Page Content
-    </Button>
-    {showEditor !== 'editPic' && <Button
-      size="small"
-      sx={{ textAlign: 'center' }}
-      id="a-d"
-      variant="outlined"
-      onClick={() => showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/')}
-    >
-      Cancel
-    </Button>}
-  </Stack>
-  )
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('createPic')}
+      >
+        Add Picture
+      </Button>
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('editPic')}
+      >
+        Edit Picture
+      </Button>
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('editContent')}
+      >
+        Edit Page Content
+      </Button>
+      {showEditor !== 'editPic' && (
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        id="a-d"
+        variant="outlined"
+        onClick={() => (showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/'))}
+      >
+        Cancel
+      </Button>
+      )}
+    </Stack>
+  );
 }
-
 
 export function AdminDashboardContent() {
   const [showEditor, setShowEditor] = useState('');
   return (
     <div style={{ minHeight: showEditor !== 'editContent' ? '80vh' : 'inherit' }}>
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-      <ButtonsNav showEditor={showEditor} setShowEditor={setShowEditor}/>
+      <ButtonsNav showEditor={showEditor} setShowEditor={setShowEditor} />
       {showEditor === '' ? <ChangeNewsPage /> : null}
       { showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} /> }
       { showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}

@@ -31,7 +31,7 @@ async function updateNews(
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
   const config = {
     url,
-    method:'put',
+    method: 'put',
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
     data: editNews,
   };
@@ -47,7 +47,7 @@ export async function deleteNews(
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
   const config = {
     url,
-    method:'delete',
+    method: 'delete',
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
     data: editNews,
   };

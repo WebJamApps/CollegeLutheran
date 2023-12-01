@@ -9,7 +9,7 @@ describe('CreatePicDialog', () => {
       title: true,
       setPic: jest.fn(),
       pic: {
-        title: '', type: '', url: '', comments: '', _id:''
+        title: '', type: '', url: '', comments: '', _id: '',
       },
     };
     const result: any = renderer.create(<PicTextField {...props} />).toJSON();
@@ -22,7 +22,7 @@ describe('CreatePicDialog', () => {
       title: true,
       setPic: jest.fn(),
       pic: {
-        title: '', type: '', url: '', comments: '',_id:''
+        title: '', type: '', url: '', comments: '', _id: '',
       },
     };
     const value = 'title';

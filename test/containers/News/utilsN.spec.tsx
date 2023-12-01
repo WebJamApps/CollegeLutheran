@@ -66,8 +66,6 @@ describe('news utils', () => {
         email: 'string',
       },
     };
-    const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-    const method = 'put';
     const getNews = jest.fn();
     const setEditNews = jest.fn();
     const err = new Error('error');
@@ -77,7 +75,7 @@ describe('news utils', () => {
       method: 'put',
       headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
       data: editNews,
-    }
+    };
     await performAxiosRequest(config, getNews, setEditNews);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith(config);

@@ -5,10 +5,11 @@ import {
   Button,
   Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup,
 } from '@mui/material';
+import libUtils from 'src/lib/commonUtils';
 import { defaultPic } from './utils';
 import { EditPicTextField } from './EditPicTextField';
 import picUtils from './pictures.utils';
-import libUtils from 'src/lib/commonUtils';
+
 function checkDisabled(editPic: typeof defaultPic):boolean {
   return !!(editPic.title && editPic.url);
 }
@@ -26,7 +27,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
       disableEnforceFocus
       disableAutoFocus
       className="editPicDialog"
-      open={!editPic._id ? false : true}
+      open={!!editPic._id}
       onClose={() => setEditPic(defaultPic)}
     >
       <DialogTitle>Edit Picture</DialogTitle>

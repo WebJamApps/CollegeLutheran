@@ -99,7 +99,7 @@ async function createPicAPI(
 }
 
 export const defaultPic = {
-  url: '', comments: '', title: '', type: '', _id:''
+  url: '', comments: '', title: '', type: '', _id: '',
 };
 
 export interface FormParams {
