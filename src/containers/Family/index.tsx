@@ -1,4 +1,4 @@
-import FamilyContent from './FamilyContent';
+import { FamilyContent } from './FamilyContent';
 import commonUtils from '../../lib/commonUtils';
 
 export const Family = (): JSX.Element => {

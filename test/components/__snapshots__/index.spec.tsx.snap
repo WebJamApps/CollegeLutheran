@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PicSlider renders with a caption 1`] = `
+<div
+  id="pic-slider"
+>
+  <div
+    className="slick-slider slick-initialized"
+    dir="ltr"
+  >
+    <div
+      className="slick-list"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={null}
+      onMouseMove={null}
+      onMouseUp={[Function]}
+      onTouchCancel={null}
+      onTouchEnd={[Function]}
+      onTouchMove={null}
+      onTouchStart={[Function]}
+      style={{}}
+    >
+      <div
+        className="slick-track"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <div
+          aria-hidden={false}
+          className="slick-slide slick-active slick-current"
+          data-index={0}
+          onClick={[Function]}
+          style={
+            {
+              "left": -0,
+              "opacity": 1,
+              "outline": "none",
+              "position": "relative",
+              "transition": "opacity 5000ms ease, visibility 5000ms ease",
+              "width": 0,
+            }
+          }
+          tabIndex="-1"
+        >
+          <div>
+            <div
+              style={
+                {
+                  "display": "inline-block",
+                  "width": "100%",
+                }
+              }
+              tabIndex={-1}
+            >
+              <img
+                alt="test"
+                className="slide-show"
+                src="https://test.com"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          aria-hidden={true}
+          className="slick-slide"
+          data-index={1}
+          onClick={[Function]}
+          style={
+            {
+              "left": -0,
+              "opacity": 0,
+              "outline": "none",
+              "position": "relative",
+              "transition": "opacity 5000ms ease, visibility 5000ms ease",
+              "width": 0,
+            }
+          }
+          tabIndex="-1"
+        >
+          <div>
+            <div
+              style={
+                {
+                  "display": "inline-block",
+                  "width": "100%",
+                }
+              }
+              tabIndex={-1}
+            >
+              <img
+                alt="test2"
+                className="slide-show"
+                src="https://test2.com"
+              />
+              <div
+                className="slider-caption"
+                style={
+                  {
+                    "backgroundColor": "silver",
+                    "fontWeight": "bold",
+                    "marginBottom": 0,
+                    "marginTop": 0,
+                    "padding": 0,
+                    "textAlign": "center",
+                  }
+                }
+              >
+                 
+                test2
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
