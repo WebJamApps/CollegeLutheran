@@ -233,33 +233,6 @@ exports[`App component renders the component 1`] = `
           >
             <a
               className="nav-link"
-              href="/stewardship"
-              onClick={[Function]}
-            >
-              <div
-                style={
-                  {
-                    "display": "inline",
-                  }
-                }
-              >
-                <i
-                  className="fas fa-step-forward"
-                />
-                 
-                <span
-                  className="nav-item"
-                >
-                  Stewardship
-                </span>
-              </div>
-            </a>
-          </div>
-          <div
-            className="menu-item"
-          >
-            <a
-              className="nav-link"
               href="/news"
               onClick={[Function]}
             >
@@ -305,33 +278,6 @@ exports[`App component renders the component 1`] = `
                   className="nav-item"
                 >
                   Giving
-                </span>
-              </div>
-            </a>
-          </div>
-          <div
-            className="menu-item"
-          >
-            <a
-              className="nav-link"
-              href="/habitatproject"
-              onClick={[Function]}
-            >
-              <div
-                style={
-                  {
-                    "display": "inline",
-                  }
-                }
-              >
-                <i
-                  className="fas fa-hammer"
-                />
-                 
-                <span
-                  className="nav-item"
-                >
-                  Habitat Project
                 </span>
               </div>
             </a>

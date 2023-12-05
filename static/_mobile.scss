@@ -91,7 +91,7 @@
 // Galaxy Fold
 @media (max-width: 285px) {
   .header-text {
-    font-size: 20px !important;
+    font-size: 20px;
   }
   .giving-iframe {
     width: auto !important;
@@ -238,7 +238,6 @@
 @media (min-width: 400px) and (max-width: 419px) {
 
   .flex-header {
-    margin-top: -20px;
     width: 100% !important;
   }
 
@@ -275,7 +274,8 @@
 
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .header-text {
-    font-size: 24px !important;
+    font-size: 24px;
+    margin-top:10px;
   }
 }
 
@@ -290,10 +290,6 @@
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
   }
-
-  // ::-webkit-scrollbar {
-  //   display: none;
-  // }
 
   .drawer {
     background-color: rgb(192, 192, 192);

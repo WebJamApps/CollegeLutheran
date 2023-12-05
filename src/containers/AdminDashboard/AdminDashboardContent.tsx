@@ -32,23 +32,23 @@ export function ChangeYouthPageSect() {
   );
 }
 
-export function ChangeStewardshipPageSect() {
-  return (
-    <ChangePageSection
-      pageType="stewardshipPage"
-      formTitle="Stewardshippage Section"
-    />
-  );
-}
+// export function ChangeStewardshipPageSect() {
+//   return (
+//     <ChangePageSection
+//       pageType="stewardshipPage"
+//       formTitle="Stewardshippage Section"
+//     />
+//   );
+// }
 
-export function ChangeHabitatPageSect() {
-  return (
-    <ChangePageSection
-      pageType="habitatPage"
-      formTitle="Habitatpage Section"
-    />
-  );
-}
+// export function ChangeHabitatPageSect() {
+//   return (
+//     <ChangePageSection
+//       pageType="habitatPage"
+//       formTitle="Habitatpage Section"
+//     />
+//   );
+// }
 
 export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
   return (evt: { target: { checked: any; }; }) => {
@@ -159,8 +159,8 @@ export function AdminDashboardContent() {
       { showEditor === 'editContent' ? (
         <>
           <ChangeHomePageSect />
-          <ChangeHabitatPageSect />
-          <ChangeStewardshipPageSect />
+          {/* <ChangeHabitatPageSect /> */}
+          {/* <ChangeStewardshipPageSect /> */}
           <ChangeYouthPageSect />
         </>
       ) : null}

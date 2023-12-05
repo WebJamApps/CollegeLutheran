@@ -45,7 +45,7 @@ export function NewsContent({ books }: NewsContentProps) {
                           <tr
                             className="TableRow-root news"
                             key={d._id}
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: isAdmin ? 'pointer' : 'default' }}
                             onClick={() => { if (isAdmin) setEditNews(d); }}
                           >
                             <td className="TableCell-root TableCell-body newsUrl">

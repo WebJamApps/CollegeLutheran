@@ -7,7 +7,7 @@ export const defaultNews = {
 } as Ibook;
 
 export async function performAxiosRequest(
-  config:any,
+  config: any,
   getNews: () => Promise<void>,
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
@@ -22,40 +22,9 @@ export async function performAxiosRequest(
   }
 }
 
-// async function updateNews(
-//   editNews: typeof defaultNews,
-//   auth: Iauth,
-//   getNews: () => Promise<void>,
-//   setEditNews: (arg0:typeof defaultNews) => void,
-// ): Promise<void> {
-//   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-//   const config = {
-//     url,
-//     method: 'put',
-//     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-//     data: editNews,
-//   };
-//   await performAxiosRequest(config, getNews, setEditNews);
-// }
-
-// export async function deleteNews(
-//   editNews: typeof defaultNews,
-//   getNews: () => Promise<void>,
-//   auth: Iauth,
-//   setEditNews: (arg0: typeof defaultNews) => void,
-// ): Promise<void> {
-//   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-//   const config = {
-//     url,
-//     method: 'delete',
-//     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-//     data: editNews,
-//   };
-//   await performAxiosRequest(config, getNews, setEditNews);
-// }
 async function newsApi(
-  method:string,
-  editNewsState: { editNews: typeof defaultNews, setEditNews: (arg0:typeof defaultNews) => void },
+  method: string,
+  editNewsState: { editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void },
   auth: Iauth,
   getNews: () => Promise<void>,
 ): Promise<void> {
