@@ -434,55 +434,49 @@ exports[`App component renders the component 1`] = `
           }
         >
           <div
-            className="headercontent"
-          />
-          <div>
-            <div
-              className="flex-header"
+            className="flex-header"
+            style={
+              {
+                "marginLeft": "15px",
+              }
+            }
+          >
+            <h2
+              className="header-text"
               style={
                 {
-                  "marginLeft": "15px",
-                  "marginTop": "-18px",
-                  "paddingLeft": "10px",
-                  "paddingRight": "10px",
+                  "fontSize": "16px !important",
+                  "marginTop": "1px",
                 }
               }
             >
-              <h2
+              <a
                 className="header-text"
+                href="/"
                 style={
                   {
-                    "fontSize": "25px",
-                    "marginBottom": "-1px",
-                    "marginTop": "1px",
+                    "fontSize": "inherit",
+                    "textAlign": "left",
+                    "textDecoration": "none",
                   }
                 }
               >
-                <a
-                  className="header-text"
-                  href="/"
-                  style={
-                    {
-                      "textAlign": "left",
-                      "textDecoration": "none",
-                    }
-                  }
-                >
-                  College Lutheran Church
-                </a>
-              </h2>
-              <p
-                className="subTitle"
-                style={
-                  {
-                    "color": "#f4c00eff",
-                    "maxWidth": "100%",
-                  }
+                College Lutheran Church
+              </a>
+            </h2>
+            <p
+              className="subTitle"
+              style={
+                {
+                  "color": "#f4c00eff",
+                  "display": "inline",
+                  "fontSize": "9pt",
+                  "maxWidth": "100%",
                 }
-              >
-                We celebrate God's grace and share His love in Christ!
-              </p>
-            </div>
+              }
+            >
+              We celebrate God's grace and share His love in Christ!
+            </p>
           </div>
         </div>
         <div
