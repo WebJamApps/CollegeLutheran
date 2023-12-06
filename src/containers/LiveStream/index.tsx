@@ -9,7 +9,7 @@ const makeSpace = (width: number) => {
 };
 
 export interface LiveStreamProps {
-  width: number, height: number
+  width: number
 }
 export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
