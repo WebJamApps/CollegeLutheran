@@ -1,16 +1,12 @@
 import { PicTextField, CreatePicDialog } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
-import { AuthProvider } from 'src/providers/Auth.provider';
-import { ContentProvider } from 'src/providers/Content.provider';
+// import { AuthProvider } from 'src/providers/Auth.provider';
+// import { ContentProvider } from 'src/providers/Content.provider';
 
 describe('CreatePicDialog', () => {
   it('renders CreatePicDialog', () => {
     const cpd = renderer.create(
-      <AuthProvider>
-        <ContentProvider>
-          <CreatePicDialog showEditor="createPic" onClose={jest.fn()} />
-        </ContentProvider>
-      </AuthProvider>,
+      <CreatePicDialog showEditor="createPic" onClose={jest.fn()} />,
     ).toJSON();
     expect(cpd).toMatchSnapshot();
   });
