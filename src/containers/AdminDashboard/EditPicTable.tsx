@@ -68,28 +68,3 @@ export function EditPicTable(props:IeditPicTableProps) {
   );
 }
 
-// interface IeditPictureProps {
-//   setShowEditPicTable: (arg0:boolean) => void
-// }
-// export function EditPicture(props:IeditPictureProps) {
-//   const { setShowEditPicTable } = props;
-//   const [isButtonClicked, setIsButtonClicked] = useState(false);
-//   const handleButtonClick = () => {
-//     setIsButtonClicked(true);
-//   };
-//   return (
-//     <div>
-//       <Button
-//         sx={{ textAlign: 'center' }}
-//         variant="contained"
-//         size="large"
-//         id="a-d"
-//         onClick={handleButtonClick}
-//       >
-//         Edit Pictures
-//       </Button>
-//       ;
-//       {isButtonClicked ? <EditPicTable setShowTable={setShowEditPicTable} /> : null}
-//     </div>
-//   );
-// }
