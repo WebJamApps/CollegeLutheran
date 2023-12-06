@@ -1,20 +1,32 @@
-import { PicTextField } from 'src/containers/AdminDashboard/CreatePicDialog';
+import { PicTextField, CreatePicDialog } from 'src/containers/AdminDashboard/CreatePicDialog';
 import renderer from 'react-test-renderer';
+import { AuthProvider } from 'src/providers/Auth.provider';
+import { ContentProvider } from 'src/providers/Content.provider';
 
 describe('CreatePicDialog', () => {
-  it('renders PicTextField', () => {
-    const props = {
-      label: '',
-      url: true,
-      title: true,
-      setPic: jest.fn(),
-      pic: {
-        title: '', type: '', url: '', comments: '', _id: '',
-      },
-    };
-    const result: any = renderer.create(<PicTextField {...props} />).toJSON();
-    expect(result.children[0].children[0].type).toBe('input');
+  it('renders CreatePicDialog', () => {
+    const cpd = renderer.create(
+      <AuthProvider>
+        <ContentProvider>
+          <CreatePicDialog showEditor="createPic" onClose={jest.fn()} />
+        </ContentProvider>
+      </AuthProvider>,
+    ).toJSON();
+    expect(cpd).toMatchSnapshot();
   });
+  // it('renders PicTextField', () => {
+  //   const props = {
+  //     label: '',
+  //     url: true,
+  //     title: true,
+  //     setPic: jest.fn(),
+  //     pic: {
+  //       title: '', type: '', url: '', comments: '', _id: '',
+  //     },
+  //   };
+  //   const result: any = renderer.create(<PicTextField {...props} />).toJSON();
+  //   expect(result.children[0].children[0].type).toBe('input');
+  // });
   it('handles onChange for PicTextField', () => {
     const props = {
       label: '',

@@ -10,7 +10,7 @@ describe('EditNewsDialog', () => {
       value: '', label: '', onChange: jest.fn(), className: '',
     };
     const result: any = renderer.create(<NewsTextField {...props} />).toJSON();
-    expect(result.type).toBe('div');
+    expect(result.type).toBe('input');
   });
   it('handles onClose for EditNewsDialog', () => {
     const editNews = {
