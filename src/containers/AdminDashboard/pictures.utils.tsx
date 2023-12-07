@@ -53,4 +53,4 @@ async function deletePic(
   await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
 }
 
-export default { updatePic, deletePic };
+export default { updatePic, deletePic, performAxiosRequest };

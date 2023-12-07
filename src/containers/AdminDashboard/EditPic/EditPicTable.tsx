@@ -4,7 +4,7 @@ import { ContentContext } from 'src/providers/Content.provider';
 import { Button } from '@mui/material';
 import { EditPicDialog } from './EditPicDialog';
 import './editPicTable.scss';
-import { defaultPic } from './utils';
+import { defaultPic } from '../utils';
 
 export const columns: GridColDef[] = [
   {

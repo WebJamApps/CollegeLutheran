@@ -9,7 +9,7 @@ import { ContentContext } from 'src/providers/Content.provider';
 import './adminDashboard.scss';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
-import { EditPicTable } from './EditPicTable';
+import { EditPicTable } from './EditPic/EditPicTable';
 import { ChangePageSection } from './ChangePageSection';
 
 export function ChangeHomePageSect() {

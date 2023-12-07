@@ -6,9 +6,9 @@ import {
   Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup,
 } from '@mui/material';
 import libUtils from 'src/lib/commonUtils';
-import { defaultPic } from './utils';
+import { defaultPic } from '../utils';
 import { EditPicTextField } from './EditPicTextField';
-import picUtils from './pictures.utils';
+import picUtils from '../pictures.utils';
 
 function checkDisabled(editPic: typeof defaultPic):boolean {
   return !!(editPic.title && editPic.url);

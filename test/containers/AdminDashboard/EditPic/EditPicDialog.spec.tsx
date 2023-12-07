@@ -1,4 +1,4 @@
-import { EditPicDialog } from 'src/containers/AdminDashboard/EditPicDialog';
+import { EditPicDialog } from 'src/containers/AdminDashboard/EditPic/EditPicDialog';
 import renderer from 'react-test-renderer';
 import { defaultPic } from 'src/containers/AdminDashboard/utils';
 

@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import { EditPicTable } from 'src/containers/AdminDashboard/EditPicTable';
+import { EditPicTable } from 'src/containers/AdminDashboard/EditPic/EditPicTable';
 
 describe('EditPicTable', () => {
   it('renders EditPicTable', () => {
