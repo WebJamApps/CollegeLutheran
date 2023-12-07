@@ -7,20 +7,11 @@ export const defaultNews = {
 } as Ibook;
 
 export async function performAxiosRequest(
-  method: 'put' | 'delete',
-  url: string,
-  editNews: typeof defaultNews,
-  auth: Iauth,
+  config: any,
   getNews: () => Promise<void>,
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
   try {
-    const config = {
-      url,
-      method,
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data: editNews,
-    };
     const { status } = await axios.request(config);
     if (status === 200) {
       setEditNews(defaultNews);
@@ -31,31 +22,21 @@ export async function performAxiosRequest(
   }
 }
 
-async function updateNews(
-  editNews: typeof defaultNews,
+async function newsApi(
+  method: string,
+  editNewsState: { editNews: typeof defaultNews, setEditNews: (arg0: typeof defaultNews) => void },
   auth: Iauth,
   getNews: () => Promise<void>,
-  setEditNews: (arg0:typeof defaultNews) => void,
 ): Promise<void> {
+  const { editNews, setEditNews } = editNewsState;
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  await performAxiosRequest('put', url, editNews, auth, getNews, setEditNews);
+  const config = {
+    url,
+    method,
+    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
+    data: editNews,
+  };
+  await performAxiosRequest(config, getNews, setEditNews);
 }
 
-export async function deleteNews(
-  editNews: typeof defaultNews,
-  getNews: () => Promise<void>,
-  auth: Iauth,
-  setEditNews: (arg0: typeof defaultNews) => void,
-): Promise<void> {
-  const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  await performAxiosRequest('delete', url, editNews, auth, getNews, setEditNews);
-}
-
-const makeShowHideBulletin = (setNews: (arg0:typeof defaultNews) => void,
-  news: typeof defaultNews,
-) => (evt: any) => {
-  const { target: { checked } } = evt;
-  const comments = checked ? 'worshipbulletin' : '';
-  setNews({ ...news, comments });
-};
-export default { updateNews, deleteNews, makeShowHideBulletin };
+export default { newsApi, performAxiosRequest };

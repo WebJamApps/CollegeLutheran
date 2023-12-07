@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Container renders AdminDashboard 1`] = `
+<div
+  style={
+    {
+      "minHeight": "80vh",
+    }
+  }
+>
+  <h4
+    style={
+      {
+        "marginTop": "10px",
+        "textAlign": "center",
+      }
+    }
+  >
+    CLC Admin Dashboard
+  </h4>
+  <div
+    direction="row"
+    spacing={2}
+    style={
+      {
+        "marginLeft": "1%",
+        "textAlign": "center",
+      }
+    }
+  >
+    <button
+      id="a-d"
+      onClick={[Function]}
+      size="small"
+      sx={
+        {
+          "textAlign": "center",
+        }
+      }
+      variant="contained"
+    >
+      Add Picture
+    </button>
+    <button
+      id="a-d"
+      onClick={[Function]}
+      size="small"
+      sx={
+        {
+          "textAlign": "center",
+        }
+      }
+      variant="contained"
+    >
+      Edit Picture
+    </button>
+    <button
+      id="a-d"
+      onClick={[Function]}
+      size="small"
+      sx={
+        {
+          "textAlign": "center",
+        }
+      }
+      variant="contained"
+    >
+      Edit Page Content
+    </button>
+    <button
+      id="a-d"
+      onClick={[Function]}
+      size="small"
+      sx={
+        {
+          "textAlign": "center",
+        }
+      }
+      variant="outlined"
+    >
+      Cancel
+    </button>
+  </div>
+  <div
+    className="material-content elevation3"
+    style={
+      {
+        "margin": "30px auto auto auto",
+        "maxWidth": "8in",
+      }
+    }
+  >
+    <h5>
+      Add to News Page
+    </h5>
+    <div>
+      <input
+        label="Title"
+        onChange={[Function]}
+        sx={
+          {
+            "marginBottom": "10px",
+          }
+        }
+        value=""
+      />
+      <input
+        label="Url"
+        onChange={[Function]}
+        value=""
+      />
+      <div
+        control={
+          <Checkbox
+            checked={false}
+            onChange={[Function]}
+          />
+        }
+        label="Is Worship Bulletin?"
+      />
+    </div>
+    <hr />
+    <button
+      onClick={[Function]}
+      size="small"
+      variant="contained"
+    >
+      Add News
+    </button>
+  </div>
+</div>
+`;

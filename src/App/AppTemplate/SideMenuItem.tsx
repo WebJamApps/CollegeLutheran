@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import {
   useContext, useEffect,
@@ -9,6 +8,7 @@ import commonUtils from 'src/lib/commonUtils';
 import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
+import utils from './utils';
 
 export function IconAndText({ menu }: { menu: ImenuItem }): JSX.Element {
   return (
@@ -102,20 +102,18 @@ export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
     menu, index, handleClose,
   } = props;
   const { news: { newsContent }, getNews } = useContext(ContentContext);
-  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
-  useEffect(() => { void getNews(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { (async () => { await getNews(); })(); }, []);
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const { pathname } = location;
   const userRoles: string[] = commonUtils.getUserRoles();
   const isAllowed = checkIsAllowed(menu, auth, userRoles);
-  if (!isAllowed) return <> </>;
   let m = menu;
   if (m.name === 'Bulletin') {
     m = setBulletin(m, newsContent);
   }
-  if (location.pathname === '/staff' && m.link === '/staff') return <> </>;
-  if ((m.link === '/staff' || m.link === '/belief') && auth.isAuthenticated) return <> </>;
+  if (!utils.showNav(isAllowed, location, m, auth)) return null;
   if (m.link) {
     return (
       <MakeLink

@@ -6,6 +6,7 @@ import {
 import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import libUtils from 'src/lib/commonUtils';
 import utils, { defaultNews } from './utilsN';
 
 interface InewsTextFieldProps {
@@ -95,8 +96,7 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
           size="small"
           variant="contained"
           className="updateNewsButton"
-              // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          onClick={() => { utils.updateNews(editNews, auth, getNews, setEditNews); }}
+          onClick={() => (async () => { await utils.newsApi('put', { editNews, setEditNews }, auth, getNews); })()}
         >
           Update
         </Button>
@@ -104,8 +104,7 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
           style={{ backgroundColor: 'red', color: 'white' }}
           size="small"
           className="deleteNewsButton"
-              // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          onClick={() => { utils.deleteNews(editNews, getNews, auth, setEditNews); }}
+          onClick={() => (async () => { await utils.newsApi('delete', { editNews, setEditNews }, auth, getNews); })()}
         >
           Delete
         </Button>
@@ -122,7 +121,7 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
 }
 
 export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) {
-  const showHideCaption = utils.makeShowHideBulletin(setEditNews, editNews);
+  const showHideCaption = libUtils.makeShowHideChecked(setEditNews, editNews, 'worshipbulletin');
   return (
     <Dialog
       disableEnforceFocus
