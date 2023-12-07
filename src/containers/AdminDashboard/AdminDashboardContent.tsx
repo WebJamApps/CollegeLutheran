@@ -1,190 +1,54 @@
 import {
-  Button, TextField, Checkbox, FormControlLabel, FormGroup,
+  Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack,
 } from '@mui/material';
-import { Editor } from '@tinymce/tinymce-react';
 import {
-  SetStateAction, useContext, useEffect, useState,
+  SetStateAction, useContext, useState,
 } from 'react';
-import forms from 'src/lib/forms';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
+import './adminDashboard.scss';
 import { CreatePicDialog } from './CreatePicDialog';
 import utils from './utils';
+import { EditPicTable } from './EditPic/EditPicTable';
+import { ChangePageSection } from './ChangePageSection';
 
-export function UpdateButton(
-  {
-    title = '',
-    getContent,
-    comments = '',
-    buttonName,
-    type,
-  }: { title: string,
-    getContent: () => Promise<void>,
-    comments?: string,
-    buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent' },
-): JSX.Element {
-  const { auth } = useContext(AuthContext);
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <Button
-        size="small"
-        variant="contained"
-        type="button"
-        id="c-h"
-        onClick={() => utils.putAPI({ title, comments, type }, auth, getContent)}
-      >
-        {buttonName}
-      </Button>
-    </div>
-  );
-}
-
-interface IcommentsEditorProps {
-  comments: string | undefined, setComments: (arg0: string) => void
-}
-export function CommentsEditor(
-  props: IcommentsEditorProps,
-): JSX.Element {
-  const { setComments, comments } = props;
-  return (
-    <Editor
-      apiKey={process.env.TINY_KEY}
-      value={comments}
-      init={{
-        height: 500,
-        menubar: 'insert tools',
-        menu: { format: { title: 'Format', items: 'forecolor backcolor' } },
-        plugins: [
-          'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor',
-          'searchreplace', 'visualblocks', 'code', 'fullscreen',
-          'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
-        ],
-        toolbar:
-          'undo redo | formatselect | bold italic backcolor forecolor |'
-          + 'alignleft aligncenter alignright alignjustify |'
-          + 'bullist numlist outdent indent | removeformat | help',
-      }}
-      onEditorChange={(newComments) => setComments(newComments)}
-    />
-  );
-}
-
-export interface IchangePageSectionWithTitleProps {
-  pageType: 'youthPage' | 'homePage',
-  formTitle: string,
-}
-
-export function ChangePageSectionWithTitle(props: IchangePageSectionWithTitleProps) {
-  const { pageType, formTitle } = props;
-  const { content, getContent } = useContext(ContentContext);
-  const [title, setTitle] = useState(content[pageType].title);
-  const [comments, setComments] = useState(content[pageType].comments);
-  const inputParams = {
-    type: 'text',
-    label: 'Title',
-    isRequired: false,
-    onChange: (evt: { target: { value: SetStateAction<string>; }; }) => {
-      const { target: { value } } = evt;
-      setTitle(value);
-      return value;
-    },
-    value: title,
-    width: '90%',
-  };
-  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
-  useEffect(() => { void getContent(); }, []);
-  return (
-    <div className="horiz-scroll">
-      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-        <h5>{formTitle}</h5>
-        <form
-          id={`create-${pageType}`}
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          {forms.makeInput(inputParams)}
-          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-          <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateButton
-            getContent={getContent}
-            title={title}
-            comments={comments}
-            type={`${pageType}Content`}
-            buttonName={`Update ${formTitle}`}
-          />
-        </form>
-      </div>
-    </div>
-  );
-}
 export function ChangeHomePageSect() {
   return (
-    <ChangePageSectionWithTitle
+    <ChangePageSection
       pageType="homePage"
       formTitle="Homepage Section"
+      withInput
     />
   );
 }
+
 export function ChangeYouthPageSect() {
   return (
-    <ChangePageSectionWithTitle
+    <ChangePageSection
       pageType="youthPage"
       formTitle="Youthpage Section"
+      withInput
     />
   );
 }
-export interface IchangePageSectionProps {
-  pageType: 'habitatPage' | 'stewardshipPage',
-  formTitle: string,
-}
-export function ChangePageSection(props: IchangePageSectionProps) {
-  const { pageType, formTitle } = props;
-  const { content, getContent } = useContext(ContentContext);
-  const [title] = useState(content[pageType].title);
-  const [comments, setComments] = useState(content[pageType].comments);
-  // eslint-disable-next-line no-void, react-hooks/exhaustive-deps
-  return (
-    <div className="horiz-scroll">
-      <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
-        <h5>{formTitle}</h5>
-        <form
-          id={`create-${pageType}`}
-          style={{
-            textAlign: 'left', marginLeft: '4px', width: '100%', maxWidth: '100%',
-          }}
-        >
-          <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
-          <CommentsEditor comments={comments} setComments={setComments} />
-          <UpdateButton
-            getContent={getContent}
-            title={title}
-            comments={comments}
-            type={`${pageType}Content`}
-            buttonName={`Update ${formTitle}`}
-          />
-        </form>
-      </div>
-    </div>
-  );
-}
-export function ChangeStewardshipPageSect() {
-  return (
-    <ChangePageSection
-      pageType="stewardshipPage"
-      formTitle="Stewardshippage Section"
-    />
-  );
-}
-export function ChangeHabitatPageSect() {
-  return (
-    <ChangePageSection
-      pageType="habitatPage"
-      formTitle="Habitatpage Section"
-    />
-  );
-}
+
+// export function ChangeStewardshipPageSect() {
+//   return (
+//     <ChangePageSection
+//       pageType="stewardshipPage"
+//       formTitle="Stewardshippage Section"
+//     />
+//   );
+// }
+
+// export function ChangeHabitatPageSect() {
+//   return (
+//     <ChangePageSection
+//       pageType="habitatPage"
+//       formTitle="Habitatpage Section"
+//     />
+//   );
+// }
 
 export function makeHandleChange(setComments: React.Dispatch<SetStateAction<string>>) {
   return (evt: { target: { checked: any; }; }) => {
@@ -192,6 +56,7 @@ export function makeHandleChange(setComments: React.Dispatch<SetStateAction<stri
     else setComments('');
   };
 }
+
 export function ChangeNewsPage(): JSX.Element {
   const { getNews } = useContext(ContentContext);
   const { auth } = useContext(AuthContext);
@@ -214,8 +79,8 @@ export function ChangeNewsPage(): JSX.Element {
             <Checkbox
               checked={comments === 'worshipbulletin'}
               onChange={
-              handleChange
-            }
+                handleChange
+              }
             />
           )}
         />
@@ -233,34 +98,72 @@ export function ChangeNewsPage(): JSX.Element {
     </div>
   );
 }
-
-export function makeHandleClick(setShowCreatePic: React.Dispatch<SetStateAction<boolean>>) {
-  return () => setShowCreatePic(true);
+interface IbuttonsNavProps {
+  setShowEditor:(arg0:string)=>void;showEditor:string;
+}
+export function ButtonsNav(props:IbuttonsNavProps) {
+  const { setShowEditor, showEditor } = props;
+  return (
+    <Stack direction="row" spacing={2} style={{ textAlign: 'center', marginLeft: '1%' }}>
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('createPic')}
+      >
+        Add Picture
+      </Button>
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('editPic')}
+      >
+        Edit Picture
+      </Button>
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        variant="contained"
+        id="a-d"
+        onClick={() => setShowEditor('editContent')}
+      >
+        Edit Page Content
+      </Button>
+      {showEditor !== 'editPic' && (
+      <Button
+        size="small"
+        sx={{ textAlign: 'center' }}
+        id="a-d"
+        variant="outlined"
+        onClick={() => (showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/'))}
+      >
+        Cancel
+      </Button>
+      )}
+    </Stack>
+  );
 }
 
 export function AdminDashboardContent() {
-  const [showCreatePic, setShowCreatePic] = useState(false);
-  const handleClick = makeHandleClick(setShowCreatePic);
+  const [showEditor, setShowEditor] = useState('');
   return (
-    <div className="page-content">
+    <div style={{ minHeight: showEditor !== 'editContent' ? '80vh' : 'inherit' }}>
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
-      <ChangeHomePageSect />
-      <div style={{ margin: 'auto', maxWidth: '400px' }}>
-        <Button
-          sx={{ textAlign: 'center' }}
-          variant="contained"
-          size="large"
-          id="a-d"
-          onClick={handleClick}
-        >
-          Add New Picture
-        </Button>
-      </div>
-      <ChangeNewsPage />
-      <CreatePicDialog showDialog={showCreatePic} setShowDialog={setShowCreatePic} />
-      <ChangeHabitatPageSect />
-      <ChangeStewardshipPageSect />
-      <ChangeYouthPageSect />
+      <ButtonsNav showEditor={showEditor} setShowEditor={setShowEditor} />
+      {showEditor === '' ? <ChangeNewsPage /> : null}
+      { showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} /> }
+      { showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
+      { showEditor === 'editContent' ? (
+        <>
+          <ChangeHomePageSect />
+          {/* <ChangeHabitatPageSect /> */}
+          {/* <ChangeStewardshipPageSect /> */}
+          <ChangeYouthPageSect />
+        </>
+      ) : null}
     </div>
   );
 }

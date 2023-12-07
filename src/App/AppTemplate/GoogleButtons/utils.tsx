@@ -46,7 +46,7 @@ const responseGoogleLogin = async (
   response: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>,
   auth: Iauth,
   setAuth: (arg0: Iauth) => void,
-  nodeEnv:string,
+  nodeEnv?: string,
 ): Promise<void> => {
   try {
     const uri = window.location.href;

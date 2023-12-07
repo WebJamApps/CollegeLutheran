@@ -1,6 +1,7 @@
 import parser from 'html-react-parser';
 import { useContext } from 'react';
 import { ContentContext } from 'src/providers/Content.provider';
+import { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 
@@ -33,14 +34,21 @@ const FamilySection = () => (
     </p>
   </section>
 );
-const FamilyContent = (): JSX.Element => {
+
+export function FamilySlideShow({ familyPics }:{ familyPics:Ibook[] }) {
+  return (
+    <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
+      {familyPics && familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
+    </div>
+  );
+}
+
+export const FamilyContent = (): JSX.Element => {
   const { pictures } = useContext(ContentContext);
-  const { familyPics = [] } = pictures;
+  const { familyPics } = pictures;
   return (
     <div className="page-content family-content">
-      <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
-        {familyPics && familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
-      </div>
+      <FamilySlideShow familyPics={familyPics} />
       <div className="container-fluid">
         <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
         <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
@@ -64,6 +72,3 @@ const FamilyContent = (): JSX.Element => {
     </div>
   );
 };
-FamilyContent.defaultProps = { familyPics: [] };
-
-export default FamilyContent;

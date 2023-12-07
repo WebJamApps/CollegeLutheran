@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  handleEscapePress, handleKeyMenu, toggleMobileMenu, AppTemplate,
+  handleEscapePress, handleKeyMenu, toggleMobileMenu, AppTemplate, makeDrawerClass,
 } from 'src/App/AppTemplate';
 
 describe('AppTemplate', () => {
@@ -25,5 +25,14 @@ describe('AppTemplate', () => {
     const setMenuOpen = jest.fn();
     handleEscapePress(e, setMenuOpen);
     expect(setMenuOpen).not.toHaveBeenCalled();
+  });
+  it('makeDrawerClass when menuOpen', () => {
+    expect(makeDrawerClass(true)).toBe('home-sidebar open drawer-container');
+  });
+  it('handleEscapePress to close menu', () => {
+    const e = { key: 'Escape' };
+    const setMenuOpen = jest.fn();
+    handleEscapePress(e, setMenuOpen);
+    expect(setMenuOpen).toHaveBeenCalledWith(false);
   });
 });

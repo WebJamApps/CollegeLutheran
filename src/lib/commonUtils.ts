@@ -18,7 +18,7 @@ function getUserRoles(): string[] {
   return userRoles;
 }
 
-const delay = (seconds:number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+const delay = (seconds: number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 
 export type NotificationType = 'success' | 'danger' | 'info' | 'default' | 'warning';
 function notify(title: string, message: string, type: NotificationType) {
@@ -37,6 +37,15 @@ function notify(title: string, message: string, type: NotificationType) {
   });
 }
 
+function makeShowHideChecked<Type>(setter: (arg0: Type) => void,
+  obj: Type, comment: string) {
+  return (evt: any) => {
+    const { target: { checked } } = evt;
+    const comments = checked ? comment : '';
+    setter({ ...obj, comments });
+  };
+}
+
 export default {
-  getUserRoles, setTitleAndScroll, delay, notify,
+  getUserRoles, setTitleAndScroll, delay, notify, makeShowHideChecked,
 };

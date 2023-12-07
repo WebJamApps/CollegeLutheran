@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LiveStream renders smallscreen 1`] = `
+<div
+  style={
+    {
+      "margin": "auto",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <p>
+    The video below will only play during an actual livestream event. To view past services, click to visit our
+     
+    <a
+      href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+      rel="noreferrer"
+      target="_blank"
+    >
+      YouTube
+    </a>
+     
+    or
+     
+    <a
+      href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Facebook
+    </a>
+     
+    pages.
+  </p>
+  <iframe
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowFullScreen={true}
+    frameBorder="0"
+    height="360"
+    src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+    title="Live Stream Small"
+    width="100%"
+  />
+  <div
+    style={
+      {
+        "marginTop": "38vh",
+      }
+    }
+  >
+     
+  </div>
+</div>
+`;
+
+exports[`LiveStream renders widescreen 1`] = `
+<div
+  style={
+    {
+      "margin": "auto",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <h5
+    style={
+      {
+        "marginTop": "0.5rem",
+      }
+    }
+  >
+    Welcome to Our Livestream Page
+  </h5>
+  <p>
+    The video below will only play during an actual livestream event. To view past services, click to visit our
+     
+    <a
+      href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+      rel="noreferrer"
+      target="_blank"
+    >
+      YouTube
+    </a>
+     
+    or
+     
+    <a
+      href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Facebook
+    </a>
+     
+    pages.
+  </p>
+  <iframe
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowFullScreen={true}
+    frameBorder="0"
+    height="620"
+    src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+    title="Live Stream Wide"
+    width="930"
+  />
+  <div
+    style={
+      {
+        "marginTop": "0px",
+      }
+    }
+  >
+     
+  </div>
+</div>
+`;

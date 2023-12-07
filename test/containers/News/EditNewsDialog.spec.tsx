@@ -10,7 +10,7 @@ describe('EditNewsDialog', () => {
       value: '', label: '', onChange: jest.fn(), className: '',
     };
     const result: any = renderer.create(<NewsTextField {...props} />).toJSON();
-    expect(result.type).toBe('div');
+    expect(result.type).toBe('input');
   });
   it('handles onClose for EditNewsDialog', () => {
     const editNews = {
@@ -32,17 +32,16 @@ describe('EditNewsDialog', () => {
     expect(result.findByProps({ label: '* Title' }).props.onChange(evt)).toBe('url');
   });
   it('renders EditNewsButtons and handles events', () => {
-    utils.updateNews = jest.fn();
-    utils.deleteNews = jest.fn();
+    utils.newsApi = jest.fn();
     const props = {
       editNews: defaultNews,
       setEditNews: jest.fn(),
     };
     const result = renderer.create(<EditNewsButtons {...props} />).root;
     result.findByProps({ className: 'updateNewsButton' }).props.onClick();
-    expect(utils.updateNews).toHaveBeenCalled();
+    expect(utils.newsApi).toHaveBeenCalled();
     result.findByProps({ className: 'deleteNewsButton' }).props.onClick();
-    expect(utils.deleteNews).toHaveBeenCalled();
+    expect(utils.newsApi).toHaveBeenCalledTimes(2);
     result.findByProps({ className: 'cancelNewsButton' }).props.onClick();
     expect(props.setEditNews).toHaveBeenCalled();
   });

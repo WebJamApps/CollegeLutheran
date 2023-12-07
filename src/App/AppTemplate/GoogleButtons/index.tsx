@@ -6,7 +6,7 @@ import utils from './utils';
 
 export const loginConfig = (auth:Iauth, setAuth: (args0:Iauth)=>void) => ({
   onSuccess: async (codeResponse: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {
-    await utils.responseGoogleLogin(codeResponse, auth, setAuth, process.env.NODE_ENV || '');
+    await utils.responseGoogleLogin(codeResponse, auth, setAuth, process.env.NODE_ENV);
   },
   onError: () => { console.log('Google login failed'); return false; },
   flow: 'auth-code',

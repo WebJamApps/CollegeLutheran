@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FamilyContent FamilySlideShow renders correctly with images 1`] = `
+<div
+  id="familySlideshowWide"
+  style={
+    {
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    id="pic-slider"
+  >
+    <div
+      className="slick-slider slick-initialized"
+    >
+      <div
+        className="slick-list"
+      >
+        <div
+          className="slick-track"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          style={
+            {
+              "opacity": 1,
+            }
+          }
+        >
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active slick-current"
+            data-index={0}
+            onClick={[Function]}
+            style={
+              {
+                "left": -0,
+                "opacity": 1,
+                "outline": "none",
+                "position": "relative",
+                "transition": "opacity 5000ms ease, visibility 5000ms ease",
+                "width": 0,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <div
+                style={
+                  {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <img
+                  alt="test"
+                  className="slide-show"
+                  src="https://test.com"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

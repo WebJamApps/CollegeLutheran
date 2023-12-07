@@ -55,7 +55,8 @@
   "collectCoverageFrom": [
     "src/**/*.{js,jsx,ts,tsx}",
     "!src/Main.tsx",
-    "!src/redux/store/index.ts"
+    "!src/redux/store/index.ts",
+    "!src/containers/HabitatProject/**","!src/containers/Stewardship/**"
   ],
   "collectCoverage": true,
   "transform": {

@@ -66,7 +66,7 @@
     "@types/superagent": "^4.1.16",
     "@types/webpack-bundle-analyzer": "^4.6.0",
     "@types/webpack-env": "^1.18.0",
-    "axios": "^1.5.0",
+    "axios": "^1.6.0",
     "bootstrap": "^5.2.3",
     "buffer": "^6.0.3",
     "copy-webpack-plugin": "^11.0.0",
@@ -113,7 +113,7 @@
     "url-loader": "^4.1.1",
     "url-search-params-polyfill": "^8.1.1",
     "util": "^0.12.5",
-    "webpack": "^5.88.2",
+    "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.1.4"
   },

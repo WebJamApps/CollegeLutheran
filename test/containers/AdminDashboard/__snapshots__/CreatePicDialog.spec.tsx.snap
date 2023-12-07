@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePicDialog renders CreatePicDialog 1`] = `
+<div
+  className="createNewPicDialog"
+  disableAutoFocus={true}
+  disableEnforceFocus={true}
+  onClose={[MockFunction]}
+  open={true}
+>
+  <div>
+    Create New Picture
+  </div>
+  <div
+    sx={
+      {
+        "padding": "10px 10px",
+      }
+    }
+  >
+    <div
+      sx={
+        {
+          "marginBottom": "10px",
+        }
+      }
+    >
+      Enter all *required fields to create a new picture.
+    </div>
+    <input
+      fullWidth={true}
+      id="url-textfield"
+      label="* Url"
+      onChange={[Function]}
+      sx={
+        {
+          "marginTop": "20px",
+        }
+      }
+      type="text"
+      value=""
+    />
+    <input
+      fullWidth={true}
+      id="title-textfield"
+      label="* Title"
+      onChange={[Function]}
+      sx={
+        {
+          "marginTop": "20px",
+        }
+      }
+      type="text"
+      value=""
+    />
+    <div
+      sx={
+        {
+          "marginTop": "20px",
+          "minWidth": 120,
+        }
+      }
+    >
+      <div
+        fullWidth={true}
+      >
+        <p
+          id="demo-simple-select-label"
+        >
+          Type
+        </p>
+        <select
+          id="demo-simple-select"
+          label="Type"
+          labelId="demo-simple-select-label"
+          onChange={[Function]}
+          value=""
+        >
+          <option
+            value="musicPics"
+          >
+            musicPics
+          </option>
+          <option
+            value="familyPics"
+          >
+            familyPics
+          </option>
+          <option
+            value="youthPics"
+          >
+            youthPics
+          </option>
+          <option
+            value="habitatPics"
+          >
+            habitatPics
+          </option>
+          <option
+            value="otherPics"
+          >
+            otherPics
+          </option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <div
+        control={
+          <Checkbox
+            checked={false}
+            onClick={[Function]}
+          />
+        }
+        label="Show Title In Caption"
+      />
+    </div>
+  </div>
+  <div>
+    <button
+      className="createPicButton"
+      onClick={[Function]}
+      size="small"
+      variant="contained"
+    >
+      Create
+    </button>
+    <button
+      className="cancelPicButton"
+      onClick={[MockFunction]}
+      size="small"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;
