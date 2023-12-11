@@ -1,7 +1,9 @@
 import type { Ibook } from 'src/providers/utils';
+import { useResizeDetector } from 'react-resize-detector';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { checkIsAdmin } from 'src/App';
+import { Button } from '@mui/material';
 import ELCALogo from '../../components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
 import { defaultNews } from './utilsN';
@@ -11,6 +13,7 @@ interface NewsContentProps {
 }
 
 export function NewsContent({ books }: NewsContentProps) {
+  const { height, ref } = useResizeDetector();
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editNews, setEditNews] = useState(defaultNews);
@@ -66,14 +69,22 @@ export function NewsContent({ books }: NewsContentProps) {
         </div>
         <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
         <hr style={{ margin: '0px' }} />
-        <div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
+        <div ref={ref} style={{ margin: 'auto', textAlign: 'center', marginTop: '-30px' }}>
+          <p style={{ display: 'block', color: 'white' }}>{height}</p>
+          {height && height < 700 ? (
+            <Button
+              onClick={() => window.location.reload()}
+              size="large"
+              variant="contained"
+            >
+              Sign Up for Emails
+            </Button>
+          ) : null}
+          <div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
+        </div>
       </div>
       <EditNewsDialog editNews={editNews} setEditNews={setEditNews} />
       <ELCALogo />
     </div>
   );
 }
-
-NewsContent.defaultProps = { books: [] };
-
-export default NewsContent;
