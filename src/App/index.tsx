@@ -27,6 +27,7 @@ export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
     if (userType && roles.includes(userType)) isAdmin = true;
   }
   setIsAdmin(isAdmin);
+  return isAdmin;
 }
 
 export function showAdminDashboard(isAdmin:boolean) {
@@ -37,7 +38,7 @@ export function showAdminDashboard(isAdmin:boolean) {
 export function App(): JSX.Element {
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
-  useEffect(() => checkIsAdmin(auth, setIsAdmin), [auth]);
+  useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
   return (
     <div id="App" className="App">
       <BrowserRouter>
