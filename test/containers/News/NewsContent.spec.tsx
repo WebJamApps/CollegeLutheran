@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import NewsContent from 'src/containers/News/NewsContent';
+import { NewsContent } from 'src/containers/News/NewsContent';
 
 describe('NewsContent', () => {
   it('renders the news page', () => {

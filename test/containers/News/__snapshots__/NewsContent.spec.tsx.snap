@@ -28,9 +28,36 @@ exports[`NewsContent renders the news page 1`] = `
       }
     />
     <div
-      className="ctct-inline-form"
-      data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"
-    />
+      style={
+        {
+          "margin": "auto",
+          "marginTop": "-30px",
+          "textAlign": "center",
+        }
+      }
+    >
+      <p
+        style={
+          {
+            "color": "white",
+            "display": "block",
+          }
+        }
+      >
+        100
+      </p>
+      <button
+        onClick={[Function]}
+        size="large"
+        variant="contained"
+      >
+        Sign Up for Emails
+      </button>
+      <div
+        className="ctct-inline-form"
+        data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"
+      />
+    </div>
   </div>
   <div
     className="editNewsDialog"
