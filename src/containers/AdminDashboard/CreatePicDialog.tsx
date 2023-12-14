@@ -52,6 +52,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
     setPic({ ...pic, type: event.target.value });
     return value;
   };
+  const isFormValid = () => pic.title !== '' && pic.url !== '';
   return (
     <Dialog
       disableEnforceFocus
@@ -103,6 +104,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
           variant="contained"
           className="createPicButton"
           onClick={async () => { await utils.createPicAPI(getPictures, onClose, pic, auth); }}
+          disabled={!isFormValid()}
         >
           Create
         </Button>
