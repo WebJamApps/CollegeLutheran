@@ -119,6 +119,7 @@ exports[`CreatePicDialog renders CreatePicDialog 1`] = `
   <div>
     <button
       className="createPicButton"
+      disabled={true}
       onClick={[Function]}
       size="small"
       variant="contained"
