@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import {
+  Box,
   Button,
-  Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup,
+  Checkbox, Dialog, DialogActions, DialogContent, DialogTitle,
+  FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent,
 } from '@mui/material';
 import libUtils from 'src/lib/commonUtils';
 import { defaultPic } from '../utils';
@@ -22,6 +24,12 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
   const showHideCaption = libUtils.makeShowHideChecked(setEditPic, editPic, 'showCaption');
+  const handleChange = (event: SelectChangeEvent) => {
+    const { target: { value } } = event;
+    setEditPic({ ...editPic, type: event.target.value });
+    return value;
+  };
+  // const isFormValid = () => editPic.title !== '' && editPic.url !== '';
   return (
     <Dialog
       disableEnforceFocus
@@ -50,6 +58,24 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             return value;
           }}
         />
+        <Box sx={{ minWidth: 120, marginTop: '20px' }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={editPic.type}
+              label="Type"
+              onChange={handleChange}
+            >
+              <MenuItem value="musicPics">musicPics</MenuItem>
+              <MenuItem value="familyPics">familyPics</MenuItem>
+              <MenuItem value="youthPics">youthPics</MenuItem>
+              <MenuItem value="habitatPics">habitatPics</MenuItem>
+              <MenuItem value="otherPics">otherPics</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
         <FormGroup>
           <FormControlLabel
             control={(
@@ -69,6 +95,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             size="small"
             variant="contained"
             className="updatePicButton"
+            // disabled={!isFormValid()}
             onClick={() => {
               (async () => {
                 await picUtils.updatePic(editPic, auth, getPictures, setEditPic, onClose);
