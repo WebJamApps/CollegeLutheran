@@ -74,7 +74,6 @@ exports[`CreatePicDialog renders CreatePicDialog 1`] = `
           label="Type"
           labelId="demo-simple-select-label"
           onChange={[Function]}
-          value=""
         >
           <option
             value="musicPics"

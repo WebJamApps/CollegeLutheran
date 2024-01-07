@@ -2,15 +2,18 @@ import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import {
-  Box,
+  // Box,
   Button,
   Checkbox, Dialog, DialogActions, DialogContent, DialogTitle,
-  FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent,
+  // FormControl,
+  FormControlLabel, FormGroup,
+  // InputLabel, MenuItem, Select,
+  SelectChangeEvent,
 } from '@mui/material';
 import libUtils from 'src/lib/commonUtils';
 import { defaultPic } from '../utils';
 import { EditPicTextField } from './EditPicTextField';
-import picUtils from '../pictures.utils';
+import picUtils, { PicDialogBox } from '../pictures.utils';
 
 function checkDisabled(editPic: typeof defaultPic):boolean {
   return !!(editPic.title && editPic.url);
@@ -29,7 +32,6 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
     setEditPic({ ...editPic, type: event.target.value });
     return value;
   };
-  // const isFormValid = () => editPic.title !== '' && editPic.url !== '';
   return (
     <Dialog
       disableEnforceFocus
@@ -58,7 +60,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             return value;
           }}
         />
-        <Box sx={{ minWidth: 120, marginTop: '20px' }}>
+        {/* <Box sx={{ minWidth: 120, marginTop: '20px' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
@@ -75,7 +77,8 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
               <MenuItem value="otherPics">otherPics</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
+        <PicDialogBox editPic={editPic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
             control={(
@@ -95,7 +98,6 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             size="small"
             variant="contained"
             className="updatePicButton"
-            // disabled={!isFormValid()}
             onClick={() => {
               (async () => {
                 await picUtils.updatePic(editPic, auth, getPictures, setEditPic, onClose);

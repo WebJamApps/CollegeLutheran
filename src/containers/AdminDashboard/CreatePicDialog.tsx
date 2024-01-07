@@ -1,15 +1,19 @@
 import {
-  Button, Select,
+  Button,
+  // Select,
   Checkbox,
   Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, TextField, FormGroup, FormControlLabel,
-  Box, FormControl, InputLabel, SelectChangeEvent, MenuItem,
+  // Box, FormControl, InputLabel,
+  SelectChangeEvent,
+  // MenuItem,
 } from '@mui/material';
 import { useState, useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import libUtils from 'src/lib/commonUtils';
 import utils, { defaultPic } from './utils';
+import { PicDialogBox } from './pictures.utils';
 
 interface IpicTextFieldProps {
   pic: typeof defaultPic,
@@ -68,7 +72,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
         </DialogContentText>
         <PicTextField url pic={pic} label="* Url" setPic={setPic} />
         <PicTextField pic={pic} label="* Title" setPic={setPic} />
-        <Box sx={{ minWidth: 120, marginTop: '20px' }}>
+        {/* <Box sx={{ minWidth: 120, marginTop: '20px' }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
@@ -85,7 +89,8 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
               <MenuItem value="otherPics">otherPics</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
+        <PicDialogBox pic={pic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
             control={(
