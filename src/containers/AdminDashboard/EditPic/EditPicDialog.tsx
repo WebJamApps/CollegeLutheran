@@ -2,12 +2,9 @@ import { useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import {
-  // Box,
   Button,
   Checkbox, Dialog, DialogActions, DialogContent, DialogTitle,
-  // FormControl,
   FormControlLabel, FormGroup,
-  // InputLabel, MenuItem, Select,
   SelectChangeEvent,
 } from '@mui/material';
 import libUtils from 'src/lib/commonUtils';
@@ -60,24 +57,6 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             return value;
           }}
         />
-        {/* <Box sx={{ minWidth: 120, marginTop: '20px' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={editPic.type}
-              label="Type"
-              onChange={handleChange}
-            >
-              <MenuItem value="musicPics">musicPics</MenuItem>
-              <MenuItem value="familyPics">familyPics</MenuItem>
-              <MenuItem value="youthPics">youthPics</MenuItem>
-              <MenuItem value="habitatPics">habitatPics</MenuItem>
-              <MenuItem value="otherPics">otherPics</MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
         <PicDialogBox editPic={editPic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
