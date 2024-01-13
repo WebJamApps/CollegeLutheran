@@ -1,15 +1,16 @@
 import {
-  Button, Select,
+  Button,
   Checkbox,
   Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, TextField, FormGroup, FormControlLabel,
-  Box, FormControl, InputLabel, SelectChangeEvent, MenuItem,
+  SelectChangeEvent,
 } from '@mui/material';
 import { useState, useContext } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import libUtils from 'src/lib/commonUtils';
 import utils, { defaultPic } from './utils';
+import { PicDialogBox } from './pictures.utils';
 
 interface IpicTextFieldProps {
   pic: typeof defaultPic,
@@ -52,6 +53,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
     setPic({ ...pic, type: event.target.value });
     return value;
   };
+  const isFormValid = () => pic.title !== '' && pic.url !== '';
   return (
     <Dialog
       disableEnforceFocus
@@ -67,24 +69,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
         </DialogContentText>
         <PicTextField url pic={pic} label="* Url" setPic={setPic} />
         <PicTextField pic={pic} label="* Title" setPic={setPic} />
-        <Box sx={{ minWidth: 120, marginTop: '20px' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={pic.type}
-              label="Type"
-              onChange={handleChange}
-            >
-              <MenuItem value="musicPics">musicPics</MenuItem>
-              <MenuItem value="familyPics">familyPics</MenuItem>
-              <MenuItem value="youthPics">youthPics</MenuItem>
-              <MenuItem value="habitatPics">habitatPics</MenuItem>
-              <MenuItem value="otherPics">otherPics</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        <PicDialogBox pic={pic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
             control={(
@@ -103,6 +88,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
           variant="contained"
           className="createPicButton"
           onClick={async () => { await utils.createPicAPI(getPictures, onClose, pic, auth); }}
+          disabled={!isFormValid()}
         >
           Create
         </Button>

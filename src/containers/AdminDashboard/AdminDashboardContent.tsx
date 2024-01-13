@@ -110,6 +110,7 @@ export function ButtonsNav(props:IbuttonsNavProps) {
         sx={{ textAlign: 'center' }}
         variant="contained"
         id="a-d"
+        className="createPic"
         onClick={() => setShowEditor('createPic')}
       >
         Add Picture
@@ -119,6 +120,7 @@ export function ButtonsNav(props:IbuttonsNavProps) {
         sx={{ textAlign: 'center' }}
         variant="contained"
         id="a-d"
+        className="editPic"
         onClick={() => setShowEditor('editPic')}
       >
         Edit Picture
@@ -128,6 +130,7 @@ export function ButtonsNav(props:IbuttonsNavProps) {
         sx={{ textAlign: 'center' }}
         variant="contained"
         id="a-d"
+        className="editContent"
         onClick={() => setShowEditor('editContent')}
       >
         Edit Page Content

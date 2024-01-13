@@ -1,4 +1,5 @@
 import {
+  ButtonsNav,
   ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import renderer from 'react-test-renderer';
@@ -73,5 +74,15 @@ describe('AdminDashboard Content', () => {
     const result = renderer.create(<ChangeYouthPageSect />).root;
     const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
     expect(tree).toBe(value);
+  });
+  it('handles onClick events for ButtonsNav', () => {
+    const props = { showEditor: 'string', setShowEditor: jest.fn() };
+    const result = renderer.create(<ButtonsNav {...props} />).root;
+    result.findByProps({ className: 'createPic' }).props.onClick();
+    expect(props.setShowEditor).toHaveBeenCalled();
+    result.findByProps({ className: 'editPic' }).props.onClick();
+    expect(props.setShowEditor).toHaveBeenCalled();
+    result.findByProps({ className: 'editContent' }).props.onClick();
+    expect(props.setShowEditor).toHaveBeenCalled();
   });
 });

@@ -29,6 +29,7 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
     }
   >
     <button
+      className="createPic"
       id="a-d"
       onClick={[Function]}
       size="small"
@@ -42,6 +43,7 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
       Add Picture
     </button>
     <button
+      className="editPic"
       id="a-d"
       onClick={[Function]}
       size="small"
@@ -55,6 +57,7 @@ exports[`Dashboard Container renders AdminDashboard 1`] = `
       Edit Picture
     </button>
     <button
+      className="editContent"
       id="a-d"
       onClick={[Function]}
       size="small"
