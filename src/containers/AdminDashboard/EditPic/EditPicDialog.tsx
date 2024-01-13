@@ -3,12 +3,14 @@ import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import {
   Button,
-  Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup,
+  Checkbox, Dialog, DialogActions, DialogContent, DialogTitle,
+  FormControlLabel, FormGroup,
+  SelectChangeEvent,
 } from '@mui/material';
 import libUtils from 'src/lib/commonUtils';
 import { defaultPic } from '../utils';
 import { EditPicTextField } from './EditPicTextField';
-import picUtils from '../pictures.utils';
+import picUtils, { PicDialogBox } from '../pictures.utils';
 
 function checkDisabled(editPic: typeof defaultPic):boolean {
   return !!(editPic.title && editPic.url);
@@ -22,6 +24,11 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
   const showHideCaption = libUtils.makeShowHideChecked(setEditPic, editPic, 'showCaption');
+  const handleChange = (event: SelectChangeEvent) => {
+    const { target: { value } } = event;
+    setEditPic({ ...editPic, type: event.target.value });
+    return value;
+  };
   return (
     <Dialog
       disableEnforceFocus
@@ -50,6 +57,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             return value;
           }}
         />
+        <PicDialogBox editPic={editPic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
             control={(

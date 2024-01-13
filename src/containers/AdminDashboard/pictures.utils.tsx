@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { Iauth } from 'src/providers/Auth.provider';
+import {
+  Box, FormControl, InputLabel, Select, MenuItem,
+} from '@mui/material';
+import { ReactNode } from 'react';
 import { defaultPic } from './utils';
 
 export async function performAxiosRequest(
@@ -53,4 +57,33 @@ async function deletePic(
   await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
 }
 
-export default { updatePic, deletePic, performAxiosRequest };
+interface IpicDialogBoxProps {
+  pic?: typeof defaultPic,
+  editPic?: typeof defaultPic,
+  handleChange: (SelectChangeEvent: any, child: ReactNode) => void
+}
+
+export const PicDialogBox = ({ pic, editPic, handleChange }: IpicDialogBoxProps) => (
+  <Box sx={{ minWidth: 120, marginTop: '20px' }}>
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">Type</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={pic?.type || editPic?.type}
+        label="Type"
+        onChange={handleChange}
+      >
+        <MenuItem value="musicPics">musicPics</MenuItem>
+        <MenuItem value="familyPics">familyPics</MenuItem>
+        <MenuItem value="youthPics">youthPics</MenuItem>
+        <MenuItem value="habitatPics">habitatPics</MenuItem>
+        <MenuItem value="otherPics">otherPics</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>
+);
+
+export default {
+  updatePic, deletePic, performAxiosRequest, PicDialogBox,
+};
