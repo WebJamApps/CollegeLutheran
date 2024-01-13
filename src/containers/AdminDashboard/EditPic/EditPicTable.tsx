@@ -15,8 +15,15 @@ export const columns: GridColDef[] = [
     editable: false,
   },
   {
+    field: 'type',
+    headerName: 'Category',
+    minWidth: 300,
+    flex: 1,
+    editable: false,
+  },
+  {
     field: 'url',
-    headerName: 'thumbnail',
+    headerName: 'Thumbnail',
     width: 300,
     editable: false,
     renderCell: (params: GridRenderCellParams) => {
