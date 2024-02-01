@@ -48,8 +48,7 @@
     "tsx"
   ],
   "testPathIgnorePatterns": [
-    "/node_modules/",
-    "/puppeteer/"
+    "/node_modules/"
   ],
   "coverageProvider": "v8",
   "collectCoverageFrom": [
