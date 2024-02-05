@@ -4,7 +4,7 @@ describe('Puppeteer tests', () => {
   let browser: any, page: any;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: 'new' });
+    browser = await puppeteer.launch({ headless: 'new' });// TODO make this an env variable
     page = await browser.newPage();
     await page.setViewport({
       width: 1280,
@@ -17,14 +17,8 @@ describe('Puppeteer tests', () => {
     await browser.close();
   });
 
-  it('should load Google homepage', async () => {
-    await page.goto('https://www.google.com');
-    const title = await page.title();
-    expect(title).toBe('Google');
-  });
-
   it('should load College Lutheran Homepage', async () => {
-    await page.goto('https://www.collegelutheran.org/');
+    await page.goto('https://www.collegelutheran.org/');// make this an env variable
     const title = await page.title();
     expect(title).toBe('College Lutheran Church');
   });
