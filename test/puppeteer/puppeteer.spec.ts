@@ -18,7 +18,7 @@ describe('Puppeteer tests', () => {
   });
 
   it('should load College Lutheran Homepage', async () => {
-    await page.goto(`https://localhost:${port}`);// make this an env variable
+    await page.goto(`https://localhost:${port}`);
     const title = await page.title();
     expect(title).toBe('College Lutheran Church');
   });
