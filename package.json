@@ -33,7 +33,7 @@
     "test:lint-fix": "npm run test:stylelint && npm run lint:fix",
     "test:lint": "npm run test:stylelint && eslint . --ext .js,.ts,.tsx",
     "test": "npm run test:lint && npm run test:puppeteer && npm run test:jest --",
-    "test:all": "npm run test:lint-fix && npm run test:puppeteer && npm run test:jest && npm run cc",
+    "test:all": "npm run test:lint-fix && npm run test:jest && npm run cc && npm run test:pup",
     "test:jest": "jest --config jest.config.json --runInBand",
     "test:jest-u": "npm run test:jest -- -u",
     "pre-puppet": "npm run build:prod && node server.js",
