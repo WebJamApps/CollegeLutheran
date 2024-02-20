@@ -6,9 +6,8 @@ const enforce = require('express-sslify');
 
 const app = express();
 let port = Number(process.env.PORT);
-if (process.env.NODE_ENV === 'test' || process.env.PUPPET === 'true') port += 10;
-console.log(process.env.PUPPET);
-/* istanbul ignore if */
+if (process.env.PUPPET_PORT) port = Number(process.env.PUPPET_PORT);
+
 if (process.env.NODE_ENV === 'production') app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 app.use(express.static(path.normalize(path.join(__dirname, 'dist'))));
