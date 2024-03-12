@@ -41,7 +41,8 @@
     "cleaninstall": "rimraf yarn.lock && rimraf package-lock.json && rimraf node_modules && npm cache clean --force && npm install",
     "postinstall": "npm run build:prod",
     "test:puppeteer": "start-server-and-test pre-puppet $PUPPET_URL run:puppeteer",
-    "test:pup":"dotenv -- npm run test:puppeteer"
+    "test:pup": "dotenv -- npm run test:puppeteer",
+    "test:firefox": "jest --config test/puppeteer/jest.config.json firefox.spec.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -90,7 +91,7 @@
     "moment": "^2.29.4",
     "popper.js": "^1.16.1",
     "process": "^0.11.10",
-    "puppeteer": "^21.10.0",
+    "puppeteer": "^21.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-notifications-component": "^4.0.1",

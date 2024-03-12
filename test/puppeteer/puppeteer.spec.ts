@@ -8,11 +8,10 @@ const delay = (seconds: number) => new Promise((resolve) => setTimeout(resolve, 
 describe('Puppeteer tests', () => {
   let browser: any, page: any;
   const url = process.env.PUPPET_URL || 'http://localhost:7787';
-  const headless = !process.env.HEADLESS || process.env.HEADLESS === 'new' ? 'new' : false;
+  const headMode = !process.env.HEADLESS || process.env.HEADLESS === 'new' ? 'new' : false;
+  const browChoice = !process.env.PUPPETEER_PRODUCT || process.env.PUPPETEER_PRODUCT === 'chrome' ? 'chrome' : 'firefox';
   beforeAll(async () => {
-    console.log('headless?');
-    console.log(process.env.HEADLESS);
-    browser = await puppeteer.launch({ headless });
+    browser = await puppeteer.launch({ headless: headMode, product: browChoice });
     page = await browser.newPage();
     await page.setViewport({
       width: 1280,
@@ -22,7 +21,7 @@ describe('Puppeteer tests', () => {
   });
 
   afterEach(async () => {
-    if (!headless) {
+    if (!headMode) {
       await delay(2);
     }
   });
