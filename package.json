@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": ">=20.9.0 <21",
+    "node": ">=20.12.0 <21",
     "npm": ">=10.2.1 <11"
   },
   "files": [
@@ -41,7 +41,7 @@
     "cleaninstall": "rimraf yarn.lock && rimraf package-lock.json && rimraf node_modules && npm cache clean --force && npm install",
     "postinstall": "npm run build:prod",
     "test:puppeteer": "start-server-and-test pre-puppet $PUPPET_URL run:puppeteer",
-    "test:pup":"dotenv -- npm run test:puppeteer"
+    "test:pup": "dotenv -- npm run test:puppeteer"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -50,7 +50,7 @@
     "@mui/material": "^5.14.11",
     "@mui/x-data-grid": "^6.15.0",
     "@react-oauth/google": "^0.11.1",
-    "@tinymce/tinymce-react": "^4.3.0",
+    "@tinymce/tinymce-react": "^5.0.1",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/core-js": "^2.5.5",
     "@types/domutils": "^1.7.4",
