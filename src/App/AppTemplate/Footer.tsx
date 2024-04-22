@@ -1,7 +1,6 @@
 
 const footerLinks = () => {
   const links = [
-    // { href: 'href="https://twitter.com/CollegeLutheran"', name: 'twitter' },
     { href: 'https://www.facebook.com/CollegeLutheranChurch/', name: 'facebook' },
     { href: 'https://www.instagram.com/collegelutheranchurch/', name: 'instagram' },
     { href: 'https://www.youtube.com/@collegelutheranchurch2611', name: 'fa-brands fa-youtube' },
