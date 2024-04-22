@@ -6,3 +6,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/webjamapps/CollegeLutheran/badge.svg)](https://snyk.io/test/github/webjamapps/CollegeLutheran)
 # CollegeLutheran
 College Lutheran Church website running React
+
+## Local Development
+
+You will need to run web-jam-back for connection to database and authentication
