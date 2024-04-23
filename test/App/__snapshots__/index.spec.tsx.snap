@@ -786,22 +786,6 @@ exports[`App component renders the component 1`] = `
               }
             >
               <a
-                href="href="https://twitter.com/CollegeLutheran""
-                rel="noopener noreferrer"
-                style={
-                  {
-                    "paddingRight": "5px",
-                  }
-                }
-                target="_blank"
-              >
-                <span>
-                  <i
-                    className="fab fa-twitter"
-                  />
-                </span>
-              </a>
-              <a
                 href="https://www.facebook.com/CollegeLutheranChurch/"
                 rel="noopener noreferrer"
                 style={
@@ -830,6 +814,22 @@ exports[`App component renders the component 1`] = `
                 <span>
                   <i
                     className="fab fa-instagram"
+                  />
+                </span>
+              </a>
+              <a
+                href="https://www.youtube.com/@collegelutheranchurch2611"
+                rel="noopener noreferrer"
+                style={
+                  {
+                    "paddingRight": "5px",
+                  }
+                }
+                target="_blank"
+              >
+                <span>
+                  <i
+                    className="fab fa-fa-brands fa-youtube"
                   />
                 </span>
               </a>
