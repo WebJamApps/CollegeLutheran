@@ -32,6 +32,7 @@ export function CommentsEditor(
             + 'bullist numlist outdent indent | removeformat | help',
       }}
       onEditorChange={(newComments) => setComments(newComments)}
+      onSubmit={(e) => { e.preventDefault(); }}
     />
   );
 }
