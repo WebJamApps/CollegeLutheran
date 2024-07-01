@@ -38,7 +38,7 @@ exports[`LiveStream renders smallscreen 1`] = `
     allowFullScreen={true}
     frameBorder="0"
     height="360"
-    src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+    src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
     title="Live Stream Small"
     width="100%"
   />
@@ -101,7 +101,7 @@ exports[`LiveStream renders widescreen 1`] = `
     allowFullScreen={true}
     frameBorder="0"
     height="620"
-    src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+    src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
     title="Live Stream Wide"
     width="930"
   />
