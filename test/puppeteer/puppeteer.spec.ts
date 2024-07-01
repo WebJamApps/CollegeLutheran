@@ -8,7 +8,7 @@ const delay = (seconds: number) => new Promise((resolve) => setTimeout(resolve, 
 describe('Puppeteer tests', () => {
   let browser: any, page: any;
   const url = process.env.PUPPET_URL || 'http://localhost:7787';
-  const headless = !process.env.HEADLESS || process.env.HEADLESS === 'new' ? 'new' : false;
+  const headless = !!(!process.env.HEADLESS || process.env.HEADLESS === 'true');
   beforeAll(async () => {
     console.log('headless?');
     console.log(process.env.HEADLESS);
