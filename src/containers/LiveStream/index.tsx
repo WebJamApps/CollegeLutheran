@@ -30,7 +30,7 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
       {width > 931 ? (
         <iframe
           title="Live Stream Wide"
-          src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+          src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
           width="930"
           height="620"
           frameBorder="0"
@@ -43,7 +43,7 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
         ? (
           <iframe
             title="Live Stream Small"
-            src="https://player.restream.io/?token=261fc02e28664618bdb68072cfeeb786"
+            src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
             width="100%"
             height="360"
             frameBorder="0"
