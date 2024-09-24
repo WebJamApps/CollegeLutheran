@@ -117,10 +117,7 @@ module.exports = (env) => ({
 
   plugins: [
     new ProvidePlugin({
-      // $: 'jquery',
-      // jQuery: 'jquery',
-      // 'window.jQuery': 'jquery',
-      process: 'process/browser',
+      process: 'process/browser.js',
       Buffer: ['buffer', 'Buffer'],
     }),
     new HtmlWebpackPlugin({

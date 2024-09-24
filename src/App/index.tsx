@@ -15,7 +15,7 @@ import Calendar from '../containers/Calendar';
 import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import DefaultLiveStream from '../containers/LiveStream';
-// import { Stewardship } from '../containers/Stewardship';
+import { Stewardship } from '../containers/Stewardship';
 // import HabitatProject from '../containers/HabitatProject';
 
 export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
@@ -56,7 +56,7 @@ export function App(): JSX.Element {
             <Route path="/news" element={<News />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/livestream" element={<DefaultLiveStream />} />
-            {/* <Route path="/stewardship" element={<Stewardship />} /> */}
+            <Route path="/stewardship" element={<Stewardship />} />
             {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

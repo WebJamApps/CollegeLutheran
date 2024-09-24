@@ -5,9 +5,6 @@ import { Provider } from 'react-redux';
 import commonUtils from 'src/lib/commonUtils';
 
 describe('App component', () => {
-  it('is defined', () => {
-    expect(App).toBeDefined();
-  });
   it('renders the component', () => {
     commonUtils.setTitleAndScroll = jest.fn();
     const href = 'http://localhost:7777';
