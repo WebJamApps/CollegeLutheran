@@ -18,15 +18,32 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
       {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Welcome to Our Livestream Page</h5> : null}
       <p>
-        The video below will only play during an actual livestream event. To view past services, click to visit our
+        The video below is embedded from YouTube, however if it does not play properly,
+        please click one of the following links to view the live church service.
+        <br />
         {' '}
-        <a target="_blank" href="https://www.youtube.com/@collegelutheranchurch2611/streams" rel="noreferrer">YouTube</a>
+        <a
+          style={{ fontWeight: 'bold' }}
+          target="_blank"
+          href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+          rel="noreferrer"
+        >
+          YouTube Live
+        </a>
         {' '}
-        or
+        |
         {' '}
-        <a target="_blank" href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal" rel="noreferrer">Facebook</a>
+        <a
+          style={{ fontWeight: 'bold' }}
+          target="_blank"
+          href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
+          rel="noreferrer"
+        >
+          Facebook Videos
+        </a>
         {' '}
-        pages.
+        -
+        These links also provide a way to view previous church services that were recorded.
       </p>
       {width > 931 ? (
         <iframe
