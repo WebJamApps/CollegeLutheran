@@ -11,27 +11,38 @@ exports[`LiveStream renders smallscreen 1`] = `
   }
 >
   <p>
-    The video below will only play during an actual livestream event. To view past services, click to visit our
+    The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
+    <br />
      
     <a
       href="https://www.youtube.com/@collegelutheranchurch2611/streams"
       rel="noreferrer"
+      style={
+        {
+          "fontWeight": "bold",
+        }
+      }
       target="_blank"
     >
-      YouTube
+      YouTube Live
     </a>
      
-    or
+    |
      
     <a
       href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
       rel="noreferrer"
+      style={
+        {
+          "fontWeight": "bold",
+        }
+      }
       target="_blank"
     >
-      Facebook
+      Facebook Videos
     </a>
      
-    pages.
+    - These links also provide a way to view previous church services that were recorded.
   </p>
   <iframe
     allow="autoplay; fullscreen; picture-in-picture"
@@ -74,27 +85,38 @@ exports[`LiveStream renders widescreen 1`] = `
     Welcome to Our Livestream Page
   </h5>
   <p>
-    The video below will only play during an actual livestream event. To view past services, click to visit our
+    The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
+    <br />
      
     <a
       href="https://www.youtube.com/@collegelutheranchurch2611/streams"
       rel="noreferrer"
+      style={
+        {
+          "fontWeight": "bold",
+        }
+      }
       target="_blank"
     >
-      YouTube
+      YouTube Live
     </a>
      
-    or
+    |
      
     <a
       href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
       rel="noreferrer"
+      style={
+        {
+          "fontWeight": "bold",
+        }
+      }
       target="_blank"
     >
-      Facebook
+      Facebook Videos
     </a>
      
-    pages.
+    - These links also provide a way to view previous church services that were recorded.
   </p>
   <iframe
     allow="autoplay; fullscreen; picture-in-picture"
