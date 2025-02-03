@@ -6,7 +6,7 @@ function HabitatProjectContent():JSX.Element {
   return (
     <div className="page-content">
       <Grid container>
-        <div style={{ margin: 'auto' }}>
+        <div style={{ margin: 'auto', paddingLeft: '4px' }}>
 
           <img className="center" src="https://salemfaithbuilds.com/wp-content/uploads/2024/12/image.png" alt="Salem Faith Builds logo" />
           <p style={{ textAlign: 'left' }}>
