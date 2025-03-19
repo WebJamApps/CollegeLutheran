@@ -25,7 +25,7 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
         <a
           style={{ fontWeight: 'bold' }}
           target="_blank"
-          href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+          href="https://www.youtube.com/@collegelutheranchurch/streams"
           rel="noreferrer"
         >
           YouTube Live
