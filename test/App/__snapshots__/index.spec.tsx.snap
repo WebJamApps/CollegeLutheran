@@ -845,7 +845,7 @@ exports[`App component renders the component 1`] = `
                 </span>
               </a>
               <a
-                href="https://www.youtube.com/@collegelutheranchurch2611"
+                href="https://www.youtube.com/@collegelutheranchurch/streams"
                 rel="noopener noreferrer"
                 style={
                   {

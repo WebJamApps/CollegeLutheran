@@ -15,7 +15,7 @@ exports[`LiveStream renders smallscreen 1`] = `
     <br />
      
     <a
-      href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+      href="https://www.youtube.com/@collegelutheranchurch/streams"
       rel="noreferrer"
       style={
         {
@@ -89,7 +89,7 @@ exports[`LiveStream renders widescreen 1`] = `
     <br />
      
     <a
-      href="https://www.youtube.com/@collegelutheranchurch2611/streams"
+      href="https://www.youtube.com/@collegelutheranchurch/streams"
       rel="noreferrer"
       style={
         {
