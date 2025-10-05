@@ -16,10 +16,10 @@ const StewardshipContent = () => (
           alt="fall stewardship"
           src="https://dl.dropboxusercontent.com/scl/fi/la8fjnoppc97zt1koxsqz/fallStewardship.jpg?rlkey=u60j5qhaq2h21ckytmgb8dqi0&dl=0"
         />
-        {/* <i style={{ fontSize: '10pt' }}>
+        <i style={{ fontSize: '10pt' }}>
           <a
             style={{ fontSize: '10pt' }}
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdiyZQL3kd5stmAmdm0CM19GfQ7A5d_xgO-9PgHtjeYEldKHQ/viewform?vc=0&c=0&w=1&flr=0"
+            href="https://forms.gle/7UC5r6Y4GknFans39"
             target="_blank"
             rel="noreferrer"
           >
@@ -27,7 +27,7 @@ const StewardshipContent = () => (
           </a>
           {' '}
           to provide your 2025 Statement of Intent.
-        </i> */}
+        </i>
         <p style={{ marginTop: '12px' }}>
           Dear members and friends of College Lutheran Church,
         </p>
