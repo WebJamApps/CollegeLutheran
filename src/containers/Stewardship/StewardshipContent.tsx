@@ -26,7 +26,7 @@ const StewardshipContent = () => (
             Click here
           </a>
           {' '}
-          to provide your 2025 Statement of Intent.
+          to provide your 2026 Statement of Intent.
         </i>
         <p style={{ marginTop: '12px' }}>
           Dear members and friends of College Lutheran Church,
