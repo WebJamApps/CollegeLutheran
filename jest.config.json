@@ -55,7 +55,7 @@
     "src/**/*.{js,jsx,ts,tsx}",
     "!src/Main.tsx",
     "!src/redux/store/index.ts",
-    "!src/containers/HabitatProject/**","!src/containers/Stewardship/**"
+    "!src/containers/HabitatProject/**"
   ],
   "collectCoverage": true,
   "transform": {
