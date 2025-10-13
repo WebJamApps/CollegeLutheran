@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ELCALogo from 'src/components/elcaLogo';
 
 const StewardshipContent = () => (
@@ -10,73 +11,64 @@ const StewardshipContent = () => (
           maxWidth: '998px', margin: 'auto', minHeight: '74vh',
         }}
       >
-        <h3 style={{ paddingTop: '12px', paddingBottom: '0px', marginBottom: '0px' }}>Stewardship</h3>
+        <h3 style={{ paddingTop: '12px', paddingBottom: '0px', marginBottom: '4px' }}>Stewardship</h3>
         <img
           style={{ float: 'right' }}
           alt="fall stewardship"
           src="https://dl.dropboxusercontent.com/scl/fi/la8fjnoppc97zt1koxsqz/fallStewardship.jpg?rlkey=u60j5qhaq2h21ckytmgb8dqi0&dl=0"
         />
-        <i style={{ fontSize: '10pt' }}>
+        <i style={{ fontSize: '12pt' }}>
           <a
-            style={{ fontSize: '10pt' }}
+            style={{ fontSize: '12pt' }}
             href="https://forms.gle/7UC5r6Y4GknFans39"
             target="_blank"
             rel="noreferrer"
           >
-            Click here
+            <strong>Click here</strong>
           </a>
           {' '}
           to provide your 2026 Statement of Intent.
         </i>
-        <p style={{ marginTop: '12px' }}>
-          Dear members and friends of College Lutheran Church,
+        <p style={{ marginTop: '10px' }}>
+          &quot;So if anyone is in Christ, there is a new creation: everything old has passed away; look, new things have come into being!&quot; (II Corinthians 5:17)
         </p>
         <p>
-          This year, our fall Stewardship Appeal will celebrate
-          {' '}
-          <strong>&quot;A New Creation In Christ&quot;</strong>
-          (2 Corinthians 5:17) that we see evident in and through the many ministries of College Lutheran Church.
-          God continues to bless us by calling and equipping our church to provide Christ-centered worship,
-          neighbor-focused service, and community-building fellowship. We have much to be grateful for as members and friends of CLC!
+          As College Lutheran Church, our mission is to celebrate God&apos;s grace and share His love in Christ! We give thanks for the new creation that God the Father works in our hearts through the ministry of His Son and the power of the Holy Spirit. In just this past year, we have continued to gather for faithful worship and we have gone out to serve our neighbors nearby and faraway. Thank you for supporting the ministries of College Lutheran Church!
         </p>
         <p>
-          In the weeks ahead you will be hearing more about our ministry plans for
-          {' '}
-          <strong>2026. </strong>
-          Newsletter articles, bulletin inserts, temple talks, letters, and a brochure will
-          inform you of our congregation&apos;s mission plans for this coming year.
-          Together we are on a mission that begins with Word, Sacrament,
-          and Service at the center of our life together. As we look back on recent years,
-          our core ministries have grown in incredible ways thanks to God’s blessings
-          and the increased generosity of our congregation members.
-          Looking ahead to
+          In the year ahead, we hope that you will prayerfully consider how you will continue to support CLC with your gifts of time, talents, and offerings. Some anticipated needs in
           {' '}
           <strong>2026</strong>
           {' '}
-          means celebrating the journey we have been traveling
-          and making sure that our new ministries can continue to meet the needs of our community.
+          include:
         </p>
+        <ul>
+          <li>
+            Updates to the Fellowship Hall to better fit our meals and programs
+            <br />
+            — about $10,000 to improve sound, lighting, and video projection.
+          </li>
+          <li>
+            Meeting increased costs related to insurance, utilities, and cost of living
+            <br />
+            — CLC is a very active congregation all week long! Although this increases expenses, we would not have it any other way!
+          </li>
+        </ul>
         <p>
-          As part of the Stewardship program this year, you will be invited to make a
-          commitment of financial support for the coming year.
-          Please pray about this request and do your best to respond generously as the Lord leads you.
-          Then, on
+          In total, we are hoping for an increase of $390 in weekly giving in
           {' '}
-          <strong>Sunday, October 19</strong>
-          , we will observe Stewardship Sunday by
-          presenting our pledges and commitments (we call them &quot;Statements of Intent&quot;)
-          during the worship service. You are also welcome to mail your
-          Statement of Intent to the church office, or use our online commitment portal if you prefer.
+          <strong>2026</strong>
+          {' '}
+          so that we can fully fund our ministries. Every gift matters and helps us to continue celebrating the work God does in our community and through our community. Please consider how your giving can join with the gifts of members and friends of CLC who will support these ministries in
+          {' '}
+          <strong>2026</strong>
+          !
         </p>
         <p>
-          Thank you for being part of this exciting congregation we love.
-          Pray for our common work together as we continue to reach out with the Gospel.
-        </p>
-        <p>
-          In His name,
+          With thanks,
         </p>
         <p style={{ marginBottom: '0px' }}>
-          Pastor David Drebes
+          Pastor David Drebes & the Stewardship Team
         </p>
       </div>
       <ELCALogo />
