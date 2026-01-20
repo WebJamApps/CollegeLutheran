@@ -24,6 +24,7 @@ module.exports = (env) => ({
     alias: { src: srcDir},
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     fallback: {
+      "vm": require.resolve("vm-browserify"),
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
       util: require.resolve('util/'),
