@@ -101,9 +101,7 @@ const StaffContent = (): JSX.Element => (
               </p>
               <p>
                 Pastor David’s interests include hiking, kayaking, and writing. He spent formative years working as both a counselor at
-                Lutheran summer camps and also as a reporter for city newspapers. Pastor David also serves as the coordinator of
-                the Virginia Synod’s Power in the Spirit, an annual conference which gathers people of all ages and experiences for fellowship,
-                service, worship, and learning on the campus of Roanoke College.
+                Lutheran summer camps and also as a reporter for city newspapers.
               </p>
               <p>
                 Pastor David enjoys visiting with parishioners and members of the wider community.
