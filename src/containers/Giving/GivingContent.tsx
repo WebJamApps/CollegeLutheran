@@ -45,38 +45,46 @@ function GivingDonation():JSX.Element {
   );
 }
 
-function Item(props: { [x: string]: any; sx: any; }) {
-  const { sx, ...other } = props;
+export function GivingContent(): JSX.Element {
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        p: 1,
-        borderRadius: 2,
-        textAlign: 'center',
-        fontSize: '10pt',
-        fontWeight: '400',
-        overflowX: 'scroll',
-        ...sx,
-      }}
-      {...other}
-    />
-  );
-}
+    // Main wrapper that ensures everything is centered on the page
+    <Box sx={{
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center', // This centers all children horizontally
+      py: 3,
+    }}
+    >
 
-export function GivingContent():JSX.Element {
-  return (
-    <div style={{ width: '100%' }}>
-      <Box
-        sx={{ display: 'grid', gridAutoColumns: 'repeat(auto-fit, minmax(100px, 1fr))' }}
-      >
-
-        <Item sx={{ gridRow: '25%', gridColumn: '3' }}><GivingInfo /></Item>
-        <Item sx={{ gridRow: '50%', gridColumn: 'span 3' }}><GivingDonation /></Item>
-        <Item sx={{ gridRow: '25%', gridColumn: 'span 3' }}><ELCALogo /></Item>
-
+      {/* 1. Info Section - Width limited so it looks good on desktop */}
+      <Box sx={{ width: '100%', mb: 4 }}>
+        <GivingInfo />
       </Box>
-    </div>
+
+      {/* 2. Donation Iframe Wrapper - Handles the horizontal scroll */}
+      <Box
+        sx={{
+          width: '100%',
+          maxWidth: '1200px', // Matches your desired content width
+          height: '800px',
+          overflowX: 'auto', // Forces horizontal scrollbar
+          border: '1px solid #eee', // Optional: helps see the scroll area
+          '&::-webkit-scrollbar': { height: '10px' },
+          '&::-webkit-scrollbar-thumb': { backgroundColor: '#ccc', borderRadius: '4px' },
+        }}
+      >
+        {/* This inner Box MUST be wider than the wrapper to trigger the scrollbar */}
+        <Box sx={{ minWidth: '1000px', height: '100%' }}>
+          <GivingDonation />
+        </Box>
+      </Box>
+
+      {/* 3. Footer/Logo Section */}
+      <Box sx={{ mt: 4 }}>
+        <ELCALogo />
+      </Box>
+
+    </Box>
   );
 }
