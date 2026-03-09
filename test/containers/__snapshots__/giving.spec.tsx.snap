@@ -2,54 +2,50 @@
 
 exports[`Giving Renders the Giving component 1`] = `
 <div
-  style={
-    {
-      "width": "100%",
-    }
-  }
+  className="MuiBox-root css-thmi91"
 >
   <div
-    className="MuiBox-root css-1mx15d0"
+    className="MuiBox-root css-1b46un8"
   >
     <div
-      className="MuiBox-root css-ezkpjx"
-    >
-      <div
-        className="material-content elevation3"
-        style={
-          {
-            "margin": "auto",
-            "marginLeft": "20px",
-            "marginRight": "20px",
-            "textAlign": "left",
-          }
+      className="material-content elevation3"
+      style={
+        {
+          "margin": "auto",
+          "marginLeft": "20px",
+          "marginRight": "20px",
+          "textAlign": "left",
         }
-      >
-        <h3>
-          Giving
-        </h3>
-        <p>
-          Thank you for supporting the ministries of College Lutheran Church through your online giving. We now use
-           
-          <i>
-            BreezeChMS
-          </i>
-           
-          to process online gifts. Giving electronically from your bank account or credit card is easy! Just complete the form below to support the ministries of CLC with your offering.
-        </p>
+      }
+    >
+      <h3>
+        Giving
+      </h3>
+      <p>
+        Thank you for supporting the ministries of College Lutheran Church through your online giving. We now use
+         
         <i>
-          If you have any questions about online giving, please contact us at (540) 389-4963 or
-           
-          <a
-            href="mailto:office1@collegelutheran.org"
-          >
-            office1@collegelutheran.org
-          </a>
+          BreezeChMS
         </i>
-      </div>
+         
+        to process online gifts. Giving electronically from your bank account or credit card is easy! Just complete the form below to support the ministries of CLC with your offering.
+      </p>
+      <i>
+        If you have any questions about online giving, please contact us at (540) 389-4963 or
+         
+        <a
+          href="mailto:office1@collegelutheran.org"
+        >
+          office1@collegelutheran.org
+        </a>
+      </i>
     </div>
+  </div>
+  <div
+    className="MuiBox-root css-1emsdqd"
+  >
     <div
-      className="MuiBox-root css-1v9pxvv"
+      className="MuiBox-root css-3ioch2"
     >
       <iframe
         className="giving-iframe"
@@ -68,37 +64,37 @@ exports[`Giving Renders the Giving component 1`] = `
         </p>
       </iframe>
     </div>
+  </div>
+  <div
+    className="MuiBox-root css-h5fkc8"
+  >
     <div
-      className="MuiBox-root css-t0sx0o"
-    >
-      <div
-        style={
-          {
-            "marginLeft": "-9px",
-            "textAlign": "center",
-          }
+      style={
+        {
+          "marginLeft": "-9px",
+          "textAlign": "center",
         }
+      }
+    >
+      <a
+        href="http://www.elca.org/"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <a
-          href="http://www.elca.org/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            alt="ELCA LOGO"
-            id="elcaLogo"
-            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-            style={
-              {
-                "margin": "auto",
-                "marginLeft": "",
-                "paddingTop": "30px",
-                "width": "308px",
-              }
+        <img
+          alt="ELCA LOGO"
+          id="elcaLogo"
+          src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+          style={
+            {
+              "margin": "auto",
+              "marginLeft": "",
+              "paddingTop": "30px",
+              "width": "308px",
             }
-          />
-        </a>
-      </div>
+          }
+        />
+      </a>
     </div>
   </div>
 </div>
