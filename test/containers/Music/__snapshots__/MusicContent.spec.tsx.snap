@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`YouthContent renders the music page 1`] = `
+exports[`MusicContent > renders the music page 1`] = `
 <div
   className="page-content"
 >

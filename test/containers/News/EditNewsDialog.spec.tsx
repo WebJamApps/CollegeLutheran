@@ -7,7 +7,7 @@ import utils, { defaultNews } from 'src/containers/News/utilsN';
 describe('EditNewsDialog', () => {
   it('renders NewsTextField', () => {
     const props = {
-      value: '', label: '', onChange: jest.fn(), className: '',
+      value: '', label: '', onChange: vi.fn(), className: '',
     };
     const result: any = renderer.create(<NewsTextField {...props} />).toJSON();
     expect(result.type).toBe('input');
@@ -16,15 +16,15 @@ describe('EditNewsDialog', () => {
     const editNews = {
       title: '', type: 'Forum', comments: '', url: '', _id: '',
     };
-    const setEditNews = jest.fn();
+    const setEditNews = vi.fn();
     const result = renderer.create(<EditNewsDialog editNews={editNews} setEditNews={setEditNews} />).root;
     result.findByProps({ className: 'editNewsDialog' }).props.onClose();
     expect(setEditNews).toHaveBeenCalled();
   });
   it('renders EditNewsContent and handles events', () => {
     const props = {
-      showHideCaption: jest.fn(),
-      editNewsState: { editNews: defaultNews, setEditNews: jest.fn() },
+      showHideCaption: vi.fn(),
+      editNewsState: { editNews: defaultNews, setEditNews: vi.fn() },
     };
     const evt = { target: { value: 'url' } };
     const result = renderer.create(<EditNewsContent {...props} />).root;
@@ -32,10 +32,10 @@ describe('EditNewsDialog', () => {
     expect(result.findByProps({ label: '* Title' }).props.onChange(evt)).toBe('url');
   });
   it('renders EditNewsButtons and handles events', () => {
-    utils.newsApi = jest.fn();
+    utils.newsApi = vi.fn();
     const props = {
       editNews: defaultNews,
-      setEditNews: jest.fn(),
+      setEditNews: vi.fn(),
     };
     const result = renderer.create(<EditNewsButtons {...props} />).root;
     result.findByProps({ className: 'updateNewsButton' }).props.onClick();

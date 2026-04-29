@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`LiveStream renders smallscreen 1`] = `
+exports[`LiveStream > renders smallscreen 1`] = `
 <div
   style={
     {
@@ -65,7 +65,7 @@ exports[`LiveStream renders smallscreen 1`] = `
 </div>
 `;
 
-exports[`LiveStream renders widescreen 1`] = `
+exports[`LiveStream > renders widescreen 1`] = `
 <div
   style={
     {

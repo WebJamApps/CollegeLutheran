@@ -13,7 +13,7 @@ describe('NewsContent', () => {
   });
   it('handles event for NewsContent', () => {
     const props = { title: 'title', type: 'type', _id: 'a' };
-    const setEditNews = jest.fn();
+    const setEditNews = vi.fn();
     const result = renderer.create(<NewsContent books={[props]} />).root;
     result.findByProps({ className: 'TableRow-root news' }).props.onClick();
     setEditNews();

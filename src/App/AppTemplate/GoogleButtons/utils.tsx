@@ -1,7 +1,7 @@
 import { CodeResponse, googleLogout } from '@react-oauth/google';
 import { defaultAuth, Iauth } from 'src/providers/Auth.provider';
 import 'react-notifications-component/dist/theme.css';
-import jwt from 'jwt-simple';
+import { jwtDecode } from 'jwt-decode';
 import superagent from 'superagent';
 import commonUtils from 'src/lib/commonUtils';
 
@@ -25,7 +25,7 @@ const setUserAuth = async (
 };
 
 const setUser = async (auth: Iauth, setAuth: (args0: Iauth) => void, token: string): Promise<void> => {
-  const { sub } = jwt.decode(token, process.env.HashString as string);
+  const { sub } = jwtDecode<{ sub?: string }>(token);
   await setUserAuth(setAuth, token, sub);
 };
 
@@ -62,7 +62,7 @@ const responseGoogleLogin = async (
     const { token } = await authenticate(body);
     await setUser(auth, setAuth, token);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     const eMessage = (e as Error).message;
     commonUtils.notify('Failed to authenticate', eMessage, 'danger');
     setAuth({ ...defaultAuth, error: eMessage });

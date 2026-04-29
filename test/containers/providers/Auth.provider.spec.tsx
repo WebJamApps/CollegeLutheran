@@ -8,6 +8,6 @@ describe('Auth Provider', () => {
   });
   it('defaultSetAuth', () => {
     const Iauth: any = {};
-    expect(defaultSetAuth(Iauth)).toBe(console.log());
+    expect(defaultSetAuth(Iauth)).toBeUndefined();
   });
 });

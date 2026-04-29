@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`EditPicDialog renders EditPicDialog 1`] = `
+exports[`EditPicDialog > renders EditPicDialog 1`] = `
 <div
   className="editPicDialog"
   disableAutoFocus={true}

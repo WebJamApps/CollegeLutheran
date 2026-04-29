@@ -6,14 +6,14 @@ import picUtils from 'src/containers/AdminDashboard/pictures.utils';
 describe('EditPicDialog', () => {
   it('renders EditPicDialog', () => {
     const props = {
-      onClose: jest.fn(), editPic: defaultPic, setEditPic: jest.fn(),
+      onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
     };
     const epd = renderer.create(<EditPicDialog {...props} />).toJSON();
     expect(epd).toMatchSnapshot();
   });
   it('handles events for EditPicDialog for url field', () => {
     const props = {
-      onClose: jest.fn(), editPic: defaultPic, setEditPic: jest.fn(),
+      onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
     };
     const evt = { target: { value: 'url' } };
     const result = renderer.create(<EditPicDialog {...props} />).root;
@@ -21,7 +21,7 @@ describe('EditPicDialog', () => {
   });
   it('handles events for EditPicDialog for title field', () => {
     const props = {
-      onClose: jest.fn(), editPic: defaultPic, setEditPic: jest.fn(),
+      onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
     };
     const evt = { target: { value: 'title' } };
     const result = renderer.create(<EditPicDialog {...props} />).root;
@@ -29,17 +29,17 @@ describe('EditPicDialog', () => {
   });
   it('handles onClose for EditPicDialog', () => {
     const props = {
-      editPic: defaultPic, onClose: jest.fn(), setEditPic: jest.fn(),
+      editPic: defaultPic, onClose: vi.fn(), setEditPic: vi.fn(),
     };
     const result = renderer.create(<EditPicDialog {...props} />).root;
     result.findByProps({ className: 'editPicDialog' }).props.onClose();
     expect(props.setEditPic).toHaveBeenCalled();
   });
   it('handles onClick for EditPicDialog', () => {
-    picUtils.updatePic = jest.fn();
-    picUtils.deletePic = jest.fn();
+    picUtils.updatePic = vi.fn();
+    picUtils.deletePic = vi.fn();
     const props = {
-      editPic: defaultPic, onClose: jest.fn(), setEditPic: jest.fn(),
+      editPic: defaultPic, onClose: vi.fn(), setEditPic: vi.fn(),
     };
     const result = renderer.create(<EditPicDialog {...props} />).root;
     result.findByProps({ className: 'updatePicButton' }).props.onClick();

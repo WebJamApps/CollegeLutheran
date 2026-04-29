@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`SideMenuItem renders anchor when type is not link 1`] = `
+exports[`SideMenuItem > renders anchor when type is not link 1`] = `
 <div
   className="menu-item"
 >
