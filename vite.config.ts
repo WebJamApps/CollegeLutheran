@@ -37,7 +37,10 @@ export default defineConfig(({ mode }) => {
   const isTest = mode === 'test' || process.env.VITEST;
   return {
     plugins: [
-      ...(isTest ? [] : [replaceProcessEnv(env), checker({ typescript: true })]),
+      ...(isTest ? [] : [
+        replaceProcessEnv(env),
+        checker({ typescript: { tsconfigPath: './tsconfig.prod.json' } }),
+      ]),
       react(),
     ],
     server: {

@@ -85,6 +85,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
   },
-  "include":["src","test"],
+  "include":["src","test","types"],
   "exclude": ["dist", "node_modules", "vite.config.ts"]
 }
