@@ -85,7 +85,8 @@
     "stylelint-config-recommended-scss": "^17.0.1",
     "superagent": "^10.2.2",
     "typescript": "^5.2.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vite-plugin-checker": "^0.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -110,7 +111,6 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-scss": "^7.0.0",
     "typescript-eslint": "^8.59.1",
-    "vite-plugin-checker": "^0.13.0",
     "vitest": "^4.1.5"
   }
 }
