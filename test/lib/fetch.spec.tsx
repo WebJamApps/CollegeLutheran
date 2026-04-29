@@ -8,20 +8,20 @@ describe('fetch', () => {
     expect(fetch).toBeDefined();
   });
   it('GET catches error', async () => {
-    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
+    const myMock:any = vi.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
     superagent.get = myMock;
-    Store.addNotification = jest.fn();
+    Store.addNotification = vi.fn();
     const r = await fetch.fetchGet(
-      jest.fn(),
+      vi.fn(),
       '/',
       '');
     expect(r).toBe(false);
   });
   it('GET catches error when PageContent', async () => {
-    const myMock:any = jest.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
+    const myMock:any = vi.fn(() => ({ set: () => Promise.reject(new Error('bad')) }));
     superagent.get = myMock;
-    const dispatch = jest.fn();
-    Store.addNotification = jest.fn();
+    const dispatch = vi.fn();
+    Store.addNotification = vi.fn();
     const r = await fetch.fetchGet(
       dispatch,
       '/?type=PageContent',
@@ -30,11 +30,11 @@ describe('fetch', () => {
     expect(dispatch).toHaveBeenCalled();
   });
   it('GET is successful', async () => {
-    const myMock:any = jest.fn(() => ({ set: () => Promise.resolve({ body: {} }) }));
+    const myMock:any = vi.fn(() => ({ set: () => Promise.resolve({ body: {} }) }));
     superagent.get = myMock;
-    Store.addNotification = jest.fn();
+    Store.addNotification = vi.fn();
     const r = await fetch.fetchGet(
-      jest.fn(),
+      vi.fn(),
       '/',
       '');
     expect(r).toBe(true);

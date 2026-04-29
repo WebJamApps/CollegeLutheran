@@ -2,14 +2,14 @@ import axios, { AxiosError } from 'axios';
 import utils from 'src/containers/AdminDashboard/utils';
 import commonUtils from 'src/lib/commonUtils';
 
-jest.mock('axios');
+vi.mock('axios');
 
 describe('Admin Dash utils', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('putAPI and update content when status is 200', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const data = { title: '', comments: '', type: '' };
     const auth = {
       isAuthenticated: true,
@@ -20,14 +20,9 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
-    const getContent = jest.fn();
-    const notifyMock = jest.fn();
+    const getContent = vi.fn();
 
-    (axios.request as jest.Mock).mockResolvedValueOnce({ status: 200 });
-    jest.mock('src/lib/commonUtils', () => ({
-      ...jest.requireActual('src/lib/commonUtils'),
-      notify: notifyMock,
-    }));
+    vi.mocked(axios.request).mockResolvedValueOnce({ status: 200 });
 
     await utils.putAPI(data, auth, getContent);
 
@@ -42,7 +37,7 @@ describe('Admin Dash utils', () => {
     expect(commonUtils.notify).toHaveBeenCalled();
   });
   it('putAPI when status is 400', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const data = { title: '', comments: '', type: '' };
     const auth = {
       isAuthenticated: true,
@@ -53,10 +48,10 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
-    const getContent = jest.fn();
-    const notifyMock = jest.fn();
+    const getContent = vi.fn();
+    const notifyMock = vi.fn();
     notifyMock.mockReturnValueOnce(undefined);
-    (axios.request as jest.Mock).mockRejectedValueOnce({ status: 400 });
+    vi.mocked(axios.request).mockRejectedValueOnce({ status: 400 });
     await utils.putAPI(data, auth, getContent);
     expect(axios.request).toHaveBeenCalledTimes(2);
     expect(axios.request).toHaveBeenCalledWith({
@@ -80,8 +75,8 @@ describe('Admin Dash utils', () => {
       },
     };
     const e = { status: 400 };
-    (axios.request as jest.Mock).mockRejectedValueOnce(new AxiosError('error'));
-    commonUtils.notify = jest.fn();
+    vi.mocked(axios.request).mockRejectedValueOnce(new AxiosError('error'));
+    commonUtils.notify = vi.fn();
     await utils.handlePutError(e as AxiosError, data, auth);
     expect(commonUtils.notify).toHaveBeenCalled();
     expect(axios.request).toHaveBeenCalled();
@@ -98,13 +93,13 @@ describe('Admin Dash utils', () => {
       },
     };
     const e = { status: 500 };
-    (axios.request as jest.Mock).mockRejectedValueOnce(new AxiosError('error'));
-    commonUtils.notify = jest.fn();
+    vi.mocked(axios.request).mockRejectedValueOnce(new AxiosError('error'));
+    commonUtils.notify = vi.fn();
     await utils.handlePutError(e as AxiosError, data, auth);
     expect(commonUtils.notify).toHaveBeenCalled();
   });
   it('successfully adds news', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -114,10 +109,10 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
-    const getContent = jest.fn();
+    const getContent = vi.fn();
     const dialogData = { title: '', url: '', comments: '' };
-    const clearForm = jest.fn();
-    (axios.request as jest.Mock).mockResolvedValueOnce({ status: 201 });
+    const clearForm = vi.fn();
+    vi.mocked(axios.request).mockResolvedValueOnce({ status: 201 });
     await utils.addNewsAPI(auth, getContent, clearForm, dialogData);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
@@ -134,7 +129,7 @@ describe('Admin Dash utils', () => {
     expect(commonUtils.notify).toHaveBeenCalled();
   });
   it('catches news error', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -144,11 +139,11 @@ describe('Admin Dash utils', () => {
         email: 'string',
       },
     };
-    const getContent = jest.fn();
+    const getContent = vi.fn();
     const dialogData = { title: '', url: '', comments: '' };
-    const clearForm = jest.fn();
+    const clearForm = vi.fn();
     const err = new Error('error');
-    (axios.request as jest.Mock).mockRejectedValueOnce(err);
+    vi.mocked(axios.request).mockRejectedValueOnce(err);
     await utils.addNewsAPI(auth, getContent, clearForm, dialogData);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
@@ -165,7 +160,7 @@ describe('Admin Dash utils', () => {
     expect(commonUtils.notify).toHaveBeenCalled();
   });
   it('successfully adds a pic', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -176,9 +171,9 @@ describe('Admin Dash utils', () => {
       },
     };
     const data = { title: '' };
-    const getPictures = jest.fn();
-    const setShowDialog = jest.fn();
-    (axios.request as jest.Mock).mockResolvedValueOnce({ status: 201 });
+    const getPictures = vi.fn();
+    const setShowDialog = vi.fn();
+    vi.mocked(axios.request).mockResolvedValueOnce({ status: 201 });
     await utils.createPicAPI(getPictures, setShowDialog, data, auth);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({
@@ -191,7 +186,7 @@ describe('Admin Dash utils', () => {
     expect(setShowDialog).toHaveBeenCalledWith(false);
   });
   it('catches pic error', async () => {
-    commonUtils.notify = jest.fn();
+    commonUtils.notify = vi.fn();
     const auth = {
       isAuthenticated: true,
       error: 'string',
@@ -202,10 +197,10 @@ describe('Admin Dash utils', () => {
       },
     };
     const data = { title: '' };
-    const getPictures = jest.fn();
-    const setShowDialog = jest.fn();
+    const getPictures = vi.fn();
+    const setShowDialog = vi.fn();
     const err = new Error('error');
-    (axios.request as jest.Mock).mockRejectedValueOnce(err);
+    vi.mocked(axios.request).mockRejectedValueOnce(err);
     await utils.createPicAPI(getPictures, setShowDialog, data, auth);
     expect(axios.request).toHaveBeenCalledTimes(1);
     expect(axios.request).toHaveBeenCalledWith({

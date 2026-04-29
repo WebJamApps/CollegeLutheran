@@ -3,7 +3,7 @@ interface IWideFBFeed {
   width?: number;
 }
 
-const WideFacebookFeed = ({ width }: IWideFBFeed): JSX.Element => {
+const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed): JSX.Element => {
   let mb = '32px', mt = '0px';
   if (width && width < 1092) { mb = '0px'; mt = '32px'; }
   return (
@@ -57,6 +57,5 @@ const WideFacebookFeed = ({ width }: IWideFBFeed): JSX.Element => {
     </div>
   );
 };
-WideFacebookFeed.defaultProps = { width: 1004 };
 
 export default WideFacebookFeed;

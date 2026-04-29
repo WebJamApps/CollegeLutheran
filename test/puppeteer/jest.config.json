@@ -1,7 +1,0 @@
-{ 
-"testEnvironmentOptions":{
-    "url": "http://localhost/"
-    },
- "preset": "ts-jest",
-"testEnvironment": "node"
-}

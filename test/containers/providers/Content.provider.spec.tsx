@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 
-jest.mock('axios');
+vi.mock('axios');
 
 describe('Content provider', () => {
   it('renders the ContentProvider', () => {
@@ -23,12 +23,12 @@ describe('Content provider', () => {
   });
   it('populates content catches error', async () => {
     let content: any;
-    const setContent = jest.fn((c) => { content = c; });
+    const setContent = vi.fn((c) => { content = c; });
     await populateContent(setContent);
     expect(content.habitatPage.type).toBe('habitatPageContent');
   });
   it('populates content', async () => {
-    const setContent = jest.fn();
+    const setContent = vi.fn();
     const resp = {
       data: {
         homePage:
@@ -37,12 +37,12 @@ describe('Content provider', () => {
         habitatPage: { title: '', type: '', _id: '' },
       },
     };
-    (axios.get as jest.Mock).mockImplementation(() => Promise.resolve(resp));
+    vi.mocked(axios.get).mockImplementation(() => Promise.resolve(resp));
     await populateContent(setContent);
     expect(setContent).toHaveBeenCalled();
   });
   it('populates pictures', async () => {
-    const setPictures = jest.fn();
+    const setPictures = vi.fn();
     const resp = {
       data: {
         musicPics:
@@ -53,7 +53,7 @@ describe('Content provider', () => {
         otherPics: { title: '', type: '', _id: '' },
       },
     };
-    (axios.get as jest.Mock).mockImplementation(() => Promise.resolve(resp));
+    vi.mocked(axios.get).mockImplementation(() => Promise.resolve(resp));
     await populatePictures(setPictures);
     expect(setPictures).toHaveBeenCalled();
   });
@@ -75,8 +75,8 @@ describe('Content provider', () => {
     {
       type: '2', _id: 'b', title: 'b2', created_at: '2023-06-16T10:30:00Z',
     }];
-    (axios.get as jest.Mock).mockResolvedValue({ data });
-    const setNews = jest.fn();
+    vi.mocked(axios.get).mockResolvedValue({ data });
+    const setNews = vi.fn();
     await populateNews(setNews);
     expect(setNews).toHaveBeenCalledWith({ newsContent: data });
   });

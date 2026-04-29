@@ -8,16 +8,16 @@ import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/Chan
 
 describe('AdminDashboard Content', () => {
   it('renders the update button', () => {
-    utils.putAPI = jest.fn();
+    utils.putAPI = vi.fn();
     const props = {
-      title: '', comments: 'comments', buttonName: '', type: 'habitatPageContent' as any, getContent: jest.fn(),
+      title: '', comments: 'comments', buttonName: '', type: 'habitatPageContent' as any, getContent: vi.fn(),
     };
     const result = renderer.create(<UpdateButton {...props} />).root;
     result.findByProps({ id: 'c-h' }).props.onClick();
     expect(utils.putAPI).toHaveBeenCalled();
   });
   it('handles setComments on CommentsEditor', () => {
-    const setComments = jest.fn();
+    const setComments = vi.fn();
     const comments = 'test';
     const result = renderer.create(<CommentsEditor setComments={setComments} comments={comments} />).root;
     result.findByProps({ value: 'test' }).props.onEditorChange('newComments');
@@ -49,7 +49,7 @@ describe('AdminDashboard Content', () => {
   it('makeHandleChange when checked is true', () => {
     const checked = true;
     const evt = { target: { checked } };
-    const setComments = jest.fn();
+    const setComments = vi.fn();
     const handleChange = makeHandleChange(setComments);
     handleChange(evt);
     expect(setComments).toHaveBeenCalledWith('worshipbulletin');
@@ -57,13 +57,13 @@ describe('AdminDashboard Content', () => {
   it('makeHandleChange when checked is false', () => {
     const checked = false;
     const evt = { target: { checked } };
-    const setComments = jest.fn();
+    const setComments = vi.fn();
     const handleChange = makeHandleChange(setComments);
     handleChange(evt);
     expect(setComments).toHaveBeenCalledWith('');
   });
   it('handles onClick for addNewsAPI button', () => {
-    utils.addNewsAPI = jest.fn();
+    utils.addNewsAPI = vi.fn();
     const result = renderer.create(<ChangeNewsPage />).root;
     result.findByProps({ variant: 'contained' }).props.onClick();
     expect(utils.addNewsAPI).toHaveBeenCalled();
@@ -76,7 +76,7 @@ describe('AdminDashboard Content', () => {
     expect(tree).toBe(value);
   });
   it('handles onClick events for ButtonsNav', () => {
-    const props = { showEditor: 'string', setShowEditor: jest.fn() };
+    const props = { showEditor: 'string', setShowEditor: vi.fn() };
     const result = renderer.create(<ButtonsNav {...props} />).root;
     result.findByProps({ className: 'createPic' }).props.onClick();
     expect(props.setShowEditor).toHaveBeenCalled();

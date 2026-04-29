@@ -11,15 +11,15 @@ describe('GoogleButtons', () => {
     expect(result).toBe('login');
   });
   it('renders logout and handles click', () => {
-    utils.responseGoogleLogout = jest.fn();
+    utils.responseGoogleLogout = vi.fn();
     const gb = renderer.create(
       <GoogleOAuthProvider clientId=""><GoogleButtons type="logout" index={0} /></GoogleOAuthProvider>).root;
     gb.findByProps({ className: 'logoutButton' }).props.onClick();
     expect(utils.responseGoogleLogout).toHaveBeenCalled();
   });
   it('uses loginConfig', async () => {
-    utils.responseGoogleLogin = jest.fn();
-    const config = loginConfig({} as any, jest.fn());
+    utils.responseGoogleLogin = vi.fn();
+    const config = loginConfig({} as any, vi.fn());
     await config.onSuccess({} as any);
     expect(utils.responseGoogleLogin).toHaveBeenCalled();
     expect(config.onError()).toBe(false);

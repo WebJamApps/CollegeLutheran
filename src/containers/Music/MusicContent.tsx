@@ -46,6 +46,4 @@ export const MusicContent = (): JSX.Element => {
   );
 };
 
-MusicContent.defaultProps = { musicPics: [] };
-
 export default MusicContent;

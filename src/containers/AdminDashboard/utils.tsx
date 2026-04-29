@@ -16,7 +16,7 @@ async function handlePutError(e: AxiosError,
       };
       await axios.request(config);
       commonUtils.notify(data.type, 'Successfully created', 'success');
-    } catch (err) {
+    } catch {
       commonUtils.notify(data.type, `Failed to create ${data.type}, ${(e as Error).message}`, 'warning');
     }
   } else {

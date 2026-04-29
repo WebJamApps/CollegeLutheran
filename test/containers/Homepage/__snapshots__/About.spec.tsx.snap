@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`About renders the about page 1`] = `
+exports[`About > renders the about page 1`] = `
 <div
   className="aboutPage"
 >
@@ -108,11 +108,10 @@ exports[`About renders the about page 1`] = `
           }
         >
           <img
-            alt="churchBuilding"
-            src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+            alt="Luther Rose"
+            src="/Lutherrose.svg"
             style={
               {
-                "borderRadius": "50%",
                 "width": "100%",
               }
             }

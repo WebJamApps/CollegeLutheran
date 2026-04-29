@@ -4,13 +4,13 @@ import {
 import renderer from 'react-test-renderer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-jest.mock('react-redux', () => ({
-  useSelector: jest.fn(),
-  useDispatch: jest.fn(),
+vi.mock('react-redux', () => ({
+  useSelector: vi.fn(),
+  useDispatch: vi.fn(),
 }));
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: jest.fn().mockReturnValue({ pathname: '/staff' }),
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useLocation: vi.fn().mockReturnValue({ pathname: '/staff' }),
 }));
 
 describe('SideMenuItem', () => {
@@ -67,10 +67,9 @@ describe('SideMenuItem', () => {
         },
       },
       pathname: '/staff',
-      handleClose: jest.fn(),
+      handleClose: vi.fn(),
     };
     const result: any = renderer.create(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>).toJSON();
-    console.log(result);
     expect(result.type).toBe('div');
   });
   it('shows logout button when authenticated', () => {
@@ -89,10 +88,9 @@ describe('SideMenuItem', () => {
         },
       },
       pathname: '',
-      handleClose: jest.fn(),
+      handleClose: vi.fn(),
     };
     const result: any = renderer.create(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>).toJSON();
-    console.log(result);
     expect(result.type).toBe('div');
   });
   it('renders anchor when type is not link', () => {
@@ -101,7 +99,7 @@ describe('SideMenuItem', () => {
     };
     const index = 0;
     const type = '';
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     const result = renderer.create(<MakeLink menu={menu} index={index} type={type} handleClose={handleClose} />).toJSON();
     expect(result).toMatchSnapshot();
   });

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`EditPicTable renders EditPicTable 1`] = `
+exports[`EditPicTable > renders EditPicTable 1`] = `
 <div
   className="editPicTable"
   style={
@@ -33,7 +33,7 @@ exports[`EditPicTable renders EditPicTable 1`] = `
     aria-colcount={3}
     aria-multiselectable={false}
     aria-rowcount={1}
-    className="rowParams MuiDataGrid-root MuiDataGrid-root--densityStandard MuiDataGrid-withBorderColor css-5wly58-MuiDataGrid-root"
+    className="rowParams MuiDataGrid-root MuiDataGrid-root--densityStandard MuiDataGrid-withBorderColor css-az8st9-MuiDataGrid-root"
     role="grid"
   >
     <div
@@ -80,6 +80,7 @@ exports[`EditPicTable renders EditPicTable 1`] = `
             onClick={[Function]}
           >
             <div
+              aria-controls=":r2:"
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby=":r1: :r0:"
@@ -89,7 +90,7 @@ exports[`EditPicTable renders EditPicTable 1`] = `
               onFocus={[Function]}
               onKeyDown={[Function]}
               onMouseDown={[Function]}
-              role="button"
+              role="combobox"
               tabIndex={0}
             >
               100
@@ -98,6 +99,7 @@ exports[`EditPicTable renders EditPicTable 1`] = `
               aria-hidden={true}
               aria-invalid={false}
               className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              disabled={false}
               onAnimationStart={[Function]}
               onChange={[Function]}
               tabIndex={-1}

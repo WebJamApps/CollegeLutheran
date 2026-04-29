@@ -8,13 +8,13 @@ describe('AppTemplate', () => {
     expect(AppTemplate).toBeDefined();
   });
   it('toggleMobileMenu', () => {
-    const setMenuOpen = jest.fn();
+    const setMenuOpen = vi.fn();
     const menuOpen = true;
     toggleMobileMenu(menuOpen, setMenuOpen);
     expect(setMenuOpen).toHaveBeenCalledWith(false);
   });
   it('handleKeyMenu', () => {
-    const setMenuOpen = jest.fn();
+    const setMenuOpen = vi.fn();
     const e = { key: 'Enter' };
     const menuOpen = true;
     handleKeyMenu(e, menuOpen, setMenuOpen);
@@ -22,7 +22,7 @@ describe('AppTemplate', () => {
   });
   it('handleEscapePress', () => {
     const e = { key: 'Enter' };
-    const setMenuOpen = jest.fn();
+    const setMenuOpen = vi.fn();
     handleEscapePress(e, setMenuOpen);
     expect(setMenuOpen).not.toHaveBeenCalled();
   });
@@ -31,7 +31,7 @@ describe('AppTemplate', () => {
   });
   it('handleEscapePress to close menu', () => {
     const e = { key: 'Escape' };
-    const setMenuOpen = jest.fn();
+    const setMenuOpen = vi.fn();
     handleEscapePress(e, setMenuOpen);
     expect(setMenuOpen).toHaveBeenCalledWith(false);
   });

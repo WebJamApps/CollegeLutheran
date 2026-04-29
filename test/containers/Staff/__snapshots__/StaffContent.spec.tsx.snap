@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Staff renders MoreStaff 1`] = `
+exports[`Staff > renders MoreStaff 1`] = `
 [
   <section
     id="Kellie"
@@ -117,7 +117,7 @@ exports[`Staff renders MoreStaff 1`] = `
 ]
 `;
 
-exports[`Staff renders StaffContent 1`] = `
+exports[`Staff > renders StaffContent 1`] = `
 <div
   className="page-content"
 >

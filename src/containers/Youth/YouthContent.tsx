@@ -83,7 +83,5 @@ export const YouthContent = (
   );
 };
 
-YouthContent.defaultProps = { youthPics: [] };
-
 export default YouthContent;
 
