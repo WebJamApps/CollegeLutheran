@@ -11,6 +11,4 @@ export const Youth = (
   );
 };
 
-Youth.defaultProps = { youthPics: [] };
-
 export default connect(mapStoreToProps, null)(Youth as any);

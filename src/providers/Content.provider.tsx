@@ -19,7 +19,7 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
       stewardshipPage,
     });
   } catch (err) {
-    console.log((err as Error).message);
+    console.error((err as Error).message);
     const habitatPage = {
       title: '',
       _id: '',
@@ -47,7 +47,7 @@ export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void)
       musicPics, familyPics, youthPics, habitatPics, otherPics,
     };
     setPictures(pictures);
-  } catch (err) { console.log((err as AxiosError).message); }
+  } catch (err) { console.error((err as AxiosError).message); }
 };
 
 export const populateNews = async (setNews: (arg0:Inews)=> void) => {
@@ -65,7 +65,7 @@ export const populateNews = async (setNews: (arg0:Inews)=> void) => {
       });
     }
     setNews({ newsContent: data });
-  } catch (err) { console.log((err as AxiosError).message); }
+  } catch (err) { console.error((err as AxiosError).message); }
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

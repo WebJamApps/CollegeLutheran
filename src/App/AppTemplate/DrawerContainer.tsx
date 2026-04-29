@@ -16,7 +16,7 @@ export function DrawerContainer(props:IdrawerContainerProps) {
           <img
             alt="Luther Rose"
             id="webjamwidelogo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lutherrose.svg/800px-Lutherrose.svg.png"
+            src="/Lutherrose.svg"
             style={{ width: '86px', marginRight: 0, marginLeft: 0 }}
           />
         </div>

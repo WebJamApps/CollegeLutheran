@@ -43,9 +43,9 @@ export function PictureSection({ data, width }: { data: Ibook[], width?:number }
           }}
         >
           <img
-            style={{ borderRadius: '50%', width: '100%' }}
-            alt="churchBuilding"
-            src="https://dl.dropboxusercontent.com/s/8wcnwvc7s9iclj5/clcBuilding.png?dl=0"
+            style={{ width: '100%' }}
+            alt="Luther Rose"
+            src="/Lutherrose.svg"
           />
         </div>
       </div>

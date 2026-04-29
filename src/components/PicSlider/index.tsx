@@ -39,7 +39,6 @@ class PicSlider extends Component<PicSliderProps> {
     };
   }
 
-  /* eslint-disable react/jsx-props-no-spreading */
   render(): JSX.Element {
     const { data } = this.props;
     return (

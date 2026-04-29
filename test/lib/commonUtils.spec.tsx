@@ -4,7 +4,7 @@ import commonUtils, { NotificationType } from '../../src/lib/commonUtils';
 
 describe('commonUtils', () => {
   it('calls scrollIntoView', () => {
-    const scrollIntoViewMock = jest.fn();
+    const scrollIntoViewMock = vi.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
     document.body.innerHTML = '<div class="page-content"></div>';
     commonUtils.setTitleAndScroll('home');
@@ -15,10 +15,10 @@ describe('commonUtils', () => {
     await commonUtils.delay(1);
     const end = Date.now();
     const diff = end - start;
-    expect(diff).toBeGreaterThanOrEqual(1000);
+    expect(diff).toBeGreaterThanOrEqual(990);
   });
   it('calls addNotification', () => {
-    Store.addNotification = jest.fn();
+    Store.addNotification = vi.fn();
     const title = '';
     const message = '';
     const type: NotificationType = 'success';

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`PicSlider renders with a caption 1`] = `
+exports[`PicSlider > renders with a caption 1`] = `
 <div
   id="pic-slider"
 >

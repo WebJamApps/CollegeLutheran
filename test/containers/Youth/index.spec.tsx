@@ -5,7 +5,7 @@ import { Youth } from 'src/containers/Youth/index';
 describe('Youth', () => {
   it('renders correctly without images', () => {
     const tree = renderer
-      .create(<Youth youthPics={[]} />)
+      .create(<Youth />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Family renders correctly without images 1`] = `
+exports[`Family > renders correctly without images 1`] = `
 <div
   className="page-content family-content"
 >

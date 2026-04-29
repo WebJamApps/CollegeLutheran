@@ -1,11 +1,11 @@
-@import 'config';
-@import 'menu';
-@import 'footer';
-@import 'tables';
-@import 'home';
-@import 'materialui';
-@import 'mobile';
-@import 'slideshow';
+@use 'config';
+@use 'menu';
+@use 'footer';
+@use 'tables';
+@use 'home';
+@use 'materialui';
+@use 'mobile';
+@use 'slideshow';
 
 /* General */
 * {

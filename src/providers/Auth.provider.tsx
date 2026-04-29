@@ -17,7 +17,7 @@ export const defaultAuth: Iauth = {
   user: { userType: '', email: '' },
 };
 
-export const defaultSetAuth = (arg0: Iauth) => { console.log(arg0); };
+export const defaultSetAuth = (_arg0: Iauth) => { /* no-op placeholder */ };
 
 export const AuthContext = createContext({
   auth: defaultAuth,

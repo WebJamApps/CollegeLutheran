@@ -4,19 +4,19 @@ import { defaultPic } from 'src/containers/AdminDashboard/utils';
 
 describe('pictures.utils', () => {
   it('deletePic', async () => {
-    axios.request = jest.fn();
-    await picUtils.deletePic(defaultPic, jest.fn(), { token: 'token' } as any, jest.fn(), jest.fn());
+    axios.request = vi.fn();
+    await picUtils.deletePic(defaultPic, vi.fn(), { token: 'token' } as any, vi.fn(), vi.fn());
     expect(axios.request).toHaveBeenCalled();
   });
   it('updatePic', async () => {
-    axios.request = jest.fn();
-    await picUtils.updatePic(defaultPic, { token: 'token' } as any, jest.fn(), jest.fn(), jest.fn());
+    axios.request = vi.fn();
+    await picUtils.updatePic(defaultPic, { token: 'token' } as any, vi.fn(), vi.fn(), vi.fn());
     expect(axios.request).toHaveBeenCalled();
   });
   it('performAxiosRequest successfully', async () => {
-    axios.request = jest.fn(() => Promise.resolve({ status: 200 })) as any;
-    const setShowTable = jest.fn();
-    await picUtils.performAxiosRequest({}, jest.fn(), jest.fn(), setShowTable);
+    axios.request = vi.fn(() => Promise.resolve({ status: 200 })) as any;
+    const setShowTable = vi.fn();
+    await picUtils.performAxiosRequest({}, vi.fn(), vi.fn(), setShowTable);
     expect(setShowTable).toHaveBeenCalledWith(false);
   });
 });
