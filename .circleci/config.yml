@@ -32,3 +32,8 @@ jobs:
             STATUS=$?
             kill $SERVER_PID || true
             exit $STATUS
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
