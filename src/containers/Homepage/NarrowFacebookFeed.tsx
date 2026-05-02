@@ -4,17 +4,31 @@ import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';
 
-const FacebookLink = () => (
-  <p style={{
-    textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
-  }}
-  >
-    <i>
-      Like Us On
-      {' '}
-      <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
-    </i>
-  </p>
+const FacebookIframe = () => (
+  <>
+    <p style={{
+      textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
+    }}
+    >
+      <i>
+        Like Us On
+        {' '}
+        <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
+      </i>
+    </p>
+    <div style={{ maxWidth: '300px', margin: 'auto', marginBottom: 0 }}>
+      <iframe
+        title="clc-facebook" /* eslint-disable-next-line max-len */
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=300&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
+        width="300"
+        height="500"
+        style={{ border: 'none', overflow: 'hidden' }}
+        scrolling="no"
+        frameBorder="0"
+        allow="encrypted-media"
+      />
+    </div>
+  </>
 );
 export function FamilySlideContainer({ data }: { data: Ibook[] }) {
   return (
@@ -59,7 +73,7 @@ export const FacebookFeed = (): JSX.Element => {
         />
       </div>
       <hr />
-      <FacebookLink />
+      <FacebookIframe />
       <hr />
       <p style={{
         textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
