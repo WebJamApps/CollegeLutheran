@@ -1,20 +1,36 @@
 import type { Iauth } from 'src/providers/Auth.provider';
 import commonUtils from 'src/lib/commonUtils';
-import axios, { AxiosError } from 'axios';
 
-async function handlePutError(e: AxiosError,
+export type HttpError = Error & { status?: number };
+
+async function jsonRequest(
+  url: string,
+  init: RequestInit,
+): Promise<{ status: number }> {
+  const res = await fetch(url, init);
+  if (!res.ok) {
+    const err: HttpError = new Error(`HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  return { status: res.status };
+}
+
+async function handlePutError(e: HttpError,
   data: { title: string; comments: string; type: string },
   auth: Iauth,
 ) {
-  if ((e).status === 400) {
+  if (e.status === 400) {
     try {
-      const config = { // creating a new book here
-        url: `${process.env.BackendUrl}/book`,
-        method: 'post',
-        headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-        data,
-      };
-      await axios.request(config);
+      await jsonRequest(`${process.env.BackendUrl}/book`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
       commonUtils.notify(data.type, 'Successfully created', 'success');
     } catch {
       commonUtils.notify(data.type, `Failed to create ${data.type}, ${(e as Error).message}`, 'warning');
@@ -30,19 +46,21 @@ async function putAPI(
   getContent: () => Promise<void>,
 ): Promise<void> {
   try {
-    const config = {
-      url: `${process.env.BackendUrl}/book/one?type=${data.type}`,
-      method: 'put',
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data,
-    };
-    const { status } = await axios.request(config);
+    const { status } = await jsonRequest(`${process.env.BackendUrl}/book/one?type=${data.type}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
     if (status === 200) {
       await getContent();
       commonUtils.notify(data.type, 'successfully updated', 'success');
     }
   } catch (e) {
-    await handlePutError(e as AxiosError, data, auth);
+    await handlePutError(e as HttpError, data, auth);
   }
 }
 
@@ -52,20 +70,21 @@ async function addNewsAPI(
   clearForm: () => void,
   dialogData: { title: string, url: string | undefined, comments: string | undefined },
 ): Promise<void> {
+  const data = {
+    ...dialogData,
+    type: 'Forum',
+    access: 'CLC',
+  };
   try {
-    const data = {
-      ...dialogData,
-      type: 'Forum',
-      access: 'CLC',
-    };
-    const config = {
-      url: `${process.env.BackendUrl}/book`,
-      method: 'post',
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data,
-
-    };
-    const { status } = await axios.request(config);
+    const { status } = await jsonRequest(`${process.env.BackendUrl}/book`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
     if (status === 201) {
       await getNews();
       clearForm();
@@ -81,13 +100,15 @@ async function createPicAPI(
   data: Record<string, unknown>, auth: Iauth,
 ): Promise<void> {
   try {
-    const config = {
-      url: `${process.env.BackendUrl}/book`,
-      method: 'post',
-      headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-      data,
-    };
-    const { status } = await axios.request(config);
+    const { status } = await jsonRequest(`${process.env.BackendUrl}/book`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
     if (status === 201) {
       commonUtils.notify(`${data.title}`, 'Successfully added picture', 'success');
       await getPictures();

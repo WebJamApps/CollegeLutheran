@@ -1,22 +1,26 @@
-import axios from 'axios';
 import picUtils from 'src/containers/AdminDashboard/pictures.utils';
 import { defaultPic } from 'src/containers/AdminDashboard/utils';
 
 describe('pictures.utils', () => {
+  afterEach(() => { vi.unstubAllGlobals(); });
+
   it('deletePic', async () => {
-    axios.request = vi.fn();
+    const fetchMock = vi.fn(() => Promise.resolve({ status: 204 }));
+    vi.stubGlobal('fetch', fetchMock);
     await picUtils.deletePic(defaultPic, vi.fn(), { token: 'token' } as any, vi.fn(), vi.fn());
-    expect(axios.request).toHaveBeenCalled();
+    expect(fetchMock).toHaveBeenCalled();
   });
   it('updatePic', async () => {
-    axios.request = vi.fn();
+    const fetchMock = vi.fn(() => Promise.resolve({ status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
     await picUtils.updatePic(defaultPic, { token: 'token' } as any, vi.fn(), vi.fn(), vi.fn());
-    expect(axios.request).toHaveBeenCalled();
+    expect(fetchMock).toHaveBeenCalled();
   });
-  it('performAxiosRequest successfully', async () => {
-    axios.request = vi.fn(() => Promise.resolve({ status: 200 })) as any;
+  it('performFetchRequest successfully', async () => {
+    const fetchMock = vi.fn(() => Promise.resolve({ status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
     const setShowTable = vi.fn();
-    await picUtils.performAxiosRequest({}, vi.fn(), vi.fn(), setShowTable);
+    await picUtils.performFetchRequest('http://example/x', { method: 'GET' }, vi.fn(), vi.fn(), setShowTable);
     expect(setShowTable).toHaveBeenCalledWith(false);
   });
 });

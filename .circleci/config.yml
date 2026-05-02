@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Smoketest - verify production server starts
           command: |
-            PORT=7777 node server.js &
+            PORT=7777 node server.mjs &
             SERVER_PID=$!
             sleep 5
             curl --fail --silent --show-error http://localhost:7777/ > /dev/null

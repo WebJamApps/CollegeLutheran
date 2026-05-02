@@ -42,17 +42,6 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed): JSX.Element => {
             <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
           </i>
         </p>
-        <iframe
-          className="widescreenHomepage"
-          // eslint-disable-next-line max-len
-          src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=500&height=485&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
-          width="500"
-          height="485"
-          style={{ border: 'none', overflow: 'hidden', marginLeft: '-14px' }}
-          scrolling="none"
-          allow="encrypted-media"
-          title="facebook ticker"
-        />
       </div>
     </div>
   );

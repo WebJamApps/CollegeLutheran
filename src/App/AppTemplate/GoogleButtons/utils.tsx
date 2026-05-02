@@ -2,7 +2,6 @@ import { CodeResponse, googleLogout } from '@react-oauth/google';
 import { defaultAuth, Iauth } from 'src/providers/Auth.provider';
 import 'react-notifications-component/dist/theme.css';
 import { jwtDecode } from 'jwt-decode';
-import superagent from 'superagent';
 import commonUtils from 'src/lib/commonUtils';
 
 export interface GoogleBody {
@@ -17,8 +16,11 @@ const setUserAuth = async (
   token: string,
   userId: string | undefined,
 ) => {
-  const { body } = await superagent.get(`${process.env.BackendUrl}/user/${userId}`)
-    .set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
+  const res = await fetch(`${process.env.BackendUrl}/user/${userId}`, {
+    headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const body = await res.json();
   setAuth({
     error: '', isAuthenticated: true, token, user: body,
   });
@@ -32,9 +34,13 @@ const setUser = async (auth: Iauth, setAuth: (args0: Iauth) => void, token: stri
 const authenticate = async (
   googleBody: GoogleBody,
 ): Promise<{ token: string, email: string }> => {
-  const { body } = await superagent.post(`${process.env.BackendUrl}/user/auth/google`)
-    .set({ Accept: 'application/json' }).send(googleBody);
-  return body;
+  const res = await fetch(`${process.env.BackendUrl}/user/auth/google`, {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(googleBody),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
 };
 
 const makeState = () => () => {
