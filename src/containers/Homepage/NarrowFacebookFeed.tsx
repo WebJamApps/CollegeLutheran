@@ -19,9 +19,9 @@ const FacebookIframe = () => (
     <div style={{ maxWidth: '300px', margin: 'auto', marginBottom: 0 }}>
       <iframe
         title="clc-facebook" /* eslint-disable-next-line max-len */
-        src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=300&height=500&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=300&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
         width="300"
-        height="300"
+        height="500"
         style={{ border: 'none', overflow: 'hidden' }}
         scrolling="no"
         frameBorder="0"

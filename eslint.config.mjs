@@ -14,7 +14,7 @@ export default [
       'node_modules/**',
       'dist/**',
       'coverage/**',
-      'server.js',
+      'server.mjs',
       'vite.config.ts',
       'eslint.config.mjs',
     ],

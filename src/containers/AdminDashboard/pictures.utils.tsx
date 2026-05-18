@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Iauth } from 'src/providers/Auth.provider';
 import {
   Box, FormControl, InputLabel, Select, MenuItem,
@@ -6,15 +5,16 @@ import {
 import { ReactNode } from 'react';
 import { defaultPic } from './utils';
 
-export async function performAxiosRequest(
-  config:any,
+export async function performFetchRequest(
+  url: string,
+  init: RequestInit,
   getPictures: () => Promise<void>,
   setEditPic: (arg0: typeof defaultPic) => void,
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   try {
-    const { status } = await axios.request(config);
-    if (status === 200) {
+    const res = await fetch(url, init);
+    if (res.status === 200) {
       setEditPic(defaultPic);
       await getPictures();
       setShowTable(false);
@@ -32,13 +32,15 @@ async function updatePic(
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
-  const config = {
-    url,
-    method: 'put',
-    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-    data: editPic,
-  };
-  await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
+  await performFetchRequest(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(editPic),
+  }, getPictures, setEditPic, setShowTable);
 }
 
 async function deletePic(
@@ -49,12 +51,10 @@ async function deletePic(
   setShowTable: (arg0:boolean)=>void,
 ): Promise<void> {
   const url = `${process.env.BackendUrl}/book/${editPic._id}`;
-  const config = {
-    url,
-    method: 'delete',
+  await performFetchRequest(url, {
+    method: 'DELETE',
     headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-  };
-  await performAxiosRequest(config, getPictures, setEditPic, setShowTable);
+  }, getPictures, setEditPic, setShowTable);
 }
 
 interface IpicDialogBoxProps {
@@ -85,5 +85,5 @@ export const PicDialogBox = ({ pic, editPic, handleChange }: IpicDialogBoxProps)
 );
 
 export default {
-  updatePic, deletePic, performAxiosRequest, PicDialogBox,
+  updatePic, deletePic, performFetchRequest, PicDialogBox,
 };

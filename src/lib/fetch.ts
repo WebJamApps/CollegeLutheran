@@ -1,14 +1,17 @@
 import { Store } from 'react-notifications-component';
-import superagent from 'superagent';
 import 'react-notifications-component/dist/theme.css';
 import type { Dispatch, AnyAction } from 'redux';
 
 const fetchGet = async (dispatch:Dispatch<AnyAction>,
   route: string, reducer: string,
 ): Promise<boolean> => {
-  let res;
+  let body;
   try {
-    res = await superagent.get(`${process.env.BackendUrl}/${route}`).set('Accept', 'application/json');
+    const res = await fetch(`${process.env.BackendUrl}/${route}`, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    body = await res.json();
   } catch (e) {
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
@@ -30,7 +33,7 @@ const fetchGet = async (dispatch:Dispatch<AnyAction>,
     console.log((e as Error).message);
     return false;
   }
-  dispatch({ type: `${reducer}`, data: res.body });
+  dispatch({ type: `${reducer}`, data: body });
   return true;
 };
 
