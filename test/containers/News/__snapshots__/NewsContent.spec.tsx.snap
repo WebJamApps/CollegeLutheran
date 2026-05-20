@@ -36,16 +36,6 @@ exports[`NewsContent > renders the news page 1`] = `
         }
       }
     >
-      <p
-        style={
-          {
-            "color": "white",
-            "display": "block",
-          }
-        }
-      >
-        100
-      </p>
       <button
         onClick={[Function]}
         size="large"
@@ -149,7 +139,6 @@ exports[`NewsContent > renders the news page 1`] = `
   <div
     style={
       {
-        "marginLeft": "-9px",
         "textAlign": "center",
       }
     }
@@ -166,9 +155,9 @@ exports[`NewsContent > renders the news page 1`] = `
         style={
           {
             "margin": "auto",
-            "marginLeft": "",
+            "maxWidth": "500px",
             "paddingTop": "30px",
-            "width": "308px",
+            "width": "100%",
           }
         }
       />

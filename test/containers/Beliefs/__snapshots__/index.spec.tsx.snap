@@ -178,7 +178,6 @@ exports[`Beliefs > renders correctly 1`] = `
     <div
       style={
         {
-          "marginLeft": "-9px",
           "textAlign": "center",
         }
       }
@@ -195,9 +194,9 @@ exports[`Beliefs > renders correctly 1`] = `
           style={
             {
               "margin": "auto",
-              "marginLeft": "",
+              "maxWidth": "500px",
               "paddingTop": "30px",
-              "width": "308px",
+              "width": "100%",
             }
           }
         />

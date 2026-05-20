@@ -143,7 +143,6 @@ exports[`Family > renders correctly without images 1`] = `
     <div
       style={
         {
-          "marginLeft": "-9px",
           "textAlign": "center",
         }
       }
@@ -160,9 +159,9 @@ exports[`Family > renders correctly without images 1`] = `
           style={
             {
               "margin": "auto",
-              "marginLeft": "",
+              "maxWidth": "500px",
               "paddingTop": "30px",
-              "width": "308px",
+              "width": "100%",
             }
           }
         />
