@@ -110,18 +110,19 @@
 
   // Causes stretching issues if much larger on staff page
   #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
-    margin: auto auto auto -20px !important;
+    margin: 0 auto !important;
     width: 255px !important;
   }
 
   // Centers on /home and /news page
   #contentBlock > div.page-content > div.newsELCA > a #elcaLogo, div.homeELCA > a #elcaLogo {
-    margin: auto auto auto -2px !important;
+    margin: 0 auto !important;
   }
 
   #elcaLogo {
-    width: 273px !important;
-    margin: auto auto auto -12px !important;
+    width: 100% !important;
+    max-width: 273px !important;
+    margin: 0 auto !important;
   }
   #wjfooter {
     padding-top: 0 !important;
@@ -165,7 +166,7 @@
   }
   // Causes stretching issues if much larger on staff page
   #contentBlock > div.page-content > div > div > div.staffELCA > a #elcaLogo {
-    margin: auto auto auto -20px !important;
+    margin: 0 auto !important;
     width: 303px !important;
   }
 }

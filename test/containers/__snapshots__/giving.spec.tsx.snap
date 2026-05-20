@@ -71,6 +71,7 @@ exports[`Giving > Renders the Giving component 1`] = `
     <div
       style={
         {
+          "padding": "0 16px",
           "textAlign": "center",
         }
       }
@@ -78,6 +79,12 @@ exports[`Giving > Renders the Giving component 1`] = `
       <a
         href="http://www.elca.org/"
         rel="noopener noreferrer"
+        style={
+          {
+            "display": "inline-block",
+            "maxWidth": "100%",
+          }
+        }
         target="_blank"
       >
         <img
@@ -86,8 +93,10 @@ exports[`Giving > Renders the Giving component 1`] = `
           src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
           style={
             {
-              "margin": "auto",
-              "maxWidth": "500px",
+              "display": "block",
+              "height": "auto",
+              "margin": "0 auto",
+              "maxWidth": "700px",
               "paddingTop": "30px",
               "width": "100%",
             }
