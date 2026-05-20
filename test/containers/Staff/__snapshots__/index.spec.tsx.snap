@@ -337,7 +337,7 @@ exports[`Staff > renders correctly 1`] = `
       <div
         style={
           {
-            "marginLeft": "-9px",
+            "padding": "30px 24px 0",
             "textAlign": "center",
           }
         }
@@ -350,13 +350,14 @@ exports[`Staff > renders correctly 1`] = `
           <img
             alt="ELCA LOGO"
             id="elcaLogo"
-            src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+            src="/elca-logo.png"
             style={
               {
-                "margin": "auto",
-                "marginLeft": "",
-                "paddingTop": "30px",
-                "width": "308px",
+                "display": "block",
+                "height": "auto",
+                "margin": "0 auto",
+                "maxWidth": "500px",
+                "width": "100%",
               }
             }
           />
