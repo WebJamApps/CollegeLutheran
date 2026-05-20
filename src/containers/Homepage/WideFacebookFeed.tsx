@@ -45,11 +45,11 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed): JSX.Element => {
         <iframe
           className="widescreenHomepage"
           // eslint-disable-next-line max-len
-          src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&width=500&height=485&colorscheme=light&show_faces=false&header=true&stream=true&show_border=false"
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=485&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
           width="500"
           height="485"
           style={{ border: 'none', overflow: 'hidden', marginLeft: '-14px' }}
-          scrolling="none"
+          scrolling="no"
           allow="encrypted-media"
           title="facebook ticker"
         />

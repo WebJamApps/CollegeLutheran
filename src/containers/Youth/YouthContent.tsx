@@ -72,8 +72,8 @@ export const YouthContent = (
             <img
               id="elcaLogo"
               alt="ELCA LOGO"
-              src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
-              style={{ width: '350px', paddingTop: '30px', margin: 'auto' }}
+              src="/elca-logo.png"
+              style={{ width: '100%', maxWidth: '500px', height: 'auto', paddingTop: '30px', margin: 'auto' }}
             />
           </a>
         </div>

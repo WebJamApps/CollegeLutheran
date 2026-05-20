@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Iauth } from 'src/providers/Auth.provider';
 import { Ibook } from 'src/providers/utils';
 
@@ -6,14 +5,15 @@ export const defaultNews = {
   url: '', comments: '', title: '', _id: '', type: 'Forum',
 } as Ibook;
 
-export async function performAxiosRequest(
-  config: any,
+export async function performFetchRequest(
+  url: string,
+  init: RequestInit,
   getNews: () => Promise<void>,
   setEditNews: (arg0: typeof defaultNews) => void,
 ): Promise<void> {
   try {
-    const { status } = await axios.request(config);
-    if (status === 200) {
+    const res = await fetch(url, init);
+    if (res.status === 200) {
       setEditNews(defaultNews);
       await getNews();
     }
@@ -30,13 +30,15 @@ async function newsApi(
 ): Promise<void> {
   const { editNews, setEditNews } = editNewsState;
   const url = `${process.env.BackendUrl}/book/${editNews._id}`;
-  const config = {
-    url,
-    method,
-    headers: { Authorization: `Bearer ${auth.token}`, Accept: 'application/json' },
-    data: editNews,
-  };
-  await performAxiosRequest(config, getNews, setEditNews);
+  await performFetchRequest(url, {
+    method: method.toUpperCase(),
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(editNews),
+  }, getNews, setEditNews);
 }
 
-export default { newsApi, performAxiosRequest };
+export default { newsApi, performFetchRequest };

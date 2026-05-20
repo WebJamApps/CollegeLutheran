@@ -61,9 +61,7 @@
     "@types/react-router-hash-link": "^2.4.5",
     "@types/react-slick": "^0.23.10",
     "@types/sanitize-html": "^2.8.0",
-    "@types/superagent": "^8.1.9",
     "@vitejs/plugin-react": "^6.0.1",
-    "axios": "^1.8.3",
     "dotenv": "^16.3.1",
     "express": "^4.21.2",
     "express-sslify": "^1.2.0",
@@ -84,7 +82,6 @@
     "sass": "^1.68.0",
     "slick-carousel": "^1.8.1",
     "stylelint-config-recommended-scss": "^17.0.1",
-    "superagent": "^10.2.2",
     "typescript": "^5.2.2",
     "vite": "^8.0.10",
     "vite-plugin-checker": "^0.13.0"

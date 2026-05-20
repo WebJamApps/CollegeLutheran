@@ -1,17 +1,22 @@
 import {
   createContext, ReactNode, useEffect, useState,
 } from 'react';
-import axios, { AxiosError } from 'axios';
 import {
   Ibook, Icontent, Inews, IpictureTypes, makeGetter,
 } from './utils';
 
+async function fetchJson<T = unknown>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json() as Promise<T>;
+}
+
 export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   try {
-    const { data: homePage } = await axios.get(`${process.env.BackendUrl}/book/one?type=homePageContent`);
-    const { data: youthPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
-    const { data: habitatPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
-    const { data: stewardshipPage } = await axios.get(`${process.env.BackendUrl}/book/one?type=stewardshipPageContent`);
+    const homePage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=homePageContent`);
+    const youthPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
+    const habitatPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=habitatPageContent`);
+    const stewardshipPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=stewardshipPageContent`);
     setContent({
       homePage,
       youthPage,
@@ -38,21 +43,21 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
 
 export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
   try {
-    const { data: musicPics } = await axios.get(`${process.env.BackendUrl}/book?type=musicPics`);
-    const { data: familyPics } = await axios.get(`${process.env.BackendUrl}/book?type=familyPics`);
-    const { data: youthPics } = await axios.get(`${process.env.BackendUrl}/book?type=youthPics`);
-    const { data: habitatPics } = await axios.get(`${process.env.BackendUrl}/book?type=habitatPics`);
-    const { data: otherPics } = await axios.get(`${process.env.BackendUrl}/book?type=otherPics`);
+    const musicPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=musicPics`);
+    const familyPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=familyPics`);
+    const youthPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=youthPics`);
+    const habitatPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=habitatPics`);
+    const otherPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=otherPics`);
     const pictures = {
       musicPics, familyPics, youthPics, habitatPics, otherPics,
     };
     setPictures(pictures);
-  } catch (err) { console.error((err as AxiosError).message); }
+  } catch (err) { console.error((err as Error).message); }
 };
 
 export const populateNews = async (setNews: (arg0:Inews)=> void) => {
   try {
-    const { data } = await axios.get(`${process.env.BackendUrl}/book?type=Forum`);
+    const data = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=Forum`);
     if (Array.isArray(data)) {
       data.sort((a, b) => {
         if (a.created_at && b.created_at) {
@@ -65,7 +70,7 @@ export const populateNews = async (setNews: (arg0:Inews)=> void) => {
       });
     }
     setNews({ newsContent: data });
-  } catch (err) { console.error((err as AxiosError).message); }
+  } catch (err) { console.error((err as Error).message); }
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

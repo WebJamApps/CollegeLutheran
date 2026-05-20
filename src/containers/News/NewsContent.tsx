@@ -13,7 +13,6 @@ import { defaultNews } from './utilsN';
 export function SignUpForEmails({ height }:{ height:number }) {
   return (
     <>
-      <p style={{ display: 'block', color: 'white' }}>{height}</p>
       {height < 700 ? (
         <Button
           onClick={() => window.location.reload()}
