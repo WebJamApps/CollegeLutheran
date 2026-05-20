@@ -454,7 +454,7 @@ exports[`Staff > renders StaffContent 1`] = `
       <div
         style={
           {
-            "padding": "0 16px",
+            "paddingTop": "30px",
             "textAlign": "center",
           }
         }
@@ -462,12 +462,6 @@ exports[`Staff > renders StaffContent 1`] = `
         <a
           href="http://www.elca.org/"
           rel="noopener noreferrer"
-          style={
-            {
-              "display": "inline-block",
-              "maxWidth": "100%",
-            }
-          }
           target="_blank"
         >
           <img
@@ -476,11 +470,13 @@ exports[`Staff > renders StaffContent 1`] = `
             src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
             style={
               {
+                "background": "#ffffff",
+                "boxSizing": "border-box",
                 "display": "block",
                 "height": "auto",
                 "margin": "0 auto",
                 "maxWidth": "700px",
-                "paddingTop": "30px",
+                "padding": "20px 28px",
                 "width": "100%",
               }
             }
