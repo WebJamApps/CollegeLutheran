@@ -122,7 +122,7 @@ exports[`Youth > renders correctly without images 1`] = `
             {
               "height": "auto",
               "margin": "auto",
-              "maxWidth": "700px",
+              "maxWidth": "500px",
               "paddingTop": "30px",
               "width": "100%",
             }

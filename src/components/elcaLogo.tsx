@@ -1,6 +1,6 @@
 
 const ELCALogo = (): JSX.Element => (
-  <div style={{ textAlign: 'center', paddingTop: '30px' }}>
+  <div style={{ textAlign: 'center', padding: '30px 24px 0' }}>
     <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
         id="elcaLogo"
@@ -9,7 +9,7 @@ const ELCALogo = (): JSX.Element => (
         style={{
           display: 'block',
           width: '100%',
-          maxWidth: '700px',
+          maxWidth: '500px',
           height: 'auto',
           margin: '0 auto',
         }}

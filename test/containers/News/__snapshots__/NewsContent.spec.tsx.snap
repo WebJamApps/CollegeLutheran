@@ -139,7 +139,7 @@ exports[`NewsContent > renders the news page 1`] = `
   <div
     style={
       {
-        "paddingTop": "30px",
+        "padding": "30px 24px 0",
         "textAlign": "center",
       }
     }
@@ -158,7 +158,7 @@ exports[`NewsContent > renders the news page 1`] = `
             "display": "block",
             "height": "auto",
             "margin": "0 auto",
-            "maxWidth": "700px",
+            "maxWidth": "500px",
             "width": "100%",
           }
         }
