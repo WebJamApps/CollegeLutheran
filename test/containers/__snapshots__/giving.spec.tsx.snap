@@ -84,16 +84,13 @@ exports[`Giving > Renders the Giving component 1`] = `
         <img
           alt="ELCA LOGO"
           id="elcaLogo"
-          src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+          src="/elca-logo.png"
           style={
             {
-              "background": "#ffffff",
-              "boxSizing": "border-box",
               "display": "block",
               "height": "auto",
               "margin": "0 auto",
               "maxWidth": "700px",
-              "padding": "20px 28px",
               "width": "100%",
             }
           }

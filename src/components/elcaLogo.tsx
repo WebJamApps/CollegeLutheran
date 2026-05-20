@@ -5,16 +5,13 @@ const ELCALogo = (): JSX.Element => (
       <img
         id="elcaLogo"
         alt="ELCA LOGO"
-        src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+        src="/elca-logo.png"
         style={{
           display: 'block',
           width: '100%',
           maxWidth: '700px',
           height: 'auto',
           margin: '0 auto',
-          background: '#ffffff',
-          padding: '20px 28px',
-          boxSizing: 'border-box',
         }}
       />
     </a>

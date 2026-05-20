@@ -117,12 +117,14 @@ exports[`YouthContent > renders the youth page 1`] = `
         <img
           alt="ELCA LOGO"
           id="elcaLogo"
-          src="https://dl.dropboxusercontent.com/s/wkzubcmmm3pqst4/elca-logo.png?dl=0"
+          src="/elca-logo.png"
           style={
             {
+              "height": "auto",
               "margin": "auto",
+              "maxWidth": "700px",
               "paddingTop": "30px",
-              "width": "350px",
+              "width": "100%",
             }
           }
         />
