@@ -9,6 +9,7 @@ import store from './redux/store';
 import { AuthProvider } from './providers/Auth.provider';
 import '../static/styles.scss';
 import { ContentProvider } from './providers/Content.provider';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 function Main() {
@@ -19,7 +20,9 @@ function Main() {
           <PersistGate loading={null} persistor={store.persistor}>
             <ContentProvider>
               <ReactNotifications />
-              <App />
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
             </ContentProvider>
           </PersistGate>
         </Provider>

@@ -3,10 +3,18 @@ import { HashLink } from 'react-router-hash-link';
 import staffItems from './staffItems.json';
 import ELCALogo from '../../components/elcaLogo';
 
+interface StaffMember {
+  sectionId: string;
+  title: string;
+  width: string;
+  src: string;
+  desc: string;
+}
+
 export function MoreStaff() {
   return (
     <>
-      {staffItems.staff.map((s: any) => (
+      {(staffItems.staff as StaffMember[]).map((s) => (
         <section key={s.sectionId} id={s.sectionId}>
           <hr />
           <h4>

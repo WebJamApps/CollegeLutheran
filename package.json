@@ -9,8 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": "24.15.0",
-    "npm": "11.12.1"
+    "node": "24.16.0"
   },
   "files": [
     "vite.config.ts",
@@ -63,7 +62,7 @@
     "@types/sanitize-html": "^2.8.0",
     "@vitejs/plugin-react": "^6.0.1",
     "dotenv": "^16.3.1",
-    "express": "^4.21.2",
+    "express": "^5.0.0",
     "express-sslify": "^1.2.0",
     "html-react-parser": "^3.0.9",
     "jwt-decode": "^4.0.0",
@@ -73,7 +72,7 @@
     "react-notifications-component": "^4.0.1",
     "react-redux": "^8.0.5",
     "react-resize-detector": "^8.0.4",
-    "react-router-dom": "^6.16.0",
+    "react-router-dom": "^7.0.0",
     "react-router-hash-link": "^2.4.3",
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",

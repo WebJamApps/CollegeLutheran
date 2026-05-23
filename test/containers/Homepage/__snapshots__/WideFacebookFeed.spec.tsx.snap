@@ -44,6 +44,7 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
     <iframe
       frameBorder="0"
       height="500"
+      loading="lazy"
       scrolling="no"
       src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&height=500&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&color=%23060D5E&ctz=America%2FNew_York"
       style={
@@ -97,6 +98,7 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
       allow="encrypted-media"
       className="widescreenHomepage"
       height="485"
+      loading="lazy"
       scrolling="no"
       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=485&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
       style={

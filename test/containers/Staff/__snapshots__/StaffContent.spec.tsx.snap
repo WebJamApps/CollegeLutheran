@@ -159,6 +159,7 @@ exports[`Staff > renders StaffContent 1`] = `
             Reverend
              
             <a
+              data-discover="true"
               href="/staff/#David"
               onClick={[Function]}
             >
@@ -184,6 +185,7 @@ exports[`Staff > renders StaffContent 1`] = `
             }
           >
             <a
+              data-discover="true"
               href="/staff/#Susan"
               onClick={[Function]}
             >
@@ -207,6 +209,7 @@ exports[`Staff > renders StaffContent 1`] = `
             }
           >
             <a
+              data-discover="true"
               href="/staff/#Kellie"
               onClick={[Function]}
             >
@@ -230,6 +233,7 @@ exports[`Staff > renders StaffContent 1`] = `
             }
           >
             <a
+              data-discover="true"
               href="/staff/#Sandi"
               onClick={[Function]}
             >
@@ -253,6 +257,7 @@ exports[`Staff > renders StaffContent 1`] = `
             }
           >
             <a
+              data-discover="true"
               href="/staff/#Lawrence"
               onClick={[Function]}
             >
@@ -270,6 +275,7 @@ exports[`Staff > renders StaffContent 1`] = `
             }
           >
             <a
+              data-discover="true"
               href="/staff/#Richard"
               onClick={[Function]}
             >
