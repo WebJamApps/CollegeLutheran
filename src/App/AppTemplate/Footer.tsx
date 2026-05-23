@@ -19,20 +19,6 @@ const footerLinks = () => {
         Powered by &nbsp;
       </span>
       <a className="wjllc" target="_blank" rel="noopener noreferrer" href="https://www.web-jam.com">Web Jam LLC</a>
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
-        <iframe
-          title="footer-facebook-feed"
-          // eslint-disable-next-line max-len
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
-          width="340"
-          height="70"
-          style={{ border: 'none', overflow: 'hidden' }}
-          scrolling="no"
-          frameBorder="0"
-          allow="encrypted-media"
-          loading="lazy"
-        />
-      </div>
     </div>
   );
 };
