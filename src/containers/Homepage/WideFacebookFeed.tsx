@@ -19,6 +19,7 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed): JSX.Element => {
           style={{ borderWidth: 0 }}
           width="550"
           height="500"
+          loading="lazy"
           frameBorder="0"
           scrolling="no"
           title="google-calendar"
@@ -48,6 +49,7 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed): JSX.Element => {
           src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=485&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
           width="500"
           height="485"
+          loading="lazy"
           style={{ border: 'none', overflow: 'hidden', marginLeft: '-14px' }}
           scrolling="no"
           allow="encrypted-media"

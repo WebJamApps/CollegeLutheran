@@ -16,33 +16,21 @@ const APP_ENV_KEYS = [
   'NODE_ENV',
 ] as const;
 
-function replaceProcessEnv(env: Record<string, string>): Plugin {
-  return {
-    name: 'replace-process-env',
-    enforce: 'pre',
-    transform(code, id) {
-      if (!/\.(t|j)sx?$/.test(id)) return null;
-      let out = code;
-      for (const key of APP_ENV_KEYS) {
-        const re = new RegExp(`process\\.env\\.${key}\\b`, 'g');
-        out = out.replace(re, JSON.stringify(env[key] ?? ''));
-      }
-      return out === code ? null : { code: out, map: null };
-    },
-  };
-}
-
 export default defineConfig(({ mode }) => {
   const env: Record<string, string> = { ...loadEnv(mode, process.cwd(), ''), NODE_ENV: mode };
   const isTest = mode === 'test' || process.env.VITEST;
+
+  const defines = APP_ENV_KEYS.reduce((acc, key) => {
+    acc[`process.env.${key}`] = JSON.stringify(env[key] ?? '');
+    return acc;
+  }, {} as Record<string, string>);
+
   return {
     plugins: [
-      ...(isTest ? [] : [
-        replaceProcessEnv(env),
-        checker({ typescript: { tsconfigPath: './tsconfig.prod.json' } }),
-      ]),
+      ...(isTest ? [] : [checker({ typescript: { tsconfigPath: './tsconfig.prod.json' } })]),
       react(),
     ],
+    define: isTest ? {} : defines,
     server: {
       port: Number(env.PORT) || 7777,
     },

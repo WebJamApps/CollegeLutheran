@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import ELCALogo from '../../components/elcaLogo';
 
-function GivingInfo():JSX.Element {
+function GivingInfo(): JSX.Element {
   return (
     <div
       className="material-content elevation3"
@@ -30,7 +30,7 @@ function GivingInfo():JSX.Element {
   );
 }
 
-function GivingDonation():JSX.Element {
+function GivingDonation(): JSX.Element {
   return (
     <iframe
       width="100%"
@@ -54,7 +54,7 @@ export function GivingContent(): JSX.Element {
       flexDirection: 'column',
       alignItems: 'center', // This centers all children horizontally
       py: 3,
-    }}
+    } as const}
     >
 
       {/* 1. Info Section - Width limited so it looks good on desktop */}
@@ -66,7 +66,7 @@ export function GivingContent(): JSX.Element {
       <Box
         sx={{
           width: '100%',
-          maxWidth: '1200px', // Matches your desired content width
+          maxWidth: 1200, // Matches your desired content width
           height: '800px',
           overflowX: 'auto', // Forces horizontal scrollbar
           border: '1px solid #eee', // Optional: helps see the scroll area
