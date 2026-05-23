@@ -57,6 +57,24 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
         />
       )
         : null}
+      <div style={{ marginTop: '20px' }}>
+        <iframe
+          title="facebook-live-feed"
+          // eslint-disable-next-line max-len
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+          width={width > 500 ? '500' : '100%'}
+          height="500"
+          style={{
+            border: 'none',
+            overflow: 'hidden',
+            maxWidth: '500px',
+          }}
+          scrolling="no"
+          frameBorder="0"
+          allow="encrypted-media"
+          loading="lazy"
+        />
+      </div>
       {width < 932
         ? (
           <iframe

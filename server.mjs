@@ -10,13 +10,13 @@ const app = express();
 if (process.env.NODE_ENV === 'production') app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 app.use((_req, res, next) => {
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()');
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   next();
 });
 
 app.use(express.static(path.normalize(path.join(__dirname, 'dist'))));
-app.use('/', express.static(path.normalize(path.join(__dirname, 'dist'))));
-app.get('/*', (_request, response) => {
+app.get('/*path', (_request, response) => {
   response.sendFile(path.normalize(path.join(__dirname, 'dist/index.html')));
 });
 

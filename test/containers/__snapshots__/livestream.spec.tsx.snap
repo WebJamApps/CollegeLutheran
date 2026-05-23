@@ -44,6 +44,31 @@ exports[`LiveStream > renders smallscreen 1`] = `
      
     - These links also provide a way to view previous church services that were recorded.
   </p>
+  <div
+    style={
+      {
+        "marginTop": "20px",
+      }
+    }
+  >
+    <iframe
+      allow="encrypted-media"
+      frameBorder="0"
+      height="500"
+      loading="lazy"
+      scrolling="no"
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+      style={
+        {
+          "border": "none",
+          "maxWidth": "500px",
+          "overflow": "hidden",
+        }
+      }
+      title="facebook-live-feed"
+      width="100%"
+    />
+  </div>
   <iframe
     allow="autoplay; fullscreen; picture-in-picture"
     allowFullScreen={true}
@@ -127,6 +152,31 @@ exports[`LiveStream > renders widescreen 1`] = `
     title="Live Stream Wide"
     width="930"
   />
+  <div
+    style={
+      {
+        "marginTop": "20px",
+      }
+    }
+  >
+    <iframe
+      allow="encrypted-media"
+      frameBorder="0"
+      height="500"
+      loading="lazy"
+      scrolling="no"
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+      style={
+        {
+          "border": "none",
+          "maxWidth": "500px",
+          "overflow": "hidden",
+        }
+      }
+      title="facebook-live-feed"
+      width="500"
+    />
+  </div>
   <div
     style={
       {

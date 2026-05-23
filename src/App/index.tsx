@@ -1,5 +1,5 @@
 import {
-  BrowserRouter, Routes, Route, Navigate,
+  Routes, Route, Navigate,
 } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
@@ -30,7 +30,7 @@ export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
   return isAdmin;
 }
 
-export function showAdminDashboard(isAdmin:boolean) {
+export function showAdminDashboard(isAdmin: boolean) {
   if (isAdmin) return <Route path="/admin" element={<AdminDashboard />} />;
   return null;
 }
@@ -41,27 +41,25 @@ export function App(): JSX.Element {
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
   return (
     <div id="App" className="App">
-      <BrowserRouter>
-        <AppTemplate>
-          <Routes>
-            <Route path="/" element={<DefaultHome width={900} />} />
-            <Route path="/music" element={<DefaultMusic />} />
-            <Route path="/belief" element={<Beliefs />} />
-            <Route path="/family" element={<Family />} />
-            <Route path="/giving" element={<Giving />} />
-            <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
-            <Route path="/staff" element={<Staff />} />
-            {showAdminDashboard(isAdmin)}
-            <Route path="/youth" element={<DefaultYouth />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/livestream" element={<DefaultLiveStream />} />
-            <Route path="/stewardship" element={<Stewardship />} />
-            {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </AppTemplate>
-      </BrowserRouter>
+      <AppTemplate>
+        <Routes>
+          <Route path="/" element={<DefaultHome width={900} />} />
+          <Route path="/music" element={<DefaultMusic />} />
+          <Route path="/belief" element={<Beliefs />} />
+          <Route path="/family" element={<Family />} />
+          <Route path="/giving" element={<Giving />} />
+          <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />
+          <Route path="/staff" element={<Staff />} />
+          {showAdminDashboard(isAdmin)}
+          <Route path="/youth" element={<DefaultYouth />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/livestream" element={<DefaultLiveStream />} />
+          <Route path="/stewardship" element={<Stewardship />} />
+          {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AppTemplate>
     </div>
   );
 }

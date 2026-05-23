@@ -23,6 +23,7 @@ const FacebookIframe = () => (
         width="300"
         height="500"
         style={{ border: 'none', overflow: 'hidden' }}
+        loading="lazy"
         scrolling="no"
         frameBorder="0"
         allow="encrypted-media"
