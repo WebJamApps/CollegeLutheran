@@ -1,101 +1,79 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Giving > Renders the Giving component 1`] = `
-<div
-  className="MuiBox-root css-thmi91"
->
+<div>
   <div
-    className="MuiBox-root css-1b46un8"
+    class="MuiBox-root css-thmi91"
   >
     <div
-      className="material-content elevation3"
-      style={
-        {
-          "margin": "auto",
-          "marginLeft": "20px",
-          "marginRight": "20px",
-          "textAlign": "left",
-        }
-      }
+      class="MuiBox-root css-1b46un8"
     >
-      <h3>
-        Giving
-      </h3>
-      <p>
-        Thank you for supporting the ministries of College Lutheran Church through your online giving. We now use
-         
-        <i>
-          BreezeChMS
-        </i>
-         
-        to process online gifts. Giving electronically from your bank account or credit card is easy! Just complete the form below to support the ministries of CLC with your offering.
-      </p>
-      <i>
-        If you have any questions about online giving, please contact us at (540) 389-4963 or
-         
-        <a
-          href="mailto:office1@collegelutheran.org"
-        >
-          office1@collegelutheran.org
-        </a>
-      </i>
-    </div>
-  </div>
-  <div
-    className="MuiBox-root css-1emsdqd"
-  >
-    <div
-      className="MuiBox-root css-3ioch2"
-    >
-      <iframe
-        className="giving-iframe"
-        height="100%"
-        src="https://collegelutheranchurch.breezechms.com/give/online"
-        style={
-          {
-            "overflowX": "scroll",
-          }
-        }
-        title="Just Giving"
-        width="100%"
+      <div
+        class="material-content elevation3"
+        style="text-align: left; margin: auto 20px;"
       >
+        <h3>
+          Giving
+        </h3>
         <p>
-          Your browser does not support iframe.
+          Thank you for supporting the ministries of College Lutheran Church through your online giving. We now use
+           
+          <i>
+            BreezeChMS
+          </i>
+           
+          to process online gifts. Giving electronically from your bank account or credit card is easy! Just complete the form below to support the ministries of CLC with your offering.
         </p>
-      </iframe>
+        <i>
+          If you have any questions about online giving, please contact us at (540) 389-4963 or
+           
+          <a
+            href="mailto:office1@collegelutheran.org"
+          >
+            office1@collegelutheran.org
+          </a>
+        </i>
+      </div>
     </div>
-  </div>
-  <div
-    className="MuiBox-root css-h5fkc8"
-  >
     <div
-      style={
-        {
-          "padding": "30px 24px 0",
-          "textAlign": "center",
-        }
-      }
+      class="MuiBox-root css-1emsdqd"
     >
-      <a
-        href="http://www.elca.org/"
-        rel="noopener noreferrer"
-        target="_blank"
+      <div
+        class="MuiBox-root css-3ioch2"
       >
-        <img
-          alt="ELCA LOGO"
-          id="elcaLogo"
-          src="/elca-logo.png"
-          style={
-            {
-              "display": "block",
-              "height": "auto",
-              "margin": "0 auto",
-              "maxWidth": "500px",
-              "width": "100%",
-            }
-          }
-        />
-      </a>
+        <iframe
+          class="giving-iframe"
+          height="100%"
+          src="https://collegelutheranchurch.breezechms.com/give/online"
+          style="overflow-x: scroll;"
+          title="Just Giving"
+          width="100%"
+        >
+          <p>
+            Your browser does not support iframe.
+          </p>
+        </iframe>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-h5fkc8"
+    >
+      <div
+        style="text-align: center; padding: 30px 24px 0px;"
+      >
+        <a
+          href="http://www.elca.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="ELCA LOGO"
+            id="elcaLogo"
+            src="/elca-logo.png"
+            style="display: block; width: 100%; max-width: 500px; height: auto; margin: 0px auto;"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </div>

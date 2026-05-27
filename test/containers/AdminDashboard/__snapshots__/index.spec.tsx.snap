@@ -1,135 +1,81 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Dashboard Container > renders AdminDashboard 1`] = `
-<div
-  style={
-    {
-      "minHeight": "80vh",
-    }
-  }
->
-  <h4
-    style={
-      {
-        "marginTop": "10px",
-        "textAlign": "center",
-      }
-    }
-  >
-    CLC Admin Dashboard
-  </h4>
+<div>
   <div
-    direction="row"
-    spacing={2}
-    style={
-      {
-        "marginLeft": "1%",
-        "textAlign": "center",
-      }
-    }
+    style="min-height: 80vh;"
   >
-    <button
-      className="createPic"
-      id="a-d"
-      onClick={[Function]}
-      size="small"
-      sx={
-        {
-          "textAlign": "center",
-        }
-      }
-      variant="contained"
+    <h4
+      style="text-align: center; margin-top: 10px;"
     >
-      Add Picture
-    </button>
-    <button
-      className="editPic"
-      id="a-d"
-      onClick={[Function]}
-      size="small"
-      sx={
-        {
-          "textAlign": "center",
-        }
-      }
-      variant="contained"
+      CLC Admin Dashboard
+    </h4>
+    <div
+      direction="row"
+      spacing="2"
+      style="text-align: center; margin-left: 1%;"
     >
-      Edit Picture
-    </button>
-    <button
-      className="editContent"
-      id="a-d"
-      onClick={[Function]}
-      size="small"
-      sx={
-        {
-          "textAlign": "center",
-        }
-      }
-      variant="contained"
-    >
-      Edit Page Content
-    </button>
-    <button
-      id="a-d"
-      onClick={[Function]}
-      size="small"
-      sx={
-        {
-          "textAlign": "center",
-        }
-      }
-      variant="outlined"
-    >
-      Cancel
-    </button>
-  </div>
-  <div
-    className="material-content elevation3"
-    style={
-      {
-        "margin": "30px auto auto auto",
-        "maxWidth": "8in",
-      }
-    }
-  >
-    <h5>
-      Add to News Page
-    </h5>
-    <div>
-      <input
-        label="Title"
-        onChange={[Function]}
-        sx={
-          {
-            "marginBottom": "10px",
-          }
-        }
-        value=""
-      />
-      <input
-        label="Url"
-        onChange={[Function]}
-        value=""
-      />
-      <div
-        control={
-          <Checkbox
-            checked={false}
-            onChange={[Function]}
-          />
-        }
-        label="Is Worship Bulletin?"
-      />
+      <button
+        class="createPic"
+        id="a-d"
+        sx="[object Object]"
+        variant="contained"
+      >
+        Add Picture
+      </button>
+      <button
+        class="editPic"
+        id="a-d"
+        sx="[object Object]"
+        variant="contained"
+      >
+        Edit Picture
+      </button>
+      <button
+        class="editContent"
+        id="a-d"
+        sx="[object Object]"
+        variant="contained"
+      >
+        Edit Page Content
+      </button>
+      <button
+        id="a-d"
+        sx="[object Object]"
+        variant="outlined"
+      >
+        Cancel
+      </button>
     </div>
-    <hr />
-    <button
-      onClick={[Function]}
-      size="small"
-      variant="contained"
+    <div
+      class="material-content elevation3"
+      style="max-width: 8in; margin: 30px auto auto;"
     >
-      Add News
-    </button>
+      <h5>
+        Add to News Page
+      </h5>
+      <div>
+        <input
+          label="Title"
+          sx="[object Object]"
+          value=""
+        />
+        <input
+          label="Url"
+          value=""
+        />
+        <div
+          control="[object Object]"
+          label="Is Worship Bulletin?"
+        />
+      </div>
+      <hr />
+      <button
+        variant="contained"
+      >
+        Add News
+      </button>
+    </div>
   </div>
 </div>
 `;

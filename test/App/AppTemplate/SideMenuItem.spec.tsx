@@ -1,7 +1,7 @@
 import {
   ContinueMenuItem, MakeLink, checkIsAllowed, setBulletin, sortBulletins,
 } from 'src/App/AppTemplate/SideMenuItem';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 vi.mock('react-redux', () => ({
@@ -69,8 +69,8 @@ describe('SideMenuItem', () => {
       pathname: '/staff',
       handleClose: vi.fn(),
     };
-    const result: any = renderer.create(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>).toJSON();
-    expect(result.type).toBe('div');
+    const { container } = render(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>);
+    expect(container.firstChild?.nodeName).toBe('DIV');
   });
   it('shows logout button when authenticated', () => {
     const props = {
@@ -90,8 +90,8 @@ describe('SideMenuItem', () => {
       pathname: '',
       handleClose: vi.fn(),
     };
-    const result: any = renderer.create(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>).toJSON();
-    expect(result.type).toBe('div');
+    const { container } = render(<GoogleOAuthProvider clientId=""><ContinueMenuItem {...props} /></GoogleOAuthProvider>);
+    expect(container.firstChild?.nodeName).toBe('DIV');
   });
   it('renders anchor when type is not link', () => {
     const menu = {
@@ -100,8 +100,8 @@ describe('SideMenuItem', () => {
     const index = 0;
     const type = '';
     const handleClose = vi.fn();
-    const result = renderer.create(<MakeLink menu={menu} index={index} type={type} handleClose={handleClose} />).toJSON();
-    expect(result).toMatchSnapshot();
+    const { container } = render(<MakeLink menu={menu} index={index} type={type} handleClose={handleClose} />);
+    expect(container).toMatchSnapshot();
   });
   it('returns null when path and menu link are staff', () => {
     const menu = {

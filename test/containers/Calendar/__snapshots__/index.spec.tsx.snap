@@ -1,47 +1,34 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Calendar > renders correctly 1`] = `
-<div
-  className="page-content"
->
+<div>
   <div
-    className="container-fluid"
+    class="page-content"
   >
-    <p
-      style={
-        {
-          "fontSize": "4pt",
-          "margin": "0",
-        }
-      }
-    >
-       
-    </p>
     <div
-      className="material-content elevation3"
-      style={
-        {
-          "margin": "auto",
-          "maxWidth": "998px",
-          "paddingBottom": "-80px",
-        }
-      }
+      class="container-fluid"
     >
-      <iframe
-        frameBorder="0"
-        height="900"
-        scrolling="no"
-        src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showTabs=0&showCalendars=0&
+      <p
+        style="font-size: 4pt; margin: 0px;"
+      >
+         
+      </p>
+      <div
+        class="material-content elevation3"
+        style="max-width: 998px; margin: auto;"
+      >
+        <iframe
+          frameborder="0"
+          height="900"
+          scrolling="no"
+          src="https://calendar.google.com/calendar/embed?title=College%20Lutheran%20Events%20Calendar&showTabs=0&showCalendars=0&
           height=900&wkst=1&bgcolor=%23FFFFFF&src=ra8um2u26p59a2t92lfooq4els%40group.calendar.google.com&
           color=%23060D5E&ctz=America%2FNew_York"
-        style={
-          {
-            "borderWidth": "0",
-          }
-        }
-        title="Church Calendar"
-        width="900"
-      />
+          style="border-width: 0px;"
+          title="Church Calendar"
+          width="900"
+        />
+      </div>
     </div>
   </div>
 </div>

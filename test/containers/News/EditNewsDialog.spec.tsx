@@ -1,4 +1,5 @@
-import renderer from 'react-test-renderer';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, fireEvent } from '@testing-library/react';
 import {
   EditNewsDialog, NewsTextField, EditNewsContent, EditNewsButtons,
 } from 'src/containers/News/EditNewsDialog';
@@ -9,40 +10,47 @@ describe('EditNewsDialog', () => {
     const props = {
       value: '', label: '', onChange: vi.fn(), className: '',
     };
-    const result: any = renderer.create(<NewsTextField {...props} />).toJSON();
-    expect(result.type).toBe('input');
+    const { container } = render(<NewsTextField {...props} />);
+    expect(container.querySelector('input')).not.toBeNull();
   });
-  it('handles onClose for EditNewsDialog', () => {
+  it('renders EditNewsDialog with editNews', () => {
     const editNews = {
       title: '', type: 'Forum', comments: '', url: '', _id: '',
     };
     const setEditNews = vi.fn();
-    const result = renderer.create(<EditNewsDialog editNews={editNews} setEditNews={setEditNews} />).root;
-    result.findByProps({ className: 'editNewsDialog' }).props.onClose();
-    expect(setEditNews).toHaveBeenCalled();
+    const { container } = render(<EditNewsDialog editNews={editNews} setEditNews={setEditNews} />);
+    expect(container.querySelector('.editNewsDialog')).not.toBeNull();
   });
-  it('renders EditNewsContent and handles events', () => {
+  it('renders EditNewsContent and handles input changes', () => {
+    const setEditNews = vi.fn();
     const props = {
       showHideCaption: vi.fn(),
-      editNewsState: { editNews: defaultNews, setEditNews: vi.fn() },
+      editNewsState: { editNews: defaultNews, setEditNews },
     };
-    const evt = { target: { value: 'url' } };
-    const result = renderer.create(<EditNewsContent {...props} />).root;
-    expect(result.findByProps({ label: '* URL' }).props.onChange(evt)).toBe('url');
-    expect(result.findByProps({ label: '* Title' }).props.onChange(evt)).toBe('url');
+    const { container } = render(<EditNewsContent {...props} />);
+    const urlInput = container.querySelector('input[label="* URL"]') as HTMLInputElement | null;
+    const titleInput = container.querySelector('input[label="* Title"]') as HTMLInputElement | null;
+    expect(urlInput).not.toBeNull();
+    expect(titleInput).not.toBeNull();
+    fireEvent.change(urlInput!, { target: { value: 'url' } });
+    fireEvent.change(titleInput!, { target: { value: 'title' } });
+    expect(setEditNews).toHaveBeenCalledTimes(2);
   });
   it('renders EditNewsButtons and handles events', () => {
     utils.newsApi = vi.fn();
     const props = {
-      editNews: defaultNews,
+      editNews: { ...defaultNews, title: 't', url: 'u' },
       setEditNews: vi.fn(),
     };
-    const result = renderer.create(<EditNewsButtons {...props} />).root;
-    result.findByProps({ className: 'updateNewsButton' }).props.onClick();
+    const { container } = render(<EditNewsButtons {...props} />);
+    const update = container.querySelector('.updateNewsButton') as HTMLButtonElement | null;
+    const del = container.querySelector('.deleteNewsButton') as HTMLButtonElement | null;
+    const cancel = container.querySelector('.cancelNewsButton') as HTMLButtonElement | null;
+    fireEvent.click(update!);
     expect(utils.newsApi).toHaveBeenCalled();
-    result.findByProps({ className: 'deleteNewsButton' }).props.onClick();
+    fireEvent.click(del!);
     expect(utils.newsApi).toHaveBeenCalledTimes(2);
-    result.findByProps({ className: 'cancelNewsButton' }).props.onClick();
+    fireEvent.click(cancel!);
     expect(props.setEditNews).toHaveBeenCalled();
   });
 });

@@ -1,4 +1,4 @@
-import { withResizeDetector } from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 import commonUtils from '../../lib/commonUtils';
 
 const makeSpace = (width: number) => {
@@ -11,7 +11,7 @@ const makeSpace = (width: number) => {
 export interface LiveStreamProps {
   width: number
 }
-export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
+export const LiveStream = ({ width }: LiveStreamProps) => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   const src = `https://www.youtube.com/embed/live_stream?channel=${process.env.CHANNEL_ID}`;
   return (
@@ -94,4 +94,7 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
     </div>
   );
 };
-export default withResizeDetector(LiveStream);
+export default function DefaultLiveStream() {
+  const { width, ref } = useResizeDetector<HTMLDivElement>();
+  return <div ref={ref}><LiveStream width={width || 0} /></div>;
+}

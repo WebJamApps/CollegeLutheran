@@ -1,190 +1,134 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`LiveStream > renders smallscreen 1`] = `
-<div
-  style={
-    {
-      "margin": "auto",
-      "textAlign": "center",
-      "width": "100%",
-    }
-  }
->
-  <p>
-    The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
-    <br />
-     
-    <a
-      href="https://www.youtube.com/@collegelutheranchurch/streams"
-      rel="noreferrer"
-      style={
-        {
-          "fontWeight": "bold",
-        }
-      }
-      target="_blank"
-    >
-      YouTube Live
-    </a>
-     
-    |
-     
-    <a
-      href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
-      rel="noreferrer"
-      style={
-        {
-          "fontWeight": "bold",
-        }
-      }
-      target="_blank"
-    >
-      Facebook Videos
-    </a>
-     
-    - These links also provide a way to view previous church services that were recorded.
-  </p>
+<div>
   <div
-    style={
-      {
-        "marginTop": "20px",
-      }
-    }
+    style="margin: auto; width: 100%; text-align: center;"
   >
+    <p>
+      The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
+      <br />
+       
+      <a
+        href="https://www.youtube.com/@collegelutheranchurch/streams"
+        rel="noreferrer"
+        style="font-weight: bold;"
+        target="_blank"
+      >
+        YouTube Live
+      </a>
+       
+      |
+       
+      <a
+        href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
+        rel="noreferrer"
+        style="font-weight: bold;"
+        target="_blank"
+      >
+        Facebook Videos
+      </a>
+       
+      - These links also provide a way to view previous church services that were recorded.
+    </p>
+    <div
+      style="margin-top: 20px;"
+    >
+      <iframe
+        allow="encrypted-media"
+        frameborder="0"
+        height="500"
+        loading="lazy"
+        scrolling="no"
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+        style="border: medium; overflow: hidden; max-width: 500px;"
+        title="facebook-live-feed"
+        width="100%"
+      />
+    </div>
     <iframe
-      allow="encrypted-media"
-      frameBorder="0"
-      height="500"
-      loading="lazy"
-      scrolling="no"
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-      style={
-        {
-          "border": "none",
-          "maxWidth": "500px",
-          "overflow": "hidden",
-        }
-      }
-      title="facebook-live-feed"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen=""
+      frameborder="0"
+      height="360"
+      src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
+      title="Live Stream Small"
       width="100%"
     />
-  </div>
-  <iframe
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowFullScreen={true}
-    frameBorder="0"
-    height="360"
-    src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
-    title="Live Stream Small"
-    width="100%"
-  />
-  <div
-    style={
-      {
-        "marginTop": "38vh",
-      }
-    }
-  >
-     
+    <div
+      style="margin-top: 38vh;"
+    >
+       
+    </div>
   </div>
 </div>
 `;
 
 exports[`LiveStream > renders widescreen 1`] = `
-<div
-  style={
-    {
-      "margin": "auto",
-      "textAlign": "center",
-      "width": "100%",
-    }
-  }
->
-  <h5
-    style={
-      {
-        "marginTop": "0.5rem",
-      }
-    }
-  >
-    Welcome to Our Livestream Page
-  </h5>
-  <p>
-    The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
-    <br />
-     
-    <a
-      href="https://www.youtube.com/@collegelutheranchurch/streams"
-      rel="noreferrer"
-      style={
-        {
-          "fontWeight": "bold",
-        }
-      }
-      target="_blank"
-    >
-      YouTube Live
-    </a>
-     
-    |
-     
-    <a
-      href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
-      rel="noreferrer"
-      style={
-        {
-          "fontWeight": "bold",
-        }
-      }
-      target="_blank"
-    >
-      Facebook Videos
-    </a>
-     
-    - These links also provide a way to view previous church services that were recorded.
-  </p>
-  <iframe
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowFullScreen={true}
-    frameBorder="0"
-    height="620"
-    src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
-    title="Live Stream Wide"
-    width="930"
-  />
+<div>
   <div
-    style={
-      {
-        "marginTop": "20px",
-      }
-    }
+    style="margin: auto; width: 100%; text-align: center;"
   >
+    <h5
+      style="margin-top: 0.5rem;"
+    >
+      Welcome to Our Livestream Page
+    </h5>
+    <p>
+      The video below is embedded from YouTube, however if it does not play properly, please click one of the following links to view the live church service.
+      <br />
+       
+      <a
+        href="https://www.youtube.com/@collegelutheranchurch/streams"
+        rel="noreferrer"
+        style="font-weight: bold;"
+        target="_blank"
+      >
+        YouTube Live
+      </a>
+       
+      |
+       
+      <a
+        href="https://www.facebook.com/CollegeLutheranChurch/videos/?ref=page_internal"
+        rel="noreferrer"
+        style="font-weight: bold;"
+        target="_blank"
+      >
+        Facebook Videos
+      </a>
+       
+      - These links also provide a way to view previous church services that were recorded.
+    </p>
     <iframe
-      allow="encrypted-media"
-      frameBorder="0"
-      height="500"
-      loading="lazy"
-      scrolling="no"
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-      style={
-        {
-          "border": "none",
-          "maxWidth": "500px",
-          "overflow": "hidden",
-        }
-      }
-      title="facebook-live-feed"
-      width="500"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen=""
+      frameborder="0"
+      height="620"
+      src="https://www.youtube.com/embed/live_stream?channel=UCOra1rXiO-BHzMDNlLd9hFQ"
+      title="Live Stream Wide"
+      width="930"
     />
-  </div>
-  <div
-    style={
-      {
-        "marginTop": "0px",
-      }
-    }
-  >
-     
+    <div
+      style="margin-top: 20px;"
+    >
+      <iframe
+        allow="encrypted-media"
+        frameborder="0"
+        height="500"
+        loading="lazy"
+        scrolling="no"
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+        style="border: medium; overflow: hidden; max-width: 500px;"
+        title="facebook-live-feed"
+        width="500"
+      />
+    </div>
+    <div
+      style="margin-top: 0px;"
+    >
+       
+    </div>
   </div>
 </div>
 `;

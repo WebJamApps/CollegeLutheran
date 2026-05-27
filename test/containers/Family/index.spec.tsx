@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Family } from '../../../src/containers/Family/index';
 
 describe('Family', () => {
   it('renders correctly without images', () => {
-    const tree = renderer
-      .create(<Family />)
-      .toJSON();
+    const tree = render(<Family />).container;
     expect(tree).toMatchSnapshot();
   });
 });

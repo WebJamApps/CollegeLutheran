@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AuthProvider, defaultSetAuth } from 'src/providers/Auth.provider';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 describe('Auth Provider', () => {
   it('renders the Auth provider', () => {
-    const authProvider = renderer.create(<AuthProvider><div /></AuthProvider>).toJSON();
-    expect(authProvider).toBeDefined();
+    const { container } = render(<AuthProvider><div /></AuthProvider>);
+    expect(container).toBeDefined();
   });
   it('defaultSetAuth', () => {
     const Iauth: any = {};

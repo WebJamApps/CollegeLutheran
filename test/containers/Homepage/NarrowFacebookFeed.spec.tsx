@@ -1,4 +1,4 @@
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { FacebookFeed, FamilySlideContainer } from 'src/containers/Homepage/NarrowFacebookFeed';
 
 describe('NarrowFacebookFeed', () => {
@@ -8,12 +8,13 @@ describe('NarrowFacebookFeed', () => {
       _id: 'a',
       type: '',
     };
-    const result: any = renderer.create(<FamilySlideContainer data={[data]} />).toJSON();
-    expect(result.props.className).toBe('familySlideContainer');
-    expect(result.children[0].children[0].children[0].props.className.includes('slick-slider')).toBe(true);
+    const { container } = render(<FamilySlideContainer data={[data]} />);
+    const root = container.firstChild as HTMLElement | null;
+    expect(root?.className).toBe('familySlideContainer');
+    expect(container.querySelector('.slick-slider')).not.toBeNull();
   });
   it('renders FacebookFeed', () => {
-    const result: any = renderer.create(<FacebookFeed />).toJSON();
-    expect(result.type).toBe('div');
+    const { container } = render(<FacebookFeed />);
+    expect(container.firstChild?.nodeName).toBe('DIV');
   });
 });

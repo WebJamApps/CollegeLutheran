@@ -18,7 +18,7 @@ export function shuffle(array: Ibook[]) {
   return array;
 }
 
-export function PictureSection({ data, width }: { data: Ibook[], width?:number }) {
+export function PictureSection({ data, width }: { data: Ibook[], width?: number }) {
   if (width && width >= 900 && data && data.length > 0) {
     return (
       <div className="col">
@@ -60,7 +60,7 @@ export interface IAbout {
 
 export const About = ({
   width,
-}: IAbout): JSX.Element => {
+}: IAbout) => {
   const { pictures } = useContext(ContentContext);
   const { content: { homePage }, getContent } = useContext(ContentContext);
   const {

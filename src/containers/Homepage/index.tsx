@@ -6,7 +6,7 @@ import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
 import ELCALogo from '../../components/elcaLogo';
 
-export function Homepage({ width }:{ width:number }): JSX.Element {
+export function Homepage({ width }: { width: number }) {
   useEffect(() => commonUtils.setTitleAndScroll('', window.screen.width), []);
   return (
     <div>

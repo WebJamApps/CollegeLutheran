@@ -24,7 +24,7 @@ export const AuthContext = createContext({
   setAuth: defaultSetAuth,
 });
 
-export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const { Provider } = AuthContext;
   const [auth, setAuth] = useState(defaultAuth);
   return (<Provider value={{ auth, setAuth }}>{children}</Provider>

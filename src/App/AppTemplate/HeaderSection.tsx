@@ -1,6 +1,6 @@
 import { useResizeDetector } from 'react-resize-detector';
 
-export function HeaderSection(): JSX.Element {
+export function HeaderSection() {
   const { width, ref } = useResizeDetector();
   return (
     <div id="header" className="material-header home-header" style={{ backgroundColor: '#244a8bff' }}>

@@ -10,7 +10,7 @@ import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
 import utils from './utils';
 
-export function IconAndText({ menu }: { menu: ImenuItem }): JSX.Element {
+export function IconAndText({ menu }: { menu: ImenuItem }) {
   return (
     <div style={{ display: 'inline' }}>
       <i className={`${menu.iconClass}`} />
@@ -23,7 +23,7 @@ export function IconAndText({ menu }: { menu: ImenuItem }): JSX.Element {
 interface ImakeLinkProps {
   menu: ImenuItem, index: number, type: string, handleClose: () => void
 }
-export function MakeLink(props: ImakeLinkProps): JSX.Element {
+export function MakeLink(props: ImakeLinkProps) {
   const {
     menu, index, type, handleClose,
   } = props;
@@ -75,7 +75,7 @@ interface IcontinueMenuItemProps {
   auth: Iauth,
   pathname: string,
 }
-export const ContinueMenuItem = (props:IcontinueMenuItemProps): JSX.Element | null => {
+export const ContinueMenuItem = (props: IcontinueMenuItemProps) => {
   const {
     menu, index, auth, pathname,
   } = props;
@@ -97,7 +97,7 @@ interface IsideMenuItemProps {
   menu: ImenuItem, index: number,
   handleClose: () => void,
 }
-export function SideMenuItem(props: IsideMenuItemProps): JSX.Element | null {
+export function SideMenuItem(props: IsideMenuItemProps) {
   const {
     menu, index, handleClose,
   } = props;

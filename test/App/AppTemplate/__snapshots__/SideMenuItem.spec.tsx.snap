@@ -1,29 +1,26 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`SideMenuItem > renders anchor when type is not link 1`] = `
-<div
-  className="menu-item"
->
-  <a
-    className="nav-link"
-    href="/some-url"
-    onClick={[MockFunction]}
+<div>
+  <div
+    class="menu-item"
   >
-    <div
-      style={
-        {
-          "display": "inline",
-        }
-      }
+    <a
+      class="nav-link"
+      href="/some-url"
     >
-      <i
-        className=""
-      />
-       
-      <span
-        className="nav-item"
-      />
-    </div>
-  </a>
+      <div
+        style="display: inline;"
+      >
+        <i
+          class=""
+        />
+         
+        <span
+          class="nav-item"
+        />
+      </div>
+    </a>
+  </div>
 </div>
 `;

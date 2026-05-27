@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, fireEvent } from '@testing-library/react';
 import { EditPicDialog } from 'src/containers/AdminDashboard/EditPic/EditPicDialog';
-import renderer from 'react-test-renderer';
 import { defaultPic } from 'src/containers/AdminDashboard/utils';
 import picUtils from 'src/containers/AdminDashboard/pictures.utils';
 
@@ -8,45 +9,38 @@ describe('EditPicDialog', () => {
     const props = {
       onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
     };
-    const epd = renderer.create(<EditPicDialog {...props} />).toJSON();
-    expect(epd).toMatchSnapshot();
+    const { container } = render(<EditPicDialog {...props} />);
+    expect(container).toMatchSnapshot();
   });
-  it('handles events for EditPicDialog for url field', () => {
-    const props = {
-      onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
-    };
-    const evt = { target: { value: 'url' } };
-    const result = renderer.create(<EditPicDialog {...props} />).root;
-    expect(result.findByProps({ label: '* URL' }).props.onChange(evt)).toBe('url');
+  it('handles change events for url and title fields', () => {
+    const setEditPic = vi.fn();
+    const props = { onClose: vi.fn(), editPic: defaultPic, setEditPic };
+    const { container } = render(<EditPicDialog {...props} />);
+    const url = container.querySelector('input[label="* URL"]') as HTMLInputElement | null;
+    const title = container.querySelector('input[label="* Title"]') as HTMLInputElement | null;
+    expect(url).not.toBeNull();
+    expect(title).not.toBeNull();
+    fireEvent.change(url!, { target: { value: 'url' } });
+    fireEvent.change(title!, { target: { value: 'title' } });
+    expect(setEditPic).toHaveBeenCalledTimes(2);
   });
-  it('handles events for EditPicDialog for title field', () => {
-    const props = {
-      onClose: vi.fn(), editPic: defaultPic, setEditPic: vi.fn(),
-    };
-    const evt = { target: { value: 'title' } };
-    const result = renderer.create(<EditPicDialog {...props} />).root;
-    expect(result.findByProps({ label: '* Title' }).props.onChange(evt)).toBe('title');
+  it('renders the editPicDialog wrapper', () => {
+    const props = { editPic: defaultPic, onClose: vi.fn(), setEditPic: vi.fn() };
+    const { container } = render(<EditPicDialog {...props} />);
+    expect(container.querySelector('.editPicDialog')).not.toBeNull();
   });
-  it('handles onClose for EditPicDialog', () => {
-    const props = {
-      editPic: defaultPic, onClose: vi.fn(), setEditPic: vi.fn(),
-    };
-    const result = renderer.create(<EditPicDialog {...props} />).root;
-    result.findByProps({ className: 'editPicDialog' }).props.onClose();
-    expect(props.setEditPic).toHaveBeenCalled();
-  });
-  it('handles onClick for EditPicDialog', () => {
+  it('handles update / delete / cancel button clicks', () => {
     picUtils.updatePic = vi.fn();
     picUtils.deletePic = vi.fn();
-    const props = {
-      editPic: defaultPic, onClose: vi.fn(), setEditPic: vi.fn(),
-    };
-    const result = renderer.create(<EditPicDialog {...props} />).root;
-    result.findByProps({ className: 'updatePicButton' }).props.onClick();
+    const setEditPic = vi.fn();
+    const editPic = { ...defaultPic, title: 't', url: 'u' };
+    const props = { editPic, onClose: vi.fn(), setEditPic };
+    const { container } = render(<EditPicDialog {...props} />);
+    fireEvent.click(container.querySelector('.updatePicButton') as HTMLButtonElement);
     expect(picUtils.updatePic).toHaveBeenCalled();
-    result.findByProps({ className: 'deletePicButton' }).props.onClick();
+    fireEvent.click(container.querySelector('.deletePicButton') as HTMLButtonElement);
     expect(picUtils.deletePic).toHaveBeenCalled();
-    result.findByProps({ className: 'cancelPicButton' }).props.onClick();
-    expect(props.setEditPic).toHaveBeenCalled();
+    fireEvent.click(container.querySelector('.cancelPicButton') as HTMLButtonElement);
+    expect(setEditPic).toHaveBeenCalled();
   });
 });

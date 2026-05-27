@@ -1,19 +1,21 @@
-import renderer from 'react-test-renderer';
+import { render, fireEvent } from '@testing-library/react';
 import forms, { DataDropParams } from '../../src/lib/forms';
 
 describe('forms', () => {
   it('makeDropDown', () => {
     const onChangeMock = vi.fn();
-    const input = renderer.create(forms.makeDropdown('test', 'test', 'test', onChangeMock, [])).root;
-    input.findByType('select').props.onChange();
+    const { container } = render(forms.makeDropdown('test', 'test', 'test', onChangeMock, []));
+    const select = container.querySelector('select')!;
+    fireEvent.change(select, { target: { value: 'x' } });
     expect(onChangeMock).toHaveBeenCalled();
   });
   it('makeDataDropDown', () => {
     const props = {
       htmlFor: 'test', labelText: 'test', value: 'test', onChange: vi.fn(), options: [],
     };
-    const input = renderer.create(forms.makeDataDropdown({ ...props } as unknown as DataDropParams)).root;
-    const result = input.findByType('select').props.onChange();
-    expect(result).toBeUndefined();
+    const { container } = render(forms.makeDataDropdown({ ...props } as unknown as DataDropParams));
+    const select = container.querySelector('select')!;
+    fireEvent.change(select, { target: { value: 'x' } });
+    expect(props.onChange).toHaveBeenCalled();
   });
 });

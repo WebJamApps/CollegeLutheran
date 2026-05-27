@@ -3,7 +3,7 @@ import { ContentContext } from 'src/providers/Content.provider';
 import ELCALogo from '../../components/elcaLogo';
 import PicSlider from '../../components/PicSlider';
 
-export const MusicContent = (): JSX.Element => {
+export const MusicContent = () => {
   const { pictures } = useContext(ContentContext);
   const { musicPics = [] } = pictures;
   return (

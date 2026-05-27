@@ -23,7 +23,7 @@ const footerLinks = () => {
   );
 };
 
-export const Footer = (): JSX.Element => (
+export const Footer = () => (
   <div
     id="wjfooter"
     className="footer"

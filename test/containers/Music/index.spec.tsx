@@ -1,11 +1,9 @@
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Music } from 'src/containers/Music/index';
 
 describe('Music', () => {
   it('renders correctly without images', () => {
-    const tree = renderer
-      .create(<Music />)
-      .toJSON();
+    const tree = render(<Music />).container;
     expect(tree).toMatchSnapshot();
   });
 });

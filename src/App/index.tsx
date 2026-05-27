@@ -35,7 +35,7 @@ export function showAdminDashboard(isAdmin: boolean) {
   return null;
 }
 
-export function App(): JSX.Element {
+export function App() {
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);

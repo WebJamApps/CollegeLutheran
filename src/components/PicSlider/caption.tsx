@@ -1,4 +1,6 @@
-export const Caption = (props: { caption?: (JSX.Element | string); }):JSX.Element => {
+import type React from 'react';
+
+export const Caption = (props: { caption?: (React.JSX.Element | string); }): React.JSX.Element => {
   const { caption } = props;
   return (
     <div
