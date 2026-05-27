@@ -1,5 +1,5 @@
 import type { Ibook } from 'src/providers/utils';
-import { useResizeDetector } from 'react-resize-detector';
+import { useElementHeight } from 'src/lib/useWindowSize';
 import {
   useContext, useEffect, useState,
 } from 'react';
@@ -31,7 +31,7 @@ interface NewsContentProps {
   books?: Ibook[];
 }
 export function NewsContent({ books }: NewsContentProps) {
-  const { height, ref } = useResizeDetector();
+  const { height, ref } = useElementHeight<HTMLDivElement>();
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editNews, setEditNews] = useState(defaultNews);

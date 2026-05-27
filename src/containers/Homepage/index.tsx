@@ -1,4 +1,3 @@
-// import { withResizeDetector } from 'react-resize-detector';
 import commonUtils from 'src/lib/commonUtils';
 import { useEffect } from 'react';
 import { About } from './About';
@@ -34,6 +33,5 @@ export function Homepage({ width }: { width: number }) {
     </div>
   );
 }
-// export default withResizeDetector(Homepage);
 export default Homepage;
 

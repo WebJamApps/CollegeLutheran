@@ -1,4 +1,4 @@
-import { useResizeDetector } from 'react-resize-detector';
+import { useWindowWidth } from 'src/lib/useWindowSize';
 import commonUtils from '../../lib/commonUtils';
 
 const makeSpace = (width: number) => {
@@ -95,6 +95,6 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
   );
 };
 export default function DefaultLiveStream() {
-  const { width, ref } = useResizeDetector<HTMLDivElement>();
-  return <div ref={ref}><LiveStream width={width || 0} /></div>;
+  const width = useWindowWidth();
+  return <LiveStream width={width || 0} />;
 }

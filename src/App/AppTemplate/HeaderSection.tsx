@@ -1,11 +1,10 @@
-import { useResizeDetector } from 'react-resize-detector';
+import { useWindowWidth } from 'src/lib/useWindowSize';
 
 export function HeaderSection() {
-  const { width, ref } = useResizeDetector();
+  const width = useWindowWidth();
   return (
     <div id="header" className="material-header home-header" style={{ backgroundColor: '#244a8bff' }}>
       <div
-        ref={ref}
         className="flex-header"
         style={{
           marginLeft: '15px',
