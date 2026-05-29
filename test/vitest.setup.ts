@@ -4,6 +4,7 @@ import { vi } from 'vitest';
 config();
 
 vi.mock('@mui/material');
+vi.mock('@tinymce/tinymce-react');
 
 global.ResizeObserver = class {
   observe(): void { /* no-op */ }

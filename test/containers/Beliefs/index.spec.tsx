@@ -1,12 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Beliefs } from 'src/containers/Beliefs';
 
 describe('Beliefs', () => {
   it('renders correctly', () => {
-    const tree = renderer
-      .create(<BrowserRouter><Beliefs /></BrowserRouter>)
-      .toJSON();
+    const tree = render(<BrowserRouter><Beliefs /></BrowserRouter>).container;
     expect(tree).toMatchSnapshot();
   });
 });

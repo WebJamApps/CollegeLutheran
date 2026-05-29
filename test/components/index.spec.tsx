@@ -1,4 +1,4 @@
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import PicSlider from 'src/components/PicSlider';
 
 describe('PicSlider', () => {
@@ -11,7 +11,7 @@ describe('PicSlider', () => {
         type: 'otherPics', comments: 'showCaption', url: 'https://test2.com', title: 'test2', _id: '345',
       },
     ];
-    const result: any = renderer.create(<PicSlider data={data} />).toJSON();
+    const result: any = render(<PicSlider data={data} />).container;
     expect(result).toMatchSnapshot();
   });
 });

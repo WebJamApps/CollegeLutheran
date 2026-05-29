@@ -1,137 +1,99 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CreatePicDialog > renders CreatePicDialog 1`] = `
-<div
-  className="createNewPicDialog"
-  disableAutoFocus={true}
-  disableEnforceFocus={true}
-  onClose={[MockFunction]}
-  open={true}
->
-  <div>
-    Create New Picture
-  </div>
+<div>
   <div
-    sx={
-      {
-        "padding": "10px 10px",
-      }
-    }
+    class="createNewPicDialog"
+    open=""
   >
-    <div
-      sx={
-        {
-          "marginBottom": "10px",
-        }
-      }
-    >
-      Enter all *required fields to create a new picture.
+    <div>
+      Create New Picture
     </div>
-    <input
-      fullWidth={true}
-      id="url-textfield"
-      label="* Url"
-      onChange={[Function]}
-      sx={
-        {
-          "marginTop": "20px",
-        }
-      }
-      type="text"
-      value=""
-    />
-    <input
-      fullWidth={true}
-      id="title-textfield"
-      label="* Title"
-      onChange={[Function]}
-      sx={
-        {
-          "marginTop": "20px",
-        }
-      }
-      type="text"
-      value=""
-    />
     <div
-      sx={
-        {
-          "marginTop": "20px",
-          "minWidth": 120,
-        }
-      }
+      sx="[object Object]"
     >
       <div
-        fullWidth={true}
+        sx="[object Object]"
       >
-        <p
-          id="demo-simple-select-label"
-        >
-          Type
-        </p>
-        <select
-          id="demo-simple-select"
-          label="Type"
-          labelId="demo-simple-select-label"
-          onChange={[Function]}
-        >
-          <option
-            value="musicPics"
+        Enter all *required fields to create a new picture.
+      </div>
+      <input
+        id="url-textfield"
+        label="* Url"
+        sx="[object Object]"
+        type="text"
+        value=""
+      />
+      <input
+        id="title-textfield"
+        label="* Title"
+        sx="[object Object]"
+        type="text"
+        value=""
+      />
+      <div
+        sx="[object Object]"
+      >
+        <div>
+          <p
+            id="demo-simple-select-label"
           >
-            musicPics
-          </option>
-          <option
-            value="familyPics"
+            Type
+          </p>
+          <select
+            id="demo-simple-select"
+            label="Type"
+            labelid="demo-simple-select-label"
           >
-            familyPics
-          </option>
-          <option
-            value="youthPics"
-          >
-            youthPics
-          </option>
-          <option
-            value="habitatPics"
-          >
-            habitatPics
-          </option>
-          <option
-            value="otherPics"
-          >
-            otherPics
-          </option>
-        </select>
+            <option
+              value="musicPics"
+            >
+              musicPics
+            </option>
+            <option
+              value="familyPics"
+            >
+              familyPics
+            </option>
+            <option
+              value="youthPics"
+            >
+              youthPics
+            </option>
+            <option
+              value="habitatPics"
+            >
+              habitatPics
+            </option>
+            <option
+              value="otherPics"
+            >
+              otherPics
+            </option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <div
+          control="[object Object]"
+          label="Show Title In Caption"
+        />
       </div>
     </div>
     <div>
-      <div
-        control={
-          <Checkbox
-            checked={false}
-            onClick={[Function]}
-          />
-        }
-        label="Show Title In Caption"
-      />
+      <button
+        class="createPicButton"
+        disabled=""
+        variant="contained"
+      >
+        Create
+      </button>
+      <button
+        class="cancelPicButton"
+      >
+        Cancel
+      </button>
     </div>
-  </div>
-  <div>
-    <button
-      className="createPicButton"
-      disabled={true}
-      onClick={[Function]}
-      size="small"
-      variant="contained"
-    >
-      Create
-    </button>
-    <button
-      className="cancelPicButton"
-      onClick={[MockFunction]}
-      size="small"
-    >
-      Cancel
-    </button>
   </div>
 </div>
 `;

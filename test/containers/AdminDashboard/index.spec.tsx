@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { AdminDashboard } from 'src/containers/AdminDashboard';
 
 describe('Dashboard Container', () => {
@@ -8,7 +8,7 @@ describe('Dashboard Container', () => {
     expect(true).toBe(true);
   });
   it('renders AdminDashboard', () => {
-    const ad = renderer.create(<BrowserRouter><AdminDashboard /></BrowserRouter>).toJSON();
+    const ad = render(<BrowserRouter><AdminDashboard /></BrowserRouter>).container;
     expect(ad).toMatchSnapshot();
   });
 });

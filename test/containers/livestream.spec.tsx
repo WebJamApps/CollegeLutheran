@@ -1,13 +1,13 @@
 import { LiveStream } from 'src/containers/LiveStream/index';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 describe('LiveStream', () => {
   it('renders widescreen', () => {
-    const liveStream = renderer.create(<LiveStream width={950} />).toJSON();
+    const liveStream = render(<LiveStream width={950} />).container;
     expect(liveStream).toMatchSnapshot();
   });
   it('renders smallscreen', () => {
-    const liveStream = renderer.create(<LiveStream width={400} />).toJSON();
+    const liveStream = render(<LiveStream width={400} />).container;
     expect(liveStream).toMatchSnapshot();
   });
 });

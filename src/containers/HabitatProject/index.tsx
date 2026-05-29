@@ -1,7 +1,7 @@
 // import HabitatProjectContent from './HabitatProjectContent';
 // import commonUtils from '../../lib/commonUtils';
 
-// const HabitatProject = (): JSX.Element => {
+// const HabitatProject = () => {
 //   commonUtils.setTitleAndScroll('Habitat Project', window.screen.width);
 //   return (<HabitatProjectContent />);
 // };
