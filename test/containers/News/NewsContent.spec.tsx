@@ -1,22 +1,22 @@
-import renderer from 'react-test-renderer';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, fireEvent } from '@testing-library/react';
 import { NewsContent } from 'src/containers/News/NewsContent';
 
 describe('NewsContent', () => {
   it('renders the news page', () => {
-    const result: any = renderer.create(<NewsContent />).toJSON();
-    expect(result).toMatchSnapshot();
+    const { container } = render(<NewsContent />);
+    expect(container).toMatchSnapshot();
   });
   it('renders the news table', () => {
     const props = { title: 'title', type: 'type', _id: 'a' };
-    const result: any = renderer.create(<NewsContent books={[props]} />).toJSON();
-    expect(result.children[0].children[0].children[0].props.className).toBe('forumsTable');
+    const { container } = render(<NewsContent books={[props]} />);
+    expect(container.querySelector('.forumsTable')).not.toBeNull();
   });
   it('handles event for NewsContent', () => {
     const props = { title: 'title', type: 'type', _id: 'a' };
-    const setEditNews = vi.fn();
-    const result = renderer.create(<NewsContent books={[props]} />).root;
-    result.findByProps({ className: 'TableRow-root news' }).props.onClick();
-    setEditNews();
-    expect(setEditNews).toHaveBeenCalled();
+    const { container } = render(<NewsContent books={[props]} />);
+    const row = container.querySelector('.TableRow-root.news') as HTMLElement | null;
+    expect(row).not.toBeNull();
+    fireEvent.click(row!);
   });
 });

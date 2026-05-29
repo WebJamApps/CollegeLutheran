@@ -1,5 +1,5 @@
-import { Store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import type { Dispatch, AnyAction } from 'redux';
 
 const fetchGet = async (dispatch:Dispatch<AnyAction>,
@@ -16,19 +16,7 @@ const fetchGet = async (dispatch:Dispatch<AnyAction>,
     if (route.includes('PageContent')) {
       dispatch({ type: `${reducer}`, data: { title: '', comments: '' } });
     }
-    Store.addNotification({
-      title: `${reducer}`,
-      message: 'Message Failed to Get the Information',
-      type: 'warning',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ['animate__animated animate__fadeIn'],
-      animationOut: ['animate__animated animate__fadeOut'],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
+    toast.warning(`${reducer}: Message Failed to Get the Information`, { position: 'top-right', autoClose: 5000 });
     // eslint-disable-next-line no-console
     console.log((e as Error).message);
     return false;

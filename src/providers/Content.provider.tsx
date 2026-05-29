@@ -11,7 +11,7 @@ async function fetchJson<T = unknown>(url: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
+export const populateContent = async (setContent: (arg0: Icontent) => void) => {
   try {
     const homePage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=homePageContent`);
     const youthPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=youthPageContent`);
@@ -41,7 +41,7 @@ export const populateContent = async (setContent: (arg0:Icontent)=> void) => {
   }
 };
 
-export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void) => {
+export const populatePictures = async (setPictures: (arg0: IpictureTypes) => void) => {
   try {
     const musicPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=musicPics`);
     const familyPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=familyPics`);
@@ -55,7 +55,7 @@ export const populatePictures = async (setPictures: (arg0:IpictureTypes)=> void)
   } catch (err) { console.error((err as Error).message); }
 };
 
-export const populateNews = async (setNews: (arg0:Inews)=> void) => {
+export const populateNews = async (setNews: (arg0: Inews) => void) => {
   try {
     const data = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=Forum`);
     if (Array.isArray(data)) {
@@ -74,11 +74,11 @@ export const populateNews = async (setNews: (arg0:Inews)=> void) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function setContentDef(_arg0: Icontent) {}
+export function setContentDef(_arg0: Icontent) { }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function setPicturesDef(_arg0: IpictureTypes) {}
+export function setPicturesDef(_arg0: IpictureTypes) { }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function setNewsDef(_arg0: Inews) {}
+export function setNewsDef(_arg0: Inews) { }
 
 export const ContentContext = createContext({
   content: {
@@ -105,8 +105,8 @@ export const ContentContext = createContext({
   getNews: () => Promise.resolve(),
 });
 
-  type ContentProps = { children: ReactNode };
-export function ContentProvider({ children }: ContentProps): JSX.Element {
+type ContentProps = { children: ReactNode };
+export function ContentProvider({ children }: ContentProps) {
   const { Provider } = ContentContext;
   const [content, setContent] = useState({} as Icontent);
   const [pictures, setPictures] = useState({} as IpictureTypes);

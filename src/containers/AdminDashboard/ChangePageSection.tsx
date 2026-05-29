@@ -11,7 +11,7 @@ interface IcommentsEditorProps {
 }
 export function CommentsEditor(
   props: IcommentsEditorProps,
-): JSX.Element {
+) {
   const { setComments, comments } = props;
   return (
     <Editor
@@ -27,9 +27,9 @@ export function CommentsEditor(
           'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
         ],
         toolbar:
-            'undo redo | formatselect | bold italic backcolor forecolor |'
-            + 'alignleft aligncenter alignright alignjustify |'
-            + 'bullist numlist outdent indent | removeformat | help',
+          'undo redo | formatselect | bold italic backcolor forecolor |'
+          + 'alignleft aligncenter alignright alignjustify |'
+          + 'bullist numlist outdent indent | removeformat | help',
       }}
       onEditorChange={(newComments) => setComments(newComments)}
       onSubmit={(e) => { e.preventDefault(); }}
@@ -51,7 +51,7 @@ export function UpdateButton(
     buttonName: string,
     type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent'
   },
-): JSX.Element {
+) {
   const { auth } = useContext(AuthContext);
   return (
     <div style={{ marginTop: '10px' }}>

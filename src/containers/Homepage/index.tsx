@@ -1,4 +1,3 @@
-// import { withResizeDetector } from 'react-resize-detector';
 import commonUtils from 'src/lib/commonUtils';
 import { useEffect } from 'react';
 import { About } from './About';
@@ -6,7 +5,7 @@ import WideFacebookFeed from './WideFacebookFeed';
 import { FacebookFeed } from './NarrowFacebookFeed';
 import ELCALogo from '../../components/elcaLogo';
 
-export function Homepage({ width }:{ width:number }): JSX.Element {
+export function Homepage({ width }: { width: number }) {
   useEffect(() => commonUtils.setTitleAndScroll('', window.screen.width), []);
   return (
     <div>
@@ -34,6 +33,5 @@ export function Homepage({ width }:{ width:number }): JSX.Element {
     </div>
   );
 }
-// export default withResizeDetector(Homepage);
 export default Homepage;
 

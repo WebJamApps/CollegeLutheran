@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ContentContext } from 'src/providers/Content.provider';
 import { NewsContent } from './NewsContent';
 
-export function News(): JSX.Element {
+export function News() {
   const { news: { newsContent } } = useContext(ContentContext);
   commonUtils.setTitleAndScroll('News', window.screen.width);
 

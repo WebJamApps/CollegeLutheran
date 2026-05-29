@@ -2,7 +2,6 @@
 import {
   populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef, setNewsDef, populateNews,
 } from 'src/providers/Content.provider';
-import renderer from 'react-test-renderer';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
@@ -17,8 +16,8 @@ describe('Content provider', () => {
 
   it('renders the ContentProvider', () => {
     vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('no network'))));
-    const contentProvider = renderer.create(<ContentProvider><div /></ContentProvider>).toJSON();
-    expect(contentProvider).toBeDefined();
+    const { container } = render(<ContentProvider><div /></ContentProvider>);
+    expect(container).toBeDefined();
   });
   it('sets content with useEffect', async () => {
     vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('no network'))));

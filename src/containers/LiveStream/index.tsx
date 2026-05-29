@@ -1,4 +1,4 @@
-import { withResizeDetector } from 'react-resize-detector';
+import { useWindowWidth } from 'src/lib/useWindowSize';
 import commonUtils from '../../lib/commonUtils';
 
 const makeSpace = (width: number) => {
@@ -11,7 +11,7 @@ const makeSpace = (width: number) => {
 export interface LiveStreamProps {
   width: number
 }
-export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
+export const LiveStream = ({ width }: LiveStreamProps) => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
   const src = `https://www.youtube.com/embed/live_stream?channel=${process.env.CHANNEL_ID}`;
   return (
@@ -57,24 +57,6 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
         />
       )
         : null}
-      <div style={{ marginTop: '20px' }}>
-        <iframe
-          title="facebook-live-feed"
-          // eslint-disable-next-line max-len
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-          width={width > 500 ? '500' : '100%'}
-          height="500"
-          style={{
-            border: 'none',
-            overflow: 'hidden',
-            maxWidth: '500px',
-          }}
-          scrolling="no"
-          frameBorder="0"
-          allow="encrypted-media"
-          loading="lazy"
-        />
-      </div>
       {width < 932
         ? (
           <iframe
@@ -94,4 +76,7 @@ export const LiveStream = ({ width }: LiveStreamProps): JSX.Element => {
     </div>
   );
 };
-export default withResizeDetector(LiveStream);
+export default function DefaultLiveStream() {
+  const width = useWindowWidth();
+  return <LiveStream width={width || 0} />;
+}

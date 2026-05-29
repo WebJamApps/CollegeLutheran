@@ -45,7 +45,7 @@ export function FamilySlideContainer({ data }: { data: Ibook[] }) {
     </div>
   );
 }
-export const FacebookFeed = (): JSX.Element => {
+export const FacebookFeed = () => {
   const { pictures } = useContext(ContentContext);
   const {
     familyPics = [], musicPics = [], youthPics = [], otherPics = [], habitatPics = [],

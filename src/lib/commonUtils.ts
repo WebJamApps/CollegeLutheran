@@ -1,5 +1,5 @@
-import { Store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const setTitleAndScroll = (pageTitle: string, width?: number): void => {
   if (pageTitle !== '') pageTitle += ' | ';// eslint-disable-line no-param-reassign
@@ -22,19 +22,15 @@ const delay = (seconds: number) => new Promise((resolve) => setTimeout(resolve, 
 
 export type NotificationType = 'success' | 'danger' | 'info' | 'default' | 'warning';
 function notify(title: string, message: string, type: NotificationType) {
-  Store.addNotification({
-    title,
-    message,
-    type,
-    insert: 'top',
-    container: 'top-right',
-    animationIn: ['animate__animated animate__fadeIn'],
-    animationOut: ['animate__animated animate__fadeOut'],
-    dismiss: {
-      duration: 1500,
-      onScreen: true,
-    },
-  });
+  const body = `${title}: ${message}`;
+  const opts = { position: 'top-right' as const, autoClose: 1500 };
+  switch (type) {
+    case 'success': toast.success(body, opts); break;
+    case 'danger': toast.error(body, opts); break;
+    case 'warning': toast.warning(body, opts); break;
+    case 'info': toast.info(body, opts); break;
+    default: toast(body, opts);
+  }
 }
 
 function makeShowHideChecked<Type>(setter: (arg0: Type) => void,

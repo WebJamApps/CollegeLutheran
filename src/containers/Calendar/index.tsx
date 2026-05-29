@@ -12,5 +12,5 @@ export default class Calendar extends Component {
 
   componentDidMount(): void { this.commonUtils.setTitleAndScroll('Church Calendar', window.screen.width); }
 
-  render(): JSX.Element { return (<DefaultCalendarContent />); }
+  render() { return (<DefaultCalendarContent />); }
 }

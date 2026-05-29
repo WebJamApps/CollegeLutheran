@@ -35,7 +35,7 @@ const FamilySection = () => (
   </section>
 );
 
-export function FamilySlideShow({ familyPics }:{ familyPics:Ibook[] }) {
+export function FamilySlideShow({ familyPics }: { familyPics: Ibook[] }) {
   return (
     <div id="familySlideshowWide" style={{ display: 'flex', flexDirection: 'column' }}>
       {familyPics && familyPics.length > 0 ? (<PicSlider data={familyPics} />) : null}
@@ -43,7 +43,7 @@ export function FamilySlideShow({ familyPics }:{ familyPics:Ibook[] }) {
   );
 }
 
-export const FamilyContent = (): JSX.Element => {
+export const FamilyContent = () => {
   const { pictures } = useContext(ContentContext);
   const { familyPics } = pictures;
   return (
@@ -57,7 +57,7 @@ export const FamilyContent = (): JSX.Element => {
             <span style={{ color: 'rgb(0, 51, 102)' }}>
               <strong>
                 <i>&quot;The members of the body that seem to be weaker are indispensable.&quot;</i>
-              &nbsp;&nbsp;&nbsp;1 Corinthians 12:22
+                &nbsp;&nbsp;&nbsp;1 Corinthians 12:22
               </strong>
             </span>
           </p>

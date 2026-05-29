@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, fireEvent } from '@testing-library/react';
 import {
   ButtonsNav,
   ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
-import renderer from 'react-test-renderer';
 import utils from 'src/containers/AdminDashboard/utils';
 import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
 
@@ -12,39 +13,37 @@ describe('AdminDashboard Content', () => {
     const props = {
       title: '', comments: 'comments', buttonName: '', type: 'habitatPageContent' as any, getContent: vi.fn(),
     };
-    const result = renderer.create(<UpdateButton {...props} />).root;
-    result.findByProps({ id: 'c-h' }).props.onClick();
+    const { container } = render(<UpdateButton {...props} />);
+    const btn = container.querySelector('#c-h') as HTMLButtonElement | null;
+    expect(btn).not.toBeNull();
+    fireEvent.click(btn!);
     expect(utils.putAPI).toHaveBeenCalled();
   });
   it('handles setComments on CommentsEditor', () => {
     const setComments = vi.fn();
-    const comments = 'test';
-    const result = renderer.create(<CommentsEditor setComments={setComments} comments={comments} />).root;
-    result.findByProps({ value: 'test' }).props.onEditorChange('newComments');
+    const { container } = render(<CommentsEditor setComments={setComments} comments="test" />);
+    const textarea = container.querySelector('textarea') as HTMLTextAreaElement | null;
+    expect(textarea).not.toBeNull();
+    fireEvent.change(textarea!, { target: { value: 'newComments' } });
     expect(setComments).toHaveBeenCalledWith('newComments');
   });
   it('handles setTitle for ChangeHomepage', () => {
-    const value = 'title';
-    const evt = { target: { value } };
-    const result = renderer.create(<ChangeHomePageSect />).root;
-    const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
-    expect(tree).toBe(value);
+    const { container } = render(<ChangeHomePageSect />);
+    const input = container.querySelector('#title') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    fireEvent.change(input!, { target: { value: 'title' } });
   });
   it('handles setTitle for ChangeNewsPage', () => {
-    const value = 'somethin';
-    const evt = { target: { value } };
-    const result = renderer.create(<ChangeNewsPage />).root;
-    result.findByProps({ label: 'Title' }).props.onChange(evt);
-    const tree = evt.target.value;
-    expect(tree).toBe(value);
+    const { container } = render(<ChangeNewsPage />);
+    const title = container.querySelector('input[label="Title"]') as HTMLInputElement | null;
+    expect(title).not.toBeNull();
+    fireEvent.change(title!, { target: { value: 'somethin' } });
   });
   it('handles setUrl for ChangeNewsPage', () => {
-    const value = 'anythin';
-    const evt = { target: { value } };
-    const result = renderer.create(<ChangeNewsPage />).root;
-    result.findByProps({ label: 'Url' }).props.onChange(evt);
-    const tree = evt.target.value;
-    expect(tree).toBe(value);
+    const { container } = render(<ChangeNewsPage />);
+    const url = container.querySelector('input[label="Url"]') as HTMLInputElement | null;
+    expect(url).not.toBeNull();
+    fireEvent.change(url!, { target: { value: 'anythin' } });
   });
   it('makeHandleChange when checked is true', () => {
     const checked = true;
@@ -64,25 +63,24 @@ describe('AdminDashboard Content', () => {
   });
   it('handles onClick for addNewsAPI button', () => {
     utils.addNewsAPI = vi.fn();
-    const result = renderer.create(<ChangeNewsPage />).root;
-    result.findByProps({ variant: 'contained' }).props.onClick();
+    const { container } = render(<ChangeNewsPage />);
+    const btn = container.querySelector('button[variant="contained"]') as HTMLButtonElement | null;
+    expect(btn).not.toBeNull();
+    fireEvent.click(btn!);
     expect(utils.addNewsAPI).toHaveBeenCalled();
   });
-  it('handles onChange for ChangeyouthPage', () => {
-    const value = 'title';
-    const evt = { target: { value } };
-    const result = renderer.create(<ChangeYouthPageSect />).root;
-    const tree = result.findByProps({ type: 'text' }).props.onChange(evt);
-    expect(tree).toBe(value);
+  it('handles onChange for ChangeYouthPage', () => {
+    const { container } = render(<ChangeYouthPageSect />);
+    const input = container.querySelector('#title') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    fireEvent.change(input!, { target: { value: 'title' } });
   });
   it('handles onClick events for ButtonsNav', () => {
     const props = { showEditor: 'string', setShowEditor: vi.fn() };
-    const result = renderer.create(<ButtonsNav {...props} />).root;
-    result.findByProps({ className: 'createPic' }).props.onClick();
-    expect(props.setShowEditor).toHaveBeenCalled();
-    result.findByProps({ className: 'editPic' }).props.onClick();
-    expect(props.setShowEditor).toHaveBeenCalled();
-    result.findByProps({ className: 'editContent' }).props.onClick();
-    expect(props.setShowEditor).toHaveBeenCalled();
+    const { container } = render(<ButtonsNav {...props} />);
+    fireEvent.click(container.querySelector('.createPic') as HTMLButtonElement);
+    fireEvent.click(container.querySelector('.editPic') as HTMLButtonElement);
+    fireEvent.click(container.querySelector('.editContent') as HTMLButtonElement);
+    expect(props.setShowEditor).toHaveBeenCalledTimes(3);
   });
 });

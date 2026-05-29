@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Store } from 'react-notifications-component';
+import { toast } from 'react-toastify';
 import commonUtils, { NotificationType } from '../../src/lib/commonUtils';
 
 describe('commonUtils', () => {
@@ -17,12 +17,10 @@ describe('commonUtils', () => {
     const diff = end - start;
     expect(diff).toBeGreaterThanOrEqual(990);
   });
-  it('calls addNotification', () => {
-    Store.addNotification = vi.fn();
-    const title = '';
-    const message = '';
+  it('calls toast.success for success type', () => {
+    const spy = vi.spyOn(toast, 'success').mockImplementation(() => 0 as never);
     const type: NotificationType = 'success';
-    commonUtils.notify(title, message, type);
-    expect(Store.addNotification).toHaveBeenCalled();
+    commonUtils.notify('t', 'm', type);
+    expect(spy).toHaveBeenCalled();
   });
 });

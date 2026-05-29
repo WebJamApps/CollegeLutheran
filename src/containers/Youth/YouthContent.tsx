@@ -10,7 +10,7 @@ function FaithWithoutWorks() {
         <span style={{ color: 'rgb(0, 51, 102)' }}>
           <strong>
             <i>&quot;Faith without works is dead.&quot;</i>
-              &nbsp;&nbsp;&nbsp;James 2:17
+            &nbsp;&nbsp;&nbsp;James 2:17
           </strong>
         </span>
       </p>
@@ -30,7 +30,7 @@ function FaithWithoutWorks() {
 }
 
 export const YouthContent = (
-): JSX.Element => {
+) => {
   const { pictures } = useContext(ContentContext);
   const { content: { youthPage } } = useContext(ContentContext);
   const { youthPics = [] } = pictures;
@@ -47,7 +47,7 @@ export const YouthContent = (
             <span style={{ color: 'rgb(0, 51, 102)' }}>
               <strong>
                 <i>&quot;Think of us in this way, as servants of Christ and stewards of God’s mysteries.&quot;</i>
-              &nbsp;&nbsp;&nbsp;1 Corinthians 4:1
+                &nbsp;&nbsp;&nbsp;1 Corinthians 4:1
               </strong>
             </span>
           </p>
