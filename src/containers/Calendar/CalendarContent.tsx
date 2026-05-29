@@ -1,5 +1,5 @@
 
-const CalendarContent = (): JSX.Element => (
+const CalendarContent = () => (
   <div className="page-content">
     <div className="container-fluid">
       <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>

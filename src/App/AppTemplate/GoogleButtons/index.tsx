@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import utils from './utils';
 
-export const loginConfig = (auth:Iauth, setAuth: (args0:Iauth)=>void) => ({
+export const loginConfig = (auth: Iauth, setAuth: (args0: Iauth) => void) => ({
   onSuccess: async (codeResponse: Omit<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {
     await utils.responseGoogleLogin(codeResponse, auth, setAuth, process.env.NODE_ENV);
   },
@@ -12,8 +12,8 @@ export const loginConfig = (auth:Iauth, setAuth: (args0:Iauth)=>void) => ({
   flow: 'auth-code',
 });
 
-interface IgoogleButtonsProps { type: string, index: number}
-export function GoogleButtons(props: IgoogleButtonsProps): JSX.Element {
+interface IgoogleButtonsProps { type: string, index: number }
+export function GoogleButtons(props: IgoogleButtonsProps) {
   const { setAuth, auth } = useContext(AuthContext);
   const { type, index } = props;
   const login = useGoogleLogin(loginConfig(auth, setAuth) as Record<string, unknown>);

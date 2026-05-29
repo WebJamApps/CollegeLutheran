@@ -33,7 +33,7 @@ export function MoreStaff() {
   );
 }
 
-const StaffContent = (): JSX.Element => (
+const StaffContent = () => (
   <div className="page-content">
     <div className="container-fluid">
       <div style={{ padding: '15px', marginTop: '20px' }}>

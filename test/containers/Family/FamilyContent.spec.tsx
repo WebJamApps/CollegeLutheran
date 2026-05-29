@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { FamilySlideShow } from 'src/containers/Family/FamilyContent';
 
 describe('FamilyContent', () => {
@@ -7,9 +7,7 @@ describe('FamilyContent', () => {
     const familyPics = [{
       type: 'familyPics', _id: '123', url: 'https://test.com', title: 'test',
     }];
-    const tree = renderer
-      .create(<FamilySlideShow familyPics={familyPics} />)
-      .toJSON();
+    const tree = render(<FamilySlideShow familyPics={familyPics} />).container;
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,10 +1,10 @@
 import { Caption } from 'src/components/PicSlider/caption';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 describe('PicSlider', () => {
   it('renders Caption', () => {
     const props = { caption: '' };
-    const result: any = renderer.create(<Caption {...props} />).toJSON();
-    expect(result.props.className).toBe('slider-caption');
+    const { container } = render(<Caption {...props} />);
+    expect((container.firstChild as HTMLElement | null)?.className).toBe('slider-caption');
   });
 });

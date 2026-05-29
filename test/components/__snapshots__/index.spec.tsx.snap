@@ -1,121 +1,66 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PicSlider > renders with a caption 1`] = `
-<div
-  id="pic-slider"
->
+<div>
   <div
-    className="slick-slider slick-initialized"
-    dir="ltr"
+    id="pic-slider"
   >
     <div
-      className="slick-list"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={null}
-      onMouseMove={null}
-      onMouseUp={[Function]}
-      onTouchCancel={null}
-      onTouchEnd={[Function]}
-      onTouchMove={null}
-      onTouchStart={[Function]}
-      style={{}}
+      class="slick-slider slick-initialized"
+      dir="ltr"
     >
       <div
-        className="slick-track"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseOver={[Function]}
-        style={
-          {
-            "opacity": 1,
-          }
-        }
+        class="slick-list"
       >
         <div
-          aria-hidden={false}
-          className="slick-slide slick-active slick-current"
-          data-index={0}
-          onClick={[Function]}
-          style={
-            {
-              "left": -0,
-              "opacity": 1,
-              "outline": "none",
-              "position": "relative",
-              "transition": "opacity 5000ms ease, visibility 5000ms ease",
-              "width": 0,
-            }
-          }
-          tabIndex="-1"
+          class="slick-track"
+          style="opacity: 1;"
         >
-          <div>
-            <div
-              style={
-                {
-                  "display": "inline-block",
-                  "width": "100%",
-                }
-              }
-              tabIndex={-1}
-            >
-              <img
-                alt="test"
-                className="slide-show"
-                src="https://test.com"
-              />
+          <div
+            aria-hidden="false"
+            class="slick-slide slick-active slick-current"
+            data-index="0"
+            style="outline: none; width: 0px; position: relative; left: 0px; opacity: 1; z-index: 999; transition: opacity 5000ms ease, visibility 5000ms ease;"
+            tabindex="-1"
+          >
+            <div>
+              <div
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
+              >
+                <img
+                  alt="test"
+                  class="slide-show"
+                  src="https://test.com"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          aria-hidden={true}
-          className="slick-slide"
-          data-index={1}
-          onClick={[Function]}
-          style={
-            {
-              "left": -0,
-              "opacity": 0,
-              "outline": "none",
-              "position": "relative",
-              "transition": "opacity 5000ms ease, visibility 5000ms ease",
-              "width": 0,
-            }
-          }
-          tabIndex="-1"
-        >
-          <div>
-            <div
-              style={
-                {
-                  "display": "inline-block",
-                  "width": "100%",
-                }
-              }
-              tabIndex={-1}
-            >
-              <img
-                alt="test2"
-                className="slide-show"
-                src="https://test2.com"
-              />
+          <div
+            aria-hidden="true"
+            class="slick-slide"
+            data-index="1"
+            style="outline: none; width: 0px; position: relative; left: 0px; opacity: 0; z-index: 998; transition: opacity 5000ms ease, visibility 5000ms ease;"
+            tabindex="-1"
+          >
+            <div>
               <div
-                className="slider-caption"
-                style={
-                  {
-                    "backgroundColor": "silver",
-                    "fontWeight": "bold",
-                    "marginBottom": 0,
-                    "marginTop": 0,
-                    "padding": 0,
-                    "textAlign": "center",
-                  }
-                }
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
               >
-                 
-                test2
-                 
+                <img
+                  alt="test2"
+                  class="slide-show"
+                  src="https://test2.com"
+                />
+                <div
+                  class="slider-caption"
+                  style="text-align: center; font-weight: bold; padding: 0px; background-color: silver; margin-bottom: 0px; margin-top: 0px;"
+                >
+                   
+                  test2
+                   
+                </div>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ function makeDropdown(
   value: string,
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void,
   options: { type: string, Category: string }[],
-): JSX.Element {
+) {
   let key = 1;
   return (
     <label htmlFor={htmlFor} style={{ paddingTop: '12px' }} id={htmlFor}>
@@ -30,7 +30,7 @@ export interface DataDropParams {
   onChange: (arg0: React.ChangeEvent<HTMLSelectElement>, arg1: string) => void,
   options: Record<string, string>[], oValue: string, dValue: string
 }
-function makeDataDropdown(p: DataDropParams): JSX.Element {
+function makeDataDropdown(p: DataDropParams) {
   return (
     <label htmlFor={p.htmlFor} style={{ paddingTop: '12px' }} id={p.htmlFor}>
       {p.labelText}
@@ -50,7 +50,7 @@ export interface InputParams {
   label: string, isRequired: boolean | undefined,
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined, value: string, width: string
 }
-function makeInput(p: InputParams): JSX.Element {
+function makeInput(p: InputParams) {
   let fId = p.label && p.label.toLowerCase(), newLine = true;
   fId = fId.replace(/\s/g, '');
   if (p.newLine !== undefined && p.newLine === false) newLine = false;

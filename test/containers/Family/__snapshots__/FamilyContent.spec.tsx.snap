@@ -1,67 +1,42 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FamilyContent > FamilySlideShow renders correctly with images 1`] = `
-<div
-  id="familySlideshowWide"
-  style={
-    {
-      "display": "flex",
-      "flexDirection": "column",
-    }
-  }
->
+<div>
   <div
-    id="pic-slider"
+    id="familySlideshowWide"
+    style="display: flex; flex-direction: column;"
   >
     <div
-      className="slick-slider slick-initialized"
+      id="pic-slider"
     >
       <div
-        className="slick-list"
+        class="slick-slider slick-initialized"
       >
         <div
-          className="slick-track"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseOver={[Function]}
-          style={
-            {
-              "opacity": 1,
-            }
-          }
+          class="slick-list"
         >
           <div
-            aria-hidden={false}
-            className="slick-slide slick-active slick-current"
-            data-index={0}
-            onClick={[Function]}
-            style={
-              {
-                "left": -0,
-                "opacity": 1,
-                "outline": "none",
-                "position": "relative",
-                "transition": "opacity 5000ms ease, visibility 5000ms ease",
-                "width": 0,
-              }
-            }
-            tabIndex="-1"
+            class="slick-track"
+            style="opacity: 1;"
           >
-            <div>
-              <div
-                style={
-                  {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
-              >
-                <img
-                  alt="test"
-                  className="slide-show"
-                  src="https://test.com"
-                />
+            <div
+              aria-hidden="false"
+              class="slick-slide slick-active slick-current"
+              data-index="0"
+              style="outline: none; width: 0px; position: relative; left: 0px; opacity: 1; z-index: 999; transition: opacity 5000ms ease, visibility 5000ms ease;"
+              tabindex="-1"
+            >
+              <div>
+                <div
+                  style="width: 100%; display: inline-block;"
+                  tabindex="-1"
+                >
+                  <img
+                    alt="test"
+                    class="slide-show"
+                    src="https://test.com"
+                  />
+                </div>
               </div>
             </div>
           </div>

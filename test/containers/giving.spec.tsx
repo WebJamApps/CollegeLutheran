@@ -1,9 +1,9 @@
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Giving } from '../../src/containers/Giving/index';
 
 describe('Giving', () => {
   it('Renders the Giving component', () => {
-    const giving = renderer.create(<Giving />).toJSON();
+    const giving = render(<Giving />).container;
     expect(giving).toMatchSnapshot();
   });
 });

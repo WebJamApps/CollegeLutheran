@@ -57,7 +57,7 @@ export function makeHandleChange(setComments: React.Dispatch<SetStateAction<stri
   };
 }
 
-export function ChangeNewsPage(): JSX.Element {
+export function ChangeNewsPage() {
   const { getNews } = useContext(ContentContext);
   const { auth } = useContext(AuthContext);
   const [title, setTitle] = useState('');
@@ -99,9 +99,9 @@ export function ChangeNewsPage(): JSX.Element {
   );
 }
 interface IbuttonsNavProps {
-  setShowEditor:(arg0:string)=>void;showEditor:string;
+  setShowEditor: (arg0: string) => void; showEditor: string;
 }
-export function ButtonsNav(props:IbuttonsNavProps) {
+export function ButtonsNav(props: IbuttonsNavProps) {
   const { setShowEditor, showEditor } = props;
   return (
     <Stack direction="row" spacing={2} style={{ textAlign: 'center', marginLeft: '1%' }}>
@@ -136,15 +136,15 @@ export function ButtonsNav(props:IbuttonsNavProps) {
         Edit Page Content
       </Button>
       {showEditor !== 'editPic' && (
-      <Button
-        size="small"
-        sx={{ textAlign: 'center' }}
-        id="a-d"
-        variant="outlined"
-        onClick={() => (showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/'))}
-      >
-        Cancel
-      </Button>
+        <Button
+          size="small"
+          sx={{ textAlign: 'center' }}
+          id="a-d"
+          variant="outlined"
+          onClick={() => (showEditor === 'editContent' ? setShowEditor('') : window.location.assign('/'))}
+        >
+          Cancel
+        </Button>
       )}
     </Stack>
   );
@@ -157,9 +157,9 @@ export function AdminDashboardContent() {
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
       <ButtonsNav showEditor={showEditor} setShowEditor={setShowEditor} />
       {showEditor === '' ? <ChangeNewsPage /> : null}
-      { showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} /> }
-      { showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
-      { showEditor === 'editContent' ? (
+      {showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} />}
+      {showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
+      {showEditor === 'editContent' ? (
         <>
           <ChangeHomePageSect />
           {/* <ChangeHabitatPageSect /> */}

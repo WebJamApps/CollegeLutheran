@@ -9,7 +9,7 @@ export interface IpictureTypes {
 export interface Ibook {
   link?: string;
   caption?: string;
-  modify?: JSX.Element;
+  modify?: unknown;
   thumbnail?: string;
   title: string;
   _id: string;

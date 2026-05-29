@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import ELCALogo from '../../components/elcaLogo';
 
-function GivingInfo(): JSX.Element {
+function GivingInfo() {
   return (
     <div
       className="material-content elevation3"
@@ -30,7 +30,7 @@ function GivingInfo(): JSX.Element {
   );
 }
 
-function GivingDonation(): JSX.Element {
+function GivingDonation() {
   return (
     <iframe
       width="100%"
@@ -45,7 +45,7 @@ function GivingDonation(): JSX.Element {
   );
 }
 
-export function GivingContent(): JSX.Element {
+export function GivingContent() {
   return (
     // Main wrapper that ensures everything is centered on the page
     <Box sx={{

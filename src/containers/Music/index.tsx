@@ -3,7 +3,7 @@ import { MusicContent } from './MusicContent';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import commonUtils from '../../lib/commonUtils';
 
-export const Music = (): JSX.Element => {
+export const Music = () => {
   commonUtils.setTitleAndScroll('Music', window.screen.width);
   return (<MusicContent />);
 };

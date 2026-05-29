@@ -1,9 +1,9 @@
 import Calendar from 'src/containers/Calendar';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 describe('Calendar', () => {
   it('renders correctly', () => {
-    const c = renderer.create(<Calendar />).toJSON();
+    const c = render(<Calendar />).container;
     expect(c).toMatchSnapshot();
   });
 });
