@@ -18,16 +18,17 @@ const StewardshipContent = () => (
           src="https://dl.dropboxusercontent.com/scl/fi/la8fjnoppc97zt1koxsqz/fallStewardship.jpg?rlkey=u60j5qhaq2h21ckytmgb8dqi0&dl=0"
         />
         <i style={{ fontSize: '12pt' }}>
+          Click here to
+          {' '}
           <a
             style={{ fontSize: '12pt' }}
             href="https://forms.gle/7UC5r6Y4GknFans39"
             target="_blank"
             rel="noreferrer"
           >
-            <strong>Click here</strong>
+            <strong>provide your 2026 Statement of Intent</strong>
           </a>
-          {' '}
-          to provide your 2026 Statement of Intent.
+          .
         </i>
         <p style={{ marginTop: '10px' }}>
           &quot;So if anyone is in Christ, there is a new creation: everything old has passed away; look, new things have come into being!&quot; (II Corinthians 5:17)
