@@ -5,6 +5,7 @@ export function Editor(props: any) {
     <textarea
       id={id}
       data-testid={id}
+      aria-label={id || 'editor'}
       value={value ?? ''}
       onChange={(e) => onEditorChange && onEditorChange(e.target.value)}
     />

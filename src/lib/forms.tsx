@@ -62,6 +62,7 @@ function makeInput(p: InputParams) {
       <input
         style={{ paddingLeft: 0, minWidth: 'inherit', width: p.width }}
         id={fId}
+        aria-label={p.label}
         type={p.type}
         name={fId}
         onChange={p.onChange}
