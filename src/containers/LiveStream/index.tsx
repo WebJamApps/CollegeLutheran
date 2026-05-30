@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useWindowWidth } from 'src/lib/useWindowSize';
 import commonUtils from '../../lib/commonUtils';
 
@@ -13,7 +14,22 @@ export interface LiveStreamProps {
 }
 export const LiveStream = ({ width }: LiveStreamProps) => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
-  const src = `https://www.youtube.com/embed/live_stream?channel=${process.env.CHANNEL_ID}`;
+  const [videoId, setVideoId] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      try {
+        const res = await fetch(`${process.env.BackendUrl}/livestream/current`);
+        const data = await res.json() as { videoId: string | null };
+        if (active && data?.videoId) setVideoId(data.videoId);
+      } catch { /* no video available → fall back to the links below */ }
+    };
+    void load();
+    return () => { active = false; };
+  }, []);
+  // Only render the embed when the backend gives us a real video id; otherwise
+  // the page shows just the links (no stale YouTube "waiting" placeholder).
+  const src = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
       {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Welcome to Our Livestream Page</h5> : null}
@@ -45,7 +61,7 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
         -
         These links also provide a way to view previous church services that were recorded.
       </p>
-      {width > 931 ? (
+      {src && width > 931 ? (
         <iframe
           title="Live Stream Wide"
           src={src}
@@ -57,7 +73,7 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
         />
       )
         : null}
-      {width < 932
+      {src && width < 932
         ? (
           <iframe
             title="Live Stream Small"
