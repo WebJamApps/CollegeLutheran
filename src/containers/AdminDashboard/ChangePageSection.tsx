@@ -2,7 +2,7 @@ import { SetStateAction, useContext, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { ContentContext } from 'src/providers/Content.provider';
 import { AuthContext } from 'src/providers/Auth.provider';
-import { Button } from '@mui/material';
+import { Button, Switch, FormControlLabel } from '@mui/material';
 import forms from 'src/lib/forms';
 import utils from './utils';
 
@@ -44,12 +44,14 @@ export function UpdateButton(
     comments = '',
     buttonName,
     type,
+    enabled,
   }: {
     title: string,
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent'
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent',
+    enabled?: boolean,
   },
 ) {
   const { auth } = useContext(AuthContext);
@@ -60,7 +62,9 @@ export function UpdateButton(
         variant="contained"
         type="button"
         id="c-h"
-        onClick={() => utils.putAPI({ title, comments, type }, auth, getContent)}
+        onClick={() => utils.putAPI({
+          title, comments, type, enabled,
+        }, auth, getContent)}
       >
         {buttonName}
       </Button>
@@ -70,13 +74,16 @@ export function UpdateButton(
 
 export interface IchangePageSectionProps {
   pageType: 'habitatPage' | 'stewardshipPage' | 'homePage' | 'youthPage',
-  formTitle: string, withInput?: boolean
+  formTitle: string, withInput?: boolean, withToggle?: boolean
 }
 export function ChangePageSection(props: IchangePageSectionProps) {
-  const { pageType, formTitle, withInput } = props;
+  const {
+    pageType, formTitle, withInput, withToggle,
+  } = props;
   const { content, getContent } = useContext(ContentContext);
   const [comments, setComments] = useState(content[pageType].comments);
   const [title, setTitle] = useState(content[pageType].title);
+  const [enabled, setEnabled] = useState<boolean>(content[pageType].enabled === true);
   const inputParams = {
     type: 'text',
     label: 'Title',
@@ -100,6 +107,12 @@ export function ChangePageSection(props: IchangePageSectionProps) {
           }}
         >
           {withInput ? forms.makeInput(inputParams) : null}
+          {withToggle ? (
+            <FormControlLabel
+              control={<Switch checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />}
+              label={enabled ? 'Page visible (on)' : 'Page hidden (off)'}
+            />
+          ) : null}
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
           <UpdateButton
@@ -108,6 +121,7 @@ export function ChangePageSection(props: IchangePageSectionProps) {
             comments={comments}
             type={`${pageType}Content`}
             buttonName={`Update ${formTitle}`}
+            enabled={withToggle ? enabled : undefined}
           />
         </form>
       </div>

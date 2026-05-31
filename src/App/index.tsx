@@ -3,6 +3,8 @@ import {
 } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
+import { ContentContext } from 'src/providers/Content.provider';
+import { stewardshipEnabled } from 'src/providers/utils';
 import DefaultMusic from '../containers/Music';
 import { Beliefs } from '../containers/Beliefs';
 import { Giving } from '../containers/Giving';
@@ -37,8 +39,12 @@ export function showAdminDashboard(isAdmin: boolean) {
 
 export function App() {
   const { auth } = useContext(AuthContext);
+  const { content } = useContext(ContentContext);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
+  // Stewardship is seasonal: block the route (direct URL too) unless an admin
+  // has enabled it; default off → redirect home. (CollegeLutheran#707)
+  const stewardshipOn = stewardshipEnabled(content);
   return (
     <div id="App" className="App">
       <AppTemplate>
@@ -55,7 +61,7 @@ export function App() {
           <Route path="/news" element={<News />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/livestream" element={<DefaultLiveStream />} />
-          <Route path="/stewardship" element={<Stewardship />} />
+          <Route path="/stewardship" element={stewardshipOn ? <Stewardship /> : <Navigate to="/" replace />} />
           {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
