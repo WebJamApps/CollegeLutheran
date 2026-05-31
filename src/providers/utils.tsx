@@ -26,6 +26,7 @@ export interface Ibook {
   comments?: string;
   checkedOutBy?: string;
   checkedOutByName?: string;
+  enabled?: boolean;
 }
 
 export interface Icontent {
@@ -48,3 +49,9 @@ export function makeGetter(
 ) {
   return async () => populate(setter);
 }
+
+// Seasonal Stewardship page is visible only when an admin has toggled its
+// content doc's `enabled` flag on; absent/false = hidden. (CollegeLutheran#707)
+export const stewardshipEnabled = (
+  content?: { stewardshipPage?: Ibook },
+): boolean => content?.stewardshipPage?.enabled === true;

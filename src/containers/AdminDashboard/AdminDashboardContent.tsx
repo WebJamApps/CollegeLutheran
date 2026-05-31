@@ -32,14 +32,15 @@ export function ChangeYouthPageSect() {
   );
 }
 
-// export function ChangeStewardshipPageSect() {
-//   return (
-//     <ChangePageSection
-//       pageType="stewardshipPage"
-//       formTitle="Stewardshippage Section"
-//     />
-//   );
-// }
+export function ChangeStewardshipPageSect() {
+  return (
+    <ChangePageSection
+      pageType="stewardshipPage"
+      formTitle="Stewardshippage Section"
+      withToggle
+    />
+  );
+}
 
 // export function ChangeHabitatPageSect() {
 //   return (
@@ -163,7 +164,7 @@ export function AdminDashboardContent() {
         <>
           <ChangeHomePageSect />
           {/* <ChangeHabitatPageSect /> */}
-          {/* <ChangeStewardshipPageSect /> */}
+          <ChangeStewardshipPageSect />
           <ChangeYouthPageSect />
         </>
       ) : null}

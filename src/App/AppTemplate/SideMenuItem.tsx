@@ -3,7 +3,7 @@ import {
   useContext, useEffect,
 } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
-import type { Ibook } from 'src/providers/utils';
+import { type Ibook, stewardshipEnabled } from 'src/providers/utils';
 import commonUtils from 'src/lib/commonUtils';
 import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
@@ -101,7 +101,7 @@ export function SideMenuItem(props: IsideMenuItemProps) {
   const {
     menu, index, handleClose,
   } = props;
-  const { news: { newsContent }, getNews } = useContext(ContentContext);
+  const { news: { newsContent }, getNews, content } = useContext(ContentContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { (async () => { await getNews(); })(); }, []);
   const { auth } = useContext(AuthContext);
@@ -113,6 +113,9 @@ export function SideMenuItem(props: IsideMenuItemProps) {
   if (m.name === 'Bulletin') {
     m = setBulletin(m, newsContent);
   }
+  // Stewardship is seasonal: hide its nav link unless an admin has toggled the
+  // stewardship content doc's `enabled` flag on (default off → hidden). (CollegeLutheran#707)
+  if (m.name === 'Stewardship' && !stewardshipEnabled(content)) return null;
   if (!utils.showNav(isAllowed, location, m, auth)) return null;
   if (m.link) {
     return (

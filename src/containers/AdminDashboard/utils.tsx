@@ -41,7 +41,7 @@ async function handlePutError(e: HttpError,
 }
 
 async function putAPI(
-  data: { title: string; comments: string; type: string },
+  data: { title: string; comments: string; type: string; enabled?: boolean },
   auth: Iauth,
   getContent: () => Promise<void>,
 ): Promise<void> {
