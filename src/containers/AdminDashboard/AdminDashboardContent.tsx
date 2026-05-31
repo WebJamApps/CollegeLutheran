@@ -36,7 +36,7 @@ export function ChangeStewardshipPageSect() {
   return (
     <ChangePageSection
       pageType="stewardshipPage"
-      formTitle="Stewardshippage Section"
+      formTitle="Stewardship Page Section"
       withToggle
     />
   );
