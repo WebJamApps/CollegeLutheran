@@ -33,4 +33,16 @@ describe('LiveStream', () => {
     await screen.findByText('Facebook Videos');
     await waitFor(() => expect(screen.queryByTitle('Live Stream Small')).toBeNull());
   });
+
+  it('labels a live stream as "Live now"', async () => {
+    vi.stubGlobal('fetch', vi.fn(() => okJson({ videoId: 'VID123', status: 'live' })));
+    render(<LiveStream width={950} />);
+    expect((await screen.findByTestId('stream-label')).textContent).toBe('Live now');
+  });
+
+  it('labels a completed stream with its date', async () => {
+    vi.stubGlobal('fetch', vi.fn(() => okJson({ videoId: 'VID123', status: 'completed', publishedAt: '2026-05-25T15:00:00Z' })));
+    render(<LiveStream width={950} />);
+    expect((await screen.findByTestId('stream-label')).textContent).toContain('May 25, 2026');
+  });
 });

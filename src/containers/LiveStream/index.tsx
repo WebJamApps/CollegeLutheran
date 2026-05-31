@@ -14,14 +14,14 @@ export interface LiveStreamProps {
 }
 export const LiveStream = ({ width }: LiveStreamProps) => {
   commonUtils.setTitleAndScroll('Livestream', window.screen.width);
-  const [videoId, setVideoId] = useState<string | null>(null);
+  const [info, setInfo] = useState<{ videoId: string | null; status?: string; publishedAt?: string }>({ videoId: null });
   useEffect(() => {
     let active = true;
     const load = async () => {
       try {
         const res = await fetch(`${process.env.BackendUrl}/livestream/current`);
-        const data = await res.json() as { videoId: string | null };
-        if (active && data?.videoId) setVideoId(data.videoId);
+        const data = await res.json() as { videoId: string | null; status?: string; publishedAt?: string };
+        if (active && data?.videoId) setInfo(data);
       } catch { /* no video available → fall back to the links below */ }
     };
     void load();
@@ -29,7 +29,17 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
   }, []);
   // Only render the embed when the backend gives us a real video id; otherwise
   // the page shows just the links (no stale YouTube "waiting" placeholder).
-  const src = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  const src = info.videoId ? `https://www.youtube.com/embed/${info.videoId}` : null;
+  // Tell visitors which stream they're seeing: the active service, or the date
+  // of the most recent recorded one. publishedAt comes from web-jam-back.
+  const streamLabel = (): string => {
+    if (info.status === 'live') return 'Live now';
+    if (info.publishedAt) {
+      return `Most recent service — ${new Date(info.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+    }
+    if (src) return 'Most recent recorded service';
+    return '';
+  };
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
       {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Welcome to Our Livestream Page</h5> : null}
@@ -61,6 +71,9 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
         -
         These links also provide a way to view previous church services that were recorded.
       </p>
+      {src ? (
+        <p style={{ fontWeight: 'bold', margin: '6px 0' }} data-testid="stream-label">{streamLabel()}</p>
+      ) : null}
       {src && width > 931 ? (
         <iframe
           title="Live Stream Wide"
