@@ -1,6 +1,6 @@
 {
   "name": "collegelutheran",
-  "version": "2.1.5",
+  "version": "2.1.7",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -31,7 +31,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test:stylelint": "stylelint \"static/**/*.scss\"",
+    "test:stylelint": "stylelint \"src/styles/**/*.scss\"",
     "lint:fix": "eslint . --fix",
     "test:lint-fix": "npm run test:stylelint && npm run lint:fix",
     "test:lint": "npm run test:stylelint && eslint .",

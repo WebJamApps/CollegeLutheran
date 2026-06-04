@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { App } from './App';
 import store from './redux/store';
 import { AuthProvider } from './providers/Auth.provider';
-import '../static/styles.scss';
+import './styles/styles.scss';
 import { ContentProvider } from './providers/Content.provider';
 import { BrowserRouter } from 'react-router-dom';
 
