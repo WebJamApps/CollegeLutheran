@@ -54,22 +54,13 @@
   }
 }
 
-// Button-style link to Constant Contact's hosted opt-in page (replaces the old
-// embedded inline-form widget; see NewsContent.tsx).
-.signup-link {
-  display: inline-block;
+// Email sign-up is handled by the church office (no online form); see
+// NewsContent.tsx.
+.signup-info {
+  max-width: 32rem;
   margin: 1rem auto;
-  padding: 0.6rem 1.4rem;
-  background: #4a148c;
-  color: #fff;
-  border-radius: 4px;
+  padding: 0 1rem;
+  color: #444;
   font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    background: #6a1b9a;
-    text-decoration: none;
-  }
+  line-height: 1.5;
 }

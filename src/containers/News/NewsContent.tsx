@@ -8,23 +8,24 @@ import ELCALogo from 'src/components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
 import { defaultNews } from './utilsN';
 
-// Constant Contact's hosted opt-in page. We link to it instead of embedding the
-// inline-form widget: the widget was injected by an external script that
-// Firefox's Enhanced Tracking Protection blocks (form never rendered), and it
-// also raced the SPA route mount. A direct link works in every browser with no
-// script, no timing race, and no console errors.
-const OPT_IN_URL = 'https://visitor.r20.constantcontact.com/manage/optin?v=001cd950f6ed99253e212302d6c939739';
-
+// Email sign-up is handled by the church office, not an online form. The old
+// Constant Contact inline-form widget never worked (Firefox blocked the script,
+// it raced the SPA mount, and there is no usable hosted form/URL to link to), so
+// we simply ask people to contact the office to be added to the list.
 export function SignUpForEmails() {
   return (
-    <a
-      className="signup-link"
-      href={OPT_IN_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Sign Up for Email Updates
-    </a>
+    <div className="signup-info">
+      <p>
+        To join our email list, please contact the church office (Sandi Roop) at
+        {' '}
+        <a href="tel:+15403894963">(540) 389-4963</a>
+        {' '}
+        or
+        {' '}
+        <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
+        , and she will add you to the distribution list.
+      </p>
+    </div>
   );
 }
 

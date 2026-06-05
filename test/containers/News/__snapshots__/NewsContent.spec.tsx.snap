@@ -22,14 +22,28 @@ exports[`NewsContent > renders the news page 1`] = `
       <div
         style="margin: auto; text-align: center;"
       >
-        <a
-          class="signup-link"
-          href="https://visitor.r20.constantcontact.com/manage/optin?v=001cd950f6ed99253e212302d6c939739"
-          rel="noopener noreferrer"
-          target="_blank"
+        <div
+          class="signup-info"
         >
-          Sign Up for Email Updates
-        </a>
+          <p>
+            To join our email list, please contact the church office (Sandi Roop) at
+             
+            <a
+              href="tel:+15403894963"
+            >
+              (540) 389-4963
+            </a>
+             
+            or
+             
+            <a
+              href="mailto:office1@collegelutheran.org"
+            >
+              office1@collegelutheran.org
+            </a>
+            , and she will add you to the distribution list.
+          </p>
+        </div>
       </div>
     </div>
     <div
