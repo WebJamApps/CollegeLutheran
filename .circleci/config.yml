@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:24.15-browsers
+      - image: cimg/node:24.16-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -17,6 +17,23 @@ jobs:
           command: npm test
       - store_artifacts:
           path: coverage
+      - run:
+          name: e2e tests (Playwright, desktop + mobile)
+          command: |
+            npx playwright install chromium
+            # Rebuild for production: the postinstall build during `npm install`
+            # runs without NODE_ENV=production and emits React's dev jsxDEV
+            # runtime, which crashes the served bundle. Heroku sets NODE_ENV, so
+            # prod is fine; CI must set it explicitly here. Done after the e2e
+            # browser install so the devDep Playwright is still present.
+            NODE_ENV=production npm run build
+            PORT=7777 node server.mjs &
+            SERVER_PID=$!
+            sleep 5
+            BASE_URL=http://localhost:7777 npm run test:e2e
+            STATUS=$?
+            kill $SERVER_PID || true
+            exit $STATUS
       - run:
           name: Smoketest - clean install without devDependencies
           command: |
