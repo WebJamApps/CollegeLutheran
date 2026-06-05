@@ -49,6 +49,9 @@ jobs:
             NODE_ENV=production npm run build
             PORT=7777 node server.mjs > /tmp/front.log 2>&1 &
             sleep 5
+            echo "DIAG post-seed backend rows:"; curl -s "http://localhost:7000/book?type=Forum" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).length)}catch(e){console.log('parse-fail:'+d.slice(0,80))}})" || true
+            echo "DIAG CORS for origin 7777:"; curl -s -H "Origin: http://localhost:7777" -D - -o /dev/null "http://localhost:7000/book?type=Forum" | grep -i "access-control" || echo "NO access-control header"
+            echo "DIAG bundle BackendUrl baked:"; grep -ho "http://localhost:7000" dist/assets/*.js | head -1 || echo "localhost:7000 NOT in bundle"
             set +e
             E2E_SEEDED=1 BASE_URL=http://localhost:7777 npm run test:e2e
             STATUS=$?
