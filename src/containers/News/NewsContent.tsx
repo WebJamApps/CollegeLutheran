@@ -1,28 +1,46 @@
 import type { Ibook } from 'src/providers/utils';
-import { useElementHeight } from 'src/lib/useWindowSize';
 import {
-  useContext, useEffect, useState,
+  useContext, useEffect, useRef, useState,
 } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { checkIsAdmin } from 'src/App';
-import { Button } from '@mui/material';
 import ELCALogo from 'src/components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
 import { defaultNews } from './utilsN';
 
-export function SignUpForEmails({ height }:{ height:number }) {
+// The email sign-up is a Constant Contact inline form injected by an external
+// script (see index.html). Firefox's Enhanced Tracking Protection blocks that
+// script, so the div stays empty and no form appears. We can't link a direct
+// sign-up URL (we don't have one), so when the form fails to render we show a
+// fallback asking people to contact the office. Detection: if the CTCT div is
+// still empty a few seconds after mount, the script was blocked/failed.
+export function SignUpForEmails() {
+  const formRef = useRef<HTMLDivElement>(null);
+  const [unavailable, setUnavailable] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (formRef.current && formRef.current.childElementCount === 0) setUnavailable(true);
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
-      {height < 700 ? (
-        <Button
-          onClick={() => window.location.reload()}
-          size="large"
-          variant="contained"
-        >
-          Sign Up for Emails
-        </Button>
+      <div ref={formRef} className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
+      {unavailable ? (
+        <div className="signup-unavailable">
+          <p>
+            Our email sign-up form isn&rsquo;t available in this browser. To join our
+            email list, please contact the church office (Sandi Roop) at
+            {' '}
+            <a href="tel:+15403894963">(540) 389-4963</a>
+            {' '}
+            or
+            {' '}
+            <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
+            , and she will add you to the distribution list.
+          </p>
+        </div>
       ) : null}
-      <div className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
     </>
   );
 }
@@ -31,7 +49,6 @@ interface NewsContentProps {
   books?: Ibook[];
 }
 export function NewsContent({ books }: NewsContentProps) {
-  const { height, ref } = useElementHeight<HTMLDivElement>();
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editNews, setEditNews] = useState(defaultNews);
@@ -89,8 +106,8 @@ export function NewsContent({ books }: NewsContentProps) {
         </div>
         <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
         <hr style={{ margin: '0px' }} />
-        <div ref={ref} style={{ margin: 'auto', textAlign: 'center', marginTop: '-30px' }}>
-          <SignUpForEmails height={height || 100} />
+        <div style={{ margin: 'auto', textAlign: 'center' }}>
+          <SignUpForEmails />
         </div>
       </div>
       <EditNewsDialog editNews={editNews} setEditNews={setEditNews} />

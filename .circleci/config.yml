@@ -18,21 +18,44 @@ jobs:
       - store_artifacts:
           path: coverage
       - run:
-          name: e2e tests (Playwright, desktop + mobile)
+          name: e2e tests (Playwright + real web-jam-back on the test DB)
           command: |
             npx playwright install chromium
-            # Rebuild for production: the postinstall build during `npm install`
-            # runs without NODE_ENV=production and emits React's dev jsxDEV
-            # runtime, which crashes the served bundle. Heroku sets NODE_ENV, so
-            # prod is fine; CI must set it explicitly here. Done after the e2e
-            # browser install so the devDep Playwright is still present.
-            NODE_ENV=production npm run build
-            PORT=7777 node server.mjs &
-            SERVER_PID=$!
+            # Start a real web-jam-back (public repo) against the TEST MongoDB so
+            # the News table is populated by the real API — no stubs. MONGO_DB_URI
+            # is the test DB (never prod), set as a CircleCI project env var.
+            # --ignore-scripts skips web-jam-back's postinstall (it pulls in
+            # JaMmusic, which we don't need); we then build it with tsc.
+            git clone --depth 1 --branch main https://github.com/WebJamApps/web-jam-back.git /tmp/wjb
+            ( cd /tmp/wjb && npm ci --ignore-scripts && npx tsc )
+            # web-jam-back only calls app.listen when NODE_ENV !== 'test', reads
+            # MONGO_DB_URI when NODE_ENV !== 'test', and runs a dev-only song
+            # reseed when NODE_ENV !== 'production'. CI's NODE_ENV is 'test', which
+            # would skip listen entirely — so run it explicitly as production: it
+            # listens, reads MONGO_DB_URI (the test DB), and skips the reseed.
+            NODE_ENV=production MONGO_DB_URI="$MONGO_DB_URI" \
+              AllowUrl='{"urls":["http://localhost:7777"]}' \
+              PORT=7000 node /tmp/wjb/build/src/index.js > /tmp/wjb.log 2>&1 &
+            for _ in $(seq 1 30); do curl -sf "http://localhost:7000/book?type=Forum" >/dev/null && break; sleep 2; done
+            cat /tmp/wjb.log || true
+            # Seed several Forum rows so the table renders (and scrolls).
+            node test/e2e/seed-news.mjs seed
+            # Point the frontend at the local backend via a real env var — Vite's
+            # loadEnv picks up process.env, whereas writing a .env file did NOT bake
+            # into the CI bundle. NODE_ENV=production so React uses the prod JSX
+            # runtime (a plain build crashes the served bundle).
+            BackendUrl=http://localhost:7000 NODE_ENV=production npm run build
+            PORT=7777 node server.mjs > /tmp/front.log 2>&1 &
             sleep 5
-            BASE_URL=http://localhost:7777 npm run test:e2e
+            echo "DIAG post-seed backend rows:"; curl -s "http://localhost:7000/book?type=Forum" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).length)}catch(e){console.log('parse-fail:'+d.slice(0,80))}})" || true
+            echo "DIAG CORS for origin 7777:"; curl -s -H "Origin: http://localhost:7777" -D - -o /dev/null "http://localhost:7000/book?type=Forum" | grep -i "access-control" || echo "NO access-control header"
+            echo "DIAG bundle BackendUrl baked:"; grep -ho "http://localhost:7000" dist/assets/*.js | head -1 || echo "localhost:7000 NOT in bundle"
+            set +e
+            E2E_SEEDED=1 BASE_URL=http://localhost:7777 npm run test:e2e
             STATUS=$?
-            kill $SERVER_PID || true
+            set -e
+            # Always remove the rows we seeded, pass or fail.
+            node test/e2e/seed-news.mjs cleanup
             exit $STATUS
       - run:
           name: Smoketest - clean install without devDependencies
