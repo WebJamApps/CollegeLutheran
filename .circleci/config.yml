@@ -28,11 +28,16 @@ jobs:
             # JaMmusic, which we don't need); we then build it with tsc.
             git clone --depth 1 --branch main https://github.com/WebJamApps/web-jam-back.git /tmp/wjb
             ( cd /tmp/wjb && npm ci --ignore-scripts && npx tsc )
-            MONGO_DB_URI="$MONGO_DB_URI" AllowUrl='{"urls":["http://localhost:7777"]}' \
+            # web-jam-back's mongoConnect reads TEST_DB when NODE_ENV=test, else
+            # MONGO_DB_URI — set BOTH to the test DB so it connects either way.
+            MONGO_DB_URI="$MONGO_DB_URI" TEST_DB="$MONGO_DB_URI" \
+              AllowUrl='{"urls":["http://localhost:7777"]}' \
               PORT=7000 node /tmp/wjb/build/src/index.js > /tmp/wjb.log 2>&1 &
             for _ in $(seq 1 30); do curl -sf "http://localhost:7000/book?type=Forum" >/dev/null && break; sleep 2; done
             # Seed several Forum rows so the table renders (and scrolls).
             node test/e2e/seed-news.mjs seed
+            echo "DIAG backend Forum rows:"; curl -s "http://localhost:7000/book?type=Forum" | head -c 300; echo
+            echo "DIAG web-jam-back startup log:"; cat /tmp/wjb.log
             # Point the frontend at the local backend. Vite reads BackendUrl from
             # a .env file (loadEnv), and .env is gitignored so CI has none — write
             # it here, else the build bakes an empty BackendUrl and the browser
