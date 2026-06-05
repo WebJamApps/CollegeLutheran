@@ -367,7 +367,8 @@ div.fof {
 /* App/Giving */
 
 .giving-iframe {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: 750px;
   border: 1px solid #d3d3d3;
 }
