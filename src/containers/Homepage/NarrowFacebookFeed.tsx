@@ -16,13 +16,19 @@ const FacebookIframe = () => (
         <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
       </i>
     </p>
-    <div style={{ maxWidth: '300px', margin: 'auto', marginBottom: 0 }}>
+    {/* Crop the page-plugin's own header (~56px) so only the post feed shows
+        (it otherwise duplicates the first post's "College Lutheran Church"
+        header). */}
+    <div style={{
+      maxWidth: '300px', margin: 'auto', marginBottom: 0, height: '500px', overflow: 'hidden',
+    }}
+    >
       <iframe
         title="clc-facebook" /* eslint-disable-next-line max-len */
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=300&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=300&height=568&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
         width="300"
-        height="500"
-        style={{ border: 'none', overflow: 'hidden' }}
+        height="568"
+        style={{ border: 'none', overflow: 'hidden', marginTop: '-68px' }}
         loading="lazy"
         scrolling="no"
         frameBorder="0"

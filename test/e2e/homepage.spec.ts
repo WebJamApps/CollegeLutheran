@@ -20,8 +20,8 @@ test('renders the homepage with its key sections', async ({ page }) => {
 });
 
 test('shows exactly one Facebook feed (no duplicated embed)', async ({ page }) => {
-  // Only one feed renders per viewport (wide OR narrow). Two would mean the
-  // duplicate-feed regression is back.
+  // Only one embed renders per viewport (wide OR narrow). Two would mean a
+  // duplicated Facebook section is back.
   const feeds = page.locator('iframe[src*="plugins/page.php"]');
   await expect(feeds).toHaveCount(1);
 });

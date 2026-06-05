@@ -43,18 +43,25 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed) => {
             <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
           </i>
         </p>
-        <iframe
-          className="widescreenHomepage"
-          // eslint-disable-next-line max-len
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=485&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
-          width="500"
-          height="485"
-          loading="lazy"
-          style={{ border: 'none', overflow: 'hidden', marginLeft: '-14px' }}
-          scrolling="no"
-          allow="encrypted-media"
-          title="facebook ticker"
-        />
+        {/* Crop the page-plugin's own header (~56px) so only the post feed
+            shows. The plugin always renders a page header above the timeline,
+            which duplicates the first post's author header ("two headers"). */}
+        <div style={{ height: '485px', overflow: 'hidden' }}>
+          <iframe
+            className="widescreenHomepage"
+            // eslint-disable-next-line max-len
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=553&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
+            width="500"
+            height="553"
+            loading="lazy"
+            style={{
+              border: 'none', overflow: 'hidden', marginLeft: '-14px', marginTop: '-68px',
+            }}
+            scrolling="no"
+            allow="encrypted-media"
+            title="facebook ticker"
+          />
+        </div>
       </div>
     </div>
   );
