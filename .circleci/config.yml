@@ -40,13 +40,11 @@ jobs:
             cat /tmp/wjb.log || true
             # Seed several Forum rows so the table renders (and scrolls).
             node test/e2e/seed-news.mjs seed
-            # Point the frontend at the local backend. Vite reads BackendUrl from
-            # a .env file (loadEnv), and .env is gitignored so CI has none — write
-            # it here, else the build bakes an empty BackendUrl and the browser
-            # fetches a relative /book (index.html, not JSON). NODE_ENV=production
-            # so React uses the prod JSX runtime (a plain build crashes the bundle).
-            printf 'BackendUrl=http://localhost:7000\nPORT=7777\n' > .env
-            NODE_ENV=production npm run build
+            # Point the frontend at the local backend via a real env var — Vite's
+            # loadEnv picks up process.env, whereas writing a .env file did NOT bake
+            # into the CI bundle. NODE_ENV=production so React uses the prod JSX
+            # runtime (a plain build crashes the served bundle).
+            BackendUrl=http://localhost:7000 NODE_ENV=production npm run build
             PORT=7777 node server.mjs > /tmp/front.log 2>&1 &
             sleep 5
             echo "DIAG post-seed backend rows:"; curl -s "http://localhost:7000/book?type=Forum" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).length)}catch(e){console.log('parse-fail:'+d.slice(0,80))}})" || true
