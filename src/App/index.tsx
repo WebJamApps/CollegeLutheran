@@ -41,6 +41,14 @@ export function App() {
   const { auth } = useContext(AuthContext);
   const { content } = useContext(ContentContext);
   const [isAdmin, setIsAdmin] = useState(false);
+  // Track the real viewport width (and keep it current on resize/rotate) so the
+  // homepage can pick its narrow vs wide feed instead of always rendering wide.
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const onResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
   // Stewardship is seasonal: block the route (direct URL too) unless an admin
   // has enabled it; default off → redirect home. (CollegeLutheran#707)
@@ -49,7 +57,7 @@ export function App() {
     <div id="App" className="App">
       <AppTemplate>
         <Routes>
-          <Route path="/" element={<DefaultHome width={900} />} />
+          <Route path="/" element={<DefaultHome width={width} />} />
           <Route path="/music" element={<DefaultMusic />} />
           <Route path="/belief" element={<Beliefs />} />
           <Route path="/family" element={<Family />} />

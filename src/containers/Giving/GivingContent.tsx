@@ -62,22 +62,18 @@ export function GivingContent() {
         <GivingInfo />
       </Box>
 
-      {/* 2. Donation Iframe Wrapper - Handles the horizontal scroll */}
-      <Box
-        sx={{
-          width: '100%',
-          maxWidth: 1200, // Matches your desired content width
-          height: '800px',
-          overflowX: 'auto', // Forces horizontal scrollbar
-          border: '1px solid #eee', // Optional: helps see the scroll area
-          '&::-webkit-scrollbar': { height: '10px' },
-          '&::-webkit-scrollbar-thumb': { backgroundColor: '#ccc', borderRadius: '4px' },
-        }}
+      {/* 2. Donation iframe — responsive: fills the available width so the
+          Breeze give form fits the viewport (taller on phones where the form
+          stacks vertically), instead of being forced to 1000px and pushed
+          off-screen on mobile. */}
+      <Box sx={{
+        width: '100%',
+        maxWidth: 1200,
+        height: { xs: '1100px', sm: '800px' },
+        px: { xs: 1, sm: 0 },
+      }}
       >
-        {/* This inner Box MUST be wider than the wrapper to trigger the scrollbar */}
-        <Box sx={{ minWidth: '1000px', height: '100%' }}>
-          <GivingDonation />
-        </Box>
+        <GivingDonation />
       </Box>
 
       {/* 3. Footer/Logo Section */}
