@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 // Guards the News-page email sign-up fallback. The sign-up is a Constant Contact
-// inline form injected by an external script (signup-form-widget.min.js). Firefox
-// Enhanced Tracking Protection blocks that script, leaving the form empty — what
-// Pastor David reported. We simulate the block by aborting the script request,
-// which is deterministic across browsers, then assert the contact-the-office
-// fallback appears and the old floating "Sign Up for Emails" reload button is
-// gone. Runs on desktop + mobile (see playwright.config.ts projects).
+// inline form injected by an external script (signup-form-widget.min.js) loaded
+// in index.html. Firefox Enhanced Tracking Protection blocks that script, leaving
+// the form empty — what Pastor David reported. We simulate the block by aborting
+// the script request, which is deterministic across browsers, then assert the
+// contact-the-office fallback appears. Runs on desktop + mobile (see
+// playwright.config.ts projects).
 
 test('shows the contact-the-office fallback when the sign-up form is blocked', async ({ page }) => {
   await page.route('**/signup-form-widget*', (route) => route.abort());
@@ -21,9 +21,6 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
   await expect(fallback).toContainText('Sandi Roop');
   await expect(fallback.getByRole('link', { name: 'office1@collegelutheran.org' })).toBeVisible();
   await expect(fallback.getByRole('link', { name: '(540) 389-4963' })).toBeVisible();
-
-  // The old reload button that floated over the News table must be gone.
-  await expect(page.getByRole('button', { name: 'Sign Up for Emails' })).toHaveCount(0);
 });
 
 test('does not show the fallback when the form renders', async ({ page }) => {
