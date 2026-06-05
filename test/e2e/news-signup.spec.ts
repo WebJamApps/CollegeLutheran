@@ -28,10 +28,10 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
 
 test('does not show the fallback when the form renders', async ({ page }) => {
   // Simulate a successful Constant Contact injection deterministically: fill the
-  // React-rendered target (the real form GUID; index.html also has a vestigial
-  // .ctct-inline-form) the instant it is added to the DOM, before the component's
-  // empty-div detection timeout. addInitScript + MutationObserver avoids a race
-  // on slow CI where the 3.5s timeout could otherwise fire first.
+  // React-rendered target (the real form GUID) the instant it is added to the
+  // DOM, before the component's empty-div detection timeout. addInitScript +
+  // MutationObserver avoids a race on slow CI where the 3.5s timeout could
+  // otherwise fire first.
   const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
   await page.addInitScript((id) => {
     const fill = () => {
