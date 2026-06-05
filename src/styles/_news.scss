@@ -53,3 +53,14 @@
     width: 320px !important;
   }
 }
+
+// Fallback shown when the Constant Contact sign-up form is blocked (Firefox
+// Enhanced Tracking Protection) and never renders into .ctct-inline-form.
+.signup-unavailable {
+  max-width: 32rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.5;
+}
