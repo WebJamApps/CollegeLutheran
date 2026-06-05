@@ -26,7 +26,7 @@ exports[`Calendar > renders correctly 1`] = `
           color=%23060D5E&ctz=America%2FNew_York"
           style="border-width: 0px;"
           title="Church Calendar"
-          width="900"
+          width="100%"
         />
       </div>
     </div>

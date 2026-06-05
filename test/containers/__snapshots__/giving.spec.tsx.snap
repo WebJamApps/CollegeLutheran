@@ -36,24 +36,20 @@ exports[`Giving > Renders the Giving component 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root css-1emsdqd"
+      class="MuiBox-root css-pceey"
     >
-      <div
-        class="MuiBox-root css-3ioch2"
+      <iframe
+        class="giving-iframe"
+        height="100%"
+        src="https://collegelutheranchurch.breezechms.com/give/online"
+        style="overflow-x: scroll;"
+        title="Just Giving"
+        width="100%"
       >
-        <iframe
-          class="giving-iframe"
-          height="100%"
-          src="https://collegelutheranchurch.breezechms.com/give/online"
-          style="overflow-x: scroll;"
-          title="Just Giving"
-          width="100%"
-        >
-          <p>
-            Your browser does not support iframe.
-          </p>
-        </iframe>
-      </div>
+        <p>
+          Your browser does not support iframe.
+        </p>
+      </iframe>
     </div>
     <div
       class="MuiBox-root css-h5fkc8"
