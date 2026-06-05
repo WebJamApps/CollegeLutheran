@@ -33,10 +33,13 @@ jobs:
             for _ in $(seq 1 30); do curl -sf "http://localhost:7000/book?type=Forum" >/dev/null && break; sleep 2; done
             # Seed several Forum rows so the table renders (and scrolls).
             node test/e2e/seed-news.mjs seed
-            # Rebuild for production: a plain build emits React's dev jsxDEV
-            # runtime and crashes the served bundle (Heroku sets NODE_ENV, CI must
-            # too). Point the frontend at the local backend.
-            NODE_ENV=production BackendUrl=http://localhost:7000 npm run build
+            # Point the frontend at the local backend. Vite reads BackendUrl from
+            # a .env file (loadEnv), and .env is gitignored so CI has none — write
+            # it here, else the build bakes an empty BackendUrl and the browser
+            # fetches a relative /book (index.html, not JSON). NODE_ENV=production
+            # so React uses the prod JSX runtime (a plain build crashes the bundle).
+            printf 'BackendUrl=http://localhost:7000\nPORT=7777\n' > .env
+            NODE_ENV=production npm run build
             PORT=7777 node server.mjs > /tmp/front.log 2>&1 &
             sleep 5
             set +e

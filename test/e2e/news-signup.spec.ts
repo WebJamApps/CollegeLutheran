@@ -27,20 +27,27 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
 });
 
 test('does not show the fallback when the form renders', async ({ page }) => {
-  await page.goto('/news', { waitUntil: 'domcontentloaded' });
-
-  // Simulate a successful Constant Contact injection: give the form div a child
-  // before the detection timeout fires.
-  // Scope to the React-rendered target (the real form GUID); index.html also
-  // has a vestigial .ctct-inline-form, so the bare class is ambiguous.
+  // Simulate a successful Constant Contact injection deterministically: fill the
+  // React-rendered target (the real form GUID; index.html also has a vestigial
+  // .ctct-inline-form) the instant it is added to the DOM, before the component's
+  // empty-div detection timeout. addInitScript + MutationObserver avoids a race
+  // on slow CI where the 3.5s timeout could otherwise fire first.
   const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
-  await page.locator(`[data-form-id="${formId}"]`).waitFor({ state: 'attached' });
-  await page.evaluate((id) => {
-    const el = document.querySelector(`[data-form-id="${id}"]`);
-    if (el) el.innerHTML = '<form data-stub="1"><input aria-label="email" /></form>';
+  await page.addInitScript((id) => {
+    const fill = () => {
+      const el = document.querySelector(`[data-form-id="${id}"]`);
+      if (el && el.childElementCount === 0) {
+        el.innerHTML = '<form data-stub="1"><input aria-label="email" /></form>';
+        return true;
+      }
+      return false;
+    };
+    const obs = new MutationObserver(() => { if (fill()) obs.disconnect(); });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
   }, formId);
 
+  await page.goto('/news', { waitUntil: 'domcontentloaded' });
   // Wait past the detection window, then confirm no fallback rendered.
   await page.waitForTimeout(4500);
-  await expect(page.getByText(/contact the church office/i)).toHaveCount(0);
+  await expect(page.locator('.signup-unavailable')).toHaveCount(0);
 });
