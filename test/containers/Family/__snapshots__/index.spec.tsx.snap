@@ -94,18 +94,6 @@ exports[`Family > renders correctly without images 1`] = `
               https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf
             </a>
           </p>
-          <p>
-            <strong>
-              Hand Prayer:
-            </strong>
-             
-            <a
-              href="http://www.vibrantfaithathome.org/item/hand-prayers"
-              target="_blank"
-            >
-              http://www.vibrantfaithathome.org/item/hand-prayers
-            </a>
-          </p>
         </section>
       </div>
       <div
