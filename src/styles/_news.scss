@@ -54,13 +54,22 @@
   }
 }
 
-// Fallback shown when the Constant Contact sign-up form is blocked (Firefox
-// Enhanced Tracking Protection) and never renders into .ctct-inline-form.
-.signup-unavailable {
-  max-width: 32rem;
+// Button-style link to Constant Contact's hosted opt-in page (replaces the old
+// embedded inline-form widget; see NewsContent.tsx).
+.signup-link {
+  display: inline-block;
   margin: 1rem auto;
-  padding: 0 1rem;
-  color: #444;
+  padding: 0.6rem 1.4rem;
+  background: #4a148c;
+  color: #fff;
+  border-radius: 4px;
   font-size: 1rem;
-  line-height: 1.5;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    background: #6a1b9a;
+    text-decoration: none;
+  }
 }

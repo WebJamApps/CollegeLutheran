@@ -1,6 +1,6 @@
 import type { Ibook } from 'src/providers/utils';
 import {
-  useContext, useEffect, useRef, useState,
+  useContext, useEffect, useState,
 } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { checkIsAdmin } from 'src/App';
@@ -8,40 +8,23 @@ import ELCALogo from 'src/components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
 import { defaultNews } from './utilsN';
 
-// The email sign-up is a Constant Contact inline form injected by an external
-// script (see index.html). Firefox's Enhanced Tracking Protection blocks that
-// script, so the div stays empty and no form appears. We can't link a direct
-// sign-up URL (we don't have one), so when the form fails to render we show a
-// fallback asking people to contact the office. Detection: if the CTCT div is
-// still empty a few seconds after mount, the script was blocked/failed.
+// Constant Contact's hosted opt-in page. We link to it instead of embedding the
+// inline-form widget: the widget was injected by an external script that
+// Firefox's Enhanced Tracking Protection blocks (form never rendered), and it
+// also raced the SPA route mount. A direct link works in every browser with no
+// script, no timing race, and no console errors.
+const OPT_IN_URL = 'https://visitor.r20.constantcontact.com/manage/optin?v=001cd950f6ed99253e212302d6c939739';
+
 export function SignUpForEmails() {
-  const formRef = useRef<HTMLDivElement>(null);
-  const [unavailable, setUnavailable] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (formRef.current && formRef.current.childElementCount === 0) setUnavailable(true);
-    }, 3500);
-    return () => clearTimeout(timer);
-  }, []);
   return (
-    <>
-      <div ref={formRef} className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
-      {unavailable ? (
-        <div className="signup-unavailable">
-          <p>
-            Our email sign-up form isn&rsquo;t available in this browser. To join our
-            email list, please contact the church office (Sandi Roop) at
-            {' '}
-            <a href="tel:+15403894963">(540) 389-4963</a>
-            {' '}
-            or
-            {' '}
-            <a href="mailto:office1@collegelutheran.org">office1@collegelutheran.org</a>
-            , and she will add you to the distribution list.
-          </p>
-        </div>
-      ) : null}
-    </>
+    <a
+      className="signup-link"
+      href={OPT_IN_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Sign Up for Email Updates
+    </a>
   );
 }
 
