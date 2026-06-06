@@ -21,6 +21,19 @@ export function SignUpForEmails({ height }: { height: number }) {
   const formRef = useRef<HTMLDivElement>(null);
   const [unavailable, setUnavailable] = useState(false);
   useEffect(() => {
+    // The Constant Contact widget only scans the page once per script execution,
+    // so when you reach /news via an in-app (SPA) navigation the freshly-mounted
+    // div is left empty and no form appears. Re-run the widget on every mount:
+    // clear the div, drop any prior instance, and append a fresh script to force
+    // a re-scan so the form shows up on every visit.
+    (window as unknown as { _ctct_m?: string })._ctct_m = '01cd950f6ed99253e212302d6c939739';
+    if (formRef.current) formRef.current.innerHTML = '';
+    document.getElementById('ctctSignupScript')?.remove();
+    const s = document.createElement('script');
+    s.id = 'ctctSignupScript';
+    s.src = 'https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js';
+    s.async = true;
+    document.body.appendChild(s);
     const timer = setTimeout(() => {
       if (formRef.current && formRef.current.childElementCount === 0) setUnavailable(true);
     }, 3500);
