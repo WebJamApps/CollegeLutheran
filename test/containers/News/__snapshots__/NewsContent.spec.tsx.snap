@@ -22,6 +22,11 @@ exports[`NewsContent > renders the news page 1`] = `
       <div
         style="margin: auto; text-align: center;"
       >
+        <button
+          variant="contained"
+        >
+          Sign Up for Emails
+        </button>
         <div
           class="ctct-inline-form"
           data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4"
