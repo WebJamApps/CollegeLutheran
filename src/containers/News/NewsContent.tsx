@@ -18,6 +18,18 @@ export function SignUpForEmails() {
   const formRef = useRef<HTMLDivElement>(null);
   const [unavailable, setUnavailable] = useState(false);
   useEffect(() => {
+    // Load the Constant Contact widget here, on the only page that has its target
+    // div. Loading it globally from index.html made the widget log "Div for inline
+    // form ... is missing" on every other page, none of which has a div for it.
+    (window as unknown as { _ctct_m?: string })._ctct_m = '01cd950f6ed99253e212302d6c939739';
+    if (!document.getElementById('ctctSignupScript')) {
+      const s = document.createElement('script');
+      s.id = 'ctctSignupScript';
+      s.src = 'https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js';
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
     const timer = setTimeout(() => {
       if (formRef.current && formRef.current.childElementCount === 0) setUnavailable(true);
     }, 3500);
