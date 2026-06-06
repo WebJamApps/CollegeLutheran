@@ -4,32 +4,36 @@ import {
 } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { checkIsAdmin } from 'src/App';
+import { Button } from '@mui/material';
+import { useElementHeight } from 'src/lib/useWindowSize';
 import ELCALogo from 'src/components/elcaLogo';
 import { EditNewsDialog } from './EditNewsDialog';
 import { defaultNews } from './utilsN';
 
 // The email sign-up is a Constant Contact inline form injected by an external
-// script (see index.html). Firefox's Enhanced Tracking Protection blocks that
-// script, so the div stays empty and no form appears. We can't link a direct
-// sign-up URL (we don't have one), so when the form fails to render we show a
-// fallback asking people to contact the office. Detection: if the CTCT div is
-// still empty a few seconds after mount, the script was blocked/failed.
-export function SignUpForEmails() {
+// script loaded globally in index.html. Firefox's Enhanced Tracking Protection
+// blocks that script, so the div stays empty and no form appears. Two safety
+// nets: (1) a "Sign Up for Emails" button that reloads the page to re-trigger
+// the script — this recovers the form when it didn't render (e.g. on an SPA
+// revisit); and (2) if the div is still empty ~3.5s after mount, a fallback
+// asking people to contact the office (Sandi Roop).
+export function SignUpForEmails({ height }: { height: number }) {
   const formRef = useRef<HTMLDivElement>(null);
   const [unavailable, setUnavailable] = useState(false);
   useEffect(() => {
-    // Load the Constant Contact widget here, on the only page that has its target
-    // div. Loading it globally from index.html made the widget log "Div for inline
-    // form ... is missing" on every other page, none of which has a div for it.
+    // The Constant Contact widget only scans the page once per script execution,
+    // so when you reach /news via an in-app (SPA) navigation the freshly-mounted
+    // div is left empty and no form appears. Re-run the widget on every mount:
+    // clear the div, drop any prior instance, and append a fresh script to force
+    // a re-scan so the form shows up on every visit.
     (window as unknown as { _ctct_m?: string })._ctct_m = '01cd950f6ed99253e212302d6c939739';
-    if (!document.getElementById('ctctSignupScript')) {
-      const s = document.createElement('script');
-      s.id = 'ctctSignupScript';
-      s.src = 'https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js';
-      s.async = true;
-      s.defer = true;
-      document.body.appendChild(s);
-    }
+    if (formRef.current) formRef.current.innerHTML = '';
+    document.getElementById('ctctSignupScript')?.remove();
+    const s = document.createElement('script');
+    s.id = 'ctctSignupScript';
+    s.src = 'https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js';
+    s.async = true;
+    document.body.appendChild(s);
     const timer = setTimeout(() => {
       if (formRef.current && formRef.current.childElementCount === 0) setUnavailable(true);
     }, 3500);
@@ -37,6 +41,15 @@ export function SignUpForEmails() {
   }, []);
   return (
     <>
+      {height < 700 ? (
+        <Button
+          onClick={() => window.location.reload()}
+          size="large"
+          variant="contained"
+        >
+          Sign Up for Emails
+        </Button>
+      ) : null}
       <div ref={formRef} className="ctct-inline-form" data-form-id="99081bd2-b1a5-48cd-bb60-8c9aba82c2a4" />
       {unavailable ? (
         <div className="signup-unavailable">
@@ -61,6 +74,7 @@ interface NewsContentProps {
   books?: Ibook[];
 }
 export function NewsContent({ books }: NewsContentProps) {
+  const { height, ref } = useElementHeight<HTMLDivElement>();
   const { auth } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editNews, setEditNews] = useState(defaultNews);
@@ -118,8 +132,8 @@ export function NewsContent({ books }: NewsContentProps) {
         </div>
         <p style={{ fontSize: '4pt', margin: '0' }}>&nbsp;</p>
         <hr style={{ margin: '0px' }} />
-        <div style={{ margin: 'auto', textAlign: 'center' }}>
-          <SignUpForEmails />
+        <div ref={ref} style={{ margin: 'auto', textAlign: 'center' }}>
+          <SignUpForEmails height={height || 100} />
         </div>
       </div>
       <EditNewsDialog editNews={editNews} setEditNews={setEditNews} />
