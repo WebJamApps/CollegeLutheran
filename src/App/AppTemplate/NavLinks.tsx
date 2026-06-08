@@ -1,6 +1,8 @@
 import { menuItems } from './menuConfig';
 import { SideMenuItem } from './SideMenuItem';
 
+declare const __APP_VERSION__: string;
+
 interface InavLinksProps {
   handleClose: () => void, userCount?: number, heartBeat?: string,
 }
@@ -43,6 +45,20 @@ export function NavLinks(props: InavLinksProps) {
           />
         ),
       )}
+      <div style={{
+        textAlign: 'left',
+        padding: '10px 15px',
+        fontSize: '0.8rem',
+        color: 'inherit',
+        opacity: 0.8,
+        marginTop: '0px',
+      }}
+      ><strong>
+          Version
+          {' '}
+          {__APP_VERSION__}
+        </strong>
+      </div>
       <p style={{ margin: 0, padding: 0, fontSize: '6pt' }}>&nbsp;</p>
     </div>
   );
