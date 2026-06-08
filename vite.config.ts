@@ -3,6 +3,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
+import pkg from './package.json';
 
 const srcDir = fileURLToPath(new URL('./src', import.meta.url));
 
@@ -37,7 +38,10 @@ export default defineConfig(async ({ mode }) => {
       ...(isTest ? [] : [checker({ typescript: { tsconfigPath: './tsconfig.prod.json' } })]),
       react(),
     ],
-    define: isTest ? {} : defines,
+    define: isTest ? {} : {
+      ...defines,
+      __APP_VERSION__: JSON.stringify(pkg.version),
+    },
     server: {
       port: Number(env.PORT) || 7777,
     },
@@ -60,5 +64,5 @@ export default defineConfig(async ({ mode }) => {
         exclude: ['src/Main.tsx', 'src/redux/store/index.ts', 'src/containers/HabitatProject/**'],
       },
     },
-  };
+  } as any;
 });
