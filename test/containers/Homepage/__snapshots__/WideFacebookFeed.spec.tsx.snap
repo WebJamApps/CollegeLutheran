@@ -52,21 +52,18 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
           </a>
         </i>
       </p>
-      <div
-        style="height: 485px; overflow: hidden;"
+      <p
+        class="fbFeedFallback"
+        style="text-align: center; font-size: 10pt;"
       >
-        <iframe
-          allow="encrypted-media"
-          class="widescreenHomepage"
-          height="553"
-          loading="lazy"
-          scrolling="no"
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=500&height=553&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
-          style="border: medium; overflow: hidden; margin-left: -14px; margin-top: -68px;"
-          title="facebook ticker"
-          width="500"
-        />
-      </div>
+        <a
+          href="https://www.facebook.com/CollegeLutheranChurch/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Visit us on Facebook
+        </a>
+      </p>
     </div>
   </div>
 </div>

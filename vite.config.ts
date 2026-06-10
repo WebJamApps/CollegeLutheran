@@ -15,6 +15,7 @@ const APP_ENV_KEYS = [
   'CHANNEL_ID',
   'userRoles',
   'NODE_ENV',
+  'FB_APP_ID',
 ] as const;
 
 export default defineConfig(async ({ mode }) => {

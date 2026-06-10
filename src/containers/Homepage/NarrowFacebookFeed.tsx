@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
 import { shuffle } from './About';
+import FacebookPosts from './FacebookPosts';
 
 const FacebookIframe = () => (
   <>
@@ -16,25 +17,7 @@ const FacebookIframe = () => (
         <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
       </i>
     </p>
-    {/* Crop the page-plugin's own header (~56px) so only the post feed shows
-        (it otherwise duplicates the first post's "College Lutheran Church"
-        header). */}
-    <div style={{
-      maxWidth: '300px', margin: 'auto', marginBottom: 0, height: '500px', overflow: 'hidden',
-    }}
-    >
-      <iframe
-        title="clc-facebook" /* eslint-disable-next-line max-len */
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCollegeLutheranChurch&tabs=timeline&width=300&height=568&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
-        width="300"
-        height="568"
-        style={{ border: 'none', overflow: 'hidden', marginTop: '-68px' }}
-        loading="lazy"
-        scrolling="no"
-        frameBorder="0"
-        allow="encrypted-media"
-      />
-    </div>
+    <FacebookPosts maxWidth={300} maxHeight={500} />
   </>
 );
 export function FamilySlideContainer({ data }: { data: Ibook[] }) {

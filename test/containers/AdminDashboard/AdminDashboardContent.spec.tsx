@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import {
   ButtonsNav,
-  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange,
+  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange, ReconnectFacebook,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import utils from 'src/containers/AdminDashboard/utils';
 import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
@@ -96,5 +96,29 @@ describe('AdminDashboard Content', () => {
     fireEvent.click(container.querySelector('.editPic') as HTMLButtonElement);
     fireEvent.click(container.querySelector('.editContent') as HTMLButtonElement);
     expect(props.setShowEditor).toHaveBeenCalledTimes(3);
+  });
+  it('loads the FB SDK and reconnects on click', async () => {
+    utils.loadFbSdk = vi.fn();
+    utils.reconnectFacebookAPI = vi.fn(() => Promise.resolve());
+    const { container } = render(<ReconnectFacebook />);
+    expect(utils.loadFbSdk).toHaveBeenCalled();
+    const btn = container.querySelector('.reconnectFbButton') as HTMLButtonElement;
+    expect(btn).not.toBeNull();
+    await act(async () => { fireEvent.click(btn); });
+    expect(utils.reconnectFacebookAPI).toHaveBeenCalled();
+  });
+  it('shows a spinner while reconnecting Facebook', async () => {
+    utils.loadFbSdk = vi.fn();
+    let resolveApi!: () => void;
+    utils.reconnectFacebookAPI = vi.fn(() => new Promise<void>((resolve) => { resolveApi = resolve; }));
+    const { container } = render(<ReconnectFacebook />);
+    const btn = container.querySelector('.reconnectFbButton') as HTMLButtonElement;
+    expect(container.querySelector('.reconnectFbSpinner')).toBeNull();
+    await act(async () => { fireEvent.click(btn); });
+    expect(container.querySelector('.reconnectFbSpinner')).not.toBeNull();
+    await act(async () => { resolveApi(); });
+    await waitFor(() => {
+      expect(container.querySelector('.reconnectFbSpinner')).toBeNull();
+    });
   });
 });
