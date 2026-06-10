@@ -18,9 +18,9 @@ const PAGE_URL = 'https://www.facebook.com/CollegeLutheranChurch/';
 // stale-looking content (the backend stops updating during a token outage).
 const STALE_MS = 7 * 24 * 60 * 60 * 1000;
 
-export interface FacebookPostsProps { maxWidth?: number; maxHeight?: number }
+export interface FacebookPostsProps { maxWidth?: number; maxHeight?: number; testId?: string }
 
-export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485 }: FacebookPostsProps) => {
+export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: FacebookPostsProps) => {
   const [posts, setPosts] = useState<FbPost[]>([]);
   useEffect(() => {
     let active = true;
@@ -39,7 +39,7 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485 }: FacebookPosts
   // Empty or failed → a plain link rather than a broken/empty box.
   if (posts.length === 0) {
     return (
-      <p className="fbFeedFallback" style={{ textAlign: 'center', fontSize: '10pt' }}>
+      <p className="fbFeedFallback" data-testid={testId} style={{ textAlign: 'center', fontSize: '10pt' }}>
         <a href={PAGE_URL} target="_blank" rel="noreferrer">Visit us on Facebook</a>
       </p>
     );
@@ -47,6 +47,7 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485 }: FacebookPosts
   return (
     <div
       className="fbFeed"
+      data-testid={testId}
       style={{
         maxWidth: `${maxWidth}px`, margin: 'auto', maxHeight: `${maxHeight}px`, overflowY: 'auto', textAlign: 'left',
       }}

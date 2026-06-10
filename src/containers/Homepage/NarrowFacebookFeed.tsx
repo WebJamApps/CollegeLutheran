@@ -17,7 +17,7 @@ const FacebookIframe = () => (
         <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
       </i>
     </p>
-    <FacebookPosts maxWidth={300} maxHeight={500} />
+    <FacebookPosts maxWidth={300} maxHeight={500} testId="narrow-fb-feed" />
   </>
 );
 export function FamilySlideContainer({ data }: { data: Ibook[] }) {

@@ -44,7 +44,7 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed) => {
             <a style={{ fontSize: '10pt' }} href="https://www.facebook.com/CollegeLutheranChurch/">Facebook</a>
           </i>
         </p>
-        <FacebookPosts maxWidth={500} maxHeight={485} />
+        <FacebookPosts maxWidth={500} maxHeight={485} testId="wide-fb-feed" />
       </div>
     </div>
   );

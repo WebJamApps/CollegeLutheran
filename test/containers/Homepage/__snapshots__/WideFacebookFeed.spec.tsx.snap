@@ -54,6 +54,7 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
       </p>
       <p
         class="fbFeedFallback"
+        data-testid="wide-fb-feed"
         style="text-align: center; font-size: 10pt;"
       >
         <a
