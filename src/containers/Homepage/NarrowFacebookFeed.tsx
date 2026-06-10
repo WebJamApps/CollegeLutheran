@@ -7,9 +7,11 @@ import FacebookPosts from './FacebookPosts';
 
 const FacebookIframe = () => (
   <>
-    <p style={{
-      textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
-    }}
+    <p
+      id="narrowFacebook"
+      style={{
+        textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
+      }}
     >
       <i>
         Like Us On

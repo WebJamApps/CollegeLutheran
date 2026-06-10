@@ -52,19 +52,6 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
           </a>
         </i>
       </p>
-      <p
-        class="fbFeedFallback"
-        data-testid="wide-fb-feed"
-        style="text-align: center; font-size: 10pt;"
-      >
-        <a
-          href="https://www.facebook.com/CollegeLutheranChurch/"
-          rel="noreferrer"
-          target="_blank"
-        >
-          Visit us on Facebook
-        </a>
-      </p>
     </div>
   </div>
 </div>

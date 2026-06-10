@@ -36,14 +36,10 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
     return () => { active = false; };
   }, []);
 
-  // Empty or failed → a plain link rather than a broken/empty box.
-  if (posts.length === 0) {
-    return (
-      <p className="fbFeedFallback" data-testid={testId} style={{ textAlign: 'center', fontSize: '10pt' }}>
-        <a href={PAGE_URL} target="_blank" rel="noreferrer">Visit us on Facebook</a>
-      </p>
-    );
-  }
+  // Empty, failed, or stale → render nothing. The "Like Us On Facebook" header
+  // that sits above this component in both feeds is already the page link, so a
+  // fallback link here would just duplicate it.
+  if (posts.length === 0) return null;
   return (
     <div
       className="fbFeed"

@@ -29,25 +29,29 @@ describe('FacebookPosts', () => {
     expect(container.querySelector('img')?.getAttribute('src')).toBe('https://img/1.jpg');
   });
 
-  it('renders the page-link fallback when the feed is empty', async () => {
-    vi.stubGlobal('fetch', vi.fn(() => okJson({ lastUpdated: recent, posts: [] })));
-    render(<FacebookPosts />);
-    const link = await screen.findByText('Visit us on Facebook');
-    expect(link.getAttribute('href')).toBe('https://www.facebook.com/CollegeLutheranChurch/');
-  });
-
-  it('renders the fallback when the fetch fails', async () => {
-    vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('no network'))));
+  it('renders nothing when the feed is empty (the header above is the fallback link)', async () => {
+    const fetchMock = vi.fn(() => okJson({ lastUpdated: recent, posts: [] }));
+    vi.stubGlobal('fetch', fetchMock);
     const { container } = render(<FacebookPosts />);
-    await screen.findByText('Visit us on Facebook');
-    expect(container.querySelector('.fbFeedFallback')).not.toBeNull();
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(container.querySelector('.fbPost')).toBeNull();
+    expect(container.textContent).toBe('');
   });
 
-  it('renders the fallback (no cards) when the cached feed is stale', async () => {
+  it('renders nothing when the fetch fails', async () => {
+    const fetchMock = vi.fn(() => Promise.reject(new Error('no network')));
+    vi.stubGlobal('fetch', fetchMock);
+    const { container } = render(<FacebookPosts />);
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(container.querySelector('.fbPost')).toBeNull();
+  });
+
+  it('renders nothing (no cards) when the cached feed is stale', async () => {
     const old = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    vi.stubGlobal('fetch', vi.fn(() => okJson({ lastUpdated: old, posts: [{ id: 'p1', message: 'stale' }] })));
+    const fetchMock = vi.fn(() => okJson({ lastUpdated: old, posts: [{ id: 'p1', message: 'stale' }] }));
+    vi.stubGlobal('fetch', fetchMock);
     const { container } = render(<FacebookPosts />);
-    await screen.findByText('Visit us on Facebook');
-    await waitFor(() => expect(container.querySelector('.fbPost')).toBeNull());
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(container.querySelector('.fbPost')).toBeNull();
   });
 });

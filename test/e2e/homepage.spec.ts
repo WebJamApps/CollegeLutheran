@@ -19,14 +19,14 @@ test('renders the homepage with its key sections', async ({ page }) => {
   await expect(page.locator('iframe[src*="calendar.google.com"]').first()).toBeAttached();
 });
 
-test('shows exactly one Facebook feed (no duplicated embed)', async ({ page }) => {
+test('shows exactly one Facebook section (no duplicated embed)', async ({ page }) => {
   // The feed is now cards from web-jam-back's /facebook/feed (CollegeLutheran#740),
-  // not the page-plugin iframe. Only one renders per viewport (wide OR narrow);
-  // two would mean a duplicated Facebook section is back. Both the card list and
-  // the page-link fallback carry the -fb-feed testid, so this holds whether or
-  // not the backend feed is populated.
-  const feeds = page.locator('[data-testid$="-fb-feed"]');
-  await expect(feeds).toHaveCount(1);
+  // not the page-plugin iframe, and the card list only renders when the backend
+  // has posts. The always-present "Like Us On Facebook" header (id wideFacebook
+  // on desktop, narrowFacebook on mobile) marks the section; exactly one renders
+  // per viewport. Two would mean a duplicated Facebook section is back.
+  const headers = page.locator('#wideFacebook, #narrowFacebook');
+  await expect(headers).toHaveCount(1);
 });
 
 test('has no horizontal overflow', async ({ page }) => {
@@ -50,21 +50,20 @@ test.describe('mobile layout', () => {
   });
 
   test('renders the narrow phone layout, not the wide desktop one', async ({ page }) => {
-    await expect(page.getByTestId('narrow-fb-feed')).toBeAttached();
+    await expect(page.locator('#narrowFacebook')).toBeAttached();
     await expect(page.locator('iframe[title="clc-calendar"]')).toBeAttached();
     // The desktop two-column layout must not leak onto a phone.
-    await expect(page.getByTestId('wide-fb-feed')).toHaveCount(0);
     await expect(page.locator('iframe[title="google-calendar"]')).toHaveCount(0);
     await expect(page.locator('#wideFacebook')).toHaveCount(0);
   });
 
-  test('the Facebook and calendar embeds fit within the viewport width', async ({ page }) => {
-    // The feed and calendar must stay inside the screen so the phone layout
-    // never forces a horizontal scroll.
+  test('the Facebook and calendar sections fit within the viewport width', async ({ page }) => {
+    // The feed section and calendar must stay inside the screen so the phone
+    // layout never forces a horizontal scroll.
     const viewport = page.viewportSize();
     const width = viewport?.width ?? 0;
     const targets = [
-      { label: 'narrow Facebook feed', locator: page.getByTestId('narrow-fb-feed') },
+      { label: 'narrow Facebook header', locator: page.locator('#narrowFacebook') },
       { label: 'clc-calendar iframe', locator: page.locator('iframe[title="clc-calendar"]') },
     ];
     for (const { label, locator } of targets) {
