@@ -1,5 +1,5 @@
 import {
-  Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack,
+  Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack, CircularProgress,
 } from '@mui/material';
 import {
   SetStateAction, useContext, useState,
@@ -64,10 +64,21 @@ export function ChangeNewsPage() {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [comments, setComments] = useState('');
+  const [loading, setLoading] = useState(false);
   const clearForm = () => {
     setTitle(''); setUrl(''); setComments('');
   };
   const handleChange = makeHandleChange(setComments);
+
+  const handleAddNews = async () => {
+    setLoading(true);
+    try {
+      await utils.addNewsAPI(auth, getNews, clearForm, { title, url, comments });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '30px auto auto auto' }}>
       <h5>Add to News Page</h5>
@@ -90,11 +101,10 @@ export function ChangeNewsPage() {
       <Button
         size="small"
         variant="contained"
-        onClick={() => utils.addNewsAPI(
-          auth, getNews, clearForm, { title, url, comments },
-        )}
+        disabled={loading}
+        onClick={handleAddNews}
       >
-        Add News
+        {loading ? <CircularProgress size={20} color="inherit" className="addNewsSpinner" /> : 'Add News'}
       </Button>
     </div>
   );
