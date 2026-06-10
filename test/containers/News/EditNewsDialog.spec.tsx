@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react';
 import {
   EditNewsDialog, NewsTextField, EditNewsContent, EditNewsButtons,
 } from 'src/containers/News/EditNewsDialog';
@@ -36,8 +37,8 @@ describe('EditNewsDialog', () => {
     fireEvent.change(titleInput!, { target: { value: 'title' } });
     expect(setEditNews).toHaveBeenCalledTimes(2);
   });
-  it('renders EditNewsButtons and handles events', () => {
-    utils.newsApi = vi.fn();
+  it('renders EditNewsButtons and handles events', async () => {
+    utils.newsApi = vi.fn(() => Promise.resolve());
     const props = {
       editNews: { ...defaultNews, title: 't', url: 'u' },
       setEditNews: vi.fn(),
@@ -46,11 +47,28 @@ describe('EditNewsDialog', () => {
     const update = container.querySelector('.updateNewsButton') as HTMLButtonElement | null;
     const del = container.querySelector('.deleteNewsButton') as HTMLButtonElement | null;
     const cancel = container.querySelector('.cancelNewsButton') as HTMLButtonElement | null;
-    fireEvent.click(update!);
+    await act(async () => { fireEvent.click(update!); });
     expect(utils.newsApi).toHaveBeenCalled();
-    fireEvent.click(del!);
+    await act(async () => { fireEvent.click(del!); });
     expect(utils.newsApi).toHaveBeenCalledTimes(2);
     fireEvent.click(cancel!);
     expect(props.setEditNews).toHaveBeenCalled();
+  });
+  it('shows a spinner while news is being submitted', async () => {
+    let resolveApi!: () => void;
+    utils.newsApi = vi.fn(() => new Promise<void>((resolve) => { resolveApi = resolve; }));
+    const props = {
+      editNews: { ...defaultNews, title: 't', url: 'u' },
+      setEditNews: vi.fn(),
+    };
+    const { container } = render(<EditNewsButtons {...props} />);
+    expect(container.querySelector('.newsSubmitSpinner')).toBeNull();
+    const update = container.querySelector('.updateNewsButton') as HTMLButtonElement;
+    await act(async () => { fireEvent.click(update); });
+    expect(container.querySelector('.newsSubmitSpinner')).not.toBeNull();
+    await act(async () => { resolveApi(); });
+    await waitFor(() => {
+      expect(container.querySelector('.newsSubmitSpinner')).toBeNull();
+    });
   });
 });

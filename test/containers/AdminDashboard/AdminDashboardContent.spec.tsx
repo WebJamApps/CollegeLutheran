@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react';
 import {
   ButtonsNav,
   ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange,
@@ -61,13 +62,26 @@ describe('AdminDashboard Content', () => {
     handleChange(evt);
     expect(setComments).toHaveBeenCalledWith('');
   });
-  it('handles onClick for addNewsAPI button', () => {
-    utils.addNewsAPI = vi.fn();
+  it('handles onClick for addNewsAPI button', async () => {
+    utils.addNewsAPI = vi.fn(() => Promise.resolve());
     const { container } = render(<ChangeNewsPage />);
     const btn = container.querySelector('button[variant="contained"]') as HTMLButtonElement | null;
     expect(btn).not.toBeNull();
-    fireEvent.click(btn!);
+    await act(async () => { fireEvent.click(btn!); });
     expect(utils.addNewsAPI).toHaveBeenCalled();
+  });
+  it('shows a spinner while news is being added', async () => {
+    let resolveApi!: () => void;
+    utils.addNewsAPI = vi.fn(() => new Promise<void>((resolve) => { resolveApi = resolve; }));
+    const { container } = render(<ChangeNewsPage />);
+    const btn = container.querySelector('button[variant="contained"]') as HTMLButtonElement;
+    expect(container.querySelector('.addNewsSpinner')).toBeNull();
+    await act(async () => { fireEvent.click(btn); });
+    expect(container.querySelector('.addNewsSpinner')).not.toBeNull();
+    await act(async () => { resolveApi(); });
+    await waitFor(() => {
+      expect(container.querySelector('.addNewsSpinner')).toBeNull();
+    });
   });
   it('handles onChange for ChangeYouthPage', () => {
     const { container } = render(<ChangeYouthPageSect />);

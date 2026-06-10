@@ -1,9 +1,10 @@
 import {
   Button,
   Checkbox,
+  CircularProgress,
   Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup, TextField,
 } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import libUtils from 'src/lib/commonUtils';
@@ -88,28 +89,35 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
   const { editNews, setEditNews } = props;
   const { auth } = useContext(AuthContext);
   const { getNews } = useContext(ContentContext);
+  const [loading, setLoading] = useState(false);
+  const handleNewsAction = async (method: string) => {
+    setLoading(true);
+    try { await utils.newsApi(method, { editNews, setEditNews }, auth, getNews); } finally { setLoading(false); }
+  };
   return (
     <DialogActions>
       <>
         <Button
-          disabled={!checkDisabled(editNews)}
+          disabled={!checkDisabled(editNews) || loading}
           size="small"
           variant="contained"
           className="updateNewsButton"
-          onClick={() => (async () => { await utils.newsApi('put', { editNews, setEditNews }, auth, getNews); })()}
+          onClick={() => { handleNewsAction('put'); }}
         >
-          Update
+          {loading ? <CircularProgress size={20} color="inherit" className="newsSubmitSpinner" /> : 'Update'}
         </Button>
         <Button
           style={{ backgroundColor: 'red', color: 'white' }}
+          disabled={loading}
           size="small"
           className="deleteNewsButton"
-          onClick={() => (async () => { await utils.newsApi('delete', { editNews, setEditNews }, auth, getNews); })()}
+          onClick={() => { handleNewsAction('delete'); }}
         >
-          Delete
+          {loading ? <CircularProgress size={20} color="inherit" className="newsSubmitSpinner" /> : 'Delete'}
         </Button>
         <Button
           size="small"
+          disabled={loading}
           className="cancelNewsButton"
           onClick={() => setEditNews(defaultNews)}
         >

@@ -31,3 +31,7 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - Do not edit CI config or anything under `.github/` unless the task is about it.
 - e2e tests (`npm run test:e2e`, Playwright) need a browser install and a running
   app; you don't need to run them — unit tests + lint are the gate.
+
+## Memory
+- **News Flow:** Creating "News" is handled via the `ChangeNewsPage` component in `src/containers/AdminDashboard/AdminDashboardContent.tsx`. Updating and Deleting news happens through `src/containers/News/EditNewsDialog.tsx`.
+- **Async Testing:** When components have `await` calls that disable buttons (like during API calls), tests using `@testing-library/react` need to mock functions to return Promises (`vi.fn(() => Promise.resolve())`) and interactions should be wrapped in `await act(async () => { ... })` to properly flush React state.
