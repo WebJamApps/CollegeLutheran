@@ -125,7 +125,7 @@ export const FB_GRAPH_VERSION = 'v20.0';
 interface FbLoginResponse { authResponse?: { accessToken?: string } }
 interface FbSdk {
   init: (opts: Record<string, unknown>) => void;
-  login: (cb: (res: FbLoginResponse) => void, opts: { scope: string }) => void;
+  login: (cb: (res: FbLoginResponse) => void, opts: { scope: string; auth_type?: string }) => void;
 }
 interface FbWindow extends Window { FB?: FbSdk; fbAsyncInit?: () => void }
 
@@ -154,7 +154,7 @@ function loadFbSdk(): void {
 // not function").
 async function sendPageToken(userToken: string, auth: Iauth): Promise<void> {
   try {
-    await jsonRequest(`${process.env.BackendUrl}/facebook/token`, {
+    const res = await fetch(`${process.env.BackendUrl}/facebook/token`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${auth.token}`,
@@ -163,6 +163,10 @@ async function sendPageToken(userToken: string, auth: Iauth): Promise<void> {
       },
       body: JSON.stringify({ userToken }),
     });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({})) as { message?: string };
+      throw new Error(body.message || `HTTP ${res.status}`);
+    }
     commonUtils.notify('Facebook', 'Reconnected — the feed will refresh shortly', 'success');
   } catch (e) {
     commonUtils.notify('Facebook', `Reconnect failed, ${(e as Error).message}`, 'warning');
@@ -170,7 +174,10 @@ async function sendPageToken(userToken: string, auth: Iauth): Promise<void> {
 }
 
 // "Reconnect Facebook": admin logs in as the page admin → short-lived user
-// token → sendPageToken to web-jam-back.
+// token → sendPageToken to web-jam-back. `auth_type: 'rerequest'` forces the
+// page picker every time rather than silently reusing the last grant, so a
+// prior reconnect of a different page can't leave this one ungranted. Keep BOTH
+// the CollegeLutheran and WebJamLLC pages checked — deselecting one revokes it.
 async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
   const w = window as unknown as FbWindow;
   if (!w.FB) {
@@ -186,7 +193,7 @@ async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
         return;
       }
       void sendPageToken(userToken, auth).finally(resolve);
-    }, { scope: 'pages_show_list,pages_read_engagement' });
+    }, { scope: 'pages_show_list,pages_read_engagement', auth_type: 'rerequest' });
   });
 }
 

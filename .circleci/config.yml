@@ -35,6 +35,9 @@ jobs:
             # listens, reads MONGO_DB_URI (the test DB), and skips the reseed.
             NODE_ENV=production MONGO_DB_URI="$MONGO_DB_URI" \
               AllowUrl='{"urls":["http://localhost:7777"]}' \
+              FB_PAGE_ID=202368653220334 \
+              FB_PAGES='{"202368653220334":"CollegeLutheran","365007513885497":"WebJamLLC"}' \
+              FB_APP_ID=2207148322688942 \
               PORT=7000 node /tmp/wjb/build/src/index.js > /tmp/wjb.log 2>&1 &
             for _ in $(seq 1 30); do curl -sf "http://localhost:7000/book?type=Forum" >/dev/null && break; sleep 2; done
             cat /tmp/wjb.log || true

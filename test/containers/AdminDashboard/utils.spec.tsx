@@ -170,15 +170,17 @@ describe('Admin Dash utils', () => {
       expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/still loading/), 'warning');
     });
 
-    it('PUTs the user token and notifies success', async () => {
+    it('PUTs the user token (rerequesting the page picker) and notifies success', async () => {
       commonUtils.notify = vi.fn();
-      (window as any).FB = {
-        init: vi.fn(),
-        login: (cb: (r: any) => void) => cb({ authResponse: { accessToken: 'USER-TOKEN' } }),
-      };
+      const loginMock = vi.fn((cb: (r: any) => void) => cb({ authResponse: { accessToken: 'USER-TOKEN' } }));
+      (window as any).FB = { init: vi.fn(), login: loginMock };
       const fetchMock = vi.fn(() => Promise.resolve({ ok: true, status: 200 }));
       vi.stubGlobal('fetch', fetchMock);
       await utils.reconnectFacebookAPI(auth as any);
+      expect(loginMock).toHaveBeenCalledWith(
+        expect.any(Function),
+        expect.objectContaining({ auth_type: 'rerequest' }),
+      );
       expect(fetchMock).toHaveBeenCalledWith(
         `${process.env.BackendUrl}/facebook/token`,
         {
@@ -197,15 +199,19 @@ describe('Admin Dash utils', () => {
       expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/cancelled/), 'warning');
     });
 
-    it('warns when the backend PUT fails', async () => {
+    it('surfaces the backend error message when the PUT fails', async () => {
       commonUtils.notify = vi.fn();
       (window as any).FB = {
         init: vi.fn(),
         login: (cb: (r: any) => void) => cb({ authResponse: { accessToken: 'USER-TOKEN' } }),
       };
-      vi.stubGlobal('fetch', vi.fn(() => Promise.resolve({ ok: false, status: 400 })));
+      vi.stubGlobal('fetch', vi.fn(() => Promise.resolve({
+        ok: false, status: 400, json: () => Promise.resolve({ message: 'CollegeLutheran page not found in /me/accounts' }),
+      })));
       await utils.reconnectFacebookAPI(auth as any);
-      expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/Reconnect failed/), 'warning');
+      expect(commonUtils.notify).toHaveBeenCalledWith(
+        'Facebook', expect.stringMatching(/Reconnect failed.*page not found/), 'warning',
+      );
     });
   });
 });
