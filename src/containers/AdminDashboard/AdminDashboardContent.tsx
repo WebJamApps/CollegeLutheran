@@ -2,7 +2,7 @@ import {
   Button, TextField, Checkbox, FormControlLabel, FormGroup, Stack, CircularProgress,
 } from '@mui/material';
 import {
-  SetStateAction, useContext, useState,
+  SetStateAction, useContext, useEffect, useState,
 } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
@@ -109,6 +109,38 @@ export function ChangeNewsPage() {
     </div>
   );
 }
+
+export function ReconnectFacebook() {
+  const { auth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => { utils.loadFbSdk(); }, []);
+  const handleReconnect = async () => {
+    setLoading(true);
+    try {
+      await utils.reconnectFacebookAPI(auth);
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
+    <div className="material-content elevation3" style={{ maxWidth: '8in', margin: '20px auto auto auto', textAlign: 'center' }}>
+      <h5>Homepage Facebook Feed</h5>
+      <p style={{ fontSize: '10pt' }}>
+        If the homepage Facebook feed stops updating, click below and log in as the page
+        admin to refresh the connection.
+      </p>
+      <Button
+        size="small"
+        variant="contained"
+        className="reconnectFbButton"
+        disabled={loading}
+        onClick={handleReconnect}
+      >
+        {loading ? <CircularProgress size={20} color="inherit" className="reconnectFbSpinner" /> : 'Reconnect Facebook'}
+      </Button>
+    </div>
+  );
+}
 interface IbuttonsNavProps {
   setShowEditor: (arg0: string) => void; showEditor: string;
 }
@@ -168,6 +200,7 @@ export function AdminDashboardContent() {
       <h4 style={{ textAlign: 'center', marginTop: '10px' }}>CLC Admin Dashboard</h4>
       <ButtonsNav showEditor={showEditor} setShowEditor={setShowEditor} />
       {showEditor === '' ? <ChangeNewsPage /> : null}
+      {showEditor === '' ? <ReconnectFacebook /> : null}
       {showEditor === 'createPic' && <CreatePicDialog showEditor={showEditor} onClose={() => setShowEditor('')} />}
       {showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
       {showEditor === 'editContent' ? (

@@ -119,6 +119,77 @@ async function createPicAPI(
   }
 }
 
+// Must match the version web-jam-back's FacebookController is pinned to.
+export const FB_GRAPH_VERSION = 'v20.0';
+
+interface FbLoginResponse { authResponse?: { accessToken?: string } }
+interface FbSdk {
+  init: (opts: Record<string, unknown>) => void;
+  login: (cb: (res: FbLoginResponse) => void, opts: { scope: string }) => void;
+}
+interface FbWindow extends Window { FB?: FbSdk; fbAsyncInit?: () => void }
+
+// Load the Facebook JS SDK once (on the admin page only). App id is public, so
+// it's safe in the bundle; FB.init reads it from the env-injected value.
+function loadFbSdk(): void {
+  /* istanbul ignore if */
+  if (typeof window === 'undefined') return;
+  const w = window as unknown as FbWindow;
+  if (w.FB || document.getElementById('facebook-jssdk')) return;
+  w.fbAsyncInit = () => {
+    w.FB?.init({
+      appId: process.env.FB_APP_ID, version: FB_GRAPH_VERSION, cookie: false, xfbml: false,
+    });
+  };
+  const js = document.createElement('script');
+  js.id = 'facebook-jssdk';
+  js.src = 'https://connect.facebook.net/en_US/sdk.js';
+  document.body.appendChild(js);
+}
+
+// PUT the short-lived user token to web-jam-back, which derives + stores the
+// never-expiring page token (the app secret stays server-side). Split out of
+// the FB.login callback because that callback must be a plain function — the
+// Facebook SDK rejects an async callback ("Expression is of type asyncfunction,
+// not function").
+async function sendPageToken(userToken: string, auth: Iauth): Promise<void> {
+  try {
+    await jsonRequest(`${process.env.BackendUrl}/facebook/token`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userToken }),
+    });
+    commonUtils.notify('Facebook', 'Reconnected — the feed will refresh shortly', 'success');
+  } catch (e) {
+    commonUtils.notify('Facebook', `Reconnect failed, ${(e as Error).message}`, 'warning');
+  }
+}
+
+// "Reconnect Facebook": admin logs in as the page admin → short-lived user
+// token → sendPageToken to web-jam-back.
+async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
+  const w = window as unknown as FbWindow;
+  if (!w.FB) {
+    commonUtils.notify('Facebook', 'Facebook is still loading — wait a moment and try again', 'warning');
+    return;
+  }
+  await new Promise<void>((resolve) => {
+    w.FB!.login((response: FbLoginResponse) => {
+      const userToken = response?.authResponse?.accessToken;
+      if (!userToken) {
+        commonUtils.notify('Facebook', 'Login was cancelled', 'warning');
+        resolve();
+        return;
+      }
+      void sendPageToken(userToken, auth).finally(resolve);
+    }, { scope: 'pages_show_list,pages_read_engagement' });
+  });
+}
+
 export const defaultPic = {
   url: '', comments: '', title: '', type: '', _id: '',
 };
@@ -135,4 +206,6 @@ export default {
   putAPI,
   createPicAPI,
   handlePutError,
+  loadFbSdk,
+  reconnectFacebookAPI,
 };

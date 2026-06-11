@@ -143,4 +143,69 @@ describe('Admin Dash utils', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(commonUtils.notify).toHaveBeenCalled();
   });
+
+  describe('Facebook reconnect', () => {
+    afterEach(() => {
+      delete (window as any).FB;
+      const existing = document.getElementById('facebook-jssdk');
+      if (existing) existing.remove();
+    });
+
+    it('loadFbSdk appends the SDK script once', () => {
+      utils.loadFbSdk();
+      expect(document.getElementById('facebook-jssdk')).not.toBeNull();
+      utils.loadFbSdk(); // idempotent — no duplicate
+      expect(document.querySelectorAll('#facebook-jssdk')).toHaveLength(1);
+    });
+
+    it('loadFbSdk does nothing once FB is present', () => {
+      (window as any).FB = { init: vi.fn(), login: vi.fn() };
+      utils.loadFbSdk();
+      expect(document.getElementById('facebook-jssdk')).toBeNull();
+    });
+
+    it('warns when the SDK is not loaded yet', async () => {
+      commonUtils.notify = vi.fn();
+      await utils.reconnectFacebookAPI(auth as any);
+      expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/still loading/), 'warning');
+    });
+
+    it('PUTs the user token and notifies success', async () => {
+      commonUtils.notify = vi.fn();
+      (window as any).FB = {
+        init: vi.fn(),
+        login: (cb: (r: any) => void) => cb({ authResponse: { accessToken: 'USER-TOKEN' } }),
+      };
+      const fetchMock = vi.fn(() => Promise.resolve({ ok: true, status: 200 }));
+      vi.stubGlobal('fetch', fetchMock);
+      await utils.reconnectFacebookAPI(auth as any);
+      expect(fetchMock).toHaveBeenCalledWith(
+        `${process.env.BackendUrl}/facebook/token`,
+        {
+          method: 'PUT',
+          headers: jsonHeaders,
+          body: JSON.stringify({ userToken: 'USER-TOKEN' }),
+        },
+      );
+      expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/Reconnected/), 'success');
+    });
+
+    it('warns when login is cancelled', async () => {
+      commonUtils.notify = vi.fn();
+      (window as any).FB = { init: vi.fn(), login: (cb: (r: any) => void) => cb({}) };
+      await utils.reconnectFacebookAPI(auth as any);
+      expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/cancelled/), 'warning');
+    });
+
+    it('warns when the backend PUT fails', async () => {
+      commonUtils.notify = vi.fn();
+      (window as any).FB = {
+        init: vi.fn(),
+        login: (cb: (r: any) => void) => cb({ authResponse: { accessToken: 'USER-TOKEN' } }),
+      };
+      vi.stubGlobal('fetch', vi.fn(() => Promise.resolve({ ok: false, status: 400 })));
+      await utils.reconnectFacebookAPI(auth as any);
+      expect(commonUtils.notify).toHaveBeenCalledWith('Facebook', expect.stringMatching(/Reconnect failed/), 'warning');
+    });
+  });
 });
