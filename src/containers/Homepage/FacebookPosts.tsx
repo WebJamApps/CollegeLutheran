@@ -22,6 +22,7 @@ export interface FacebookPostsProps { maxWidth?: number; maxHeight?: number; tes
 
 export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: FacebookPostsProps) => {
   const [posts, setPosts] = useState<FbPost[]>([]);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   useEffect(() => {
     let active = true;
     const load = async () => {
@@ -29,7 +30,7 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
         const res = await fetch(`${process.env.BackendUrl}/facebook/feed`);
         const data = await res.json() as FeedResponse;
         const fresh = !!data.lastUpdated && Date.now() - new Date(data.lastUpdated).getTime() < STALE_MS;
-        if (active && fresh && Array.isArray(data.posts)) setPosts(data.posts);
+        if (active && fresh && Array.isArray(data.posts)) { setPosts(data.posts); setLastUpdated(data.lastUpdated); }
       } catch { /* leave posts empty → the page-link fallback renders below */ }
     };
     void load();
@@ -41,42 +42,49 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
   // fallback link here would just duplicate it.
   if (posts.length === 0) return null;
   return (
-    <div
-      className="fbFeed"
-      data-testid={testId}
-      style={{
-        maxWidth: `${maxWidth}px`, margin: 'auto', maxHeight: `${maxHeight}px`, overflowY: 'auto', textAlign: 'left',
-      }}
-    >
-      {posts.map((post) => (
-        <a
-          key={post.id || post.permalink_url}
-          className="fbPost"
-          href={post.permalink_url || PAGE_URL}
-          target="_blank"
-          rel="noreferrer"
-          style={{
-            display: 'block',
-            textDecoration: 'none',
-            color: 'inherit',
-            border: '1px solid #ddd',
-            borderRadius: '6px',
-            padding: '8px',
-            marginBottom: '10px',
-          }}
-        >
-          {post.full_picture ? (
-            <img src={post.full_picture} alt="" style={{ width: '100%', borderRadius: '4px', marginBottom: '6px' }} />
-          ) : null}
-          {post.message ? <p style={{ fontSize: '10pt', margin: '0 0 4px' }}>{post.message}</p> : null}
-          {post.created_time ? (
-            <span style={{ fontSize: '8pt', color: '#666' }}>
-              {new Date(post.created_time).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
-          ) : null}
-        </a>
-      ))}
-    </div>
+    <>
+      <div
+        className="fbFeed"
+        data-testid={testId}
+        style={{
+          maxWidth: `${maxWidth}px`, margin: 'auto', maxHeight: `${maxHeight}px`, overflowY: 'auto', textAlign: 'left',
+        }}
+      >
+        {posts.map((post) => (
+          <a
+            key={post.id || post.permalink_url}
+            className="fbPost"
+            href={post.permalink_url || PAGE_URL}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: 'block',
+              textDecoration: 'none',
+              color: 'inherit',
+              border: '1px solid #ddd',
+              borderRadius: '6px',
+              padding: '8px',
+              marginBottom: '10px',
+            }}
+          >
+            {post.full_picture ? (
+              <img src={post.full_picture} alt="" style={{ width: '100%', borderRadius: '4px', marginBottom: '6px' }} />
+            ) : null}
+            {post.message ? <p style={{ fontSize: '10pt', margin: '0 0 4px' }}>{post.message}</p> : null}
+            {post.created_time ? (
+              <span style={{ fontSize: '8pt', color: '#666' }}>
+                {new Date(post.created_time).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+            ) : null}
+          </a>
+        ))}
+      </div>
+      {lastUpdated ? (
+        <p className="fbUpdated" style={{ fontSize: '8pt', color: '#666', textAlign: 'center', margin: '4px 0 0' }}>
+          {`Feed updated ${new Date(lastUpdated).toLocaleString()}`}
+        </p>
+      ) : null}
+    </>
   );
 };
 
