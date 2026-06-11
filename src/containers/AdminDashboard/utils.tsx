@@ -147,9 +147,30 @@ function loadFbSdk(): void {
   document.body.appendChild(js);
 }
 
+// PUT the short-lived user token to web-jam-back, which derives + stores the
+// never-expiring page token (the app secret stays server-side). Split out of
+// the FB.login callback because that callback must be a plain function — the
+// Facebook SDK rejects an async callback ("Expression is of type asyncfunction,
+// not function").
+async function sendPageToken(userToken: string, auth: Iauth): Promise<void> {
+  try {
+    await jsonRequest(`${process.env.BackendUrl}/facebook/token`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userToken }),
+    });
+    commonUtils.notify('Facebook', 'Reconnected — the feed will refresh shortly', 'success');
+  } catch (e) {
+    commonUtils.notify('Facebook', `Reconnect failed, ${(e as Error).message}`, 'warning');
+  }
+}
+
 // "Reconnect Facebook": admin logs in as the page admin → short-lived user
-// token → PUT to web-jam-back, which derives + stores the page token. The app
-// secret stays server-side, which is why the exchange can't happen here.
+// token → sendPageToken to web-jam-back.
 async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
   const w = window as unknown as FbWindow;
   if (!w.FB) {
@@ -157,28 +178,14 @@ async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
     return;
   }
   await new Promise<void>((resolve) => {
-    w.FB!.login(async (response: FbLoginResponse) => {
+    w.FB!.login((response: FbLoginResponse) => {
       const userToken = response?.authResponse?.accessToken;
       if (!userToken) {
         commonUtils.notify('Facebook', 'Login was cancelled', 'warning');
         resolve();
         return;
       }
-      try {
-        await jsonRequest(`${process.env.BackendUrl}/facebook/token`, {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userToken }),
-        });
-        commonUtils.notify('Facebook', 'Reconnected — the feed will refresh shortly', 'success');
-      } catch (e) {
-        commonUtils.notify('Facebook', `Reconnect failed, ${(e as Error).message}`, 'warning');
-      }
-      resolve();
+      void sendPageToken(userToken, auth).finally(resolve);
     }, { scope: 'pages_show_list,pages_read_engagement' });
   });
 }
