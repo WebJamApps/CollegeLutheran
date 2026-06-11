@@ -38,3 +38,10 @@ server over https with a self-signed cert:
      Authorized JavaScript origins **and** Authorized redirect URIs, or Google
      login returns a 400 (the token-exchange `redirect_uri` must match the
      scheme the auth code was issued under).
+
+> **When you log into Facebook to Reconnect, keep BOTH the CollegeLutheran and WebJamLLC
+> pages checked.** web-jam-back now serves both pages from the one "Web Jam LLC" Meta app
+> (web-jam-back#799), and the Facebook consent dialog's page selection is a *replace*, not
+> an add: unchecking a page you previously granted revokes the app's access to it and kills
+> that page's stored token. So even though this admin only reconnects CollegeLutheran, leave
+> WebJamLLC checked too (and vice-versa from the JaMmusic side).

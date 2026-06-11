@@ -27,6 +27,7 @@ describe('FacebookPosts', () => {
     const first = container.querySelector('.fbPost') as HTMLAnchorElement;
     expect(first.getAttribute('href')).toBe('https://fb/p1');
     expect(container.querySelector('img')?.getAttribute('src')).toBe('https://img/1.jpg');
+    expect(container.querySelector('.fbUpdated')?.textContent).toMatch(/^Feed updated /);
   });
 
   it('renders nothing when the feed is empty (the header above is the fallback link)', async () => {
