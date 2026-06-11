@@ -57,11 +57,16 @@ const responseGoogleLogin = async (
   try {
     const uri = window.location.href;
     const baseUri = uri.split('/')[2];
+    // Match the page's actual scheme. Production is https; local dev is usually
+    // http, but can be https (DEV_HTTPS=true) to exercise the FB.login Reconnect
+    // flow. The redirect_uri sent to Google's token endpoint must match the
+    // scheme the auth code was issued under, or the exchange 400s.
+    const { protocol } = window.location;
     const body = {
       clientId: process.env.GoogleClientId,
       redirectUri: !baseUri.includes('localhost')
         && nodeEnv === 'production' ? `https://${baseUri}`
-        : `http://${baseUri}`,
+        : `${protocol}//${baseUri}`,
       code: `${response.code}`,
       state: makeState(),
     };

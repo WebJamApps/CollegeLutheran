@@ -72,3 +72,6 @@ typings/
 
 .DS_Store
 .prettierrc
+
+# Local dev TLS certs (self-signed, for FB.login https testing)
+.certs/

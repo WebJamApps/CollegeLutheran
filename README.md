@@ -10,3 +10,31 @@ College Lutheran Church website running React
 ## Local Development
 
 You will need to run web-jam-back for connection to database and authentication
+
+### Local HTTPS (for the admin "Reconnect Facebook" button)
+
+Most local work runs over plain http (`npm run dev` → `http://localhost:7777`).
+But the admin **Reconnect Facebook** button uses the Facebook JS SDK's `FB.login`,
+which refuses to run on `http://` pages. To exercise it locally, serve the dev
+server over https with a self-signed cert:
+
+1. **Generate a self-signed cert into `.certs/`** (gitignored) — one time:
+
+   ```sh
+   mkdir -p .certs && openssl req -x509 -newkey rsa:2048 -nodes \
+     -keyout .certs/localhost.key -out .certs/localhost.crt \
+     -days 825 -subj "/CN=localhost" \
+     -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+   ```
+
+2. **`npm run dev`** now serves `https://localhost:7777` (the `dev` script sets
+   `DEV_HTTPS=true`). With no certs present it silently falls back to http, so
+   this is safe for anyone who skips the setup. Accept the browser's
+   self-signed-cert warning the first time.
+
+3. **One-time external setup for the https origin:**
+   - **web-jam-back** `AllowUrl` must include `https://localhost:7777` (CORS).
+   - **Google OAuth client** — add `https://localhost:7777` to **both**
+     Authorized JavaScript origins **and** Authorized redirect URIs, or Google
+     login returns a 400 (the token-exchange `redirect_uri` must match the
+     scheme the auth code was issued under).

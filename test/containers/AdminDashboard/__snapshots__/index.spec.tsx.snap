@@ -76,6 +76,25 @@ exports[`Dashboard Container > renders AdminDashboard 1`] = `
         Add News
       </button>
     </div>
+    <div
+      class="material-content elevation3"
+      style="max-width: 8in; margin: 20px auto auto; text-align: center;"
+    >
+      <h5>
+        Homepage Facebook Feed
+      </h5>
+      <p
+        style="font-size: 10pt;"
+      >
+        If the homepage Facebook feed stops updating, click below and log in as the page admin to refresh the connection.
+      </p>
+      <button
+        class="reconnectFbButton"
+        variant="contained"
+      >
+        Reconnect Facebook
+      </button>
+    </div>
   </div>
 </div>
 `;
