@@ -1,7 +1,8 @@
-# GEMINI.md — CollegeLutheran
+# AGENTS.md — CollegeLutheran
 
-Guidance for gemini-cli when working in this repo. (Global rules live in
-`~/.gemini/GEMINI.md`; this file adds CollegeLutheran specifics.)
+Guidance for AI coding agents (agy/Antigravity, etc.) working in this repo.
+(Global rules live in `~/.agents/AGENTS.md`; this file adds CollegeLutheran
+specifics.)
 
 ## What this is
 A React + TypeScript + Vite front-end for College Lutheran Church. State via
