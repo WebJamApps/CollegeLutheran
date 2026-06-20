@@ -24,27 +24,32 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
 });
 
 test('does not show the fallback when the form renders', async ({ page }) => {
-  // Simulate a successful Constant Contact injection deterministically: fill the
-  // React-rendered target (the real form GUID) the instant it is added to the
-  // DOM, before the component's empty-div detection timeout. addInitScript +
-  // MutationObserver avoids a race on slow CI where the 3.5s timeout could
-  // otherwise fire first.
+  // Simulate a successful Constant Contact injection deterministically by filling
+  // the React-rendered target (the real form GUID) before the component's ~3.5s
+  // empty-div detection fires. The component CLEARS that div on mount
+  // (formRef.innerHTML = '' in NewsContent.tsx) to re-run the widget, so a
+  // one-shot fill that lands before the clear gets wiped — leaving the div empty
+  // at 3.5s and (flakily) triggering the fallback. So keep a PERSISTENT observer
+  // that refills whenever the div is emptied, including by that clear; the div is
+  // then guaranteed non-empty when detection runs.
   const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
   await page.addInitScript((id) => {
     const fill = () => {
       const el = document.querySelector(`[data-form-id="${id}"]`);
+      // Refilling sets childElementCount > 0, so this is a no-op once filled and
+      // won't loop on its own mutation.
       if (el && el.childElementCount === 0) {
         el.innerHTML = '<form data-stub="1"><input aria-label="email" /></form>';
-        return true;
       }
-      return false;
     };
-    const obs = new MutationObserver(() => { if (fill()) obs.disconnect(); });
-    obs.observe(document.documentElement, { childList: true, subtree: true });
+    new MutationObserver(fill).observe(document.documentElement, { childList: true, subtree: true });
   }, formId);
 
   await page.goto('/news', { waitUntil: 'domcontentloaded' });
-  // Wait past the detection window, then confirm no fallback rendered.
+  // Precondition: the simulated form actually rendered (so a silent stub failure
+  // can't make this pass for the wrong reason).
+  await expect(page.locator(`[data-form-id="${formId}"] form[data-stub="1"]`)).toBeVisible();
+  // Past the detection window, the fallback must never have rendered.
   await page.waitForTimeout(4500);
   await expect(page.locator('.signup-unavailable')).toHaveCount(0);
 });
