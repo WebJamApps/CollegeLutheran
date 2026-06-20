@@ -23,35 +23,8 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
   await expect(fallback.getByRole('link', { name: '(540) 389-4963' })).toBeVisible();
 });
 
-test('does not show the fallback when the form renders', async ({ page }) => {
-  // Block the real Constant Contact widget so this test never depends on its racy
-  // network timing (the source of the original flake), then simulate a successful
-  // injection deterministically ourselves — our stub is then the ONLY thing that
-  // ever fills the form div. The component CLEARS that div on mount
-  // (formRef.innerHTML = '' in NewsContent.tsx) to re-run the widget, so keep a
-  // PERSISTENT observer that refills whenever the div is emptied (including by
-  // that clear); the div is then guaranteed non-empty when the ~3.5s empty-div
-  // detection runs, so the fallback never shows.
-  await page.route('**/signup-form-widget*', (route) => route.abort());
-  const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
-  await page.addInitScript((id) => {
-    const fill = () => {
-      const el = document.querySelector(`[data-form-id="${id}"]`);
-      // Refilling sets childElementCount > 0, so this is a no-op once filled and
-      // won't loop on its own mutation.
-      if (el && el.childElementCount === 0) {
-        el.innerHTML = '<form data-stub="1"><input aria-label="email" /></form>';
-      }
-    };
-    new MutationObserver(fill).observe(document.documentElement, { childList: true, subtree: true });
-  }, formId);
-
-  await page.goto('/news', { waitUntil: 'domcontentloaded' });
-  // Precondition: our stub actually got injected (so a silent stub failure can't
-  // make this pass for the wrong reason). toBeAttached, not toBeVisible — we only
-  // care that the div is non-empty, not how the bare stub lays out.
-  await expect(page.locator(`[data-form-id="${formId}"] form[data-stub="1"]`)).toBeAttached();
-  // Past the detection window, the fallback must never have rendered.
-  await page.waitForTimeout(4500);
-  await expect(page.locator('.signup-unavailable')).toHaveCount(0);
-});
+// The positive path ("form renders → no fallback") used to live here but was
+// inherently flaky in a real browser — it raced the component's mount-time div
+// clear, height-driven re-renders, and the 3.5s detection timer. It's now
+// covered deterministically with fake timers in
+// test/containers/News/SignUpForEmails.spec.tsx.
