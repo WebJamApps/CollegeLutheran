@@ -24,14 +24,15 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
 });
 
 test('does not show the fallback when the form renders', async ({ page }) => {
-  // Simulate a successful Constant Contact injection deterministically by filling
-  // the React-rendered target (the real form GUID) before the component's ~3.5s
-  // empty-div detection fires. The component CLEARS that div on mount
-  // (formRef.innerHTML = '' in NewsContent.tsx) to re-run the widget, so a
-  // one-shot fill that lands before the clear gets wiped — leaving the div empty
-  // at 3.5s and (flakily) triggering the fallback. So keep a PERSISTENT observer
-  // that refills whenever the div is emptied, including by that clear; the div is
-  // then guaranteed non-empty when detection runs.
+  // Block the real Constant Contact widget so this test never depends on its racy
+  // network timing (the source of the original flake), then simulate a successful
+  // injection deterministically ourselves — our stub is then the ONLY thing that
+  // ever fills the form div. The component CLEARS that div on mount
+  // (formRef.innerHTML = '' in NewsContent.tsx) to re-run the widget, so keep a
+  // PERSISTENT observer that refills whenever the div is emptied (including by
+  // that clear); the div is then guaranteed non-empty when the ~3.5s empty-div
+  // detection runs, so the fallback never shows.
+  await page.route('**/signup-form-widget*', (route) => route.abort());
   const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
   await page.addInitScript((id) => {
     const fill = () => {
@@ -46,9 +47,10 @@ test('does not show the fallback when the form renders', async ({ page }) => {
   }, formId);
 
   await page.goto('/news', { waitUntil: 'domcontentloaded' });
-  // Precondition: the simulated form actually rendered (so a silent stub failure
-  // can't make this pass for the wrong reason).
-  await expect(page.locator(`[data-form-id="${formId}"] form[data-stub="1"]`)).toBeVisible();
+  // Precondition: our stub actually got injected (so a silent stub failure can't
+  // make this pass for the wrong reason). toBeAttached, not toBeVisible — we only
+  // care that the div is non-empty, not how the bare stub lays out.
+  await expect(page.locator(`[data-form-id="${formId}"] form[data-stub="1"]`)).toBeAttached();
   // Past the detection window, the fallback must never have rendered.
   await page.waitForTimeout(4500);
   await expect(page.locator('.signup-unavailable')).toHaveCount(0);
