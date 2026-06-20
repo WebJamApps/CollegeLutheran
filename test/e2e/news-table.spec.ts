@@ -10,6 +10,12 @@ import { test, expect } from '@playwright/test';
 // Only runs in the seeded integration context (E2E_SEEDED=1). Skipped for plain
 // runs against prod/other backends, which won't have the seeded rows.
 
+// This run's first seeded title. Must match seededTitle() in seed-news.mjs — the
+// per-run E2E_SEED_TAG isolates this build from concurrent ones sharing the test
+// DB. Defaults to the `local` tag for manual runs.
+const TAG = process.env.E2E_SEED_TAG || 'local';
+const firstSeededTitle = `E2E ${TAG} News Item 01`;
+
 test.describe('News table (real API + seeded test DB)', () => {
   test.skip(process.env.E2E_SEEDED !== '1', 'requires the seeded test-DB backend (CI e2e job)');
 
@@ -19,13 +25,13 @@ test.describe('News table (real API + seeded test DB)', () => {
 
   test('renders seeded news rows from the API', async ({ page }) => {
     // A specific seeded row proves the data round-tripped through the real API.
-    await expect(page.getByRole('link', { name: 'E2E Test News Item 01' })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole('link', { name: firstSeededTitle })).toBeVisible({ timeout: 15_000 });
     const rows = page.locator('table.newsTable tbody tr');
     expect(await rows.count()).toBeGreaterThanOrEqual(10);
   });
 
   test('the news table does not overflow the viewport', async ({ page }) => {
-    await expect(page.getByRole('link', { name: 'E2E Test News Item 01' })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole('link', { name: firstSeededTitle })).toBeVisible({ timeout: 15_000 });
     const overflow = await page.evaluate(() => {
       const el = document.scrollingElement || document.documentElement;
       return el.scrollWidth - el.clientWidth;
