@@ -23,28 +23,8 @@ test('shows the contact-the-office fallback when the sign-up form is blocked', a
   await expect(fallback.getByRole('link', { name: '(540) 389-4963' })).toBeVisible();
 });
 
-test('does not show the fallback when the form renders', async ({ page }) => {
-  // Simulate a successful Constant Contact injection deterministically: fill the
-  // React-rendered target (the real form GUID) the instant it is added to the
-  // DOM, before the component's empty-div detection timeout. addInitScript +
-  // MutationObserver avoids a race on slow CI where the 3.5s timeout could
-  // otherwise fire first.
-  const formId = '99081bd2-b1a5-48cd-bb60-8c9aba82c2a4';
-  await page.addInitScript((id) => {
-    const fill = () => {
-      const el = document.querySelector(`[data-form-id="${id}"]`);
-      if (el && el.childElementCount === 0) {
-        el.innerHTML = '<form data-stub="1"><input aria-label="email" /></form>';
-        return true;
-      }
-      return false;
-    };
-    const obs = new MutationObserver(() => { if (fill()) obs.disconnect(); });
-    obs.observe(document.documentElement, { childList: true, subtree: true });
-  }, formId);
-
-  await page.goto('/news', { waitUntil: 'domcontentloaded' });
-  // Wait past the detection window, then confirm no fallback rendered.
-  await page.waitForTimeout(4500);
-  await expect(page.locator('.signup-unavailable')).toHaveCount(0);
-});
+// The positive path ("form renders → no fallback") used to live here but was
+// inherently flaky in a real browser — it raced the component's mount-time div
+// clear, height-driven re-renders, and the 3.5s detection timer. It's now
+// covered deterministically with fake timers in
+// test/containers/News/SignUpForEmails.spec.tsx.

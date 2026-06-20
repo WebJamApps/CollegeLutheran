@@ -20,6 +20,9 @@ jobs:
       - run:
           name: e2e tests (Playwright + real web-jam-back on the test DB)
           command: |
+            # Per-run tag so concurrent CI builds don't clobber each other's
+            # seeded rows in the shared test DB (seed/spec/cleanup all read it).
+            export E2E_SEED_TAG="$CIRCLE_BUILD_NUM"
             npx playwright install chromium
             # Start a real web-jam-back (public repo) against the TEST MongoDB so
             # the News table is populated by the real API — no stubs. MONGO_DB_URI
