@@ -417,6 +417,13 @@ div.familyELCA, div.youthELCA, div.givingELCA, div.beliefsELCA, div.newsELCA {
   padding-top: 0;
 }
 
+html[data-theme-mode='dark'] #elcaLogo {
+  background: #ffffff;
+  border: 1px solid var(--clc-border, rgba(244, 192, 14, 0.26));
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
 .staffElca {
   text-align: left;
   margin-bottom: -30px;
