@@ -36,7 +36,7 @@
 
   .page-content {
     flex: 1 0 auto;
-    border-right: 1px solid #000000;
+    border-right: 1px solid var(--clc-border, #000000);
   }
 
   ::-webkit-scrollbar:vertical {
@@ -46,7 +46,7 @@
   .newsIFrame {
     width:350px;
     height: 610px;
-    border: 1px solid #d3d3d3;
+    border: 1px solid var(--clc-border, #d3d3d3);
   }
 }
 
@@ -293,7 +293,7 @@
   }
 
   .drawer {
-    background-color: rgb(192, 192, 192);
+    background-color: var(--clc-drawer-bg, rgb(192, 192, 192));
     float: right;
     height: 100%;
   }
@@ -357,7 +357,7 @@
     display: block !important;
     width: 100vw !important;
     z-index: 100 !important;
-    background-color: rgba(42, 34, 42, 0.67);
+    background-color: color-mix(in srgb, var(--clc-header-bg, #2a222a) 67%, transparent);
   }
 
   .content-block {
@@ -412,7 +412,7 @@
   height: 86vh;
   overflow-x: hidden;
   z-index: 90000;
-  background-color: rgb(192, 192, 192);
+  background-color: var(--clc-drawer-bg, rgb(192, 192, 192));
   overflow-y: auto;
   -webkit-appearance: none;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -424,7 +424,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    background-color: #244a8bff;
+    background-color: var(--clc-header-bg, #244a8bff);
     margin: auto;
     padding-top: 3px;
     text-align: center;

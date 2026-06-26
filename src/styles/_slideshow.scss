@@ -57,12 +57,12 @@
 #familySlideshowWide img, #familySlideshow1 img, #youthSlideshowWide img, #youthSlideshowWide1 img {
   margin: auto;
   max-height: 5in;
-  padding-top: 1px
+  padding-top: 1px;
 }
 
 .slide-show {
   height: 400px;
   width: 100%;
   object-fit: contain;
-  background-color: rgb(192, 192, 192);
+  background-color: var(--clc-caption-bg, rgb(192, 192, 192));
 }

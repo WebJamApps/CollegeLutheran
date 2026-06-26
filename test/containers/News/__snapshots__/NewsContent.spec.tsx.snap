@@ -73,7 +73,7 @@ exports[`NewsContent > renders the news page 1`] = `
         </button>
         <button
           class="deleteNewsButton"
-          style="background-color: red; color: white;"
+          sx="[object Object]"
         >
           Delete
         </button>

@@ -1,30 +1,30 @@
 .nav-link {
   padding-left: 0;
   display     : block !important;
-  color       : #23527c;
+  color       : var(--clc-link, #23527c);
   outline     : none !important;
 }
 
 button.nav-link {
-  background-color: rgb(192, 192, 192);
+  background-color: var(--clc-drawer-bg, rgb(192, 192, 192));
   font-size       : 16px;
   border          : none;
   padding         : 14px 0;
 }
 
 button.nav-link:hover {
-  background-color: white;
+  background-color: var(--clc-drawer-hover, white);
 }
 
 .nav-item {
-  color          : #23527c;
+  color          : var(--clc-link, #23527c);
   text-decoration: underline;
   padding-right  : 0;
   margin-right   : 0;
 }
 
 .menu-item:hover {
-  background-color: white;
+  background-color: var(--clc-drawer-hover, white);
 }
 
 .menu-item {
@@ -55,8 +55,8 @@ button.nav-link:hover {
   left           : 90vw;
   top             : 34px;
   z-index: 50;
-  color           : #f4c00eff;
-  background-color: #244a8bff;
+  color           : var(--clc-brand-gold, #f4c00eff);
+  background-color: var(--clc-header-bg, #244a8bff);
   padding         : 1px 6px 0;
 }
 
@@ -69,16 +69,16 @@ button.nav-link:hover {
   position        : fixed;
   top             : 32px;
   right           : 16px;
-  background-color: #2a222a;
-  color           : white;
+  background-color: var(--clc-header-bg, #2a222a);
+  color           : var(--clc-header-text, white);
   padding         : 6px;
   z-index         : 90000;
 }
 
 .menu-item a.menu-hover {
-  color: '#88c1ff' !important;
+  color: var(--clc-link, #88c1ff) !important;
 }
 
 .menu-hover:hover {
-  color: rgb(204, 224, 255) !important;
+  color: var(--clc-link-hover, rgb(204, 224, 255)) !important;
 }

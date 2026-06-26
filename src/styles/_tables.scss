@@ -8,16 +8,16 @@ table {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #d8ecf3;
+  background-color: color-mix(in srgb, var(--clc-link, #d8ecf3) 18%, var(--clc-paper-bg, #ffffff));
 }
 
 tbody.regformtbody tr:nth-child(odd) {
-  background-color: white;
+  background-color: var(--clc-paper-bg, white);
 }
 
 th, td {
   border-collapse: collapse;
-  border: 1px solid #777;
+  border: 1px solid var(--clc-border, #777);
   padding: 8px;
   text-align: left;
 }
@@ -45,8 +45,8 @@ tbody.regformtbody td {
 
 .TableStyle-root {
   width: 80%;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #fff;
+  color: var(--clc-text-primary, rgba(0, 0, 0, 0.87));
+  background-color: var(--clc-paper-bg, #fff);
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -84,11 +84,11 @@ tbody.regformtbody td {
   left: 0;
   z-index: 2;
   position: sticky;
-  background-color: #fff;
+  background-color: var(--clc-paper-bg, #fff);
 }
 
 .TableCell-head {
-  color: rgba(0, 0, 0, 0.87);
+  color: var(--clc-text-primary, rgba(0, 0, 0, 0.87));
   font-weight: bold;
   line-height: 1.5rem;
 }
@@ -98,7 +98,7 @@ tbody.regformtbody td {
   padding: 8px;
   font-size: 0.875rem;
   text-align: left;
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  border-bottom: 1px solid var(--clc-border, rgba(224, 224, 224, 1));
   letter-spacing: 0.02em;
   vertical-align: inherit;
 }
@@ -108,5 +108,5 @@ tbody.regformtbody td {
 }
 
 .TableCell-body {
-  color: rgba(0, 0, 0, 0.87);
+  color: var(--clc-text-primary, rgba(0, 0, 0, 0.87));
 }

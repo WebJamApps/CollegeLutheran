@@ -82,7 +82,7 @@ exports[`EditPicDialog > renders EditPicDialog 1`] = `
       </button>
       <button
         class="deletePicButton"
-        style="color: red;"
+        sx="[object Object]"
       >
         Delete
       </button>

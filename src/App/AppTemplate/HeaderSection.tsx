@@ -1,9 +1,12 @@
 import { useWindowWidth } from 'src/lib/useWindowSize';
+import { useTheme } from '@mui/material/styles';
+import { ThemeModeSelector } from './ThemeModeSelector';
 
 export function HeaderSection() {
   const width = useWindowWidth();
+  const theme = useTheme();
   return (
-    <div id="header" className="material-header home-header" style={{ backgroundColor: '#244a8bff' }}>
+    <div id="header" className="material-header home-header" style={{ backgroundColor: theme.palette.primary.main }}>
       <div
         className="flex-header"
         style={{
@@ -35,13 +38,14 @@ export function HeaderSection() {
           style={{
             display: width && width < 260 ? 'none' : 'inline',
             maxWidth: '100%',
-            color: '#f4c00eff',
+            color: theme.palette.secondary.main,
             fontSize: width && width > 450 ? '14px' : '9pt',
           }}
         >
           We celebrate God&apos;s grace and share His love in Christ!
         </p>
       </div>
+      <ThemeModeSelector />
     </div>
   );
 }

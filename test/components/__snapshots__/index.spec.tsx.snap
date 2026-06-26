@@ -55,7 +55,7 @@ exports[`PicSlider > renders with a caption 1`] = `
                 />
                 <div
                   class="slider-caption"
-                  style="text-align: center; font-weight: bold; padding: 0px; background-color: silver; margin-bottom: 0px; margin-top: 0px;"
+                  style="text-align: center; font-weight: bold; padding: 0px; background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.87); margin-bottom: 0px; margin-top: 0px;"
                 >
                    
                   test2
