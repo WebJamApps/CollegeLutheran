@@ -312,6 +312,25 @@ button:disabled {
   z-index: 60;
 }
 
+/* On phones the header is cramped: reserve the bottom-right corner so the
+   title/subtitle text wraps before it reaches the theme selector + hamburger. */
+@media screen and (max-width: 699px) {
+  /* Let the header grow to fit its content on phones so a wrapped title +
+     subtitle never spill out below the fixed height. */
+  .home-header {
+    height: auto;
+    min-height: 91px;
+  }
+
+  .flex-header {
+    width: calc(100% - 162px) !important;
+  }
+
+  .subTitle {
+    max-width: 100%;
+  }
+}
+
 .theme-mode-option + .theme-mode-option {
   border-left: 1px solid var(--clc-border, rgba(255, 255, 255, 0.28));
 }

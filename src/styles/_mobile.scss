@@ -239,7 +239,7 @@
 @media (min-width: 400px) and (max-width: 419px) {
 
   .flex-header {
-    width: 100% !important;
+    width: calc(100% - 150px) !important;
   }
 
   img#elcaLogo {
