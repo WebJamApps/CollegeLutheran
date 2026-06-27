@@ -86,7 +86,7 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
             Update
           </Button>
           <Button
-            style={{ color: 'red' }}
+            sx={{ color: 'error.main' }}
             size="small"
             className="deletePicButton"
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -106,4 +106,3 @@ export function EditPicDialog({ editPic, setEditPic, onClose }: IeditPicDialogPr
     </Dialog>
   );
 }
-

@@ -630,7 +630,7 @@ exports[`EditPicTable > renders EditPicTable 1`] = `
         </button>
         <button
           class="deletePicButton"
-          style="color: red;"
+          sx="[object Object]"
         >
           Delete
         </button>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 // Cards rendered from web-jam-back's cached Graph API feed
 // (GET /facebook/feed), replacing the unreliable Page Plugin iframe
@@ -21,6 +22,7 @@ const STALE_MS = 7 * 24 * 60 * 60 * 1000;
 export interface FacebookPostsProps { maxWidth?: number; maxHeight?: number; testId?: string }
 
 export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: FacebookPostsProps) => {
+  const theme = useTheme();
   const [posts, setPosts] = useState<FbPost[]>([]);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   useEffect(() => {
@@ -61,7 +63,8 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
               display: 'block',
               textDecoration: 'none',
               color: 'inherit',
-              border: '1px solid #ddd',
+              border: `1px solid ${theme.palette.divider}`,
+              backgroundColor: theme.palette.background.paper,
               borderRadius: '6px',
               padding: '8px',
               marginBottom: '10px',
@@ -72,7 +75,7 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
             ) : null}
             {post.message ? <p style={{ fontSize: '10pt', margin: '0 0 4px' }}>{post.message}</p> : null}
             {post.created_time ? (
-              <span style={{ fontSize: '8pt', color: '#666' }}>
+              <span style={{ fontSize: '8pt', color: theme.palette.text.secondary }}>
                 {new Date(post.created_time).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </span>
             ) : null}
@@ -80,7 +83,7 @@ export const FacebookPosts = ({ maxWidth = 500, maxHeight = 485, testId }: Faceb
         ))}
       </div>
       {lastUpdated ? (
-        <p className="fbUpdated" style={{ fontSize: '8pt', color: '#666', textAlign: 'center', margin: '4px 0 0' }}>
+        <p className="fbUpdated" style={{ fontSize: '8pt', color: theme.palette.text.secondary, textAlign: 'center', margin: '4px 0 0' }}>
           {`Feed updated ${new Date(lastUpdated).toLocaleString()}`}
         </p>
       ) : null}

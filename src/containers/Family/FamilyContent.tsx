@@ -54,7 +54,7 @@ export const FamilyContent = () => {
         <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
           <h3 style={{ paddingBottom: '15px' }}>Children and Families</h3>
           <p>
-            <span style={{ color: 'rgb(0, 51, 102)' }}>
+            <span className="brand-emphasis">
               <strong>
                 <i>&quot;The members of the body that seem to be weaker are indispensable.&quot;</i>
                 &nbsp;&nbsp;&nbsp;1 Corinthians 12:22

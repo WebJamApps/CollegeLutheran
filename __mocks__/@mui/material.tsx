@@ -88,6 +88,14 @@ export function CircularProgress(props: any) {
   return <div {...props} />;
 }
 
+export function CssBaseline() {
+  return null;
+}
+
+export function GlobalStyles() {
+  return null;
+}
+
 export function Box(props: any) {
   const { children } = props;
   return <div {...props}>{children}</div>;

@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    background-color: #244a8b;
+    background-color: var(--clc-header-bg, #244a8b);
     margin: auto;
     padding-top: 3px;
     text-align: center;

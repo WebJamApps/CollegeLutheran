@@ -24,7 +24,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </h3>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe that the Holy Bible is God’s inspired Word.
@@ -37,7 +37,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe that God created us and all that exists.
@@ -48,7 +48,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe that Jesus Christ is the Son of God.
@@ -58,7 +58,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe that the Holy Spirit has been given to us.
@@ -68,7 +68,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe we are saved by grace through faith.
@@ -78,7 +78,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe we are called to mission.
@@ -88,7 +88,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe Christ is truly present in Holy Communion. 
@@ -98,7 +98,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We accept the Apostles’ and Nicene Creeds.
@@ -109,7 +109,7 @@ exports[`Beliefs > renders correctly 1`] = `
         </p>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               We believe in the power of prayer.

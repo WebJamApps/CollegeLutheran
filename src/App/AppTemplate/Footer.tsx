@@ -1,4 +1,6 @@
 
+import { useTheme } from '@mui/material/styles';
+
 const footerLinks = () => {
   const links = [
     { href: 'https://www.facebook.com/CollegeLutheranChurch/', name: 'facebook', label: 'Facebook' },
@@ -30,14 +32,21 @@ const footerLinks = () => {
   );
 };
 
-export const Footer = () => (
-  <div
-    id="wjfooter"
-    className="footer"
-    style={{
-      marginTop: '20px', paddingTop: '20px', paddingBottom: '20px', bottom: '0',
-    }}
-  >
-    {footerLinks()}
-  </div>
-);
+export const Footer = () => {
+  const theme = useTheme();
+  return (
+    <div
+      id="wjfooter"
+      className="footer"
+      style={{
+        marginTop: '20px',
+        paddingTop: '20px',
+        paddingBottom: '20px',
+        bottom: '0',
+        backgroundColor: theme.palette.primary.main,
+      }}
+    >
+      {footerLinks()}
+    </div>
+  );
+};
