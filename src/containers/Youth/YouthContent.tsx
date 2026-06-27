@@ -31,8 +31,7 @@ function FaithWithoutWorks() {
 
 export const YouthContent = (
 ) => {
-  const { pictures } = useContext(ContentContext);
-  const { content: { youthPage } } = useContext(ContentContext);
+  const { pictures, content: { youthPage } } = useContext(ContentContext);
   const { youthPics = [] } = pictures;
   return (
     <div className="page-content">
@@ -68,7 +67,7 @@ export const YouthContent = (
           </section>
         </div>
         <div className="youthELCA">
-          <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.elca.org/" target="_blank" rel="noopener noreferrer">
             <img
               id="elcaLogo"
               alt="ELCA LOGO"

@@ -13,7 +13,7 @@ const footerLinks = () => {
       {
         links.map((link) => (
           <a
-            key={Math.random().toString()}
+            key={link.name}
             aria-label={link.label}
             target="_blank"
             rel="noopener noreferrer"

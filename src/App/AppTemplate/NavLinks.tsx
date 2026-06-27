@@ -29,7 +29,7 @@ export function NavLinks(props: InavLinksProps) {
       <p style={{ fontSize: '1px', marginBottom: '2px' }} />
       <div className="menu-item" style={contactPanelStyle}>
         <p style={contactTextStyle}>
-          <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={contactLinkStyle}>
+          <a href="https://bit.ly/CollegeLutheranDirections" className="menu-hover" style={contactLinkStyle}>
             <span>210 S. College Ave</span>
           </a>
           <br />

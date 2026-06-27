@@ -20,7 +20,7 @@ describe('pictures.utils', () => {
     const fetchMock = vi.fn(() => Promise.resolve({ status: 200 }));
     vi.stubGlobal('fetch', fetchMock);
     const setShowTable = vi.fn();
-    await picUtils.performFetchRequest('http://example/x', { method: 'GET' }, vi.fn(), vi.fn(), setShowTable);
+    await picUtils.performFetchRequest('https://example/x', { method: 'GET' }, vi.fn(), vi.fn(), setShowTable);
     expect(setShowTable).toHaveBeenCalledWith(false);
   });
 });

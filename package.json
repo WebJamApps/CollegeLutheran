@@ -1,6 +1,6 @@
 {
   "name": "collegelutheran",
-  "version": "2.1.27",
+  "version": "2.1.28",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -35,7 +35,7 @@
     "lint:fix": "eslint . --fix",
     "test:lint-fix": "npm run test:stylelint && npm run lint:fix",
     "test:lint": "npm run test:stylelint && eslint .",
-    "test": "npm run test:lint && npm run test:unit",
+    "test": "npm run test:lint && npm run typecheck && npm run test:unit",
     "test:unit": "vitest run",
     "test:watch": "vitest",
     "test:unit-u": "vitest run -u",
@@ -96,6 +96,7 @@
     "eslint-plugin-n": "^17.24.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-security": "^4.0.0",
+    "eslint-plugin-sonarjs": "^4.1.0",
     "globals": "^15.14.0",
     "jsdom": "^29.1.1",
     "mongodb": "^7.2.0",
