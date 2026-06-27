@@ -107,7 +107,11 @@ export function EditNewsButtons(props: IeditNewsDialogProps) {
           {loading ? <CircularProgress size={20} color="inherit" className="newsSubmitSpinner" /> : 'Update'}
         </Button>
         <Button
-          style={{ backgroundColor: 'red', color: 'white' }}
+          sx={{
+            backgroundColor: 'error.main',
+            color: 'error.contrastText',
+            '&:hover': { backgroundColor: 'error.dark' },
+          }}
           disabled={loading}
           size="small"
           className="deleteNewsButton"
@@ -144,4 +148,3 @@ export function EditNewsDialog({ editNews, setEditNews }: IeditNewsDialogProps) 
     </Dialog>
   );
 }
-

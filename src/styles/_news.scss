@@ -9,7 +9,7 @@
 .newsTable {
     width: 320px;
     margin-bottom: 1rem;
-    color: #212529;
+    color: var(--clc-text-primary, #212529);
     table-layout: fixed;
 }
 
@@ -23,12 +23,12 @@
 
 .newsUrl tbody tr:nth-child(odd) {
   display: table-row;
-  background-color: #d8ecf3;
+  background-color: color-mix(in srgb, var(--clc-link, #d8ecf3) 18%, var(--clc-paper-bg, #ffffff));
 }
 
 .newsUrl tbody tr:nth-child(even) {
   display: table-row;
-  background-color: #fff;
+  background-color: var(--clc-paper-bg, #fff);
 }
 
 @media screen and (max-width: 320px) {
@@ -60,7 +60,7 @@
   max-width: 32rem;
   margin: 1rem auto;
   padding: 0 1rem;
-  color: #444;
+  color: var(--clc-text-secondary, #444);
   font-size: 1rem;
   line-height: 1.5;
 }

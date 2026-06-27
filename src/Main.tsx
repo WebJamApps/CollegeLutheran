@@ -10,6 +10,7 @@ import { AuthProvider } from './providers/Auth.provider';
 import './styles/styles.scss';
 import { ContentProvider } from './providers/Content.provider';
 import { BrowserRouter } from 'react-router-dom';
+import { CollegeLutheranThemeProvider } from './App/theme';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 function Main() {
@@ -19,10 +20,12 @@ function Main() {
         <Provider store={store.store}>
           <PersistGate loading={null} persistor={store.persistor}>
             <ContentProvider>
-              <ToastContainer position="top-right" autoClose={5000} />
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+              <CollegeLutheranThemeProvider>
+                <ToastContainer position="top-right" autoClose={5000} />
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </CollegeLutheranThemeProvider>
             </ContentProvider>
           </PersistGate>
         </Provider>

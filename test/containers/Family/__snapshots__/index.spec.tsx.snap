@@ -28,7 +28,7 @@ exports[`Family > renders correctly without images 1`] = `
         </h3>
         <p>
           <span
-            style="color: rgb(0, 51, 102);"
+            class="brand-emphasis"
           >
             <strong>
               <i>

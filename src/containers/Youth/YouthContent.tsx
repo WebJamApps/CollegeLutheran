@@ -7,7 +7,7 @@ function FaithWithoutWorks() {
   return (
     <>
       <p>
-        <span style={{ color: 'rgb(0, 51, 102)' }}>
+        <span className="brand-emphasis">
           <strong>
             <i>&quot;Faith without works is dead.&quot;</i>
             &nbsp;&nbsp;&nbsp;James 2:17
@@ -44,7 +44,7 @@ export const YouthContent = (
         <div className="material-content elevation3" style={{ maxWidth: '998px', paddingBottom: '-80px', margin: 'auto' }}>
           <h3 style={{ paddingTop: '22px', paddingBottom: '15px' }}>Youth Ministry</h3>
           <p>
-            <span style={{ color: 'rgb(0, 51, 102)' }}>
+            <span className="brand-emphasis">
               <strong>
                 <i>&quot;Think of us in this way, as servants of Christ and stewards of God’s mysteries.&quot;</i>
                 &nbsp;&nbsp;&nbsp;1 Corinthians 4:1
@@ -84,4 +84,3 @@ export const YouthContent = (
 };
 
 export default YouthContent;
-

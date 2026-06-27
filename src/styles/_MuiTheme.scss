@@ -5,7 +5,7 @@
 th.MuiTableCell-root.MuiTableCell-head.MUIDataTableHeadCell-root-64 {
   padding: 4px;
   font-weight: bold;
-  color: black;
+  color: var(--clc-text-primary, black);
   font-size: 11pt;
 }
 

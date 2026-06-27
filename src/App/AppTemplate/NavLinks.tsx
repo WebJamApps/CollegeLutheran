@@ -1,5 +1,6 @@
 import { menuItems } from './menuConfig';
 import { SideMenuItem } from './SideMenuItem';
+import { useTheme } from '@mui/material/styles';
 
 declare const __APP_VERSION__: string;
 
@@ -10,27 +11,40 @@ export function NavLinks(props: InavLinksProps) {
   const {
     handleClose,
   } = props;
+  const theme = useTheme();
+  const contactPanelStyle = {
+    backgroundColor: theme.palette.primary.main,
+    marginLeft: '0px',
+  };
+  const contactTextStyle = {
+    color: theme.palette.primary.contrastText,
+    marginBottom: '2px',
+    fontSize: '11pt',
+  };
+  const contactLinkStyle = {
+    color: theme.palette.mode === 'dark' ? theme.palette.secondary.light : '#88c1ff',
+  };
   return (
     <div className="nav-list" style={{ width: '220px' }}>
       <p style={{ fontSize: '1px', marginBottom: '2px' }} />
-      <div className="menu-item" style={{ backgroundColor: '#244a8bff' }}>
-        <p style={{ color: '#fff', marginBottom: '2px', fontSize: '11pt' }}>
-          <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={{ color: '#88c1ff' }}>
+      <div className="menu-item" style={contactPanelStyle}>
+        <p style={contactTextStyle}>
+          <a href="http://bit.ly/CollegeLutheranDirections" className="menu-hover" style={contactLinkStyle}>
             <span>210 S. College Ave</span>
           </a>
           <br />
           Salem, VA 24153
         </p>
       </div>
-      <div className="menu-item" style={{ backgroundColor: '#244a8bff', marginLeft: '0px' }}>
-        <p style={{ color: '#fff', marginBottom: '2px', fontSize: '11pt' }}>
+      <div className="menu-item" style={contactPanelStyle}>
+        <p style={contactTextStyle}>
           <span>ph: </span>
-          <a href="tel:5403894963" className="menu-hover" style={{ color: '#88c1ff' }}>(540) 389-4963</a>
+          <a href="tel:5403894963" className="menu-hover" style={contactLinkStyle}>(540) 389-4963</a>
           <br />
           <span>fax: </span>
           (540) 389-4980
           <br />
-          <a style={{ color: '#88c1ff', wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org">
+          <a style={{ ...contactLinkStyle, wordWrap: 'break-word' }} href="mailto:office1@collegelutheran.org">
             <span className="menu-hover">office1@collegelutheran.org</span>
           </a>
         </p>
