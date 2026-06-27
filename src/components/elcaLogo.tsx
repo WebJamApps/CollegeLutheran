@@ -1,7 +1,7 @@
 
 const ELCALogo = () => (
   <div style={{ textAlign: 'center', padding: '30px 24px 0' }}>
-    <a href="http://www.elca.org/" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.elca.org/" target="_blank" rel="noopener noreferrer">
       <img
         id="elcaLogo"
         alt="ELCA LOGO"

@@ -8,6 +8,7 @@ import security from 'eslint-plugin-security';
 import json from 'eslint-plugin-json';
 import jsxA11yX from 'eslint-plugin-jsx-a11y-x';
 import globals from 'globals';
+import sonarjs from 'eslint-plugin-sonarjs';
 
 // jsx-a11y-x recommended rules, enforced as errors.
 // Defensive: the v0.2.0 recommended preset lists rules it doesn't actually
@@ -36,6 +37,7 @@ export default [
     },
   },
   js.configs.recommended,
+  sonarjs.configs.recommended,
   ...tseslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
@@ -71,6 +73,7 @@ export default [
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'max-len': ['error', { code: 150 }],
       'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
+      'sonarjs/no-small-switch': 'off',
     },
   },
   {
@@ -88,6 +91,7 @@ export default [
       ...vitest.configs.recommended.rules,
       'vitest/no-conditional-expect': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+      'sonarjs/no-skipped-tests': 'off',
     },
   },
   {

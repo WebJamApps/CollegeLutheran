@@ -385,7 +385,7 @@ exports[`Staff > renders StaffContent 1`] = `
           style="text-align: center; padding: 30px 24px 0px;"
         >
           <a
-            href="http://www.elca.org/"
+            href="https://www.elca.org/"
             rel="noopener noreferrer"
             target="_blank"
           >

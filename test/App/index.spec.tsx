@@ -3,7 +3,7 @@ import { showAdminDashboard, checkIsAdmin } from 'src/App';
 describe('App component', () => {
   it('showAdminDashboard when isAdmin', () => {
     const result = showAdminDashboard(true);
-    expect(result).not.toBe(null);
+    expect(result).not.toBeNull();
   });
   it('checkIsAdmin', () => {
     const setIsAdmin = vi.fn();

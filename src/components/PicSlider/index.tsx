@@ -21,7 +21,7 @@ export interface PicSliderProps {
   data: Ibook[];
 }
 class PicSlider extends Component<PicSliderProps> {
-  static defaultProps: { data: [{ url: ''; title: ''; _id: 0 }]; };
+  static readonly defaultProps: { data: [{ url: ''; title: ''; _id: 0 }]; };
 
   settings: SettingsType;
 

@@ -192,7 +192,7 @@ async function reconnectFacebookAPI(auth: Iauth): Promise<void> {
         resolve();
         return;
       }
-      void sendPageToken(userToken, auth).finally(resolve);
+      sendPageToken(userToken, auth).finally(resolve);
     }, { scope: 'pages_show_list,pages_read_engagement', auth_type: 'rerequest' });
   });
 }

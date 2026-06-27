@@ -8,6 +8,7 @@ export function shuffle(array: Ibook[]) {
   let currentIndex = array.length, randomIndex;
 
   while (currentIndex !== 0) {
+    // eslint-disable-next-line sonarjs/pseudo-random
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
