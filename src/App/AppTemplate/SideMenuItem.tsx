@@ -89,8 +89,7 @@ export const ContinueMenuItem = (props: IcontinueMenuItemProps) => {
 };
 
 export const checkIsAllowed = (menu: ImenuItem, auth: Iauth, userRoles: string[]) => {
-  if (menu.auth && (!auth.isAuthenticated || userRoles.indexOf(auth.user.userType) === -1)) return false;
-  return true;
+  return !menu.auth || (auth.isAuthenticated && userRoles.indexOf(auth.user.userType) !== -1);
 };
 
 interface IsideMenuItemProps {

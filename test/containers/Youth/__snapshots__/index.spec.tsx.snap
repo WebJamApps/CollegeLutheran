@@ -71,7 +71,7 @@ exports[`Youth > renders correctly without images 1`] = `
         class="youthELCA"
       >
         <a
-          href="http://www.elca.org/"
+          href="https://www.elca.org/"
           rel="noopener noreferrer"
           target="_blank"
         >
