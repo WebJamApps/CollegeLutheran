@@ -33,6 +33,22 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - e2e tests (`npm run test:e2e`, Playwright) need a browser install and a running
   app; you don't need to run them — unit tests + lint are the gate.
 
+## Branch & memory hygiene
+
+- One branch per task: never create or push any branch other than the one
+  created for the current task.
+- Once your PR is merged or closed, its branch is DEAD — never commit to it or
+  push it again. Follow-up work (including afterthoughts like docs or lessons
+  learned) starts on a NEW branch off the latest `dev`, with its own PR.
+- Save lessons BEFORE the merge, not after: anything you learned during the task
+  worth keeping (build quirks, selector gotchas, testing patterns — e.g. the
+  output of a `/learn`-style memory pass) gets committed to this file's Memory
+  section on the SAME task branch while the PR is still open, so it ships inside
+  the PR. A post-merge push to the old branch strands the lesson and forces
+  manual cleanup.
+
 ## Memory
 - **News Flow:** Creating "News" is handled via the `ChangeNewsPage` component in `src/containers/AdminDashboard/AdminDashboardContent.tsx`. Updating and Deleting news happens through `src/containers/News/EditNewsDialog.tsx`.
 - **Async Testing:** When components have `await` calls that disable buttons (like during API calls), tests using `@testing-library/react` need to mock functions to return Promises (`vi.fn(() => Promise.resolve())`) and interactions should be wrapped in `await act(async () => { ... })` to properly flush React state.
+- **MUI Imports & Testing Mocks:** `useTheme` must always be imported from `@mui/material/styles` instead of `@mui/material`. The testing environment uses a custom manual mock (`__mocks__/@mui/material.tsx`) that does not mock or export `useTheme`. When introducing new MUI components (like `NativeSelect`), ensure they are added to `__mocks__/@mui/material.tsx` and correctly destructure and spread nested `inputProps` on native inputs (e.g. `<select {...rest} {...inputProps}>`) to preserve testing-library query support (like `aria-label`).
+- **E2E Test Class Preservation:** When refactoring page layouts (especially in core templates like `HeaderSection.tsx`, `ThemeModeSelector.tsx`), check if existing DOM classes (e.g., `.theme-mode-selector`) or IDs are targeted by Playwright tests under `test/e2e/`, and ensure they are preserved on the outer-most container of the new layout to prevent E2E selector timeouts on CI/CD pipelines.
