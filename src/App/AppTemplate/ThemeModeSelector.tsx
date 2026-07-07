@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@mui/material';
+import { FormControl, NativeSelect, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { ThemePreference, useThemePreference } from '../theme';
 
@@ -11,50 +11,72 @@ const options: { value: ThemePreference, label: string, title: string }[] = [
 export function ThemeModeSelector() {
   const theme = useTheme();
   const { preference, setPreference } = useThemePreference();
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPreference(event.target.value as ThemePreference);
+  };
+
+  const currentOption = options.find((opt) => opt.value === preference) || options[1];
+
   return (
-    <div
-      className="theme-mode-selector"
-      aria-label="Theme preference"
-      role="group"
-      style={{
-        border: `1px solid ${theme.palette.divider}`,
-        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(255, 255, 255, 0.16)',
-      }}
-    >
-      {options.map((option) => {
-        const selected = preference === option.value;
-        return (
-          <Tooltip key={option.value} title={option.title}>
-            <Button
-              size="small"
-              type="button"
-              aria-pressed={selected}
-              onClick={() => setPreference(option.value)}
-              className={selected ? 'theme-mode-option selected' : 'theme-mode-option'}
-              sx={{
-                minWidth: { xs: 28, sm: 54 },
-                px: { xs: 0.75, sm: 1 },
-                py: 0.25,
-                borderRadius: 0,
-                color: selected ? theme.palette.secondary.contrastText : theme.palette.primary.contrastText,
-                backgroundColor: selected ? theme.palette.secondary.main : 'transparent',
-                fontSize: { xs: '0.68rem', sm: '0.72rem' },
-                lineHeight: 1.4,
-                textTransform: 'none',
-                '&:hover': {
-                  backgroundColor: selected ? theme.palette.secondary.light : theme.palette.action.hover,
-                },
-                '&:focus-visible': {
-                  outline: `2px solid ${theme.palette.secondary.light}`,
-                  outlineOffset: '-2px',
-                },
+    <Tooltip title={currentOption.title}>
+      <FormControl
+        size="small"
+        className="theme-mode-selector"
+        sx={{
+          position: 'absolute',
+          right: { xs: 10, sm: 14 },
+          bottom: { xs: 8, sm: 10 },
+          zIndex: 60,
+        }}
+      >
+        <NativeSelect
+          value={preference}
+          onChange={handleChange}
+          inputProps={{
+            'aria-label': 'Theme preference',
+          }}
+          sx={{
+            minWidth: { xs: 85, sm: 105 },
+            height: 32,
+            borderRadius: '16px',
+            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(255, 255, 255, 0.16)',
+            color: theme.palette.primary.contrastText,
+            fontSize: { xs: '0.75rem', sm: '0.8rem' },
+            lineHeight: 1.4,
+            border: `1px solid ${theme.palette.divider}`,
+            px: 1,
+            '&::before, &:after': {
+              display: 'none', // Remove the default MUI underline
+            },
+            '& .MuiNativeSelect-select': {
+              py: 0.5,
+              pr: '24px !important', // Leave space for the dropdown arrow
+              pl: 0.5,
+              color: 'inherit',
+              '&:focus': {
+                backgroundColor: 'transparent',
+              },
+            },
+            '& .MuiNativeSelect-icon': {
+              color: theme.palette.primary.contrastText,
+            },
+          }}
+        >
+          {options.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              style={{
+                backgroundColor: theme.palette.background.paper,
+                color: theme.palette.text.primary,
               }}
             >
               {option.label}
-            </Button>
-          </Tooltip>
-        );
-      })}
-    </div>
+            </option>
+          ))}
+        </NativeSelect>
+      </FormControl>
+    </Tooltip>
   );
 }
