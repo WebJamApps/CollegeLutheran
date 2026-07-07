@@ -70,8 +70,13 @@ export function FormControlLabel(props: any) {
 }
 
 export function Select(props: any) {
-  const { children } = props;
-  return <select {...props}>{children}</select>;
+  const { children, inputProps, ...rest } = props;
+  return <select {...rest} {...inputProps}>{children}</select>;
+}
+
+export function NativeSelect(props: any) {
+  const { children, inputProps, ...rest } = props;
+  return <select {...rest} {...inputProps}>{children}</select>;
 }
 
 export function MenuItem(props: any) {

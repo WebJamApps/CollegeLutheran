@@ -1,4 +1,5 @@
-import { FormControl, NativeSelect, Tooltip, useTheme } from '@mui/material';
+import { FormControl, NativeSelect, Tooltip } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { ThemePreference, useThemePreference } from '../theme';
 
 const options: { value: ThemePreference, label: string, title: string }[] = [
