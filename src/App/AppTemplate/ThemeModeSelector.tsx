@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@mui/material';
+import { FormControl, MenuItem, Select, SelectChangeEvent, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { ThemePreference, useThemePreference } from '../theme';
 
@@ -11,50 +11,95 @@ const options: { value: ThemePreference, label: string, title: string }[] = [
 export function ThemeModeSelector() {
   const theme = useTheme();
   const { preference, setPreference } = useThemePreference();
+
+  const handleChange = (event: SelectChangeEvent<ThemePreference>) => {
+    setPreference(event.target.value as ThemePreference);
+  };
+
+  const currentOption = options.find((opt) => opt.value === preference) || options[1];
+
   return (
-    <div
-      className="theme-mode-selector"
-      aria-label="Theme preference"
-      role="group"
-      style={{
-        border: `1px solid ${theme.palette.divider}`,
-        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(255, 255, 255, 0.16)',
-      }}
-    >
-      {options.map((option) => {
-        const selected = preference === option.value;
-        return (
-          <Tooltip key={option.value} title={option.title}>
-            <Button
-              size="small"
-              type="button"
-              aria-pressed={selected}
-              onClick={() => setPreference(option.value)}
-              className={selected ? 'theme-mode-option selected' : 'theme-mode-option'}
-              sx={{
-                minWidth: { xs: 28, sm: 54 },
-                px: { xs: 0.75, sm: 1 },
-                py: 0.25,
-                borderRadius: 0,
-                color: selected ? theme.palette.secondary.contrastText : theme.palette.primary.contrastText,
-                backgroundColor: selected ? theme.palette.secondary.main : 'transparent',
-                fontSize: { xs: '0.68rem', sm: '0.72rem' },
-                lineHeight: 1.4,
-                textTransform: 'none',
-                '&:hover': {
-                  backgroundColor: selected ? theme.palette.secondary.light : theme.palette.action.hover,
+    <Tooltip title={currentOption.title}>
+      <FormControl
+        size="small"
+        className="theme-mode-selector-container"
+        sx={{
+          position: 'absolute',
+          right: { xs: 10, sm: 14 },
+          bottom: { xs: 8, sm: 10 },
+          zIndex: 60,
+        }}
+      >
+        <Select
+          value={preference}
+          onChange={handleChange}
+          aria-label="Theme preference"
+          variant="outlined"
+          sx={{
+            minWidth: { xs: 85, sm: 105 },
+            height: 32,
+            borderRadius: '16px',
+            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(255, 255, 255, 0.16)',
+            color: theme.palette.primary.contrastText,
+            fontSize: { xs: '0.75rem', sm: '0.8rem' },
+            lineHeight: 1.4,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.divider,
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.secondary.light,
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.secondary.light,
+            },
+            '& .MuiSvgIcon-root': {
+              color: theme.palette.primary.contrastText,
+            },
+            '& .MuiSelect-select': {
+              py: 0.5,
+              px: 1.5,
+              display: 'flex',
+              alignItems: 'center',
+            },
+          }}
+          MenuProps={{
+            slotProps: {
+              paper: {
+                sx: {
+                  bgcolor: theme.palette.background.paper,
+                  backgroundImage: 'none',
+                  boxShadow: theme.shadows[3],
+                  border: `1px solid ${theme.palette.divider}`,
                 },
-                '&:focus-visible': {
-                  outline: `2px solid ${theme.palette.secondary.light}`,
-                  outlineOffset: '-2px',
+              },
+            },
+          }}
+        >
+          {options.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              sx={{
+                fontSize: '0.85rem',
+                py: 0.75,
+                color: theme.palette.text.primary,
+                '&.Mui-selected': {
+                  bgcolor: theme.palette.action.selected,
+                  color: theme.palette.text.primary,
+                  '&:hover': {
+                    bgcolor: theme.palette.action.selected,
+                  },
+                },
+                '&:hover': {
+                  bgcolor: theme.palette.action.hover,
                 },
               }}
             >
               {option.label}
-            </Button>
-          </Tooltip>
-        );
-      })}
-    </div>
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Tooltip>
   );
 }

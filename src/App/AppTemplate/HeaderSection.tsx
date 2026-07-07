@@ -5,6 +5,16 @@ import { ThemeModeSelector } from './ThemeModeSelector';
 export function HeaderSection() {
   const width = useWindowWidth();
   const theme = useTheme();
+
+  let titleFontSize = '18px';
+  if (width) {
+    if (width > 450) {
+      titleFontSize = '25px';
+    } else if (width > 320) {
+      titleFontSize = '21px';
+    }
+  }
+
   return (
     <div id="header" className="material-header home-header" style={{ backgroundColor: theme.palette.primary.main }}>
       <div
@@ -17,7 +27,7 @@ export function HeaderSection() {
           className="header-text"
           style={{
             marginTop: width && width > 320 ? '10px' : '1px',
-            fontSize: width && width > 320 ? '24px' : '16px !important',
+            fontSize: titleFontSize,
           }}
         >
           <a
@@ -39,7 +49,7 @@ export function HeaderSection() {
             display: width && width < 260 ? 'none' : 'inline',
             maxWidth: '100%',
             color: theme.palette.secondary.main,
-            fontSize: width && width > 450 ? '14px' : '9pt',
+            fontSize: width && width > 450 ? '15px' : '12px',
           }}
         >
           We celebrate God&apos;s grace and share His love in Christ!
