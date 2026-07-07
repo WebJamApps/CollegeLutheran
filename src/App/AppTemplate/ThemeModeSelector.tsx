@@ -22,6 +22,7 @@ export function ThemeModeSelector() {
     <Tooltip title={currentOption.title}>
       <FormControl
         size="small"
+        className="theme-mode-selector"
         sx={{
           position: 'absolute',
           right: { xs: 10, sm: 14 },
