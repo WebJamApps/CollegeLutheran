@@ -72,10 +72,8 @@ describe('CollegeLutheranThemeProvider', () => {
   it('persists explicit selector choices', () => {
     installMatchMedia(false);
     render(<CollegeLutheranThemeProvider><ThemeState /></CollegeLutheranThemeProvider>);
-    const combobox = screen.getByRole('combobox', { name: 'Theme preference' });
-    fireEvent.mouseDown(combobox);
-    const option = screen.getByRole('option', { name: 'Dark' });
-    fireEvent.click(option);
+    const select = screen.getByRole('combobox', { name: 'Theme preference' });
+    fireEvent.change(select, { target: { value: 'dark' } });
     expect(screen.getByTestId('preference').textContent).toBe('dark');
     expect(screen.getByTestId('resolvedMode').textContent).toBe('dark');
     expect(localStorage.getItem('clc-theme-preference')).toBe('dark');

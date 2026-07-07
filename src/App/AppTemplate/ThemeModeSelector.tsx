@@ -1,5 +1,4 @@
-import { FormControl, MenuItem, Select, SelectChangeEvent, Tooltip } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { FormControl, NativeSelect, Tooltip, useTheme } from '@mui/material';
 import { ThemePreference, useThemePreference } from '../theme';
 
 const options: { value: ThemePreference, label: string, title: string }[] = [
@@ -12,7 +11,7 @@ export function ThemeModeSelector() {
   const theme = useTheme();
   const { preference, setPreference } = useThemePreference();
 
-  const handleChange = (event: SelectChangeEvent<ThemePreference>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPreference(event.target.value as ThemePreference);
   };
 
@@ -22,7 +21,6 @@ export function ThemeModeSelector() {
     <Tooltip title={currentOption.title}>
       <FormControl
         size="small"
-        className="theme-mode-selector-container"
         sx={{
           position: 'absolute',
           right: { xs: 10, sm: 14 },
@@ -30,11 +28,12 @@ export function ThemeModeSelector() {
           zIndex: 60,
         }}
       >
-        <Select
+        <NativeSelect
           value={preference}
           onChange={handleChange}
-          aria-label="Theme preference"
-          variant="outlined"
+          inputProps={{
+            'aria-label': 'Theme preference',
+          }}
           sx={{
             minWidth: { xs: 85, sm: 105 },
             height: 32,
@@ -43,62 +42,38 @@ export function ThemeModeSelector() {
             color: theme.palette.primary.contrastText,
             fontSize: { xs: '0.75rem', sm: '0.8rem' },
             lineHeight: 1.4,
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme.palette.divider,
+            border: `1px solid ${theme.palette.divider}`,
+            px: 1,
+            '&::before, &:after': {
+              display: 'none', // Remove the default MUI underline
             },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme.palette.secondary.light,
-            },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme.palette.secondary.light,
-            },
-            '& .MuiSvgIcon-root': {
-              color: theme.palette.primary.contrastText,
-            },
-            '& .MuiSelect-select': {
+            '& .MuiNativeSelect-select': {
               py: 0.5,
-              px: 1.5,
-              display: 'flex',
-              alignItems: 'center',
-            },
-          }}
-          MenuProps={{
-            slotProps: {
-              paper: {
-                sx: {
-                  bgcolor: theme.palette.background.paper,
-                  backgroundImage: 'none',
-                  boxShadow: theme.shadows[3],
-                  border: `1px solid ${theme.palette.divider}`,
-                },
+              pr: '24px !important', // Leave space for the dropdown arrow
+              pl: 0.5,
+              color: 'inherit',
+              '&:focus': {
+                backgroundColor: 'transparent',
               },
+            },
+            '& .MuiNativeSelect-icon': {
+              color: theme.palette.primary.contrastText,
             },
           }}
         >
           {options.map((option) => (
-            <MenuItem
+            <option
               key={option.value}
               value={option.value}
-              sx={{
-                fontSize: '0.85rem',
-                py: 0.75,
+              style={{
+                backgroundColor: theme.palette.background.paper,
                 color: theme.palette.text.primary,
-                '&.Mui-selected': {
-                  bgcolor: theme.palette.action.selected,
-                  color: theme.palette.text.primary,
-                  '&:hover': {
-                    bgcolor: theme.palette.action.selected,
-                  },
-                },
-                '&:hover': {
-                  bgcolor: theme.palette.action.hover,
-                },
               }}
             >
               {option.label}
-            </MenuItem>
+            </option>
           ))}
-        </Select>
+        </NativeSelect>
       </FormControl>
     </Tooltip>
   );
