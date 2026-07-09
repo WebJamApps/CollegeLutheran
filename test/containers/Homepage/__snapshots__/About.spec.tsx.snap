@@ -21,9 +21,6 @@ exports[`About > renders the about page 1`] = `
           >
             College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA. The church is situated on College Avenue, within easy walking distance of Roanoke College. College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
           </p>
-          <h5
-            style="font-weight: bold; margin-top: 35px;"
-          />
           <section
             style="margin-top: 20px; text-align: left; margin-bottom: 35px;"
           />

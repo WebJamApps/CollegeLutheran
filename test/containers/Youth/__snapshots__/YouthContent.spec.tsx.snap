@@ -60,9 +60,6 @@ exports[`YouthContent > renders the youth page 1`] = `
           We invite you to come be part of our active, growing youth ministry program at any or all of our upcoming events.
         </p>
         <hr />
-        <h5
-          style="font-weight: bold; margin-top: 35px;"
-        />
         <section
           style="margin-top: 20px; text-align: left; margin-bottom: 35px;"
         />

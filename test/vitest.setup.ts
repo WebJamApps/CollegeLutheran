@@ -1,7 +1,13 @@
 import { config } from 'dotenv';
-import { vi } from 'vitest';
+import { expect, vi } from 'vitest';
+import * as axeMatchers from 'vitest-axe/matchers';
+
+expect.extend(axeMatchers);
 
 config();
+
+// Vite's `define` block is empty in test mode, so stub the build-time version global.
+(globalThis as Record<string, unknown>).__APP_VERSION__ = 'test';
 
 vi.mock('@mui/material');
 vi.mock('@tinymce/tinymce-react');
