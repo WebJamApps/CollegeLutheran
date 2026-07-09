@@ -42,7 +42,7 @@ export const LiveStream = ({ width }: LiveStreamProps) => {
   };
   return (
     <div style={{ margin: 'auto', width: '100%', textAlign: 'center' }}>
-      {width > 600 ? <h5 style={{ marginTop: '0.5rem' }}>Welcome to Our Livestream Page</h5> : null}
+      {width > 600 ? <h3 style={{ marginTop: '0.5rem', fontSize: '16pt', fontWeight: 'bold' }}>Welcome to Our Livestream Page</h3> : null}
       <p>
         The video below is embedded from YouTube, however if it does not play properly,
         please click one of the following links to view the live church service.

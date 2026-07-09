@@ -11,8 +11,12 @@ export function DrawerContainer(props:IdrawerContainerProps) {
     className, handleClose, handleKeyPress,
   } = props;
   const theme = useTheme();
+  // Click-to-close catch-all around the drawer. It must NOT be a focusable
+  // button: the nav links inside are the interactive elements (each closes the
+  // menu itself), and a role="button" wrapper with focusable children violates
+  // axe's nested-interactive rule (CollegeLutheran#773).
   return (
-    <div tabIndex={0} role="button" id="sidebar" onClick={handleClose} onKeyPress={handleKeyPress} className={className}>
+    <div role="presentation" id="sidebar" onClick={handleClose} onKeyPress={handleKeyPress} className={className}>
       <div className="drawer" style={{ backgroundColor: theme.palette.background.paper, zIndex: -1, position: 'relative' }}>
         <div className="navImage">
           <img

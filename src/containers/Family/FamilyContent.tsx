@@ -6,7 +6,7 @@ import PicSlider from '../../components/PicSlider';
 import ELCALogo from '../../components/elcaLogo';
 
 // eslint-disable-next-line max-len
-const additionalContent = '<hr><h5>Resources for Families</h5><p><strong><em>Roots and Wings</em></strong>, a monthly publication of the Virginia Synod that provides suggestions of daily family time activities:<a target="_blank" href="https://www.vasynod.org/ministries/roots-and-wings/">https://www.vasynod.org/ministries/roots-and-wings/</a></p><p><strong>Ideas to bring worship to the home:</strong>&nbsp;<a target="_blank" href="https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf">https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf</a></p>';
+const additionalContent = '<hr><h3 style="font-size:16pt;font-weight:bold">Resources for Families</h3><p><strong><em>Roots and Wings</em></strong>, a monthly publication of the Virginia Synod that provides suggestions of daily family time activities:<a target="_blank" href="https://www.vasynod.org/ministries/roots-and-wings/">https://www.vasynod.org/ministries/roots-and-wings/</a></p><p><strong>Ideas to bring worship to the home:</strong>&nbsp;<a target="_blank" href="https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf">https://www.vasynod.org/wp-content/uploads/2012/11/Worship-in-the-Home.pdf</a></p>';
 const FamilySection = () => (
   <section style={{ textAlign: 'left' }}>
     <p>

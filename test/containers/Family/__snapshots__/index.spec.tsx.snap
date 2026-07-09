@@ -65,9 +65,11 @@ exports[`Family > renders correctly without images 1`] = `
         >
            
           <hr />
-          <h5>
+          <h3
+            style="font-size: 16pt; font-weight: bold;"
+          >
             Resources for Families
-          </h5>
+          </h3>
           <p>
             <strong>
               <em>
