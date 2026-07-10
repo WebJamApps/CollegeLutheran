@@ -29,8 +29,8 @@ describe('EditNewsDialog', () => {
       editNewsState: { editNews: defaultNews, setEditNews },
     };
     const { container } = render(<EditNewsContent {...props} />);
-    const urlInput = container.querySelector('input[label="* URL"]') as HTMLInputElement | null;
-    const titleInput = container.querySelector('input[label="* Title"]') as HTMLInputElement | null;
+    const urlInput = container.querySelector('input[aria-label="* URL"]') as HTMLInputElement | null;
+    const titleInput = container.querySelector('input[aria-label="* Title"]') as HTMLInputElement | null;
     expect(urlInput).not.toBeNull();
     expect(titleInput).not.toBeNull();
     fireEvent.change(urlInput!, { target: { value: 'url' } });

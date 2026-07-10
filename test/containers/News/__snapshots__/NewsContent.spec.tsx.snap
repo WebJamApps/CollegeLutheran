@@ -43,15 +43,15 @@ exports[`NewsContent > renders the news page 1`] = `
         sx="[object Object]"
       >
         <input
+          aria-label="* URL"
           class="url"
-          label="* URL"
           sx="[object Object]"
           type="text"
           value=""
         />
         <input
+          aria-label="* Title"
           class="title"
-          label="* Title"
           sx="[object Object]"
           type="text"
           value=""

@@ -56,12 +56,12 @@ exports[`Dashboard Container > renders AdminDashboard 1`] = `
       </h5>
       <div>
         <input
-          label="Title"
+          aria-label="Title"
           sx="[object Object]"
           value=""
         />
         <input
-          label="Url"
+          aria-label="Url"
           value=""
         />
         <div

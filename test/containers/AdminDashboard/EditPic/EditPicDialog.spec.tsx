@@ -16,8 +16,8 @@ describe('EditPicDialog', () => {
     const setEditPic = vi.fn();
     const props = { onClose: vi.fn(), editPic: defaultPic, setEditPic };
     const { container } = render(<EditPicDialog {...props} />);
-    const url = container.querySelector('input[label="* URL"]') as HTMLInputElement | null;
-    const title = container.querySelector('input[label="* Title"]') as HTMLInputElement | null;
+    const url = container.querySelector('input[aria-label="* URL"]') as HTMLInputElement | null;
+    const title = container.querySelector('input[aria-label="* Title"]') as HTMLInputElement | null;
     expect(url).not.toBeNull();
     expect(title).not.toBeNull();
     fireEvent.change(url!, { target: { value: 'url' } });

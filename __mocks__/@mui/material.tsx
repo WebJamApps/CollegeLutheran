@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function TextField(props: any) {
-  const { children } = props;
-  return <input {...props}>{children}</input>;
+  // The real MUI TextField renders its `label` prop as an accessible <label>;
+  // surface it as aria-label here so runtime a11y (axe) checks stay honest.
+  const { children, label, ...rest } = props;
+  return <input aria-label={label} {...rest}>{children}</input>;
 }
 
 export function Checkbox(props: any) {

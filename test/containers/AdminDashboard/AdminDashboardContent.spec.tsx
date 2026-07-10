@@ -36,13 +36,13 @@ describe('AdminDashboard Content', () => {
   });
   it('handles setTitle for ChangeNewsPage', () => {
     const { container } = render(<ChangeNewsPage />);
-    const title = container.querySelector('input[label="Title"]') as HTMLInputElement | null;
+    const title = container.querySelector('input[aria-label="Title"]') as HTMLInputElement | null;
     expect(title).not.toBeNull();
     fireEvent.change(title!, { target: { value: 'somethin' } });
   });
   it('handles setUrl for ChangeNewsPage', () => {
     const { container } = render(<ChangeNewsPage />);
-    const url = container.querySelector('input[label="Url"]') as HTMLInputElement | null;
+    const url = container.querySelector('input[aria-label="Url"]') as HTMLInputElement | null;
     expect(url).not.toBeNull();
     fireEvent.change(url!, { target: { value: 'anythin' } });
   });

@@ -61,7 +61,9 @@ export const YouthContent = (
           </p>
           <FaithWithoutWorks />
           <hr />
-          <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(youthPage && youthPage.title ? youthPage.title : '')}</h5>
+          {youthPage?.title ? (
+            <h3 style={{ fontWeight: 'bold', marginTop: '35px', fontSize: '16pt' }}>{parser(youthPage.title)}</h3>
+          ) : null}
           <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
             {parser(youthPage && youthPage.comments ? youthPage.comments : '')}
           </section>

@@ -81,7 +81,9 @@ export const About = ({
               The church is situated on College Avenue, within easy walking distance of Roanoke College.
               College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
             </p>
-            <h5 style={{ fontWeight: 'bold', marginTop: '35px' }}>{parser(homePage && homePage.title ? homePage.title : '')}</h5>
+            {homePage?.title ? (
+              <h3 style={{ fontWeight: 'bold', marginTop: '35px', fontSize: '16pt' }}>{parser(homePage.title)}</h3>
+            ) : null}
             <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
               {parser(homePage && homePage.comments ? homePage.comments : '')}
             </section>

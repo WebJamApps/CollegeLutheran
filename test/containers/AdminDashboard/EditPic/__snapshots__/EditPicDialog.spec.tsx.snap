@@ -12,13 +12,13 @@ exports[`EditPicDialog > renders EditPicDialog 1`] = `
       sx="[object Object]"
     >
       <input
-        label="* URL"
+        aria-label="* URL"
         sx="[object Object]"
         type="text"
         value=""
       />
       <input
-        label="* Title"
+        aria-label="* Title"
         sx="[object Object]"
         type="text"
         value=""
