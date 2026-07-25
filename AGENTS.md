@@ -52,3 +52,12 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - **Async Testing:** When components have `await` calls that disable buttons (like during API calls), tests using `@testing-library/react` need to mock functions to return Promises (`vi.fn(() => Promise.resolve())`) and interactions should be wrapped in `await act(async () => { ... })` to properly flush React state.
 - **MUI Imports & Testing Mocks:** `useTheme` must always be imported from `@mui/material/styles` instead of `@mui/material`. The testing environment uses a custom manual mock (`__mocks__/@mui/material.tsx`) that does not mock or export `useTheme`. When introducing new MUI components (like `NativeSelect`), ensure they are added to `__mocks__/@mui/material.tsx` and correctly destructure and spread nested `inputProps` on native inputs (e.g. `<select {...rest} {...inputProps}>`) to preserve testing-library query support (like `aria-label`).
 - **E2E Test Class Preservation:** When refactoring page layouts (especially in core templates like `HeaderSection.tsx`, `ThemeModeSelector.tsx`), check if existing DOM classes (e.g., `.theme-mode-selector`) or IDs are targeted by Playwright tests under `test/e2e/`, and ensure they are preserved on the outer-most container of the new layout to prevent E2E selector timeouts on CI/CD pipelines.
+
+## Pull requests
+
+### PR body conventions (violations may be machine-rejected)
+
+- **Summary**: markdown bullet points, one change per bullet — never a run-on paragraph.
+- **Test evidence**: paste the REAL runner output verbatim (the lines showing pass/fail and test counts), inside a ``` fence — never a description like "all tests passed". If the output has scrolled out of view, re-run the test command and paste what it prints.
+- **Test plan**: exact commands and manual steps that exercise the change (start command, route/page, what to click, expected visible result) — a green test suite alone is not a plan.
+- **Attribution**: `--author` names the model actually doing the work. Antigravity/agy sessions are ALWAYS `agy — Gemini 3.5 Flash (Medium)` or `(High)` — never write any other Gemini model name (models misremember their own identity; use this exact string).
