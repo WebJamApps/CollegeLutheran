@@ -15,9 +15,23 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.use(express.static(path.normalize(path.join(__dirname, 'dist'))));
+const distDir = path.normalize(path.join(__dirname, 'dist'));
+
+app.use('/assets', express.static(path.join(distDir, 'assets'), {
+  setHeaders: (res) => {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  },
+}));
+
+app.use(express.static(distDir, {
+  setHeaders: (res, filePath) => {
+    res.setHeader('Cache-Control', filePath.endsWith('.html') ? 'no-store' : 'no-cache');
+  },
+}));
+
 app.get('/*path', (_request, response) => {
-  response.sendFile(path.normalize(path.join(__dirname, 'dist/index.html')));
+  response.setHeader('Cache-Control', 'no-store');
+  response.sendFile(path.join(distDir, 'index.html'));
 });
 
 const isMain = import.meta.url === pathToFileURL(process.argv[1] || '').href;
