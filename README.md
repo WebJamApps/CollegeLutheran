@@ -50,3 +50,5 @@ server over https with a self-signed cert:
 > an add: unchecking a page you previously granted revokes the app's access to it and kills
 > that page's stored token. So even though this admin only reconnects CollegeLutheran, leave
 > WebJamLLC checked too (and vice-versa from the JaMmusic side).
+
+
