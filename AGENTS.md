@@ -55,6 +55,12 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - **Linting Script Names & Vitest Timezone Alignment:** `CollegeLutheran` uses `npm run test:lint` for linting (there is no `npm run lint` script). When updating Vitest snapshots for components with date or version strings, ensure updates are executed with `TZ=UTC npx vitest run -u` (or `npm test`) so snapshots match CircleCI's UTC container runner.
 - **Snyk Failures & Resolution via `npm audit fix`**: PR checks may report failure on `security/snyk` due to transitive dependency vulnerabilities (such as `brace-expansion`). Running `npm audit fix` updates `package-lock.json` with non-breaking patches to resolve these vulnerabilities. Always run `npm test` and `npm run test:lint` afterwards to verify the test suite remains 100% green before committing and pushing the updated `package-lock.json` to the PR branch.
 
+## Quota & Token Hygiene
+- **Sliding Window Quota Preservation:** Google Antigravity (`agy`) tracks model token usage on a rolling 5-hour sliding window. To preserve quota and avoid 3+ hour lockouts during heavy or multi-repo tasks:
+  - Keep command outputs compact: avoid printing thousands of lines of raw test logs directly into main turn outputs.
+  - Redirect large multi-line summaries, test plans, and evidence to scratch files (`--summary-file`, `--test-plan-file`, `--test-evidence-file`) when calling `create-draft-pr.sh`.
+  - **Automatic Flash Med Subagent Handoff on "Go":** Once requirements and implementation steps are aligned interactively on `Flash High`, automatically delegate contained execution work (coding, running test suites, branch/PR creation) down to a `Flash Med` subagent without waiting for Josh to explicitly request delegation.
+
 ## Pull requests
 
 ### PR body conventions (violations may be machine-rejected)
