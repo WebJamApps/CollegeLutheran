@@ -6,7 +6,7 @@ jobs:
       - image: cimg/node:24.18-browsers
         environment:
           DB_URL: mongodb://127.0.0.1:27017/web-jam-test
-      - image: cimg/mongo:7.0
+      - image: mongo:7.0
     working_directory: ~/repo
     steps:
       - checkout
