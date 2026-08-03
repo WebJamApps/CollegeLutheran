@@ -4,6 +4,9 @@ jobs:
     docker:
       # Node 24.18 (engines/.nvmrc) — matching browsers image.
       - image: cimg/node:24.18-browsers
+        environment:
+          DB_URL: mongodb://127.0.0.1:27017/web-jam-test
+      - image: cimg/mongo:7.0
     working_directory: ~/repo
     steps:
       - checkout
@@ -34,6 +37,7 @@ jobs:
             # Per-run tag so concurrent CI builds don't clobber each other's
             # seeded rows in the shared test DB (seed/spec/cleanup all read it).
             export E2E_SEED_TAG="$CIRCLE_BUILD_NUM"
+            export MONGO_DB_URI="$DB_URL"
             npx playwright install chromium
             # Start a real web-jam-back (public repo) against the TEST MongoDB so
             # the News table is populated by the real API — no stubs. MONGO_DB_URI
@@ -47,7 +51,7 @@ jobs:
             # reseed when NODE_ENV !== 'production'. CI's NODE_ENV is 'test', which
             # would skip listen entirely — so run it explicitly as production: it
             # listens, reads MONGO_DB_URI (the test DB), and skips the reseed.
-            NODE_ENV=production MONGO_DB_URI="$MONGO_DB_URI" \
+            NODE_ENV=production MONGO_DB_URI="$DB_URL" \
               AllowUrl='{"urls":["http://localhost:7777"]}' \
               FB_PAGE_ID=202368653220334 \
               FB_PAGES='{"202368653220334":"CollegeLutheran","365007513885497":"WebJamLLC"}' \
