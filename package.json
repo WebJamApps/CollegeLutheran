@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": "24.18.0"
+    "node": "24.18.1"
   },
   "files": [
     "vite.config.ts",
