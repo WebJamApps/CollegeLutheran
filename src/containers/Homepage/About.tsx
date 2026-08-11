@@ -20,8 +20,8 @@ export function shuffle(array: Ibook[]) {
 }
 
 export function PictureSection({
-  data, width,
-}: { data: Ibook[], width?: number }) {
+  data, width, homePage,
+}: { data: Ibook[], width?: number, homePage?: Ibook }) {
   if (width && width >= 900) {
     return (
       <div className="col">
@@ -53,6 +53,14 @@ export function PictureSection({
             />
           </div>
         )}
+        {homePage?.title ? (
+          <h3 style={{ fontWeight: 'bold', marginTop: '25px', fontSize: '16pt' }}>
+            {parser(homePage.title)}
+          </h3>
+        ) : null}
+        <section style={{ marginTop: '15px', textAlign: 'left', marginBottom: '0px' }}>
+          {parser(homePage && homePage.comments ? homePage.comments : '')}
+        </section>
       </div>
     );
   }
@@ -79,8 +87,18 @@ export const About = ({
     <div className="aboutPage">
       <div className="container-fluid" style={{ paddingRight: 0 }}>
         <div className="row">
-          <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
-            <div style={{ marginTop: '20px', marginBottom: '25px', fontSize: '18px' }}>
+          <div
+            className="col"
+            style={{
+              top: '0',
+              maxWidth: '7.35in',
+              paddingRight: '4px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div style={{ marginTop: '20px', marginBottom: '20px', fontSize: '18px' }}>
               <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
                 &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
               </p>
@@ -111,65 +129,36 @@ export const About = ({
                 Peace be with you!
               </p>
             </div>
-            {width && width >= 900 && (homePage?.title || homePage?.comments) ? (
-              <div style={{
-                display: 'flex', flexDirection: 'row', gap: '24px', marginBottom: '10px',
-              }}
-              >
-                <div style={{ flex: '1 1 50%', minWidth: '200px' }}>
-                  <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
-                    <span style={{ fontSize: '18px' }}>
-                      <strong>What Else is Happening at CLC?</strong>
-                    </span>
-                  </p>
-                  <p style={{ marginBottom: '8px' }}>
-                    Click
-                    {' '}
-                    <a href="/news">News</a>
-                    {' '}
-                    to view or subscribe to our emails.
-                    Scroll below to view our CLC Events Calendar, and follow us on social media.
-                  </p>
-                </div>
-                <div style={{ flex: '1 1 50%', minWidth: '200px' }}>
+            <div>
+              {width && width >= 900 ? null : (
+                <>
                   {homePage?.title ? (
-                    <h3 style={{ fontWeight: 'bold', marginTop: '0px', fontSize: '16pt' }}>
+                    <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>
                       {parser(homePage.title)}
                     </h3>
                   ) : null}
-                  <section style={{ marginTop: homePage?.title ? '8px' : '0px', textAlign: 'left' }}>
+                  <section style={{ marginTop: '10px', textAlign: 'left', marginBottom: '15px' }}>
                     {parser(homePage && homePage.comments ? homePage.comments : '')}
                   </section>
-                </div>
-              </div>
-            ) : (
-              <>
-                {homePage?.title ? (
-                  <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>
-                    {parser(homePage.title)}
-                  </h3>
-                ) : null}
-                <section style={{ marginTop: '10px', textAlign: 'left', marginBottom: '15px' }}>
-                  {parser(homePage && homePage.comments ? homePage.comments : '')}
-                </section>
-                <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
-                  <span style={{ fontSize: '18px' }}>
-                    {' '}
-                    <strong>What Else is Happening at CLC?</strong>
-                  </span>
-                </p>
-                <p style={{ marginBottom: '8px' }}>
-                  Click
+                </>
+              )}
+              <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
+                <span style={{ fontSize: '18px' }}>
                   {' '}
-                  <a href="/news">News</a>
-                  {' '}
-                  to view or subscribe to our emails.
-                  Scroll below to view our CLC Events Calendar, and follow us on social media.
-                </p>
-              </>
-            )}
+                  <strong>What Else is Happening at CLC?</strong>
+                </span>
+              </p>
+              <p style={{ marginBottom: '0px' }}>
+                Click
+                {' '}
+                <a href="/news">News</a>
+                {' '}
+                to view or subscribe to our emails.
+                Scroll below to view our CLC Events Calendar, and follow us on social media.
+              </p>
+            </div>
           </div>
-          <PictureSection data={data} width={width} />
+          <PictureSection data={data} width={width} homePage={homePage} />
         </div>
       </div>
     </div>

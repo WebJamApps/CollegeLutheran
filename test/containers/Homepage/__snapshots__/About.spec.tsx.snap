@@ -14,10 +14,10 @@ exports[`About > renders the about page 1`] = `
       >
         <div
           class="col"
-          style="top: 0px; max-width: 7.35in; padding-right: 4px;"
+          style="top: 0px; max-width: 7.35in; padding-right: 4px; display: flex; flex-direction: column; justify-content: space-between;"
         >
           <div
-            style="margin-top: 20px; margin-bottom: 25px; font-size: 18px;"
+            style="margin-top: 20px; margin-bottom: 20px; font-size: 18px;"
           >
             <p
               style="font-weight: bold; margin-bottom: 16px;"
@@ -50,34 +50,33 @@ exports[`About > renders the about page 1`] = `
               Peace be with you!
             </p>
           </div>
-          <section
-            style="margin-top: 10px; text-align: left; margin-bottom: 15px;"
-          />
-          <p
-            style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
-          >
-            <span
-              style="font-size: 18px;"
+          <div>
+            <p
+              style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
             >
+              <span
+                style="font-size: 18px;"
+              >
+                 
+                <strong>
+                  What Else is Happening at CLC?
+                </strong>
+              </span>
+            </p>
+            <p
+              style="margin-bottom: 0px;"
+            >
+              Click
                
-              <strong>
-                What Else is Happening at CLC?
-              </strong>
-            </span>
-          </p>
-          <p
-            style="margin-bottom: 8px;"
-          >
-            Click
-             
-            <a
-              href="/news"
-            >
-              News
-            </a>
-             
-            to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
-          </p>
+              <a
+                href="/news"
+              >
+                News
+              </a>
+               
+              to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
+            </p>
+          </div>
         </div>
         <div
           class="col"
@@ -92,6 +91,9 @@ exports[`About > renders the about page 1`] = `
               style="width: 100%;"
             />
           </div>
+          <section
+            style="margin-top: 15px; text-align: left; margin-bottom: 0px;"
+          />
         </div>
       </div>
     </div>
