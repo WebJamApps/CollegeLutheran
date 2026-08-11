@@ -205,7 +205,6 @@ export const About = ({
             <PictureSection data={data} width={width} />
           </div>
         )}
-        </div>
       </div>
     </div>
   );

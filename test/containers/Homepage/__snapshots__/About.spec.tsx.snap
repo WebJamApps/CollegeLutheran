@@ -50,33 +50,6 @@ exports[`About > renders the about page 1`] = `
               Peace be with you!
             </p>
           </div>
-          <div>
-            <p
-              style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
-            >
-              <span
-                style="font-size: 18px;"
-              >
-                 
-                <strong>
-                  What Else is Happening at CLC?
-                </strong>
-              </span>
-            </p>
-            <p
-              style="margin-bottom: 0px;"
-            >
-              Click
-               
-              <a
-                href="/news"
-              >
-                News
-              </a>
-               
-              to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
-            </p>
-          </div>
         </div>
         <div
           class="col"
@@ -91,8 +64,47 @@ exports[`About > renders the about page 1`] = `
               style="width: 100%;"
             />
           </div>
+        </div>
+      </div>
+      <div
+        class="row"
+        style="margin-top: 10px; margin-bottom: 10px;"
+      >
+        <div
+          class="col"
+          style="max-width: 7.35in; padding-right: 4px;"
+        >
+          <p
+            style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
+          >
+            <span
+              style="font-size: 18px;"
+            >
+               
+              <strong>
+                What Else is Happening at CLC?
+              </strong>
+            </span>
+          </p>
+          <p
+            style="margin-bottom: 0px;"
+          >
+            Click
+             
+            <a
+              href="/news"
+            >
+              News
+            </a>
+             
+            to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
+          </p>
+        </div>
+        <div
+          class="col"
+        >
           <section
-            style="margin-top: 15px; text-align: left; margin-bottom: 0px;"
+            style="margin-top: 0px; text-align: left;"
           />
         </div>
       </div>
