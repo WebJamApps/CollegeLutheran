@@ -77,9 +77,10 @@ export const About = ({
         <div className="row">
           <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
             <div style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
-              <p style={{ fontStyle: 'italic', marginBottom: '16px' }}>
-                &ldquo;I lift my eyes to the hills&rdquo;: Psalm 121
-                <br />
+              <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+                &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
+              </p>
+              <p style={{ marginBottom: '16px' }}>
                 A visitor to our congregation once spoke those words as he exited the front door of our church.
               </p>
               <p style={{ marginBottom: '16px' }}>

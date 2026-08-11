@@ -20,10 +20,13 @@ exports[`About > renders the about page 1`] = `
             style="margin-top: 40px; margin-bottom: 40px; font-size: 18px;"
           >
             <p
-              style="font-style: italic; margin-bottom: 16px;"
+              style="font-weight: bold; margin-bottom: 16px;"
             >
-              “I lift my eyes to the hills”: Psalm 121
-              <br />
+              “I lift my eyes to the hills”:   Psalm 121
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
               A visitor to our congregation once spoke those words as he exited the front door of our church.
             </p>
             <p
