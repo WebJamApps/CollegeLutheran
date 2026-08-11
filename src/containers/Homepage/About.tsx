@@ -107,27 +107,62 @@ export const About = ({
                 Peace be with you!
               </p>
             </div>
-            {homePage?.title ? (
-              <h3 style={{ fontWeight: 'bold', marginTop: '35px', fontSize: '16pt' }}>{parser(homePage.title)}</h3>
-            ) : null}
-            <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-              {parser(homePage && homePage.comments ? homePage.comments : '')}
-            </section>
-            <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
-              <span style={{ fontSize: '18px' }}>
-                {' '}
-                <strong>What Else is Happening at CLC?</strong>
-              </span>
-            </p>
-            <p>
-              Click
-              {' '}
-              <a href="/news">News</a>
-              {' '}
-              to view or subscribe to our emails.
-              Scroll below to view our CLC Events Calendar, and follow us on social media.
-              <br />
-            </p>
+            {width && width >= 900 && (homePage?.title || homePage?.comments) ? (
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '24px', marginTop: '25px', marginBottom: '35px' }}>
+                <div style={{ flex: '1 1 45%', minWidth: '200px' }}>
+                  <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
+                    <span style={{ fontSize: '18px' }}>
+                      <strong>What Else is Happening at CLC?</strong>
+                    </span>
+                  </p>
+                  <p>
+                    Click
+                    {' '}
+                    <a href="/news">News</a>
+                    {' '}
+                    to view or subscribe to our emails.
+                    Scroll below to view our CLC Events Calendar, and follow us on social media.
+                    <br />
+                  </p>
+                </div>
+                <div style={{ flex: '1 1 50%', minWidth: '200px' }}>
+                  {homePage?.title ? (
+                    <h3 style={{ fontWeight: 'bold', marginTop: '0px', fontSize: '16pt' }}>
+                      {parser(homePage.title)}
+                    </h3>
+                  ) : null}
+                  <section style={{ marginTop: homePage?.title ? '10px' : '0px', textAlign: 'left' }}>
+                    {parser(homePage && homePage.comments ? homePage.comments : '')}
+                  </section>
+                </div>
+              </div>
+            ) : (
+              <>
+                {homePage?.title ? (
+                  <h3 style={{ fontWeight: 'bold', marginTop: '35px', fontSize: '16pt' }}>
+                    {parser(homePage.title)}
+                  </h3>
+                ) : null}
+                <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
+                  {parser(homePage && homePage.comments ? homePage.comments : '')}
+                </section>
+                <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
+                  <span style={{ fontSize: '18px' }}>
+                    {' '}
+                    <strong>What Else is Happening at CLC?</strong>
+                  </span>
+                </p>
+                <p>
+                  Click
+                  {' '}
+                  <a href="/news">News</a>
+                  {' '}
+                  to view or subscribe to our emails.
+                  Scroll below to view our CLC Events Calendar, and follow us on social media.
+                  <br />
+                </p>
+              </>
+            )}
           </div>
           <PictureSection data={data} width={width} />
         </div>
