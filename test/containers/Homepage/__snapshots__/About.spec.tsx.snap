@@ -17,7 +17,7 @@ exports[`About > renders the about page 1`] = `
           style="top: 0px; max-width: 7.35in; padding-right: 4px;"
         >
           <div
-            style="margin-top: 40px; margin-bottom: 40px; font-size: 18px;"
+            style="margin-top: 40px; margin-bottom: 20px; font-size: 18px;"
           >
             <p
               style="font-weight: bold; margin-bottom: 16px;"
@@ -51,7 +51,7 @@ exports[`About > renders the about page 1`] = `
             </p>
           </div>
           <p
-            style="padding-right: 15px; margin-bottom: 16px; padding-bottom: 0px;"
+            style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
           >
             <span
               style="font-size: 18px;"
@@ -63,7 +63,7 @@ exports[`About > renders the about page 1`] = `
             </span>
           </p>
           <p
-            style="margin-bottom: 0px;"
+            style="margin-bottom: 0px; padding-bottom: 0px;"
           >
             Click
              
@@ -90,7 +90,7 @@ exports[`About > renders the about page 1`] = `
             />
           </div>
           <section
-            style="margin-top: 20px; text-align: left; margin-bottom: 35px;"
+            style="margin-top: 20px; text-align: left; margin-bottom: 0px;"
           />
         </div>
       </div>

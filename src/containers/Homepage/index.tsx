@@ -13,7 +13,7 @@ export function Homepage({ width }: { width: number }) {
         ? (
           <div className="page-content">
             <About width={width} />
-            <hr />
+            <hr style={{ marginTop: 0 }} />
             <WideFacebookFeed width={width} />
             <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
           </div>
@@ -23,7 +23,7 @@ export function Homepage({ width }: { width: number }) {
             <About
               width={width}
             />
-            <hr />
+            <hr style={{ marginTop: 0 }} />
             <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
             <FacebookFeed />
             <p style={{ fontSize: '6pt', marginBottom: '0' }}>&nbsp;</p>
