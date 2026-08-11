@@ -88,7 +88,7 @@ export const About = ({
       <div className="container-fluid" style={{ paddingRight: 0 }}>
         <div className="row">
           <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
-            <div style={{ marginTop: '40px', marginBottom: '20px', fontSize: '18px' }}>
+            <div style={{ marginTop: '25px', marginBottom: '25px', fontSize: '18px' }}>
               <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
                 &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
               </p>
@@ -137,7 +137,7 @@ export const About = ({
                 <strong>What Else is Happening at CLC?</strong>
               </span>
             </p>
-            <p style={{ marginBottom: 0, paddingBottom: 0 }}>
+            <p style={{ marginBottom: '8px' }}>
               Click
               {' '}
               <a href="/news">News</a>
