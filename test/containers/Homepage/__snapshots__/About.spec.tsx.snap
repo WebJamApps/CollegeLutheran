@@ -17,7 +17,7 @@ exports[`About > renders the about page 1`] = `
           style="top: 0px; max-width: 7.35in; padding-right: 4px;"
         >
           <div
-            style="margin-top: 25px; margin-bottom: 25px; font-size: 18px;"
+            style="margin-top: 20px; margin-bottom: 25px; font-size: 18px;"
           >
             <p
               style="font-weight: bold; margin-bottom: 16px;"
@@ -50,6 +50,9 @@ exports[`About > renders the about page 1`] = `
               Peace be with you!
             </p>
           </div>
+          <section
+            style="margin-top: 10px; text-align: left; margin-bottom: 15px;"
+          />
           <p
             style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
           >
@@ -81,7 +84,7 @@ exports[`About > renders the about page 1`] = `
         >
           <div
             id="slideshow1"
-            style="margin: 40px auto auto; text-align: center;"
+            style="margin: 20px auto auto; text-align: center;"
           >
             <img
               alt="Luther Rose"
@@ -89,9 +92,6 @@ exports[`About > renders the about page 1`] = `
               style="width: 100%;"
             />
           </div>
-          <section
-            style="margin-top: 20px; text-align: left; margin-bottom: 0px;"
-          />
         </div>
       </div>
     </div>
