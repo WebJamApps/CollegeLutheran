@@ -11,9 +11,10 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 });
 
-test('renders the homepage with its key sections', async ({ page }) => {
+test('renders the homepage with its key sections and Psalm 121 top text', async ({ page }) => {
   await expect(page).toHaveTitle(/College Lutheran/i);
-  await expect(page.getByText('College Lutheran Church is located', { exact: false })).toBeVisible();
+  await expect(page.getByText('I lift my eyes to the hills', { exact: false })).toBeVisible();
+  await expect(page.getByText('Psalm 121', { exact: false })).toBeVisible();
 
   // The events calendar embed is always present.
   await expect(page.locator('iframe[src*="calendar.google.com"]').first()).toBeAttached();
@@ -38,7 +39,7 @@ test('has no horizontal overflow', async ({ page }) => {
   expect(overflow, `unexpected horizontal overflow of ${overflow}px`).toBeLessThanOrEqual(2);
 });
 
-// Mobile-only assertions. The Homepage swaps layouts at 900px
+// Mobile-only assertions. The Homepage swaps layouts at 1099px
 // (src/containers/Homepage/index.tsx): the narrow phone layout has its own
 // calendar iframe (title clc-calendar) + Facebook feed (testid narrow-fb-feed)
 // while the wide desktop layout uses a two-column row (title google-calendar,
@@ -49,7 +50,7 @@ test.describe('mobile layout', () => {
     test.skip(testInfo.project.name !== 'mobile', 'mobile viewport only');
   });
 
-  test('renders the narrow phone layout, not the wide desktop one', async ({ page }) => {
+  test('renders the narrow phone layout below 1099px width, not the wide desktop one', async ({ page }) => {
     await expect(page.locator('#narrowFacebook')).toBeAttached();
     await expect(page.locator('iframe[title="clc-calendar"]')).toBeAttached();
     // The desktop two-column layout must not leak onto a phone.
