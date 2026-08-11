@@ -1,16 +1,18 @@
 import {
+  Box,
   Button,
   Checkbox,
   Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, TextField, FormGroup, FormControlLabel,
+  FormHelperText,
   SelectChangeEvent,
 } from '@mui/material';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
 import libUtils from 'src/lib/commonUtils';
 import utils, { defaultPic } from './utils';
-import { PicDialogBox } from './pictures.utils';
+import { PicDialogBox, fixDropboxUrl } from './pictures.utils';
 
 interface IpicTextFieldProps {
   pic: typeof defaultPic,
@@ -33,8 +35,9 @@ export function PicTextField(props: IpicTextFieldProps) {
       value={pic[field]}
       onChange={(evt) => {
         const { target: { value } } = evt;
-        setPic({ ...pic, [field]: value });
-        return value;
+        const fixedValue = url ? fixDropboxUrl(value) : value;
+        setPic({ ...pic, [field]: fixedValue });
+        return fixedValue;
       }}
     />
   );
@@ -45,15 +48,21 @@ interface IcreatePicDialogProps {
 }
 export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) {
   const [pic, setPic] = useState(defaultPic);
+  const [imgError, setImgError] = useState(false);
   const { auth } = useContext(AuthContext);
   const { getPictures } = useContext(ContentContext);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [pic.url]);
+
   const showHideCaption = libUtils.makeShowHideChecked(setPic, pic, 'showCaption');
   const handleChange = (event: SelectChangeEvent) => {
     const { target: { value } } = event;
     setPic({ ...pic, type: event.target.value });
     return value;
   };
-  const isFormValid = () => pic.title !== '' && pic.url !== '';
+  const isFormValid = () => pic.title !== '' && pic.url !== '' && !imgError;
   return (
     <Dialog
       disableEnforceFocus
@@ -69,6 +78,33 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
         </DialogContentText>
         <PicTextField url pic={pic} label="* Url" setPic={setPic} />
         <PicTextField pic={pic} label="* Title" setPic={setPic} />
+        {pic.url && (
+          <Box sx={{ marginTop: '15px', textAlign: 'center' }}>
+            <Box
+              component="img"
+              src={pic.url}
+              alt="Thumbnail Preview"
+              className="pic-thumbnail-preview"
+              onLoad={() => setImgError(false)}
+              onError={() => setImgError(true)}
+              sx={{
+                maxHeight: 150,
+                maxWidth: '100%',
+                objectFit: 'contain',
+                borderRadius: 1,
+                border: '1px solid',
+                borderColor: imgError ? 'error.main' : 'divider',
+                display: imgError ? 'none' : 'block',
+                margin: '0 auto',
+              }}
+            />
+            {imgError && (
+              <FormHelperText error className="image-error-message">
+                Failed to load image from URL. Please enter a valid image URL.
+              </FormHelperText>
+            )}
+          </Box>
+        )}
         <PicDialogBox pic={pic} handleChange={handleChange} />
         <FormGroup>
           <FormControlLabel
@@ -95,6 +131,7 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
         <Button
           size="small"
           className="cancelPicButton"
+          sx={{ color: 'text.secondary' }}
           onClick={onClose}
         >
           Cancel
@@ -103,3 +140,4 @@ export function CreatePicDialog({ showEditor, onClose }: IcreatePicDialogProps) 
     </Dialog>
   );
 }
+
