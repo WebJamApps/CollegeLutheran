@@ -62,7 +62,9 @@ exports[`About > renders the about page 1`] = `
               </strong>
             </span>
           </p>
-          <p>
+          <p
+            style="margin-bottom: 0px;"
+          >
             Click
              
             <a
@@ -72,7 +74,6 @@ exports[`About > renders the about page 1`] = `
             </a>
              
             to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
-            <br />
           </p>
         </div>
         <div

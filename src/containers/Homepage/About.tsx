@@ -137,14 +137,13 @@ export const About = ({
                 <strong>What Else is Happening at CLC?</strong>
               </span>
             </p>
-            <p>
+            <p style={{ marginBottom: 0 }}>
               Click
               {' '}
               <a href="/news">News</a>
               {' '}
               to view or subscribe to our emails.
               Scroll below to view our CLC Events Calendar, and follow us on social media.
-              <br />
             </p>
           </div>
           <PictureSection data={data} width={width} homePage={homePage} />
