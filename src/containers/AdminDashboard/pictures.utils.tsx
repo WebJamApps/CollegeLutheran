@@ -1,9 +1,14 @@
 import { Iauth } from 'src/providers/Auth.provider';
 import {
-  Box, FormControl, InputLabel, Select, MenuItem,
+  Box, FormControl, InputLabel, Select, MenuItem, FormHelperText,
 } from '@mui/material';
 import { ReactNode } from 'react';
 import { defaultPic } from './utils';
+
+export const fixDropboxUrl = (url: string): string => {
+  if (!url) return url;
+  return url.replace(/^https?:\/\/(www\.)?dropbox\.com\//i, 'https://dl.dropboxusercontent.com/');
+};
 
 export async function performFetchRequest(
   url: string,
@@ -80,10 +85,15 @@ export const PicDialogBox = ({ pic, editPic, handleChange }: IpicDialogBoxProps)
         <MenuItem value="habitatPics">habitatPics</MenuItem>
         <MenuItem value="otherPics">otherPics</MenuItem>
       </Select>
+      <FormHelperText>
+        All pictures will appear on the homepage. Selecting a category sorts that picture
+        to the corresponding interior page (Music, Family, Youth, Habitat, or Other).
+      </FormHelperText>
     </FormControl>
   </Box>
 );
 
 export default {
-  updatePic, deletePic, performFetchRequest, PicDialogBox,
+  updatePic, deletePic, performFetchRequest, PicDialogBox, fixDropboxUrl,
 };
+
