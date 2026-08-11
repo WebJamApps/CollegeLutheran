@@ -19,36 +19,52 @@ export function shuffle(array: Ibook[]) {
   return array;
 }
 
-export function PictureSection({ data, width }: { data: Ibook[], width?: number }) {
-  if (width && width >= 900 && data && data.length > 0) {
+export function PictureSection({
+  data, width, homePage,
+}: { data: Ibook[], width?: number, homePage?: Ibook }) {
+  if (width && width >= 1099) {
     return (
       <div className="col">
-        <div
-          id="familySlideshowWide"
-          style={{
-            width: '100%', margin: 'auto', marginTop: '45px', textAlign: 'left', paddingLeft: 0, paddingRight: 0,
-          }}
-        >
-          <PicSlider data={data} />
-        </div>
-      </div>
-    );
-  }
-  if (width && width >= 900 && data && data.length === 0) {
-    return (
-      <div className="col" style={{ padding: '1px', paddingRight: '0' }}>
-        <div
-          id="slideshow1"
-          style={{
-            margin: 'auto', marginTop: '40px', textAlign: 'center',
-          }}
-        >
-          <img
-            style={{ width: '100%' }}
-            alt="Luther Rose"
-            src="/Lutherrose.svg"
-          />
-        </div>
+        {data && data.length > 0 ? (
+          <div
+            id="familySlideshowWide"
+            style={{
+              width: '100%',
+              maxWidth: '450px',
+              margin: 'auto',
+              marginTop: '15px',
+              marginBottom: '0px',
+              textAlign: 'left',
+              paddingLeft: 0,
+              paddingRight: 0,
+            }}
+          >
+            <PicSlider data={data} />
+          </div>
+        ) : (
+          <div
+            id="slideshow1"
+            style={{
+              margin: 'auto', marginTop: '15px', marginBottom: '0px', textAlign: 'center', maxWidth: '350px',
+            }}
+          >
+            <img
+              style={{
+                width: '100%', maxWidth: '350px', display: 'block', margin: 'auto',
+              }}
+              alt="Luther Rose"
+              src="/Lutherrose.svg"
+            />
+          </div>
+        )}
+        {homePage?.title ? (
+          <h3 style={{ fontWeight: 'bold', marginTop: '10px', marginBottom: '4px', fontSize: '16pt' }}>
+            {parser(homePage.title)}
+          </h3>
+        ) : null}
+        <section style={{ marginTop: homePage?.title ? '4px' : '10px', textAlign: 'left', marginBottom: '0px' }}>
+          {parser(homePage && homePage.comments ? homePage.comments : '')}
+        </section>
       </div>
     );
   }
@@ -76,34 +92,65 @@ export const About = ({
       <div className="container-fluid" style={{ paddingRight: 0 }}>
         <div className="row">
           <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
-            <p style={{ marginTop: '40px', marginBottom: '40px', fontSize: '18px' }}>
-              College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA.
-              The church is situated on College Avenue, within easy walking distance of Roanoke College.
-              College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
-            </p>
-            {homePage?.title ? (
-              <h3 style={{ fontWeight: 'bold', marginTop: '35px', fontSize: '16pt' }}>{parser(homePage.title)}</h3>
-            ) : null}
-            <section style={{ marginTop: '20px', textAlign: 'left', marginBottom: '35px' }}>
-              {parser(homePage && homePage.comments ? homePage.comments : '')}
-            </section>
-            <p style={{ paddingRight: '15px', marginBottom: '16px', paddingBottom: 0 }}>
+            <div style={{ marginTop: '20px', marginBottom: '20px', fontSize: '18px' }}>
+              <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+                &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
+              </p>
+              <p style={{ marginBottom: '16px' }}>
+                A visitor to our congregation once spoke those words as he exited the front door of our church.
+              </p>
+              <p style={{ marginBottom: '16px' }}>
+                Welcome to the web site of College Lutheran Church, a congregation of the
+                Evangelical Lutheran Church in America (ELCA) in Salem VA., in the heart of the
+                beautiful Roanoke Valley of Southwest Virginia. We are a vibrant and growing
+                congregation founded in 1852 on the grounds of Roanoke College, by seven early
+                visionaries who pledged to provide a word and sacrament ministry&mdash;a Lutheran
+                presence&mdash;in this place.
+              </p>
+              <p style={{ marginBottom: '16px' }}>
+                Since our founding, we have sought to proclaim the Gospel and to seek ways to
+                carry out our &ldquo;calling&rdquo; to serve people, in our own community and elsewhere. We
+                are a servant church. Our web site contains more information on our service times
+                and ministries to children, youth and the community at the tabs at the right side of
+                the screen.
+              </p>
+              <p style={{ marginBottom: '16px' }}>
+                Wherever you are on your faith journey, are a local, or are visiting our beautiful
+                area, you are welcome here. We look forward to seeing you, as we prepare to
+                celebrate our 175th anniversary in 2027.
+              </p>
+              <p style={{ marginBottom: '16px' }}>
+                Peace be with you!
+              </p>
+            </div>
+            {width && width >= 1099 ? null : (
+              <>
+                {homePage?.title ? (
+                  <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>
+                    {parser(homePage.title)}
+                  </h3>
+                ) : null}
+                <section style={{ marginTop: '10px', textAlign: 'left', marginBottom: '15px' }}>
+                  {parser(homePage && homePage.comments ? homePage.comments : '')}
+                </section>
+              </>
+            )}
+            <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
               <span style={{ fontSize: '18px' }}>
                 {' '}
                 <strong>What Else is Happening at CLC?</strong>
               </span>
             </p>
-            <p>
+            <p style={{ marginBottom: '0px' }}>
               Click
               {' '}
               <a href="/news">News</a>
               {' '}
               to view or subscribe to our emails.
               Scroll below to view our CLC Events Calendar, and follow us on social media.
-              <br />
             </p>
           </div>
-          <PictureSection data={data} width={width} />
+          <PictureSection data={data} width={width} homePage={homePage} />
         </div>
       </div>
     </div>
