@@ -22,7 +22,7 @@ export function shuffle(array: Ibook[]) {
 export function PictureSection({
   data, width, homePage,
 }: { data: Ibook[], width?: number, homePage?: Ibook }) {
-  if (width && width >= 900) {
+  if (width && width >= 1099) {
     return (
       <div className="col">
         {data && data.length > 0 ? (
@@ -123,7 +123,7 @@ export const About = ({
                 Peace be with you!
               </p>
             </div>
-            {width && width >= 900 ? null : (
+            {width && width >= 1099 ? null : (
               <>
                 {homePage?.title ? (
                   <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>

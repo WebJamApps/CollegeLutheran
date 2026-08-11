@@ -9,7 +9,7 @@ export function Homepage({ width }: { width: number }) {
   useEffect(() => commonUtils.setTitleAndScroll('', window.screen.width), []);
   return (
     <div>
-      {width >= 900
+      {width >= 1099
         ? (
           <div className="page-content">
             <About width={width} />

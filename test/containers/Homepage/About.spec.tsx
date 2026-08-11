@@ -15,13 +15,13 @@ describe('About', () => {
     const result = shuffle(arr);
     result.forEach((r) => expect(ids.has(r._id)).toBe(true));
   });
-  it('renders PicSlider on right column when width > 900', () => {
+  it('renders PicSlider on right column when width > 1099', () => {
     const data = { title: 'pic', _id: '1', type: 'any' };
-    const { container } = render(<PictureSection data={[data]} width={900} />);
+    const { container } = render(<PictureSection data={[data]} width={1100} />);
     expect(container.querySelector('[id^="pic-slider"]')).not.toBeNull();
   });
   it('renders PicSlider on bottom of page', () => {
-    const { container } = render(<PictureSection data={[]} width={900} />);
+    const { container } = render(<PictureSection data={[]} width={1100} />);
     expect(container.querySelector('#slideshow1')).not.toBeNull();
   });
   it('PicSlider returns empty when data has no title', () => {
