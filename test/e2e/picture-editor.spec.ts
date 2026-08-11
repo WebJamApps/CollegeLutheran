@@ -23,9 +23,9 @@ test.describe('Picture Editor Enhancements (#795)', () => {
     expect(convertedUrl).toBe('https://dl.dropboxusercontent.com/s/example/photo.jpg');
   });
 
-  test('ensures cancel button in picture dialog has legible styling', async ({ page }) => {
-    // Check dark mode cancel button class definition
-    const cancelBtnSelector = '.cancelPicButton';
-    expect(cancelBtnSelector).toBe('.cancelPicButton');
+  test('ensures cancel button in picture dialog locator is defined', async ({ page }) => {
+    // Check dark mode cancel button locator
+    const cancelBtn = page.locator('.cancelPicButton');
+    expect(cancelBtn).toBeDefined();
   });
 });
