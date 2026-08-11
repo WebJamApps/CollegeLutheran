@@ -14,7 +14,7 @@ exports[`About > renders the about page 1`] = `
       >
         <div
           class="col"
-          style="top: 0px; max-width: 7.35in; padding-right: 4px; display: flex; flex-direction: column; justify-content: space-between;"
+          style="top: 0px; max-width: 7.35in; padding-right: 4px;"
         >
           <div
             style="margin-top: 20px; margin-bottom: 20px; font-size: 18px;"

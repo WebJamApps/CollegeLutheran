@@ -20,8 +20,8 @@ export function shuffle(array: Ibook[]) {
 }
 
 export function PictureSection({
-  data, width, homePage,
-}: { data: Ibook[], width?: number, homePage?: Ibook }) {
+  data, width,
+}: { data: Ibook[], width?: number }) {
   if (width && width >= 900) {
     return (
       <div className="col">
@@ -53,14 +53,6 @@ export function PictureSection({
             />
           </div>
         )}
-        {homePage?.title ? (
-          <h3 style={{ fontWeight: 'bold', marginTop: '25px', fontSize: '16pt' }}>
-            {parser(homePage.title)}
-          </h3>
-        ) : null}
-        <section style={{ marginTop: '15px', textAlign: 'left', marginBottom: '0px' }}>
-          {parser(homePage && homePage.comments ? homePage.comments : '')}
-        </section>
       </div>
     );
   }
@@ -86,62 +78,115 @@ export const About = ({
   return (
     <div className="aboutPage">
       <div className="container-fluid" style={{ paddingRight: 0 }}>
-        <div className="row">
-          <div
-            className="col"
-            style={{
-              top: '0',
-              maxWidth: '7.35in',
-              paddingRight: '4px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            <div style={{ marginTop: '20px', marginBottom: '20px', fontSize: '18px' }}>
-              <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
-                &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                A visitor to our congregation once spoke those words as he exited the front door of our church.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Welcome to the web site of College Lutheran Church, a congregation of the
-                Evangelical Lutheran Church in America (ELCA) in Salem VA., in the heart of the
-                beautiful Roanoke Valley of Southwest Virginia. We are a vibrant and growing
-                congregation founded in 1852 on the grounds of Roanoke College, by seven early
-                visionaries who pledged to provide a word and sacrament ministry&mdash;a Lutheran
-                presence&mdash;in this place.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Since our founding, we have sought to proclaim the Gospel and to seek ways to
-                carry out our &ldquo;calling&rdquo; to serve people, in our own community and elsewhere. We
-                are a servant church. Our web site contains more information on our service times
-                and ministries to children, youth and the community at the tabs at the right side of
-                the screen.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Wherever you are on your faith journey, are a local, or are visiting our beautiful
-                area, you are welcome here. We look forward to seeing you, as we prepare to
-                celebrate our 175th anniversary in 2027.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Peace be with you!
-              </p>
+        {width && width >= 900 ? (
+          <>
+            <div className="row">
+              <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
+                <div style={{ marginTop: '20px', marginBottom: '20px', fontSize: '18px' }}>
+                  <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+                    &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
+                  </p>
+                  <p style={{ marginBottom: '16px' }}>
+                    A visitor to our congregation once spoke those words as he exited the front door of our church.
+                  </p>
+                  <p style={{ marginBottom: '16px' }}>
+                    Welcome to the web site of College Lutheran Church, a congregation of the
+                    Evangelical Lutheran Church in America (ELCA) in Salem VA., in the heart of the
+                    beautiful Roanoke Valley of Southwest Virginia. We are a vibrant and growing
+                    congregation founded in 1852 on the grounds of Roanoke College, by seven early
+                    visionaries who pledged to provide a word and sacrament ministry&mdash;a Lutheran
+                    presence&mdash;in this place.
+                  </p>
+                  <p style={{ marginBottom: '16px' }}>
+                    Since our founding, we have sought to proclaim the Gospel and to seek ways to
+                    carry out our &ldquo;calling&rdquo; to serve people, in our own community and elsewhere. We
+                    are a servant church. Our web site contains more information on our service times
+                    and ministries to children, youth and the community at the tabs at the right side of
+                    the screen.
+                  </p>
+                  <p style={{ marginBottom: '16px' }}>
+                    Wherever you are on your faith journey, are a local, or are visiting our beautiful
+                    area, you are welcome here. We look forward to seeing you, as we prepare to
+                    celebrate our 175th anniversary in 2027.
+                  </p>
+                  <p style={{ marginBottom: '16px' }}>
+                    Peace be with you!
+                  </p>
+                </div>
+              </div>
+              <PictureSection data={data} width={width} />
             </div>
-            <div>
-              {width && width >= 900 ? null : (
-                <>
-                  {homePage?.title ? (
-                    <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>
-                      {parser(homePage.title)}
-                    </h3>
-                  ) : null}
-                  <section style={{ marginTop: '10px', textAlign: 'left', marginBottom: '15px' }}>
-                    {parser(homePage && homePage.comments ? homePage.comments : '')}
-                  </section>
-                </>
-              )}
+            <div className="row" style={{ marginTop: '10px', marginBottom: '10px' }}>
+              <div className="col" style={{ maxWidth: '7.35in', paddingRight: '4px' }}>
+                <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
+                  <span style={{ fontSize: '18px' }}>
+                    {' '}
+                    <strong>What Else is Happening at CLC?</strong>
+                  </span>
+                </p>
+                <p style={{ marginBottom: '0px' }}>
+                  Click
+                  {' '}
+                  <a href="/news">News</a>
+                  {' '}
+                  to view or subscribe to our emails.
+                  Scroll below to view our CLC Events Calendar, and follow us on social media.
+                </p>
+              </div>
+              <div className="col">
+                {homePage?.title ? (
+                  <h3 style={{ fontWeight: 'bold', marginTop: '0px', fontSize: '16pt' }}>
+                    {parser(homePage.title)}
+                  </h3>
+                ) : null}
+                <section style={{ marginTop: homePage?.title ? '10px' : '0px', textAlign: 'left' }}>
+                  {parser(homePage && homePage.comments ? homePage.comments : '')}
+                </section>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="row">
+            <div className="col" style={{ top: '0', maxWidth: '7.35in', paddingRight: '4px' }}>
+              <div style={{ marginTop: '20px', marginBottom: '20px', fontSize: '18px' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+                  &ldquo;I lift my eyes to the hills&rdquo;: &nbsp; Psalm 121
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  A visitor to our congregation once spoke those words as he exited the front door of our church.
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  Welcome to the web site of College Lutheran Church, a congregation of the
+                  Evangelical Lutheran Church in America (ELCA) in Salem VA., in the heart of the
+                  beautiful Roanoke Valley of Southwest Virginia. We are a vibrant and growing
+                  congregation founded in 1852 on the grounds of Roanoke College, by seven early
+                  visionaries who pledged to provide a word and sacrament ministry&mdash;a Lutheran
+                  presence&mdash;in this place.
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  Since our founding, we have sought to proclaim the Gospel and to seek ways to
+                  carry out our &ldquo;calling&rdquo; to serve people, in our own community and elsewhere. We
+                  are a servant church. Our web site contains more information on our service times
+                  and ministries to children, youth and the community at the tabs at the right side of
+                  the screen.
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  Wherever you are on your faith journey, are a local, or are visiting our beautiful
+                  area, you are welcome here. We look forward to seeing you, as we prepare to
+                  celebrate our 175th anniversary in 2027.
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  Peace be with you!
+                </p>
+              </div>
+              {homePage?.title ? (
+                <h3 style={{ fontWeight: 'bold', marginTop: '20px', fontSize: '16pt' }}>
+                  {parser(homePage.title)}
+                </h3>
+              ) : null}
+              <section style={{ marginTop: '10px', textAlign: 'left', marginBottom: '15px' }}>
+                {parser(homePage && homePage.comments ? homePage.comments : '')}
+              </section>
               <p style={{ paddingRight: '15px', marginBottom: '8px', paddingBottom: 0 }}>
                 <span style={{ fontSize: '18px' }}>
                   {' '}
@@ -157,8 +202,9 @@ export const About = ({
                 Scroll below to view our CLC Events Calendar, and follow us on social media.
               </p>
             </div>
+            <PictureSection data={data} width={width} />
           </div>
-          <PictureSection data={data} width={width} homePage={homePage} />
+        )}
         </div>
       </div>
     </div>
