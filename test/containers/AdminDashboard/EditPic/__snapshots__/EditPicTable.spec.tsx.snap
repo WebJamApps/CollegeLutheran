@@ -611,6 +611,9 @@ exports[`EditPicTable > renders EditPicTable 1`] = `
                 otherPics
               </option>
             </select>
+            <span>
+              All pictures will appear on the homepage. Selecting a category sorts that picture to the corresponding interior page (Music, Family, Youth, Habitat, or Other).
+            </span>
           </div>
         </div>
         <div>
@@ -636,6 +639,7 @@ exports[`EditPicTable > renders EditPicTable 1`] = `
         </button>
         <button
           class="cancelPicButton"
+          sx="[object Object]"
         >
           Cancel
         </button>

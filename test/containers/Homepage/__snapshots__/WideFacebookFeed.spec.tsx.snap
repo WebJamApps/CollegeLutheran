@@ -11,7 +11,7 @@ exports[`WideFacebookFeed > renders WideFacebookFeed 1`] = `
       style="max-width: 600px; margin: auto; padding-right: 10px;"
     >
       <p
-        style="text-align: center; font-size: 10pt; margin-top: 0px;"
+        style="text-align: center; font-size: 10pt; margin-top: 4px; margin-bottom: 4px;"
       >
         <a
           href="/calendar"

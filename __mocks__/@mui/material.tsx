@@ -104,8 +104,9 @@ export function GlobalStyles() {
 }
 
 export function Box(props: any) {
-  const { children } = props;
-  return <div {...props}>{children}</div>;
+  const { children, component: Component = 'div', ...rest } = props;
+  const Tag = Component as any;
+  return <Tag {...rest}>{children}</Tag>;
 }
 
 export function Stack(props: any) {
@@ -113,6 +114,17 @@ export function Stack(props: any) {
   return <div {...props}>{children}</div>;
 }
 
+export function FormHelperText(props: any) {
+  const { children } = props;
+  return <span {...props}>{children}</span>;
+}
+
+export function Typography(props: any) {
+  const { children } = props;
+  return <span {...props}>{children}</span>;
+}
+
 export type SelectChangeEvent<T = string> = {
   target: { value: T; name?: string };
 };
+

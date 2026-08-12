@@ -16,16 +16,45 @@ exports[`About > renders the about page 1`] = `
           class="col"
           style="top: 0px; max-width: 7.35in; padding-right: 4px;"
         >
-          <p
-            style="margin-top: 40px; margin-bottom: 40px; font-size: 18px;"
+          <div
+            style="margin-top: 20px; margin-bottom: 20px; font-size: 18px;"
           >
-            College Lutheran Church is located in Southwest Virginia in the beautiful city of Salem, right next to Roanoke, VA. The church is situated on College Avenue, within easy walking distance of Roanoke College. College Lutheran Church is part of the Evangelical Lutheran Church in America (ELCA).
-          </p>
+            <p
+              style="font-weight: bold; margin-bottom: 16px;"
+            >
+              “I lift my eyes to the hills”:   Psalm 121
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
+              A visitor to our congregation once spoke those words as he exited the front door of our church.
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
+              Welcome to the web site of College Lutheran Church, a congregation of the Evangelical Lutheran Church in America (ELCA) in Salem VA., in the heart of the beautiful Roanoke Valley of Southwest Virginia. We are a vibrant and growing congregation founded in 1852 on the grounds of Roanoke College, by seven early visionaries who pledged to provide a word and sacrament ministry—a Lutheran presence—in this place.
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
+              Since our founding, we have sought to proclaim the Gospel and to seek ways to carry out our “calling” to serve people, in our own community and elsewhere. We are a servant church. Our web site contains more information on our service times and ministries to children, youth and the community at the tabs at the right side of the screen.
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
+              Wherever you are on your faith journey, are a local, or are visiting our beautiful area, you are welcome here. We look forward to seeing you, as we prepare to celebrate our 175th anniversary in 2027.
+            </p>
+            <p
+              style="margin-bottom: 16px;"
+            >
+              Peace be with you!
+            </p>
+          </div>
           <section
-            style="margin-top: 20px; text-align: left; margin-bottom: 35px;"
+            style="margin-top: 10px; text-align: left; margin-bottom: 15px;"
           />
           <p
-            style="padding-right: 15px; margin-bottom: 16px; padding-bottom: 0px;"
+            style="padding-right: 15px; margin-bottom: 8px; padding-bottom: 0px;"
           >
             <span
               style="font-size: 18px;"
@@ -36,7 +65,9 @@ exports[`About > renders the about page 1`] = `
               </strong>
             </span>
           </p>
-          <p>
+          <p
+            style="margin-bottom: 0px;"
+          >
             Click
              
             <a
@@ -46,24 +77,9 @@ exports[`About > renders the about page 1`] = `
             </a>
              
             to view or subscribe to our emails. Scroll below to view our CLC Events Calendar, and follow us on social media.
-            <br />
           </p>
         </div>
-        <div
-          class="col"
-          style="padding: 1px 0px 1px 1px;"
-        >
-          <div
-            id="slideshow1"
-            style="margin: 40px auto auto; text-align: center;"
-          >
-            <img
-              alt="Luther Rose"
-              src="/Lutherrose.svg"
-              style="width: 100%;"
-            />
-          </div>
-        </div>
+         
       </div>
     </div>
   </div>

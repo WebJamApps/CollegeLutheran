@@ -10,7 +10,10 @@ const WideFacebookFeed = ({ width = 1004 }: IWideFBFeed) => {
   return (
     <div className="row" style={{ marginLeft: '10px' }}>
       <div className="col" style={{ maxWidth: '600px', margin: 'auto', paddingRight: '10px' }}>
-        <p style={{ textAlign: 'center', fontSize: '10pt', marginTop: '0px' }}>
+        <p style={{
+          textAlign: 'center', fontSize: '10pt', marginTop: '4px', marginBottom: '4px',
+        }}
+        >
           <a style={{ fontSize: '10pt' }} href="/calendar">
             <i>View Full Calendar</i>
           </a>
