@@ -1,6 +1,6 @@
 {
   "name": "collegelutheran",
-  "version": "2.2.8",
+  "version": "2.2.11",
   "description": "collegelutheran.org",
   "main": "dist/index.html",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "author": "https://github.com/orgs/WebJamApps/teams/the-95-theses",
   "engines": {
-    "node": "24.18.1"
+    "node": "24.19.0"
   },
   "files": [
     "vite.config.ts",
@@ -31,6 +31,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "jscpd": "jscpd src",
     "test:stylelint": "stylelint \"src/styles/**/*.scss\"",
     "lint:fix": "eslint . --fix",
     "test:lint-fix": "npm run test:stylelint && npm run lint:fix",
@@ -99,6 +100,7 @@
     "eslint-plugin-security": "^4.0.0",
     "eslint-plugin-sonarjs": "^4.1.0",
     "globals": "^15.14.0",
+    "jscpd": "^5.0.11",
     "jsdom": "^29.1.1",
     "mongodb": "^7.2.0",
     "stylelint": "^17.0.0",
