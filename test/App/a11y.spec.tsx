@@ -23,6 +23,7 @@ const mainRoutes = [
   '/',
   '/music',
   '/belief',
+  '/history',
   '/family',
   '/giving',
   '/staff',
