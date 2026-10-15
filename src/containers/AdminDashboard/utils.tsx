@@ -19,6 +19,7 @@ async function jsonRequest(
 async function handlePutError(e: HttpError,
   data: { title: string; comments: string; type: string },
   auth: Iauth,
+  getContent?: () => Promise<void>,
 ) {
   if (e.status === 400) {
     try {
@@ -31,6 +32,7 @@ async function handlePutError(e: HttpError,
         },
         body: JSON.stringify(data),
       });
+      await getContent?.();
       commonUtils.notify(data.type, 'Successfully created', 'success');
     } catch {
       commonUtils.notify(data.type, `Failed to create ${data.type}, ${(e as Error).message}`, 'warning');
@@ -44,6 +46,7 @@ async function putAPI(
   data: { title: string; comments: string; type: string; enabled?: boolean },
   auth: Iauth,
   getContent: () => Promise<void>,
+  refreshAfterCreate = false,
 ): Promise<void> {
   try {
     const { status } = await jsonRequest(`${process.env.BackendUrl}/book/one?type=${data.type}`, {
@@ -60,7 +63,7 @@ async function putAPI(
       commonUtils.notify(data.type, 'successfully updated', 'success');
     }
   } catch (e) {
-    await handlePutError(e as HttpError, data, auth);
+    await handlePutError(e as HttpError, data, auth, refreshAfterCreate ? getContent : undefined);
   }
 }
 

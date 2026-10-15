@@ -41,6 +41,16 @@ export const populateContent = async (setContent: (arg0: Icontent) => void) => {
   }
 };
 
+export const populateHeaderLine = async (setHeaderLine: (value: Ibook | null) => void) => {
+  try {
+    const headerLine = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=headerLineContent`);
+    setHeaderLine(headerLine);
+  } catch (err) {
+    console.error((err as Error).message);
+    setHeaderLine(null);
+  }
+};
+
 export const populatePictures = async (setPictures: (arg0: IpictureTypes) => void) => {
   try {
     const musicPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=musicPics`);
@@ -86,6 +96,7 @@ export const ContentContext = createContext({
     youthPage: {} as Ibook,
     habitatPage: {} as Ibook,
     stewardshipPage: {} as Ibook,
+    headerLineContent: null as Ibook | null,
   },
   pictures: {
     musicPics: [],
@@ -103,6 +114,8 @@ export const ContentContext = createContext({
   getPictures: () => Promise.resolve(),
   setNews: setNewsDef,
   getNews: () => Promise.resolve(),
+  setHeaderLine: (_arg0: Ibook | null) => {},
+  getHeaderLine: () => Promise.resolve(),
 });
 
 type ContentProps = { children: ReactNode };
@@ -111,10 +124,12 @@ export function ContentProvider({ children }: ContentProps) {
   const [content, setContent] = useState({} as Icontent);
   const [pictures, setPictures] = useState({} as IpictureTypes);
   const [news, setNews] = useState({} as Inews);
+  const [headerLineContent, setHeaderLineContent] = useState<Ibook | null>(null);
 
   const getContent = makeGetter(setContent, populateContent);
   const getPictures = makeGetter(setPictures, populatePictures);
   const getNews = makeGetter(setNews, populateNews);
+  const getHeaderLine = makeGetter(setHeaderLineContent, populateHeaderLine);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
@@ -122,11 +137,23 @@ export function ContentProvider({ children }: ContentProps) {
     void populatePictures(setPictures);
     // eslint-disable-next-line no-void
     void populateNews(setNews);
+    // eslint-disable-next-line no-void
+    void populateHeaderLine(setHeaderLineContent);
   }, []);
 
   return (
     <Provider value={{
-      setContent, content, getContent, pictures, setPictures, getPictures, news, setNews, getNews,
+      setContent,
+      content: { ...content, headerLineContent },
+      getContent,
+      pictures,
+      setPictures,
+      getPictures,
+      news,
+      setNews,
+      getNews,
+      setHeaderLine: setHeaderLineContent,
+      getHeaderLine,
     }}
     >
       {children}

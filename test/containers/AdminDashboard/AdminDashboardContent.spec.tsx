@@ -3,12 +3,27 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import {
   ButtonsNav,
-  ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange, ReconnectFacebook,
+  ChangeHeaderLine, ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange, ReconnectFacebook,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import utils from 'src/containers/AdminDashboard/utils';
 import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
 
 describe('AdminDashboard Content', () => {
+  it('saves the plain header line with an 80-character limit', () => {
+    utils.putAPI = vi.fn();
+    const { getByLabelText, getByRole } = render(<ChangeHeaderLine />);
+    const input = getByLabelText('Header line') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'Worship Service Every Sunday at 10 am' } });
+
+    expect(input.maxLength).toBe(80);
+    fireEvent.click(getByRole('button', { name: 'Update Header line' }));
+    expect(utils.putAPI).toHaveBeenCalledWith(
+      { title: 'Worship Service Every Sunday at 10 am', comments: '', type: 'headerLineContent' },
+      expect.anything(),
+      expect.any(Function),
+      true,
+    );
+  });
   it('renders the update button', () => {
     utils.putAPI = vi.fn();
     const props = {
