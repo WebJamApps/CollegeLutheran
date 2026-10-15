@@ -170,6 +170,12 @@ select {
   position: relative;
 }
 
+.home-header.has-under-line {
+  height: auto;
+  min-height: 91px;
+  padding-bottom: 8px;
+}
+
 .home-header-image {
   width: 85px;
 }
@@ -187,12 +193,42 @@ select {
   width: 85%;
 }
 
+.header-copy {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  max-width: 100%;
+}
+
 .subTitle {
   max-width: 80%;
   font-weight: bold;
   font-size: 16px;
+  font-style: italic;
   color: var(--clc-brand-gold, #999999);
   font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
+}
+
+.header-line {
+  color: var(--clc-brand-gold, #f4c00e);
+  font-family: 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.header-line-inline {
+  position: absolute;
+  top: 50%;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.header-line-under {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: normal;
 }
 
 /* splash is in the index.ejs file, used for the initial page load animation */
@@ -318,6 +354,20 @@ button:disabled {
 
   .subTitle {
     max-width: 100%;
+  }
+
+  .header-line-inline {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .subTitle {
+    font-size: 13px;
+  }
+
+  .header-line {
+    font-size: 12px;
   }
 }
 
