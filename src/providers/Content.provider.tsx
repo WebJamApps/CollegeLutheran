@@ -51,13 +51,18 @@ export const populateHeaderLine = async (setHeaderLine: (value: Ibook | null) =>
   }
 };
 
-export const populateEventPage = async (setEventPage: (value: Ibook | null) => void) => {
+export const populateEventPage = async (
+  setEventPage: (value: Ibook | null) => void,
+  setLoading?: (loading: boolean) => void,
+) => {
   try {
     const eventPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=eventPageContent`);
     setEventPage(eventPage);
   } catch (err) {
     console.error((err as Error).message);
     setEventPage(null);
+  } finally {
+    setLoading?.(false);
   }
 };
 
@@ -109,6 +114,7 @@ export const ContentContext = createContext({
     headerLineContent: null as Ibook | null,
     eventPage: null as Ibook | null,
   },
+  eventLoading: false,
   pictures: {
     musicPics: [],
     familyPics: [],
@@ -139,12 +145,16 @@ export function ContentProvider({ children }: ContentProps) {
   const [news, setNews] = useState({} as Inews);
   const [headerLineContent, setHeaderLineContent] = useState<Ibook | null>(null);
   const [eventPageContent, setEventPageContent] = useState<Ibook | null>(null);
+  const [eventLoading, setEventLoading] = useState<boolean>(true);
 
   const getContent = makeGetter(setContent, populateContent);
   const getPictures = makeGetter(setPictures, populatePictures);
   const getNews = makeGetter(setNews, populateNews);
   const getHeaderLine = makeGetter(setHeaderLineContent, populateHeaderLine);
-  const getEventPage = makeGetter(setEventPageContent, populateEventPage);
+  const getEventPage = async () => {
+    setEventLoading(true);
+    await populateEventPage(setEventPageContent, setEventLoading);
+  };
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
@@ -155,13 +165,14 @@ export function ContentProvider({ children }: ContentProps) {
     // eslint-disable-next-line no-void
     void populateHeaderLine(setHeaderLineContent);
     // eslint-disable-next-line no-void
-    void populateEventPage(setEventPageContent);
+    void populateEventPage(setEventPageContent, setEventLoading);
   }, []);
 
   return (
     <Provider value={{
       setContent,
       content: { ...content, headerLineContent, eventPage: eventPageContent },
+      eventLoading,
       getContent,
       pictures,
       setPictures,
@@ -171,7 +182,10 @@ export function ContentProvider({ children }: ContentProps) {
       getNews,
       setHeaderLine: setHeaderLineContent,
       getHeaderLine,
-      setEventPage: setEventPageContent,
+      setEventPage: (val: Ibook | null) => {
+        setEventPageContent(val);
+        setEventLoading(false);
+      },
       getEventPage,
     }}
     >

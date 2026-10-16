@@ -342,5 +342,32 @@ describe('SideMenuItem', () => {
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '/event');
   });
+  it('hides the event menu item while event is loading', () => {
+    const customContext = {
+      ...mockContentContext,
+      eventLoading: true,
+      content: {
+        ...mockContentContext.content!,
+        eventPage: {
+          title: 'Blood Drive',
+          comments: '',
+          type: 'eventPageContent',
+          _id: 'e1',
+          enabled: true,
+        },
+      },
+    };
+    const eventMenuItem = {
+      classname: '', type: 'link', iconClass: 'fas fa-star', link: '/event', name: 'Event',
+    };
+    const { container } = render(
+      <GoogleOAuthProvider clientId="">
+        <ContentContext.Provider value={customContext as any}>
+          <SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />
+        </ContentContext.Provider>
+      </GoogleOAuthProvider>,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
 });
 

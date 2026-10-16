@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { InputHTMLAttributes } from 'react';
+
+export interface MockSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
+  checked?: boolean;
+}
+
 export function TextField(props: any) {
   // The real MUI TextField renders its `label` prop as an accessible <label>;
   // surface it as aria-label here so runtime a11y (axe) checks stay honest.
@@ -66,7 +72,7 @@ export function FormGroup(props: any) {
   return <div {...props}>{children}</div>;
 }
 
-export function Switch(props: any) {
+export function Switch(props: MockSwitchProps) {
   const { checked, onChange, ...rest } = props;
   return (
     <input

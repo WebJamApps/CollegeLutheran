@@ -104,7 +104,9 @@ export function SideMenuItem(props: IsideMenuItemProps) {
   const {
     menu, index, handleClose, isSubItem, menuOpen,
   } = props;
-  const { news: { newsContent }, getNews, content } = useContext(ContentContext);
+  const {
+    news: { newsContent }, getNews, content, eventLoading,
+  } = useContext(ContentContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { (async () => { await getNews(); })(); }, []);
   const { auth } = useContext(AuthContext);
@@ -181,7 +183,7 @@ export function SideMenuItem(props: IsideMenuItemProps) {
   // The event page is active only while an admin switch is on and its name is
   // non-empty; off/missing/empty name → hidden. (CollegeLutheran#824)
   if (m.link === '/event') {
-    if (!eventEnabled(content)) return null;
+    if (eventLoading || !eventEnabled(content)) return null;
     m = { ...m, name: content.eventPage?.title?.trim() || m.name };
   }
   if (!utils.showNav(isAllowed, location, m, auth)) return null;
