@@ -3,7 +3,7 @@ import {
   useContext, useEffect, useState,
 } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
-import { type Ibook, stewardshipEnabled } from 'src/providers/utils';
+import { type Ibook, stewardshipEnabled, eventEnabled } from 'src/providers/utils';
 import commonUtils from 'src/lib/commonUtils';
 import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
@@ -178,6 +178,12 @@ export function SideMenuItem(props: IsideMenuItemProps) {
   // Stewardship is seasonal: hide its nav link unless an admin has toggled the
   // stewardship content doc's `enabled` flag on (default off → hidden). (CollegeLutheran#707)
   if (m.name === 'Stewardship' && !stewardshipEnabled(content)) return null;
+  // The event page is active only while an admin switch is on and its name is
+  // non-empty; off/missing/empty name → hidden. (CollegeLutheran#824)
+  if (m.link === '/event') {
+    if (!eventEnabled(content)) return null;
+    m = { ...m, name: content.eventPage?.title?.trim() || m.name };
+  }
   if (!utils.showNav(isAllowed, location, m, auth)) return null;
   if (m.link) {
     return (

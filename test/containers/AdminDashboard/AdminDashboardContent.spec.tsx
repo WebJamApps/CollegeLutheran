@@ -3,12 +3,30 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import {
   ButtonsNav,
+  ChangeEventPageSect,
   ChangeHeaderLine, ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange, ReconnectFacebook,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import utils from 'src/containers/AdminDashboard/utils';
 import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
 
 describe('AdminDashboard Content', () => {
+  it('saves the event page with name and content via ChangeEventPageSect', () => {
+    utils.putAPI = vi.fn();
+    const { getByLabelText, getByRole } = render(<ChangeEventPageSect />);
+    const nameInput = getByLabelText('Name') as HTMLInputElement;
+    fireEvent.change(nameInput, { target: { value: 'Blood Drive' } });
+
+    fireEvent.click(getByRole('button', { name: 'Update Event Page' }));
+    expect(utils.putAPI).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: 'Blood Drive',
+        type: 'eventPageContent',
+      }),
+      expect.anything(),
+      expect.any(Function),
+      true,
+    );
+  });
   it('saves the plain header line with an 80-character limit', () => {
     utils.putAPI = vi.fn();
     const { getByLabelText, getByRole } = render(<ChangeHeaderLine />);

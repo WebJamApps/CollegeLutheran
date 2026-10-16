@@ -66,6 +66,18 @@ export function FormGroup(props: any) {
   return <div {...props}>{children}</div>;
 }
 
+export function Switch(props: any) {
+  const { checked, onChange, ...rest } = props;
+  return (
+    <input
+      type="checkbox"
+      checked={Boolean(checked)}
+      onChange={onChange}
+      {...rest}
+    />
+  );
+}
+
 export function FormControlLabel(props: any) {
   const { children } = props;
   return <div {...props}>{children}</div>;

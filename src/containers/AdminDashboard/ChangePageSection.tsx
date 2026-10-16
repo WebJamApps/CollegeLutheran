@@ -1,4 +1,6 @@
-import { SetStateAction, useContext, useState } from 'react';
+import {
+  SetStateAction, useContext, useEffect, useState,
+} from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { ContentContext } from 'src/providers/Content.provider';
 import { AuthContext } from 'src/providers/Auth.provider';
@@ -50,7 +52,7 @@ export function UpdateButton(
     getContent: () => Promise<void>,
     comments?: string,
     buttonName: string,
-    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent',
+    type: 'habitatPageContent' | 'homePageContent' | 'stewardshipPageContent' | 'youthPageContent' | 'eventPageContent',
     enabled?: boolean,
   },
 ) {
@@ -64,7 +66,7 @@ export function UpdateButton(
         id="c-h"
         onClick={() => utils.putAPI({
           title, comments, type, enabled,
-        }, auth, getContent)}
+        }, auth, getContent, true)}
       >
         {buttonName}
       </Button>
@@ -73,20 +75,30 @@ export function UpdateButton(
 }
 
 export interface IchangePageSectionProps {
-  pageType: 'habitatPage' | 'stewardshipPage' | 'homePage' | 'youthPage',
-  formTitle: string, withInput?: boolean, withToggle?: boolean
+  pageType: 'habitatPage' | 'stewardshipPage' | 'homePage' | 'youthPage' | 'eventPage',
+  formTitle: string, withInput?: boolean, withToggle?: boolean, inputLabel?: string,
 }
 export function ChangePageSection(props: IchangePageSectionProps) {
   const {
-    pageType, formTitle, withInput, withToggle,
+    pageType, formTitle, withInput, withToggle, inputLabel,
   } = props;
-  const { content, getContent } = useContext(ContentContext);
-  const [comments, setComments] = useState(content[pageType].comments);
-  const [title, setTitle] = useState(content[pageType].title);
-  const [enabled, setEnabled] = useState<boolean>(content[pageType].enabled === true);
+  const { content, getContent, getEventPage } = useContext(ContentContext);
+  const pageDoc = content[pageType];
+  const [comments, setComments] = useState(pageDoc?.comments ?? '');
+  const [title, setTitle] = useState(pageDoc?.title ?? '');
+  const [enabled, setEnabled] = useState<boolean>(pageDoc?.enabled === true);
+
+  useEffect(() => {
+    const doc = content[pageType];
+    setComments(doc?.comments ?? '');
+    setTitle(doc?.title ?? '');
+    setEnabled(doc?.enabled === true);
+  }, [content, pageType]);
+
+  const label = inputLabel || 'Title';
   const inputParams = {
     type: 'text',
-    label: 'Title',
+    label,
     isRequired: false,
     onChange: (evt: { target: { value: SetStateAction<string>; }; }) => {
       const { target: { value } } = evt;
@@ -96,6 +108,8 @@ export function ChangePageSection(props: IchangePageSectionProps) {
     value: title,
     width: '90%',
   };
+  const refreshFn = pageType === 'eventPage' ? (getEventPage || getContent) : getContent;
+
   return (
     <div className="horiz-scroll">
       <div className="material-content elevation3" style={{ width: '850px', margin: '30px auto' }}>
@@ -116,7 +130,7 @@ export function ChangePageSection(props: IchangePageSectionProps) {
           <p style={{ fontSize: '12pt', marginTop: '12px', marginBottom: '2px' }}>Content</p>
           <CommentsEditor comments={comments} setComments={setComments} />
           <UpdateButton
-            getContent={getContent}
+            getContent={refreshFn}
             title={title}
             comments={comments}
             type={`${pageType}Content`}

@@ -51,6 +51,16 @@ export const populateHeaderLine = async (setHeaderLine: (value: Ibook | null) =>
   }
 };
 
+export const populateEventPage = async (setEventPage: (value: Ibook | null) => void) => {
+  try {
+    const eventPage = await fetchJson<Ibook>(`${process.env.BackendUrl}/book/one?type=eventPageContent`);
+    setEventPage(eventPage);
+  } catch (err) {
+    console.error((err as Error).message);
+    setEventPage(null);
+  }
+};
+
 export const populatePictures = async (setPictures: (arg0: IpictureTypes) => void) => {
   try {
     const musicPics = await fetchJson<Ibook[]>(`${process.env.BackendUrl}/book?type=musicPics`);
@@ -97,6 +107,7 @@ export const ContentContext = createContext({
     habitatPage: {} as Ibook,
     stewardshipPage: {} as Ibook,
     headerLineContent: null as Ibook | null,
+    eventPage: null as Ibook | null,
   },
   pictures: {
     musicPics: [],
@@ -116,6 +127,8 @@ export const ContentContext = createContext({
   getNews: () => Promise.resolve(),
   setHeaderLine: (_arg0: Ibook | null) => {},
   getHeaderLine: () => Promise.resolve(),
+  setEventPage: (_arg0: Ibook | null) => {},
+  getEventPage: () => Promise.resolve(),
 });
 
 type ContentProps = { children: ReactNode };
@@ -125,11 +138,13 @@ export function ContentProvider({ children }: ContentProps) {
   const [pictures, setPictures] = useState({} as IpictureTypes);
   const [news, setNews] = useState({} as Inews);
   const [headerLineContent, setHeaderLineContent] = useState<Ibook | null>(null);
+  const [eventPageContent, setEventPageContent] = useState<Ibook | null>(null);
 
   const getContent = makeGetter(setContent, populateContent);
   const getPictures = makeGetter(setPictures, populatePictures);
   const getNews = makeGetter(setNews, populateNews);
   const getHeaderLine = makeGetter(setHeaderLineContent, populateHeaderLine);
+  const getEventPage = makeGetter(setEventPageContent, populateEventPage);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
@@ -139,12 +154,14 @@ export function ContentProvider({ children }: ContentProps) {
     void populateNews(setNews);
     // eslint-disable-next-line no-void
     void populateHeaderLine(setHeaderLineContent);
+    // eslint-disable-next-line no-void
+    void populateEventPage(setEventPageContent);
   }, []);
 
   return (
     <Provider value={{
       setContent,
-      content: { ...content, headerLineContent },
+      content: { ...content, headerLineContent, eventPage: eventPageContent },
       getContent,
       pictures,
       setPictures,
@@ -154,6 +171,8 @@ export function ContentProvider({ children }: ContentProps) {
       getNews,
       setHeaderLine: setHeaderLineContent,
       getHeaderLine,
+      setEventPage: setEventPageContent,
+      getEventPage,
     }}
     >
       {children}
