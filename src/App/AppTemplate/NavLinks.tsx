@@ -53,7 +53,7 @@ export function NavLinks(props: InavLinksProps) {
           </a>
           <br />
           <a
-            style={{ ...contactLinkStyle, wordWrap: 'break-word' }}
+            style={{ ...contactLinkStyle, fontSize: '10pt', whiteSpace: 'nowrap' }}
             href="mailto:office1@collegelutheran.org"
             className="menu-hover contact-link"
           >
