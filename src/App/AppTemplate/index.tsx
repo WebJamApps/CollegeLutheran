@@ -52,6 +52,7 @@ export function AppTemplate({ children }:{ children: ReactNode }) {
         handleKeyPress={handleKeyPress}
         className={makeDrawerClass(menuOpen)}
         handleClose={handleClose}
+        menuOpen={menuOpen}
       />
       <MainPanel children={children} onClick={onClick} onKeyPress={onKeyPress} />
     </div>

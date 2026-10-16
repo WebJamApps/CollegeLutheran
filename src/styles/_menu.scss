@@ -44,6 +44,62 @@ button.nav-link:hover {
   box-sizing            : border-box;
 }
 
+.menu-group-container {
+  width: 100%;
+}
+
+.menu-group-header {
+  padding-left : 8px;
+  padding-right: 16px;
+}
+
+button.menu-group-button {
+  background     : transparent !important;
+  border         : none;
+  cursor         : pointer;
+  width          : 100%;
+  display        : flex;
+  flex-direction : row;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 10px 0 !important;
+  color          : var(--clc-link, #23527c);
+  font-family    : 'Trebuchet MS', 'ChivoBlack', Arial, Helvetica, sans-serif;
+  font-size      : 16px;
+  line-height    : 24px;
+  text-align     : left;
+  outline        : none;
+}
+
+button.menu-group-button:hover {
+  background-color: transparent !important;
+}
+
+.menu-group-title {
+  display    : inline-flex;
+  align-items: center;
+}
+
+.menu-group-title .group-name {
+  color          : var(--clc-link, #23527c);
+  font-weight    : bold;
+  text-decoration: none;
+}
+
+.menu-group-button .group-arrow {
+  margin-left: auto;
+  font-size  : 14px;
+  color      : var(--clc-link, #23527c);
+}
+
+.group-items {
+  width: 100%;
+}
+
+.menu-sub-item {
+  padding-left: 24px;
+}
+
 .menu-toggle {
   padding-left : 10px;
   padding-right: 0;
@@ -52,9 +108,9 @@ button.nav-link:hover {
 #mobilemenutoggle {
   cursor          : pointer;
   position        : absolute;
-  left           : 90vw;
+  left            : 90vw;
   top             : 8px;
-  z-index: 100;
+  z-index         : 100;
   color           : var(--clc-brand-gold, #f4c00eff);
   background-color: var(--clc-header-bg, #244a8bff);
   padding         : 1px 6px 0;
@@ -75,8 +131,17 @@ button.nav-link:hover {
   z-index         : 90000;
 }
 
-.menu-item a.menu-hover {
+.menu-item:not(.contact-panel) a.menu-hover {
   color: var(--clc-link, #88c1ff) !important;
+}
+
+.contact-panel a.menu-hover,
+.contact-panel a {
+  color: #88c1ff !important;
+}
+
+.menu-item.contact-panel:hover {
+  background-color: var(--clc-header-bg, #244a8b);
 }
 
 .menu-hover:hover {

@@ -6,7 +6,11 @@ import {
   handleEscapePress, handleKeyMenu, toggleMobileMenu, AppTemplate, makeDrawerClass,
 } from 'src/App/AppTemplate';
 import { HeaderSection } from 'src/App/AppTemplate/HeaderSection';
+import { NavLinks } from 'src/App/AppTemplate/NavLinks';
+import { DrawerContainer } from 'src/App/AppTemplate/DrawerContainer';
 import { ContentContext } from 'src/providers/Content.provider';
+import { MemoryRouter } from 'react-router-dom';
+import { fireEvent } from '@testing-library/react';
 
 vi.mock('src/App/AppTemplate/ThemeModeSelector', () => ({
   ThemeModeSelector: () => <div className="theme-mode-selector" />,
@@ -133,3 +137,73 @@ describe('HeaderSection placement', () => {
     expect(container.querySelector('#header')).not.toHaveClass('has-under-line');
   });
 });
+
+describe('NavLinks and DrawerContainer (side-menu)', () => {
+  it('contact panel displays the 4 lines with light blue links and no fax/ph: label', () => {
+    const handleClose = vi.fn();
+    const { container } = render(
+      <MemoryRouter>
+        <NavLinks handleClose={handleClose} />
+      </MemoryRouter>,
+    );
+
+    const contactPanel = container.querySelector('.contact-panel');
+    expect(contactPanel).toBeInTheDocument();
+
+    expect(contactPanel).toHaveTextContent('210 S. College Ave');
+    expect(contactPanel).toHaveTextContent('Salem, VA 24153');
+    expect(contactPanel).toHaveTextContent('(540) 389-4963');
+    expect(contactPanel).toHaveTextContent('office1@collegelutheran.org');
+
+    expect(contactPanel?.textContent).not.toContain('fax:');
+    expect(contactPanel?.textContent).not.toContain('ph:');
+
+    const links = contactPanel?.querySelectorAll('a');
+    expect(links?.length).toBe(3);
+
+    const addressLink = contactPanel?.querySelector('a[href="https://bit.ly/CollegeLutheranDirections"]');
+    expect(addressLink).toBeInTheDocument();
+    expect(addressLink).toHaveStyle({ color: '#88c1ff' });
+
+    const phoneLink = contactPanel?.querySelector('a[href="tel:5403894963"]');
+    expect(phoneLink).toBeInTheDocument();
+    expect(phoneLink).toHaveStyle({ color: '#88c1ff' });
+
+    const emailLink = contactPanel?.querySelector('a[href="mailto:office1@collegelutheran.org"]');
+    expect(emailLink).toBeInTheDocument();
+    expect(emailLink).toHaveStyle({ color: '#88c1ff' });
+  });
+
+  it('DrawerContainer closes only when clicking the backdrop, leaving drawer open on inner tap', () => {
+    const handleClose = vi.fn();
+    const handleKeyPress = vi.fn();
+    const { container } = render(
+      <MemoryRouter>
+        <DrawerContainer
+          className="home-sidebar open drawer-container"
+          handleClose={handleClose}
+          handleKeyPress={handleKeyPress}
+          menuOpen
+        />
+      </MemoryRouter>,
+    );
+
+    const sidebar = container.querySelector('#sidebar');
+    const drawer = container.querySelector('.drawer');
+    expect(sidebar).toBeInTheDocument();
+    expect(drawer).toBeInTheDocument();
+
+    // Clicking an inner element of the drawer does not trigger handleClose
+    if (drawer) {
+      fireEvent.click(drawer);
+      expect(handleClose).not.toHaveBeenCalled();
+    }
+
+    // Clicking the outer backdrop (#sidebar) directly calls handleClose
+    if (sidebar) {
+      fireEvent.click(sidebar);
+      expect(handleClose).toHaveBeenCalledTimes(1);
+    }
+  });
+});
+
