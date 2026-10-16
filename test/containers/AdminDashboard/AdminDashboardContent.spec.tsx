@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { act, useState } from 'react';
+import React, { act, useState, type ContextType } from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import type { Ibook } from 'src/providers/utils';
 import {
   ButtonsNav,
   ChangeEventPageSect,
@@ -156,25 +157,30 @@ describe('AdminDashboard Content', () => {
     });
   });
   it('preserves dirty drafts across unrelated content updates', () => {
-    const initialEvent = {
+    const initialEvent: Ibook = {
       _id: 'event-1',
       title: 'Saved event',
       comments: '<p>Saved comments</p>',
       type: 'eventPageContent',
       enabled: true,
     };
-    let setContentFn!: (val: any) => void;
+    type ContentState = ContextType<typeof ContentContext>['content'];
+    let setContentFn!: (val: ContentState) => void;
     function Wrapper({ children }: { children: React.ReactNode }) {
-      const [contextContent, setContextContent] = useState<any>({
+      const [contextContent, setContextContent] = useState<ContentState>({
         eventPage: initialEvent,
-        homePage: { title: 'Initial Home' },
-        youthPage: {},
-        habitatPage: {},
-        stewardshipPage: {},
+        homePage: { title: 'Initial Home', _id: '', type: 'homePageContent' },
+        youthPage: { title: '', _id: '', type: 'youthPageContent' },
+        habitatPage: { title: '', _id: '', type: 'habitatPageContent' },
+        stewardshipPage: { title: '', _id: '', type: 'stewardshipPageContent' },
+        headerLineContent: null,
       });
       setContentFn = setContextContent;
+      const contextValue: Partial<ContextType<typeof ContentContext>> = {
+        content: contextContent,
+      };
       return (
-        <ContentContext.Provider value={{ content: contextContent } as any}>
+        <ContentContext.Provider value={contextValue as ContextType<typeof ContentContext>}>
           {children}
         </ContentContext.Provider>
       );
@@ -197,10 +203,11 @@ describe('AdminDashboard Content', () => {
     act(() => {
       setContentFn({
         eventPage: initialEvent,
-        homePage: { title: 'Updated Home without event change' },
-        youthPage: {},
-        habitatPage: {},
-        stewardshipPage: {},
+        homePage: { title: 'Updated Home without event change', _id: '', type: 'homePageContent' },
+        youthPage: { title: '', _id: '', type: 'youthPageContent' },
+        habitatPage: { title: '', _id: '', type: 'habitatPageContent' },
+        stewardshipPage: { title: '', _id: '', type: 'stewardshipPageContent' },
+        headerLineContent: null,
       });
     });
 

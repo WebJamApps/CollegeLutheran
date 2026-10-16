@@ -333,7 +333,7 @@ describe('SideMenuItem', () => {
     };
     render(
       <GoogleOAuthProvider clientId="">
-        <ContentContext.Provider value={customContext as any}>
+        <ContentContext.Provider value={customContext as React.ContextType<typeof ContentContext>}>
           <SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />
         </ContentContext.Provider>
       </GoogleOAuthProvider>,
@@ -362,7 +362,7 @@ describe('SideMenuItem', () => {
     };
     const { container } = render(
       <GoogleOAuthProvider clientId="">
-        <ContentContext.Provider value={customContext as any}>
+        <ContentContext.Provider value={customContext as React.ContextType<typeof ContentContext>}>
           <SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />
         </ContentContext.Provider>
       </GoogleOAuthProvider>,

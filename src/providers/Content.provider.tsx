@@ -151,10 +151,7 @@ export function ContentProvider({ children }: ContentProps) {
   const getPictures = makeGetter(setPictures, populatePictures);
   const getNews = makeGetter(setNews, populateNews);
   const getHeaderLine = makeGetter(setHeaderLineContent, populateHeaderLine);
-  const getEventPage = async () => {
-    setEventLoading(true);
-    await populateEventPage(setEventPageContent, setEventLoading);
-  };
+  const getEventPage = makeGetter(setEventPageContent, populateEventPage);
   useEffect(() => {
     // eslint-disable-next-line no-void
     void populateContent(setContent);
