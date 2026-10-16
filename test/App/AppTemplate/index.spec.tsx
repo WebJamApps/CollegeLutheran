@@ -171,7 +171,7 @@ describe('NavLinks and DrawerContainer (side-menu)', () => {
 
     const emailLink = contactPanel?.querySelector('a[href="mailto:office1@collegelutheran.org"]');
     expect(emailLink).toBeInTheDocument();
-    expect(emailLink).toHaveStyle({ color: '#88c1ff' });
+    expect(emailLink).toHaveStyle({ color: '#88c1ff', fontSize: '10pt', whiteSpace: 'nowrap' });
   });
 
   it('DrawerContainer closes only when clicking the backdrop, leaving drawer open on inner tap', () => {
