@@ -339,8 +339,8 @@ button:disabled {
   color: var(--clc-page-bg, black);
 }
 
-/* On phones the header is cramped: reserve the bottom-right corner so the
-   title/subtitle text wraps before it reaches the theme selector + hamburger. */
+/* On phones reserve the top-right corner so the title/subtitle text wraps
+   before reaching the hamburger button. */
 @media screen and (max-width: 699px) {
   /* Let the header grow to fit its content on phones so a wrapped title +
      subtitle never spill out below the fixed height. */
@@ -350,7 +350,7 @@ button:disabled {
   }
 
   .flex-header {
-    width: calc(100% - 120px) !important;
+    width: calc(100% - 48px) !important;
   }
 
   .subTitle {

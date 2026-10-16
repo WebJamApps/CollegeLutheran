@@ -1,5 +1,5 @@
 import {
-  createContext, ReactNode, useContext, useEffect, useMemo, useState,
+  createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState,
 } from 'react';
 import {
   createTheme, ThemeProvider as MuiThemeProvider,
@@ -25,14 +25,22 @@ const brand = {
 interface ThemePreferenceContextValue {
   preference: ThemePreference;
   resolvedMode: ResolvedThemeMode;
+  theme: ResolvedThemeMode;
   setPreference: (preference: ThemePreference) => void;
+  setTheme: (theme: ResolvedThemeMode) => void;
+  toggleTheme: () => void;
 }
 
 const ThemePreferenceContext = createContext<ThemePreferenceContextValue>({
   preference: 'system',
   resolvedMode: 'light',
+  theme: 'light',
   setPreference: () => undefined,
+  setTheme: () => undefined,
+  toggleTheme: () => undefined,
 });
+
+export const ThemeContext = ThemePreferenceContext;
 
 export function getStoredThemePreference(storage: Storage | undefined = window.localStorage): ThemePreference {
   try {
@@ -121,6 +129,9 @@ function themeVariables(mode: ResolvedThemeMode) {
   return {
     ':root': {
       colorScheme: mode,
+      '--sidebar-bg': darkMode ? '#111a2c' : '#c0c0c0',
+      '--sidebar-fg': darkMode ? '#ffffff' : '#244a8b',
+      '--sidebar-fg-hover': darkMode ? '#ffffff' : '#0056b3',
       '--clc-header-bg': darkMode ? brand.plum : brand.blue,
       '--clc-header-text': '#ffffff',
       '--clc-brand-gold': brand.gold,
@@ -161,24 +172,37 @@ export function CollegeLutheranThemeProvider({ children }: { children: ReactNode
   }, []);
 
   useEffect(() => {
+    document.documentElement.dataset.theme = resolvedMode;
     document.documentElement.dataset.themePreference = preference;
     document.documentElement.dataset.themeMode = resolvedMode;
   }, [preference, resolvedMode]);
 
-  const setPreference = (nextPreference: ThemePreference) => {
+  const setPreference = useCallback((nextPreference: ThemePreference) => {
     setPreferenceState(nextPreference);
     try {
       window.localStorage.setItem(STORAGE_KEY, nextPreference);
     } catch {
       // Storage can be unavailable in private contexts; the in-memory choice still applies.
     }
-  };
+  }, []);
+
+  const setTheme = useCallback((mode: ResolvedThemeMode) => {
+    setPreference(mode);
+  }, [setPreference]);
+
+  const toggleTheme = useCallback(() => {
+    const nextMode: ResolvedThemeMode = resolvedMode === 'dark' ? 'light' : 'dark';
+    setPreference(nextMode);
+  }, [resolvedMode, setPreference]);
 
   const contextValue = useMemo(() => ({
     preference,
     resolvedMode,
+    theme: resolvedMode,
     setPreference,
-  }), [preference, resolvedMode]);
+    setTheme,
+    toggleTheme,
+  }), [preference, resolvedMode, setPreference, setTheme, toggleTheme]);
 
   return (
     <ThemePreferenceContext.Provider value={contextValue}>

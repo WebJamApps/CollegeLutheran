@@ -100,6 +100,100 @@ button.menu-group-button:hover {
   padding-left: 24px;
 }
 
+.theme-toggle {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.theme-toggle:hover {
+  background-color: transparent !important;
+}
+
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid var(--sidebar-fg, #244a8b);
+  border-radius: 999px;
+  background: var(--sidebar-bg, #c0c0c0);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--sidebar-fg, #244a8b);
+  overflow: hidden;
+}
+
+.theme-switch:focus-visible {
+  box-shadow: 0 0 0 2px var(--sidebar-fg-hover, #0056b3);
+}
+
+.theme-switch-side {
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.theme-switch-side i {
+  font-size: 14px;
+}
+
+.theme-switch-side-label {
+  text-decoration: none;
+}
+
+.theme-switch-light {
+  color: #ffffff;
+}
+
+.theme-switch-dark {
+  color: var(--sidebar-fg, #244a8b);
+}
+
+.theme-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  height: calc(100% - 4px);
+  border-radius: 999px;
+  background: var(--sidebar-fg, #244a8b);
+  transition: transform 0.2s ease;
+  z-index: 1;
+}
+
+.theme-switch.is-dark .theme-switch-thumb {
+  transform: translateX(100%);
+  background: var(--sidebar-fg, #ffffff);
+}
+
+/* When the thumb is on the LIGHT side (is-light), invert the side
+   label colors so the side under the thumb stays readable. */
+.theme-switch.is-light .theme-switch-light {
+  color: #ffffff;
+}
+
+.theme-switch.is-light .theme-switch-dark {
+  color: var(--sidebar-fg, #244a8b);
+}
+
+.theme-switch.is-dark .theme-switch-light {
+  color: var(--sidebar-fg, #ffffff);
+}
+
+.theme-switch.is-dark .theme-switch-dark {
+  color: var(--sidebar-bg, #111a2c);
+}
+
 .menu-toggle {
   padding-left : 10px;
   padding-right: 0;

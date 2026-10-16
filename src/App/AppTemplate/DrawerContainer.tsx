@@ -1,6 +1,5 @@
 import { NavLinks } from './NavLinks';
 import './index.scss';
-import { useTheme } from '@mui/material/styles';
 
 interface IdrawerContainerProps {
   handleKeyPress: (arg0:any)=>void, className:any, userCount?:number,
@@ -10,7 +9,6 @@ export function DrawerContainer(props:IdrawerContainerProps) {
   const {
     className, handleClose, handleKeyPress, menuOpen,
   } = props;
-  const theme = useTheme();
   // Click-to-close catch-all around the drawer. It must NOT be a focusable
   // button: the nav links inside are the interactive elements (each closes the
   // menu itself), and a role="button" wrapper with focusable children violates
@@ -25,7 +23,7 @@ export function DrawerContainer(props:IdrawerContainerProps) {
       onKeyPress={handleKeyPress}
       className={className}
     >
-      <div className="drawer" style={{ backgroundColor: theme.palette.background.paper, zIndex: -1, position: 'relative' }}>
+      <div className="drawer">
         <div className="navImage">
           <img
             alt="Luther Rose"

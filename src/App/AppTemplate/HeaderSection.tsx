@@ -4,7 +4,13 @@ import {
 import { useWindowWidth } from 'src/lib/useWindowSize';
 import { useTheme } from '@mui/material/styles';
 import { ContentContext } from 'src/providers/Content.provider';
-import { ThemeModeSelector } from './ThemeModeSelector';
+
+export function getTitleFontSize(width: number): string {
+  if (width > 450) return '25px';
+  if (width > 350) return '22px';
+  if (width > 300) return '19px';
+  return '16px';
+}
 
 export function HeaderSection() {
   const width = useWindowWidth();
@@ -22,17 +28,16 @@ export function HeaderSection() {
       const header = headerRef.current;
       const copy = copyRef.current;
       const line = lineRef.current;
-      const selector = header?.querySelector<HTMLElement>('.theme-mode-selector');
-      if (!header || !copy || !line || !selector || width <= 699 || !headerLine) {
+      if (!header || !copy || !line || width <= 699 || !headerLine) {
         setLineFits(false);
         return;
       }
       const copyRight = copy.getBoundingClientRect().right;
-      const selectorLeft = selector.getBoundingClientRect().left;
+      const rightBoundary = header.getBoundingClientRect().right - 24;
       const lineWidth = line.scrollWidth;
-      const fits = selectorLeft - copyRight >= lineWidth + 48;
+      const fits = rightBoundary - copyRight >= lineWidth + 48;
       setLineFits(fits);
-      if (fits) setInlineLeft((copyRight + selectorLeft) / 2 - header.getBoundingClientRect().left);
+      if (fits) setInlineLeft((copyRight + rightBoundary) / 2 - header.getBoundingClientRect().left);
     };
 
     updatePlacement();
@@ -41,8 +46,6 @@ export function HeaderSection() {
       : new ResizeObserver(updatePlacement);
     if (headerRef.current) observer?.observe(headerRef.current);
     if (copyRef.current) observer?.observe(copyRef.current);
-    const selector = headerRef.current?.querySelector<HTMLElement>('.theme-mode-selector');
-    if (selector) observer?.observe(selector);
     window.addEventListener('resize', updatePlacement);
     return () => {
       observer?.disconnect();
@@ -50,14 +53,7 @@ export function HeaderSection() {
     };
   }, [headerLine, width]);
 
-  let titleFontSize = '18px';
-  if (width) {
-    if (width > 450) {
-      titleFontSize = '25px';
-    } else if (width > 320) {
-      titleFontSize = '21px';
-    }
-  }
+  const titleFontSize = getTitleFontSize(width);
 
   return (
     <div
@@ -114,7 +110,6 @@ export function HeaderSection() {
           </span>
         )}
       </div>
-      <ThemeModeSelector />
     </div>
   );
 }

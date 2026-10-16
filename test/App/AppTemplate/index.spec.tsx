@@ -12,8 +12,12 @@ import { ContentContext } from 'src/providers/Content.provider';
 import { MemoryRouter } from 'react-router-dom';
 import { fireEvent } from '@testing-library/react';
 
+vi.mock('src/App/AppTemplate/ThemeToggle', () => ({
+  ThemeToggle: () => <div className="theme-toggle theme-mode-selector" />,
+}));
 vi.mock('src/App/AppTemplate/ThemeModeSelector', () => ({
-  ThemeModeSelector: () => <div className="theme-mode-selector" />,
+  ThemeModeSelector: () => <div className="theme-toggle theme-mode-selector" />,
+  ThemeToggle: () => <div className="theme-toggle theme-mode-selector" />,
 }));
 
 function HeaderWithLine({ title }: { title: string | null }) {
@@ -71,7 +75,6 @@ describe('HeaderSection placement', () => {
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getRect(this: HTMLElement) {
       if (this.id === 'header') return new DOMRect(20, 0, 1160, 100);
       if (this.classList.contains('header-copy')) return new DOMRect(35, 0, 365, 60);
-      if (this.classList.contains('theme-mode-selector')) return new DOMRect(900, 0, 200, 50);
       return new DOMRect();
     });
   });
@@ -90,18 +93,18 @@ describe('HeaderSection placement', () => {
     expect(screen.getByText(/We celebrate God's grace/)).toBeInTheDocument();
   });
 
-  it('centers a fitting desktop line between the title block and theme selector', () => {
+  it('centers a fitting desktop line between the title block and header right boundary', () => {
     const { container } = render(<HeaderWithLine title="  Sunday worship  " />);
 
     const line = screen.getByText('Sunday worship');
     expect(line).toHaveClass('header-line-inline');
     expect(line).not.toHaveClass('header-line-under');
-    expect(line).toHaveStyle({ left: '630px' });
+    expect(line).toHaveStyle({ left: '758px' });
     expect(container.querySelector('#header')).not.toHaveClass('has-under-line');
   });
 
   it('moves an overflowing desktop line under the subtitle and expands the header', () => {
-    lineWidth = 600;
+    lineWidth = 800;
     const { container } = render(<HeaderWithLine title="A longer worship announcement" />);
 
     const line = screen.getByText('A longer worship announcement');
@@ -124,7 +127,7 @@ describe('HeaderSection placement', () => {
     const line = screen.getByText('Sunday worship');
     expect(line).toHaveClass('header-line-inline');
 
-    lineWidth = 600;
+    lineWidth = 800;
     act(() => { window.dispatchEvent(new Event('resize')); });
     expect(line).toHaveClass('header-line-under');
     expect(line.style.left).toBe('');
@@ -139,7 +142,7 @@ describe('HeaderSection placement', () => {
 });
 
 describe('NavLinks and DrawerContainer (side-menu)', () => {
-  it('contact panel displays the 4 lines with light blue links and no fax/ph: label', () => {
+  it('contact panel displays the 4 lines with light blue links, 10pt font, and google maps address link', () => {
     const handleClose = vi.fn();
     const { container } = render(
       <MemoryRouter>
@@ -158,20 +161,43 @@ describe('NavLinks and DrawerContainer (side-menu)', () => {
     expect(contactPanel?.textContent).not.toContain('fax:');
     expect(contactPanel?.textContent).not.toContain('ph:');
 
+    const contactP = contactPanel?.querySelector('p');
+    expect(contactP).toHaveStyle({ fontSize: '10pt' });
+
     const links = contactPanel?.querySelectorAll('a');
     expect(links?.length).toBe(3);
 
-    const addressLink = contactPanel?.querySelector('a[href="https://bit.ly/CollegeLutheranDirections"]');
+    const addressLink = contactPanel?.querySelector('a');
     expect(addressLink).toBeInTheDocument();
-    expect(addressLink).toHaveStyle({ color: '#88c1ff' });
+    expect(addressLink).toHaveAttribute(
+      'href',
+      'https://www.google.com/maps/place/College+Lutheran+Church,+210+S+College+Ave,+Salem,+VA+24153',
+    );
+    expect(addressLink).toHaveStyle({ color: '#88c1ff', fontSize: '10pt' });
+    expect(addressLink).toHaveAttribute('target', '_blank');
+    expect(addressLink).toHaveAttribute('rel', 'noopener noreferrer');
 
     const phoneLink = contactPanel?.querySelector('a[href="tel:5403894963"]');
     expect(phoneLink).toBeInTheDocument();
-    expect(phoneLink).toHaveStyle({ color: '#88c1ff' });
+    expect(phoneLink).toHaveStyle({ color: '#88c1ff', fontSize: '10pt' });
 
     const emailLink = contactPanel?.querySelector('a[href="mailto:office1@collegelutheran.org"]');
     expect(emailLink).toBeInTheDocument();
     expect(emailLink).toHaveStyle({ color: '#88c1ff', fontSize: '10pt', whiteSpace: 'nowrap' });
+  });
+
+  it('renders ThemeToggle in NavLinks above the version number', () => {
+    const handleClose = vi.fn();
+    const { container } = render(
+      <MemoryRouter>
+        <NavLinks handleClose={handleClose} />
+      </MemoryRouter>,
+    );
+
+    const toggle = container.querySelector('.theme-toggle');
+    expect(toggle).toBeInTheDocument();
+    expect(container.querySelector('.theme-mode-selector')).toBeInTheDocument();
+    expect(container.textContent).toContain('Version');
   });
 
   it('DrawerContainer closes only when clicking the backdrop, leaving drawer open on inner tap', () => {
