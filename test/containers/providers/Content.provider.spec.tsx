@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef, setNewsDef, populateNews,
-  populateHeaderLine,
+  populateHeaderLine, populateEventPage,
 } from 'src/providers/Content.provider';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -65,6 +65,27 @@ describe('Content provider', () => {
     await populateHeaderLine(setHeaderLine);
 
     expect(setHeaderLine).toHaveBeenCalledWith(null);
+  });
+  it('loads the event-page record independently', async () => {
+    const eventPage = {
+      title: 'Blood Drive', type: 'eventPageContent', _id: 'event-1', enabled: true, comments: 'Donate',
+    };
+    const fetchMock = vi.fn(() => okJson(eventPage));
+    vi.stubGlobal('fetch', fetchMock);
+    const setEventPage = vi.fn();
+
+    await populateEventPage(setEventPage);
+
+    expect(fetchMock).toHaveBeenCalledWith(`${process.env.BackendUrl}/book/one?type=eventPageContent`);
+    expect(setEventPage).toHaveBeenCalledWith(eventPage);
+  });
+  it('leaves the event page empty when its independent request fails', async () => {
+    vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('event unavailable'))));
+    const setEventPage = vi.fn();
+
+    await populateEventPage(setEventPage);
+
+    expect(setEventPage).toHaveBeenCalledWith(null);
   });
   it('populates pictures', async () => {
     const data = {

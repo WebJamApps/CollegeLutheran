@@ -47,6 +47,7 @@ const mockContentContext: Partial<React.ContextType<typeof ContentContext>> = {
       title: '', _id: '', type: '', comments: '',
     },
     headerLineContent: null,
+    eventPage: null,
   },
   setContent: vi.fn(),
   getContent: vi.fn(),
@@ -306,4 +307,67 @@ describe('SideMenuItem', () => {
     fireEvent.click(link);
     expect(handleClose).toHaveBeenCalled();
   });
+  it('hides the event menu item when event is off or empty', () => {
+    const eventMenuItem = {
+      classname: '', type: 'link', iconClass: 'fas fa-star', link: '/event', name: 'Event',
+    };
+    const { container } = renderWithProviders(<SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />);
+    expect(container).toBeEmptyDOMElement();
+  });
+  it('shows the event menu item with its configured title when event is enabled', () => {
+    const customContext = {
+      ...mockContentContext,
+      content: {
+        ...mockContentContext.content!,
+        eventPage: {
+          title: 'Blood Drive',
+          comments: '',
+          type: 'eventPageContent',
+          _id: 'e1',
+          enabled: true,
+        },
+      },
+    };
+    const eventMenuItem = {
+      classname: '', type: 'link', iconClass: 'fas fa-star', link: '/event', name: 'Event',
+    };
+    render(
+      <GoogleOAuthProvider clientId="">
+        <ContentContext.Provider value={customContext as React.ContextType<typeof ContentContext>}>
+          <SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />
+        </ContentContext.Provider>
+      </GoogleOAuthProvider>,
+    );
+    const link = screen.getByRole('link', { name: /Blood Drive/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '/event');
+  });
+  it('hides the event menu item while event is loading', () => {
+    const customContext = {
+      ...mockContentContext,
+      eventLoading: true,
+      content: {
+        ...mockContentContext.content!,
+        eventPage: {
+          title: 'Blood Drive',
+          comments: '',
+          type: 'eventPageContent',
+          _id: 'e1',
+          enabled: true,
+        },
+      },
+    };
+    const eventMenuItem = {
+      classname: '', type: 'link', iconClass: 'fas fa-star', link: '/event', name: 'Event',
+    };
+    const { container } = render(
+      <GoogleOAuthProvider clientId="">
+        <ContentContext.Provider value={customContext as React.ContextType<typeof ContentContext>}>
+          <SideMenuItem menu={eventMenuItem} index={0} handleClose={vi.fn()} />
+        </ContentContext.Provider>
+      </GoogleOAuthProvider>,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
 });
+
