@@ -108,9 +108,9 @@ button.menu-group-button:hover {
 #mobilemenutoggle {
   cursor          : pointer;
   position        : absolute;
-  left            : 90vw;
+  left           : 90vw;
   top             : 8px;
-  z-index         : 100;
+  z-index: 100;
   color           : var(--clc-brand-gold, #f4c00eff);
   background-color: var(--clc-header-bg, #244a8bff);
   padding         : 1px 6px 0;

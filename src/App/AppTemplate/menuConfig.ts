@@ -1,12 +1,12 @@
 export interface ImenuItem {
-  classname: string;
-  type: string;
-  iconClass: string;
-  link: string;
-  name: string;
-  auth?: boolean;
-  nav?: string;
-  children?: ImenuItem[];
+  classname: string,
+  type: string,
+  iconClass: string,
+  link: string,
+  name: string,
+  auth?: boolean,
+  nav?: string,
+  children?: ImenuItem[],
 }
 
 export const menuItems: ImenuItem[] = [

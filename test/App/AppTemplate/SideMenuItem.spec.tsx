@@ -12,35 +12,60 @@ vi.mock('react-redux', () => ({
   useSelector: vi.fn(),
   useDispatch: vi.fn(),
 }));
+interface IMockLinkProps {
+  to: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}
 
 vi.mock('react-router-dom', () => ({
   useLocation: () => mockLocation,
   Link: ({
     to, children, onClick, className,
-  }: any) => (
+  }: IMockLinkProps) => (
     <a href={to} onClick={onClick} className={className}>
       {children}
     </a>
   ),
 }));
 
-const mockContentContext = {
+const mockContentContext: Partial<React.ContextType<typeof ContentContext>> = {
   news: { newsContent: [] },
   getNews: vi.fn(),
-  content: {},
+  content: {
+    homePage: {
+      title: '', _id: '', type: '', comments: '',
+    },
+    youthPage: {
+      title: '', _id: '', type: '', comments: '',
+    },
+    habitatPage: {
+      title: '', _id: '', type: '', comments: '',
+    },
+    stewardshipPage: {
+      title: '', _id: '', type: '', comments: '',
+    },
+    headerLineContent: null,
+  },
   setContent: vi.fn(),
   getContent: vi.fn(),
-  pictures: {},
+  pictures: {
+    musicPics: [],
+    familyPics: [],
+    youthPics: [],
+    habitatPics: [],
+    otherPics: [],
+  },
   setPictures: vi.fn(),
   getPictures: vi.fn(),
-  headerLineContent: null,
-  setHeaderLineContent: vi.fn(),
+  setHeaderLine: vi.fn(),
   getHeaderLine: vi.fn(),
 };
 
 const renderWithProviders = (ui: React.ReactElement) => render(
   <GoogleOAuthProvider clientId="">
-    <ContentContext.Provider value={mockContentContext as any}>
+    <ContentContext.Provider value={mockContentContext as React.ContextType<typeof ContentContext>}>
       {ui}
     </ContentContext.Provider>
   </GoogleOAuthProvider>,

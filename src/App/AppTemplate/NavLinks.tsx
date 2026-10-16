@@ -5,10 +5,8 @@ import { useTheme } from '@mui/material/styles';
 declare const __APP_VERSION__: string;
 
 interface InavLinksProps {
-  handleClose: () => void;
-  userCount?: number;
-  heartBeat?: string;
-  menuOpen?: boolean;
+  handleClose: () => void, userCount?: number, heartBeat?: string,
+  menuOpen?: boolean,
 }
 export function NavLinks(props: InavLinksProps) {
   const {

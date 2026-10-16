@@ -12,10 +12,10 @@ export const loginConfig = (auth: Iauth, setAuth: (args0: Iauth) => void) => ({
   flow: 'auth-code',
 });
 
-interface IgoogleButtonsProps { type: string, index: number }
+interface IgoogleButtonsProps { type: string, index: number, handleClose?: () => void }
 export function GoogleButtons(props: IgoogleButtonsProps) {
   const { setAuth, auth } = useContext(AuthContext);
-  const { type, index } = props;
+  const { type, index, handleClose } = props;
   const login = useGoogleLogin(loginConfig(auth, setAuth) as Record<string, unknown>);
   if (type === 'login') {
     return (
@@ -25,6 +25,7 @@ export function GoogleButtons(props: IgoogleButtonsProps) {
           className="loginButton"
           size="small"
           onClick={() => {
+            if (handleClose) handleClose();
             login(); return 'login';
           }}
         >
@@ -38,7 +39,10 @@ export function GoogleButtons(props: IgoogleButtonsProps) {
         className="logoutButton"
         variant="contained"
         size="small"
-        onClick={async () => { await utils.responseGoogleLogout(setAuth); }}
+        onClick={async () => {
+          if (handleClose) handleClose();
+          await utils.responseGoogleLogout(setAuth);
+        }}
       >
         Logout
       </Button>

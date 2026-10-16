@@ -75,16 +75,17 @@ interface IcontinueMenuItemProps {
   index: number,
   auth: Iauth,
   pathname: string,
+  handleClose?: () => void,
 }
 export const ContinueMenuItem = (props: IcontinueMenuItemProps) => {
   const {
-    menu, index, auth, pathname,
+    menu, index, auth, pathname, handleClose,
   } = props;
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/staff') {
-    return <GoogleButtons key="googleLogin" type="login" index={index} />;
+    return <GoogleButtons key="googleLogin" type="login" index={index} handleClose={handleClose} />;
   }
   if (menu.type === 'googleLogout' && auth.isAuthenticated) {
-    return <GoogleButtons key="googleLogout" type="logout" index={index} />;
+    return <GoogleButtons key="googleLogout" type="logout" index={index} handleClose={handleClose} />;
   }
   return null;
 };
@@ -154,7 +155,6 @@ export function SideMenuItem(props: IsideMenuItemProps) {
           id={listId}
           className="group-items"
           hidden={!isOpen}
-          style={{ display: isOpen ? 'block' : 'none' }}
         >
           {menu.children.map((child, childIndex) => (
             <SideMenuItem
