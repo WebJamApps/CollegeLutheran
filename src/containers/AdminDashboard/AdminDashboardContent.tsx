@@ -42,6 +42,41 @@ export function ChangeStewardshipPageSect() {
   );
 }
 
+export function ChangeHeaderLine() {
+  const { auth } = useContext(AuthContext);
+  const { content, getHeaderLine } = useContext(ContentContext);
+  const [title, setTitle] = useState(content.headerLineContent?.title ?? '');
+
+  useEffect(() => {
+    setTitle(content.headerLineContent?.title ?? '');
+  }, [content.headerLineContent?.title]);
+
+  return (
+    <div className="material-content elevation3" style={{ maxWidth: '850px', margin: '30px auto' }}>
+      <h5>Header line</h5>
+      <TextField
+        label="Header line"
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
+        slotProps={{ htmlInput: { maxLength: 80 } }}
+      />
+      <Button
+        size="small"
+        variant="contained"
+        type="button"
+        sx={{ marginTop: '10px' }}
+        onClick={() => utils.putAPI({
+          title: title.slice(0, 80),
+          comments: '',
+          type: 'headerLineContent',
+        }, auth, getHeaderLine, true)}
+      >
+        Update Header line
+      </Button>
+    </div>
+  );
+}
+
 // export function ChangeHabitatPageSect() {
 //   return (
 //     <ChangePageSection
@@ -205,6 +240,7 @@ export function AdminDashboardContent() {
       {showEditor === 'editPic' && <EditPicTable onClose={() => setShowEditor('')} />}
       {showEditor === 'editContent' ? (
         <>
+          <ChangeHeaderLine />
           <ChangeHomePageSect />
           {/* <ChangeHabitatPageSect /> */}
           <ChangeStewardshipPageSect />

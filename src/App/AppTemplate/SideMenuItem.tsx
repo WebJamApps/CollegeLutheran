@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  useContext, useEffect,
+  useContext, useEffect, useState,
 } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import { type Ibook, stewardshipEnabled } from 'src/providers/utils';
@@ -8,7 +8,7 @@ import commonUtils from 'src/lib/commonUtils';
 import { ContentContext } from 'src/providers/Content.provider';
 import type { ImenuItem } from './menuConfig';
 import { GoogleButtons } from './GoogleButtons';
-import utils from './utils';
+import utils, { isCurrentPage } from './utils';
 
 export function IconAndText({ menu }: { menu: ImenuItem }) {
   return (
@@ -21,14 +21,15 @@ export function IconAndText({ menu }: { menu: ImenuItem }) {
 }
 
 interface ImakeLinkProps {
-  menu: ImenuItem, index: number, type: string, handleClose: () => void
+  menu: ImenuItem, index: number, type: string, handleClose: () => void, isSubItem?: boolean,
 }
 export function MakeLink(props: ImakeLinkProps) {
   const {
-    menu, index, type, handleClose,
+    menu, index, type, handleClose, isSubItem,
   } = props;
+  const itemClassName = `menu-item${isSubItem ? ' menu-sub-item' : ''}`;
   return (
-    <div key={index} className="menu-item">
+    <div key={index} className={itemClassName}>
       {type === 'Link' ? (
         <Link to={menu.link} className="nav-link" onClick={handleClose}>
           <IconAndText menu={menu} />
@@ -57,7 +58,7 @@ export const sortBulletins = (bulletin: Ibook[]) => {
 };
 
 export const setBulletin = (mItem: ImenuItem, books: any): ImenuItem => {
-  const m = mItem;
+  const m = { ...mItem };
   if (books) {
     const bulletins: any[] = books.filter((b: any) => b.comments === 'worshipbulletin');
     if (bulletins && bulletins.length > 0) {
@@ -74,16 +75,17 @@ interface IcontinueMenuItemProps {
   index: number,
   auth: Iauth,
   pathname: string,
+  handleClose?: () => void,
 }
 export const ContinueMenuItem = (props: IcontinueMenuItemProps) => {
   const {
-    menu, index, auth, pathname,
+    menu, index, auth, pathname, handleClose,
   } = props;
   if (menu.type === 'googleLogin' && !auth.isAuthenticated && pathname === '/staff') {
-    return <GoogleButtons key="googleLogin" type="login" index={index} />;
+    return <GoogleButtons key="googleLogin" type="login" index={index} handleClose={handleClose} />;
   }
   if (menu.type === 'googleLogout' && auth.isAuthenticated) {
-    return <GoogleButtons key="googleLogout" type="logout" index={index} />;
+    return <GoogleButtons key="googleLogout" type="logout" index={index} handleClose={handleClose} />;
   }
   return null;
 };
@@ -95,19 +97,80 @@ export const checkIsAllowed = (menu: ImenuItem, auth: Iauth, userRoles: string[]
 interface IsideMenuItemProps {
   menu: ImenuItem, index: number,
   handleClose: () => void,
+  isSubItem?: boolean,
+  menuOpen?: boolean,
 }
 export function SideMenuItem(props: IsideMenuItemProps) {
   const {
-    menu, index, handleClose,
+    menu, index, handleClose, isSubItem, menuOpen,
   } = props;
   const { news: { newsContent }, getNews, content } = useContext(ContentContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { (async () => { await getNews(); })(); }, []);
   const { auth } = useContext(AuthContext);
-  const location = useLocation();
-  const { pathname } = location;
+  const location = useLocation() || { pathname: '' };
+  const pathname = location.pathname || '';
   const userRoles: string[] = commonUtils.getUserRoles();
   const isAllowed = checkIsAllowed(menu, auth, userRoles);
+
+  const containsCurrentPage = Boolean(
+    menu.children?.some((child) => isCurrentPage(pathname, child.link)),
+  );
+  const [isOpen, setIsOpen] = useState(containsCurrentPage);
+
+  useEffect(() => {
+    if (containsCurrentPage) {
+      setIsOpen(true);
+    }
+  }, [containsCurrentPage, pathname, menuOpen]);
+
+  if (menu.type === 'group' && menu.children) {
+    const listId = `menu-group-${menu.classname || index}`;
+    return (
+      <div key={index} className="menu-group-container">
+        <div className="menu-item menu-group-header">
+          <button
+            type="button"
+            className="menu-group-button"
+            aria-label={menu.name}
+            aria-expanded={isOpen}
+            aria-controls={listId}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen((prev) => !prev);
+            }}
+          >
+            <span className="menu-group-title">
+              <i className={menu.iconClass} aria-hidden="true" />
+              &nbsp;&nbsp;
+              <span className="group-name">{menu.name}</span>
+            </span>
+            <i
+              className={`fas fa-chevron-${isOpen ? 'down' : 'right'} group-arrow`}
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+        <div
+          id={listId}
+          className="group-items"
+          hidden={!isOpen}
+        >
+          {menu.children.map((child, childIndex) => (
+            <SideMenuItem
+              key={child.name || childIndex}
+              menu={child}
+              index={childIndex}
+              handleClose={handleClose}
+              isSubItem
+              menuOpen={menuOpen}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   let m = menu;
   if (m.name === 'Bulletin') {
     m = setBulletin(m, newsContent);
@@ -123,6 +186,7 @@ export function SideMenuItem(props: IsideMenuItemProps) {
         index={index}
         type="Link"
         handleClose={handleClose}
+        isSubItem={isSubItem}
       />
     );
   }

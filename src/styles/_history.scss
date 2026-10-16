@@ -1,0 +1,23 @@
+/* History page */
+
+.history-picture {
+  display: block;
+  float: right;
+  width: 40%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 0 3px 6px;
+  shape-outside: ellipse(48% 50% at 50% 50%);
+  shape-margin: 7px;
+}
+
+@media screen and (max-width: 699px) {
+  .history-picture {
+    float: none;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 14px auto;
+    shape-outside: none;
+  }
+}

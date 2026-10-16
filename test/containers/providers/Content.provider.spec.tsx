@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   populateContent, ContentProvider, setContentDef, populatePictures, setPicturesDef, setNewsDef, populateNews,
+  populateHeaderLine,
 } from 'src/providers/Content.provider';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -45,6 +46,25 @@ describe('Content provider', () => {
     const setContent = vi.fn();
     await populateContent(setContent);
     expect(setContent).toHaveBeenCalled();
+  });
+  it('loads the header-line record independently', async () => {
+    const headerLine = { title: 'Sunday worship', type: 'headerLineContent', _id: 'header' };
+    const fetchMock = vi.fn(() => okJson(headerLine));
+    vi.stubGlobal('fetch', fetchMock);
+    const setHeaderLine = vi.fn();
+
+    await populateHeaderLine(setHeaderLine);
+
+    expect(fetchMock).toHaveBeenCalledWith(`${process.env.BackendUrl}/book/one?type=headerLineContent`);
+    expect(setHeaderLine).toHaveBeenCalledWith(headerLine);
+  });
+  it('leaves the header line empty when its independent request fails', async () => {
+    vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('header unavailable'))));
+    const setHeaderLine = vi.fn();
+
+    await populateHeaderLine(setHeaderLine);
+
+    expect(setHeaderLine).toHaveBeenCalledWith(null);
   });
   it('populates pictures', async () => {
     const data = {

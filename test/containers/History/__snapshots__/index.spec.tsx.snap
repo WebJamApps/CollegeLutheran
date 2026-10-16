@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`History > calls setTitleAndScroll and renders History container 1`] = `
+<div>
+  <div
+    class="page-content"
+  >
+    <div
+      class="container-fluid"
+    >
+      <p
+        style="font-size: 4pt; margin: 0px;"
+      >
+         
+      </p>
+      <div
+        class="material-content elevation3"
+        style="max-width: 998px; margin: auto; min-height: 74vh;"
+      >
+        <h3
+          style="padding-top: 12px; padding-bottom: 0px; margin-bottom: 4px;"
+        >
+          College Lutheran Church: From 1852 to Today
+        </h3>
+        <img
+          alt="College Lutheran Church building, aerial view at sunset"
+          class="history-picture"
+          src="/clc-building-light.jpg"
+        />
+        <p>
+          College Lutheran Church, a member of the national Evangelical Lutheran Church in America and the Virginia Synod, was organized on the campus of Roanoke College on December 18, 1852, by seven charter members. It has been located three places: the Roanoke College chapel, then the northwestern corner of College and Main, and its current location on South College Avenue.  The Main Street location was dedicated May 2, 1858.  The current building is now just past a century in age, having opened in 1922.
+        </p>
+        <p>
+          The church is built from medina sandstone quarried locally.  It was constructed by J. R. Crouse of Greensboro, NC.  It is furnished in an arts and crafts neo-gothic design.  Its ten triple glass windows contain ten depictions of significant events in the life of Christ.  They were designed by the George Hardy Payne Studios of Patterson, NJ.  It has a seating capacity of 360.  The building was remodeled and enlarged following a 2002 congregational decision.  A congregational architect member, Joseph Stoutamire, worked with the construction team to help adapt the building to the congregation’s needs.
+        </p>
+        <p>
+          First served by temporary pastor, Christopher Baughman, the new Roanoke College president, David Bittle, then became College Church pastor until 1860 and again in 1861-1869.  Since mid-Twentieth Century, College Lutheran Church has been served by pastors: William Eisenberg, Malcolm Minnick, Richard Giessler, Dwayne Westermann, Bob Ward, Wynemah Hinlicky co-pastoring with William Weicker, and David Drebes.
+        </p>
+        <p>
+          Today’s congregational life features an active youth program headed by Faith Formation Director Kellie Rice, frequent cooperative ministries with Salem Presbyterian and St. Paul Episcopal, hands-on Habitat house construction, and a liturgically based service with weekly Communion, backed up by a music program headed by Susan Short among other ministries.  Several young members are preparing for Christian vocations.  One unusual resource is the number of retired clergy who are members and the strong presence of people with ties to Roanoke College.  It is not just seven, anymore.
+        </p>
+      </div>
+      <div
+        style="text-align: center; padding: 30px 24px 0px;"
+      >
+        <a
+          href="https://www.elca.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="ELCA LOGO"
+            id="elcaLogo"
+            src="/elca-logo.png"
+            style="display: block; width: 100%; max-width: 500px; height: auto; margin: 0px auto;"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

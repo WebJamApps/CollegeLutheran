@@ -18,6 +18,7 @@ import { AppTemplate } from './AppTemplate';
 import DefaultHome from '../containers/Homepage';
 import DefaultLiveStream from '../containers/LiveStream';
 import { Stewardship } from '../containers/Stewardship';
+import { History } from '../containers/History';
 // import HabitatProject from '../containers/HabitatProject';
 
 export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
@@ -60,6 +61,7 @@ export function App() {
           <Route path="/" element={<DefaultHome width={width} />} />
           <Route path="/music" element={<DefaultMusic />} />
           <Route path="/belief" element={<Beliefs />} />
+          <Route path="/history" element={<History />} />
           <Route path="/family" element={<Family />} />
           <Route path="/giving" element={<Giving />} />
           <Route path="/onlinegiving" element={<Navigate to="/giving" replace />} />

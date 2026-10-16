@@ -2,8 +2,8 @@
 export function TextField(props: any) {
   // The real MUI TextField renders its `label` prop as an accessible <label>;
   // surface it as aria-label here so runtime a11y (axe) checks stay honest.
-  const { children, label, ...rest } = props;
-  return <input aria-label={label} {...rest}>{children}</input>;
+  const { children, label, slotProps, ...rest } = props;
+  return <input aria-label={label} {...rest} {...slotProps?.htmlInput}>{children}</input>;
 }
 
 export function Checkbox(props: any) {

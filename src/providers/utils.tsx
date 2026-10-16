@@ -34,6 +34,7 @@ export interface Icontent {
   youthPage: Ibook;
   habitatPage: Ibook;
   stewardshipPage: Ibook;
+  headerLineContent?: Ibook | null;
 }
 
 export interface Inews {

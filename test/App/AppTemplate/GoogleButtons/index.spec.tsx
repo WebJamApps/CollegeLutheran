@@ -6,22 +6,26 @@ import utils from 'src/App/AppTemplate/GoogleButtons/utils';
 
 describe('GoogleButtons', () => {
   it('renders login and handles click', () => {
+    const handleClose = vi.fn();
     const { container } = render(
-      <GoogleOAuthProvider clientId=""><GoogleButtons type="login" index={0} /></GoogleOAuthProvider>,
+      <GoogleOAuthProvider clientId=""><GoogleButtons type="login" index={0} handleClose={handleClose} /></GoogleOAuthProvider>,
     );
     const btn = container.querySelector('.loginButton') as HTMLButtonElement | null;
     expect(btn).not.toBeNull();
     fireEvent.click(btn!);
+    expect(handleClose).toHaveBeenCalledTimes(1);
   });
   it('renders logout and handles click', () => {
+    const handleClose = vi.fn();
     utils.responseGoogleLogout = vi.fn();
     const { container } = render(
-      <GoogleOAuthProvider clientId=""><GoogleButtons type="logout" index={0} /></GoogleOAuthProvider>,
+      <GoogleOAuthProvider clientId=""><GoogleButtons type="logout" index={0} handleClose={handleClose} /></GoogleOAuthProvider>,
     );
     const btn = container.querySelector('.logoutButton') as HTMLButtonElement | null;
     expect(btn).not.toBeNull();
     fireEvent.click(btn!);
     expect(utils.responseGoogleLogout).toHaveBeenCalled();
+    expect(handleClose).toHaveBeenCalledTimes(1);
   });
   it('uses loginConfig', async () => {
     utils.responseGoogleLogin = vi.fn();

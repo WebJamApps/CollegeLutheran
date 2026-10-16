@@ -36,6 +36,20 @@ describe('Admin Dash utils', () => {
     expect(commonUtils.notify).toHaveBeenCalled();
   });
 
+  it('refreshes the header-line record after its fallback POST succeeds', async () => {
+    commonUtils.notify = vi.fn();
+    const data = { title: 'Sunday worship', comments: '', type: 'headerLineContent' };
+    const getHeaderLine = vi.fn();
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce({ ok: false, status: 400 })
+      .mockResolvedValueOnce({ ok: true, status: 201 });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await utils.putAPI(data, auth, getHeaderLine, true);
+
+    expect(getHeaderLine).toHaveBeenCalledOnce();
+  });
+
   it('putAPI when status is 400 (creates the resource via fallback POST)', async () => {
     commonUtils.notify = vi.fn();
     const data = { title: '', comments: '', type: '' };
@@ -68,7 +82,7 @@ describe('Admin Dash utils', () => {
     const fetchMock = vi.fn(() => Promise.reject(new Error('boom')));
     vi.stubGlobal('fetch', fetchMock);
     commonUtils.notify = vi.fn();
-    await utils.handlePutError(e, data, auth);
+    await utils.handlePutError(e, data, auth, vi.fn());
     expect(commonUtils.notify).toHaveBeenCalled();
     expect(fetchMock).toHaveBeenCalled();
   });
@@ -77,7 +91,7 @@ describe('Admin Dash utils', () => {
     const data = { title: '', comments: '', type: '' };
     const e: HttpError = Object.assign(new Error('error'), { status: 500 });
     commonUtils.notify = vi.fn();
-    await utils.handlePutError(e, data, auth);
+    await utils.handlePutError(e, data, auth, vi.fn());
     expect(commonUtils.notify).toHaveBeenCalled();
   });
 
