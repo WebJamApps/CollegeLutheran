@@ -4,7 +4,7 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext, Iauth } from 'src/providers/Auth.provider';
 import { ContentContext } from 'src/providers/Content.provider';
-import { stewardshipEnabled } from 'src/providers/utils';
+import { stewardshipEnabled, eventEnabled } from 'src/providers/utils';
 import DefaultMusic from '../containers/Music';
 import { Beliefs } from '../containers/Beliefs';
 import { Giving } from '../containers/Giving';
@@ -19,6 +19,7 @@ import DefaultHome from '../containers/Homepage';
 import DefaultLiveStream from '../containers/LiveStream';
 import { Stewardship } from '../containers/Stewardship';
 import { History } from '../containers/History';
+import { Event } from '../containers/Event';
 // import HabitatProject from '../containers/HabitatProject';
 
 export function checkIsAdmin(auth: Iauth, setIsAdmin: (arg0: boolean) => void) {
@@ -40,7 +41,7 @@ export function showAdminDashboard(isAdmin: boolean) {
 
 export function App() {
   const { auth } = useContext(AuthContext);
-  const { content } = useContext(ContentContext);
+  const { content, eventLoading } = useContext(ContentContext);
   const [isAdmin, setIsAdmin] = useState(false);
   // Track the real viewport width (and keep it current on resize/rotate) so the
   // homepage can pick its narrow vs wide feed instead of always rendering wide.
@@ -54,6 +55,17 @@ export function App() {
   // Stewardship is seasonal: block the route (direct URL too) unless an admin
   // has enabled it; default off → redirect home. (CollegeLutheran#707)
   const stewardshipOn = stewardshipEnabled(content);
+  // The event page is active only while an admin switch is on and its name is
+  // non-empty; off/missing/empty name → redirect home. While the event is
+  // loading, retain /event so direct visits and page reloads do not prematurely
+  // redirect home. (CollegeLutheran#824, CollegeLutheran#835)
+  const eventOn = eventEnabled(content);
+  let eventElement = <Navigate to="/" replace />;
+  if (eventLoading) {
+    eventElement = <div className="page-content" style={{ minHeight: '80vh' }} />;
+  } else if (eventOn) {
+    eventElement = <Event />;
+  }
   return (
     <div id="App" className="App">
       <AppTemplate>
@@ -72,6 +84,7 @@ export function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/livestream" element={<DefaultLiveStream />} />
           <Route path="/stewardship" element={stewardshipOn ? <Stewardship /> : <Navigate to="/" replace />} />
+          <Route path="/event" element={eventElement} />
           {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

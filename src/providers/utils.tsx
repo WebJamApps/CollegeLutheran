@@ -35,6 +35,7 @@ export interface Icontent {
   habitatPage: Ibook;
   stewardshipPage: Ibook;
   headerLineContent?: Ibook | null;
+  eventPage?: Ibook | null;
 }
 
 export interface Inews {
@@ -56,3 +57,14 @@ export function makeGetter(
 export const stewardshipEnabled = (
   content?: { stewardshipPage?: Ibook },
 ): boolean => content?.stewardshipPage?.enabled === true;
+
+// The event page and its News & Events link show only while its admin switch
+// is on (`enabled === true`) and its name is not empty. (CollegeLutheran#824)
+export const eventEnabled = (
+  content?: { eventPage?: Ibook | null },
+): boolean => Boolean(
+  content?.eventPage?.enabled === true
+  && content?.eventPage?.title
+  && content?.eventPage?.title.trim() !== '',
+);
+

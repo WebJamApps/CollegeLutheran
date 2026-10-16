@@ -42,6 +42,18 @@ export function ChangeStewardshipPageSect() {
   );
 }
 
+export function ChangeEventPageSect() {
+  return (
+    <ChangePageSection
+      pageType="eventPage"
+      formTitle="Event Page"
+      withInput
+      withToggle
+      inputLabel="Name"
+    />
+  );
+}
+
 export function ChangeHeaderLine() {
   const { auth } = useContext(AuthContext);
   const { content, getHeaderLine } = useContext(ContentContext);
@@ -245,6 +257,7 @@ export function AdminDashboardContent() {
           {/* <ChangeHabitatPageSect /> */}
           <ChangeStewardshipPageSect />
           <ChangeYouthPageSect />
+          <ChangeEventPageSect />
         </>
       ) : null}
     </div>

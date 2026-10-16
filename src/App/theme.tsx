@@ -153,7 +153,7 @@ function themeVariables(mode: ResolvedThemeMode) {
 export function CollegeLutheranThemeProvider({ children }: { children: ReactNode }) {
   const [preference, setPreferenceState] = useState<ThemePreference>(() => getStoredThemePreference());
   const [systemPrefersDark, setSystemPrefersDark] = useState(() => (
-    window.matchMedia?.(SYSTEM_DARK_QUERY).matches ?? false
+    window.matchMedia?.(SYSTEM_DARK_QUERY)?.matches ?? false
   ));
   const resolvedMode = resolveThemeMode(preference, systemPrefersDark);
   const theme = useMemo(() => makeCollegeLutheranTheme(resolvedMode), [resolvedMode]);

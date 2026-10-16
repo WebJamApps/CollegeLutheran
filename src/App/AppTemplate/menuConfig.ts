@@ -136,6 +136,13 @@ export const menuItems: ImenuItem[] = [
         link: '/calendar',
         name: 'Calendar',
       },
+      {
+        classname: '',
+        type: 'link',
+        iconClass: 'fas fa-star',
+        link: '/event',
+        name: 'Event',
+      },
     ],
   },
   {

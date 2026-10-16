@@ -1,14 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { act, useState, type ContextType } from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import { act } from 'react';
+import type { Ibook } from 'src/providers/utils';
 import {
   ButtonsNav,
+  ChangeEventPageSect,
   ChangeHeaderLine, ChangeHomePageSect, ChangeNewsPage, ChangeYouthPageSect, makeHandleChange, ReconnectFacebook,
 } from 'src/containers/AdminDashboard/AdminDashboardContent';
 import utils from 'src/containers/AdminDashboard/utils';
 import { CommentsEditor, UpdateButton } from 'src/containers/AdminDashboard/ChangePageSection';
+import { ContentContext } from 'src/providers/Content.provider';
 
 describe('AdminDashboard Content', () => {
+  it('saves the event page with name and content via ChangeEventPageSect', () => {
+    utils.putAPI = vi.fn();
+    const { getByLabelText, getByRole } = render(<ChangeEventPageSect />);
+    const nameInput = getByLabelText('Name') as HTMLInputElement;
+    fireEvent.change(nameInput, { target: { value: 'Blood Drive' } });
+
+    fireEvent.click(getByRole('button', { name: 'Update Event Page' }));
+    expect(utils.putAPI).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: 'Blood Drive',
+        type: 'eventPageContent',
+      }),
+      expect.anything(),
+      expect.any(Function),
+      true,
+    );
+  });
   it('saves the plain header line with an 80-character limit', () => {
     utils.putAPI = vi.fn();
     const { getByLabelText, getByRole } = render(<ChangeHeaderLine />);
@@ -135,5 +155,63 @@ describe('AdminDashboard Content', () => {
     await waitFor(() => {
       expect(container.querySelector('.reconnectFbSpinner')).toBeNull();
     });
+  });
+  it('preserves dirty drafts across unrelated content updates', () => {
+    const initialEvent: Ibook = {
+      _id: 'event-1',
+      title: 'Saved event',
+      comments: '<p>Saved comments</p>',
+      type: 'eventPageContent',
+      enabled: true,
+    };
+    type ContentState = ContextType<typeof ContentContext>['content'];
+    let setContentFn!: (val: ContentState) => void;
+    function Wrapper({ children }: { children: React.ReactNode }) {
+      const [contextContent, setContextContent] = useState<ContentState>({
+        eventPage: initialEvent,
+        homePage: { title: 'Initial Home', _id: '', type: 'homePageContent' },
+        youthPage: { title: '', _id: '', type: 'youthPageContent' },
+        habitatPage: { title: '', _id: '', type: 'habitatPageContent' },
+        stewardshipPage: { title: '', _id: '', type: 'stewardshipPageContent' },
+        headerLineContent: null,
+      });
+      setContentFn = setContextContent;
+      const contextValue: Partial<ContextType<typeof ContentContext>> = {
+        content: contextContent,
+      };
+      return (
+        <ContentContext.Provider value={contextValue as ContextType<typeof ContentContext>}>
+          {children}
+        </ContentContext.Provider>
+      );
+    }
+    const { getByLabelText, container } = render(
+      <Wrapper>
+        <ChangeEventPageSect />
+      </Wrapper>,
+    );
+    const nameInput = getByLabelText('Name') as HTMLInputElement;
+    expect(nameInput.value).toBe('Saved event');
+
+    fireEvent.change(nameInput, { target: { value: 'Unsaved draft' } });
+    expect(nameInput.value).toBe('Unsaved draft');
+
+    const textarea = container.querySelector('textarea') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: 'Unsaved comments draft' } });
+    expect(textarea.value).toBe('Unsaved comments draft');
+
+    act(() => {
+      setContentFn({
+        eventPage: initialEvent,
+        homePage: { title: 'Updated Home without event change', _id: '', type: 'homePageContent' },
+        youthPage: { title: '', _id: '', type: 'youthPageContent' },
+        habitatPage: { title: '', _id: '', type: 'habitatPageContent' },
+        stewardshipPage: { title: '', _id: '', type: 'stewardshipPageContent' },
+        headerLineContent: null,
+      });
+    });
+
+    expect(nameInput.value).toBe('Unsaved draft');
+    expect(textarea.value).toBe('Unsaved comments draft');
   });
 });
