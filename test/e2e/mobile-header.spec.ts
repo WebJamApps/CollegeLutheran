@@ -46,4 +46,31 @@ test.describe('mobile dark-mode header (#711, #832)', () => {
       'subtitle must not spill below the header',
     ).toBeLessThanOrEqual(header!.y + header!.height + 1);
   });
+
+  test('keyboard Enter and Space activate the theme toggle switch exactly once per press', async ({ page }) => {
+    test.skip(test.info().project.name !== 'mobile', 'phone-layout test (mobile project only)');
+    await page.goto('/');
+    await page.evaluate(() => localStorage.setItem('clc-theme-preference', 'light'));
+    await page.reload();
+
+    const hamburger = page.locator('#mobilemenutoggle');
+    await hamburger.click();
+
+    const toggle = page.locator('.theme-switch');
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-checked', 'false');
+
+    // Press Enter to switch from light -> dark
+    await toggle.focus();
+    await page.keyboard.press('Enter');
+    await expect(toggle).toHaveAttribute('aria-checked', 'true');
+    const storedDark = await page.evaluate(() => localStorage.getItem('clc-theme-preference'));
+    expect(storedDark).toBe('dark');
+
+    // Press Space to switch from dark -> light
+    await page.keyboard.press('Space');
+    await expect(toggle).toHaveAttribute('aria-checked', 'false');
+    const storedLight = await page.evaluate(() => localStorage.getItem('clc-theme-preference'));
+    expect(storedLight).toBe('light');
+  });
 });

@@ -84,7 +84,7 @@ describe('CollegeLutheranThemeProvider', () => {
     const toggleDark = screen.getByRole('switch', { name: 'Switch to light mode' });
     expect(toggleDark.getAttribute('aria-checked')).toBe('true');
 
-    fireEvent.keyPress(toggleDark, { key: 'Enter', charCode: 13 });
+    fireEvent.click(toggleDark);
     expect(screen.getByTestId('preference').textContent).toBe('light');
     expect(screen.getByTestId('resolvedMode').textContent).toBe('light');
     expect(document.documentElement.dataset.theme).toBe('light');

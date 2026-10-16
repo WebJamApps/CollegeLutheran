@@ -3,12 +3,9 @@ import { useThemePreference } from '../theme';
 export function ThemeToggle() {
   const { theme, toggleTheme } = useThemePreference();
   const isDark = theme === 'dark';
-  const handleClick = (e: React.MouseEvent | React.KeyboardEvent) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     toggleTheme();
-  };
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') handleClick(e);
   };
   return (
     <div className="menu-item theme-toggle theme-mode-selector">
@@ -19,7 +16,6 @@ export function ThemeToggle() {
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         className={`theme-switch ${isDark ? 'is-dark' : 'is-light'}`}
         onClick={handleClick}
-        onKeyPress={handleKeyPress}
       >
         <span className="theme-switch-side theme-switch-light">
           <i className="fas fa-sun" aria-hidden="true" />
