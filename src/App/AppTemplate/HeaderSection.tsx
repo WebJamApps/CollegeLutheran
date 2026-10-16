@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import { ContentContext } from 'src/providers/Content.provider';
 
 export function getTitleFontSize(width: number): string {
-  if (width > 600) return '28px';
   if (width > 450) return '25px';
   if (width > 350) return '22px';
   if (width > 300) return '19px';
@@ -73,8 +72,7 @@ export function HeaderSection() {
           <h2
             className="header-text"
             style={{
-              marginTop: width && width > 450 ? '8px' : '4px',
-              marginBottom: '2px',
+              marginTop: width && width > 320 ? '10px' : '1px',
               fontSize: titleFontSize,
             }}
           >

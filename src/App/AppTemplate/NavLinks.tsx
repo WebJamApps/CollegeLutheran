@@ -1,7 +1,7 @@
 import { useTheme } from '@mui/material/styles';
 import { menuItems } from './menuConfig';
 import { SideMenuItem } from './SideMenuItem';
-import { ThemeModeSelector } from './ThemeModeSelector';
+import { ThemeToggle } from './ThemeToggle';
 
 declare const __APP_VERSION__: string;
 
@@ -76,13 +76,7 @@ export function NavLinks(props: InavLinksProps) {
           />
         ),
       )}
-      <div style={{
-        textAlign: 'left',
-        padding: '8px 15px 0 15px',
-      }}
-      >
-        <ThemeModeSelector />
-      </div>
+      <ThemeToggle />
       <div style={{
         textAlign: 'left',
         padding: '10px 15px',

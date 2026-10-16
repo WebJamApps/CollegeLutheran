@@ -12,8 +12,12 @@ import { ContentContext } from 'src/providers/Content.provider';
 import { MemoryRouter } from 'react-router-dom';
 import { fireEvent } from '@testing-library/react';
 
+vi.mock('src/App/AppTemplate/ThemeToggle', () => ({
+  ThemeToggle: () => <div className="theme-toggle theme-mode-selector" />,
+}));
 vi.mock('src/App/AppTemplate/ThemeModeSelector', () => ({
-  ThemeModeSelector: () => <div className="theme-mode-selector" />,
+  ThemeModeSelector: () => <div className="theme-toggle theme-mode-selector" />,
+  ThemeToggle: () => <div className="theme-toggle theme-mode-selector" />,
 }));
 
 function HeaderWithLine({ title }: { title: string | null }) {
@@ -182,7 +186,7 @@ describe('NavLinks and DrawerContainer (side-menu)', () => {
     expect(emailLink).toHaveStyle({ color: '#88c1ff', fontSize: '10pt', whiteSpace: 'nowrap' });
   });
 
-  it('renders ThemeModeSelector in NavLinks above the version number', () => {
+  it('renders ThemeToggle in NavLinks above the version number', () => {
     const handleClose = vi.fn();
     const { container } = render(
       <MemoryRouter>
@@ -190,8 +194,9 @@ describe('NavLinks and DrawerContainer (side-menu)', () => {
       </MemoryRouter>,
     );
 
-    const selector = container.querySelector('.theme-mode-selector');
-    expect(selector).toBeInTheDocument();
+    const toggle = container.querySelector('.theme-toggle');
+    expect(toggle).toBeInTheDocument();
+    expect(container.querySelector('.theme-mode-selector')).toBeInTheDocument();
     expect(container.textContent).toContain('Version');
   });
 
