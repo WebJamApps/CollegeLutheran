@@ -24,9 +24,7 @@ export function ThemeModeSelector() {
         size="small"
         className="theme-mode-selector"
         sx={{
-          position: 'absolute',
-          right: { xs: 10, sm: 14 },
-          bottom: { xs: 8, sm: 10 },
+          display: 'inline-flex',
           zIndex: 60,
         }}
       >
@@ -37,11 +35,11 @@ export function ThemeModeSelector() {
             'aria-label': 'Theme preference',
           }}
           sx={{
-            minWidth: { xs: 85, sm: 105 },
+            minWidth: 105,
             height: 32,
             borderRadius: '16px',
-            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(255, 255, 255, 0.16)',
-            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 26, 51, 0.72)' : 'rgba(0, 0, 0, 0.06)',
+            color: theme.palette.text.primary,
             fontSize: { xs: '0.75rem', sm: '0.8rem' },
             lineHeight: 1.4,
             border: `1px solid ${theme.palette.divider}`,
@@ -59,7 +57,7 @@ export function ThemeModeSelector() {
               },
             },
             '& .MuiNativeSelect-icon': {
-              color: theme.palette.primary.contrastText,
+              color: theme.palette.text.primary,
             },
           }}
         >

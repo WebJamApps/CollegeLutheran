@@ -1,6 +1,7 @@
+import { useTheme } from '@mui/material/styles';
 import { menuItems } from './menuConfig';
 import { SideMenuItem } from './SideMenuItem';
-import { useTheme } from '@mui/material/styles';
+import { ThemeModeSelector } from './ThemeModeSelector';
 
 declare const __APP_VERSION__: string;
 
@@ -23,11 +24,12 @@ export function NavLinks(props: InavLinksProps) {
   const contactTextStyle = {
     color: theme.palette.primary.contrastText,
     margin: 0,
-    fontSize: '11pt',
+    fontSize: '10pt',
     lineHeight: 1.4,
   };
   const contactLinkStyle = {
     color: '#88c1ff',
+    fontSize: '10pt',
   };
   return (
     <div className="nav-list" style={{ width: '220px' }}>
@@ -35,7 +37,9 @@ export function NavLinks(props: InavLinksProps) {
       <div className="menu-item contact-panel" style={contactPanelStyle}>
         <p style={contactTextStyle}>
           <a
-            href="https://bit.ly/CollegeLutheranDirections"
+            href="https://www.google.com/maps/place/College+Lutheran+Church,+210+S+College+Ave,+Salem,+VA+24153"
+            target="_blank"
+            rel="noopener noreferrer"
             className="menu-hover contact-link"
             style={contactLinkStyle}
           >
@@ -53,7 +57,7 @@ export function NavLinks(props: InavLinksProps) {
           </a>
           <br />
           <a
-            style={{ ...contactLinkStyle, fontSize: '10pt', whiteSpace: 'nowrap' }}
+            style={{ ...contactLinkStyle, whiteSpace: 'nowrap' }}
             href="mailto:office1@collegelutheran.org"
             className="menu-hover contact-link"
           >
@@ -72,6 +76,13 @@ export function NavLinks(props: InavLinksProps) {
           />
         ),
       )}
+      <div style={{
+        textAlign: 'left',
+        padding: '8px 15px 0 15px',
+      }}
+      >
+        <ThemeModeSelector />
+      </div>
       <div style={{
         textAlign: 'left',
         padding: '10px 15px',
