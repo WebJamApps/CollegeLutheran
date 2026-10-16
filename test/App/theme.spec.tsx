@@ -5,7 +5,7 @@ import {
   resolveThemeMode,
   useThemePreference,
 } from 'src/App/theme';
-import { ThemeModeSelector } from 'src/App/AppTemplate/ThemeModeSelector';
+import { ThemeToggle } from 'src/App/AppTemplate/ThemeToggle';
 
 function ThemeState() {
   const { preference, resolvedMode } = useThemePreference();
@@ -13,7 +13,7 @@ function ThemeState() {
     <div>
       <span data-testid="preference">{preference}</span>
       <span data-testid="resolvedMode">{resolvedMode}</span>
-      <ThemeModeSelector />
+      <ThemeToggle />
     </div>
   );
 }
@@ -69,14 +69,26 @@ describe('CollegeLutheranThemeProvider', () => {
     expect(screen.getByTestId('resolvedMode').textContent).toBe('dark');
   });
 
-  it('persists explicit selector choices', () => {
+  it('toggles theme and persists choice on click and keyboard events', () => {
     installMatchMedia(false);
     render(<CollegeLutheranThemeProvider><ThemeState /></CollegeLutheranThemeProvider>);
-    const select = screen.getByRole('combobox', { name: 'Theme preference' });
-    fireEvent.change(select, { target: { value: 'dark' } });
+    const toggle = screen.getByRole('switch', { name: 'Switch to dark mode' });
+    expect(toggle.getAttribute('aria-checked')).toBe('false');
+
+    fireEvent.click(toggle);
     expect(screen.getByTestId('preference').textContent).toBe('dark');
     expect(screen.getByTestId('resolvedMode').textContent).toBe('dark');
+    expect(document.documentElement.dataset.theme).toBe('dark');
     expect(localStorage.getItem('clc-theme-preference')).toBe('dark');
+
+    const toggleDark = screen.getByRole('switch', { name: 'Switch to light mode' });
+    expect(toggleDark.getAttribute('aria-checked')).toBe('true');
+
+    fireEvent.click(toggleDark);
+    expect(screen.getByTestId('preference').textContent).toBe('light');
+    expect(screen.getByTestId('resolvedMode').textContent).toBe('light');
+    expect(document.documentElement.dataset.theme).toBe('light');
+    expect(localStorage.getItem('clc-theme-preference')).toBe('light');
   });
 });
 
