@@ -6,10 +6,10 @@ import { useTheme } from '@mui/material/styles';
 import { ContentContext } from 'src/providers/Content.provider';
 
 export function getTitleFontSize(width: number): string {
-  if (width > 450) return '25px';
-  if (width > 350) return '22px';
-  if (width > 300) return '19px';
-  return '16px';
+  if (width > 450) return '26px';
+  if (width > 350) return '23px';
+  if (width > 300) return '20px';
+  return '17px';
 }
 
 export function HeaderSection() {

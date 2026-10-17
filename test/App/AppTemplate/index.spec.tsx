@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import {
   handleEscapePress, handleKeyMenu, toggleMobileMenu, AppTemplate, makeDrawerClass,
 } from 'src/App/AppTemplate';
-import { HeaderSection } from 'src/App/AppTemplate/HeaderSection';
+import { HeaderSection, getTitleFontSize } from 'src/App/AppTemplate/HeaderSection';
 import { NavLinks } from 'src/App/AppTemplate/NavLinks';
 import { DrawerContainer } from 'src/App/AppTemplate/DrawerContainer';
 import { ContentContext } from 'src/providers/Content.provider';
@@ -61,6 +61,12 @@ describe('AppTemplate', () => {
     const setMenuOpen = vi.fn();
     handleEscapePress(e, setMenuOpen);
     expect(setMenuOpen).toHaveBeenCalledWith(false);
+  });
+  it('returns increased title font size across breakpoints', () => {
+    expect(getTitleFontSize(500)).toBe('26px');
+    expect(getTitleFontSize(400)).toBe('23px');
+    expect(getTitleFontSize(320)).toBe('20px');
+    expect(getTitleFontSize(280)).toBe('17px');
   });
 });
 
