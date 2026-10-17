@@ -1,8 +1,5 @@
-import { ContentContext } from 'src/providers/Content.provider';
-import { useContext } from 'react';
 import type { Ibook } from 'src/providers/utils';
 import PicSlider from '../../components/PicSlider';
-import { shuffle } from './About';
 import FacebookPosts from './FacebookPosts';
 
 const FacebookIframe = () => (
@@ -37,12 +34,6 @@ export function FamilySlideContainer({ data }: { data: Ibook[] }) {
   );
 }
 export const FacebookFeed = () => {
-  const { pictures } = useContext(ContentContext);
-  const {
-    familyPics = [], musicPics = [], youthPics = [], otherPics = [], habitatPics = [],
-  } = pictures;
-  const allPics = familyPics.concat(youthPics).concat(habitatPics).concat(otherPics).concat(musicPics);
-  const data = shuffle(allPics);
   return (
     <div className="notWidescreen" style={{ maxWidth: '320px', margin: 'auto' }}>
       <p style={{
@@ -67,13 +58,6 @@ export const FacebookFeed = () => {
       <hr />
       <FacebookIframe />
       <hr />
-      <p style={{
-        textAlign: 'center', fontSize: '10pt', marginTop: '10px', marginBottom: 0, paddingBottom: '4px',
-      }}
-      >
-        {' '}
-      </p>
-      <FamilySlideContainer data={data} />
     </div>
   );
 };

@@ -73,6 +73,11 @@ test.describe('side menu groups and interactions', () => {
     const historyLink = page.getByRole('link', { name: /History/i });
     await expect(historyLink).toBeVisible();
 
+    // Assert sub-item computed padding-left is 24px on mobile
+    const historyItem = page.locator('.menu-item.menu-sub-item', { has: historyLink });
+    const historyPaddingLeft = await historyItem.evaluate((el) => window.getComputedStyle(el).paddingLeft);
+    expect(historyPaddingLeft).toBe('24px');
+
     // Tapping group line again folds group and still leaves drawer open
     await aboutUsButton.click();
     await expect(aboutUsButton).toHaveAttribute('aria-expanded', 'false');

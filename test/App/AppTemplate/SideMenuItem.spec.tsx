@@ -219,6 +219,7 @@ describe('SideMenuItem', () => {
     expect(controlledList).not.toHaveAttribute('hidden');
     expect(screen.getByText('Our Lutheran Beliefs')).toBeInTheDocument();
     expect(screen.getByText('History')).toBeInTheDocument();
+    expect(screen.getByText('Our Lutheran Beliefs').closest('.menu-item')).toHaveClass('menu-sub-item');
 
     // Click to collapse
     fireEvent.click(button);

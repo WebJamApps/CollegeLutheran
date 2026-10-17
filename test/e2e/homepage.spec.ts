@@ -73,4 +73,9 @@ test.describe('mobile layout', () => {
       expect(right, `${label} overflows the ${width}px viewport`).toBeLessThanOrEqual(width + 2);
     }
   });
+
+  test('renders the photo slideshow as the first child of .page-content', async ({ page }) => {
+    const firstChild = page.locator('.page-content > :first-child');
+    await expect(firstChild).toHaveClass(/familySlideContainer/);
+  });
 });
