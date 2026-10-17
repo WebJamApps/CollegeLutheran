@@ -29,6 +29,10 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - **Both at once:** `npm test` runs lint then unit — the single check to confirm
   you're green.
 - Type-check only: `npm run typecheck`.
+- **Local Dev / Full-Stack Testing:** To test the full stack with live MongoDB data (photos, slideshows, news, and page content), run the backend (`web-jam-back`) locally alongside the front-end:
+  - Start backend: `cd /home/joshua/WebJamApps/web-jam-back && npm start` (runs on `http://localhost:7000`).
+  - Start frontend: `npm run dev` or `npm run build && npx vite preview --port 7777`.
+  - Without `web-jam-back` running, API calls to `process.env.BackendUrl` fail, causing empty picture arrays and missing dynamic content.
 
 ## Layout
 - App code in `src/`: `components/`, `containers/`, `lib/`, `providers/`,
@@ -74,6 +78,7 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - **Vitest Unit Test DOM Matchers & Optional Chaining Defense:** In component test suites rendering full route trees (such as `<App />`), always import `@testing-library/jest-dom` if asserting with DOM matchers like `toBeInTheDocument()`. In theme and environment providers inspecting browser APIs (such as `window.matchMedia`), use complete optional chaining (`window.matchMedia?.(QUERY)?.matches ?? false`) so tests or environments where `matchMedia` returns `undefined` fail gracefully rather than throwing `TypeError: Cannot read properties of undefined (reading 'matches')`.
 - **Mobile CSS Cascade Specificity for Drawer Menu Items:** In `styles.scss`, `@use 'mobile'` is loaded after `@use 'menu'`. When defining sub-item indentation styles (e.g. `.menu-sub-item { padding-left: 24px; }`), a mobile media query targeting `.menu-item` with `padding-left: 10px` has equal specificity and later source order, overriding the sub-item indentation on mobile screens. Compound selectors (such as `.menu-item.menu-sub-item`) must be explicitly declared within the mobile media queries to preserve indentation hierarchy across responsive viewports.
 - **Production Build JSX Runtime Environment Gating:** In Vite builds with `@vitejs/plugin-react`, if local `.env` defines `NODE_ENV=development`, the react plugin can compile JSX files using `jsxDEV`, which does not exist in production React bundles and throws `TypeError: (0, z.jsxDEV) is not a function` at runtime in production preview. Ensure `NODE_ENV=production` is enforced during production builds (`npm run build`).
+- **Full-Stack Local Testing Prerequisite (`web-jam-back`):** Dynamic features like the homepage photo slideshow (`PicSlider`), news feeds, and book content fetch from `${process.env.BackendUrl}` (`http://localhost:7000`). When testing the UI locally or opening pages in Chrome for approval, always start `web-jam-back` (`/home/joshua/WebJamApps/web-jam-back`, `npm start`) so MongoDB supplies real data; otherwise, `ContentContext` receives empty responses and components depending on data (such as the slideshow) will not render.
 
 ## Quota & Token Hygiene
 - **Sliding Window Quota Preservation:** Google Antigravity (`agy`) tracks model token usage on a rolling 5-hour sliding window. To preserve quota and avoid 3+ hour lockouts during heavy or multi-repo tasks:
