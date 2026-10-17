@@ -13,8 +13,9 @@ describe('NarrowFacebookFeed', () => {
     expect(root?.className).toBe('familySlideContainer');
     expect(container.querySelector('.slick-slider')).not.toBeNull();
   });
-  it('renders FacebookFeed', () => {
+  it('renders FacebookFeed without the slideshow', () => {
     const { container } = render(<FacebookFeed />);
     expect(container.firstChild?.nodeName).toBe('DIV');
+    expect(container.querySelector('.familySlideContainer')).toBeNull();
   });
 });
