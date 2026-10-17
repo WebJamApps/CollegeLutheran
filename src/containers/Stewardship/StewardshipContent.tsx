@@ -21,7 +21,9 @@ const StewardshipContent = () => {
         >
           <h3 style={{ paddingTop: '12px', paddingBottom: '0px', marginBottom: '4px' }}>Stewardship</h3>
           <img
-            style={{ float: 'right' }}
+            style={{
+              float: 'right', maxWidth: '40%', height: 'auto', margin: '0 0 12px 12px',
+            }}
             alt="fall stewardship"
             src="https://dl.dropboxusercontent.com/scl/fi/la8fjnoppc97zt1koxsqz/fallStewardship.jpg?rlkey=u60j5qhaq2h21ckytmgb8dqi0&dl=0"
           />
