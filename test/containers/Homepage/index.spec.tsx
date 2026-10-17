@@ -14,4 +14,10 @@ describe('Homepage', () => {
     const root = container.firstChild as HTMLElement | null;
     expect(root?.children[1]?.nodeName).toBe('DIV');
   });
+  it('should render the slideshow at the top of page-content when width < 1099', () => {
+    const props = { width: 300 };
+    const { container } = render(<Homepage {...props} />);
+    const pageContent = container.querySelector('.page-content');
+    expect(pageContent?.firstElementChild?.className).toBe('familySlideContainer');
+  });
 });
