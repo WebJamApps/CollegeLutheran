@@ -54,7 +54,14 @@ export function App() {
   useEffect(() => { checkIsAdmin(auth, setIsAdmin); }, [auth]);
   // Stewardship is seasonal: block the route (direct URL too) unless an admin
   // has enabled it; default off → redirect home. (CollegeLutheran#707)
-  const stewardshipOn = stewardshipEnabled(content);
+  // Until page content has loaded, stewardshipPage is undefined: hold the route
+  // so a direct visit or reload of /stewardship does not redirect home early.
+  let stewardshipElement = <Navigate to="/" replace />;
+  if (!content.stewardshipPage) {
+    stewardshipElement = <div className="page-content" style={{ minHeight: '80vh' }} />;
+  } else if (stewardshipEnabled(content)) {
+    stewardshipElement = <Stewardship />;
+  }
   // The event page is active only while an admin switch is on and its name is
   // non-empty; off/missing/empty name → redirect home. While the event is
   // loading, retain /event so direct visits and page reloads do not prematurely
@@ -83,7 +90,7 @@ export function App() {
           <Route path="/news" element={<News />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/livestream" element={<DefaultLiveStream />} />
-          <Route path="/stewardship" element={stewardshipOn ? <Stewardship /> : <Navigate to="/" replace />} />
+          <Route path="/stewardship" element={stewardshipElement} />
           <Route path="/event" element={eventElement} />
           {/* <Route path="/habitatproject" element={<HabitatProject />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />
