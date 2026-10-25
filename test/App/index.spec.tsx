@@ -1,5 +1,5 @@
 import type { ContextType } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { render, screen } from '@testing-library/react';
@@ -42,6 +42,10 @@ const makeMockContentContext = (overrides?: Partial<ContentContextType>): Conten
   ...overrides,
 });
 
+function LocationProbe() {
+  return <div data-testid="location">{useLocation().pathname}</div>;
+}
+
 const renderAppOnRoute = (contextValue: ContentContextType, route = '/event') => render(
   <GoogleOAuthProvider clientId="test-client-id">
     <Provider store={store.store}>
@@ -49,6 +53,7 @@ const renderAppOnRoute = (contextValue: ContentContextType, route = '/event') =>
         <ContentContext.Provider value={contextValue}>
           <MemoryRouter initialEntries={[route]}>
             <App />
+            <LocationProbe />
           </MemoryRouter>
         </ContentContext.Provider>
       </CollegeLutheranThemeProvider>
@@ -141,5 +146,34 @@ describe('App component', () => {
     });
     renderAppOnRoute(context, '/event');
     expect(screen.queryByRole('heading', { name: 'Blood Drive' })).not.toBeInTheDocument();
+  });
+
+  it('retains /stewardship route and does not render home while content is loading', () => {
+    const context = makeMockContentContext({
+      content: {} as ContentContextType['content'],
+    });
+    renderAppOnRoute(context, '/stewardship');
+    expect(screen.getByTestId('location')).toHaveTextContent('/stewardship');
+    expect(screen.queryByRole('heading', { name: 'Stewardship' })).not.toBeInTheDocument();
+  });
+
+  it('renders Stewardship on a direct visit once content loads with it enabled', () => {
+    const base = makeMockContentContext();
+    const context = makeMockContentContext({
+      content: {
+        ...base.content,
+        stewardshipPage: {
+          title: '', _id: 's1', type: 'stewardshipPageContent', enabled: true,
+        },
+      },
+    });
+    renderAppOnRoute(context, '/stewardship');
+    expect(screen.getByRole('heading', { name: 'Stewardship' })).toBeInTheDocument();
+  });
+
+  it('redirects /stewardship to home when content has loaded and it is not enabled', () => {
+    renderAppOnRoute(makeMockContentContext(), '/stewardship');
+    expect(screen.getByTestId('location').textContent).toBe('/');
+    expect(screen.queryByRole('heading', { name: 'Stewardship' })).not.toBeInTheDocument();
   });
 });
