@@ -62,6 +62,9 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
   manual cleanup.
 
 > **Moved to the Obsidian vault (2026-11-05):** Coding lessons from the former Memory section now live word for word in `~/Dropbox/web-jam-llms/rules-vault/CollegeLutheran-AGENTS.md`. Read it before working in that area.
+Before changing anything under `test/`, read `docs/rules/tests.md`.
+Before changing anything under `src/containers/AdminDashboard/`, read `docs/rules/admin-dashboard.md`.
+Before changing anything under `src/styles/`, read `docs/rules/styles.md`.
 
 ## Quota & Token Hygiene
 - **Sliding Window Quota Preservation:** Google Antigravity (`agy`) tracks model token usage on a rolling 5-hour sliding window. To preserve quota and avoid 3+ hour lockouts during heavy or multi-repo tasks:
