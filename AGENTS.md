@@ -25,8 +25,7 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - **Lint:** `npm run test:lint` (stylelint on `src/styles/**/*.scss` + eslint).
   Auto-fix with `npm run test:lint-fix`. There is **no** `npm run lint` script.
 - **Unit tests:** `npm run test:unit` (vitest, run mode).
-- **Both at once:** `npm test` runs lint then unit — the single check to confirm
-  you're green.
+- **Both at once:** `npm test` runs `npm run test:lint`, `npm run typecheck`, `npm run jscpd`, and `npm run test:unit` — the single check to confirm you're green.
 - Type-check only: `npm run typecheck`.
 - **Local Dev / Full-Stack Testing:** To test the full stack with live MongoDB data (photos, slideshows, news, and page content), run the backend (`web-jam-back`) locally alongside the front-end:
   - Start backend: `cd /home/joshua/WebJamApps/web-jam-back && npm start` (runs on `http://localhost:7000`).
@@ -44,8 +43,7 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - `dist/`, `coverage/`, `node_modules/`, `public/` build artifacts.
 - Do not add, upgrade, or remove dependencies — ask first.
 - Do not edit CI config or anything under `.github/` unless the task is about it.
-- e2e tests (`npm run test:e2e`, Playwright) need a browser install and a running
-  app; you don't need to run them — unit tests + lint are the gate.
+- e2e tests (`npm run test:e2e`, Playwright in `test/e2e/` on Desktop Chrome and Pixel 5; `BASE_URL` defaults to `https://www.collegelutheran.org`): CircleCI's `build` job gates every PR on them against a local `web-jam-back` (port 7000, test MongoDB) and `server.mjs` (port 7777).
 
 ## Branch & memory hygiene
 
@@ -54,14 +52,14 @@ than adding a UI library — e.g. a loading spinner is `<CircularProgress />` fr
 - Once your PR is merged or closed, its branch is DEAD — never commit to it or
   push it again. Follow-up work (including afterthoughts like docs or lessons
   learned) starts on a NEW branch off the latest `dev`, with its own PR.
-- Save lessons BEFORE the merge, not after: anything you learned during the task
-  worth keeping (build quirks, selector gotchas, testing patterns — e.g. the
-  output of a `/learn`-style memory pass) gets committed to this file's Memory
-  section on the SAME task branch while the PR is still open, so it ships inside
-  the PR. A post-merge push to the old branch strands the lesson and forces
-  manual cleanup.
+- Save lessons BEFORE the merge, not after: when `/learn` writes a task's
+  lessons into `AGENTS.md`, move each area lesson word for word into its
+  `docs/rules/<area>.md` file (creating the file and its pointer line in
+  `AGENTS.md` when needed) and leave lessons that apply everywhere in
+  `AGENTS.md`, committed on the SAME task branch while the PR is still open. A
+  post-merge push to the old branch strands the lesson and forces manual
+  cleanup.
 
-> **Moved to the Obsidian vault (2026-11-05):** Coding lessons from the former Memory section now live word for word in `~/Dropbox/web-jam-llms/rules-vault/CollegeLutheran-AGENTS.md`. Read it before working in that area.
 Before changing anything under `test/`, read `docs/rules/tests.md`.
 Before changing anything under `src/containers/AdminDashboard/`, read `docs/rules/admin-dashboard.md`.
 Before changing anything under `src/styles/`, read `docs/rules/styles.md`.
@@ -70,7 +68,7 @@ Before changing anything under `src/styles/`, read `docs/rules/styles.md`.
 - **Sliding Window Quota Preservation:** Google Antigravity (`agy`) tracks model token usage on a rolling 5-hour sliding window. To preserve quota and avoid 3+ hour lockouts during heavy or multi-repo tasks:
   - Keep command outputs compact: avoid printing thousands of lines of raw test logs directly into main turn outputs.
   - Redirect large multi-line summaries, test plans, and evidence to scratch files (`--summary-file`, `--test-plan-file`, `--test-evidence-file`) when calling `create-draft-pr.sh`.
-  - **Automatic Flash Med Subagent Handoff on "Go":** Once requirements and implementation steps are aligned interactively on `Flash High`, automatically delegate contained execution work (coding, running test suites, branch/PR creation) down to a `Flash Med` subagent without waiting for Josh to explicitly request delegation.
+  - **Automatic Flash Subagent Handoff on "Go":** After Josh says go, an agy session on Flash does the work itself or hands it to a subagent at the same level.
 
 ## Pull requests
 
